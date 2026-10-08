@@ -160,5 +160,305 @@
       "caption": "Overview comparison matrix for mixed phenotype acute leukaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mixed_phenotype_acute_leukaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Multiparameter flow cytometry covering myeloid, B- and T-lineage markers",
+          "cells": [
+            {
+              "text": "Myeloid, B- and T-lineage markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytochemistry including myeloperoxidase and non-specific esterase",
+          "cells": [
+            {
+              "text": "Myeloperoxidase and non-specific esterase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytogenetics and FISH for BCR-ABL1 and KMT2A rearrangements",
+          "cells": [
+            {
+              "text": "BCR-ABL1 and KMT2A rearrangements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular studies including BCR-ABL1 transcript",
+          "cells": [
+            {
+              "text": "BCR-ABL1 transcript"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow aspirate and trephine with immunohistochemistry",
+          "cells": [
+            {
+              "text": "Marrow involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid examination",
+          "cells": [
+            {
+              "text": "Central nervous system involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mixed_phenotype_acute_leukaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Blast phase of chronic myeloid leukaemia",
+          "cells": [
+            {
+              "text": "BCR-ABL1 detected changes management and prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute myeloid or lymphoblastic leukaemia with aberrant markers",
+          "cells": [
+            {
+              "text": "Easily misclassified as AML or ALL"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mixed_phenotype_acute_leukaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Confirm before treatment",
+          "cells": [
+            {
+              "text": "Immunophenotyping, cytogenetics and molecular testing to identify or exclude BCR-ABL1 and KMT2A rearrangements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BCR-ABL1 positive disease",
+          "cells": [
+            {
+              "text": "ALL-type induction backbone combined with a BCR-ABL1 tyrosine kinase inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KMT2A-rearranged disease",
+          "cells": [
+            {
+              "text": "Higher-risk subtype; individualised induction and a lower threshold for transplant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other cases",
+          "cells": [
+            {
+              "text": "ALL-based induction; myeloid-directed induction when myeloid antigen expression predominates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant in first remission",
+          "cells": [
+            {
+              "text": "Allogeneic transplant considered for many patients, particularly KMT2A and higher-risk subtypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response monitoring",
+          "cells": [
+            {
+              "text": "Serial marrow assessment with MRD testing where possible; BCR-ABL1 transcript monitoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mixed_phenotype_acute_leukaemia-dx-mgmt",
+      "title": "Diagnosis and management of Mixed phenotype acute leukaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute leukaemia with blasts expressing both myeloid and lymphoid markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Very high blast count with leukostasis, tumour lysis, CNS symptoms, or BCR-ABL1?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology referral for leukostasis or tumour lysis management",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Multiparameter flow cytometry; cytochemistry; FISH for BCR-ABL1 and KMT2A; marrow; CSF",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are BCR-ABL1 or KMT2A rearrangements identified or excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reclassify the leukaemia and seek expert pathology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "BCR-ABL1 positive: ALL-type induction with a BCR-ABL1 tyrosine kinase inhibitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "KMT2A-rearranged: higher-risk; individualised induction; lower threshold for transplant",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Other cases: ALL-based induction; myeloid-directed if myeloid markers predominate",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Allogeneic transplant in first remission considered for many patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serial marrow and MRD monitoring; early transplant evaluation; trial enrolment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

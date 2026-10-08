@@ -144,5 +144,305 @@
       "caption": "Overview comparison matrix for slap lesion (superior labral anterior-posterior tear)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "slap_lesion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Excludes bony and other joint pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR arthrography",
+          "cells": [
+            {
+              "text": "Superior labral tear; more sensitive than plain MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard MRI",
+          "cells": [
+            {
+              "text": "Used where arthrography is unavailable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic arthroscopy",
+          "cells": [
+            {
+              "text": "Definitive assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glenohumeral internal rotation assessment",
+          "cells": [
+            {
+              "text": "Internal rotation deficit in throwers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "slap_lesion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rotator cuff tear or tendinopathy",
+          "cells": [
+            {
+              "text": "Often coexists and drives symptoms; must be addressed at the same time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior or posterior glenohumeral instability",
+          "cells": [
+            {
+              "text": "Recurrent dislocation signals significant instability rather than an isolated tear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long head of biceps tendinopathy or subluxation",
+          "cells": [
+            {
+              "text": "Biceps pathology favours tenodesis over labral repair"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "slap_lesion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Structured physiotherapy",
+          "cells": [
+            {
+              "text": "Rotator cuff and scapular strengthening, posterior capsular stretching, and correction of internal rotation deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and throwing modification",
+          "cells": [
+            {
+              "text": "Corticosteroid injection for symptom control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthroscopic labral repair",
+          "cells": [
+            {
+              "text": "Symptomatic unstable type II tears in young athletes who fail rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biceps tenodesis or tenotomy",
+          "cells": [
+            {
+              "text": "Older patients, or where degenerative change accompanies the tear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Concomitant pathology",
+          "cells": [
+            {
+              "text": "Rotator cuff tears or a paralabral cyst treated at the same procedure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graduated return to sport",
+          "cells": [
+            {
+              "text": "Realistic counselling on the variable recovery of throwing performance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "slap_lesion-dx-mgmt",
+      "title": "Diagnosis and management of SLAP lesion (superior labral anterior-posterior tear)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Deep shoulder pain with clicking, catching or lost throwing velocity: suspected SLAP",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (recurrent dislocation, rapid weakness or a mass, night pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for biceps rupture, tumour, infection or significant instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs; MR arthrography or MRI; assessment of internal rotation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MR arthrography show a labral tear that matches the symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cuff pathology, instability or a normal labral variant; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy for cuff, scapular strength and internal rotation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Analgesia, activity change and corticosteroid injection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Arthroscopic repair of symptomatic unstable type II tears in young athletes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Biceps tenodesis or tenotomy in older or degenerative cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many respond to rehabilitation; repair and tenodesis outcomes depend on age and activity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

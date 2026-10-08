@@ -151,5 +151,316 @@
       "caption": "Overview comparison matrix for madelung disease (multiple symmetric lipomatosis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "madelung_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT or MRI of neck and thorax",
+          "cells": [
+            {
+              "text": "Fat map and compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Chronic alcohol use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose, HbA1c and lipid profile",
+          "cells": [
+            {
+              "text": "Metabolic disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Associated neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cortisol testing",
+          "cells": [
+            {
+              "text": "Cushing syndrome excluded when ambiguous"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "madelung_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cushing syndrome",
+          "cells": [
+            {
+              "text": "Cortisol excess and other stigmata"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial multiple lipomatosis",
+          "cells": [
+            {
+              "text": "Discrete encapsulated lipomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dercum disease",
+          "cells": [
+            {
+              "text": "Painful adipose tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liposarcoma",
+          "cells": [
+            {
+              "text": "Growth and imaging features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "madelung_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Alcohol abstinence",
+          "cells": [
+            {
+              "text": "Central; may slow progression and recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Debulking surgery",
+          "cells": [
+            {
+              "text": "Lipectomy or liposuction for compression or cosmesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compressive complications",
+          "cells": [
+            {
+              "text": "Urgent decompression for airway compromise or dysphagia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic care",
+          "cells": [
+            {
+              "text": "Glucose and lipid control; alcohol-related liver and nutritional care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial disease",
+          "cells": [
+            {
+              "text": "Investigation where clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "madelung_disease-dx-mgmt",
+      "title": "Diagnosis and management of Madelung disease (multiple symmetric lipomatosis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Symmetric neck and upper trunk fat in a middle-aged man with heavy alcohol use",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (stridor, dysphagia, dyspnoea or venous compression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical decompression for airway or oesophageal compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT or MRI neck and thorax, liver tests, glucose and lipids, cortisol if unclear",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is symmetric non-encapsulated fat seen with Cushing syndrome excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Cushing syndrome, familial lipomatosis or liposarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Alcohol abstinence with structured addiction support",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Debulking lipectomy or liposuction for compression or cosmesis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Urgent decompression for airway or swallowing compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manage glucose, lipid and alcohol-related comorbidity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Counsel that recurrence after debulking is common",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign but progressive and disfiguring; debulking relieves compression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

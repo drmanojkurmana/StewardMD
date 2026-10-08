@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for primary open-angle glaucoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_open_angle_glaucoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Applanation tonometry",
+          "cells": [
+            {
+              "text": "Intraocular pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonioscopy",
+          "cells": [
+            {
+              "text": "Whether the angle is open"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated optic disc examination",
+          "cells": [
+            {
+              "text": "Cupping and rim changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Automated perimetry",
+          "cells": [
+            {
+              "text": "Field loss, detected and monitored"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT of the retinal nerve fibre layer and ganglion cell complex",
+          "cells": [
+            {
+              "text": "Nerve fibre layer and ganglion cell complex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central corneal thickness (pachymetry)",
+          "cells": [
+            {
+              "text": "Influences pressure interpretation and risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_open_angle_glaucoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ocular hypertension without nerve damage",
+          "cells": [
+            {
+              "text": "Raised pressure without nerve damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary open-angle glaucoma (pigmentary, pseudoexfoliation, steroid-induced)",
+          "cells": [
+            {
+              "text": "Pigmentary, pseudoexfoliation or steroid-induced cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_open_angle_glaucoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prostaglandin analogue (first line)",
+          "cells": [
+            {
+              "text": "Latanoprost to lower intraocular pressure, the only modifiable risk factor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Additional pressure-lowering drops",
+          "cells": [
+            {
+              "text": "Beta-blockers, alpha-2 agonists, carbonic anhydrase inhibitors or rho-kinase inhibitors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective laser trabeculoplasty",
+          "cells": [
+            {
+              "text": "First-line alternative or adjunct to medical therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery for progression",
+          "cells": [
+            {
+              "text": "Trabeculectomy or drainage device after progression despite maximal tolerated medical therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Tonometry, optic disc and RNFL imaging, and perimetry to detect progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adherence and education",
+          "cells": [
+            {
+              "text": "Support adherence and drop technique; early disease is asymptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Ophthalmology follow-up with low-vision support and rehabilitation for advanced loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_open_angle_glaucoma-dx-mgmt",
+      "title": "Diagnosis and management of Primary open-angle glaucoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary open-angle glaucoma: raised IOP, cupping or field loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progression despite controlled IOP, disc haemorrhage or advanced cupping?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ophthalmology review for rapid or secondary glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Applanation tonometry; gonioscopy; disc examination; perimetry; RNFL OCT; pachymetry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do disc, field and OCT findings confirm glaucomatous damage with an open angle?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ocular hypertension or non-glaucomatous neuropathy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Latanoprost as first-line therapy to lower intraocular pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add beta-blockers, alpha-2 agonists, CAIs or rho-kinase inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Selective laser trabeculoplasty as first-line alternative or adjunct",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Trabeculectomy or drainage device if progression despite medical therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong monitoring of pressure, disc, RNFL and fields; low-vision support if advanced",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -144,5 +144,267 @@
       "caption": "Overview comparison matrix for rhinosporidiosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rhinosporidiosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nasal endoscopy",
+          "cells": [
+            {
+              "text": "Vascular polypoidal mass and its extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology of excised tissue",
+          "cells": [
+            {
+              "text": "Sporangia and endospores"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemoglobin where epistaxis has recurred",
+          "cells": [
+            {
+              "text": "Anaemia from bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging in extensive disease",
+          "cells": [
+            {
+              "text": "Spread beyond the nasal cavity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rhinosporidiosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Mainstay of treatment for the polypoidal mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cauterisation of the base",
+          "cells": [
+            {
+              "text": "Electrocoagulation or cautery to reduce recurrence and control bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant dapsone",
+          "cells": [
+            {
+              "text": "Suppresses residual disease and lowers the recurrence rate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epistaxis control",
+          "cells": [
+            {
+              "text": "Transfusion and correction of anaemia where bleeding has been heavy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological confirmation",
+          "cells": [
+            {
+              "text": "Demonstrates sporangia and endospores in the excised tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid pond water",
+          "cells": [
+            {
+              "text": "Advise avoidance of bathing in stagnant pond water to reduce reinfection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic surveillance",
+          "cells": [
+            {
+              "text": "Detects recurrence given local spread of endospores"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rhinosporidiosis-dx-mgmt",
+      "title": "Diagnosis and management of Rhinosporidiosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Friable vascular nasal polyp with recurrent epistaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (brisk epistaxis, spread beyond the nose, airway compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Secure haemostasis; treat airway compromise from a large nasopharyngeal mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nasal endoscopy, histology for sporangia, haemoglobin, imaging if extensive",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are sporangia and endospores seen on histology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider angiofibroma, haemangioma, inverted papilloma or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision of the polypoidal mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cauterise the base to reduce recurrence and bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adjuvant dapsone to suppress residual disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Endoscopic surveillance for recurrence; avoid stagnant pond water",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good outcome with complete excision; recurrence is common from local spread",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -141,5 +141,305 @@
       "caption": "Overview comparison matrix for segmental testicular infarction."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Urology and radiology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "segmental_testicular_infarction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Scrotal ultrasound with Doppler or contrast-enhanced ultrasound",
+          "cells": [
+            {
+              "text": "Wedge-shaped or rounded avascular area; absent segment perfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Characterises the lesion in equivocal cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers (AFP, beta-hCG, LDH)",
+          "cells": [
+            {
+              "text": "Normal markers support conservative management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypercoagulable or vasculitic assessment",
+          "cells": [
+            {
+              "text": "Underlying cause needing treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval imaging",
+          "cells": [
+            {
+              "text": "A shrinking lesion supports a benign diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "segmental_testicular_infarction-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Testicular tumour",
+          "cells": [
+            {
+              "text": "Main mimic on imaging; separated by contrast imaging, markers and follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testicular torsion",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epididymo-orchitis with abscess",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "segmental_testicular_infarction-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Analgesia and interval imaging when markers are normal and imaging excludes malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat identifiable cause",
+          "cells": [
+            {
+              "text": "Antimicrobials for epididymo-orchitis; sickle cell disease or thrombophilia management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial scrotal ultrasound",
+          "cells": [
+            {
+              "text": "Shows a shrinking avascular lesion, supporting a benign course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical exploration",
+          "cells": [
+            {
+              "text": "Only if neoplasm cannot be excluded; testis-sparing excision with frozen section favoured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia or vasculitis work-up",
+          "cells": [
+            {
+              "text": "Investigate for predisposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urological follow-up",
+          "cells": [
+            {
+              "text": "Until resolution is confirmed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "segmental_testicular_infarction-dx-mgmt",
+      "title": "Diagnosis and management of Segmental testicular infarction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute testicular pain with a focal avascular testicular lesion on imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Tumour features, enlarging lesion, or signs of torsion or abscess?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent urology: exploration with testis-sparing excision and frozen section",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Doppler or contrast ultrasound; AFP, beta-hCG, LDH; MRI if equivocal",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Wedge-shaped avascular lesion with normal markers?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess for tumour, torsion or abscess; consider MRI or exploration",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Analgesia and conservative care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat the underlying cause such as epididymo-orchitis or sickle cell disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial scrotal ultrasound to show the lesion shrinking",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Assess for thrombophilia or vasculitis; urological follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign course; lesion shrinks and the testis is usually preserved",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

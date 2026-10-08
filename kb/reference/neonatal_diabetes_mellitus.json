@@ -146,5 +146,296 @@
       "caption": "Overview comparison matrix for neonatal diabetes mellitus (kcnj11/abcc8/ins)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neonatal_diabetes_mellitus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma glucose, ketones and blood gas",
+          "cells": [
+            {
+              "text": "Severity and ketoacidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C-peptide and insulin levels",
+          "cells": [
+            {
+              "text": "Endogenous insulin secretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent genetic testing for KCNJ11, ABCC8, INS and 6q24",
+          "cells": [
+            {
+              "text": "The result changes treatment and prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic autoantibodies",
+          "cells": [
+            {
+              "text": "Typically negative; helps exclude autoimmune diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic imaging and syndromic assessment",
+          "cells": [
+            {
+              "text": "When a structural or syndromic cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_diabetes_mellitus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Type 1 diabetes presenting in infancy",
+          "cells": [
+            {
+              "text": "Autoimmune; pancreatic autoantibodies are typically negative in neonatal diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wolcott-Rallison or IPEX syndrome",
+          "cells": [
+            {
+              "text": "Neonatal diabetes as part of a syndrome; syndromic assessment separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_diabetes_mellitus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Insulin at presentation",
+          "cells": [
+            {
+              "text": "Controls hyperglycaemia and treats any ketoacidosis or dehydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral sulfonylurea trial",
+          "cells": [
+            {
+              "text": "In KATP channel (KCNJ11 or ABCC8) disease, to transition many infants off insulin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continued insulin",
+          "cells": [
+            {
+              "text": "For INS, 6q24 and sulfonylurea-unresponsive forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Glycaemic control, feeding and growth; DEND features in KCNJ11 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Remission and relapse follow-up",
+          "cells": [
+            {
+              "text": "Anticipate remission in transient 6q24 forms; follow up for later relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Paediatric endocrinology and clinical genetics, with family genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neonatal_diabetes_mellitus-dx-mgmt",
+      "title": "Diagnosis and management of Neonatal diabetes mellitus (KCNJ11/ABCC8/INS)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hyperglycaemia, poor weight gain or ketoacidosis in an infant under six months",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ketoacidosis, dehydration, developmental delay or seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency insulin, fluids and ketone monitoring; urgent genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Glucose, ketones, blood gas, C-peptide, autoantibodies, KCNJ11, ABCC8, INS, 6q24",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "KATP channel or INS variant confirmed with autoantibodies negative?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider type 1 diabetes or syndromic neonatal diabetes; reassess autoantibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Insulin to control hyperglycaemia and treat ketoacidosis or dehydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Trial of oral sulfonylurea in KCNJ11 or ABCC8 disease to transition off insulin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Continue insulin for INS, 6q24 and sulfonylurea-unresponsive forms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor glycaemia, feeding and growth; screen for DEND features",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Sulfonylurea-responsive cases control well; transient forms may relapse later",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

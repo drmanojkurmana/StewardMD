@@ -153,5 +153,312 @@
       "caption": "Overview comparison matrix for osteoid osteoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Soft Tissue and Bone / standard orthopaedic oncology texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "osteoid_osteoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Thin-section CT",
+          "cells": [
+            {
+              "text": "Localises the nidus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Lucent nidus with surrounding sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Marrow and soft-tissue oedema; may overestimate aggressiveness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone scintigraphy",
+          "cells": [
+            {
+              "text": "Focal intense uptake (double-density sign)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response to NSAIDs",
+          "cells": [
+            {
+              "text": "Symptom pattern and response to anti-inflammatory drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "When the diagnosis is uncertain or tissue is obtained at ablation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteoid_osteoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteoblastoma",
+          "cells": [
+            {
+              "text": "Larger, more aggressive, with less reactive sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ewing sarcoma or other primary bone malignancy",
+          "cells": [
+            {
+              "text": "Cortical destruction or a soft-tissue mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteoid_osteoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Thin-section CT before treatment",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Localise the nidus before choosing a pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Discussion of options",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Continued medical management awaiting spontaneous resolution, or active ablation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs first-line",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Controls nocturnal pain; may be sufficient while awaiting involution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT-guided thermal ablation",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Treatment of choice for definitive resolution; minimally invasive, high success, allows histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Open excision or curettage",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "For lesions unsuitable for thermal ablation, such as when the nidus is close to vital structures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "osteoid_osteoma-dx-mgmt",
+      "title": "Diagnosis and management of Osteoid osteoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Well-localised night pain in a young patient, relieved by NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid growth, cortical destruction, neurological signs or NSAID failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: biopsy and oncology review for suspected osteoblastoma or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Thin-section CT for the nidus; radiographs; bone scan; MRI with caution",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a small nidus localised on thin-section CT, with malignancy excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider osteoblastoma, Brodie abscess, stress fracture or osteomyelitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "NSAIDs for nocturnal pain; may suffice while awaiting spontaneous involution",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Discuss medical management against definitive ablation with the patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "CT-guided percutaneous thermal ablation of the nidus for definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Open excision or curettage for lesions unsuitable for thermal ablation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent outlook; benign, and ablation is usually curative with low recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

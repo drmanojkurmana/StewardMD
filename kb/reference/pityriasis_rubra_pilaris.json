@@ -149,5 +149,325 @@
       "caption": "Overview comparison matrix for pityriasis rubra pilaris."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pityriasis_rubra_pilaris-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Alternating ortho- and parakeratosis with follicular plugging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing",
+          "cells": [
+            {
+              "text": "Recognised association with type VI disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for erythroderma complications",
+          "cells": [
+            {
+              "text": "Fluid balance and temperature regulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of cutaneous T-cell lymphoma",
+          "cells": [
+            {
+              "text": "Atypical or refractory erythroderma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline liver function and lipids",
+          "cells": [
+            {
+              "text": "Before systemic retinoid therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review for CARD14-associated familial disease",
+          "cells": [
+            {
+              "text": "Inherited pattern suggested"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pityriasis_rubra_pilaris-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Psoriasis",
+          "cells": [
+            {
+              "text": "Islands of sparing and follicular papules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sezary syndrome (cutaneous T-cell lymphoma)",
+          "cells": [
+            {
+              "text": "Rapidly progressive or atypical disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pityriasis_rubra_pilaris-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral retinoids",
+          "cells": [
+            {
+              "text": "Acitretin or isotretinoin as first-line systemic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methotrexate",
+          "cells": [
+            {
+              "text": "Second-line systemic agent, alone or with a retinoid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biologics",
+          "cells": [
+            {
+              "text": "TNF inhibitors, ustekinumab or IL-17 inhibitors for refractory disease, particularly CARD14-associated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical care",
+          "cells": [
+            {
+              "text": "Emollients, keratolytics, corticosteroids and vitamin D analogues for comfort and scaling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythroderma care",
+          "cells": [
+            {
+              "text": "Fluid balance, temperature regulation and skin-barrier protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV",
+          "cells": [
+            {
+              "text": "Testing and antiretroviral therapy where type VI disease is identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Liver function and lipids during systemic retinoid therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pityriasis_rubra_pilaris-dx-mgmt",
+      "title": "Diagnosis and management of Pityriasis rubra pilaris",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Erythroderma with follicular papules and islands of sparing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (thermoregulation failure, fluid loss, heart failure, sepsis, lymphoma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent inpatient care for erythroderma with fluid loss, sepsis or cardiac compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy for ortho- and parakeratosis; HIV testing; liver function and lipids",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show alternating ortho- and parakeratosis with follicular plugging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider psoriasis, drug-induced erythroderma, atopic dermatitis or cutaneous lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral retinoids such as acitretin or isotretinoin as first-line systemic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Methotrexate as second-line systemic agent, alone or with a retinoid",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Biologics (TNF inhibitors, ustekinumab, IL-17 inhibitors) for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supportive care of erythroderma with fluid balance and temperature regulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "HIV testing and antiretroviral therapy where type VI disease is identified",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Classic adult form often resolves in one to several years; other forms are chronic",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

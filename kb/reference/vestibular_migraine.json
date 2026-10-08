@@ -152,5 +152,267 @@
       "caption": "Overview comparison matrix for vestibular migraine."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bárány Society and International Headache Society diagnostic criteria for vestibular migraine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vestibular_migraine-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pure-tone audiometry",
+          "cells": [
+            {
+              "text": "Fluctuating low-frequency loss of Menière disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video head impulse and caloric testing",
+          "cells": [
+            {
+              "text": "Typically normal or non-lateralising between attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical and ocular vestibular evoked myogenic potentials",
+          "cells": [
+            {
+              "text": "Vestibular function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Structural or posterior circulation cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vestibular_migraine-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Menière disease",
+          "cells": [
+            {
+              "text": "Fluctuating low-frequency hearing loss; audiometry separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign paroxysmal positional vertigo",
+          "cells": [
+            {
+              "text": "Positional, brief episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior circulation transient ischaemic attack or stroke",
+          "cells": [
+            {
+              "text": "Brainstem signs during an attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent postural-perceptual dizziness",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vestibular_migraine-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Trigger identification and lifestyle changes",
+          "cells": [
+            {
+              "text": "Regular sleep, hydration and meals; reduce dietary and stress triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Migraine preventive drugs",
+          "cells": [
+            {
+              "text": "Beta-blockers, amitriptyline, topiramate or flunarizine for frequent or disabling attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute treatment",
+          "cells": [
+            {
+              "text": "Attack management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vestibular_migraine-dx-mgmt",
+      "title": "Diagnosis and management of vestibular migraine",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vestibular migraine: episodic vertigo, with or without headache",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (brainstem signs, progressive unilateral hearing loss or first attack)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for brainstem signs; exclude posterior circulation stroke",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Audiometry, video head impulse, vestibular evoked potentials, brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are episodes recurrent, with migraine features and no other vestibular cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Menière disease, BPPV or persistent postural dizziness; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Trigger identification and regular sleep, hydration and meals",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Preventive migraine drugs such as beta-blockers or topiramate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Acute treatment for attacks with migraine features",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Recurrent episodes that often respond to migraine prevention",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

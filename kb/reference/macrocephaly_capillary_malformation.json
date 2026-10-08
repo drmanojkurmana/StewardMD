@@ -150,5 +150,316 @@
       "caption": "Overview comparison matrix for macrocephaly-capillary malformation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews and standard paediatric neurology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "macrocephaly_capillary_malformation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Megalencephaly, ventriculomegaly, polymicrogyria, tonsillar herniation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial head circumference",
+          "cells": [
+            {
+              "text": "Ongoing brain overgrowth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and arrhythmia screen",
+          "cells": [
+            {
+              "text": "Baseline cardiac assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PIK3CA testing on affected tissue",
+          "cells": [
+            {
+              "text": "Blood may be mutation-negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal assessment",
+          "cells": [
+            {
+              "text": "Asymmetry and limb-length discrepancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "macrocephaly_capillary_malformation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "CLOVES or Klippel-Trenaunay syndrome",
+          "cells": [
+            {
+              "text": "Other PIK3CA-related overgrowth conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sturge-Weber syndrome",
+          "cells": [
+            {
+              "text": "Leptomeningeal angioma with a different pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proteus syndrome",
+          "cells": [
+            {
+              "text": "Mosaic overgrowth with variable features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beckwith-Wiedemann syndrome",
+          "cells": [
+            {
+              "text": "Overgrowth with a different molecular basis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "macrocephaly_capillary_malformation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "PI3K or mTOR inhibition",
+          "cells": [
+            {
+              "text": "Alpelisib or sirolimus for significant overgrowth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydrocephalus",
+          "cells": [
+            {
+              "text": "Ventricular shunting for progressive hydrocephalus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chiari-like malformation",
+          "cells": [
+            {
+              "text": "Posterior fossa decompression when symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography and arrhythmia screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb asymmetry",
+          "cells": [
+            {
+              "text": "Orthopaedic management; pulsed-dye laser for capillary malformations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "macrocephaly_capillary_malformation-dx-mgmt",
+      "title": "Diagnosis and management of Macrocephaly-capillary malformation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Macrocephaly with midline facial capillary malformation and body asymmetry in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (raised intracranial pressure, arrhythmia or seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurosurgical review for hydrocephalus or Chiari-like malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI, serial head circumference, echocardiography, PIK3CA on affected tissue",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a mosaic activating PIK3CA variant found in affected tissue?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Sturge-Weber, CLOVES, Proteus or Sotos syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Alpelisib or sirolimus for significant overgrowth",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Shunt for progressive hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Posterior fossa decompression for symptomatic Chiari-like malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Echocardiography and arrhythmia surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Developmental, orthopaedic and vascular anomalies team care",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Variable developmental outcome that depends on brain malformation severity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

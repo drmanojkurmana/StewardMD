@@ -147,5 +147,334 @@
       "caption": "Overview comparison matrix for syndactyly."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery / Tachdjian's Pediatric Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "syndactyly-dx-mgmt",
+      "title": "Diagnosis and management of Syndactyly",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected syndactyly: adjacent digits joined by skin, sometimes bone",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (complex fusion sharing a neurovascular bundle, or a syndrome)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Multidisciplinary planning and staged surgery for complex fusion or syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs for bony fusion; web pairing and digit lengths; syndromic review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the fusion simple, with no shared bone or neurovascular structures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Plan complex or bony syndactyly around shared structures; re-image before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Zig-zag separation with local flaps and web reconstruction, often with skin grafts",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Separate border-digit and unequal-length pairs earlier",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Operate on one side of a digit at a time to protect its blood supply",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Splinting, hand therapy and scar management; watch for web creep",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen for Apert and Poland syndromes; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Simple syndactyly has excellent results; complex forms need more surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "syndactyly-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Radiographs",
+          "cells": [
+            {
+              "text": "Simple (soft tissue) versus complex (bony) syndactyly, and shared skeletal structures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical assessment of web pairing and digit lengths",
+          "cells": [
+            {
+              "text": "Border-digit and unequal-length pairs that need earlier separation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for syndromic features",
+          "cells": [
+            {
+              "text": "Craniofacial features in Apert, chest-wall features in Poland"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular assessment and staged planning",
+          "cells": [
+            {
+              "text": "Complex or complete syndactyly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "Where the pattern is syndromic or strongly familial"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "syndactyly-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Polysyndactyly",
+          "cells": [
+            {
+              "text": "Syndactyly combined with digit duplication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constriction ring (amniotic band) sequence with acrosyndactyly",
+          "cells": [
+            {
+              "text": "Constriction rings; a syndromic link to syndactyly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Camptodactyly or clinodactyly",
+          "cells": [
+            {
+              "text": "Angular deformity without fusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired web contracture from burn or trauma",
+          "cells": [
+            {
+              "text": "Acquired after injury; syndactyly is a congenital fusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "syndactyly-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Zig-zag separation with web reconstruction",
+          "cells": [
+            {
+              "text": "Interdigitating incisions, local flaps and skin grafts to resurface the digits and rebuild the web"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Timing by anatomy",
+          "cells": [
+            {
+              "text": "Separate border-digit and unequal-length pairs earlier to prevent angular and rotational deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staged release of one digit's sides",
+          "cells": [
+            {
+              "text": "Avoid operating on both sides of a digit at once, to protect its blood supply"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Planning for complex or bony syndactyly",
+          "cells": [
+            {
+              "text": "Shared skeletal, tendon and neurovascular structures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative care",
+          "cells": [
+            {
+              "text": "Splinting, hand therapy and scar management; monitor for web creep and contracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndrome screening and genetic counselling",
+          "cells": [
+            {
+              "text": "Apert and Poland syndromes; syndromic or familial patterns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric hand surgery service",
+          "cells": [
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

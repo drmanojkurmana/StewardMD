@@ -149,5 +149,361 @@
       "caption": "Overview comparison matrix for kenny-caffey syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard endocrinology and clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kenny_caffey_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum calcium, phosphate, magnesium, albumin",
+          "cells": [
+            {
+              "text": "Corrected calcium and mineral status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intact parathyroid hormone",
+          "cells": [
+            {
+              "text": "Inappropriately low for hypocalcaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Cortical thickening, medullary stenosis, fontanelle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "25-hydroxyvitamin D and renal function",
+          "cells": [
+            {
+              "text": "Mineral metabolism context"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TBCE and FAM111A genetic testing",
+          "cells": [
+            {
+              "text": "Recessive or dominant form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Microphthalmia and refractive error"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kenny_caffey_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sanjad-Sakati syndrome",
+          "cells": [
+            {
+              "text": "Hypoparathyroidism with retardation and dysmorphism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune or surgical hypoparathyroidism",
+          "cells": [
+            {
+              "text": "No skeletal dysplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DiGeorge (22q11.2 deletion) syndrome",
+          "cells": [
+            {
+              "text": "Cardiac and immune features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteopetrosis",
+          "cells": [
+            {
+              "text": "Sclerotic bones without hypoparathyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudohypoparathyroidism",
+          "cells": [
+            {
+              "text": "Raised PTH with hormone resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin D-related rickets",
+          "cells": [
+            {
+              "text": "Low vitamin D, raised alkaline phosphatase"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kenny_caffey_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Mainstay",
+          "cells": [
+            {
+              "text": "Oral calcium with alfacalcidol or calcitriol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute hypocalcaemia",
+          "cells": [
+            {
+              "text": "Intravenous calcium for tetany, spasm or seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Calcium, phosphate and urinary calcium to avoid nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Difficult cases",
+          "cells": [
+            {
+              "text": "Consider recombinant parathyroid hormone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection",
+          "cells": [
+            {
+              "text": "Immune evaluation for recurrent infection, especially TBCE"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eyes",
+          "cells": [
+            {
+              "text": "Correct hyperopia; monitor microphthalmia complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetics",
+          "cells": [
+            {
+              "text": "Counselling distinguishing recessive TBCE from dominant FAM111A"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kenny_caffey_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Kenny-Caffey syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with seizures or tetany, short stature and hypocalcaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Tetany, laryngospasm, seizures, or prolonged QT on ECG?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent intravenous calcium and ECG monitoring for QT prolongation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Calcium, phosphate, magnesium, PTH, skeletal survey, vitamin D, TBCE and FAM111A",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low PTH with hypocalcaemia and skeletal features confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Sanjad-Sakati, DiGeorge, osteopetrosis or rickets; re-evaluate",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral calcium with activated vitamin D analogue",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intravenous calcium for acute symptomatic hypocalcaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Calcium and urinary calcium monitoring to prevent nephrocalcinosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Recombinant parathyroid hormone for difficult control",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Multidisciplinary follow-up and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifelong calcium control; growth and infection risk need follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

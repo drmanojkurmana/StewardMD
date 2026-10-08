@@ -159,5 +159,333 @@
       "caption": "Overview comparison matrix for progressive familial intrahepatic cholestasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum bile acids, bilirubin fractions and GGT",
+          "cells": [
+            {
+              "text": "Cholestatic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of ATP8B1, ABCB11 and ABCB4",
+          "cells": [
+            {
+              "text": "Genetic subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy with BSEP and MDR3 immunostaining",
+          "cells": [
+            {
+              "text": "Fibrosis and BSEP or MDR3 expression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat-soluble vitamin levels and coagulation studies",
+          "cells": [
+            {
+              "text": "Malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound and cholangiography",
+          "cells": [
+            {
+              "text": "Biliary obstruction and atresia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha-fetoprotein and imaging surveillance",
+          "cells": [
+            {
+              "text": "Hepatobiliary malignancy in BSEP disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Biliary atresia",
+          "cells": [
+            {
+              "text": "Biliary obstruction"
+            },
+            {
+              "text": "Ultrasound and cholangiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign recurrent intrahepatic cholestasis",
+          "cells": [
+            {
+              "text": "Milder allelic condition"
+            },
+            {
+              "text": "Molecular genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Total parenteral nutrition-associated cholestasis",
+          "cells": [
+            {
+              "text": "Parenteral nutrition exposure"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ileal bile acid transporter inhibitor",
+          "cells": [
+            {
+              "text": "Odevixibat or maralixibat to interrupt enterohepatic recycling and reduce pruritus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ursodeoxycholic acid",
+          "cells": [
+            {
+              "text": "Especially beneficial in the ABCB4 (MDR3/PFIC3) form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pruritus control",
+          "cells": [
+            {
+              "text": "Rifampicin, bile acid sequestrants and other antipruritics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional rehabilitation",
+          "cells": [
+            {
+              "text": "Medium-chain-triglyceride feeds and fat-soluble vitamin replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery or transplant",
+          "cells": [
+            {
+              "text": "Biliary diversion for symptom relief; liver transplantation for decompensated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy surveillance",
+          "cells": [
+            {
+              "text": "Alpha-fetoprotein and imaging for hepatocellular carcinoma and cholangiocarcinoma in BSEP disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; cascade testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis-dx-mgmt",
+      "title": "Diagnosis and management of Progressive familial intrahepatic cholestasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PFIC: cholestasis with progressive liver disease and pruritus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid jaundice with coagulopathy, rising AFP or mass, or intractable pruritus?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent hepatology review for decompensation; transplant assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bile acids, bilirubin, GGT; ATP8B1, ABCB11, ABCB4 testing; liver biopsy; ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a PFIC subtype confirmed with biliary obstruction excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider biliary atresia, Alagille or other cholestatic causes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Odevixibat or maralixibat to interrupt enterohepatic bile acid recycling",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ursodeoxycholic acid, especially in the ABCB4 form",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rifampicin and bile acid sequestrants for pruritus control",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical biliary diversion or liver transplantation for progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "AFP and imaging surveillance for hepatobiliary malignancy; genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -146,5 +146,314 @@
       "caption": "Overview comparison matrix for uhl anomaly."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease / congenital cardiomyopathy literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "uhl_anomaly-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Dilated, thin-walled, akinetic right ventricle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Wall thinning, distinguished from fibrofatty replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and ambulatory monitoring",
+          "cells": [
+            {
+              "text": "Right-sided conduction disturbance and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right ventricular function assessment",
+          "cells": [
+            {
+              "text": "Right ventricular function and heart-failure severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family and genetic evaluation",
+          "cells": [
+            {
+              "text": "Helps separate it from arrhythmogenic cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "uhl_anomaly-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Arrhythmogenic right ventricular cardiomyopathy",
+          "cells": [
+            {
+              "text": "Different genetics and management from Uhl anomaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary hypertension or valvular disease",
+          "cells": [
+            {
+              "text": "Right heart failure must not be attributed to these without assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ebstein anomaly of the tricuspid valve",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "uhl_anomaly-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Heart failure therapy",
+          "cells": [
+            {
+              "text": "Diuretics for congestion and standard neurohormonal medication for the dilated right ventricle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiarrhythmic management",
+          "cells": [
+            {
+              "text": "Rhythm surveillance for ventricular arrhythmias from the thin, akinetic free wall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Reduces thromboembolism from the dilated, poorly contractile right ventricle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Implantable cardioverter-defibrillator",
+          "cells": [
+            {
+              "text": "Considered for those at high risk of sudden cardiac death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Echocardiography and cardiac MRI for right ventricular function and progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac transplantation",
+          "cells": [
+            {
+              "text": "Definitive option for progressive, refractory right heart failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic and family evaluation",
+          "cells": [
+            {
+              "text": "Distinguishes from arrhythmogenic cardiomyopathy; specialist cardiology and cardiac surgery input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "uhl_anomaly-dx-mgmt",
+      "title": "Diagnosis and management of Uhl anomaly",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Uhl anomaly: right ventricular wall thinning with right heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive right heart failure, ventricular arrhythmia or syncope)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review for syncope, arrhythmia or haemodynamic compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography, cardiac MRI, ECG and ambulatory monitoring; family genetic review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show a thin, akinetic right ventricle, distinct from ARVC?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider arrhythmogenic right ventricular cardiomyopathy or Ebstein anomaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Heart failure therapy with diuretics and standard neurohormonal medication",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiarrhythmic management and rhythm surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticoagulation to reduce thromboembolism from the poorly contractile ventricle",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Defibrillator implant for those at high risk of sudden cardiac death",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally poor outlook; advanced disease may require cardiac transplantation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

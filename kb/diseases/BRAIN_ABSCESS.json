@@ -300,6 +300,21 @@
       "label": "Merck Manual Professional, Brain Abscess",
       "url": "https://www.merckmanuals.com/professional/neurologic-disorders/brain-infections/brain-abscess",
       "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 381-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 164-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 136-1",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -758,6 +773,316 @@
         }
       ],
       "footnote": "Doses are not given because the sources opened do not state them. Mortality is under 15% in recent series; sequelae in at least 20% of survivors (Harrison)."
+    },
+    {
+      "id": "BRAIN_ABSCESS-treatment-2",
+      "kind": "treatment",
+      "title": "Empirical antibiotics by patient group for bacterial meningitis and focal CNS infection",
+      "rowHeader": "Option",
+      "columns": [
+        "Antibiotic"
+      ],
+      "rows": [
+        {
+          "parameter": "Preterm infants to infants under 1 month",
+          "cells": [
+            {
+              "text": "Ampicillin + cefotaxime"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Infants 1 to 3 months",
+          "cells": [
+            {
+              "text": "Ampicillin + cefotaxime or ceftriaxone"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Immunocompetent children over 3 months and adults under 55",
+          "cells": [
+            {
+              "text": "Cefotaxime, ceftriaxone or cefepime, + vancomycin"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Adults over 55, and adults of any age with alcoholism or other debilitating illness",
+          "cells": [
+            {
+              "text": "Ampicillin + cefotaxime, ceftriaxone or cefepime, + vancomycin"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hospital-acquired, posttraumatic or postneurosurgery meningitis, neutropenic patients, or impaired cell-mediated immunity",
+          "cells": [
+            {
+              "text": "Ampicillin + ceftazidime or meropenem, + vancomycin"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Footnote (a) was marked on the table title; its text was not shown on the printed page."
+    },
+    {
+      "id": "BRAIN_ABSCESS-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Anaerobic human flora by anatomic site",
+      "rowHeader": "Anatomic site",
+      "columns": [
+        "Total bacteria",
+        "Anaerobic/aerobic ratio",
+        "Potential pathogens"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral cavity: saliva",
+          "cells": [
+            {
+              "text": "10^8 to 10^9"
+            },
+            {
+              "text": "1:1"
+            },
+            {
+              "text": "Fusobacterium nucleatum, Prevotella melaninogenica, Prevotella oralis group, Bacteroides ureolyticus group, Peptostreptococcus spp. (listed for the oral cavity as a whole)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Oral cavity: tooth surface",
+          "cells": [
+            {
+              "text": "10^10 to 10^11"
+            },
+            {
+              "text": "1:1"
+            },
+            {
+              "text": "As for the oral cavity above"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Oral cavity: gingival crevices",
+          "cells": [
+            {
+              "text": "10^11 to 10^12"
+            },
+            {
+              "text": "10^3:1"
+            },
+            {
+              "text": "As for the oral cavity above"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Gastrointestinal tract: stomach",
+          "cells": [
+            {
+              "text": "0 to 10^5"
+            },
+            {
+              "text": "1:1"
+            },
+            {
+              "text": "Bacteroides spp. (principally the B. fragilis group), Prevotella spp., Clostridium spp., Peptostreptococcus spp. (listed for the GI tract as a whole)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Gastrointestinal tract: jejunum/ileum",
+          "cells": [
+            {
+              "text": "10^4 to 10^7"
+            },
+            {
+              "text": "1:1"
+            },
+            {
+              "text": "As for the GI tract above"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Gastrointestinal tract: terminal ileum and colon",
+          "cells": [
+            {
+              "text": "10^11 to 10^12"
+            },
+            {
+              "text": "10^3:1"
+            },
+            {
+              "text": "As for the GI tract above"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Female genital tract",
+          "cells": [
+            {
+              "text": "10^7 to 10^9"
+            },
+            {
+              "text": "10:1"
+            },
+            {
+              "text": "Peptostreptococcus spp., Bacteroides spp., Prevotella bivia"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Footnote (a) on total bacteria is not shown on the page."
+    },
+    {
+      "id": "BRAIN_ABSCESS-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Classification of streptococci",
+      "rowHeader": "Lancefield group",
+      "columns": [
+        "Representative species",
+        "Hemolytic pattern",
+        "Typical infections"
+      ],
+      "rows": [
+        {
+          "parameter": "A",
+          "cells": [
+            {
+              "text": "S. pyogenes"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Pharyngitis, impetigo, cellulitis, scarlet fever"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "B",
+          "cells": [
+            {
+              "text": "S. agalactiae"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Neonatal sepsis and meningitis, puerperal infection, urinary tract infection, diabetic ulcer infection, endocarditis"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "C, G",
+          "cells": [
+            {
+              "text": "S. dysgalactiae subsp. equisimilis"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Cellulitis, bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "D: enterococci",
+          "cells": [
+            {
+              "text": "E. faecalis; E. faecium"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Urinary tract infection, nosocomial bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "D: nonenterococci",
+          "cells": [
+            {
+              "text": "S. bovis"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Variable or nongroupable: viridans streptococci",
+          "cells": [
+            {
+              "text": "S. sanguis; S. mitis"
+            },
+            {
+              "text": "Alpha"
+            },
+            {
+              "text": "Endocarditis, dental abscess, brain abscess"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Variable or nongroupable: intermedius or milleri group",
+          "cells": [
+            {
+              "text": "S. intermedius, S. anginosus, S. constellatus"
+            },
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "Brain abscess, visceral abscess"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Variable or nongroupable: anaerobic streptococci",
+          "cells": [
+            {
+              "text": "Peptostreptococcus magnus"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Sinusitis, pneumonia, empyema, brain abscess, liver abscess"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "Source footnotes (a) on enterococci and (b) on anaerobic streptococci are not legible in the transcription."
     }
   ],
   "flowcharts": [

@@ -190,6 +190,11 @@
       "id": "c3",
       "label": "Tables PDF, foodborne illness by incubation period (p61 to 162 inventory)",
       "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 128-4",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -493,6 +498,150 @@
         }
       ],
       "footnote": "Azithromycin dose and duration were not stated in the sources opened."
+    },
+    {
+      "id": "infections_due_to_campylobacter_and-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Bacterial food poisoning by incubation period",
+      "rowHeader": "Incubation period and organism",
+      "columns": [
+        "Symptoms",
+        "Common food sources"
+      ],
+      "rows": [
+        {
+          "parameter": "1 to 6 h: Staphylococcus aureus",
+          "cells": [
+            {
+              "text": "Nausea, vomiting, diarrhea"
+            },
+            {
+              "text": "Ham, poultry, potato or egg salad, mayonnaise, cream pastries"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "1 to 6 h: Bacillus cereus",
+          "cells": [
+            {
+              "text": "Nausea, vomiting, diarrhea"
+            },
+            {
+              "text": "Fried rice"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "8 to 16 h: Clostridium perfringens",
+          "cells": [
+            {
+              "text": "Abdominal cramps, diarrhea (vomiting rare)"
+            },
+            {
+              "text": "Beef, poultry, legumes, gravies"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "8 to 16 h: B. cereus",
+          "cells": [
+            {
+              "text": "Abdominal cramps, diarrhea (vomiting rare)"
+            },
+            {
+              "text": "Meats, vegetables, dried beans, cereals"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": ">16 h: Vibrio cholerae",
+          "cells": [
+            {
+              "text": "Watery diarrhea"
+            },
+            {
+              "text": "Shellfish, water"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": ">16 h: Enterotoxigenic Escherichia coli",
+          "cells": [
+            {
+              "text": "Watery diarrhea"
+            },
+            {
+              "text": "Salads, cheese, meats, water"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": ">16 h: Enterohemorrhagic E. coli",
+          "cells": [
+            {
+              "text": "Bloody diarrhea"
+            },
+            {
+              "text": "Ground beef, roast beef, salami, raw milk, raw vegetables, apple juice"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": ">16 h: Salmonella spp.",
+          "cells": [
+            {
+              "text": "Inflammatory diarrhea"
+            },
+            {
+              "text": "Beef, poultry, eggs, dairy products"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": ">16 h: Campylobacter jejuni",
+          "cells": [
+            {
+              "text": "Inflammatory diarrhea"
+            },
+            {
+              "text": "Poultry, raw milk"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": ">16 h: Shigella spp.",
+          "cells": [
+            {
+              "text": "Dysentery"
+            },
+            {
+              "text": "Potato or egg salad, lettuce, raw vegetables"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": ">16 h: Vibrio parahaemolyticus",
+          "cells": [
+            {
+              "text": "Dysentery"
+            },
+            {
+              "text": "Mollusks, crustaceans"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
     }
   ],
   "flowcharts": [

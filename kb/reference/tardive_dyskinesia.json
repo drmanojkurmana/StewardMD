@@ -149,5 +149,343 @@
       "caption": "Overview comparison matrix for tardive dyskinesia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tardive_dyskinesia-dx-mgmt",
+      "title": "Diagnosis and management of Tardive dyskinesia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tardive dyskinesia: orofacial chewing and tongue movements on dopamine blockers",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: movements impair speech, swallowing or breathing, or neuroleptic emergency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for airway or swallowing compromise and neuroleptic emergency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cumulative drug history; structured movement rating; bloods; copper studies if young",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does cumulative dopamine-blocker exposure fit the orofacial dyskinesia pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Huntington disease, Wilson disease or spontaneous orofacial dyskinesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "VMAT2 inhibitor such as valbenazine or deutetrabenazine as mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reduce the causative agent or switch to a lower-risk agent such as clozapine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stop metoclopramide and prochlorperazine where possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Withdraw anticholinergics, which often worsen orofacial movements",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Botulinum toxin for focal or troublesome regional movements",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Variable course; some remit, but many persist or are irreversible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tardive_dyskinesia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Drug history of cumulative dopamine-blocker exposure",
+          "cells": [
+            {
+              "text": "Duration and dose of exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured rating of involuntary movements",
+          "cells": [
+            {
+              "text": "Severity over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood tests",
+          "cells": [
+            {
+              "text": "Metabolic and other secondary causes of chorea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Copper studies",
+          "cells": [
+            {
+              "text": "Wilson disease, in a younger patient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for Huntington disease",
+          "cells": [
+            {
+              "text": "When history or examination suggest it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Atypical presentation or focal signs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tardive_dyskinesia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Huntington disease and other genetic choreas",
+          "cells": [
+            {
+              "text": "Rapid progression or cognitive and psychiatric change suggests it; genetic testing confirms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wilson disease",
+          "cells": [
+            {
+              "text": "Young patient with hepatic or psychiatric features; copper studies exclude it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spontaneous orofacial dyskinesia of the elderly",
+          "cells": [
+            {
+              "text": "Separated from tardive dyskinesia by the cumulative drug history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tardive_dyskinesia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "VMAT2 inhibitor",
+          "cells": [
+            {
+              "text": "Valbenazine or deutetrabenazine, the evidence-based mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of the causative agent",
+          "cells": [
+            {
+              "text": "Reduce the dose or switch to a lower-risk agent such as clozapine; avoid abrupt withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop causative antiemetics",
+          "cells": [
+            {
+              "text": "Metoclopramide and prochlorperazine, where they can be stopped"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw anticholinergics",
+          "cells": [
+            {
+              "text": "These tend to worsen orofacial dyskinesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulinum toxin",
+          "cells": [
+            {
+              "text": "Focal or troublesome regional movements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severity monitoring",
+          "cells": [
+            {
+              "text": "Structured rating of abnormal involuntary movements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Lowest effective dose of dopamine blockers, with regular review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology referral",
+          "cells": [
+            {
+              "text": "Specialist movement-disorder management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

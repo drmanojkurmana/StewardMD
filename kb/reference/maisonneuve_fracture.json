@@ -146,5 +146,316 @@
       "caption": "Overview comparison matrix for maisonneuve fracture."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rockwood and Green's Fractures in Adults",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "maisonneuve_fracture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full-length tibia and fibula radiographs",
+          "cells": [
+            {
+              "text": "Proximal fibular fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle mortise view",
+          "cells": [
+            {
+              "text": "Medial clear space widening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stress or weight-bearing views",
+          "cells": [
+            {
+              "text": "Syndesmotic instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Adequacy of syndesmotic reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Common peroneal nerve examination",
+          "cells": [
+            {
+              "text": "Nerve function documented"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "maisonneuve_fracture-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated Weber B ankle fracture",
+          "cells": [
+            {
+              "text": "No proximal fibular fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated medial malleolus fracture",
+          "cells": [
+            {
+              "text": "Mortise intact on full-length views"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated syndesmotic sprain",
+          "cells": [
+            {
+              "text": "No proximal fibular fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weber C ankle fracture",
+          "cells": [
+            {
+              "text": "High fibular fracture on the same side"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "maisonneuve_fracture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Syndesmosis first",
+          "cells": [
+            {
+              "text": "Anatomical reduction with screw or suture-button construct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medial injury",
+          "cells": [
+            {
+              "text": "Medial malleolus fixation or deltoid repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reduction check",
+          "cells": [
+            {
+              "text": "Intra-operative and CT check; malreduction predicts poor outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Non-weight-bearing then protected mobilisation and physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proximal fibula",
+          "cells": [
+            {
+              "text": "Generally treated non-operatively"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "maisonneuve_fracture-dx-mgmt",
+      "title": "Diagnosis and management of Maisonneuve fracture",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ankle injury with proximal fibular tenderness or a widened mortise",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (common peroneal nerve injury, open injury or unstable mortise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent orthopaedic trauma review for unstable ankle",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full-length leg and ankle radiographs, mortise view, stress views, CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is syndesmotic disruption confirmed with a proximal fibular fracture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider isolated ankle, medial malleolus or syndesmotic injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stabilise the syndesmosis with screw or suture-button fixation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fix the medial injury to restore the mortise",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Confirm syndesmotic reduction with CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Non-weight-bearing then protected mobilisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor for post-traumatic ankle arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally good with anatomical reduction; malreduction predicts pain and arthritis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

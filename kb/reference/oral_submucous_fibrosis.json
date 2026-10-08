@@ -143,5 +143,338 @@
       "caption": "Overview comparison matrix for oral submucous fibrosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oral medicine and oral pathology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oral_submucous_fibrosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Mouth opening and palpation of fibrous bands",
+          "cells": [
+            {
+              "text": "Limited mouth opening; palpable fibrous bands in the buccal mucosa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Confirms fibrosis; excludes dysplasia or carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Habit history",
+          "cells": [
+            {
+              "text": "Areca nut and tobacco use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional status and anaemia",
+          "cells": [
+            {
+              "text": "Deficiency, where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance biopsy",
+          "cells": [
+            {
+              "text": "Malignant change over time"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oral_submucous_fibrosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral leukoplakia or lichen planus",
+          "cells": [
+            {
+              "text": "Palpable fibrous bands and a rigid, pale mucosa are characteristic of this condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "A non-healing ulcer, red patch or mass suggests carcinoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oral_submucous_fibrosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Permanent cessation of areca nut and tobacco",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "The essential first step"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intralesional corticosteroids",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Often with hyaluronidase to improve mucosal suppleness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjunct therapy",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Pentoxifylline and antioxidants such as lycopene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mouth-opening physiotherapy",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Jaw-stretching exercises and interincisal devices to counter trismus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical release",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Fibrous band release with grafting or flap coverage for severe, disabling trismus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and anaemia",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Iron and vitamin supplementation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong surveillance",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Biopsy of suspicious areas for squamous cell carcinoma risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oral_submucous_fibrosis-dx-mgmt",
+      "title": "Diagnosis and management of Oral submucous fibrosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Burning, pale stiff mucosa and palpable bands in an areca nut chewer",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (non-healing ulcer or mass, rapidly worsening trismus or dysplasia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent biopsy and oral and maxillofacial surgery referral for carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mouth-opening measurement, habit history, biopsy, anaemia and nutrition check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy confirm submucous fibrosis without dysplasia or carcinoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider leukoplakia, lichen planus, scleroderma or radiation fibrosis; re-biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Permanent cessation of areca nut and tobacco use, the essential first step",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intralesional corticosteroid with hyaluronidase; pentoxifylline and antioxidants",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Mouth-opening physiotherapy, jaw-stretching and interincisal devices",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical band release with grafting or flap for severe, disabling trismus",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Correct nutritional deficiency and anaemia; lifelong biopsy surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Fibrosis largely irreversible if the habit continues; lifelong oral cancer risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

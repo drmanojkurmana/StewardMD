@@ -144,5 +144,314 @@
       "caption": "Overview comparison matrix for narcolepsy type 1."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "American Academy of Sleep Medicine ICSD-3",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "narcolepsy_type_1-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cerebrospinal fluid hypocretin measurement",
+          "cells": [
+            {
+              "text": "Low or undetectable, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple sleep latency test",
+          "cells": [
+            {
+              "text": "Short sleep latency and two or more sleep-onset REM periods"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA typing for DQB1*06:02",
+          "cells": [
+            {
+              "text": "Supportive test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overnight polysomnography",
+          "cells": [
+            {
+              "text": "Performed before the multiple sleep latency test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep diary and actigraphy",
+          "cells": [
+            {
+              "text": "Confirms adequate prior sleep"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "narcolepsy_type_1-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Narcolepsy type 2",
+          "cells": [
+            {
+              "text": "Type 1 is defined by cataplexy and or low hypocretin; type 2 lacks these"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive sleep apnoea",
+          "cells": [
+            {
+              "text": "Can coexist; overlooking it is a recognised pitfall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syncope or seizures for cataplexy-like episodes",
+          "cells": [
+            {
+              "text": "Attributing cataplexy to syncope or seizures is a recognised error"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "narcolepsy_type_1-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Behavioural foundations",
+          "cells": [
+            {
+              "text": "Scheduled naps, consistent sleep-wake timing and sleep hygiene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wake-promoting agents",
+          "cells": [
+            {
+              "text": "Modafinil, armodafinil, pitolisant or solriamfetol; or methylphenidate or amfetamines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticataplectic treatment",
+          "cells": [
+            {
+              "text": "Sodium oxybate or pitolisant; SNRIs, SSRIs or tricyclics; oxybate also improves nocturnal sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Driving and occupational counselling",
+          "cells": [
+            {
+              "text": "Sleep attacks and cataplexy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbidity screening",
+          "cells": [
+            {
+              "text": "Depression, obesity and disturbed nocturnal sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic confirmation",
+          "cells": [
+            {
+              "text": "Polysomnography, MSLT and CSF hypocretin where needed, under sleep-medicine care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong follow-up",
+          "cells": [
+            {
+              "text": "Pharmacological titration and support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "narcolepsy_type_1-dx-mgmt",
+      "title": "Diagnosis and management of Narcolepsy type 1",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Emotionally triggered cataplexy with excessive daytime sleepiness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cataplexy with falls, unsafe sleepiness, atypical features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Counsel on safety; consider a hypothalamic lesion if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Polysomnography, MSLT, CSF hypocretin where available, HLA DQB1*06:02",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Cataplexy with low CSF hypocretin, or short MSLT latency with multiple REM onsets?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider narcolepsy type 2, sleep apnoea or other hypersomnia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Scheduled naps, consistent sleep-wake timing and good sleep hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Wake-promoting agents such as modafinil, armodafinil, pitolisant or solriamfetol",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sodium oxybate or pitolisant for cataplexy; antidepressants with anticataplectic effect",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Driving safety and occupational counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong; most achieve meaningful control of sleepiness and cataplexy with treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

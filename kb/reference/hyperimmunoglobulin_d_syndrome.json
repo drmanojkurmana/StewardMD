@@ -151,5 +151,341 @@
       "caption": "Overview comparison matrix for hyper-igd syndrome / mevalonate kinase deficiency spectrum."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology / EULAR recommendations for autoinflammatory diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyperimmunoglobulin_d_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum IgD and IgA",
+          "cells": [
+            {
+              "text": "Supportive but not diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary mevalonic acid during a febrile attack",
+          "cells": [
+            {
+              "text": "Enzymatic block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute phase reactants during and between attacks",
+          "cells": [
+            {
+              "text": "Inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MVK genetic testing",
+          "cells": [
+            {
+              "text": "Biallelic variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count during attacks",
+          "cells": [
+            {
+              "text": "Leucocytosis; cyclical neutropenia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mevalonate kinase enzyme activity",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperimmunoglobulin_d_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial Mediterranean fever",
+          "cells": [
+            {
+              "text": "Different gene; MVK testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TNF receptor-associated periodic syndrome",
+          "cells": [
+            {
+              "text": "Different gene; MVK testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryopyrin-associated periodic syndromes",
+          "cells": [
+            {
+              "text": "Urticarial rash and NLRP3 variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PFAPA syndrome",
+          "cells": [
+            {
+              "text": "Regular fever cycles with aphthous stomatitis and pharyngitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyclical neutropenia",
+          "cells": [
+            {
+              "text": "Regular neutrophil nadir on serial counts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperimmunoglobulin_d_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Interleukin-1 blockade",
+          "cells": [
+            {
+              "text": "Anakinra or canakinumab for recurrent attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "On-demand corticosteroids or NSAIDs",
+          "cells": [
+            {
+              "text": "Treat individual attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alternative biologics",
+          "cells": [
+            {
+              "text": "If attacks are refractory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antipyretics, hydration and analgesia",
+          "cells": [
+            {
+              "text": "Supportive care during attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Routine immunisation",
+          "cells": [
+            {
+              "text": "Continued, with attacks possibly triggered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute phase reactant and urine protein monitoring",
+          "cells": [
+            {
+              "text": "Detects AA amyloidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyperimmunoglobulin_d_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Hyper-IgD syndrome / mevalonate kinase deficiency spectrum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent fevers from infancy with lymphadenopathy, abdominal pain and arthralgia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Developmental delay or ataxia, new proteinuria, severe dehydration, or rising attacks?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for dehydration or suspected mevalonic aciduria",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum IgD and IgA; urinary mevalonic acid in an attack; APRs; MVK sequencing; FBC",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic MVK variants found with raised urinary mevalonic acid?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider FMF, TRAPS, CAPS, PFAPA or cyclical neutropenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Interleukin-1 blockade with anakinra or canakinumab",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "On-demand corticosteroids or NSAIDs for individual attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive antipyretics, hydration and analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor acute phase reactants and urine protein for amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Attacks suppressed; amyloidosis surveillance and genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

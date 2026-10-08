@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for mitochondrial non-syndromic hearing loss (mt-rnr1 aminoglycoside sensitivity)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mitochondrial_nonsyndromic_hearing_loss-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pure-tone audiometry",
+          "cells": [
+            {
+              "text": "Baseline thresholds and progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otoacoustic emissions and brainstem response",
+          "cells": [
+            {
+              "text": "Cochlear function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial genetic testing for m.1555A>G and related MT-RNR1 and MT-TS1 variants",
+          "cells": [
+            {
+              "text": "m.1555A>G and related variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed maternal-lineage pedigree",
+          "cells": [
+            {
+              "text": "At-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of prior and planned aminoglycoside exposure",
+          "cells": [
+            {
+              "text": "Aminoglycoside exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for wider mitochondrial disease",
+          "cells": [
+            {
+              "text": "Systemic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mitochondrial_nonsyndromic_hearing_loss-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acquired aminoglycoside ototoxicity without a predisposing variant",
+          "cells": [
+            {
+              "text": "No predisposing variant; genotyping distinguishes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndromic mitochondrial disease",
+          "cells": [
+            {
+              "text": "Additional systemic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mitochondrial_nonsyndromic_hearing_loss-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong aminoglycoside avoidance",
+          "cells": [
+            {
+              "text": "Alternative antimicrobial classes; a single standard course can cause severe irreversible deafness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Record flagging",
+          "cells": [
+            {
+              "text": "Medical records, alert cards or bracelets; advice across the maternal lineage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing aids and cochlear implants",
+          "cells": [
+            {
+              "text": "Hearing aids for established loss; implantation for severe-to-profound loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial audiometry",
+          "cells": [
+            {
+              "text": "Baseline and monitoring of progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-prescription genotyping",
+          "cells": [
+            {
+              "text": "Point-of-care or pre-prescription testing to guide safe antibiotic choice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal-lineage cascade testing",
+          "cells": [
+            {
+              "text": "Identifies at-risk relatives; speech and language support for affected children"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mitochondrial_nonsyndromic_hearing_loss-dx-mgmt",
+      "title": "Diagnosis and management of Mitochondrial non-syndromic hearing loss (MT-RNR1 aminoglycoside sensitivity)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hearing loss with a maternal history, after aminoglycoside exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sudden loss after aminoglycosides, progressive bilateral loss, or systemic features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Stop aminoglycosides; urgent audiology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pure-tone audiometry; OAEs and ABR; m.1555A>G testing; maternal pedigree; drug history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is m.1555A>G or a related MT-RNR1 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider non-mitochondrial hereditary loss, acquired ototoxicity or presbyacusis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong avoidance of aminoglycosides; use alternative antimicrobial classes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Flag the diagnosis in records, on alert cards, and across the maternal lineage",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hearing aids for established loss; cochlear implantation for severe-to-profound loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial audiometry to track progression; genotype-guided antibiotic choice",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Maternal-lineage cascade testing; speech and language support for affected children",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

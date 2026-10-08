@@ -146,5 +146,336 @@
       "caption": "Overview comparison matrix for otitis externa."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "otitis_externa-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Otoscopy or otomicroscopy",
+          "cells": [
+            {
+              "text": "Canal inspection and debris clearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swab of discharge for culture",
+          "cells": [
+            {
+              "text": "Organisms in resistant cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and inflammatory markers",
+          "cells": [
+            {
+              "text": "Necrotising disease, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI of temporal bone and skull base",
+          "cells": [
+            {
+              "text": "Malignant otitis externa, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of granulation tissue",
+          "cells": [
+            {
+              "text": "Malignancy or necrotising disease, when a concern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "otitis_externa-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute otitis media with perforation",
+          "cells": [
+            {
+              "text": "Pain on moving the tragus or pinna points to canal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Furuncle of the canal",
+          "cells": [
+            {
+              "text": "Localised staphylococcal infection of a hair follicle in the cartilaginous canal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otomycosis",
+          "cells": [
+            {
+              "text": "Itching with fungal debris such as blotting-paper or fluffy growth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "otitis_externa-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Meticulous aural toilet",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Clears debris so topical therapy reaches the canal skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical antibiotic and steroid drops",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "With an ear wick when the canal is oedematous and occluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and ear care",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Keep the ear dry; avoid cotton buds and further trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Furuncle drainage",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Incision or drainage of a localised furuncle where it points"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifungal drops",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "For otomycosis, after thorough debris removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant otitis externa",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Systemic anti-pseudomonal antibiotics, skull-base imaging and specialist ENT referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Predisposing factors",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Moisture exposure, diabetes and immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "otitis_externa-dx-mgmt",
+      "title": "Diagnosis and management of Otitis externa",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Canal pain, itch and discharge; pain on moving the tragus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (cranial nerve palsy, spreading cellulitis or failure of topical therapy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: systemic anti-pseudomonal antibiotics, skull-base imaging and ENT referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Otoscopy, canal culture if resistant, glucose and markers; CT if necrosis suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the canal inflammation confined, with necrotising disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider malignant otitis externa, perforation, furuncle or otomycosis; re-examine",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Meticulous aural toilet to clear debris so topical therapy reaches the canal skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical antibiotic and steroid drops, with an ear wick if the canal is occluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Analgesia, keeping the ear dry and avoiding cotton buds",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Incision or drainage of a localised furuncle; antifungal drops for otomycosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually resolves with topical treatment; malignant otitis externa is life-threatening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,316 @@
       "caption": "Overview comparison matrix for task-specific (focal) dystonia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "task_specific_dystonia-dx-mgmt",
+      "title": "Diagnosis and management of Task-specific (focal) dystonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected task-specific dystonia: spasm only during a skilled repetitive task",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: dystonia at rest or spreading, sensory loss, or young onset with neurology",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review for a secondary, generalising or compressive cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Task-based examination with video; surface EMG; nerve conduction studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does dystonia occur only during the task, with nerve studies normal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider overuse injury, nerve entrapment, essential tremor or functional disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Botulinum toxin targeted to overactive muscles as mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ergonomic aids, altered technique or switching hands",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sensorimotor retraining and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Trihexyphenidyl trial in selected patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Teach an effective sensory trick to relieve posturing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally chronic and rarely remits; can end a career; botulinum toxin is a mainstay",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "task_specific_dystonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Task-based examination, observing the triggering activity",
+          "cells": [
+            {
+              "text": "Dystonia confined to the skilled task"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surface electromyography",
+          "cells": [
+            {
+              "text": "Co-contraction of agonist and antagonist muscles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Focal neuropathy or entrapment excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Structural or secondary cause, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video recording of the task",
+          "cells": [
+            {
+              "text": "Documents and monitors the dystonia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "task_specific_dystonia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Overuse or repetitive strain injury",
+          "cells": [
+            {
+              "text": "Early symptoms are often dismissed as overuse; observing the task separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral nerve entrapment or focal neuropathy",
+          "cells": [
+            {
+              "text": "Excluded by nerve conduction studies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "task_specific_dystonia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Botulinum toxin",
+          "cells": [
+            {
+              "text": "Targeted to overactive muscles; mainstay of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Task modification",
+          "cells": [
+            {
+              "text": "Ergonomic aids, altered technique, grip adaptation or switching hands"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sensorimotor retraining and physiotherapy",
+          "cells": [
+            {
+              "text": "Constraint and rehabilitation strategies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral anticholinergic trial",
+          "cells": [
+            {
+              "text": "Trihexyphenidyl in selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sensory trick",
+          "cells": [
+            {
+              "text": "Teach use of an effective trick to relieve posturing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic and copper studies",
+          "cells": [
+            {
+              "text": "Younger patients or those with wider dystonic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Movement-disorder neurology with occupational or performing-arts medicine support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

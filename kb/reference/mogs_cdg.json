@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for mogs-cdg (congenital disorder of glycosylation type iib)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mogs_cdg-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine oligosaccharides",
+          "cells": [
+            {
+              "text": "Characteristic glucose-rich tetrasaccharide; key confirmatory test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum transferrin isoelectric focusing",
+          "cells": [
+            {
+              "text": "Characteristically normal; does not exclude the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MOGS genetic testing",
+          "cells": [
+            {
+              "text": "CDG panel or exome sequencing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin levels",
+          "cells": [
+            {
+              "text": "Hypogammaglobulinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucosidase I enzyme assay",
+          "cells": [
+            {
+              "text": "Specialist laboratory confirmation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mogs_cdg-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other type II CDGs",
+          "cells": [
+            {
+              "text": "Normal transferrin pattern with urine tetrasaccharide points to MOGS-CDG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lysosomal oligosaccharidoses",
+          "cells": [
+            {
+              "text": "Overlapping urine oligosaccharide findings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary hypogammaglobulinaemia or combined immunodeficiency",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mogs_cdg-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive multidisciplinary care",
+          "cells": [
+            {
+              "text": "No disease-specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiepileptic drugs",
+          "cells": [
+            {
+              "text": "Seizure control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support",
+          "cells": [
+            {
+              "text": "Tube feeding where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin replacement and infection prevention",
+          "cells": [
+            {
+              "text": "For hypogammaglobulinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic monitoring",
+          "cells": [
+            {
+              "text": "Liver function tests and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative care involvement",
+          "cells": [
+            {
+              "text": "Course is frequently life-limiting"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mogs_cdg-dx-mgmt",
+      "title": "Diagnosis and management of MOGS-CDG (congenital disorder of glycosylation type IIb)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypotonic dysmorphic neonate with seizures and feeding failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Neonatal seizures, apnoea, liver dysfunction or serious infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Stabilise airway, control seizures, treat infection, call metabolic team",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine oligosaccharides (not just transferrin IEF), MOGS testing, IgG, LFTs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Glucose-rich tetrasaccharide in urine and MOGS variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other CDG types, oligosaccharidoses, peroxisomal disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiepileptic drugs and feeding support, including tube feeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Immunoglobulin replacement and infection prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy and developmental input for hypotonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for autosomal recessive inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Palliative care alongside metabolic coordination",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Severe course; reported cases died in early infancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

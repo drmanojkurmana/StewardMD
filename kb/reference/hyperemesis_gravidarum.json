@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for hyperemesis gravidarum."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyperemesis_gravidarum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine dipstick for ketones and hydration",
+          "cells": [
+            {
+              "text": "Dehydration and ketosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum electrolytes, urea and creatinine",
+          "cells": [
+            {
+              "text": "Electrolyte and renal status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and liver function tests",
+          "cells": [
+            {
+              "text": "Haemoconcentration and hepatic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests where indicated",
+          "cells": [
+            {
+              "text": "Thyrotoxicosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound",
+          "cells": [
+            {
+              "text": "Viable pregnancy; molar pregnancy excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperemesis_gravidarum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Molar pregnancy",
+          "cells": [
+            {
+              "text": "Excluded by pelvic ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyrotoxicosis of another cause",
+          "cells": [
+            {
+              "text": "Thyroid function tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetic ketoacidosis",
+          "cells": [
+            {
+              "text": "Ketones with raised glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastroenteritis or urinary tract infection",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperemesis_gravidarum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intravenous fluids",
+          "cells": [
+            {
+              "text": "Rehydration, with correction of electrolytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thiamine",
+          "cells": [
+            {
+              "text": "Given before any dextrose infusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stepwise antiemetics",
+          "cells": [
+            {
+              "text": "Starting with an antihistamine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thromboprophylaxis and nutrition",
+          "cells": [
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viability and molar pregnancy",
+          "cells": [
+            {
+              "text": "Confirmed by ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Weight, urinary ketones and electrolytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstetric and dietetic referral",
+          "cells": [
+            {
+              "text": "As needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyperemesis_gravidarum-dx-mgmt",
+      "title": "Diagnosis and management of Hyperemesis gravidarum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent vomiting in pregnancy with ketonuria and weight loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe dehydration, oliguria, confusion or ataxia, refractory vomiting, or haematemesis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: IV fluids, thiamine and obstetric review for severe dehydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine ketones; electrolytes, urea, creatinine; FBC and LFT; thyroid tests; ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the pregnancy viable, with molar disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider molar pregnancy, gastroenteritis, UTI, thyrotoxicosis or DKA",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Rehydrate with IV fluids and correct electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Thiamine before any dextrose infusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stepwise antiemetics, starting with an antihistamine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Thromboprophylaxis and nutritional support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Vomiting controlled; weight and electrolytes monitored",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

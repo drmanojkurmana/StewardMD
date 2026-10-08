@@ -146,5 +146,341 @@
       "caption": "Overview comparison matrix for uniparental disomy 14 (overview)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "uniparental_disomy_14-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Methylation analysis of the 14q32 (MEG3/DLK1) region",
+          "cells": [
+            {
+              "text": "Imprinting pattern at the differentially methylated region"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microsatellite or SNP analysis",
+          "cells": [
+            {
+              "text": "Establishes uniparental origin; separates disomy from deletion or epimutation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype",
+          "cells": [
+            {
+              "text": "Robertsonian translocation involving chromosome 14"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Usually normal; excludes deletions and duplications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth, developmental and endocrine assessment",
+          "cells": [
+            {
+              "text": "Growth restriction, developmental delay and early puberty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Small bell-shaped thorax where paternal UPD14 is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "uniparental_disomy_14-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Prader-Willi syndrome",
+          "cells": [
+            {
+              "text": "Temple syndrome mimics it in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Silver-Russell syndrome",
+          "cells": [
+            {
+              "text": "Growth restriction overlaps with maternal UPD14"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal or thoracic dysplasia",
+          "cells": [
+            {
+              "text": "Small thorax with coat-hanger ribs in paternal UPD14"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beckwith-Wiedemann or Angelman syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "uniparental_disomy_14-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Phenotype-directed support",
+          "cells": [
+            {
+              "text": "No disease-specific drug; management depends on Temple or Kagami-Ogata phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temple syndrome: feeding and growth",
+          "cells": [
+            {
+              "text": "Feeding support and growth monitoring in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temple syndrome: puberty",
+          "cells": [
+            {
+              "text": "Suppression of precocious puberty with a GnRH analogue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kagami-Ogata syndrome: respiratory support",
+          "cells": [
+            {
+              "text": "Neonatal ventilation for the small bell-shaped thorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kagami-Ogata syndrome: abdominal wall",
+          "cells": [
+            {
+              "text": "Surgical repair of abdominal wall defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental surveillance",
+          "cells": [
+            {
+              "text": "Early intervention and educational support for delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine and growth review",
+          "cells": [
+            {
+              "text": "Growth hormone considered where growth restriction persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Clinical genetics with paediatric endocrinology and respiratory input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "uniparental_disomy_14-dx-mgmt",
+      "title": "Diagnosis and management of Uniparental disomy 14 (overview)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected UPD14 or 14q32 disorder: neonatal hypotonia, growth restriction or small thorax",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neonatal respiratory compromise, feeding failure or early puberty)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neonatal respiratory support for small thorax or severe feeding failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "14q32 methylation, microsatellite or SNP analysis, microarray and karyotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do methylation and SNP analysis show uniparental disomy 14, not deletion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider imprinting-centre deletion or epimutation, and other imprinting disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Phenotype-directed support; no disease-specific drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Temple: feeding and growth monitoring; GnRH analogue for precocious puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Kagami-Ogata: neonatal respiratory support and abdominal wall repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Developmental surveillance and endocrine review; growth hormone if restriction persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome depends on the Temple or Kagami-Ogata phenotype and its complications",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

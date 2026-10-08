@@ -150,5 +150,296 @@
       "caption": "Overview comparison matrix for schwartz-jampel syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "schwartz_jampel_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Continuous complex repetitive and myotonic-like discharges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "May be normal or mildly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey and imaging",
+          "cells": [
+            {
+              "text": "Chondrodysplasia and contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HSPG2 genetic testing",
+          "cells": [
+            {
+              "text": "Targeted confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy",
+          "cells": [
+            {
+              "text": "Where the diagnosis remains uncertain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "schwartz_jampel_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Myotonic channelopathies",
+          "cells": [
+            {
+              "text": "Pure muscle channelopathy misses the skeletal chondrodysplasia that defines the syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal dysplasias with contractures",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "schwartz_jampel_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Membrane-stabilising drugs",
+          "cells": [
+            {
+              "text": "Carbamazepine, phenytoin or mexiletine to reduce stiffness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and orthopaedics",
+          "cells": [
+            {
+              "text": "Contractures, kyphoscoliosis and skeletal deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological care",
+          "cells": [
+            {
+              "text": "Blepharophimosis and eye complications, with surgery where vision or lid closure is affected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding, airway and anaesthetic planning",
+          "cells": [
+            {
+              "text": "Facial and jaw stiffness; flag difficult airway and perioperative risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational therapy and mobility aids",
+          "cells": [
+            {
+              "text": "Support growth, mobility and function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive HSPG2 (perlecan) disorder; screen at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "schwartz_jampel_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Schwartz-Jampel syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with muscle stiffness, blepharophimosis and short stature: Schwartz-Jampel",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Feeding or airway difficulty, anaesthetic risk, or respiratory kyphoscoliosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Airway and feeding support, anaesthetic alert, respiratory assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EMG for myotonic-like discharges, skeletal survey, CK, HSPG2 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "EMG discharges plus chondrodysplasia, or HSPG2 variant found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider muscle biopsy and other myotonic or skeletal disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Carbamazepine, phenytoin or mexiletine for stiffness",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and orthopaedic care of contractures and kyphoscoliosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ophthalmology for blepharophimosis, with surgery if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for autosomal recessive HSPG2 disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many classic cases reach adulthood with persistent stiffness and deformity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

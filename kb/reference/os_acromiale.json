@@ -148,5 +148,335 @@
       "caption": "Overview comparison matrix for os acromiale."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rockwood and Matsen's The Shoulder",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "os_acromiale-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Axillary lateral radiograph",
+          "cells": [
+            {
+              "text": "Demonstrates and classifies the unfused segment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Outlet and anteroposterior views",
+          "cells": [
+            {
+              "text": "Subacromial arch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Fragment size, bony margins and degenerative change at the synchondrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Rotator cuff integrity, and marrow oedema across the synchondrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic local anaesthetic into the synchondrosis",
+          "cells": [
+            {
+              "text": "Confirms the synchondrosis as the pain source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dynamic ultrasound",
+          "cells": [
+            {
+              "text": "Fragment mobility and cuff integrity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "os_acromiale-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute acromial fracture",
+          "cells": [
+            {
+              "text": "Smooth, corticated, symmetrical margins favour os acromiale over a sharp fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rotator cuff tear",
+          "cells": [
+            {
+              "text": "Progressive cuff weakness indicates a significant associated tear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "os_acromiale-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "No intervention for the common incidental, asymptomatic os acromiale"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Activity modification, physiotherapy for rotator cuff and scapular strengthening, and NSAIDs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided corticosteroid injection",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Subacromial or intra-synchondrosis, for symptomatic impingement; also confirms the pain source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery when conservative care fails",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Excision of a small unstable fragment, or fixation with bone grafting for a larger mobile fragment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated cuff tear",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Repair with subacromial decompression at the time of surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Shoulder surgeon for persistent instability; fragment size and cuff status guide the choice"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "os_acromiale-dx-mgmt",
+      "title": "Diagnosis and management of os acromiale",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Shoulder impingement pain with an unfused acromial segment on radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (sharp post-trauma fracture, progressive cuff weakness or marrow change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for true acromial fracture, infection or tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Axillary lateral radiograph, CT, MRI and diagnostic injection into synchondrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does injection into the synchondrosis reproduce the pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider rotator cuff tear, AC joint osteoarthritis or calcific tendinitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance and no intervention for incidental, asymptomatic os acromiale",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Activity modification, cuff and scapular physiotherapy, and NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Image-guided corticosteroid injection for symptomatic impingement",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Excise a small unstable fragment, or fix a larger mobile one with bone graft",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Repair any associated rotator cuff tear with subacromial decompression",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Asymptomatic cases need no treatment; symptomatic cases often settle conservatively",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

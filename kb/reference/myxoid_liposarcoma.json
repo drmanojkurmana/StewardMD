@@ -159,5 +159,296 @@
       "caption": "Overview comparison matrix for myxoid liposarcoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myxoid_liposarcoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the primary site",
+          "cells": [
+            {
+              "text": "Fat content, myxoid matrix and local extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core needle biopsy with soft-tissue pathology review",
+          "cells": [
+            {
+              "text": "Round-cell fraction for grading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FISH or RT-PCR for DDIT3 rearrangement",
+          "cells": [
+            {
+              "text": "FUS-DDIT3 or EWSR1-DDIT3 fusion confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body or dedicated spinal MRI",
+          "cells": [
+            {
+              "text": "Extrapulmonary metastatic tropism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the chest",
+          "cells": [
+            {
+              "text": "Pulmonary metastases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myxoid_liposarcoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Well-differentiated or dedifferentiated liposarcoma",
+          "cells": [
+            {
+              "text": "Lipomatous tumours without the DDIT3 fusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myxofibrosarcoma",
+          "cells": [
+            {
+              "text": "Myxoid sarcoma; molecular testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-grade fibromyxoid sarcoma",
+          "cells": [
+            {
+              "text": "Distinct fusion and morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intramuscular myxoma",
+          "cells": [
+            {
+              "text": "Benign myxoid lesion; biopsy avoids a missed sarcoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myxoid_liposarcoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "For localised extremity or truncal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neoadjuvant radiotherapy",
+          "cells": [
+            {
+              "text": "Suitability assessed at a sarcoma centre; the tumour is radiosensitive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Grade-directed treatment",
+          "cells": [
+            {
+              "text": "High round-cell content denotes high grade and worse prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance for late extrapulmonary relapse",
+          "cells": [
+            {
+              "text": "Spine, soft tissue and retroperitoneal sites"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myxoid_liposarcoma-dx-mgmt",
+      "title": "Diagnosis and management of Myxoid liposarcoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Large or growing deep thigh or popliteal mass in a young or middle-aged adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new back pain, neurological signs, rising round-cell content)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent sarcoma centre referral; spinal imaging if neurological symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI of primary site, core biopsy, DDIT3 fusion testing, spine and chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "DDIT3 fusion confirmed on biopsy with myxoid morphology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other myxoid or lipomatous sarcomas; repeat molecular testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Quantify the round-cell fraction to grade the tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical resection for localised disease, with neoadjuvant radiotherapy as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Staging with chest CT and imaging of spine and soft tissues",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance for late extrapulmonary relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Pure myxoid tumours do well; a large round-cell component markedly worsens prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

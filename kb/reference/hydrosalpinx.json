@@ -145,5 +145,305 @@
       "caption": "Overview comparison matrix for hydrosalpinx."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard gynaecology reference textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hydrosalpinx-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Tubular fluid collection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hysterosalpingography",
+          "cells": [
+            {
+              "text": "Tubal patency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Characterises complex lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laparoscopy with chromopertubation",
+          "cells": [
+            {
+              "text": "Tubal patency and direct inspection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for coexisting pelvic disease",
+          "cells": [
+            {
+              "text": "Tubal or pelvic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hydrosalpinx-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyosalpinx",
+          "cells": [
+            {
+              "text": "Infected, pus-filled tube"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tubo-ovarian abscess",
+          "cells": [
+            {
+              "text": "Infection with systemic upset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paratubal or paraovarian cyst",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hydrosalpinx-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Laparoscopic salpingectomy or proximal tubal occlusion",
+          "cells": [
+            {
+              "text": "Definitive surgical options"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reconstructive neosalpingostomy",
+          "cells": [
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound-guided aspiration",
+          "cells": [
+            {
+              "text": "Where suitable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting pelvic disease",
+          "cells": [
+            {
+              "text": "Identified and treated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic pelvic pain",
+          "cells": [
+            {
+              "text": "Symptomatic management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility services",
+          "cells": [
+            {
+              "text": "Assisted conception referral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hydrosalpinx-dx-mgmt",
+      "title": "Diagnosis and management of Hydrosalpinx",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fluid-filled dilated fallopian tube on ultrasound, with pelvic pain or infertility",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Infection with fever, severe torsion-type pain, rapidly enlarging complex mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent gynaecology review for infection or torsion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transvaginal ultrasound; HSG for patency; MRI if complex; laparoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a dilated fluid-filled tube confirmed with tubal patency assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider paratubal cyst, ovarian cyst, tubo-ovarian abscess or pyosalpinx",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Laparoscopic salpingectomy or proximal tubal occlusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reconstructive neosalpingostomy in selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ultrasound-guided aspiration of fluid where suitable",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Referral to fertility services for assisted conception",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Tube removed or occluded; fertility options addressed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

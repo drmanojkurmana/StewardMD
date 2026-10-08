@@ -206,6 +206,11 @@
       "id": "c3",
       "label": "Tables PDF, NYHA classification (p111) and Table 234-4",
       "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 243-1",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -588,6 +593,67 @@
           "cite": "c1"
         }
       ]
+    },
+    {
+      "id": "heart_failure_pathophysiology_and_diagnosi-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "NYHA and CCS functional classes",
+      "rowHeader": "Class",
+      "columns": [
+        "New York Heart Association (NYHA) functional class",
+        "Canadian Cardiovascular Society (CCS) functional class"
+      ],
+      "rows": [
+        {
+          "parameter": "Class I",
+          "cells": [
+            {
+              "text": "Cardiac disease without limitation of physical activity. Ordinary activity does not cause undue fatigue, palpitation, dyspnea or anginal pain."
+            },
+            {
+              "text": "Ordinary activity such as walking and climbing stairs does not cause angina. Angina occurs with strenuous, rapid or prolonged exertion at work or recreation."
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Class II",
+          "cells": [
+            {
+              "text": "Cardiac disease with slight limitation of physical activity. Comfortable at rest. Ordinary activity causes fatigue, palpitation, dyspnea or anginal pain."
+            },
+            {
+              "text": "Slight limitation of ordinary activity. Angina on walking or climbing stairs rapidly, walking uphill, walking or climbing stairs after meals, in cold, under emotional stress, or only in the few hours after awakening. Angina on walking more than two blocks on the level or climbing more than one flight of stairs at a normal pace in normal conditions."
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Class III",
+          "cells": [
+            {
+              "text": "Cardiac disease with marked limitation of physical activity. Comfortable at rest. Less than ordinary activity causes fatigue, palpitation, dyspnea or anginal pain."
+            },
+            {
+              "text": "Marked limitation of ordinary physical activity. Angina on walking one to two blocks on the level and climbing more than one flight of stairs in normal conditions."
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Class IV",
+          "cells": [
+            {
+              "text": "Cardiac disease with inability to carry on any physical activity without discomfort. Symptoms of cardiac insufficiency or the anginal syndrome may be present even at rest. Any activity increases discomfort."
+            },
+            {
+              "text": "Inability to carry on any physical activity without discomfort. Anginal syndrome may be present at rest."
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "CCS class III wording is kept as printed in the source."
     }
   ],
   "flowcharts": [

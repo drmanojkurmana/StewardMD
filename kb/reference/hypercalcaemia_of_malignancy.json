@@ -159,5 +159,350 @@
       "caption": "Overview comparison matrix for hypercalcaemia of malignancy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oxford Handbook of Oncology / Endocrine Society hypercalcaemia guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypercalcaemia_of_malignancy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Albumin-corrected or ionised calcium and phosphate",
+          "cells": [
+            {
+              "text": "Hypercalcaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parathyroid hormone",
+          "cells": [
+            {
+              "text": "Suppressed in malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PTH-related peptide",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "25- and 1,25-dihydroxyvitamin D",
+          "cells": [
+            {
+              "text": "Vitamin D status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myeloma screen with serum and urine electrophoresis",
+          "cells": [
+            {
+              "text": "Plasma cell disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and ECG",
+          "cells": [
+            {
+              "text": "QT shortening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging to identify or stage the primary",
+          "cells": [
+            {
+              "text": "Underlying malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypercalcaemia_of_malignancy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary hyperparathyroidism",
+          "cells": [
+            {
+              "text": "PTH raised, unlike suppressed PTH in malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thiazide diuretic use",
+          "cells": [
+            {
+              "text": "Drug exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis and other granulomatous disease",
+          "cells": [
+            {
+              "text": "Granulomatous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin D or vitamin A toxicity",
+          "cells": [
+            {
+              "text": "Raised vitamin D level"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypercalcaemia_of_malignancy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Volume depletion",
+          "cells": [
+            {
+              "text": "Corrected first with intravenous fluids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemodialysis",
+          "cells": [
+            {
+              "text": "Used instead of aggressive volume replacement in heart failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rapid initial control",
+          "cells": [
+            {
+              "text": "Severe symptomatic hypercalcaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous bisphosphonates",
+          "cells": [
+            {
+              "text": "Such as pamidronate or zoledronate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Denosumab",
+          "cells": [
+            {
+              "text": "RANK-ligand inhibitor, an option in selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cinacalcet",
+          "cells": [
+            {
+              "text": "Calcimimetic, in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of the underlying malignancy",
+          "cells": [
+            {
+              "text": "Durable control depends on it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent referral",
+          "cells": [
+            {
+              "text": "Severe or refractory hypercalcaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypercalcaemia_of_malignancy-dx-mgmt",
+      "title": "Diagnosis and management of hypercalcaemia of malignancy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypercalcaemia with suppressed PTH in a patient with known or suspected malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe calcium, short QT or arrhythmia, kidney injury, or falling consciousness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent IV fluids and bisphosphonate for severe symptomatic hypercalcaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Corrected or ionised calcium; PTH; PTHrP; vitamin D; myeloma screen; ECG; imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is PTH suppressed with a malignancy identified or suspected?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary hyperparathyroidism, thiazide use, sarcoidosis or vitamin D toxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct volume depletion first with intravenous fluids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intravenous bisphosphonates such as pamidronate or zoledronate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Denosumab, a RANK-ligand inhibitor, as an option",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treatment of the underlying malignancy for durable control",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Calcium controlled; durable control depends on the underlying cancer",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -152,5 +152,370 @@
       "caption": "Overview comparison matrix for kawasaki disease incomplete."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "American Heart Association Scientific Statement on Kawasaki Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kawasaki_disease_incomplete-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial echocardiography with body-surface-area z-scores",
+          "cells": [
+            {
+              "text": "Coronary artery dimensions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, ESR and CRP",
+          "cells": [
+            {
+              "text": "Anaemia, later thrombocytosis, inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum albumin, sodium and liver enzymes",
+          "cells": [
+            {
+              "text": "Supportive laboratory criteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Sterile pyuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Arrhythmia or ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cultures, serology and viral studies",
+          "cells": [
+            {
+              "text": "Exclusion of infective mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NT-proBNP",
+          "cells": [
+            {
+              "text": "Adjunctive supportive marker"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kawasaki_disease_incomplete-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral exanthems (measles, adenovirus, enterovirus, EBV)",
+          "cells": [
+            {
+              "text": "Viral prodrome, exudative conjunctivitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxin-mediated strep or staph disease",
+          "cells": [
+            {
+              "text": "Scarlet fever, toxic shock, scalded skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multisystem inflammatory syndrome in children",
+          "cells": [
+            {
+              "text": "Recent SARS-CoV-2 exposure, shock, gut symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stevens-Johnson syndrome or DRESS",
+          "cells": [
+            {
+              "text": "Drug exposure, mucosal erosions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic juvenile idiopathic arthritis",
+          "cells": [
+            {
+              "text": "Quotidian fever, arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leptospirosis or mercury exposure (acrodynia)",
+          "cells": [
+            {
+              "text": "Exposure history, distinct systemic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kawasaki_disease_incomplete-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunoglobulin",
+          "cells": [
+            {
+              "text": "Intravenous immunoglobulin as early as possible in the acute illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspirin",
+          "cells": [
+            {
+              "text": "Anti-inflammatory dosing, then antiplatelet dosing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resistance",
+          "cells": [
+            {
+              "text": "Corticosteroids, repeat immunoglobulin or infliximab for high-risk disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coronary surveillance",
+          "cells": [
+            {
+              "text": "Serial echocardiography using body-surface-area z-scores"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antithrombotic",
+          "cells": [
+            {
+              "text": "Tailored to coronary findings; anticoagulation for large aneurysms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Long-term cardiology with paediatric rheumatology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Threshold",
+          "cells": [
+            {
+              "text": "Low threshold to treat infants with prolonged fever"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kawasaki_disease_incomplete-dx-mgmt",
+      "title": "Diagnosis and management of kawasaki disease incomplete",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Prolonged unexplained fever with fewer than the required principal criteria",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Coronary dilatation, myocarditis, shock, or fever persisting after immunoglobulin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology and paediatric rheumatology review; treat without delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial echocardiography, FBC, ESR, CRP, albumin, urinalysis, ECG, cultures, serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fever with supportive laboratory findings and coronary assessment done?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider viral, toxin-mediated, MIS-C or drug mimics; repeat echo and reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intravenous immunoglobulin as early as possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aspirin, anti-inflammatory then antiplatelet dosing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids or infliximab for immunoglobulin-resistant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial echocardiography with body-surface-area z-scores",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Antithrombotic therapy tailored to coronary findings",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Coronary outcome depends on early immunoglobulin; long-term cardiology follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -156,5 +156,341 @@
       "caption": "Overview comparison matrix for smarca4-deficient undifferentiated thoracic tumour."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "smarca4_deficient_thoracic_tumor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "BRG1 (SMARCA4) immunohistochemistry",
+          "cells": [
+            {
+              "text": "Loss of BRG1, often with co-loss of BRM (SMARCA2)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mimic panel",
+          "cells": [
+            {
+              "text": "Expression profile separates NUT carcinoma and germ cell tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular sequencing",
+          "cells": [
+            {
+              "text": "Confirms SMARCA4 inactivation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thoracic cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Extent of mediastinal or pulmonary involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging imaging",
+          "cells": [
+            {
+              "text": "Distant metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adequate biopsy sampling",
+          "cells": [
+            {
+              "text": "Enough tissue for the full ancillary panel"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "smarca4_deficient_thoracic_tumor-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "SMARCA4-deficient non-small cell lung carcinoma",
+          "cells": [
+            {
+              "text": "Retains definite epithelial differentiation, with glandular or squamous architecture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NUT carcinoma of the thorax",
+          "cells": [
+            {
+              "text": "Overlaps clinically; excluded by NUT testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant rhabdoid tumour and SMARCB1-deficient neoplasms",
+          "cells": [
+            {
+              "text": "Rhabdoid morphology overlaps with this tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Poorly differentiated or sarcomatoid carcinoma",
+          "cells": [
+            {
+              "text": "Keratin negativity does not exclude an epithelial process"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "smarca4_deficient_thoracic_tumor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Thoracic oncology referral",
+          "cells": [
+            {
+              "text": "Prompt referral given rarity and aggressiveness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complete surgical resection",
+          "cells": [
+            {
+              "text": "Preferred when anatomically resectable and tolerated; feasible in a minority"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant therapy after resection",
+          "cells": [
+            {
+              "text": "For high-risk features, extrapolated from other high-grade thoracic malignancies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platinum-based chemotherapy with radiotherapy",
+          "cells": [
+            {
+              "text": "Backbone for unresectable or metastatic disease, with radiotherapy for local control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune checkpoint inhibition",
+          "cells": [
+            {
+              "text": "Responses in some patients; investigational"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative radiotherapy",
+          "cells": [
+            {
+              "text": "For airway, vascular or oesophageal compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical trial enrolment",
+          "cells": [
+            {
+              "text": "Given the rarity of this entity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early palliative care",
+          "cells": [
+            {
+              "text": "Alongside active treatment; short median survival"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "smarca4_deficient_thoracic_tumor-dx-mgmt",
+      "title": "Diagnosis and management of SMARCA4-deficient undifferentiated thoracic tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Large growing thoracic mass in a heavy smoker: suspected SMARCA4-deficient tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (airway or vascular compression, widespread metastasis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent thoracic oncology review and palliation of compressive symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "BRG1 (SMARCA4) immunohistochemistry; mimic panel; molecular testing; CT staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is BRG1 expression lost, with NUT carcinoma and other mimics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider SMARCA4-deficient NSCLC, NUT carcinoma or other SWI/SNF tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Refer promptly to a thoracic oncology team",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Resect if feasible and tolerated, with adjuvant therapy for high-risk features",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Platinum-based chemotherapy with radiotherapy for unresectable disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider checkpoint inhibitors if chemotherapy benefit is limited",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Very aggressive; short median survival and limited durability of chemotherapy responses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

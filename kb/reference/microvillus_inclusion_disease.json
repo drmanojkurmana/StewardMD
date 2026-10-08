@@ -147,5 +147,276 @@
       "caption": "Overview comparison matrix for microvillus inclusion disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "microvillus_inclusion_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool electrolytes and faecal osmotic gap",
+          "cells": [
+            {
+              "text": "Secretory pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small-bowel mucosal biopsy with light and electron microscopy",
+          "cells": [
+            {
+              "text": "Microvillus inclusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PAS and CD10 immunohistochemistry",
+          "cells": [
+            {
+              "text": "Apical brush-border accumulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing for MYO5B, STX3 and STXBP2",
+          "cells": [
+            {
+              "text": "Variants in these genes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial fluid balance, serum electrolytes and acid-base assessment",
+          "cells": [
+            {
+              "text": "Fluid and electrolyte losses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "microvillus_inclusion_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Total parenteral nutrition",
+          "cells": [
+            {
+              "text": "Affected infants are dependent on it from birth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid and electrolyte replacement",
+          "cells": [
+            {
+              "text": "Replacement of secretory losses with careful acid-base management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Line care and lipid strategies",
+          "cells": [
+            {
+              "text": "Prevent catheter-related sepsis and intestinal failure-associated liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplantation",
+          "cells": [
+            {
+              "text": "Intestinal or combined liver-intestine transplant for intractable disease, to achieve enteral autonomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Growth, nutritional status and hepatic function, watching for cholestasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; MYO5B and related genes; family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Gastroenterology, specialist nutrition and intestinal transplantation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "microvillus_inclusion_disease-dx-mgmt",
+      "title": "Diagnosis and management of Microvillus inclusion disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with profound secretory diarrhoea and dehydration from birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Haemodynamic instability, severe electrolyte loss, or diarrhoea persisting on bowel rest?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Intensive fluid, electrolyte and acid-base correction; restore haemodynamics",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool electrolytes and osmotic gap; small-bowel biopsy with EM; PAS and CD10; MYO5B",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a secretory pattern confirmed with microvillus inclusions on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tufting enteropathy, congenital chloride diarrhoea or IPEX syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Total parenteral nutrition, on which affected infants depend from birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Meticulous replacement of secretory losses with careful acid-base management",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Careful line care and lipid strategies to prevent sepsis and liver disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intestinal or combined liver-intestine transplant for intractable disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor growth and hepatic function; genetic counselling for MYO5B and related genes",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

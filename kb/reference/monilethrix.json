@@ -149,5 +149,296 @@
       "caption": "Overview comparison matrix for monilethrix."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "monilethrix-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Light microscopy of hairs",
+          "cells": [
+            {
+              "text": "Regular beading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichoscopy",
+          "cells": [
+            {
+              "text": "Regularly bent, beaded shafts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KRT81, KRT83, KRT86 and DSG4 testing",
+          "cells": [
+            {
+              "text": "Molecular confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scalp examination",
+          "cells": [
+            {
+              "text": "Follicular keratosis and pattern of alopecia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and pedigree",
+          "cells": [
+            {
+              "text": "Inheritance pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "monilethrix-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pseudomonilethrix",
+          "cells": [
+            {
+              "text": "Artefactual beading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pili torti",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Netherton syndrome",
+          "cells": [
+            {
+              "text": "Trichorrhexis invaginata"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "monilethrix-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Gentle hair care",
+          "cells": [
+            {
+              "text": "Avoid traction, vigorous brushing, heat styling and chemical treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical minoxidil",
+          "cells": [
+            {
+              "text": "Trial; can improve hair growth and length in some patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keratolytics, emollients, topical retinoids",
+          "cells": [
+            {
+              "text": "For follicular keratosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Compatible with normal health; often improves with age, summer or pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Usually autosomal dominant; rarer autosomal recessive DSG4 form"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "monilethrix-dx-mgmt",
+      "title": "Diagnosis and management of Monilethrix",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sparse, brittle hair with follicular keratosis from infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Distressing extensive alopecia, infected follicles or syndromic features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat infection, offer psychosocial support, assess for ectodermal disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Light microscopy and trichoscopy of hair shafts; KRT81/83/86 and DSG4 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Regular beading with constricted internodes seen?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pseudomonilethrix, pili torti, Netherton, trichothiodystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Gentle hair care avoiding traction, heat and chemicals",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Trial of topical minoxidil",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Keratolytics, emollients and retinoids for follicular keratosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling and reassurance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic but compatible with normal health; often improves with age",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

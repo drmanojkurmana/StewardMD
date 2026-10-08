@@ -142,5 +142,315 @@
       "caption": "Overview comparison matrix for primary thunderclap headache."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "International Classification of Headache Disorders (ICHD-3)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_thunderclap_headache-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent non-contrast CT of the head",
+          "cells": [
+            {
+              "text": "Early assessment for blood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture for xanthochromia",
+          "cells": [
+            {
+              "text": "Used if CT is non-diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography and venography",
+          "cells": [
+            {
+              "text": "Vascular causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Apoplexy, intracranial hypotension and other lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat vascular imaging",
+          "cells": [
+            {
+              "text": "RCVS, as early studies can be normal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_thunderclap_headache-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Subarachnoid haemorrhage",
+          "cells": [
+            {
+              "text": "Neck stiffness or photophobia"
+            },
+            {
+              "text": "Non-contrast CT of the head"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reversible cerebral vasoconstriction syndrome",
+          "cells": [
+            {
+              "text": "Recurrent thunderclap episodes"
+            },
+            {
+              "text": "Repeat vascular imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral venous sinus thrombosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "CT or MR venography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_thunderclap_headache-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Vascular emergency",
+          "cells": [
+            {
+              "text": "Urgent non-contrast CT; lumbar puncture for xanthochromia to exclude subarachnoid haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular imaging",
+          "cells": [
+            {
+              "text": "CT or MR angiography and venography to exclude RCVS, dissection and venous thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RCVS treatment",
+          "cells": [
+            {
+              "text": "Calcium channel blocker such as nimodipine; withdrawal of vasoactive triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic care",
+          "cells": [
+            {
+              "text": "Analgesia, blood pressure control and avoidance of vasoconstrictive triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign course once secondary causes are confidently excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral and safety-netting",
+          "cells": [
+            {
+              "text": "Neurology referral; re-present urgently if headache recurs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_thunderclap_headache-dx-mgmt",
+      "title": "Diagnosis and management of Primary thunderclap headache",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thunderclap headache: sudden-onset severe headache",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Focal deficit, reduced consciousness, neck stiffness, papilloedema or seizures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency management as a vascular emergency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urgent non-contrast CT head; LP for xanthochromia; CT or MR angiography and venography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is subarachnoid haemorrhage excluded and vascular causes assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat vascular imaging if RCVS is suspected; neurology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Calcium channel blocker such as nimodipine if RCVS is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withdraw vasoactive triggers; treat analgesia and blood pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Confirm secondary causes are excluded before reassurance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurology referral and safety-netting for recurrent headache",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign course once secondary causes are confidently excluded",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

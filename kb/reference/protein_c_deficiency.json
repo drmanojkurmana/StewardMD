@@ -143,5 +143,303 @@
       "caption": "Overview comparison matrix for protein c deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / AABB Technical Manual",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "protein_c_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Functional protein C activity assay",
+          "cells": [
+            {
+              "text": "Primary test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein C antigen level",
+          "cells": [
+            {
+              "text": "Deficiency type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat testing away from acute thrombosis and off vitamin K antagonists",
+          "cells": [
+            {
+              "text": "Confirms the result"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for coexisting thrombophilic defects",
+          "cells": [
+            {
+              "text": "Coexisting thrombophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family studies and genetic testing",
+          "cells": [
+            {
+              "text": "Results that guide management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "protein_c_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Factor V Leiden and prothrombin variant",
+          "cells": [
+            {
+              "text": "Coexisting thrombophilic defect"
+            },
+            {
+              "text": "Assessment for coexisting thrombophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated intravascular coagulation",
+          "cells": [
+            {
+              "text": "Acquired protein C consumption"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "protein_c_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anticoagulation for acute VTE",
+          "cells": [
+            {
+              "text": "Heparin such as low-molecular-weight heparin, overlapping before any vitamin K antagonist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Never start a VKA alone",
+          "cells": [
+            {
+              "text": "Concurrent heparin cover, to avoid warfarin-induced skin necrosis from the rapid fall in protein C"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duration",
+          "cells": [
+            {
+              "text": "Extended treatment after unprovoked or recurrent thrombosis, using a DOAC or vitamin K antagonist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal purpura fulminans",
+          "cells": [
+            {
+              "text": "Protein C concentrate or fresh frozen plasma replacement alongside anticoagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thromboprophylaxis",
+          "cells": [
+            {
+              "text": "High-risk periods such as surgery, immobility and pregnancy; avoid oestrogen-containing contraception"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family and confirmation",
+          "cells": [
+            {
+              "text": "Family testing and genetic counselling; repeat testing away from thrombosis and VKA"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "protein_c_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Protein C deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected protein C deficiency: venous thromboembolism at a young age",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Purpura fulminans, warfarin skin necrosis, or widespread microvascular thrombosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency protein C concentrate or FFP for neonatal purpura fulminans",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Functional protein C activity; protein C antigen; repeat testing off thrombosis and VKA",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is low protein C activity confirmed on repeat testing away from thrombosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider protein S or antithrombin deficiency, or acquired consumption; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Anticoagulate acute VTE with heparin, overlapping before any VKA",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Never start a VKA without concurrent heparin cover",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Extended anticoagulation after unprovoked or recurrent thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Thromboprophylaxis in surgery, immobility and pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Family testing and genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

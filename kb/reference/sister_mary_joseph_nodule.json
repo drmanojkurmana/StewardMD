@@ -146,5 +146,305 @@
       "caption": "Overview comparison matrix for sister mary joseph nodule."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sister_mary_joseph_nodule-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsy or fine-needle aspiration of the nodule",
+          "cells": [
+            {
+              "text": "Histology and immunohistochemistry; may suggest the primary source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging of chest, abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Identifies the primary tumour and stages disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper GI endoscopy and colonoscopy",
+          "cells": [
+            {
+              "text": "A gastrointestinal primary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic imaging and gynaecological assessment",
+          "cells": [
+            {
+              "text": "Ovarian or other gynaecological primary in women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers",
+          "cells": [
+            {
+              "text": "Guided by the suspected primary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Positron emission tomography",
+          "cells": [
+            {
+              "text": "Extent of disease in selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sister_mary_joseph_nodule-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Umbilical hernia",
+          "cells": [
+            {
+              "text": "A benign lesion the nodule is often mistaken for"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign umbilical granuloma or omphalitis",
+          "cells": [
+            {
+              "text": "A benign lesion that delays diagnosis if the nodule is mistaken for it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sister_mary_joseph_nodule-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Identify and treat the primary malignancy",
+          "cells": [
+            {
+              "text": "Management is directed at the underlying intra-abdominal or pelvic cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy or fine-needle aspiration with immunohistochemistry",
+          "cells": [
+            {
+              "text": "Characterises the tumour and identifies the primary source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic anticancer therapy",
+          "cells": [
+            {
+              "text": "Chemotherapy and targeted agents, guided by primary tumour type and stage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative local measures",
+          "cells": [
+            {
+              "text": "Local excision or radiotherapy for ulceration, discharge or pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oncology multidisciplinary care",
+          "cells": [
+            {
+              "text": "Advanced, often disseminated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early palliative care",
+          "cells": [
+            {
+              "text": "Symptom control and supportive management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sister_mary_joseph_nodule-dx-mgmt",
+      "title": "Diagnosis and management of Sister Mary Joseph nodule",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Firm periumbilical nodule in an adult: suspected Sister Mary Joseph nodule",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ulceration, bleeding, ascites, weight loss or rapid growth)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent oncology review for disseminated disease with a symptomatic nodule",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy or fine-needle aspiration of the nodule; chest, abdominal and pelvic imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show metastatic carcinoma and identify a primary?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Search further for the primary and reassess for benign lesions; repeat biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying intra-abdominal or pelvic primary malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Systemic anticancer therapy suited to the primary and stage",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Palliative local excision or radiotherapy for symptomatic nodules",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Early palliative care for symptom control",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Marks advanced malignancy; prognosis is poor and varies with the primary",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

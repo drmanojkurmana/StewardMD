@@ -162,5 +162,323 @@
       "caption": "Overview comparison matrix for solitary fibrous tumour."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "solitary_fibrous_tumour-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast CT or MRI of the primary site",
+          "cells": [
+            {
+              "text": "Vascularity and resectability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core needle biopsy",
+          "cells": [
+            {
+              "text": "Mitoses and necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "STAT6 and CD34 immunohistochemistry",
+          "cells": [
+            {
+              "text": "Nuclear STAT6, a highly sensitive marker; CD34 usually positive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NAB2-STAT6 fusion testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis where uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose, insulin, C-peptide and IGF-2 assessment",
+          "cells": [
+            {
+              "text": "Doege-Potter hypoglycaemia, if symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging CT of the chest",
+          "cells": [
+            {
+              "text": "Suspected metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "solitary_fibrous_tumour-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Meningioma (intracranial and spinal lesions)",
+          "cells": [
+            {
+              "text": "Nuclear STAT6 immunohistochemistry separates the two"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal stromal tumour (abdominal lesions)",
+          "cells": [
+            {
+              "text": "Nuclear STAT6 immunohistochemistry separates the two"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "solitary_fibrous_tumour-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical resection",
+          "cells": [
+            {
+              "text": "Treatment of choice for localised disease at any site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural disease resection",
+          "cells": [
+            {
+              "text": "Tailored to growth pattern; pedunculated tumours do better; en bloc resection when needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Re-excision for local recurrence",
+          "cells": [
+            {
+              "text": "Long-term survival remains possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk stratification",
+          "cells": [
+            {
+              "text": "Tumour size above 10 cm and mitoses above 4 per 10 high-power fields, with age and necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative radiotherapy",
+          "cells": [
+            {
+              "text": "Positive margins or high-risk histology, decided by the sarcoma team"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiangiogenic tyrosine kinase inhibitor",
+          "cells": [
+            {
+              "text": "Sunitinib or sorafenib for unresectable or metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doege-Potter surveillance",
+          "cells": [
+            {
+              "text": "Hypoglycaemia in large tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged surveillance",
+          "cells": [
+            {
+              "text": "Primary site and chest imaging for late recurrence or metastasis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "solitary_fibrous_tumour-dx-mgmt",
+      "title": "Diagnosis and management of Solitary fibrous tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fibroblastic soft tissue mass, often pleural: suspected solitary fibrous tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, high mitoses, symptomatic hypoglycaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent sarcoma team review; treat symptomatic hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT or MRI; core biopsy; STAT6 and CD34 staining; NAB2-STAT6 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is nuclear STAT6 positive on immunohistochemistry?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider synovial sarcoma, MPNST or meningioma; repeat biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical resection, the treatment of choice",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Re-excision for local recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sarcoma team for risk stratification and postoperative radiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiangiogenic TKI such as sunitinib or sorafenib if unresectable",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Even benign-appearing tumours need follow-up; late recurrence can occur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

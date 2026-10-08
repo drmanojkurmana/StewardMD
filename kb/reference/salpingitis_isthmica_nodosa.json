@@ -145,5 +145,267 @@
       "caption": "Overview comparison matrix for salpingitis isthmica nodosa."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard gynaecology reference textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "salpingitis_isthmica_nodosa-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hysterosalpingography",
+          "cells": [
+            {
+              "text": "Diverticular outpouchings and nodularity at the isthmus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laparoscopy with chromopertubation",
+          "cells": [
+            {
+              "text": "Tubal patency and appearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Definitive diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Limited value; helps exclude other pelvic pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility assessment",
+          "cells": [
+            {
+              "text": "Partner and ovulatory factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "salpingitis_isthmica_nodosa-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "In vitro fertilisation",
+          "cells": [
+            {
+              "text": "Bypasses the diseased tube; best chance of pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Salpingectomy",
+          "cells": [
+            {
+              "text": "Affected, obstructed or hydrosalpinx-bearing tube before assisted conception"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microsurgical resection and reanastomosis",
+          "cells": [
+            {
+              "text": "Isthmic segment, carefully selected younger women wanting natural conception"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectopic pregnancy counselling",
+          "cells": [
+            {
+              "text": "Raised tubal ectopic risk; early ultrasound to confirm intrauterine site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectopic pregnancy treatment",
+          "cells": [
+            {
+              "text": "Methotrexate or surgery as appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reproductive medicine referral",
+          "cells": [
+            {
+              "text": "Individualised planning; treat coexisting ovulatory and male factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "salpingitis_isthmica_nodosa-dx-mgmt",
+      "title": "Diagnosis and management of Salpingitis isthmica nodosa",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Subfertility or prior ectopic pregnancy: suspected salpingitis isthmica nodosa",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute pain or positive pregnancy test suggesting tubal ectopic pregnancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ultrasound; treat ectopic pregnancy with methotrexate or surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hysterosalpingography for isthmic diverticula; laparoscopy with chromopertubation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are isthmic diverticula or nodularity shown?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hydrosalpinx, genital tuberculosis, tubal endometriosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Counsel on raised ectopic risk and early ultrasound in pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat coexisting ovulatory and male factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "IVF bypassing the tube, with salpingectomy first if hydrosalpinx",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Microsurgical reanastomosis for selected younger women",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign lesion with real fertility impact; assisted conception gives best results",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

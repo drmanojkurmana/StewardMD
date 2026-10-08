@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for diffuse cutaneous systemic sclerosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kelley & Firestein's Textbook of Rheumatology / EULAR systemic sclerosis guidance",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "systemic_sclerosis_diffuse-dx-mgmt",
+      "title": "Diagnosis and management of Diffuse cutaneous systemic sclerosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected diffuse systemic sclerosis: rapid skin thickening above the elbows and knees",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (abrupt hypertension with rising creatinine, falling FVC, or gangrene)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ACE inhibitor for suspected scleroderma renal crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anti-Scl-70 and anti-RNA polymerase III; high-resolution CT; lung function; echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do HRCT and lung function confirm interstitial lung disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider limited cutaneous disease, mixed connective tissue disease, fasciitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immunosuppression for progressive skin and lung disease, with nintedanib for fibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early ACE inhibitor for renal crisis; avoid high-dose corticosteroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Vasodilators for Raynaud phenomenon and digital ulcers",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Proton pump inhibitors and prokinetics for gastrointestinal dysmotility",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Blood pressure and renal monitoring, especially early in disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Autologous stem cell transplant in selected rapidly progressive cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Higher morbidity than limited disease, from lung disease and renal crisis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "systemic_sclerosis_diffuse-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ANA with anti-Scl-70 and anti-RNA polymerase III",
+          "cells": [
+            {
+              "text": "Anti-topoisomerase I with interstitial lung disease; anti-RNA polymerase III with rapid skin progression and renal crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT of the chest",
+          "cells": [
+            {
+              "text": "Interstitial lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests",
+          "cells": [
+            {
+              "text": "Forced vital capacity and diffusing capacity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure and renal function monitoring",
+          "cells": [
+            {
+              "text": "Early renal crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nailfold capillaroscopy",
+          "cells": [
+            {
+              "text": "Scleroderma-pattern microangiopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Modified Rodnan skin score",
+          "cells": [
+            {
+              "text": "Cutaneous extent and disease activity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "systemic_sclerosis_diffuse-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunosuppression for progressive skin and lung disease",
+          "cells": [
+            {
+              "text": "Mycophenolate, cyclophosphamide, rituximab or tocilizumab; nintedanib for progressive pulmonary fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early ACE inhibitor for renal crisis",
+          "cells": [
+            {
+              "text": "Avoid high-dose corticosteroids, which can precipitate renal crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasodilators",
+          "cells": [
+            {
+              "text": "Raynaud phenomenon and digital ulcers: calcium channel blockers, phosphodiesterase-5 inhibitors or endothelin receptor antagonists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal therapy",
+          "cells": [
+            {
+              "text": "Proton pump inhibitors and prokinetics for oesophageal and gastrointestinal dysmotility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure and renal monitoring",
+          "cells": [
+            {
+              "text": "Especially early in diffuse disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung and cardiac surveillance",
+          "cells": [
+            {
+              "text": "Pulmonary function tests and echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autologous stem cell transplant",
+          "cells": [
+            {
+              "text": "Selected patients with rapidly progressive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and specialist care",
+          "cells": [
+            {
+              "text": "Skin and joint contractures; multidisciplinary team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

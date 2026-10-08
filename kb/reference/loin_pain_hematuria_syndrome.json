@@ -151,5 +151,343 @@
       "caption": "Overview comparison matrix for loin pain-haematuria syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "loin_pain_hematuria_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis with microscopy (dysmorphic red cells, casts) and culture",
+          "cells": [
+            {
+              "text": "Source of haematuria; infection excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT urography and ultrasound",
+          "cells": [
+            {
+              "text": "Stones, tumour and obstruction excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystoscopy and ureteroscopy",
+          "cells": [
+            {
+              "text": "Localise bleeding; exclude urothelial lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler or cross-sectional venous imaging",
+          "cells": [
+            {
+              "text": "Nutcracker phenomenon excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen and renal function tests",
+          "cells": [
+            {
+              "text": "Clotting disorders and renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal biopsy when clinically warranted",
+          "cells": [
+            {
+              "text": "Glomerular disease excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "loin_pain_hematuria_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Urolithiasis or microlithiasis",
+          "cells": [
+            {
+              "text": "Must be excluded before the diagnosis is made"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutcracker syndrome",
+          "cells": [
+            {
+              "text": "Renal vein compression; potentially treatable, so excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glomerulonephritis (e.g. IgA nephropathy)",
+          "cells": [
+            {
+              "text": "Glomerular disease; biopsy excludes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urothelial or renal malignancy",
+          "cells": [
+            {
+              "text": "Excluded by CT urography and cystoscopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "loin_pain_hematuria_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multidisciplinary chronic pain control",
+          "cells": [
+            {
+              "text": "Simple analgesia and neuropathic agents such as amitriptyline or gabapentinoids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Opioid limitation",
+          "cells": [
+            {
+              "text": "Limit opioid requirements and avoid dependence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Pain-coping strategies; pain is not dismissed as non-organic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interventional options",
+          "cells": [
+            {
+              "text": "Nerve blocks or ureteric catheter analgesia for refractory pain; response is variable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ablative or surgical procedures",
+          "cells": [
+            {
+              "text": "Renal denervation, ureterolysis, autotransplantation or nephrectomy for refractory disease only; benefit unpredictable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Renal function and blood pressure; avoid repeated invasive investigation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint management",
+          "cells": [
+            {
+              "text": "Urology, nephrology and a specialist pain service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "loin_pain_hematuria_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Loin pain-haematuria syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe loin pain with intermittent haematuria in a young or middle-aged woman",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (mass, weight loss, persistent haematuria, sepsis, proteinuria)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent urology review for malignancy, obstruction or sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinalysis and culture, CT urography, cystoscopy, venous imaging, coagulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are stones, tumour, infection, glomerular disease and nutcracker excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Manage the cause identified: stone, glomerular, vascular or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Multidisciplinary chronic pain control with neuropathic agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Limit opioid use and avoid dependence",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Psychological support and pain-coping strategies",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nerve blocks or ureteric catheter analgesia for refractory pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reserve ablative or surgical procedures for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Variable; many have chronic relapsing pain; invasive relief is unpredictable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

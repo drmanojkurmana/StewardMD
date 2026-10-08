@@ -148,5 +148,316 @@
       "caption": "Overview comparison matrix for phytophotodermatitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "phytophotodermatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Careful history of plant, fruit or vegetable contact followed by sun exposure",
+          "cells": [
+            {
+              "text": "Plant contact before sun exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recognition of the streaky or handprint pattern",
+          "cells": [
+            {
+              "text": "Pattern that strongly suggests the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photopatch testing",
+          "cells": [
+            {
+              "text": "Only where photoallergic contact dermatitis is considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy in atypical cases",
+          "cells": [
+            {
+              "text": "Phototoxic changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of medications and topical products",
+          "cells": [
+            {
+              "text": "Other photosensitisers, if the cause is unclear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phytophotodermatitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-accidental injury or bruising in children",
+          "cells": [
+            {
+              "text": "Handprint or bruise-like marks in a child"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Berloque dermatitis",
+          "cells": [
+            {
+              "text": "Fragrance-borne psoralens"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phytophotodermatitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Wash off the plant furocoumarin",
+          "cells": [
+            {
+              "text": "Prompt washing; remove the area from further sun exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Sun avoidance, broad-spectrum UVA sunscreen and protective clothing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythema and blisters",
+          "cells": [
+            {
+              "text": "Topical corticosteroids, cool compresses and simple wound care for blisters"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-inflammatory hyperpigmentation",
+          "cells": [
+            {
+              "text": "Reassurance and continued sun protection; topical depigmenting agents considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Symptomatic care during the acute phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Avoid combining furocoumarin-containing plants such as limes, celery and giant hogweed with sun exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safeguarding",
+          "cells": [
+            {
+              "text": "Assessment when handprint-shaped marks in a child raise concern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "phytophotodermatitis-dx-mgmt",
+      "title": "Diagnosis and management of Phytophotodermatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Streaky or handprint pigmentation after citrus or celery contact, then sun exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (extensive blistering, handprint marks in a child, systemic photosensitivity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Burns-type care for extensive blistering; safeguarding assessment for a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plant contact and sun history; streaky or handprint pattern; biopsy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does plant contact before sun exposure fit the streaky pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider allergic contact dermatitis, photoallergy, burns or non-accidental injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Wash off the plant furocoumarin promptly and avoid further sun on the area",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Enforce photoprotection with sun avoidance and broad-spectrum UVA sunscreen",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical corticosteroids, cool compresses and simple wound care for blisters",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassurance for post-inflammatory hyperpigmentation, with continued sun protection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Consider a safeguarding assessment when handprint marks in a child raise concern",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Acute reaction settles in days to weeks, but pigmentation can take months to fade",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

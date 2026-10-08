@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for naevus anaemicus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "naevus_anaemicus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diascopy",
+          "cells": [
+            {
+              "text": "Lesion margin disappears under glass pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rubbing or warming test",
+          "cells": [
+            {
+              "text": "Surrounding erythema spares the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wood's lamp examination",
+          "cells": [
+            {
+              "text": "No accentuation of the border"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for NF1 features",
+          "cells": [
+            {
+              "text": "Cafe-au-lait macules and neurofibromas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Reduced or absent background vascular erythema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Rarely required; normal melanocytes and vasculature"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "naevus_anaemicus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Naevus depigmentosus",
+          "cells": [
+            {
+              "text": "Hypomelanotic; naevus anaemicus is a vascular pallor with normal melanin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitiligo",
+          "cells": [
+            {
+              "text": "Diascopy and the rub test show a vascular pallor rather than a melanin defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ash-leaf macule of tuberous sclerosis",
+          "cells": [
+            {
+              "text": "Tuberous sclerosis features can coexist with naevus anaemicus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "naevus_anaemicus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, stable functional vascular anomaly needing no active treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical confirmation",
+          "cells": [
+            {
+              "text": "Diascopy and rubbing or warming, rather than biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurofibromatosis type 1 evaluation",
+          "cells": [
+            {
+              "text": "Naevus anaemicus can be an early marker; examine for cafe-au-lait macules and neurofibromas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurocutaneous and genetic assessment",
+          "cells": [
+            {
+              "text": "Where NF1 features coexist; review family history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cosmetic camouflage",
+          "cells": [
+            {
+              "text": "Offered for troublesome lesions; no medical treatment alters the pallor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focused follow-up",
+          "cells": [
+            {
+              "text": "On the associated neurofibromatosis risk rather than the naevus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "naevus_anaemicus-dx-mgmt",
+      "title": "Diagnosis and management of naevus anaemicus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Congenital pale, well-demarcated macule or patch, usually on the upper trunk",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (multiple cafe-au-lait macules, neurofibromas, progressive change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Neurocutaneous assessment for neurofibromatosis type 1",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Diascopy, rubbing or warming test, Wood's lamp, dermoscopy, NF1 examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Vascular pallor confirmed by diascopy and the rub test?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider naevus depigmentosus, vitiligo or tuberous sclerosis; biopsy if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure: benign, stable functional vascular anomaly needing no treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Confirm clinically with diascopy and rubbing or warming, not biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Evaluate for neurofibromatosis type 1 and related neurocutaneous features",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Offer cosmetic camouflage; no medical treatment alters the pallor",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Entirely benign and permanent; its main value is as a marker for NF1",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

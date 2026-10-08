@@ -148,5 +148,323 @@
       "caption": "Overview comparison matrix for scleroderma renal crisis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kelley & Firestein's Textbook of Rheumatology / EULAR systemic sclerosis guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scleroderma_renal_crisis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial blood pressure and renal function",
+          "cells": [
+            {
+              "text": "Accelerated hypertension and rising creatinine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood film, haptoglobin, LDH, platelets",
+          "cells": [
+            {
+              "text": "Schistocytes and microangiopathic haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Proteinuria and haematuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-RNA polymerase III and SSc antibody profile",
+          "cells": [
+            {
+              "text": "Autoantibody risk markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ADAMTS13 activity",
+          "cells": [
+            {
+              "text": "Helps exclude TTP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal biopsy",
+          "cells": [
+            {
+              "text": "Selected diagnostically uncertain cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scleroderma_renal_crisis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Thrombotic thrombocytopenic purpura or HUS",
+          "cells": [
+            {
+              "text": "Excluded in part by ADAMTS13 activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANCA-associated vasculitis with renal involvement",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced thrombotic microangiopathy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scleroderma_renal_crisis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ACE inhibitor",
+          "cells": [
+            {
+              "text": "Start promptly as cornerstone; titrate to control blood pressure even if renal function transiently worsens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Additional antihypertensives",
+          "cells": [
+            {
+              "text": "Calcium-channel blockers or other vasodilators if still uncontrolled"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucocorticoids and nephrotoxins",
+          "cells": [
+            {
+              "text": "Withdraw or minimise glucocorticoids; avoid nephrotoxic agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement therapy",
+          "cells": [
+            {
+              "text": "Severe AKI; continue ACE inhibition as dialysis independence may recover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication care",
+          "cells": [
+            {
+              "text": "Hypertensive encephalopathy and pulmonary oedema with intensive monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Blood pressure, renal function, haemolytic anaemia and thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist input",
+          "cells": [
+            {
+              "text": "Rheumatology and nephrology; assess for transplantation if dialysis-dependent"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scleroderma_renal_crisis-dx-mgmt",
+      "title": "Diagnosis and management of Scleroderma renal crisis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Systemic sclerosis with new severe hypertension or rising creatinine",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hypertensive encephalopathy, oligoanuria, pulmonary oedema or schistocytes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency admission: ACE inhibitor, intensive monitoring, dialysis if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "BP, creatinine, blood film, haptoglobin, LDH, platelets, urinalysis, ADAMTS13",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Hypertension with renal failure and microangiopathy in systemic sclerosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider TTP/HUS, ANCA vasculitis or other thrombotic microangiopathy; biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Start ACE inhibitor promptly and titrate to blood pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add calcium-channel blocker or vasodilator if uncontrolled",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Withdraw glucocorticoids and avoid nephrotoxins",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dialysis for severe AKI while continuing ACE inhibition",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Timely control allows many to recover; some stay dialysis-dependent and need transplant",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

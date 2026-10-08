@@ -157,5 +157,332 @@
       "caption": "Overview comparison matrix for sitosterolaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sitosterolaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma plant sterol quantification",
+          "cells": [
+            {
+              "text": "Grossly elevated sitosterol, campesterol and stigmasterol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ABCG5 and ABCG8 genetic testing",
+          "cells": [
+            {
+              "text": "Biallelic loss-of-function variants confirm the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full lipid profile",
+          "cells": [
+            {
+              "text": "Total cholesterol may be only modestly raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with blood film",
+          "cells": [
+            {
+              "text": "Stomatocytes, macrothrombocytopenia and large platelets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis screen",
+          "cells": [
+            {
+              "text": "Haemolysis, as seen with stomatocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular assessment",
+          "cells": [
+            {
+              "text": "Premature coronary or arterial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening",
+          "cells": [
+            {
+              "text": "Cascade testing of first-degree relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sitosterolaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial hypercholesterolaemia",
+          "cells": [
+            {
+              "text": "Xanthomata with normal or modestly raised cholesterol; statins are largely ineffective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune thrombocytopenia",
+          "cells": [
+            {
+              "text": "Macrothrombocytopenia from sitosterolaemia is sometimes mislabelled as immune disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary stomatocytosis and other membrane haemolytic anaemias",
+          "cells": [
+            {
+              "text": "Plasma plant sterols, not the red-cell picture alone, establish the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sitosterolaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Diet low in plant and shellfish sterols",
+          "cells": [
+            {
+              "text": "Avoid vegetable oils, nuts, seeds and shellfish; the cornerstone of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ezetimibe",
+          "cells": [
+            {
+              "text": "Intestinal sterol-absorption inhibitor; the principal drug therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bile acid sequestrant",
+          "cells": [
+            {
+              "text": "Such as colestyramine, as adjunct therapy; statins are of limited value"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Plasma plant sterols, lipid profile and regression of xanthomata"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematological management",
+          "cells": [
+            {
+              "text": "Haemolysis and macrothrombocytopenia improve with sterol lowering; avoid misdirected immune therapy or splenectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular surveillance",
+          "cells": [
+            {
+              "text": "Risk assessment and surveillance for premature atherosclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive ABCG5 or ABCG8 disorder; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sitosterolaemia-dx-mgmt",
+      "title": "Diagnosis and management of Sitosterolaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Xanthomata with haemolysis or thrombocytopenia in a child: suspected sitosterolaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (premature coronary disease or significant arterial involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiovascular review for premature atherosclerosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma plant sterols by GC or MS; ABCG5 and ABCG8 sequencing; blood film",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are plant sterols grossly raised, with biallelic ABCG5 or ABCG8 variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider familial hypercholesterolaemia or other sterol and membrane disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict restriction of plant and shellfish sterols as the cornerstone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ezetimibe as the principal drug to reduce phytosterol absorption",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bile acid sequestrant such as colestyramine as adjunct; statins of limited value",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Family screening and genetic counselling for the recessive disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early diagnosis lowers sterols, regresses xanthomata and reduces cardiovascular risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

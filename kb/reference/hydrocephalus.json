@@ -147,5 +147,323 @@
       "caption": "Overview comparison matrix for hydrocephalus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hydrocephalus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT or MRI brain",
+          "cells": [
+            {
+              "text": "Ventricular size and level of obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI with CSF flow studies",
+          "cells": [
+            {
+              "text": "Aqueductal or outflow obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Head circumference and cranial ultrasound",
+          "cells": [
+            {
+              "text": "Progression in infants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Large-volume lumbar puncture or external drainage trial",
+          "cells": [
+            {
+              "text": "Response in normal pressure hydrocephalus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shunt series and imaging",
+          "cells": [
+            {
+              "text": "Suspected shunt malfunction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hydrocephalus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cerebral atrophy with ex vacuo ventriculomegaly",
+          "cells": [
+            {
+              "text": "Atrophy rather than obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intracranial mass causing focal obstruction",
+          "cells": [
+            {
+              "text": "Focal mass on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodegenerative dementia in suspected normal pressure hydrocephalus",
+          "cells": [
+            {
+              "text": "Dementia with gait change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic intracranial hypertension",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hydrocephalus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "CSF diversion with a shunt",
+          "cells": [
+            {
+              "text": "Definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of the underlying cause",
+          "cells": [
+            {
+              "text": "Where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency external ventricular drainage",
+          "cells": [
+            {
+              "text": "Acute obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shunt in normal pressure hydrocephalus",
+          "cells": [
+            {
+              "text": "Selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term shunt surveillance",
+          "cells": [
+            {
+              "text": "Prompt imaging when malfunction is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Head circumference monitoring",
+          "cells": [
+            {
+              "text": "Infants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosurgical follow-up",
+          "cells": [
+            {
+              "text": "Attention to shunt complications"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hydrocephalus-dx-mgmt",
+      "title": "Diagnosis and management of Hydrocephalus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Enlarging head, headache, vomiting or falling consciousness with ventricular dilatation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Falling consciousness, impending herniation, fast head growth, or shunt failure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurosurgery for acute obstruction or herniation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT or MRI brain for ventricles and level; MRI with CSF flow; shunt imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is ventricular dilatation confirmed with the level of obstruction localised?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider atrophy with ex vacuo change, mass lesion, IIH or dementia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "CSF diversion with a shunt as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treatment of the underlying cause where possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Emergency external ventricular drainage for acute obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term shunt surveillance with prompt imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "CSF flow restored; shunt surveillance continued",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

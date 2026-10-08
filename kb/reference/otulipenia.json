@@ -148,5 +148,335 @@
       "caption": "Overview comparison matrix for otulipenia (otulin deficiency)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Textbook of Autoinflammation / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "otulipenia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "OTULIN genetic testing",
+          "cells": [
+            {
+              "text": "Biallelic loss-of-function variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Neutrophilic panniculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute-phase reactants",
+          "cells": [
+            {
+              "text": "Markedly raised; systemic inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and inflammatory markers",
+          "cells": [
+            {
+              "text": "Systemic disease activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cultures",
+          "cells": [
+            {
+              "text": "Excludes infective panniculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and gastrointestinal assessment",
+          "cells": [
+            {
+              "text": "Growth failure and diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "otulipenia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "CANDLE and other panniculitis-associated autoinflammatory disease",
+          "cells": [
+            {
+              "text": "Also panniculitis-associated; OTULIN testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective panniculitis or cellulitis",
+          "cells": [
+            {
+              "text": "Excluded by cultures; the panniculitis here is neutrophilic and non-infective"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "otulipenia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anti-tumour necrosis factor therapy",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "The mainstay; often strikingly effective against the NF-kB-driven cytokine excess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interleukin-1 blockade",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Alternative or adjunctive cytokine-directed treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Control of acute severe systemic inflammation and panniculitic flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and growth",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Support with monitoring, to enable catch-up growth once inflammation is controlled"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Serial acute-phase reactants and full blood count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection vigilance and genetics",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Cultures before and during immunosuppression; genetics referral and family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "otulipenia-dx-mgmt",
+      "title": "Diagnosis and management of Otulipenia (OTULIN deficiency)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with recurrent fever, tender nodular panniculitis and failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (instability, failure to thrive despite treatment or organ dysfunction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cytokine-directed treatment and steroids for severe inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "OTULIN testing, skin biopsy, acute-phase reactants, FBC and cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an OTULIN variant found, with infective panniculitis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CANDLE, DADA2, NOMID or infective panniculitis; review the genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Anti-tumour necrosis factor biologic therapy as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Interleukin-1 blockade as an alternative or adjunctive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids to control acute severe inflammation and flares",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nutritional support and growth monitoring for catch-up growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Vigilance for infection on biologic therapy; genetics referral and family testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Severe infantile disease; TNF blockade can produce marked improvement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

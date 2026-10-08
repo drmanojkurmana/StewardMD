@@ -148,5 +148,323 @@
       "caption": "Overview comparison matrix for narcolepsy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "narcolepsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Overnight polysomnography followed by multiple sleep latency test",
+          "cells": [
+            {
+              "text": "Short sleep latency and multiple sleep-onset REM periods"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA typing for DQB1*06:02",
+          "cells": [
+            {
+              "text": "Supportive marker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid hypocretin (orexin) measurement",
+          "cells": [
+            {
+              "text": "Low or undetectable in narcolepsy type 1; selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "When secondary narcolepsy from a hypothalamic lesion is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep diaries and actigraphy",
+          "cells": [
+            {
+              "text": "Excludes insufficient sleep and circadian disorders"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "narcolepsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Obstructive sleep apnoea and other causes of fragmented sleep",
+          "cells": [
+            {
+              "text": "Fragmented sleep is a cause of sleepiness that must be excluded first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Circadian rhythm sleep disorders",
+          "cells": [
+            {
+              "text": "Excluded with sleep diaries and actigraphy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syncope or seizures mistaken for cataplexy",
+          "cells": [
+            {
+              "text": "Cataplexy is often missed or mistaken for these"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Depression",
+          "cells": [
+            {
+              "text": "Attributing chronic sleepiness to depression delays the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "narcolepsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Behavioural measures",
+          "cells": [
+            {
+              "text": "First-line for sleepiness: scheduled daytime naps, regular sleep schedule and sleep hygiene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wake-promoting agents",
+          "cells": [
+            {
+              "text": "Modafinil, armodafinil, solriamfetol or pitolisant; or stimulants such as methylphenidate or amfetamines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticataplectic therapy",
+          "cells": [
+            {
+              "text": "Sodium oxybate, pitolisant, or antidepressants with anticataplectic effect such as SNRIs, SSRIs or tricyclics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Driving and occupational safety",
+          "cells": [
+            {
+              "text": "Counselling on the hazard of untreated sleep attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbid mood and sleep",
+          "cells": [
+            {
+              "text": "Screen for and manage mood disorder and disrupted nocturnal sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist confirmation",
+          "cells": [
+            {
+              "text": "Polysomnography and multiple sleep latency testing under sleep-medicine care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term follow-up",
+          "cells": [
+            {
+              "text": "Treatment titration and patient support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "narcolepsy-dx-mgmt",
+      "title": "Diagnosis and management of Narcolepsy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Excessive daytime sleepiness with sleep attacks, possibly cataplexy or sleep paralysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (focal signs, endocrine disturbance, cataplexy with falls)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "MRI for a hypothalamic lesion if atypical; counsel on driving safety",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Polysomnography with MSLT, HLA DQB1*06:02, CSF hypocretin where selected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Short sleep latency with multiple sleep-onset REM periods on MSLT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude sleep apnoea, insufficient sleep and circadian disorders; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Behavioural measures first: scheduled naps, regular sleep schedule, sleep hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Wake-promoting agents such as modafinil, solriamfetol or pitolisant",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sodium oxybate, pitolisant or anticataplectic antidepressants for cataplexy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Counsel on driving and occupational safety; manage comorbid mood disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong, but usually controllable with treatment; safety and quality of life at stake",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

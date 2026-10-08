@@ -148,5 +148,296 @@
       "caption": "Overview comparison matrix for vascular ring."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vascular_ring-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Barium oesophagram",
+          "cells": [
+            {
+              "text": "Characteristic posterior oesophageal indentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography",
+          "cells": [
+            {
+              "text": "Arch anatomy and ring components"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopy",
+          "cells": [
+            {
+              "text": "Airway compression, tracheomalacia or complete tracheal rings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Associated intracardiac defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Arch and airway findings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vascular_ring-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Asthma or reactive airways disease",
+          "cells": [
+            {
+              "text": "Persistent stridor and wheeze can be mistaken for asthma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent viral croup",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foreign body aspiration",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastro-oesophageal reflux disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vascular_ring-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical division of the ring",
+          "cells": [
+            {
+              "text": "Symptomatic rings; divides the lesser arch or the ligamentum arteriosum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reimplantation of anomalous vessel",
+          "cells": [
+            {
+              "text": "Pulmonary artery sling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tracheoplasty",
+          "cells": [
+            {
+              "text": "Coexisting complete tracheal rings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Asymptomatic rings found incidentally, with clinical review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vascular_ring-dx-mgmt",
+      "title": "Diagnosis and management of Vascular ring",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vascular ring: stridor, barking cough or feeding difficulty in an infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe stridor, apnoea or failure to thrive)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway assessment for severe stridor or acute airway obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Barium oesophagram, CT or MR angiography, bronchoscopy, echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging confirm a complete vascular ring compressing the airway?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider asthma, tracheomalacia or foreign body; reassess the airway",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical division of the symptomatic vascular ring",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reimplantation of an anomalous vessel for pulmonary artery sling",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tracheoplasty for coexisting complete tracheal rings",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Observation of incidental asymptomatic rings with clinical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptomatic rings need division; asymptomatic rings may be observed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

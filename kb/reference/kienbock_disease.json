@@ -149,5 +149,352 @@
       "caption": "Overview comparison matrix for kienbock disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kienbock_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain wrist radiographs with neutral PA view",
+          "cells": [
+            {
+              "text": "Ulnar variance and lunate density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Early avascular change before collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Fragmentation, collapse and articular surface"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral ulnar variance",
+          "cells": [
+            {
+              "text": "Comparison"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone scintigraphy",
+          "cells": [
+            {
+              "text": "If uncertain and cross-sectional imaging unavailable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lichtman staging",
+          "cells": [
+            {
+              "text": "Treatment planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kienbock_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Scaphoid fracture or nonunion",
+          "cells": [
+            {
+              "text": "Anatomical snuffbox tenderness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scapholunate ligament injury",
+          "cells": [
+            {
+              "text": "Carpal instability on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wrist osteoarthritis",
+          "cells": [
+            {
+              "text": "Post-traumatic arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulnar impaction syndrome",
+          "cells": [
+            {
+              "text": "Positive ulnar variance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "De Quervain tenosynovitis",
+          "cells": [
+            {
+              "text": "Radial styloid tenderness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dorsal ganglion",
+          "cells": [
+            {
+              "text": "Palpable cystic swelling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kienbock_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early disease",
+          "cells": [
+            {
+              "text": "Immobilisation, activity change, analgesia or NSAIDs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Negative ulnar variance",
+          "cells": [
+            {
+              "text": "Radial shortening osteotomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascularity or unloading",
+          "cells": [
+            {
+              "text": "Vascularised bone graft, core decompression or capitate shortening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Established collapse",
+          "cells": [
+            {
+              "text": "Proximal row carpectomy or limited intercarpal fusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "End-stage disease",
+          "cells": [
+            {
+              "text": "Total wrist arthrodesis or arthroplasty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial radiographs and MRI as indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kienbock_disease-dx-mgmt",
+      "title": "Diagnosis and management of Kienbock disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Young adult with dorsal wrist pain, stiffness and reduced grip",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive lunate collapse, established arthritis, or bilateral presentation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Orthopaedic hand referral; assess for collapse on imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plain radiographs with ulnar variance, MRI if early, CT for collapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Lunate avascular change on MRI with radiographic density change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider scaphoid injury, ligament injury or arthritis; further imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early disease: immobilisation, activity change and analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Radial shortening osteotomy for negative ulnar variance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Revascularisation or unloading procedures by Lichtman stage",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Proximal row carpectomy or limited fusion for collapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Total wrist arthrodesis for end-stage degenerative disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Pre-collapse stages respond to joint-preserving surgery; collapse needs salvage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

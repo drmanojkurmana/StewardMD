@@ -147,5 +147,335 @@
       "caption": "Overview comparison matrix for orbital apex syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "orbital_apex_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the orbit and skull base with contrast",
+          "cells": [
+            {
+              "text": "The responsible lesion at the orbital apex and skull base"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the orbit and paranasal sinuses",
+          "cells": [
+            {
+              "text": "Bone and sinus disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasoendoscopy and biopsy",
+          "cells": [
+            {
+              "text": "Invasive fungal infection, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and infection screen",
+          "cells": [
+            {
+              "text": "Infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and immune status",
+          "cells": [
+            {
+              "text": "Diabetes or immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual field testing and afferent pupil assessment",
+          "cells": [
+            {
+              "text": "Optic nerve component"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orbital_apex_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Superior orbital fissure syndrome",
+          "cells": [
+            {
+              "text": "Lacks optic nerve involvement; the optic canal lies at the apex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orbital tumour or metastasis",
+          "cells": [
+            {
+              "text": "Malignant infiltration of the skull base"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orbital_apex_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Guided by urgent contrast imaging and biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive fungal infection",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Liposomal amphotericin B with surgical debridement; correct diabetes, ketoacidosis and immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial infection",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Broad-spectrum intravenous antibiotics and drainage of any collection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory or granulomatous causes",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Systemic corticosteroids and steroid-sparing immunosuppression as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neoplastic causes",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Tissue diagnosis, then surgery, radiotherapy or chemotherapy as appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic nerve monitoring",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Visual acuity, colour vision and afferent pupillary pathway"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "orbital_apex_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Orbital apex syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ophthalmoplegia with optic nerve visual loss and trigeminal sensory loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (diabetes or immunosuppression, orbital abscess or skull base infiltration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency antifungal therapy and surgical debridement for invasive infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI of orbit and skull base, CT, nasoendoscopy, glucose and immune status",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is infection or a mass confirmed on imaging or biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider inflammatory disease, Tolosa-Hunt syndrome or superior orbital fissure syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Liposomal amphotericin B and surgical debridement for invasive fungal infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct diabetes, ketoacidosis and immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Broad-spectrum intravenous antibiotics and drainage of any bacterial collection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Corticosteroids and steroid-sparing agents for inflammatory or granulomatous causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Tissue diagnosis, then surgery, radiotherapy or chemotherapy for neoplastic causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Invasive infection is high-risk untreated; optic nerve damage can be permanent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

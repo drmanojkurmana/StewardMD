@@ -147,5 +147,316 @@
       "caption": "Overview comparison matrix for malignant acanthosis nigricans."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "malignant_acanthosis_nigricans-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper GI endoscopy with biopsy",
+          "cells": [
+            {
+              "text": "Gastric adenocarcinoma, the leading association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT chest, abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Occult primary and staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers as directed",
+          "cells": [
+            {
+              "text": "CEA, CA 19-9 or CA-125 by suspected site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Papillomatosis and hyperkeratosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose, HbA1c and insulin",
+          "cells": [
+            {
+              "text": "Insulin-resistance disease excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "malignant_acanthosis_nigricans-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign insulin-resistance acanthosis nigricans",
+          "cells": [
+            {
+              "text": "Obesity and little pruritus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced acanthosis nigricans",
+          "cells": [
+            {
+              "text": "Nicotinic acid, corticosteroids, oestrogens or protease inhibitors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confluent and reticulated papillomatosis",
+          "cells": [
+            {
+              "text": "Different pattern and distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrinopathy-associated acanthosis",
+          "cells": [
+            {
+              "text": "Acromegaly, Cushing syndrome or HAIR-AN"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "malignant_acanthosis_nigricans-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the malignancy",
+          "cells": [
+            {
+              "text": "Urgent identification and treatment; skin lesions often regress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin care",
+          "cells": [
+            {
+              "text": "Emollients and keratolytics such as topical retinoids or salicylic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pruritus",
+          "cells": [
+            {
+              "text": "Antipruritic measures for marked itch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marker of relapse",
+          "cells": [
+            {
+              "text": "Recurrence of skin signs may herald tumour relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Oncology and dermatology, with palliative support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "malignant_acanthosis_nigricans-dx-mgmt",
+      "title": "Diagnosis and management of malignant acanthosis nigricans",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapid onset of velvety plaques in the flexures of a non-obese adult over 40",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (mucosal disease, weight loss or tripe palms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent gastroenterology and oncology review for occult malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Upper GI endoscopy with biopsy, CT chest abdomen pelvis, tumour markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an occult adenocarcinoma found on staging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider benign insulin-resistance acanthosis or drug-induced change",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urgent treatment of the underlying malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients and keratolytics for the skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antipruritic measures for marked itch",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Use skin recurrence as a marker of tumour relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Oncology and dermatology co-management with palliative input",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Often an advanced adenocarcinoma; skin may regress with tumour control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

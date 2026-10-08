@@ -151,5 +151,335 @@
       "caption": "Overview comparison matrix for ovarian cancer."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ovarian_cancer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transvaginal and transabdominal pelvic ultrasound",
+          "cells": [
+            {
+              "text": "Characterises the mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum CA-125; germ cell markers in younger women",
+          "cells": [
+            {
+              "text": "AFP, hCG, LDH and inhibin in younger women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Extent of disease and operability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk-of-malignancy scoring",
+          "cells": [
+            {
+              "text": "Ultrasound, menopausal status and tumour markers combined"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "From surgery or image-guided biopsy where surgery is not upfront"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for BRCA and mismatch repair",
+          "cells": [
+            {
+              "text": "Hereditary risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ovarian_cancer-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Krukenberg tumour",
+          "cells": [
+            {
+              "text": "Metastasis from a gastrointestinal cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign cyst or endometrioma",
+          "cells": [
+            {
+              "text": "A complex solid-cystic mass with markedly raised CA-125 in a postmenopausal woman favours malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ovarian_cancer-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Maximal cytoreductive surgery",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Upfront, or interval debulking after neoadjuvant chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platinum-based chemotherapy",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Typically carboplatin with paclitaxel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PARP-inhibitor maintenance",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "For BRCA-mutated or homologous-recombination-deficient disease; bevacizumab in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response monitoring",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Serial CA-125 with cross-sectional imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetics and risk-reducing surgery",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Cascade testing; risk-reducing salpingo-oophorectomy for carriers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom and palliative care",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Paracentesis for symptomatic ascites; early palliative support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ovarian_cancer-dx-mgmt",
+      "title": "Diagnosis and management of Ovarian Cancer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pelvic mass with bloating, early satiety or ascites in an older woman",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (ascites with breathlessness, bowel obstruction, pleural effusion or cachexia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: gynaecological oncology referral before any intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pelvic ultrasound, CA-125, germ cell markers if young, CT abdomen and pelvis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the mass show malignant features, with CA-125 and imaging supporting it?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider benign cyst, endometrioma, fibroid or Krukenberg tumour; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Maximal cytoreductive surgery, upfront or as interval debulking after chemotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Platinum-based chemotherapy, typically carboplatin with paclitaxel",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "PARP-inhibitor maintenance for BRCA-mutated disease; bevacizumab selectively",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial CA-125 and imaging; genetic testing with risk-reducing surgery for carriers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Paracentesis for symptomatic ascites; early palliative and supportive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Stage and completeness of cytoreduction set outcome; ovary-confined disease is curable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

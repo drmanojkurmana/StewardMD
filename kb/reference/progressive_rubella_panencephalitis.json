@@ -148,5 +148,321 @@
       "caption": "Overview comparison matrix for progressive rubella panencephalitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "progressive_rubella_panencephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Raised protein, oligoclonal bands and greatly elevated rubella antibody"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paired serum and CSF rubella antibody indices",
+          "cells": [
+            {
+              "text": "Intrathecal synthesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "White-matter change and cerebral and cerebellar atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Diffuse slowing without the periodic complexes of SSPE"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History of congenital rubella syndrome or prior infection",
+          "cells": [
+            {
+              "text": "Prior rubella infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of measles and other progressive encephalitides",
+          "cells": [
+            {
+              "text": "Other causes excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_rubella_panencephalitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Subacute sclerosing panencephalitis (measles)",
+          "cells": [
+            {
+              "text": "Periodic complexes on EEG, which are absent here"
+            },
+            {
+              "text": "Electroencephalography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Late complications of congenital infection from other agents",
+          "cells": [
+            {
+              "text": "Congenital infection history"
+            },
+            {
+              "text": "History of congenital infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_rubella_panencephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No specific antiviral",
+          "cells": [
+            {
+              "text": "No antiviral or disease-modifying treatment reliably halts the disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiepileptic drugs",
+          "cells": [
+            {
+              "text": "Clonazepam or levetiracetam for myoclonic jerks, with seizure control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antispasticity",
+          "cells": [
+            {
+              "text": "Baclofen alongside regular physiotherapy and positioning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallowing",
+          "cells": [
+            {
+              "text": "Swallowing assessment, modified diet or enteral feeding, and aspiration precautions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and speech and language therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative support",
+          "cells": [
+            {
+              "text": "Early palliative and supportive care, with family support, given the ultimately fatal course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Community rubella (MMR) immunisation to prevent congenital rubella"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "progressive_rubella_panencephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Progressive rubella panencephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected progressive rubella panencephalitis after congenital rubella",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Ataxia, myoclonus, seizures, loss of swallowing safety or rapid deterioration?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology review for swallowing safety and rapid deterioration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CSF rubella antibody and indices; MRI; EEG; history of congenital rubella",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CSF show intrathecal rubella antibody synthesis with measles excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SSPE, leukodystrophy or another progressive encephalitis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive, symptom-directed care; no reliably effective antiviral",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiepileptic drugs such as clonazepam or levetiracetam for myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antispasticity agents such as baclofen with physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Swallowing assessment, modified diet or enteral feeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early palliative care and family support; community rubella immunisation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

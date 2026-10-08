@@ -152,5 +152,323 @@
       "caption": "Overview comparison matrix for maturity-onset diabetes of the young type 1 (hnf4a-mody)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Endocrinology and clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mody_type_1-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "HNF4A sequencing and dosage analysis",
+          "cells": [
+            {
+              "text": "HNF4A variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic islet autoantibodies (GAD, IA-2, ZnT8)",
+          "cells": [
+            {
+              "text": "Autoimmune diabetes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting and stimulated C-peptide",
+          "cells": [
+            {
+              "text": "Preserved insulin secretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting lipid profile",
+          "cells": [
+            {
+              "text": "Reduced HDL cholesterol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Documentation of birthweight and neonatal hypoglycaemia",
+          "cells": [
+            {
+              "text": "Birthweight and neonatal hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Three-generation family pedigree",
+          "cells": [
+            {
+              "text": "Family pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mody_type_1-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "HNF1A-MODY (MODY3)",
+          "cells": [
+            {
+              "text": "Low renal glucose threshold and normal birthweight"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "Autoantibody positive, with low or undetectable C-peptide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucokinase-MODY (MODY2)",
+          "cells": [
+            {
+              "text": "Mild, stable, non-progressive fasting hyperglycaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mody_type_1-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-dose sulfonylureas as first line",
+          "cells": [
+            {
+              "text": "Preferred over insulin, exploiting the sensitivity of HNF4A-MODY"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Switch after genetic confirmation",
+          "cells": [
+            {
+              "text": "Many insulin-treated patients move to sulfonylureas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Insulin when secretion declines",
+          "cells": [
+            {
+              "text": "Added or switched as beta-cell function declines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal hyperinsulinism",
+          "cells": [
+            {
+              "text": "Anticipate and manage in carriers (for example diazoxide); monitor at-risk newborns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Affected pregnancies",
+          "cells": [
+            {
+              "text": "Joint management; maternal glucose and fetal growth surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication screening",
+          "cells": [
+            {
+              "text": "Microvascular and macrovascular, with glycaemic monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; cascade testing of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mody_type_1-dx-mgmt",
+      "title": "Diagnosis and management of Maturity-Onset Diabetes of the Young Type 1 (HNF4A-MODY)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with macrosomia and neonatal hypoglycaemia, or young-onset diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe neonatal hypoglycaemia, ketoacidosis, loss of control, or an affected pregnancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neonatal glucose support; specialist review for ketoacidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "HNF4A sequencing and dosage; autoantibodies; C-peptide; HDL; birthweight; pedigree",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an HNF4A variant confirmed with autoantibodies negative and C-peptide preserved?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider HNF1A-MODY, type 1 diabetes or GCK-MODY; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Low-dose sulfonylureas as first-line therapy, in preference to insulin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Switch many insulin-treated patients to sulfonylureas after genetic confirmation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticipate and manage neonatal hyperinsulinaemic hypoglycaemia in carriers",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Joint management of affected pregnancies with maternal and fetal growth surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Complication screening and cascade genetic testing of relatives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

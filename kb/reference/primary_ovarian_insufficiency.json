@@ -152,5 +152,341 @@
       "caption": "Overview comparison matrix for primary ovarian insufficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_ovarian_insufficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum FSH, LH and oestradiol, repeated",
+          "cells": [
+            {
+              "text": "Raised FSH and LH with low oestradiol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype",
+          "cells": [
+            {
+              "text": "Turner syndrome or Y-chromosome material"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FMR1 premutation testing",
+          "cells": [
+            {
+              "text": "Fragile X-associated ovarian insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal and thyroid autoantibodies",
+          "cells": [
+            {
+              "text": "Associated autoimmune endocrinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound",
+          "cells": [
+            {
+              "text": "Uterine size and ovarian morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone mineral density assessment",
+          "cells": [
+            {
+              "text": "Oestrogen-deficiency bone loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_ovarian_insufficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypogonadotropic hypogonadism (central causes)",
+          "cells": [
+            {
+              "text": "Central cause, including isolated GnRH deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polycystic ovary syndrome with oligomenorrhoea",
+          "cells": [
+            {
+              "text": "Oligomenorrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional hypothalamic amenorrhoea",
+          "cells": [
+            {
+              "text": "Weight loss, exercise or illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anatomical causes such as Müllerian agenesis",
+          "cells": [
+            {
+              "text": "Müllerian agenesis or outflow obstruction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_ovarian_insufficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oestrogen replacement",
+          "cells": [
+            {
+              "text": "With a progestogen if the uterus is intact, until the average age of natural menopause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pubertal induction",
+          "cells": [
+            {
+              "text": "Gradual, incremental oestrogen then added progestogen in adolescents before puberty is complete"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone protection",
+          "cells": [
+            {
+              "text": "Calcium and vitamin D, weight-bearing exercise, periodic bone mineral density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility",
+          "cells": [
+            {
+              "text": "Counselling; assisted reproduction with donor oocytes or embryos; fertility preservation before gonadotoxic treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying cause",
+          "cells": [
+            {
+              "text": "Screen for thyroid and adrenal autoimmunity; manage Turner-related features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contraception",
+          "cells": [
+            {
+              "text": "Advise where pregnancy is not desired, as intermittent spontaneous ovulation can occur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Impact on fertility and identity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "FMR1 premutation and karyotype testing; gonadectomy where Y-chromosome material is present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_ovarian_insufficiency-dx-mgmt",
+      "title": "Diagnosis and management of Primary ovarian insufficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary ovarian insufficiency: raised FSH and LH with low oestradiol",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Y-chromosome material, adrenal failure, Turner features or severe oestrogen loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: gonadectomy for Y material; cardiac and aortic surveillance if Turner",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeat FSH, LH and oestradiol; karyotype; FMR1 testing; autoantibodies; pelvic US; BMD",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are FSH and LH raised with low oestradiol on repeat testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider constitutional delay, hypogonadotropic or functional causes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oestrogen with progestogen if uterus intact, until average natural menopause age",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bone protection: calcium, vitamin D and weight-bearing exercise",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fertility counselling; donor oocytes or embryos; fertility preservation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for thyroid and adrenal autoimmunity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling and family screening, including FMR1 and karyotype testing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

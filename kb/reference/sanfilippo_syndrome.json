@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for sanfilippo syndrome (mps iii)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sanfilippo_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinary glycosaminoglycans",
+          "cells": [
+            {
+              "text": "Isolated heparan sulfate elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enzyme assays for four enzymes",
+          "cells": [
+            {
+              "text": "Determines the subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SGSH, NAGLU, HGSNAT, GNS sequencing",
+          "cells": [
+            {
+              "text": "Molecular confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "White matter and atrophic changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Where seizures are suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental assessment",
+          "cells": [
+            {
+              "text": "Tracks regression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sanfilippo_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hunter syndrome (MPS II)",
+          "cells": [
+            {
+              "text": "Sanfilippo shows isolated heparan sulfate elevation in urine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autism spectrum disorder or ADHD",
+          "cells": [
+            {
+              "text": "Progressive regression follows normal early milestones"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sanfilippo_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy; enzyme replacement does not reach the CNS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural management",
+          "cells": [
+            {
+              "text": "Hyperactivity, aggression and sleep disturbance; melatonin, structured environment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiepileptic drugs",
+          "cells": [
+            {
+              "text": "As neurodegeneration advances"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physical and occupational therapy",
+          "cells": [
+            {
+              "text": "Maintain function in motor decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support",
+          "cells": [
+            {
+              "text": "Swallowing assessment; gastrostomy in late disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative care",
+          "cells": [
+            {
+              "text": "Relentless neurological decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; subtype-specific testing and relative screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sanfilippo_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Sanfilippo syndrome (MPS III)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with behavioural change and regression after normal milestones",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Escalating behaviour with sleep loss, new seizures, loss of walking or swallowing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Multidisciplinary and palliative care; feeding and seizure management",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinary GAG for heparan sulfate; enzyme assays; SGSH, NAGLU, HGSNAT, GNS testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is isolated heparan sulfate raised with a subtype defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other mucopolysaccharidoses, Rett, ceroid lipofuscinosis, autism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Behavioural measures and melatonin for sleep",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiepileptics for seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and mobility support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Feeding support, palliative care and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Relentless decline into dementia and immobility; survival limited",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

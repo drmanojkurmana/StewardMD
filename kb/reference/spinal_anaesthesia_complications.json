@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for spinal anaesthesia complications."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Anesthesia / standard perioperative references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinal_anaesthesia_complications-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Continuous blood pressure, heart rate and oxygenation",
+          "cells": [
+            {
+              "text": "Sympathetic blockade hypotension and bradycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of block height and progression",
+          "cells": [
+            {
+              "text": "Ascending block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent MRI of the spine",
+          "cells": [
+            {
+              "text": "Haematoma or abscess, when a compressive lesion is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation studies",
+          "cells": [
+            {
+              "text": "Neuraxial bleeding risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder scan",
+          "cells": [
+            {
+              "text": "Urinary retention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_anaesthesia_complications-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Local anaesthetic systemic toxicity",
+          "cells": [
+            {
+              "text": "Inadvertent vascular uptake of local anaesthetic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemorrhagic or septic shock unrelated to the block",
+          "cells": [
+            {
+              "text": "Hypotension with a cause other than the block must be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_anaesthesia_complications-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Fluids and vasopressors",
+          "cells": [
+            {
+              "text": "Intravenous fluid loading and phenylephrine for sympathetic-blockade hypotension and bradycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High or total spinal management",
+          "cells": [
+            {
+              "text": "Assisted ventilation or intubation, and circulatory support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postdural puncture headache",
+          "cells": [
+            {
+              "text": "Recumbency, hydration, simple analgesia and caffeine; escalate if persistent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary retention",
+          "cells": [
+            {
+              "text": "Bladder scanning and intermittent catheterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Unexpected neurological deficit",
+          "cells": [
+            {
+              "text": "Urgent whole-spine MRI and coagulation studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematoma prevention",
+          "cells": [
+            {
+              "text": "Anticoagulant timing guidelines and coagulation checks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and escalation",
+          "cells": [
+            {
+              "text": "Blood pressure, heart rate, oxygenation and block height; critical care if needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinal_anaesthesia_complications-dx-mgmt",
+      "title": "Diagnosis and management of Spinal anaesthesia complications",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypotension or bradycardia after neuraxial block: spinal anaesthesia complication",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid ascending block, collapse, progressive deficit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency airway and circulatory support for a high or total block",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Continuous monitoring; block height; bladder scan; coagulation studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the deficit persist beyond the expected block recovery?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Expected block recovery; continue monitoring and reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fluids and phenylephrine for sympathetic hypotension",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Recumbency, hydration and caffeine for headache",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bladder scanning and intermittent catheterisation for retention",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urgent whole-spine MRI and anticoagulant timing review for suspected haematoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Neurological outcome depends on the deficit at intervention; early recognition matters",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

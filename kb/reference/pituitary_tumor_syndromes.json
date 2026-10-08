@@ -203,5 +203,361 @@
       "caption": "Overview comparison matrix for pituitary tumor syndromes."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Entry text (no source string recorded in reference.source)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pituitary_tumor_syndromes-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Sagittal and coronal T1 MRI before and after gadolinium",
+          "cells": [
+            {
+              "text": "Adenomas hypodense on T1; CT reserved for bony erosion or calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Formal perimetric visual field testing",
+          "cells": [
+            {
+              "text": "Any chiasm-impinging mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline pituitary hormonal screen",
+          "cells": [
+            {
+              "text": "Prolactin, IGF-1, cortisol tests, alpha-subunit, FSH, LH and thyroid function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IGF-1 and oral glucose tolerance test with GH",
+          "cells": [
+            {
+              "text": "Acromegaly; failure to suppress confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting morning prolactin, with dilution when very high",
+          "cells": [
+            {
+              "text": "Hyperprolactinaemia; macroprolactin excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "24-hour urinary free cortisol and dexamethasone suppression",
+          "cells": [
+            {
+              "text": "Cushing's disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilateral inferior petrosal sinus ACTH sampling with CRH",
+          "cells": [
+            {
+              "text": "ACTH source when MRI is non-diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry on resected tissue",
+          "cells": [
+            {
+              "text": "Histological confirmation of hormone type"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pituitary_tumor_syndromes-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Craniopharyngioma",
+          "cells": [
+            {
+              "text": "Suprasellar cystic, often calcified; Rathke's pouch origin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meningioma",
+          "cells": [
+            {
+              "text": "Enhancing, may show bony hyperostosis or calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary metastases",
+          "cells": [
+            {
+              "text": "Favour the posterior pituitary; breast and lung primaries"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pituitary_tumor_syndromes-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prolactinoma",
+          "cells": [
+            {
+              "text": "Dopamine agonists such as cabergoline or bromocriptine as first-line therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Transsphenoidal surgery for non-functioning adenomas with mass effect, Cushing's disease or acromegaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical control",
+          "cells": [
+            {
+              "text": "Somatostatin ligands and pegvisomant for acromegaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Stereotactic or fractionated radiotherapy for residual or recurrent tumour after surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone replacement",
+          "cells": [
+            {
+              "text": "Any resulting anterior or posterior pituitary deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Serial pituitary MRI, hormonal profiling and formal visual field testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Apoplexy",
+          "cells": [
+            {
+              "text": "Stress-dose glucocorticoids and urgent surgical decompression where vision is threatened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Neurosurgery, endocrinology and ophthalmology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pituitary_tumor_syndromes-dx-mgmt",
+      "title": "Diagnosis and management of Pituitary Tumor Syndromes",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pituitary mass presenting with hormone excess, visual loss or headache",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (visual field loss, cranial nerve palsy, apoplexy, raised pressure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency stress-dose steroids and urgent decompression for apoplexy with visual threat",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pituitary MRI with gadolinium; visual fields; hormone screen; dynamic tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do hormone profiles and MRI identify a specific pituitary adenoma subtype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider craniopharyngioma, meningioma, Rathke's cleft cyst or pituitary metastasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Dopamine agonists such as cabergoline or bromocriptine as first-line for prolactinomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Transsphenoidal surgery for mass effect, Cushing's disease or acromegaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Somatostatin ligands and pegvisomant for residual acromegaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Radiotherapy for residual or recurrent tumour after surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial pituitary MRI, hormone profiling and visual field testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Overwhelmingly benign and slow growing; outcomes depend on tumour type and size",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,276 @@
       "caption": "Overview comparison matrix for rheumatic fever."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rheumatic_fever-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Throat swab culture and rapid antigen testing",
+          "cells": [
+            {
+              "text": "Group A streptococcus, the trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial anti-streptolysin O and anti-DNase B titres",
+          "cells": [
+            {
+              "text": "Evidence of recent streptococcal infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers (ESR and CRP)",
+          "cells": [
+            {
+              "text": "Marker of inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "PR-interval prolongation and conduction disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography with Doppler",
+          "cells": [
+            {
+              "text": "Subclinical valvulitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rheumatic_fever-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Eradicate streptococcal infection",
+          "cells": [
+            {
+              "text": "Penicillin, or a macrolide in penicillin-allergic patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint inflammation and fever",
+          "cells": [
+            {
+              "text": "Anti-inflammatory therapy such as salicylates or NSAIDs; arthritis is exquisitely responsive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe carditis",
+          "cells": [
+            {
+              "text": "Corticosteroids alongside standard heart-failure therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sydenham chorea",
+          "cells": [
+            {
+              "text": "Symptomatic treatment with carbamazepine or valproate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary prophylaxis",
+          "cells": [
+            {
+              "text": "Regular intramuscular benzathine penicillin to prevent recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carditis surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography for carditis and evolving valve disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Registration and adherence",
+          "cells": [
+            {
+              "text": "Register the patient, ensure prophylaxis adherence and screen household contacts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rheumatic_fever-dx-mgmt",
+      "title": "Diagnosis and management of rheumatic fever",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with arthritis, carditis or chorea after a streptococcal infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (murmur change with heart failure, effusion, high-grade AV block)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review for severe carditis, heart failure or heart block",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Throat swab, ASO and anti-DNase B titres, ESR and CRP, ECG, echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is recent group A streptococcal infection evidenced?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess; consider septic arthritis, JIA, lupus or endocarditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Eradicate streptococci with penicillin, or a macrolide if penicillin-allergic",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anti-inflammatory therapy for arthritis and fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids and heart-failure therapy for severe carditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term benzathine penicillin prophylaxis to prevent recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Arthritis and chorea resolve without sequelae; carditis severity dictates prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

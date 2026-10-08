@@ -147,5 +147,325 @@
       "caption": "Overview comparison matrix for tatton-brown-rahman syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tatton_brown_rahman_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Tatton-Brown-Rahman syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Tatton-Brown-Rahman syndrome: overgrowth with intellectual disability",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: unexplained cytopenias, easy bruising, or neurological regression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology referral for suspected leukaemia or marrow failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Exome or genome sequencing for DNMT3A; FBC; echocardiography; spine assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does sequencing identify a pathogenic DNMT3A variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Sotos syndrome, Weaver syndrome, Malan syndrome or fragile X",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Developmental support and individualised learning plans",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Behavioural and psychiatric care for autistic traits",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Low threshold for blood counts and haematology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Weight management for the tendency to obesity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen and manage scoliosis and congenital heart anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Course is stable and set by intellectual disability; haematological risk needs vigilance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tatton_brown_rahman_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Exome or genome sequencing, or overgrowth panel",
+          "cells": [
+            {
+              "text": "Pathogenic DNMT3A variant confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Copy number abnormalities excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental, behavioural and psychiatric assessment",
+          "cells": [
+            {
+              "text": "Autistic and psychiatric features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with clinical review",
+          "cells": [
+            {
+              "text": "Haematological risk; low threshold for haematology referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Congenital heart anomaly, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal assessment",
+          "cells": [
+            {
+              "text": "Scoliosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tatton_brown_rahman_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sotos syndrome",
+          "cells": [
+            {
+              "text": "Overlapping overgrowth and facies; DNMT3A testing is needed rather than clinical diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weaver syndrome",
+          "cells": [
+            {
+              "text": "Overlapping overgrowth; gene testing, not clinical features alone, separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tatton_brown_rahman_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Early intervention and individualised learning plans"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural and psychiatric care",
+          "cells": [
+            {
+              "text": "Autistic traits, with psychiatric input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematological vigilance",
+          "cells": [
+            {
+              "text": "Low threshold for blood counts and haematology referral for suggestive symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight management",
+          "cells": [
+            {
+              "text": "Tendency to obesity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for associated anomalies",
+          "cells": [
+            {
+              "text": "Scoliosis, joint hypermobility and congenital cardiac anomaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant, usually de novo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary coordination",
+          "cells": [
+            {
+              "text": "Clinical genetics and paediatric or adult specialists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

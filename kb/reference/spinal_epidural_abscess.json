@@ -152,5 +152,323 @@
       "caption": "Overview comparison matrix for spinal epidural abscess."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinal_epidural_abscess-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent contrast MRI of the whole spine",
+          "cells": [
+            {
+              "text": "Collections, including non-contiguous ones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures before antimicrobials",
+          "cells": [
+            {
+              "text": "Causative organism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CRP, ESR and full blood count",
+          "cells": [
+            {
+              "text": "Inflammatory response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture of aspirated or operative pus",
+          "cells": [
+            {
+              "text": "Organism and sensitivities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and primary source search",
+          "cells": [
+            {
+              "text": "Endocarditis or bacteraemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HbA1c and immunosuppression screen",
+          "cells": [
+            {
+              "text": "Risk factors such as diabetes or injection drug use"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_epidural_abscess-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vertebral osteomyelitis or discitis without abscess",
+          "cells": [
+            {
+              "text": "Bone infection without an epidural collection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic epidural spinal cord compression",
+          "cells": [
+            {
+              "text": "Malignant compression without infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal epidural haematoma",
+          "cells": [
+            {
+              "text": "A non-infective collection, relevant in anticoagulated patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_epidural_abscess-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empirical intravenous antibiotics",
+          "cells": [
+            {
+              "text": "Covering Staphylococcus aureus, including a glycopeptide for MRSA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent surgical decompression and drainage",
+          "cells": [
+            {
+              "text": "Neurological deficit or a significant compressive collection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures before antibiotics",
+          "cells": [
+            {
+              "text": "Identifies the causative organism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged targeted antibiotics",
+          "cells": [
+            {
+              "text": "With serial CRP and ESR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary source and endocarditis",
+          "cells": [
+            {
+              "text": "Echocardiography and control of predisposing factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial neurological observation",
+          "cells": [
+            {
+              "text": "Repeat whole-spine MRI for non-contiguous or recurrent collections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Spinal surgery, infectious diseases and rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinal_epidural_abscess-dx-mgmt",
+      "title": "Diagnosis and management of Spinal epidural abscess",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Back pain with fever and neurological deficit: suspected spinal epidural abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new deficit, progressive weakness, sepsis or instability)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency MRI and urgent surgical decompression for deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urgent contrast MRI of the whole spine; blood cultures; CRP, ESR and FBC",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show an epidural collection with raised inflammatory markers?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider osteomyelitis, metastatic compression or haematoma; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Empirical IV antibiotics covering S aureus, including a glycopeptide for MRSA",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Urgent surgical drainage for deficit or a significant compressive collection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prolonged targeted antibiotics with serial CRP and ESR",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat the primary source; echocardiography if endocarditis is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome is set by the deficit at intervention; delay is the main preventable harm",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

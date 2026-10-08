@@ -144,5 +144,258 @@
       "caption": "Overview comparison matrix for ring chromosome 20 syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ring_chromosome_20-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Karyotype with sufficient cells",
+          "cells": [
+            {
+              "text": "Low-level mosaicism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged or ambulatory EEG",
+          "cells": [
+            {
+              "text": "Nonconvulsive status epilepticus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Often normal, as material is not lost"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Usually unremarkable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Cognitive and behavioural course"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ring_chromosome_20-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Broad-spectrum antiseizure drugs",
+          "cells": [
+            {
+              "text": "Valproate, lamotrigine or levetiracetam as mainstay; drug resistance anticipated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nonconvulsive status",
+          "cells": [
+            {
+              "text": "Prompt treatment of recurrent episodes; benzodiazepine rescue for prolonged episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-drug options",
+          "cells": [
+            {
+              "text": "Ketogenic diet or vagus nerve stimulation for refractory epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resective surgery",
+          "cells": [
+            {
+              "text": "Generally unhelpful given the diffuse genetic basis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial neuropsychology",
+          "cells": [
+            {
+              "text": "Repeated assessment of cognition and behaviour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ring_chromosome_20-dx-mgmt",
+      "title": "Diagnosis and management of Ring chromosome 20 syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with drug-resistant or nonconvulsive seizures and cognitive change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (prolonged nonconvulsive status, regression, escalating seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of prolonged nonconvulsive status epilepticus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype with mosaicism check, prolonged EEG, microarray, MRI, neuropsychology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a ring chromosome 20 confirmed on karyotype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider a single-gene epileptic encephalopathy or other epilepsy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Broad-spectrum antiseizure drugs such as valproate, lamotrigine or levetiracetam",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat recurrent nonconvulsive status; benzodiazepine rescue for prolonged episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ketogenic diet or vagus nerve stimulation for refractory epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial neuropsychological assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Drug-resistant seizures are anticipated; resective surgery is generally unhelpful",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

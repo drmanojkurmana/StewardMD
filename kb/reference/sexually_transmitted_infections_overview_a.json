@@ -165,5 +165,462 @@
       "caption": "Overview comparison matrix for sexually transmitted infections: overview and clinical approach."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 130-7",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 130-5",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "CDC STI Treatment Guidelines 2021, Gonococcal Infections in Adults",
+      "kind": "web",
+      "url": "https://www.cdc.gov/std/treatment-guidelines/gonorrhea-adults.htm"
+    },
+    {
+      "id": "c5",
+      "label": "CDC STI Treatment Guidelines 2021, Trichomoniasis",
+      "kind": "web",
+      "url": "https://www.cdc.gov/std/treatment-guidelines/trichomoniasis.htm"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sexually_transmitted_infections_overview_a-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key tests and findings in STI syndromes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "NAAT for gonorrhea and chlamydia",
+          "cells": [
+            {
+              "text": "Urine, vaginal, rectal or pharyngeal swabs"
+            },
+            {
+              "text": "Test of choice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urethral Gram stain",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Misses up to about 30% of gonococcal urethritis",
+              "op": "<=",
+              "value": 30
+            },
+            {
+              "text": "Gram-negative intracellular diplococci confirm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vaginal pH",
+          "cells": [
+            {
+              "text": "4.5 or less normal and candidiasis; over 4.5 BV; 5 or more trichomoniasis",
+              "op": ">",
+              "value": 4.5
+            },
+            {
+              "text": "Bedside first step"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Whiff test and clue cells",
+          "cells": [
+            {
+              "text": "Fishy amine odor with KOH, clue cells, Nugent 7 or more"
+            },
+            {
+              "text": "Bacterial vaginosis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Trichomonas NAAT",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity about 95 to 100%",
+              "range": [
+                95,
+                100
+              ]
+            },
+            {
+              "text": "Wet mount misses many"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Syphilis chancre",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Incubation 9 to 90 days; painless indurated ulcer 5 to 15 mm",
+              "range": [
+                9,
+                90
+              ]
+            },
+            {
+              "text": "Firm nontender bilateral nodes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Herpes ulcers",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Incubation 2 to 7 days; multiple painful 1 to 2 mm vesicles or ulcers",
+              "range": [
+                2,
+                7
+              ]
+            },
+            {
+              "text": "Tender nodes with first episode"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Risk assessment",
+          "cells": [
+            {
+              "text": "Structured sexual history"
+            },
+            {
+              "text": "{{hy:Test for HIV and syphilis with any STI}}"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sexually_transmitted_infections_overview_a-ddx",
+      "kind": "ddx",
+      "title": "Distinguishing genital ulcers and vaginal discharge",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Syphilis",
+          "cells": [
+            {
+              "text": "Single painless indurated clean ulcer"
+            },
+            {
+              "text": "Dark-field, treponemal and nontreponemal serology"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Genital herpes",
+          "cells": [
+            {
+              "text": "Multiple painful shallow ulcers from vesicles"
+            },
+            {
+              "text": "HSV PCR of lesion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chancroid",
+          "cells": [
+            {
+              "text": "Painful ragged purulent excavated ulcer, suppurative unilateral bubo"
+            },
+            {
+              "text": "Culture for H. ducreyi"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lymphogranuloma venereum",
+          "cells": [
+            {
+              "text": "Small transient ulcer, tender loculated bubo, proctitis"
+            },
+            {
+              "text": "Chlamydia NAAT with LGV typing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Donovanosis",
+          "cells": [
+            {
+              "text": "Beefy red velvety ulcer that bleeds, pseudobuboes"
+            },
+            {
+              "text": "Tissue smear for Donovan bodies"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vulvovaginal candidiasis",
+          "cells": [
+            {
+              "text": "Itch, white clumped discharge, pH 4.5 or less"
+            },
+            {
+              "text": "KOH microscopy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bacterial vaginosis",
+          "cells": [
+            {
+              "text": "Thin gray fishy discharge, little inflammation"
+            },
+            {
+              "text": "Clue cells, pH over 4.5"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Trichomoniasis",
+          "cells": [
+            {
+              "text": "Profuse yellow discharge, colpitis macularis, pH 5 or more"
+            },
+            {
+              "text": "NAAT"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "sexually_transmitted_infections_overview_a-treatment",
+      "kind": "treatment",
+      "title": "Treating common STIs",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ceftriaxone 500 mg IM single dose",
+          "cells": [
+            {
+              "text": "Uncomplicated gonorrhea, under 150 kg"
+            },
+            {
+              "text": "1 g if 150 kg or more; test of cure for pharyngeal infection"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Doxycycline 100 mg twice daily for 7 days",
+          "cells": [
+            {
+              "text": "Chlamydia, or when chlamydia not excluded"
+            },
+            {
+              "text": "Retest gonorrhea patients at 3 months"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Benzathine penicillin",
+          "cells": [
+            {
+              "text": "Syphilis"
+            },
+            {
+              "text": "Stage-based regimen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acyclovir-class antivirals",
+          "cells": [
+            {
+              "text": "Genital herpes"
+            },
+            {
+              "text": "Episodic or suppressive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metronidazole 500 mg twice daily for 7 days",
+          "cells": [
+            {
+              "text": "Trichomoniasis in women; bacterial vaginosis"
+            },
+            {
+              "text": "Men with trichomonas: metronidazole 2 g single dose"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Fluconazole 150 mg orally once or azole pessary",
+          "cells": [
+            {
+              "text": "Vulvovaginal candidiasis"
+            },
+            {
+              "text": "Partners not treated routinely"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Partner notification and treatment",
+          "cells": [
+            {
+              "text": "Every bacterial or trichomonal STI"
+            },
+            {
+              "text": "Expedited partner therapy where allowed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sexually_transmitted_infections_overview_a-dx-mgmt",
+      "title": "Diagnosis and management of STI syndromes",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Genital symptoms or STI risk on sexual history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "NAAT for gonorrhea and chlamydia; HIV and syphilis serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Main syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Urethritis or cervicitis: ceftriaxone 500 mg IM plus doxycycline",
+          "cite": "c4"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Assess ulcer: number, pain, induration, nodes; HSV PCR, syphilis tests",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Treat by cause: penicillin, antiviral, or chancroid or LGV regimen",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Vaginal pH, whiff test, microscopy, Trichomonas NAAT",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Treat candidiasis, BV or trichomoniasis; treat partners for trichomonas",
+          "cite": "c5"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Discharge from urethra or cervix"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Genital ulcer"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "Vaginal discharge"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

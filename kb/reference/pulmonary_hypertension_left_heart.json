@@ -149,5 +149,333 @@
       "caption": "Overview comparison matrix for pulmonary hypertension due to left heart disease (group 2)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ESC/ERS Guidelines for Pulmonary Hypertension / Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pulmonary_hypertension_left_heart-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "LV function, valves and left atrial size"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right heart catheterisation",
+          "cells": [
+            {
+              "text": "Elevated wedge pressure, defining post-capillary PH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid or exercise provocation at catheterisation",
+          "cells": [
+            {
+              "text": "Occult preserved-ejection-fraction disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Natriuretic peptides and volume status",
+          "cells": [
+            {
+              "text": "Volume status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI or ischaemia evaluation",
+          "cells": [
+            {
+              "text": "Left heart cause, where unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventilation-perfusion scan",
+          "cells": [
+            {
+              "text": "Thromboembolic and parenchymal disease excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_hypertension_left_heart-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Idiopathic or heritable pulmonary arterial hypertension",
+          "cells": [
+            {
+              "text": "Pre-capillary haemodynamics"
+            },
+            {
+              "text": "Right heart catheterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic thromboembolic pulmonary hypertension",
+          "cells": [
+            {
+              "text": "Thromboembolic disease"
+            },
+            {
+              "text": "Ventilation-perfusion scan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constrictive pericarditis or restrictive cardiomyopathy",
+          "cells": [
+            {
+              "text": "Restrictive or constrictive physiology"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_hypertension_left_heart-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Underlying left heart disease",
+          "cells": [
+            {
+              "text": "Guideline-directed medical therapy for the left heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decongestion",
+          "cells": [
+            {
+              "text": "Diuretic-based decongestion and dietary sodium restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk factors",
+          "cells": [
+            {
+              "text": "Blood pressure, rate or rhythm control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid group 1 vasodilators",
+          "cells": [
+            {
+              "text": "Can precipitate pulmonary oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial echocardiography, natriuretic peptides and functional assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Valve disease",
+          "cells": [
+            {
+              "text": "Repair or replacement for significant left-sided valve disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Specialist review for combined post- and pre-capillary disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pulmonary_hypertension_left_heart-dx-mgmt",
+      "title": "Diagnosis and management of Pulmonary hypertension due to left heart disease (group 2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected left heart pulmonary hypertension: raised wedge pressure with dyspnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pulmonary oedema, hypoxaemia, low cardiac output, or decline after vasodilators?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent decongestion and cardiology review for pulmonary oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo; right heart catheterisation with wedge pressure; natriuretic peptides; CMR",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is post-capillary pressure confirmed with other causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pre-capillary PAH or CTEPH; reassess with specialist review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying left heart disease as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Diuretic-based decongestion and dietary sodium restriction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid group 1 pulmonary vasodilators, which can precipitate oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Refer significant valve disease for repair or replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Specialist review for combined post- and pre-capillary disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

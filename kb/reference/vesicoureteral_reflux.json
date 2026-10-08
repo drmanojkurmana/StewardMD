@@ -147,5 +147,267 @@
       "caption": "Overview comparison matrix for vesicoureteral reflux."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vesicoureteral_reflux-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Micturating cystourethrogram",
+          "cells": [
+            {
+              "text": "Confirms and grades reflux, grade I to V"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and bladder ultrasound",
+          "cells": [
+            {
+              "text": "Dilatation, scarring and bladder wall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DMSA scintigraphy",
+          "cells": [
+            {
+              "text": "Renal scarring and differential function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder and bowel function assessment",
+          "cells": [
+            {
+              "text": "Dysfunctional voiding and constipation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vesicoureteral_reflux-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ureteropelvic junction obstruction",
+          "cells": [
+            {
+              "text": "Causes hydronephrosis without reflux"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary obstructive megaureter",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior urethral valves in males",
+          "cells": [
+            {
+              "text": "Obstructive pattern in boys"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple recurrent lower urinary tract infection",
+          "cells": [
+            {
+              "text": "Infection without reflux on MCUG"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vesicoureteral_reflux-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Bladder and bowel dysfunction",
+          "cells": [
+            {
+              "text": "Bowel regimen, timed voiding and treatment of constipation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous low-dose antibiotic prophylaxis",
+          "cells": [
+            {
+              "text": "Higher-grade reflux or recurrent febrile UTI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Most reflux managed without surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vesicoureteral_reflux-dx-mgmt",
+      "title": "Diagnosis and management of Vesicoureteral reflux",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vesicoureteral reflux: recurrent febrile urinary tract infection in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (breakthrough UTI, progressive scarring or hypertension)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for urosepsis or progressive renal scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MCUG to grade reflux, renal ultrasound, DMSA scintigraphy, bladder and bowel review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MCUG confirm reflux and its grade?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider UPJ obstruction, posterior urethral valves or recurrent UTI alone",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat bladder and bowel dysfunction with a bowel regimen and timed voiding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Continuous low-dose antibiotic prophylaxis for high-grade reflux",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Conservative management for most cases, with surveillance imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Many resolve with growth; dysfunction and scarring determine long-term outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

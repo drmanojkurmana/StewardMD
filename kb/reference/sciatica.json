@@ -150,5 +150,294 @@
       "caption": "Overview comparison matrix for sciatica."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon / standard sports medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sciatica-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Root localisation; imaging not needed for typical early sciatica without red flags"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI lumbar spine",
+          "cells": [
+            {
+              "text": "For severe, persistent or progressive symptoms, or when intervention is planned"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Alternative if MRI is contraindicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction and EMG",
+          "cells": [
+            {
+              "text": "Selected cases, to clarify level or exclude peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood tests and targeted imaging",
+          "cells": [
+            {
+              "text": "If infection or malignancy is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sciatica-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lumbar spinal stenosis",
+          "cells": [
+            {
+              "text": "Neurogenic claudication, mostly in older patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular claudication",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal tumour or infection",
+          "cells": [
+            {
+              "text": "Cancer history, weight loss, night pain, fever, immunosuppression or drug use"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sciatica-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and staying active",
+          "cells": [
+            {
+              "text": "Most disc-related sciatica settles over weeks to months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and physiotherapy",
+          "cells": [
+            {
+              "text": "Avoid prolonged bed rest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidural or transforaminal steroid injection",
+          "cells": [
+            {
+              "text": "Fluoroscopically guided, for severe persistent radicular pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Reserve for severe, progressive or persistent symptoms or planned intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Such as microdiscectomy for persistent disabling pain or significant deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent escalation",
+          "cells": [
+            {
+              "text": "Suspected cauda equina or progressive motor deficit: emergency imaging and decompression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sciatica-dx-mgmt",
+      "title": "Diagnosis and management of Sciatica",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Leg pain in a root distribution: suspected sciatica",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Saddle anaesthesia, sphincter change, foot drop, or cancer or infection features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency MRI and surgical referral for cauda equina or progressive deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical root localisation; MRI only if severe, persistent or progressive",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is pain persistent and disabling beyond conservative care?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue reassurance, activity and physiotherapy; most settle in weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Analgesia and structured physiotherapy, avoid bed rest",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Consider image-guided epidural or transforaminal steroid injection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Microdiscectomy for persistent disabling pain or deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Most disc-related cases resolve within 6 to 12 weeks with conservative care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

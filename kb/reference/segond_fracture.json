@@ -142,5 +142,305 @@
       "caption": "Overview comparison matrix for segond fracture."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "segond_fracture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Knee radiographs (AP view best)",
+          "cells": [
+            {
+              "text": "Small fleck off the lateral proximal tibia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the knee",
+          "cells": [
+            {
+              "text": "Confirms ACL rupture and detects meniscal injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lachman and pivot-shift examination",
+          "cells": [
+            {
+              "text": "Anterior instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterolateral corner assessment",
+          "cells": [
+            {
+              "text": "Associated posterolateral corner injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "segond_fracture-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Arcuate (fibular head avulsion) fracture",
+          "cells": [
+            {
+              "text": "Indicates posterolateral corner injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reverse Segond (medial avulsion)",
+          "cells": [
+            {
+              "text": "Medial tibial rim avulsion with PCL injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated ACL rupture without avulsion",
+          "cells": [
+            {
+              "text": "No avulsion fragment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tibial plateau fracture",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "segond_fracture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Recognise the marker and image",
+          "cells": [
+            {
+              "text": "Fragment signals ACL rupture; MRI defines ligament and meniscal injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avulsion fragment",
+          "cells": [
+            {
+              "text": "Non-operative; heals without fixation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Initial symptomatic care",
+          "cells": [
+            {
+              "text": "Rest, ice, analgesia, bracing or protected weight-bearing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACL rupture",
+          "cells": [
+            {
+              "text": "Reconstruction in active or unstable patients; rehabilitation in lower-demand patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meniscal or posterolateral corner injury",
+          "cells": [
+            {
+              "text": "Surgical repair as indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Structured physiotherapy and graded return to activity, with orthopaedic follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "segond_fracture-dx-mgmt",
+      "title": "Diagnosis and management of Segond fracture",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Knee injury with a lateral tibial rim avulsion fleck on the AP radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Multiligament injury, knee dislocation, locked knee or gross rotatory instability?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent orthopaedic review; vascular check and posterolateral corner assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "AP knee radiograph; Lachman and pivot-shift; MRI for ACL and menisci",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI confirm ACL rupture with or without meniscal injury?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Look for arcuate fracture, reverse Segond or tibial plateau fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Rest, ice, analgesia and bracing or protected weight-bearing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Leave the avulsion fragment unfixed; it heals unaided",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "ACL reconstruction if active or unstable; rehabilitation otherwise",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Repair meniscal or posterolateral corner injury as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Fragment heals; outcome set by ACL and meniscal injury management",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

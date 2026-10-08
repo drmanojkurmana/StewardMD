@@ -160,5 +160,316 @@
       "caption": "Overview comparison matrix for malignant rhabdoid tumour (smarcb1)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours of Soft Tissue and Bone",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "malignant_rhabdoid_tumor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "INI1 (SMARCB1) immunohistochemistry",
+          "cells": [
+            {
+              "text": "Loss of nuclear expression is the hallmark"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuraxis MRI",
+          "cells": [
+            {
+              "text": "Synchronous CNS disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest CT and whole-body imaging",
+          "cells": [
+            {
+              "text": "Pulmonary and disseminated spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline SMARCB1 testing with counselling",
+          "cells": [
+            {
+              "text": "Predisposition syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging of the primary",
+          "cells": [
+            {
+              "text": "Extent of local disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "malignant_rhabdoid_tumor-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rhabdomyosarcoma",
+          "cells": [
+            {
+              "text": "Myogenin and desmin staining; INI1 retained"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wilms tumour or other paediatric renal tumour",
+          "cells": [
+            {
+              "text": "Kidney origin; INI1 retained"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroblastoma",
+          "cells": [
+            {
+              "text": "Small round cell tumour without INI1 loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medulloblastoma or embryonal CNS tumour",
+          "cells": [
+            {
+              "text": "CNS origin; INI1 status separates"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "malignant_rhabdoid_tumor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Localised disease",
+          "cells": [
+            {
+              "text": "Maximal safe resection, then multi-agent chemotherapy and radiotherapy for local control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic or CNS disease",
+          "cells": [
+            {
+              "text": "Intensified systemic chemotherapy with coordinated care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Very young infants",
+          "cells": [
+            {
+              "text": "Individualised radiotherapy timing given neurodevelopmental toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical trials",
+          "cells": [
+            {
+              "text": "Enrol where available, given poor conventional outcomes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline and family",
+          "cells": [
+            {
+              "text": "SMARCB1 testing; family screening if predisposition is confirmed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "malignant_rhabdoid_tumor-dx-mgmt",
+      "title": "Diagnosis and management of Malignant rhabdoid tumour (SMARCB1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapidly growing mass in an infant or young child, with or without neurological signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (CNS signs, disseminated disease or rapid deterioration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent paediatric oncology referral to a rhabdoid tumour centre",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Primary imaging, neuraxis MRI, chest CT, biopsy with INI1 staining",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is nuclear INI1 (SMARCB1) expression lost on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider rhabdomyosarcoma, Wilms tumour, neuroblastoma or embryonal CNS tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Maximal safe resection for localised disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Multi-agent chemotherapy with radiotherapy for local control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intensified chemotherapy for metastatic or CNS disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Enrol in clinical trials where available",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Germline SMARCB1 testing with genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Poor prognosis, especially in very young children and metastatic or CNS disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

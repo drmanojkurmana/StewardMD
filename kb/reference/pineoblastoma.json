@@ -157,5 +157,334 @@
       "caption": "Overview comparison matrix for pineoblastoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours of the CNS",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pineoblastoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced brain MRI",
+          "cells": [
+            {
+              "text": "Pineal mass and hydrocephalus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniospinal MRI",
+          "cells": [
+            {
+              "text": "Leptomeningeal dissemination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF cytology and germ cell tumour markers",
+          "cells": [
+            {
+              "text": "Germinoma or non-germinomatous tumours excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology with molecular or methylation profiling",
+          "cells": [
+            {
+              "text": "Tumour classification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination and germline RB1 testing",
+          "cells": [
+            {
+              "text": "Retinoblastoma and trilateral disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline DICER1 testing",
+          "cells": [
+            {
+              "text": "Where the picture suggests it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pineoblastoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pineal region germ cell tumour",
+          "cells": [
+            {
+              "text": "Serum and CSF tumour markers distinguish it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pineocytoma",
+          "cells": [
+            {
+              "text": "Lower-grade pineal parenchymal tumour, with a better prognosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pineoblastoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pre-treatment markers",
+          "cells": [
+            {
+              "text": "Serum and CSF alpha-fetoprotein and beta-hCG to exclude germ cell tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "RB1 (trilateral retinoblastoma) and DICER1 predisposition in children, with counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maximal safe resection",
+          "cells": [
+            {
+              "text": "For cytoreduction and tissue diagnosis, rather than resection at any cost"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydrocephalus",
+          "cells": [
+            {
+              "text": "Endoscopic biopsy with third ventriculostomy for CSF diversion and tissue diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniospinal irradiation",
+          "cells": [
+            {
+              "text": "With a boost to the pineal or primary site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infants",
+          "cells": [
+            {
+              "text": "Defer radiotherapy where possible because of neurotoxicity; use chemotherapy-based treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Induction approach",
+          "cells": [
+            {
+              "text": "Induction chemotherapy followed by craniospinal irradiation with primary-site boost"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine monitoring",
+          "cells": [
+            {
+              "text": "Diabetes insipidus, hypothyroidism and hypogonadism, which occur in roughly half of pineal tumours"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pineoblastoma-dx-mgmt",
+      "title": "Diagnosis and management of Pineoblastoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with pineal region mass, headache and raised intracranial pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (hydrocephalus, Parinaud signs, CSF spread, bilateral retinoblastoma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical referral for CSF diversion and raised intracranial pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI; craniospinal MRI; CSF cytology and germ cell markers; histology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do tumour markers and histology exclude germinoma and confirm pineoblastoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider germ cell tumour, pineocytoma, papillary tumour or metastasis; review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Serum and CSF germ cell markers to exclude germ cell tumour before treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Maximal safe resection for cytoreduction and tissue diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Craniospinal irradiation with a boost to the pineal or primary site",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Chemotherapy-based treatment in infants, deferring radiotherapy where possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Endocrine monitoring for diabetes insipidus, hypothyroidism and hypogonadism",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Guarded; poorest in infants, metastatic disease and germline RB1 trilateral cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

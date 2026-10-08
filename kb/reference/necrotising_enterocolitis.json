@@ -143,5 +143,305 @@
       "caption": "Overview comparison matrix for necrotising enterocolitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neonatology and paediatric surgery references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "necrotising_enterocolitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal radiographs",
+          "cells": [
+            {
+              "text": "Pneumatosis intestinalis, portal venous gas and free air"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and inflammatory markers",
+          "cells": [
+            {
+              "text": "Neutropenia and thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood culture, blood gas and lactate",
+          "cells": [
+            {
+              "text": "Sepsis and metabolic acidosis; rising lactate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes, glucose and coagulation studies",
+          "cells": [
+            {
+              "text": "Metabolic and coagulation status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Bowel wall perfusion and free fluid"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "necrotising_enterocolitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal sepsis with ileus",
+          "cells": [
+            {
+              "text": "Systemic signs overlap; blood culture and full blood count help"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spontaneous intestinal perforation",
+          "cells": [
+            {
+              "text": "Confusion with necrotising enterocolitis is a recognised pitfall"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "necrotising_enterocolitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Enteral feed cessation",
+          "cells": [
+            {
+              "text": "Nasogastric decompression of the bowel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics and parenteral nutrition",
+          "cells": [
+            {
+              "text": "Broad-spectrum intravenous antibiotics during bowel rest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive care support",
+          "cells": [
+            {
+              "text": "Fluids, correction of acidosis and coagulopathy; respiratory and cardiovascular support for shock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial radiographs",
+          "cells": [
+            {
+              "text": "Serial supine and lateral decubitus films with clinical review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Laparotomy or primary peritoneal drainage when free air indicates perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Human milk feeding",
+          "cells": [
+            {
+              "text": "Protective; avoid aggressive formula advancement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical follow-up",
+          "cells": [
+            {
+              "text": "Strictures, short bowel syndrome and neurodevelopmental impairment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "necrotising_enterocolitis-dx-mgmt",
+      "title": "Diagnosis and management of Necrotising enterocolitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Preterm newborn with feed intolerance, distension, bloody stools or instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (free air, portal venous gas, persistent acidosis, DIC)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate paediatric surgical consultation; intensive care support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Supine and lateral abdominal films, FBC, blood culture, gas with lactate, coagulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pneumatosis intestinalis or portal gas on abdominal imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat imaging; consider sepsis with ileus or spontaneous perforation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop enteral feeds; nasogastric decompression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Broad-spectrum intravenous antibiotics with parenteral nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial abdominal radiographs with clinical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Laparotomy or peritoneal drainage when free air indicates perforation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild disease often resolves; advanced disease carries mortality and long-term morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

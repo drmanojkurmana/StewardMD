@@ -155,5 +155,343 @@
       "caption": "Overview comparison matrix for placenta praevia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "RCOG Green-top Guideline / Williams Obstetrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "placenta_praevia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Placental position and distance of the placental edge from the internal os"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transabdominal ultrasound",
+          "cells": [
+            {
+              "text": "Initial screen of placental position and fetal presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound, with MRI where indicated, for accreta spectrum",
+          "cells": [
+            {
+              "text": "Accreta spectrum, especially anterior praevia over a caesarean scar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, group, antibody screen and cross-match",
+          "cells": [
+            {
+              "text": "Blood readiness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation studies",
+          "cells": [
+            {
+              "text": "Heavy or recurrent bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiotocography",
+          "cells": [
+            {
+              "text": "Fetal wellbeing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kleihauer test in rhesus-negative women",
+          "cells": [
+            {
+              "text": "Feto-maternal haemorrhage, guiding anti-D dosing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "placenta_praevia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Uterine rupture",
+          "cells": [
+            {
+              "text": "In a scarred uterus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local causes of bleeding",
+          "cells": [
+            {
+              "text": "Cervical ectropion, cervicitis, polyp or carcinoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "placenta_praevia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pelvic rest",
+          "cells": [
+            {
+              "text": "Avoid digital vaginal examination; advise pelvic rest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Planned caesarean",
+          "cells": [
+            {
+              "text": "For a placenta covering or lying close to the internal os"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antenatal corticosteroids",
+          "cells": [
+            {
+              "text": "For foetal lung maturity when preterm delivery is anticipated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-D",
+          "cells": [
+            {
+              "text": "Immunoglobulin prophylaxis for rhesus-negative women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute haemorrhage",
+          "cells": [
+            {
+              "text": "Resuscitation and transfusion, with group-and-save or cross-match maintained"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Inpatient observation for recurrent or heavy bleeding; delivery where transfusion and neonatal support exist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Accreta surveillance",
+          "cells": [
+            {
+              "text": "Especially with an anterior praevia over a caesarean scar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency",
+          "cells": [
+            {
+              "text": "Emergency caesarean and haemorrhage management if bleeding is life-threatening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "placenta_praevia-dx-mgmt",
+      "title": "Diagnosis and management of Placenta praevia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Vaginal bleeding in late pregnancy, with placenta near the internal os",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (heavy bleeding with instability, fetal compromise, accreta features, labour)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency caesarean and haemorrhage management for life-threatening bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transvaginal ultrasound for placental edge distance; cross-match; cardiotocography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ultrasound confirm a placenta covering or lying close to the internal os?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider placental abruption, vasa praevia, cervical lesion or local genital cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid digital vaginal examination and advise pelvic rest",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Planned caesarean delivery for a placenta covering or lying close to the internal os",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antenatal corticosteroids when preterm delivery is anticipated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anti-D immunoglobulin prophylaxis for rhesus-negative women",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Resuscitation and transfusion for acute antepartum haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With antenatal diagnosis and planned caesarean, outcomes are generally good",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

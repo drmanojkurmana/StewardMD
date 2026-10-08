@@ -149,5 +149,335 @@
       "caption": "Overview comparison matrix for palmoplantar pustulosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "palmoplantar_pustulosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pustule swab and culture",
+          "cells": [
+            {
+              "text": "Sterility; bacterial infection excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium hydroxide microscopy and fungal culture",
+          "cells": [
+            {
+              "text": "Tinea excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Intra-epidermal neutrophilic pustules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking history",
+          "cells": [
+            {
+              "text": "Strong association; cessation counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Association with thyroid disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone scan or MRI and inflammatory markers",
+          "cells": [
+            {
+              "text": "SAPHO syndrome, when osteoarticular pain is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "palmoplantar_pustulosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pompholyx (dyshidrotic eczema)",
+          "cells": [
+            {
+              "text": "Vesicles rather than evolving sterile pustules with brown macules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tinea with secondary pustulation",
+          "cells": [
+            {
+              "text": "Potassium hydroxide microscopy and culture separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "palmoplantar_pustulosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "The key modifiable factor, with structured support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potent topical corticosteroids",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Often under occlusion, with a topical vitamin D analogue and keratolytic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand-and-foot PUVA",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "For resistant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic agents",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Acitretin, methotrexate, ciclosporin or apremilast for refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biologic therapy",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Targeting interleukin-17, interleukin-23 or interleukin-36 in severe resistant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated conditions",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Thyroid screening; SAPHO assessment with rheumatology referral if chest wall pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "palmoplantar_pustulosis-dx-mgmt",
+      "title": "Diagnosis and management of Palmoplantar pustulosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sterile pustules on palms or soles that evolve to brown macules in a smoker",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (anterior chest wall pain, rapid generalisation or disabling disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: rheumatology review for SAPHO or generalised pustular psoriasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pustule culture, KOH and fungal culture, biopsy, thyroid tests, imaging if SAPHO",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are sterile neutrophilic pustules confirmed, with infection and tinea excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pompholyx, tinea with pustulation, contact dermatitis or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Smoking cessation with structured support as the key modifiable factor",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Potent topical steroids under occlusion, with topical vitamin D analogue and keratolytic",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hand-and-foot PUVA for resistant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Systemic acitretin, methotrexate, ciclosporin or apremilast for refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Biologic therapy targeting IL-17, IL-23 or IL-36 in severe resistant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic and relapsing; smoking cessation and treatment improve control; clearance is hard",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

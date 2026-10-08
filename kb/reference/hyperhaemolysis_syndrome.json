@@ -150,5 +150,341 @@
       "caption": "Overview comparison matrix for hyperhaemolysis syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "British Society for Haematology guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyperhaemolysis_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial haemoglobin falling below the pre-transfusion value",
+          "cells": [
+            {
+              "text": "Post-transfusion fall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lactate dehydrogenase, bilirubin and haptoglobin",
+          "cells": [
+            {
+              "text": "Brisk haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reticulocyte count",
+          "cells": [
+            {
+              "text": "Often inappropriately low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test and antibody identification",
+          "cells": [
+            {
+              "text": "Alloantibody or autoantibody"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis for haemoglobinuria",
+          "cells": [
+            {
+              "text": "Intravascular haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion history and haemoglobin electrophoresis",
+          "cells": [
+            {
+              "text": "Donor haemoglobin remaining"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperhaemolysis_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Delayed haemolytic transfusion reaction",
+          "cells": [
+            {
+              "text": "Alloantibody response after prior transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute haemolytic transfusion reaction",
+          "cells": [
+            {
+              "text": "Onset during or soon after transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sickle cell vaso-occlusive crisis",
+          "cells": [
+            {
+              "text": "Pain without a fall in haemoglobin below the pre-transfusion level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune haemolytic anaemia",
+          "cells": [
+            {
+              "text": "Positive direct antiglobulin test with autoantibody"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ongoing haemorrhage",
+          "cells": [
+            {
+              "text": "Blood loss rather than haemolysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperhaemolysis_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid further red cell transfusion",
+          "cells": [
+            {
+              "text": "Unless anaemia is immediately life-threatening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids and intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "First-line immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eculizumab or rituximab",
+          "cells": [
+            {
+              "text": "Severe or refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythropoietin, folate and iron",
+          "cells": [
+            {
+              "text": "Support erythropoiesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial haemoglobin, LDH, haptoglobin and reticulocytes",
+          "cells": [
+            {
+              "text": "Tracks haemolysis and marrow recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antigen-matched units",
+          "cells": [
+            {
+              "text": "If transfusion becomes unavoidable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flag the diagnosis on the record",
+          "cells": [
+            {
+              "text": "Prevents inadvertent re-exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyperhaemolysis_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Hyperhaemolysis syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Falling haemoglobin after transfusion in sickle cell disease or thalassaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Haemoglobinuria, low reticulocytes, rapid deterioration, or end-organ ischaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent haematology review for profound anaemia with ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial Hb; LDH, bilirubin and haptoglobin; reticulocytes; DAT; antibody screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is post-transfusion haemoglobin below the pre-transfusion level with brisk haemolysis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider delayed or acute transfusion reaction, VOC, autoimmune haemolysis or bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid further transfusion unless immediately life-threatening",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids and intravenous immunoglobulin as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Eculizumab or rituximab in severe or refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antigen-matched units with transfusion laboratory input if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Haemolysis settled and marrow recovering; diagnosis flagged on record",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

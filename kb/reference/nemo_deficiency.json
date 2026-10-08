@@ -153,5 +153,341 @@
       "caption": "Overview comparison matrix for nemo deficiency (x-linked, ikbkg)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immunologic Disorders / IUIS classification",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nemo_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Genetic sequencing of IKBKG",
+          "cells": [
+            {
+              "text": "Hypomorphic variants, including recurrent mutations and copy-number changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative immunoglobulins with vaccine antibody responses",
+          "cells": [
+            {
+              "text": "Responses to protein and polysaccharide antigens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toll-like receptor and NF-kB functional assays",
+          "cells": [
+            {
+              "text": "Impaired signalling in blood cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphocyte subset and natural killer cell analysis",
+          "cells": [
+            {
+              "text": "Immune cell function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cultures and species identification",
+          "cells": [
+            {
+              "text": "Bacterial and mycobacterial infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical and dental assessment of ectodermal features",
+          "cells": [
+            {
+              "text": "Sweating and teeth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy and histology",
+          "cells": [
+            {
+              "text": "When colitis is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nemo_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "X-linked agammaglobulinaemia",
+          "cells": [
+            {
+              "text": "Lacks the anhidrotic ectodermal dysplasia that couples with NEMO deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyper-IgM syndromes",
+          "cells": [
+            {
+              "text": "Raised IgM can occur; the wider signalling defect and ectodermal features point to NEMO"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mendelian susceptibility to mycobacterial disease",
+          "cells": [
+            {
+              "text": "Severe BCG reactions or mycobacterial infection raise this possibility"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nemo_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "To correct impaired antibody responses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimicrobial prophylaxis and no live vaccines",
+          "cells": [
+            {
+              "text": "Avoid live vaccines, particularly BCG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt targeted treatment of infection",
+          "cells": [
+            {
+              "text": "Antibacterial and antimycobacterial agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "The potentially curative option for the immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune dysregulation",
+          "cells": [
+            {
+              "text": "Immunomodulatory therapy for inflammatory colitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectodermal care",
+          "cells": [
+            {
+              "text": "Dental care; avoid overheating because sweating is reduced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Clinical immunology and genetics; prompt escalation for severe infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked IKBKG mutation; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nemo_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of NEMO deficiency (X-linked, IKBKG)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Boy with sparse hair, conical teeth, reduced sweating and recurrent infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe infection after BCG, invasive pyogenic disease, colitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent immunology review; escalate severe or opportunistic infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "IKBKG sequencing, immunoglobulins, vaccine antibody responses, NF-kB assays, cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Hypomorphic IKBKG variant confirmed with immunodeficiency and ectodermal features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider another ectodermal immunodeficiency or hyper-IgM; repeat genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immunoglobulin replacement to correct impaired antibody responses",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antimicrobial prophylaxis and avoidance of live vaccines, especially BCG",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prompt targeted antibacterial and antimycobacterial treatment of infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Haematopoietic stem cell transplantation as the potentially curative option",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Varies by mutation; severe phenotypes carry high infective mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

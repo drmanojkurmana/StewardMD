@@ -157,6 +157,16 @@
       "id": "c1",
       "label": "Harrison's Principles of Internal Medicine / WHO",
       "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, DNA Viruses (p60)",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 184-1",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -287,6 +297,211 @@
             }
           ],
           "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythema_infectiosum-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "DNA viruses by family",
+      "rowHeader": "Family",
+      "columns": [
+        "Viruses",
+        "Genome"
+      ],
+      "rows": [
+        {
+          "parameter": "Hepadnaviridae",
+          "cells": [
+            {
+              "text": "Hepatitis B virus"
+            },
+            {
+              "text": "Double-stranded DNA with single-stranded portions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Parvoviridae",
+          "cells": [
+            {
+              "text": "Parvovirus B19"
+            },
+            {
+              "text": "Single-stranded DNA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Papovaviridae",
+          "cells": [
+            {
+              "text": "Human papillomaviruses; JC virus; BK virus"
+            },
+            {
+              "text": "Double-stranded DNA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adenoviridae",
+          "cells": [
+            {
+              "text": "Human adenoviruses"
+            },
+            {
+              "text": "Double-stranded DNA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Herpesviridae",
+          "cells": [
+            {
+              "text": "Herpes simplex virus types 1 and 2; varicella-zoster virus; Epstein-Barr virus; cytomegalovirus; human herpesvirus 6; human herpesvirus 7; Kaposi's sarcoma-associated herpesvirus"
+            },
+            {
+              "text": "Double-stranded DNA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Poxviridae",
+          "cells": [
+            {
+              "text": "Variola (smallpox) virus; Orf virus; Molluscum contagiosum virus"
+            },
+            {
+              "text": "Double-stranded DNA"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "The source marks some viruses with superscript letters whose footnote text is not on the page."
+    },
+    {
+      "id": "erythema_infectiosum-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Diseases associated with parvovirus B19 infection and diagnostic tests",
+      "rowHeader": "Disease",
+      "columns": [
+        "Host(s)",
+        "IgM",
+        "IgG",
+        "PCR",
+        "Quantitative PCR"
+      ],
+      "rows": [
+        {
+          "parameter": "Fifth disease",
+          "cells": [
+            {
+              "text": "Healthy children"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": ">10^3 IU/mL"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Polyarthropathy syndrome",
+          "cells": [
+            {
+              "text": "Healthy adults (more often women)"
+            },
+            {
+              "text": "Positive within 3 months of onset"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": ">10^3 IU/mL"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Transient aplastic crisis",
+          "cells": [
+            {
+              "text": "Patients with increased erythropoiesis"
+            },
+            {
+              "text": "Negative or positive"
+            },
+            {
+              "text": "Negative or positive"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Often >10^12 IU/mL, but rapidly decreases"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Persistent anemia/pure red-cell aplasia",
+          "cells": [
+            {
+              "text": "Immunodeficient or immunocompetent patients"
+            },
+            {
+              "text": "Negative or weakly positive"
+            },
+            {
+              "text": "Negative or weakly positive"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Often >10^12 IU/mL, but should be >10^6 in the absence of treatment"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hydrops fetalis/congenital anemia",
+          "cells": [
+            {
+              "text": "Fetus (<20 weeks)"
+            },
+            {
+              "text": "Negative or positive"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Positive in amniotic fluid or tissue"
+            },
+            {
+              "text": "Not applicable"
+            }
+          ],
+          "cite": "c3"
         }
       ]
     }

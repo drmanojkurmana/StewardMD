@@ -205,6 +205,11 @@
       "label": "Merck Manual Professional, Opioid Toxicity and Withdrawal",
       "kind": "web",
       "url": "https://www.merckmanuals.com/professional/special-subjects/recreational-drugs-and-intoxicants/opioid-toxicity-and-withdrawal"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 393-1",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -534,6 +539,44 @@
             }
           ],
           "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "opioid_od-ddx-2",
+      "kind": "ddx",
+      "title": "Opioid receptor types and their actions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Actions"
+      ],
+      "rows": [
+        {
+          "parameter": "Mu (example: morphine)",
+          "cells": [
+            {
+              "text": "Analgesia, reinforcement and euphoria, cough and appetite suppression, decreased respiration, decreased GI motility, sedation, hormone changes, dopamine and acetylcholine release"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Kappa (example: butorphanol)",
+          "cells": [
+            {
+              "text": "Dysphoria, decreased GI motility, decreased appetite, decreased respiration, psychotic symptoms, sedation, diuresis, analgesia"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Delta (example: etorphine)",
+          "cells": [
+            {
+              "text": "Hormone changes, appetite suppression, dopamine release"
+            }
+          ],
+          "cite": "c3"
         }
       ]
     }

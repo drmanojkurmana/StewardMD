@@ -164,5 +164,516 @@
       "caption": "Overview comparison matrix for nontuberculous mycobacterial infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "ATS/ERS/ESCMID/IDSA NTM guideline 2020, Recommended Treatment Regimens table (Clin Infect Dis)",
+      "kind": "web",
+      "url": "https://academic.oup.com/view-large/219735566"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 258-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nontuberculous_mycobacterial_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of pulmonary NTM disease (ATS criteria)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Requirement",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical and radiographic setting",
+          "cells": [
+            {
+              "text": "Symptoms with nodules, bronchiectasis or cavities on CT"
+            },
+            {
+              "text": "Tree-in-bud, lingula and right middle lobe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microbiology: sputum",
+          "unit": "samples",
+          "cells": [
+            {
+              "text": "Same NTM in 2 of 3 sputum samples",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "{{hy:One sputum isolate is not enough}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microbiology: BAL",
+          "cells": [
+            {
+              "text": "One positive BAL culture"
+            },
+            {
+              "text": "Regardless of smear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microbiology: biopsy",
+          "cells": [
+            {
+              "text": "Granulomas or AFB on tissue plus positive culture"
+            },
+            {
+              "text": "Or blood or organ isolate in compatible setting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth rate",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Rapid growers under 7 days; slow 7 days or more",
+              "op": "<",
+              "value": 7
+            },
+            {
+              "text": "Some labs hold 6 weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Typical patient",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Thin older woman, onset about 60",
+              "op": "=",
+              "value": 60
+            },
+            {
+              "text": "Scoliosis, pectus, MVP common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Species identification",
+          "cells": [
+            {
+              "text": "Probes, sequencing or mass spectrometry"
+            },
+            {
+              "text": "M. gordonae is almost never a pathogen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IGRA and PPD",
+          "cells": [
+            {
+              "text": "M. kansasii, marinum, szulgai cause false-positive IGRA"
+            },
+            {
+              "text": "PPD over 15 mm usually TB"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated disease",
+          "cells": [
+            {
+              "text": "Two or more organs without iatrogenic cause"
+            },
+            {
+              "text": "Test HIV, IFN-gamma/IL-12 pathway, anti-IFN-gamma antibodies, GATA2"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nontuberculous_mycobacterial_infection-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic NTM infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary tuberculosis",
+          "cells": [
+            {
+              "text": "Contact history, IGRA positive; M. kansasii looks like TB"
+            },
+            {
+              "text": "NAAT (Xpert) and culture with speciation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other cavitary infection",
+          "cells": [
+            {
+              "text": "Nocardia, Rhodococcus, Legionella, fungi in immunocompromised host"
+            },
+            {
+              "text": "Cultures and modified AFB"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lung cancer",
+          "cells": [
+            {
+              "text": "Solitary nodule or mass, smoker"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchiectasis exacerbation without NTM",
+          "cells": [
+            {
+              "text": "Pseudomonas or other bacteria"
+            },
+            {
+              "text": "Repeated mycobacterial cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hot-tub lung",
+          "cells": [
+            {
+              "text": "Hypersensitivity reaction after hot tub exposure"
+            },
+            {
+              "text": "Exposure history, CT, BAL"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sporotrichosis (vs M. marinum)",
+          "cells": [
+            {
+              "text": "Ascending nodules after plant injury"
+            },
+            {
+              "text": "Culture at 30 C and fungal culture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nontuberculous_mycobacterial_infection-treatment",
+      "kind": "treatment",
+      "title": "Treatment of NTM lung disease",
+      "rowHeader": "Option",
+      "columns": [
+        "Regimen",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "MAC, nodular-bronchiectatic",
+          "cells": [
+            {
+              "text": "Azithromycin (or clarithromycin), rifampicin (or rifabutin), ethambutol three times weekly"
+            },
+            {
+              "text": "{{hy:Never macrolide monotherapy}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MAC, cavitary",
+          "cells": [
+            {
+              "text": "Same three drugs daily plus IV amikacin or streptomycin"
+            },
+            {
+              "text": "Aminoglycoside may be three times weekly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MAC, refractory",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "Culture positive after 6 months: add amikacin liposome inhalation or IV amikacin",
+              "op": ">=",
+              "value": 6
+            },
+            {
+              "text": "At least 4 drugs"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "M. kansasii",
+          "cells": [
+            {
+              "text": "Rifampicin, ethambutol plus azithromycin or isoniazid"
+            },
+            {
+              "text": "Daily or three times weekly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "M. xenopi",
+          "cells": [
+            {
+              "text": "Macrolide and/or moxifloxacin, rifampicin, ethambutol, amikacin"
+            },
+            {
+              "text": "Daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rapid growers (M. abscessus)",
+          "cells": [
+            {
+              "text": "Amikacin and macrolide-based regimens"
+            },
+            {
+              "text": "By susceptibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alternatives",
+          "cells": [
+            {
+              "text": "Intolerance or resistance"
+            },
+            {
+              "text": "Clofazimine, moxifloxacin, linezolid"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Localised disease, infected lines or prostheses"
+            },
+            {
+              "text": "Resection or removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Host factors",
+          "cells": [
+            {
+              "text": "Advanced HIV, TNF inhibitors"
+            },
+            {
+              "text": "Optimise ART; reconsider TNF blockade"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Doses are in the guideline Table 3, which was not opened; dose per ID specialist."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nontuberculous_mycobacterial_infection-dx-mgmt",
+      "title": "Diagnosis and management of nontuberculous mycobacterial infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic cough, fatigue, bronchiectasis or cavity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Chest CT; 3 sputum samples for AFB smear and culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Same NTM in 2 of 3 sputa, or positive BAL or biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Colonisation or contamination; repeat cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Identify species; exclude TB",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "MAC?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Cavitary or extensive disease?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Daily macrolide, rifampicin, ethambutol plus amikacin",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Three-times-weekly macrolide, rifampicin, ethambutol",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Species-specific regimen by susceptibility",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Still culture positive at 6 months?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Refractory: add amikacin liposome inhalation",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Continue and monitor culture conversion and toxicity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

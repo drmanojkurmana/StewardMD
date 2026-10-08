@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for pseudo-hurler polydystrophy (mucolipidosis iii)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pseudo_hurler_polydystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma or serum assay of multiple lysosomal enzymes",
+          "cells": [
+            {
+              "text": "Raised enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cultured fibroblast studies",
+          "cells": [
+            {
+              "text": "Reduced intracellular enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GNPTAB and GNPTG gene sequencing",
+          "cells": [
+            {
+              "text": "Subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey and hip imaging",
+          "cells": [
+            {
+              "text": "Dysplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Valvular involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Corneal changes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pseudo_hurler_polydystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mucolipidosis II (I-cell disease)",
+          "cells": [
+            {
+              "text": "Severe end of the pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Attenuated mucopolysaccharidoses (Scheie, Maroteaux-Lamy)",
+          "cells": [
+            {
+              "text": "Attenuated phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Juvenile idiopathic arthritis",
+          "cells": [
+            {
+              "text": "Joint stiffness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pseudo_hurler_polydystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No enzyme-replacement or curative therapy exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Preserve joint mobility and slow contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic management",
+          "cells": [
+            {
+              "text": "Progressive hip and joint disease; joint replacement in adulthood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and aids",
+          "cells": [
+            {
+              "text": "Joint pain and stiffness; mobility aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Periodic echocardiography for valvular involvement; cardiology referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eye and skeletal monitoring",
+          "cells": [
+            {
+              "text": "Ophthalmology review for corneal changes; regular skeletal monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive (GNPTAB or GNPTG); family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pseudo_hurler_polydystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Pseudo-Hurler polydystrophy (mucolipidosis III)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pseudo-Hurler polydystrophy: joint stiffness with skeletal dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive hip destruction, valve dysfunction, cervical instability, or marked decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent spine and cardiac review for instability or valve dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lysosomal enzyme assays; fibroblast studies; GNPTAB and GNPTG sequencing; skeletal survey",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do enzyme assays and GNPT gene sequencing confirm the disorder?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider mucolipidosis II, attenuated MPS or other skeletal dysplasia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive multidisciplinary care; no enzyme-replacement or curative therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy to preserve joint mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic management of progressive hip and joint disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Periodic echocardiography and ophthalmology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling and family screening for this autosomal recessive condition",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -145,5 +145,315 @@
       "caption": "Overview comparison matrix for ptosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ptosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Measurement of margin-reflex distance, palpebral aperture and levator function",
+          "cells": [
+            {
+              "text": "Ptosis severity and levator function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pupil examination",
+          "cells": [
+            {
+              "text": "Horner syndrome or third nerve palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fatigability assessment",
+          "cells": [
+            {
+              "text": "Myasthenia, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Compressive or neurogenic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic and antibody testing",
+          "cells": [
+            {
+              "text": "Myasthenia gravis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ptosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Third nerve palsy",
+          "cells": [
+            {
+              "text": "Painful ptosis with a dilated pupil and ophthalmoplegia"
+            },
+            {
+              "text": "Neuroimaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Horner syndrome",
+          "cells": [
+            {
+              "text": "Ptosis with anisocoria and anhidrosis"
+            },
+            {
+              "text": "Pupil examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "Fatigable or variable ptosis"
+            },
+            {
+              "text": "Antibody testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ptosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the mechanism",
+          "cells": [
+            {
+              "text": "Direct treatment at the underlying mechanism, which differs by type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levator surgery",
+          "cells": [
+            {
+              "text": "Levator advancement or resection for aponeurotic and congenital ptosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Painful third nerve palsy",
+          "cells": [
+            {
+              "text": "Urgent evaluation to exclude a compressive lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "Acetylcholinesterase inhibitors and immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Children",
+          "cells": [
+            {
+              "text": "Prompt correction when the visual axis is occluded, to prevent amblyopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mechanical causes",
+          "cells": [
+            {
+              "text": "Remove or treat lid masses or scarring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ptosis-dx-mgmt",
+      "title": "Diagnosis and management of Ptosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected ptosis: drooping upper eyelid with reduced margin-reflex distance",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Painful dilated-pupil ptosis, Horner features, fatigable ptosis, or childhood occlusion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neuroimaging for painful third nerve palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRD, aperture and levator function; pupils; fatigability; neuroimaging; antibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the cause identified as aponeurotic, neurogenic or myogenic?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider mechanical ptosis or pseudoptosis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying mechanism, which differs by type",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Levator advancement or resection for aponeurotic and congenital ptosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Acetylcholinesterase inhibitors and immunosuppression for myasthenia gravis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prompt correction in children with visual-axis occlusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Oculoplastic referral; neurology input for neurogenic or myogenic cause",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

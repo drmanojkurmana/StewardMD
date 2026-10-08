@@ -148,5 +148,316 @@
       "caption": "Overview comparison matrix for pneumoconiosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / GOLD & ATS guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pneumoconiosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Pneumoconiosis opacities against a standardised classification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HRCT",
+          "cells": [
+            {
+              "text": "Nodularity, fibrosis and pleural disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests",
+          "cells": [
+            {
+              "text": "Restrictive, obstructive or mixed impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational and environmental exposure history",
+          "cells": [
+            {
+              "text": "Exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for tuberculosis or malignancy",
+          "cells": [
+            {
+              "text": "Complicating TB; malignancy with asbestos"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pneumoconiosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary tuberculosis",
+          "cells": [
+            {
+              "text": "Constitutional symptoms or haemoptysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant mesothelioma",
+          "cells": [
+            {
+              "text": "Pleural effusion or thickening in an asbestos-exposed patient"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pneumoconiosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Exposure removal",
+          "cells": [
+            {
+              "text": "Removal from further dust exposure, the most important intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "Reduces functional impairment and malignancy risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchodilators",
+          "cells": [
+            {
+              "text": "For coexisting airflow obstruction; pulmonary rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vaccination",
+          "cells": [
+            {
+              "text": "Influenza and pneumococcal; prompt treatment of infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis and mesothelioma",
+          "cells": [
+            {
+              "text": "Surveillance and treatment of complicating tuberculosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Chest imaging and lung function for progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational health",
+          "cells": [
+            {
+              "text": "Compensation advice and consideration of lung transplantation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pneumoconiosis-dx-mgmt",
+      "title": "Diagnosis and management of Pneumoconiosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Occupational dust exposure with nodular opacities on chest radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (enlarging masses, constitutional symptoms, haemoptysis, lung function decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory review for suspected tuberculosis or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph with classification; HRCT; lung function; exposure history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show pneumoconiosis with no tuberculosis or malignancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider IPF, sarcoidosis, tuberculosis, hypersensitivity pneumonitis or CTD-ILD",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Remove the patient from further dust exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Smoking cessation support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bronchodilators and pulmonary rehabilitation for airflow obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Influenza and pneumococcal vaccination and prompt treatment of infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial chest imaging and lung function to monitor progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Simple pneumoconiosis may stay stable; progressive massive fibrosis impairs more",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

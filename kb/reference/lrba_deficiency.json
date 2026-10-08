@@ -151,5 +151,343 @@
       "caption": "Overview comparison matrix for lrba deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lrba_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Flow cytometry for LRBA protein",
+          "cells": [
+            {
+              "text": "Reduced or absent LRBA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphocyte subsets and regulatory T cells with CTLA-4 studies",
+          "cells": [
+            {
+              "text": "CTLA-4 expression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum immunoglobulins and specific antibody responses",
+          "cells": [
+            {
+              "text": "Hypogammaglobulinaemia and poor vaccine responses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoantibody screen and direct antiglobulin test",
+          "cells": [
+            {
+              "text": "Autoimmune cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LRBA gene sequencing",
+          "cells": [
+            {
+              "text": "Biallelic loss-of-function variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy with biopsy and chest imaging",
+          "cells": [
+            {
+              "text": "Enteropathy and interstitial lung disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lrba_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "CTLA4 haploinsufficiency",
+          "cells": [
+            {
+              "text": "Same CTLA-4 pathway; the phenotype closely resembles LRBA deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Common variable immunodeficiency",
+          "cells": [
+            {
+              "text": "Often the initial label; LRBA testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IPEX syndrome",
+          "cells": [
+            {
+              "text": "Enteropathy and autoimmunity from a different gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune lymphoproliferative syndrome",
+          "cells": [
+            {
+              "text": "Lymphoproliferation with autoimmune cytopenias"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lrba_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "CTLA4-Ig (abatacept)",
+          "cells": [
+            {
+              "text": "Replaces the deficient CTLA-4 signal; targeted therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "For hypogammaglobulinaemia; antimicrobial prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression",
+          "cells": [
+            {
+              "text": "Sirolimus, corticosteroids or steroid-sparing drugs for autoimmunity and lymphoproliferation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplant",
+          "cells": [
+            {
+              "text": "Potentially curative in severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ-specific complications",
+          "cells": [
+            {
+              "text": "Cytopenias, enteropathy, endocrinopathies such as type 1 diabetes and thyroid disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; cascade family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Severe cytopenias, uncontrolled autoimmunity or progressive lung disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lrba_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of LRBA deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Early-onset autoimmune cytopenia, enteropathy and hypogammaglobulinaemia in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (life-threatening cytopenia or progressive lung disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent immunology review for severe cytopenia or lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "LRBA protein flow cytometry, CTLA-4 studies, immunoglobulins, LRBA sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is LRBA protein reduced or absent, with biallelic LRBA variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CTLA4 haploinsufficiency, CVID, IPEX or ALPS",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "CTLA4-Ig therapy such as abatacept as targeted treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Immunoglobulin replacement and antimicrobial prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunosuppression with sirolimus or steroids for autoimmunity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider allogeneic stem cell transplant in severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cascade genetic counselling and organ-specific monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated disease is severe; targeted therapy and transplant change outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

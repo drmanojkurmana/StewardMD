@@ -153,5 +153,335 @@
       "caption": "Overview comparison matrix for paediatric functional constipation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard paediatric gastroenterology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paediatric_functional_constipation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical Rome-based diagnosis",
+          "cells": [
+            {
+              "text": "Usually sufficient from history and examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology and thyroid function",
+          "cells": [
+            {
+              "text": "Organic cause, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal examination and imaging",
+          "cells": [
+            {
+              "text": "Faecal loading, selectively"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological and spinal examination",
+          "cells": [
+            {
+              "text": "Spinal cause; spinal imaging if signs present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rectal biopsy",
+          "cells": [
+            {
+              "text": "Hirschsprung disease, when red flags are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diet, fluid and drug history",
+          "cells": [
+            {
+              "text": "Contributing factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paediatric_functional_constipation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hirschsprung disease",
+          "cells": [
+            {
+              "text": "Delayed meconium passage or ribbon-like stools; rectal biopsy needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tethered cord or spina bifida occulta",
+          "cells": [
+            {
+              "text": "Neurological or sacral signs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paediatric_functional_constipation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Disimpaction",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Oral osmotic laxative, typically a macrogol regimen, before maintenance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance laxatives",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Macrogol, adding a stimulant if needed; wean slowly over a prolonged period"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural measures",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Scheduled toilet sitting after meals, foot support and positive reinforcement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibre and fluids",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Alongside laxatives, not instead of them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family education",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Overflow soiling is involuntary; reduces blame"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red flag review",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Delayed meconium, neonatal onset and neurological signs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paediatric_functional_constipation-dx-mgmt",
+      "title": "Diagnosis and management of Paediatric functional constipation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hard, infrequent stools with withholding and overflow soiling in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (delayed meconium, faltering growth, distension or neurological signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: rectal biopsy for Hirschsprung disease or spinal imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "History, abdominal examination, coeliac and thyroid tests if organic cause suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is there no red flag, with a Rome-based functional pattern confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Hirschsprung disease, hypothyroidism, tethered cord or coeliac disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Disimpaction with an oral osmotic laxative such as macrogol before maintenance",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Long-term maintenance macrogol, adding a stimulant if needed; wean slowly",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Scheduled toilet sitting after meals, foot support and positive reinforcement",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dietary fibre and fluids alongside laxatives, not instead of them",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Family education that overflow soiling is involuntary",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Good with early, adequate and sustained treatment; early withdrawal causes relapse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

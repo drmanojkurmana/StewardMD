@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for hymenoptera (bee/wasp) sting anaphylaxis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hymenoptera_anaphylaxis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis of anaphylaxis",
+          "cells": [
+            {
+              "text": "Recognition of systemic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial serum tryptase",
+          "cells": [
+            {
+              "text": "Supports a diagnosis of mast cell activation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specific IgE and skin testing to the relevant venom",
+          "cells": [
+            {
+              "text": "Sensitisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, haemolysis and renal tests in massive envenomation",
+          "cells": [
+            {
+              "text": "Systemic effects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiography and monitoring",
+          "cells": [
+            {
+              "text": "Cardiac effects during and after the reaction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hymenoptera_anaphylaxis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Large local reaction or cellulitis at the sting site",
+          "cells": [
+            {
+              "text": "Localised swelling without systemic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying systemic mastocytosis",
+          "cells": [
+            {
+              "text": "Mast cell disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasovagal syncope after a sting",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hymenoptera_anaphylaxis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intramuscular adrenaline",
+          "cells": [
+            {
+              "text": "First-line treatment of systemic anaphylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive resuscitation",
+          "cells": [
+            {
+              "text": "High-flow oxygen, airway and circulatory support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retained stinger",
+          "cells": [
+            {
+              "text": "Rapid removal to halt ongoing absorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation after recovery",
+          "cells": [
+            {
+              "text": "Biphasic or late reactions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenaline auto-injector",
+          "cells": [
+            {
+              "text": "Prescribed with training at discharge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergy referral",
+          "cells": [
+            {
+              "text": "Specific IgE and venom immunotherapy assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Massive envenomation",
+          "cells": [
+            {
+              "text": "Supportive management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hymenoptera_anaphylaxis-dx-mgmt",
+      "title": "Diagnosis and management of Hymenoptera (bee/wasp) sting anaphylaxis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sting followed by airway, breathing or circulation symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Airway compromise, bronchospasm, hypotension, rapid progression, or massive stings?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: immediate IM adrenaline and resuscitation for airway or shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; serial tryptase; venom IgE and skin tests; FBC; ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is systemic anaphylaxis confirmed clinically, with tryptase raised if drawn?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider large local reaction, cellulitis, vasovagal syncope or another trigger",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intramuscular adrenaline as first-line treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "High-flow oxygen, airway and circulatory support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rapid removal of any retained stinger",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Discharge with adrenaline auto-injector and allergy referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recovery after observation; auto-injector and allergy follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

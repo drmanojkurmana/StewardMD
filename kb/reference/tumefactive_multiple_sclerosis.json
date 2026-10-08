@@ -142,5 +142,323 @@
       "caption": "Overview comparison matrix for tumefactive multiple sclerosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tumefactive_multiple_sclerosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI with contrast, perfusion and spectroscopy",
+          "cells": [
+            {
+              "text": "Incomplete (open) ring of enhancement; little mass effect or oedema for lesion size"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid",
+          "cells": [
+            {
+              "text": "Oligoclonal bands"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for dissemination",
+          "cells": [
+            {
+              "text": "Dissemination in space and time, supporting multiple sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain biopsy",
+          "cells": [
+            {
+              "text": "Demyelination where malignancy or infection cannot be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aquaporin-4 and MOG antibodies",
+          "cells": [
+            {
+              "text": "Exclude related mimics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tumefactive_multiple_sclerosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "High-grade glioma",
+          "cells": [
+            {
+              "text": "Mass effect and oedema are less than expected for lesion size"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary CNS lymphoma or cerebral metastasis",
+          "cells": [
+            {
+              "text": "Imaging or clinical features favouring malignancy call for biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral abscess",
+          "cells": [
+            {
+              "text": "Imaging or clinical features favouring abscess need urgent review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromyelitis optica spectrum disorder",
+          "cells": [
+            {
+              "text": "Atypical features; excluded by aquaporin-4 and MOG antibodies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tumefactive_multiple_sclerosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose corticosteroids",
+          "cells": [
+            {
+              "text": "First-line for the acute tumefactive lesion; many respond well"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "Steroid-refractory episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced imaging and biopsy",
+          "cells": [
+            {
+              "text": "Confirm demyelination and avoid unnecessary neurosurgical resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disease-modifying therapy",
+          "cells": [
+            {
+              "text": "For the underlying multiple sclerosis once confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic care",
+          "cells": [
+            {
+              "text": "Seizures, spasticity and focal deficits with neurorehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug review",
+          "cells": [
+            {
+              "text": "Review any disease-modifying drug implicated in triggering the lesion; monitor response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist follow-up",
+          "cells": [
+            {
+              "text": "Neurology and neuroimmunology referral with structured MS follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tumefactive_multiple_sclerosis-dx-mgmt",
+      "title": "Diagnosis and management of Tumefactive multiple sclerosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tumefactive MS: large demyelinating lesion mimicking a tumour or abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (features favouring malignancy or abscess, rapid decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review: features favouring malignancy or abscess; rule out before resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI with perfusion and spectroscopy; CSF oligoclonal bands; AQP4 and MOG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is demyelination confirmed, with dissemination in space and time?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Biopsy where malignancy or infection cannot be excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-dose corticosteroids for the acute tumefactive lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Plasma exchange for steroid-refractory episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Disease-modifying therapy for the underlying multiple sclerosis once confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurology and neuroimmunology referral with structured MS follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many respond to steroids; misdiagnosis as tumour risks harmful surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

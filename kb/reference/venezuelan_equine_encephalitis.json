@@ -149,5 +149,287 @@
       "caption": "Overview comparison matrix for venezuelan equine encephalitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / CDC guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "venezuelan_equine_encephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "RT-PCR on blood for viral RNA",
+          "cells": [
+            {
+              "text": "Acute viraemic phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum and CSF IgM serology",
+          "cells": [
+            {
+              "text": "Recent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Leucopenia is often seen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid analysis",
+          "cells": [
+            {
+              "text": "When encephalitis is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Patients with neurological features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "venezuelan_equine_encephalitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dengue and other arboviral febrile illness",
+          "cells": [
+            {
+              "text": "Co-endemic febrile arboviruses must be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eastern or western equine encephalitis",
+          "cells": [
+            {
+              "text": "Other equine encephalitides with different course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malaria in co-endemic regions",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leptospirosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "venezuelan_equine_encephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Antipyretics, analgesia, rehydration and rest; no licensed specific antiviral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroinvasive disease management",
+          "cells": [
+            {
+              "text": "Anticonvulsants, control of raised intracranial pressure and intensive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mosquito exposure reduction",
+          "cells": [
+            {
+              "text": "Repellents and protective clothing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "venezuelan_equine_encephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Venezuelan equine encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Venezuelan equine encephalitis: febrile illness after travel to endemic area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures, declining consciousness or focal deficits)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neuro-intensive care for neuroinvasive disease with seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "RT-PCR on blood, serum and CSF IgM, FBC, CSF analysis, neuroimaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does RT-PCR or IgM confirm a Venezuelan equine encephalitis virus infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dengue, malaria or other encephalitis; test for co-endemic infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care with antipyretics, rehydration and rest",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticonvulsants and control of raised intracranial pressure for neuroinvasive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intensive care support for severe neurological involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Repellents and protective clothing to reduce exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most infections are self-limiting febrile illness; a minority develop encephalitis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

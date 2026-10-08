@@ -154,5 +154,324 @@
       "caption": "Overview comparison matrix for osteoblastoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Soft Tissue and Bone / standard orthopaedic oncology texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "osteoblastoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Expansile lytic lesion with variable matrix mineralisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Bony architecture, matrix and cortical integrity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Marrow and soft-tissue extent, particularly in the spine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone scintigraphy",
+          "cells": [
+            {
+              "text": "Increased uptake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy with expert bone pathology review",
+          "cells": [
+            {
+              "text": "Histology; overlap with malignancy in the aggressive variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging imaging",
+          "cells": [
+            {
+              "text": "When an aggressive or malignant lesion is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteoblastoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteoid osteoma",
+          "cells": [
+            {
+              "text": "Smaller, with marked reactive sclerosis; osteoblastoma is larger and does not self-limit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteosarcoma, osteoblastoma-like variant",
+          "cells": [
+            {
+              "text": "Rapid growth, cortical destruction or a soft-tissue mass favours osteosarcoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteoblastoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgery with curative intent",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Single primary surgical intervention; no systemic therapy or radiotherapy in typical cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intralesional curettage",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "With bone grafting or cementation for non-spinal, non-aggressive lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wider margins for aggressive disease",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Up to en bloc excision for aggressive-variant or recurrent lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal decompression",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "For radiculopathy or cord compression; resection and stabilisation if the posterior column is destabilised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Re-resection with wider margins; no established systemic or radiotherapy salvage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy avoided",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Generally avoided, given the benign nature and long-term radiation risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "osteoblastoma-dx-mgmt",
+      "title": "Diagnosis and management of Osteoblastoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful expansile bone lesion over 2 cm, often in spine or long bone of a young adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (cortical destruction, soft-tissue mass, cord compression or recurrence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: sarcoma or orthopaedic oncology review for suspected osteosarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs, CT, MRI, bone scintigraphy and biopsy with bone pathology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lesion benign on pathology review, with osteosarcoma excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider osteoid osteoma, aneurysmal bone cyst or osteosarcoma; re-biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intralesional curettage with bone graft or cementation for non-aggressive lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Wider margins up to en bloc excision for aggressive or recurrent lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Spinal decompression for radiculopathy or cord compression; stabilise if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Re-resection with wider margins for recurrence; radiotherapy generally avoided",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually cured by complete removal; the aggressive variant needs closer follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

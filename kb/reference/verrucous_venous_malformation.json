@@ -148,5 +148,267 @@
       "caption": "Overview comparison matrix for verrucous venous malformation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "verrucous_venous_malformation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination",
+          "cells": [
+            {
+              "text": "Verrucous, hyperkeratotic surface and distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Depth and full extent of the venous component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler ultrasound",
+          "cells": [
+            {
+              "text": "Slow-flow venous characteristics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Dermal venous channels with epidermal hyperkeratosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "verrucous_venous_malformation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Common venous malformation",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angiokeratoma",
+          "cells": [
+            {
+              "text": "Hyperkeratotic vascular lesion; distinguished by histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Verrucous epidermal naevus",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyogenic granuloma",
+          "cells": [
+            {
+              "text": "Bleeding vascular lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "verrucous_venous_malformation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Wide surgical excision",
+          "cells": [
+            {
+              "text": "Including the deep venous component; best chance of durable control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI mapping before treatment",
+          "cells": [
+            {
+              "text": "Superficial or incomplete excision leads to recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjunctive laser therapy",
+          "cells": [
+            {
+              "text": "Surface component"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "verrucous_venous_malformation-dx-mgmt",
+      "title": "Diagnosis and management of Verrucous venous malformation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected verrucous venous malformation: bluish-red warty plaque on a limb",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (recurrent bleeding, ulceration, infection or rapid enlargement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for bleeding, ulceration or secondary infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical examination, MRI for depth and extent, Doppler, histopathology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI confirm a deep venous component beneath the verrucous surface?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider common venous malformation or verrucous naevus; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Define full depth and extent with MRI before any treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Wide complete surgical excision including the deep venous component",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adjunctive laser therapy for the superficial component",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Does not involute like infantile haemangioma; incomplete excision recurs",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

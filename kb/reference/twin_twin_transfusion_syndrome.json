@@ -149,5 +149,332 @@
       "caption": "Overview comparison matrix for twin-to-twin transfusion syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / RCOG and international fetal medicine guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "twin_twin_transfusion_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial ultrasound of amniotic fluid in each sac",
+          "cells": [
+            {
+              "text": "Oligohydramnios in the donor sac and polyhydramnios in the recipient sac"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Umbilical artery, middle cerebral artery and ductus venosus Doppler",
+          "cells": [
+            {
+              "text": "Abnormal Doppler waveforms indicate advancing stage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foetal echocardiography of the recipient",
+          "cells": [
+            {
+              "text": "Cardiac overload in the recipient twin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder filling and growth in each twin",
+          "cells": [
+            {
+              "text": "Absent bladder filling indicates advanced disease; donor growth restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chorionicity on early pregnancy imaging",
+          "cells": [
+            {
+              "text": "Only monochorionic pregnancies are at risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foetal anatomy survey",
+          "cells": [
+            {
+              "text": "Coexisting anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "twin_twin_transfusion_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Selective foetal growth restriction",
+          "cells": [
+            {
+              "text": "Fluid discordance is not explained by growth restriction alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated polyhydramnios or oligohydramnios",
+          "cells": [
+            {
+              "text": "Needs oligohydramnios in one sac and polyhydramnios in the other"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structural or chromosomal anomaly in one twin",
+          "cells": [
+            {
+              "text": "Excluded by the foetal anatomy survey"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Twin anaemia-polycythaemia sequence",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "twin_twin_transfusion_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Fetoscopic laser photocoagulation",
+          "cells": [
+            {
+              "text": "Definitive treatment of placental anastomoses in advanced (Quintero stage II and above) disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amnioreduction",
+          "cells": [
+            {
+              "text": "Alternative or adjunct where laser therapy is unavailable or unsuitable; amniotic septostomy in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chorionicity and Quintero staging",
+          "cells": [
+            {
+              "text": "Guides the timing and choice of intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial surveillance",
+          "cells": [
+            {
+              "text": "Amniotic fluid, bladder filling, growth and foetal cardiac function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective reduction by cord occlusion",
+          "cells": [
+            {
+              "text": "Severe cases with impending demise of one twin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delivery planning",
+          "cells": [
+            {
+              "text": "Tertiary unit with neonatal support; treatment of preterm labour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral and follow-up",
+          "cells": [
+            {
+              "text": "Foetal medicine referral and long-term neurodevelopmental follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "twin_twin_transfusion_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Twin-to-twin transfusion syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected TTTS: monochorionic twins with fluid discordance on ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid polyhydramnios, abnormal Dopplers, absent bladder filling)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent referral to a fetal medicine centre capable of laser therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial fluid volumes, Doppler studies, foetal echo and bladder filling in each twin",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does Quintero staging show significant disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue serial ultrasound and Doppler surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fetoscopic laser photocoagulation of placental anastomoses as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Amnioreduction where laser therapy is unavailable or unsuitable",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Selective reduction by cord occlusion in severe cases with impending demise",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Delivery planned in a tertiary unit with neonatal support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Untreated advanced TTTS risks losing one or both twins; laser improves survival",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

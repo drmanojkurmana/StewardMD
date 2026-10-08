@@ -152,5 +152,353 @@
       "caption": "Overview comparison matrix for overlap myositis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "overlap_myositis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase and muscle enzymes",
+          "cells": [
+            {
+              "text": "Muscle injury and inflammatory activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extended myositis and overlap antibody panel",
+          "cells": [
+            {
+              "text": "Antisynthetase, anti-PM/Scl, anti-U1-RNP and anti-Ku antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antinuclear and extractable nuclear antigen antibodies",
+          "cells": [
+            {
+              "text": "Overlap-associated autoantibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT and pulmonary function with gas transfer",
+          "cells": [
+            {
+              "text": "Interstitial lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nailfold capillaroscopy",
+          "cells": [
+            {
+              "text": "Capillary changes in connective tissue overlap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography and muscle MRI or biopsy",
+          "cells": [
+            {
+              "text": "Myopathic pattern and inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "overlap_myositis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated polymyositis or dermatomyositis",
+          "cells": [
+            {
+              "text": "Lacks overlap-associated antibodies and connective tissue features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inclusion body myositis",
+          "cells": [
+            {
+              "text": "A distinct myopathy without overlap antibodies or connective tissue features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic sclerosis with primary myopathy",
+          "cells": [
+            {
+              "text": "Scleroderma features with myopathy; anti-PM/Scl overlap"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "overlap_myositis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "First-line immunosuppression for the inflammatory myopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing maintenance",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Methotrexate, azathioprine or mycophenolate mofetil to limit steroid toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Significant interstitial lung disease",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Mycophenolate, cyclophosphamide or rituximab, since lung involvement drives prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory or severe myositis",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Intravenous immunoglobulin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raynaud and skin care",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Cold avoidance and a calcium-channel blocker; physiotherapy and skin care for mechanic's hands"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Creatine kinase, pulmonary function with gas transfer and high-resolution CT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "overlap_myositis-dx-mgmt",
+      "title": "Diagnosis and management of overlap myositis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Myositis with breathlessness, arthritis or Raynaud phenomenon and overlap features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (progressive lung disease, pulmonary hypertension or dysphagia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent pulmonary and immunosuppression review for rapidly progressive ILD",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK, extended myositis antibodies, HRCT, gas transfer, echo, EMG or muscle MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do overlap antibodies and CK support overlap myositis, with ILD assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider isolated myositis, inclusion body myositis or systemic sclerosis myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids as first-line immunosuppression for the inflammatory myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Methotrexate, azathioprine or mycophenolate as steroid-sparing maintenance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Mycophenolate, cyclophosphamide or rituximab for significant interstitial lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intravenous immunoglobulin for refractory or severe myositis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Raynaud measures with a calcium-channel blocker; skin care for mechanic's hands",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Variable and driven by lung involvement; chronic and relapsing, needs sustained treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

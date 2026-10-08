@@ -155,5 +155,323 @@
       "caption": "Overview comparison matrix for short-chain acyl-coa dehydrogenase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Inherited metabolic disease references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "short_chain_acyl_coa_dehydrogenase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Newborn bloodspot acylcarnitine profile",
+          "cells": [
+            {
+              "text": "C4 elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine organic acids",
+          "cells": [
+            {
+              "text": "Ethylmalonic and methylsuccinic acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACADS genetic analysis",
+          "cells": [
+            {
+              "text": "Confirms disease versus benign susceptibility variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibroblast enzyme activity",
+          "cells": [
+            {
+              "text": "Tissue enzyme assay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma free and total carnitine",
+          "cells": [
+            {
+              "text": "Carnitine depletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ETHE1 analysis",
+          "cells": [
+            {
+              "text": "Excludes alternative causes of ethylmalonic aciduria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "short_chain_acyl_coa_dehydrogenase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ethylmalonic encephalopathy (ETHE1)",
+          "cells": [
+            {
+              "text": "Alternative cause of ethylmalonic aciduria; excluded by ETHE1 analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medium-chain acyl-CoA dehydrogenase deficiency",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other fatty-acid oxidation defects",
+          "cells": [
+            {
+              "text": "Suspected when hypoglycaemia is present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "short_chain_acyl_coa_dehydrogenase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No drug therapy for most",
+          "cells": [
+            {
+              "text": "Asymptomatic individuals found on newborn screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid prolonged fasting",
+          "cells": [
+            {
+              "text": "Adequate carbohydrate and energy during intercurrent illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency regimen",
+          "cells": [
+            {
+              "text": "Frequent carbohydrate feeds in febrile illness or poor intake, for symptomatic individuals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "L-carnitine",
+          "cells": [
+            {
+              "text": "Only with documented carnitine depletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical and developmental monitoring",
+          "cells": [
+            {
+              "text": "Hypotonia, feeding difficulty and neurodevelopment in symptomatic children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmatory biochemistry and ACADS testing",
+          "cells": [
+            {
+              "text": "Avoids overtreatment of benign variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; reassurance where benign"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "short_chain_acyl_coa_dehydrogenase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Short-chain acyl-CoA dehydrogenase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "C4 elevation on newborn screen or ethylmalonic aciduria; suspected SCAD deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (lethargy in illness, hypoglycaemia, regression, seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Search for another fatty-acid oxidation defect; give carbohydrate feeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma acylcarnitines, urine organic acids, ACADS testing, carnitine level",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do biochemistry and ACADS testing show true disease, not a benign variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Benign susceptibility variant: reassure and avoid over-treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No drug therapy for most; avoid prolonged fasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emergency carbohydrate regimen in illness for symptomatic patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "L-carnitine only if depletion is documented",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Metabolic follow-up and autosomal recessive counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign for most detected by screening; symptomatic cases need developmental follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

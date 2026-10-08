@@ -147,5 +147,323 @@
       "caption": "Overview comparison matrix for uniparental disomy 7."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "uniparental_disomy_7-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "11p15 methylation with maternal UPD7 testing",
+          "cells": [
+            {
+              "text": "Maternal UPD7 by methylation, microsatellite or SNP analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Usually normal; excludes copy-number causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth monitoring and asymmetry assessment",
+          "cells": [
+            {
+              "text": "Body or limb asymmetry over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose monitoring",
+          "cells": [
+            {
+              "text": "Hypoglycaemia risk in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and nutrition assessment",
+          "cells": [
+            {
+              "text": "Feeding difficulty and failure to thrive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and speech assessment",
+          "cells": [
+            {
+              "text": "Speech and learning involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "uniparental_disomy_7-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "11p15-related Silver-Russell syndrome",
+          "cells": [
+            {
+              "text": "The commoner molecular cause of Silver-Russell syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temple syndrome (maternal UPD14)",
+          "cells": [
+            {
+              "text": "Overlapping growth restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constitutional small for gestational age",
+          "cells": [
+            {
+              "text": "Growth restriction without a syndromic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "3-M syndrome and other primordial dwarfism",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "uniparental_disomy_7-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nutritional rehabilitation",
+          "cells": [
+            {
+              "text": "No disease-specific drug; management follows the Silver-Russell phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth hormone",
+          "cells": [
+            {
+              "text": "Improves growth and body composition in children meeting Silver-Russell criteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support and sick-day guidance",
+          "cells": [
+            {
+              "text": "Avoid prolonged fasting to prevent infant hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and blood glucose monitoring",
+          "cells": [
+            {
+              "text": "Body or limb asymmetry and blood glucose in early childhood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and speech therapy",
+          "cells": [
+            {
+              "text": "UPD7 cases may show more speech and learning involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Paediatric endocrinology, dietetics and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "uniparental_disomy_7-dx-mgmt",
+      "title": "Diagnosis and management of Uniparental disomy 7",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Silver-Russell syndrome: severe growth restriction with relative macrocephaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (symptomatic hypoglycaemia, severe failure to thrive or asymmetry)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent glucose management for symptomatic hypoglycaemia in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "11p15 methylation, maternal UPD7 testing, microarray",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is maternal UPD7 confirmed on molecular testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Test 11p15 and other Silver-Russell causes; consider Temple syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Nutritional rehabilitation and feeding support; avoid prolonged fasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Growth hormone for children meeting Silver-Russell criteria",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Growth, asymmetry and blood glucose monitoring in early childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Developmental and speech therapy with endocrine, dietetic and genetic follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome follows the Silver-Russell phenotype, with growth and hypoglycaemia risks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,325 @@
       "caption": "Overview comparison matrix for surf1-related leigh syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "surf1_leigh_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of SURF1-related Leigh syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected SURF1 Leigh syndrome: psychomotor regression, hypotonia, brainstem signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (crisis during illness, brainstem or respiratory compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent crisis care: treat the precipitant, avoid fasting, support breathing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood and CSF lactate; brain MRI; muscle biopsy; SURF1 sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do MRI, COX deficiency and SURF1 sequencing together confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude treatable mimics such as biotin-thiamine-responsive disease; repeat workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prevent crises: avoid fasting and treat illness promptly with glucose fluids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cofactor supplementation with thiamine, riboflavin and coenzyme Q10",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid valproate and mitochondrial-toxic drugs; cautious anaesthesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gastrostomy feeding for swallowing difficulty",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Multidisciplinary care and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Typically progressive; many children die in early childhood, often in crises",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "surf1_leigh_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood and CSF lactate and pyruvate",
+          "cells": [
+            {
+              "text": "Raised lactate supports an energy-generation defect; CSF lactate can be raised when blood is near-normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Symmetrical T2-hyperintense lesions of the basal ganglia and brainstem"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with histochemistry",
+          "cells": [
+            {
+              "text": "Isolated cytochrome c oxidase deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SURF1 gene sequencing",
+          "cells": [
+            {
+              "text": "Pathogenic SURF1 variants; with the MRI pattern and COX deficiency, confirms diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids and urine organic acids",
+          "cells": [
+            {
+              "text": "Excludes treatable metabolic mimics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "surf1_leigh_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Biotinidase deficiency and biotin-thiamine-responsive basal ganglia disease",
+          "cells": [
+            {
+              "text": "Treatable; must be excluded before concluding an untreatable defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other complex IV assembly-factor defects (SCO2, COX10, COX15)",
+          "cells": [
+            {
+              "text": "Share a complex IV assembly defect; separated by SURF1 sequencing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute disseminated encephalomyelitis or infective encephalitis",
+          "cells": [
+            {
+              "text": "Acute deterioration should not be attributed to infection alone without considering metabolic decompensation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "surf1_leigh_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prevent metabolic crises",
+          "cells": [
+            {
+              "text": "Avoid fasting and catabolic stress; treat intercurrent illness promptly with glucose-containing fluids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin and cofactor supplementation",
+          "cells": [
+            {
+              "text": "Thiamine, riboflavin and coenzyme Q10; efficacy unproven"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid mitochondrial-toxic drugs",
+          "cells": [
+            {
+              "text": "Sodium valproate in particular; use anaesthesia cautiously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticonvulsants and symptom control",
+          "cells": [
+            {
+              "text": "Seizures, dystonia and spasticity, avoiding valproate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Gastrostomy feeding for swallowing difficulty; treat lactic acidosis by treating the precipitant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neurology, metabolic, cardiology, ophthalmology, respiratory and palliative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; carrier and prenatal testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

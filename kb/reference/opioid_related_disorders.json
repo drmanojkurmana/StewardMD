@@ -160,5 +160,477 @@
       "caption": "Overview comparison matrix for opioid-related disorders."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Opioid Use Disorder: Diagnosis",
+      "kind": "web",
+      "url": "https://www.cdc.gov/overdose-prevention/hcp/clinical-care/opioid-use-disorder-diagnosis.html"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 393-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "opioid_related_disorders-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of opioid use disorder, intoxication and withdrawal",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "OUD (DSM-5)",
+          "unit": "criteria",
+          "cells": [
+            {
+              "text": "2 or more of 11 criteria within 12 months",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "Control, craving, harms, hazardous use, tolerance, withdrawal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Severity",
+          "unit": "criteria",
+          "cells": [
+            {
+              "text": "Mild 2 to 3; moderate 4 to 5; severe 6 or more",
+              "range": [
+                2,
+                6
+              ]
+            },
+            {
+              "text": "Count criteria met"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prescribed opioids",
+          "cells": [
+            {
+              "text": "Tolerance and withdrawal do not count under appropriate medical use"
+            },
+            {
+              "text": "Avoid over-diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Overdose",
+          "cells": [
+            {
+              "text": "Slow shallow breathing, miosis, bradycardia, hypothermia, stupor or coma"
+            },
+            {
+              "text": "{{hy:Treat on clinical grounds; do not wait for toxicology}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mydriasis in overdose",
+          "cells": [
+            {
+              "text": "Appears after significant brain anoxia"
+            },
+            {
+              "text": "Ominous"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdrawal onset (heroin)",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "About 8 to 10 h after last dose",
+              "range": [
+                8,
+                10
+              ]
+            },
+            {
+              "text": "Lacrimation, rhinorrhoea, yawning, sweating, then piloerection, vomiting, aches"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdrawal duration",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Acute 7 to 10 days; protracted 26 to 30 weeks",
+              "range": [
+                7,
+                10
+              ]
+            },
+            {
+              "text": "Tolerance can develop in 6 to 8 weeks of daily use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mu receptor effects",
+          "cells": [
+            {
+              "text": "Analgesia, euphoria, cough and appetite suppression, respiratory depression, slowed gut, sedation"
+            },
+            {
+              "text": "Kappa: dysphoria, psychotic symptoms, diuresis; delta: hormone change"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Baseline tests",
+          "cells": [
+            {
+              "text": "ECG for QT (methadone), LFTs before naltrexone, HBV, HCV, HIV"
+            },
+            {
+              "text": "Avoid naltrexone if LFTs over about 3 x normal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "opioid_related_disorders-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic or complicate opioid toxicity",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Benzodiazepine or sedative overdose",
+          "cells": [
+            {
+              "text": "Poor response to naloxone, normal pupils"
+            },
+            {
+              "text": "Clinical; toxicology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcohol intoxication",
+          "cells": [
+            {
+              "text": "Alcohol odour, nystagmus"
+            },
+            {
+              "text": "Blood alcohol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Xylazine-adulterated fentanyl",
+          "cells": [
+            {
+              "text": "Persistent sedation, skin necrosis"
+            },
+            {
+              "text": "Clinical; drug checking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structural brain lesion",
+          "cells": [
+            {
+              "text": "Focal signs, no response to antagonist"
+            },
+            {
+              "text": "CT head"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic encephalopathy",
+          "cells": [
+            {
+              "text": "Hypoglycaemia, hepatic or renal failure"
+            },
+            {
+              "text": "Glucose, chemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stimulant co-intoxication",
+          "cells": [
+            {
+              "text": "Tachycardia, hypertension after naloxone"
+            },
+            {
+              "text": "Toxicology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "opioid_related_disorders-treatment",
+      "kind": "treatment",
+      "title": "Treatment of opioid-related disorders",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway, ventilation and naloxone",
+          "cells": [
+            {
+              "text": "{{hy:Overdose with respiratory depression}}"
+            },
+            {
+              "text": "Titrate to breathing, not full arousal; fentanyl may need about twice the dose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observe or infuse naloxone",
+          "cells": [
+            {
+              "text": "After reversal"
+            },
+            {
+              "text": "Antagonist wears off before most opioids; re-sedation risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methadone or buprenorphine maintenance",
+          "cells": [
+            {
+              "text": "Opioid use disorder"
+            },
+            {
+              "text": "Cornerstone; reduces illicit use and death; check QT with methadone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Naltrexone",
+          "cells": [
+            {
+              "text": "Motivated, detoxified patients"
+            },
+            {
+              "text": "Check liver tests first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdrawal management",
+          "cells": [
+            {
+              "text": "Planned detoxification"
+            },
+            {
+              "text": "Tapering agonist or clonidine or lofexidine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Buprenorphine induction caution",
+          "cells": [
+            {
+              "text": "Recent fentanyl or high-dose methadone"
+            },
+            {
+              "text": "Can precipitate withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Harm reduction",
+          "cells": [
+            {
+              "text": "All people who use opioids"
+            },
+            {
+              "text": "Take-home naloxone, needle exchange, BBV screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychosocial support",
+          "cells": [
+            {
+              "text": "All patients with OUD"
+            },
+            {
+              "text": "Counselling and contingency management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "No naloxone or maintenance doses are stated in the opened sources."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "opioid_related_disorders-dx-mgmt",
+      "title": "Diagnosis and management of opioid-related disorders",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected opioid toxicity or problematic opioid use",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Slow breathing, miosis and reduced consciousness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Support ventilation; titrate naloxone to breathing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Breathing restored?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Consider benzodiazepines, xylazine, other causes; ventilate",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Observe for re-sedation; repeat dose or infusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Assess DSM-5 OUD criteria",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "2 or more criteria in 12 months?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Safer use advice, take-home naloxone, follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Start methadone or buprenorphine, psychosocial care, naloxone kit",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

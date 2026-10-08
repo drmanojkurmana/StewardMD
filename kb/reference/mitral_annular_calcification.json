@@ -146,5 +146,305 @@
       "caption": "Overview comparison matrix for mitral annular calcification."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mitral_annular_calcification-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Calcification site; stenosis or regurgitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transoesophageal echocardiography",
+          "cells": [
+            {
+              "text": "Annular and leaflet detail; endocarditis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac CT",
+          "cells": [
+            {
+              "text": "Extent and distribution of calcium; caseous mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Caseous calcification versus tumour or thrombus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function, calcium-phosphate balance and cardiovascular risk factors",
+          "cells": [
+            {
+              "text": "Renal and calcium-phosphate status; cardiovascular risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mitral_annular_calcification-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Infective endocarditis or annular abscess",
+          "cells": [
+            {
+              "text": "Mobile mass or new regurgitation with fever"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac tumour or thrombus (caseous MAC mimic)",
+          "cells": [
+            {
+              "text": "Caseous mass; MRI distinguishes it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mitral_annular_calcification-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiovascular risk management",
+          "cells": [
+            {
+              "text": "Treat hypertension, diabetes and dyslipidaemia; optimise calcium-phosphate handling and renal disease; no specific therapy for calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Asymptomatic incidental disease: echocardiographic surveillance of valve dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart-failure therapy and intervention",
+          "cells": [
+            {
+              "text": "Significant secondary mitral regurgitation or stenosis; heavy annular calcium raises procedural risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation for atrial fibrillation",
+          "cells": [
+            {
+              "text": "To reduce embolic stroke, with rate or rhythm control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conduction monitoring",
+          "cells": [
+            {
+              "text": "Permanent pacing if high-grade atrioventricular block develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac CT or MRI",
+          "cells": [
+            {
+              "text": "Characterises caseous calcification and avoids misdiagnosis as tumour or abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Valve team referral",
+          "cells": [
+            {
+              "text": "Intervention planning in extensive disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mitral_annular_calcification-dx-mgmt",
+      "title": "Diagnosis and management of Mitral annular calcification",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Mitral annular calcification found on echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Heart failure, AV block, embolism, or fever with a mobile mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent endocarditis assessment with blood cultures and TOE for fever with a mobile mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TTE; TOE; cardiac CT for calcium extent; cardiac MRI for caseous mass; renal and CV risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a caseous mass or tumour excluded on CT or MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider endocarditis, annular abscess or cardiac tumour or thrombus; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat hypertension, diabetes and dyslipidaemia; no specific therapy for calcification",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Echocardiographic surveillance for asymptomatic incidental disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Heart-failure therapy and mitral intervention for significant dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anticoagulation for atrial fibrillation; permanent pacing for high-grade AV block",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Valve and structural heart team planning for extensive disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

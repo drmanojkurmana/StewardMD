@@ -151,5 +151,323 @@
       "caption": "Overview comparison matrix for neonatal abstinence syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neonatal_abstinence_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial standardised withdrawal scoring, such as modified Finnegan",
+          "cells": [
+            {
+              "text": "Severity; guides when pharmacological treatment is needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal history of substance use and prescribed medications",
+          "cells": [
+            {
+              "text": "Exposure history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxicology of infant urine or meconium",
+          "cells": [
+            {
+              "text": "Substance exposure, where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose monitoring",
+          "cells": [
+            {
+              "text": "Excludes hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes and calcium",
+          "cells": [
+            {
+              "text": "If clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis screen",
+          "cells": [
+            {
+              "text": "When infection cannot be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_abstinence_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal sepsis or infection",
+          "cells": [
+            {
+              "text": "Irritability and feeding problems overlap; a sepsis screen is needed when infection is not excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia",
+          "cells": [
+            {
+              "text": "Shares irritability and feeding problems; blood glucose monitoring separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypocalcaemia or other electrolyte disturbance",
+          "cells": [
+            {
+              "text": "Checked with electrolytes and calcium when clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_abstinence_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-pharmacological care",
+          "cells": [
+            {
+              "text": "Low-stimulation environment, swaddling, gentle handling, rooming-in and frequent small feeds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standardised scoring",
+          "cells": [
+            {
+              "text": "Decides when pharmacological treatment is needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Opioid replacement",
+          "cells": [
+            {
+              "text": "Oral morphine or methadone when supportive measures are insufficient, with gradual weaning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjunctive phenobarbital or clonidine",
+          "cells": [
+            {
+              "text": "For severe, refractory or polysubstance-related withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breastfeeding support",
+          "cells": [
+            {
+              "text": "Where maternal circumstances allow; monitor weight, hydration and glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal and social support",
+          "cells": [
+            {
+              "text": "Addiction services, social support and safeguarding assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated follow-up",
+          "cells": [
+            {
+              "text": "Feeding, growth and neurodevelopmental outcome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neonatal_abstinence_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Neonatal Abstinence Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Opioid-exposed newborn with tremor, high-pitched cry and feeding difficulty",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures, dehydration, poor weight gain, persistent high scores)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review; exclude sepsis or hypoglycaemia; treat seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Withdrawal scoring, maternal history, infant toxicology, glucose, sepsis screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Withdrawal signs with exposure history, and sepsis or hypoglycaemia excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the alternative cause; re-score once it is corrected",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Low-stimulation environment, swaddling, gentle handling and rooming-in",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Standardised scoring to decide when medication is needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oral morphine or methadone with gradual weaning when supportive care fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Phenobarbital or clonidine for severe or polysubstance withdrawal",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Acute withdrawal is usually self-limited; long-term outcome depends on family context",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

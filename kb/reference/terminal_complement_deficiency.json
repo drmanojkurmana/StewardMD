@@ -152,5 +152,334 @@
       "caption": "Overview comparison matrix for terminal complement (c5-c9) deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immune Deficiencies / Middleton's Allergy: Principles and Practice",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "terminal_complement_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Terminal complement (C5-C9) deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected terminal complement deficiency: recurrent invasive Neisseria infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: second invasive meningococcal episode, or unusual serogroup?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate antibiotics, such as ceftriaxone, for fulminant sepsis with purpura",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CH50 and AH50; individual C5 to C9 levels; properdin and early components",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a terminal pathway component deficient, with properdin normal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider properdin deficiency, early classical defects or asplenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "MenACWY and serogroup B meningococcal vaccination with boosters",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pneumococcal and Haemophilus influenzae type b vaccination",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider long-term prophylactic penicillin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Patient education, urgent care for fever and an alert document",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen and vaccinate at-risk family members",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Invasive episodes tend to be less fulminant, but recurrent risk persists lifelong",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "terminal_complement_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CH50 (total classical haemolytic complement)",
+          "cells": [
+            {
+              "text": "Terminal pathway integrity; a low value points to a terminal defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AH50 (alternative pathway haemolytic assay)",
+          "cells": [
+            {
+              "text": "Helps localise the defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Individual terminal components C5 to C9",
+          "cells": [
+            {
+              "text": "The deficient component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Properdin and early components C3, C4, C2",
+          "cells": [
+            {
+              "text": "Other complement defects excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture and serogrouping of neisserial isolates",
+          "cells": [
+            {
+              "text": "Organism and serogroup"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic confirmation",
+          "cells": [
+            {
+              "text": "Deficient component, where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "terminal_complement_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Properdin deficiency",
+          "cells": [
+            {
+              "text": "X-linked; mimics the neisserial phenotype and must not be overlooked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early classical pathway deficiency (C1, C2, C4)",
+          "cells": [
+            {
+              "text": "Low CH50 with normal individual early components points to a terminal defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asplenia or hyposplenism",
+          "cells": [
+            {
+              "text": "Predisposes to invasive bacterial infection; not a complement defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "terminal_complement_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Meningococcal vaccination",
+          "cells": [
+            {
+              "text": "MenACWY and serogroup B vaccines with boosters; cornerstone of prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other encapsulated organisms",
+          "cells": [
+            {
+              "text": "Pneumococcal and Haemophilus influenzae type b vaccination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylactic penicillin",
+          "cells": [
+            {
+              "text": "Long-term, to reduce invasive meningococcal risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patient education and alert document",
+          "cells": [
+            {
+              "text": "Urgent care for any febrile illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt antibiotics for invasive disease",
+          "cells": [
+            {
+              "text": "Third-generation cephalosporin such as ceftriaxone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening and genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; screen and vaccinate relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical immunology follow-up",
+          "cells": [
+            {
+              "text": "Culture and serogroup any neisserial isolate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

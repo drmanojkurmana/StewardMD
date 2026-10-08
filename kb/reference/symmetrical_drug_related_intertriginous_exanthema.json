@@ -150,5 +150,332 @@
       "caption": "Overview comparison matrix for symmetrical drug-related intertriginous and flexural exanthema (sdrife)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "symmetrical_drug_related_intertriginous_exanthema-dx-mgmt",
+      "title": "Diagnosis and management of Symmetrical drug-related intertriginous and flexural exanthema (SDRIFE)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected SDRIFE: symmetrical buttock and flexural erythema after a systemic drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (pustulation, fever, mucosal involvement, or no settling)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review to exclude a more serious cutaneous drug reaction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Systemic drug history; map flexural distribution; swabs or biopsy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the eruption symmetrical, with no contact allergen and no systemic features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider intertrigo, inverse psoriasis or acute generalised exanthematous pustulosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw the responsible systemic drug, often a beta-lactam",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical corticosteroids and emollients, with antihistamines for itch",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Document the drug allergy and avoid the culprit and cross-reactive agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Confirm the culprit by patch testing or supervised provocation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Settles within one to two weeks of drug withdrawal; recurs on re-exposure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "symmetrical_drug_related_intertriginous_exanthema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed systemic drug history",
+          "cells": [
+            {
+              "text": "Exposure correlated with onset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical mapping of flexural and gluteal distribution",
+          "cells": [
+            {
+              "text": "Symmetrical involvement of buttocks and major folds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin swabs or scrapings",
+          "cells": [
+            {
+              "text": "Candidal, dermatophyte or bacterial intertrigo excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy in atypical cases",
+          "cells": [
+            {
+              "text": "Other flexural dermatoses excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch or provocation testing after recovery",
+          "cells": [
+            {
+              "text": "Confirms the culprit drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for systemic features",
+          "cells": [
+            {
+              "text": "A more serious drug reaction excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "symmetrical_drug_related_intertriginous_exanthema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Candidal or dermatophyte intertrigo",
+          "cells": [
+            {
+              "text": "Excluded by skin swabs or scrapings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inverse (flexural) psoriasis",
+          "cells": [
+            {
+              "text": "Mistaken for it; the drug history identifies the cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute generalised exanthematous pustulosis",
+          "cells": [
+            {
+              "text": "Pustules developing in flexural sites point to this rather than SDRIFE"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergic contact dermatitis to a topical agent",
+          "cells": [
+            {
+              "text": "No external contact allergen is required at the affected sites"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "symmetrical_drug_related_intertriginous_exanthema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw the responsible systemic drug",
+          "cells": [
+            {
+              "text": "Often a beta-lactam antibiotic; the definitive step"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids and emollients",
+          "cells": [
+            {
+              "text": "Symptom relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antihistamines",
+          "cells": [
+            {
+              "text": "Pruritus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Document the drug allergy",
+          "cells": [
+            {
+              "text": "Avoid the culprit and cross-reactive agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm the culprit",
+          "cells": [
+            {
+              "text": "Patch testing or supervised provocation after recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, self-limiting course that settles within a couple of weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude a more serious reaction",
+          "cells": [
+            {
+              "text": "Assess for systemic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

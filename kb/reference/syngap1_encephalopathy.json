@@ -147,5 +147,334 @@
       "caption": "Overview comparison matrix for syngap1-related intellectual disability."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "syngap1_encephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of SYNGAP1-related intellectual disability",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected SYNGAP1 encephalopathy: intellectual disability, autism and drop seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (frequent drop attacks, status or absence clusters, feeding problems)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of status epilepticus or clusters of atypical absences",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EEG with capture during eating; MRI; chromosomal microarray; SYNGAP1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does SYNGAP1 testing or a 6p21 deletion confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Doose syndrome, Lennox-Gastaut or other epileptic-encephalopathy genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Broad-spectrum antiseizure drugs; ketogenic diet for drug-resistant seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Recognise and manage reflex seizures triggered by eating",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early physiotherapy, occupational and speech and language therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manage autistic features, aggression and sleep; watch for masked injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Feeding and oromotor support; genetic counselling for de novo variants",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifelong intellectual disability and often drug-resistant epilepsy; supportive care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "syngap1_encephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "EEG with capture during eating",
+          "cells": [
+            {
+              "text": "Reflex seizures triggered by eating"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Often normal, or non-specific changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "6p21 deletions involving SYNGAP1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "SYNGAP1 variants and other epileptic-encephalopathy genes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental, speech and autism assessment",
+          "cells": [
+            {
+              "text": "Intellectual disability, language impairment and autistic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "syngap1_encephalopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Myoclonic-atonic epilepsy (Doose syndrome)",
+          "cells": [
+            {
+              "text": "Shares myoclonic-atonic drop seizures; SYNGAP1 testing is needed to separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lennox-Gastaut syndrome",
+          "cells": [
+            {
+              "text": "Shares drop seizures and atypical absences; genetic testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic generalised epilepsy with intellectual disability",
+          "cells": [
+            {
+              "text": "A generic idiopathic label should not replace SYNGAP1 testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "syngap1_encephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Broad-spectrum antiseizure medication",
+          "cells": [
+            {
+              "text": "Sodium valproate, lamotrigine, levetiracetam or ethosuximide for generalised epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ketogenic diet",
+          "cells": [
+            {
+              "text": "Drug-resistant seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reflex seizure recognition",
+          "cells": [
+            {
+              "text": "Seizures triggered by eating and other oral or tactile stimuli"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early developmental intervention",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy, speech and language therapy and special educational support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural and sleep management",
+          "cells": [
+            {
+              "text": "Autistic features, aggression and sleep disturbance; melatonin for sleep; high pain threshold can mask injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support",
+          "cells": [
+            {
+              "text": "Dietetic and feeding-therapy input for oromotor difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Usually de novo, autosomal dominant loss-of-function variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated specialist care",
+          "cells": [
+            {
+              "text": "Neurology, clinical genetics and neurodevelopmental services"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

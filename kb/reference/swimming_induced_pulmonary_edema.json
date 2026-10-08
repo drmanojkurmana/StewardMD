@@ -142,5 +142,316 @@
       "caption": "Overview comparison matrix for swimming-induced pulmonary oedema."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Diving and sports medicine references",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "swimming_induced_pulmonary_edema-dx-mgmt",
+      "title": "Diagnosis and management of Swimming-induced pulmonary oedema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected swimming-induced pulmonary oedema: breathlessness and frothy sputum in water",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe hypoxaemia, features of a primary cardiac event, haemoptysis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac assessment for features of a primary cardiac event",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Oxygen saturation; chest imaging; echocardiography; blood pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is aspiration excluded and a primary cardiac cause ruled out?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider aspiration, cardiogenic oedema, barotrauma or decompression illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Remove from water immediately; rest, warming and supplemental oxygen",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Non-invasive positive-pressure ventilation in severe cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Advise avoiding overhydration, tight wetsuits and cold exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Evaluate and treat hypertension or cardiac disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Sildenafil or antihypertensive prophylaxis for recurrent episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Acute episode resolves quickly; recurrence is frequent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "swimming_induced_pulmonary_edema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Oxygen saturation during and after the event",
+          "cells": [
+            {
+              "text": "Hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pulmonary oedema without aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Underlying cardiac disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure assessment",
+          "cells": [
+            {
+              "text": "Hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of barotrauma in divers",
+          "cells": [
+            {
+              "text": "Diving-specific causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "swimming_induced_pulmonary_edema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Aspiration or near-drowning",
+          "cells": [
+            {
+              "text": "Oedema occurs without water aspiration, which chest imaging should show"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiogenic pulmonary oedema",
+          "cells": [
+            {
+              "text": "Echocardiography excludes a primary cardiac cause; an underlying cardiac or hypertensive cause is the predisposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary barotrauma or decompression illness in divers",
+          "cells": [
+            {
+              "text": "Must be checked for in divers and not missed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "swimming_induced_pulmonary_edema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remove from water, rest, warmth and oxygen",
+          "cells": [
+            {
+              "text": "Usually brings rapid resolution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-invasive positive-pressure ventilation",
+          "cells": [
+            {
+              "text": "Severe cases, with supportive care for hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preventive advice",
+          "cells": [
+            {
+              "text": "Avoid overhydration, over-tight wetsuits, cold exposure and excessive exertion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat hypertension or cardiac disease",
+          "cells": [
+            {
+              "text": "Evaluation with echocardiography and treatment of the underlying disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pharmacological prophylaxis",
+          "cells": [
+            {
+              "text": "Sildenafil or an antihypertensive agent for recurrent episodes in susceptible people"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling on recurrence",
+          "cells": [
+            {
+              "text": "High recurrence risk; advice on fitness to continue swimming or diving"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

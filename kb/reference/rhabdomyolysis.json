@@ -142,5 +142,296 @@
       "caption": "Overview comparison matrix for rhabdomyolysis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emergency medicine and nephrology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rhabdomyolysis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase and serial trends",
+          "cells": [
+            {
+              "text": "Very high or rising levels, which guide monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function, potassium, phosphate and calcium",
+          "cells": [
+            {
+              "text": "Kidney injury and electrolyte disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Blood on dipstick without red cells (myoglobinuria)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Hyperkalaemic changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compartment pressures",
+          "cells": [
+            {
+              "text": "Compartment syndrome, if indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rhabdomyolysis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemolysis causing pigmenturia",
+          "cells": [
+            {
+              "text": "Myoglobinuria shows blood on dipstick without red cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compartment syndrome",
+          "cells": [
+            {
+              "text": "Assess and decompress; a red flag in its own right"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rhabdomyolysis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early fluid resuscitation",
+          "cells": [
+            {
+              "text": "Generous intravenous fluid to maintain high urine output and prevent myoglobin-induced kidney injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Remove the precipitant",
+          "cells": [
+            {
+              "text": "Crush injury, drugs, toxins, prolonged immobility or seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperkalaemia",
+          "cells": [
+            {
+              "text": "Urgent treatment with continuous ECG monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes",
+          "cells": [
+            {
+              "text": "Treat symptomatic hypocalcaemia; otherwise avoid calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Creatine kinase, renal function and urine output; renal replacement for refractory hyperkalaemia, acidosis or fluid overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compartment syndrome",
+          "cells": [
+            {
+              "text": "Assess and decompress with fasciotomy where present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rhabdomyolysis-dx-mgmt",
+      "title": "Diagnosis and management of Rhabdomyolysis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Muscle pain, weakness or dark urine after crush, drugs or seizure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hyperkalaemia on ECG, oliguria, compartment syndrome)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent hyperkalaemia treatment; fasciotomy if compartment syndrome present",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Creatine kinase, renal function, potassium, urinalysis, ECG, compartment pressures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is myoglobinuria confirmed on urinalysis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider haemolysis or other causes of pigmenturia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early generous IV fluid to maintain high urine output",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Remove the precipitant: crush, drugs, toxins, immobility or seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Urgent hyperkalaemia treatment with continuous ECG monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial creatine kinase and renal function; renal replacement if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prompt fluids prevent kidney injury in many; severe hyperkalaemia worsens outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

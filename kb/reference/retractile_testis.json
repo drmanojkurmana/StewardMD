@@ -141,5 +141,287 @@
       "caption": "Overview comparison matrix for retractile testis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Paediatric urology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "retractile_testis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Examination in a warm, relaxed setting",
+          "cells": [
+            {
+              "text": "Whether the testis can be kept in the scrotum after manipulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial follow-up",
+          "cells": [
+            {
+              "text": "Ascent of the testis over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Routine imaging",
+          "cells": [
+            {
+              "text": "Not required; does not aid management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral criteria",
+          "cells": [
+            {
+              "text": "A testis that cannot be kept in the scrotum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retractile_testis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Undescended (cryptorchid) testis",
+          "cells": [
+            {
+              "text": "A retractile testis stays in the scrotum after manipulation; a truly undescended one does not"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ascending (acquired undescended) testis",
+          "cells": [
+            {
+              "text": "A scrotal testis that later ascends on follow-up; pitfall to label it merely retractile"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retractile_testis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "A genuinely retractile testis is a normal variant needing no surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm the diagnosis",
+          "cells": [
+            {
+              "text": "Examine in a warm, relaxed setting; the testis stays in the scrotum after manipulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic review",
+          "cells": [
+            {
+              "text": "Through childhood, to detect conversion to an ascending testis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orchidopexy",
+          "cells": [
+            {
+              "text": "Referral if the testis can no longer be kept in the scrotum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid routine imaging",
+          "cells": [
+            {
+              "text": "It does not aid management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassess around puberty",
+          "cells": [
+            {
+              "text": "The cremasteric reflex wanes and retraction typically resolves"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "retractile_testis-dx-mgmt",
+      "title": "Diagnosis and management of Retractile testis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Prepubertal boy with a testis that withdraws into the groin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (testis will not stay down, asymmetry or atrophy, hypospadias)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer for orchidopexy: the testis cannot be kept in the scrotum",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examine in a warm, relaxed setting; check the testis stays down after manipulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the testis stay in the scrotum after manipulation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Re-examine in a warm setting; refer if it will not stay in the scrotum",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure: a normal variant needing no surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Periodic clinical review through childhood for ascent",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid routine imaging; it does not aid management",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassess around puberty, when retraction typically resolves",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "A truly retractile testis is benign and typically resolves at puberty",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

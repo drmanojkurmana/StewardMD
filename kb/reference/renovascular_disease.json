@@ -169,5 +169,458 @@
       "caption": "Overview comparison matrix for renovascular disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Renovascular Hypertension",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/hypertension/renovascular-hypertension"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "renovascular_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising and imaging renal artery stenosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical clues",
+          "cells": [
+            {
+              "text": "Abrupt or rapidly worsening hypertension, systolic over 180 at onset, resistant BP, flash pulmonary edema"
+            },
+            {
+              "text": "Kidney size difference over 1 cm"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Epigastric systolic-diastolic bruit",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "In about 50% of FMD",
+              "op": "=",
+              "value": 50
+            },
+            {
+              "text": "Rare in atherosclerotic disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duplex peak systolic velocity",
+          "unit": "cm/s",
+          "cells": [
+            {
+              "text": "Over 200 cm/s suggests over 60% stenosis",
+              "op": ">",
+              "value": 200
+            },
+            {
+              "text": "Some trials use over 300 cm/s"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex accuracy",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity and specificity 85 to 90% for main artery",
+              "range": [
+                85,
+                90
+              ]
+            },
+            {
+              "text": "Operator dependent; weaker for branches"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CT angiography",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity and specificity about 95%",
+              "op": "=",
+              "value": 95
+            },
+            {
+              "text": "Contrast risk in renal impairment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MR angiography",
+          "cells": [
+            {
+              "text": "Non-nephrotoxic"
+            },
+            {
+              "text": "Avoid gadolinium with eGFR under 30"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Critical stenosis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Over 70 to 80% luminal narrowing",
+              "op": ">",
+              "value": 70
+            },
+            {
+              "text": "Hemodynamically significant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatinine rise on ACE inhibitor or ARB",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Over 50% despite optimal therapy",
+              "op": ">",
+              "value": 50
+            },
+            {
+              "text": "{{hy:Suggests bilateral or solitary-kidney stenosis}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Renal vein renin ratio",
+          "cells": [
+            {
+              "text": "Over 1.5 affected to unaffected side",
+              "op": ">",
+              "value": 1.5
+            },
+            {
+              "text": "Predicts BP response to revascularization"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "renovascular_disease-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic renovascular hypertension",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Essential hypertension",
+          "cells": [
+            {
+              "text": "Gradual onset, family history"
+            },
+            {
+              "text": "Normal renal artery imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal parenchymal disease",
+          "cells": [
+            {
+              "text": "Proteinuria, abnormal sediment"
+            },
+            {
+              "text": "Urinalysis, ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary aldosteronism",
+          "cells": [
+            {
+              "text": "Hypokalemia, suppressed renin"
+            },
+            {
+              "text": "Aldosterone to renin ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pheochromocytoma",
+          "cells": [
+            {
+              "text": "Paroxysmal symptoms"
+            },
+            {
+              "text": "Plasma metanephrines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atheroembolic renal disease",
+          "cells": [
+            {
+              "text": "After angiography; livedo, eosinophilia, low complement"
+            },
+            {
+              "text": "Clinical, biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal infarction",
+          "cells": [
+            {
+              "text": "Acute flank pain, fever, high LDH"
+            },
+            {
+              "text": "Contrast CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertensive nephrosclerosis",
+          "cells": [
+            {
+              "text": "Long-standing BP, small kidneys bilaterally"
+            },
+            {
+              "text": "Imaging, history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renovascular_disease-treatment",
+      "kind": "treatment",
+      "title": "Treating renovascular disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ACE inhibitor or ARB",
+          "cells": [
+            {
+              "text": "Atherosclerotic stenosis with hypertension"
+            },
+            {
+              "text": "Monitor creatinine and potassium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Statin, antiplatelet, stop smoking",
+          "cells": [
+            {
+              "text": "All atherosclerotic disease"
+            },
+            {
+              "text": "Slows progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optimal medical therapy as default",
+          "cells": [
+            {
+              "text": "Moderate atherosclerotic stenosis"
+            },
+            {
+              "text": "CORAL: stenting cut systolic BP only about 2 mmHg, no outcome benefit"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Angioplasty with stent",
+          "cells": [
+            {
+              "text": "Creatinine rise over 50%, flash pulmonary edema, refractory BP, stenosis over 70%"
+            },
+            {
+              "text": "Function improves in only about 25%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Angioplasty for FMD",
+          "cells": [
+            {
+              "text": "Fibromuscular dysplasia with hypertension"
+            },
+            {
+              "text": "Cure about 90% in selected patients; bypass if branch disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antiplatelet after FMD angioplasty",
+          "cells": [
+            {
+              "text": "After PTA with or without stent"
+            },
+            {
+              "text": "Aspirin or clopidogrel"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "renovascular_disease-dx-mgmt",
+      "title": "Diagnosis and management of renovascular disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Resistant or abrupt hypertension, flash edema or ACEi-related creatinine rise",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Duplex ultrasound or CT or MR angiography",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Significant renal artery stenosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Look for other causes of secondary hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fibromuscular dysplasia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Angioplasty, then antiplatelet",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "ACEi or ARB, statin, antiplatelet; monitor function",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Progressive GFR loss, flash edema or failed BP control?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Consider stenting",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Continue medical therapy with surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

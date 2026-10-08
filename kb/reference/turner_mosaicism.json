@@ -148,5 +148,323 @@
       "caption": "Overview comparison matrix for turner syndrome mosaicism (45,x/46,xx)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "turner_mosaicism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Karyotype with adequate cell counts, and FISH where needed",
+          "cells": [
+            {
+              "text": "Detects and quantifies the 45,X line in the mosaic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum gonadotropins and oestradiol",
+          "cells": [
+            {
+              "text": "Ovarian function; guides timing of oestrogen replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and aortic imaging",
+          "cells": [
+            {
+              "text": "Bicuspid aortic valve and aortic dilatation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Structural renal anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function, glucose, lipids and audiometry",
+          "cells": [
+            {
+              "text": "Thyroid disease, metabolic disturbance and hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone mineral density and anti-Mullerian hormone",
+          "cells": [
+            {
+              "text": "Bone health and ovarian reserve for fertility counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "turner_mosaicism-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-mosaic Turner syndrome (45,X)",
+          "cells": [
+            {
+              "text": "Classic monosomy X is more severe; mosaic phenotype is milder and more variable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "45,X/46,XY mixed gonadal dysgenesis",
+          "cells": [
+            {
+              "text": "A Y-bearing line carries gonadoblastoma risk, which mandates gonadectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Noonan syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "turner_mosaicism-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Recombinant growth hormone",
+          "cells": [
+            {
+              "text": "Improves height where short stature is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oestrogen replacement",
+          "cells": [
+            {
+              "text": "Induces and maintains puberty, then combined oestrogen-progesterone; individualised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility counselling",
+          "cells": [
+            {
+              "text": "Oocyte cryopreservation considered given premature ovarian insufficiency; assisted reproduction where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography and aortic imaging for bicuspid valve and aortic dilatation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal, thyroid, hearing and bone monitoring",
+          "cells": [
+            {
+              "text": "Structural renal anomalies, thyroid disease, hearing loss and bone health"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonadectomy not required",
+          "cells": [
+            {
+              "text": "No Y-chromosome line, so no gonadoblastoma risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Coordinated across endocrinology, cardiology and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "turner_mosaicism-dx-mgmt",
+      "title": "Diagnosis and management of Turner syndrome mosaicism (45,X/46,XX)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Turner mosaicism: short stature or gonadal insufficiency with a mild phenotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (aortic dilatation, bicuspid valve or untreated oestrogen deficiency)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review for aortic dilatation or bicuspid aortic valve",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype with adequate cell counts, gonadotropins, oestradiol, echo and renal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a 45,X line confirmed on karyotype, with ovarian function assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat karyotype with more cells or FISH to find a low-level 45,X clone",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Recombinant growth hormone where short stature is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oestrogen replacement to induce puberty, then combined oestrogen-progesterone",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fertility counselling, with oocyte cryopreservation considered",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cardiac, renal, thyroid, hearing and bone surveillance with genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally more favourable than non-mosaic disease; some have spontaneous puberty",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -206,6 +206,11 @@
       "label": "AASLD-IDSA HCV Guidance, Simplified Treatment",
       "url": "https://www.hcvguidelines.org/treatment-naive/simplified-treatment",
       "kind": "web"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, DNA Viruses (p60)",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -619,6 +624,91 @@
         }
       ],
       "footnote": "Tables PDF lists PEG IFN with ribavirin, telaprevir and boceprevir for hepatitis C; these are superseded by the pangenotypic direct-acting antivirals in the AASLD-IDSA guidance. Cirrhosis presumed if FIB-4 >3.25 or elastography >12.5 kPa (AASLD-IDSA)."
+    },
+    {
+      "id": "chronic_hepatitis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "DNA viruses by family",
+      "rowHeader": "Family",
+      "columns": [
+        "Viruses",
+        "Genome"
+      ],
+      "rows": [
+        {
+          "parameter": "Hepadnaviridae",
+          "cells": [
+            {
+              "text": "Hepatitis B virus"
+            },
+            {
+              "text": "Double-stranded DNA with single-stranded portions"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Parvoviridae",
+          "cells": [
+            {
+              "text": "Parvovirus B19"
+            },
+            {
+              "text": "Single-stranded DNA"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Papovaviridae",
+          "cells": [
+            {
+              "text": "Human papillomaviruses; JC virus; BK virus"
+            },
+            {
+              "text": "Double-stranded DNA"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Adenoviridae",
+          "cells": [
+            {
+              "text": "Human adenoviruses"
+            },
+            {
+              "text": "Double-stranded DNA"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Herpesviridae",
+          "cells": [
+            {
+              "text": "Herpes simplex virus types 1 and 2; varicella-zoster virus; Epstein-Barr virus; cytomegalovirus; human herpesvirus 6; human herpesvirus 7; Kaposi's sarcoma-associated herpesvirus"
+            },
+            {
+              "text": "Double-stranded DNA"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Poxviridae",
+          "cells": [
+            {
+              "text": "Variola (smallpox) virus; Orf virus; Molluscum contagiosum virus"
+            },
+            {
+              "text": "Double-stranded DNA"
+            }
+          ],
+          "cite": "c6"
+        }
+      ],
+      "footnote": "The source marks some viruses with superscript letters whose footnote text is not on the page."
     }
   ],
   "flowcharts": [

@@ -150,5 +150,323 @@
       "caption": "Overview comparison matrix for maturity-onset diabetes of the young type 2 (gck-mody)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Endocrinology and clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mody_type_2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular genetic testing of GCK",
+          "cells": [
+            {
+              "text": "GCK variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting plasma glucose",
+          "cells": [
+            {
+              "text": "Mild, stable elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral glucose tolerance test",
+          "cells": [
+            {
+              "text": "Small glucose increment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial HbA1c",
+          "cells": [
+            {
+              "text": "Persistently mild, stable value"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic autoantibodies",
+          "cells": [
+            {
+              "text": "Autoimmune diabetes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal growth ultrasound surveillance in affected pregnancies",
+          "cells": [
+            {
+              "text": "Fetal growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening of first-degree relatives with fasting glucose",
+          "cells": [
+            {
+              "text": "Relatives' fasting glucose"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mody_type_2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "HNF1A-MODY and HNF4A-MODY",
+          "cells": [
+            {
+              "text": "Progressive and treatment-responsive rather than stable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gestational diabetes mellitus",
+          "cells": [
+            {
+              "text": "First detected in pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "Autoantibody positive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mody_type_2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Diet and lifestyle",
+          "cells": [
+            {
+              "text": "Most non-pregnant patients need no glucose-lowering drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid unnecessary treatment",
+          "cells": [
+            {
+              "text": "Drugs, monitoring and diagnostic labels once genetically confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy guided by fetal genotype",
+          "cells": [
+            {
+              "text": "Insulin if an unaffected fetus shows accelerated growth; withhold intensive treatment if affected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal growth surveillance",
+          "cells": [
+            {
+              "text": "Ultrasound in affected pregnancies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Low complication risk; aggressive glucose-lowering is unhelpful"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic and family screening",
+          "cells": [
+            {
+              "text": "Autosomal dominant; glucose and genetic screening of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mody_type_2-dx-mgmt",
+      "title": "Diagnosis and management of Maturity-Onset Diabetes of the Young Type 2 (GCK-MODY)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Mild, stable fasting hyperglycaemia found on routine testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rising HbA1c, microvascular complications, fetal macrosomia or osmotic symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Re-evaluate for a second cause of diabetes; obstetric review if pregnant",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "GCK testing; fasting glucose; OGTT; serial HbA1c; pancreatic autoantibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a GCK variant confirmed with a stable, mild glucose pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider HNF1A or HNF4A-MODY, type 1 diabetes or gestational diabetes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Diet and lifestyle alone for most non-pregnant patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid unnecessary drugs, monitoring and diagnostic labels once confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "In pregnancy, guide treatment by fetal genotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ultrasound fetal growth surveillance in affected pregnancies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Reassurance on low complication risk; family glucose and genetic screening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

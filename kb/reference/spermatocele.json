@@ -146,5 +146,285 @@
       "caption": "Overview comparison matrix for spermatocele."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spermatocele-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Scrotal ultrasound with Doppler",
+          "cells": [
+            {
+              "text": "Cystic lesion separate from the testis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transillumination",
+          "cells": [
+            {
+              "text": "Transilluminates; separates it from a solid mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers (AFP, beta-hCG, LDH)",
+          "cells": [
+            {
+              "text": "Only if a solid component is seen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Semen analysis",
+          "cells": [
+            {
+              "text": "Fertility concern before intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical follow-up",
+          "cells": [
+            {
+              "text": "Stable, asymptomatic lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spermatocele-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Epididymal cyst",
+          "cells": [
+            {
+              "text": "Distinguished by content; a spermatocele contains sperm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydrocele",
+          "cells": [
+            {
+              "text": "Surrounds the testis anteriorly; confusion with it is a pitfall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Varicocele",
+          "cells": [
+            {
+              "text": "Confused with spermatocele; it is a separate vascular lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spermatocele-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Small, asymptomatic lesions, which are benign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling on epididymal and fertility risk",
+          "cells": [
+            {
+              "text": "Before any surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spermatocelectomy",
+          "cells": [
+            {
+              "text": "Large, symptomatic or bothersome lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Semen analysis",
+          "cells": [
+            {
+              "text": "Where fertility is a concern before operation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review",
+          "cells": [
+            {
+              "text": "If the swelling changes or becomes painful"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spermatocele-dx-mgmt",
+      "title": "Diagnosis and management of Spermatocele",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Smooth fluctuant lump above the testis that transilluminates: suspected spermatocele",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (solid or vascular component, rapid growth, hard fixed swelling)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent scrotal review for suspected tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Scrotal ultrasound with Doppler; transillumination; tumour markers if solid",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a well-defined cyst separate from the testis, with no solid component?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider epididymal tumour, hydrocele, varicocele or hernia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance and observation for small, asymptomatic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Counsel on epididymal and fertility risk before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Spermatocelectomy for large or symptomatic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Benign; most small lesions need only reassurance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

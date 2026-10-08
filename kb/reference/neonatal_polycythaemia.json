@@ -142,5 +142,305 @@
       "caption": "Overview comparison matrix for neonatal polycythaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neonatology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neonatal_polycythaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Venous haematocrit",
+          "cells": [
+            {
+              "text": "Confirms polycythaemia; capillary samples overestimate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose",
+          "cells": [
+            {
+              "text": "Hypoglycaemia is common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilirubin monitoring",
+          "cells": [
+            {
+              "text": "Hyperbilirubinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration and perfusion assessment",
+          "cells": [
+            {
+              "text": "Haemoconcentration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for the underlying cause",
+          "cells": [
+            {
+              "text": "Maternal diabetes, hypoxia or placental transfusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_polycythaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dehydration causing haemoconcentration",
+          "cells": [
+            {
+              "text": "Raises the haematocrit without true polycythaemia; assess hydration and perfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis with similar non-specific symptoms",
+          "cells": [
+            {
+              "text": "Must be excluded before attributing symptoms to polycythaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Capillary sampling artefact",
+          "cells": [
+            {
+              "text": "Overestimates haematocrit; a venous sample confirms the value"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_polycythaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hydration",
+          "cells": [
+            {
+              "text": "Adequate fluid for asymptomatic infants with a modestly raised haematocrit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Partial exchange transfusion",
+          "cells": [
+            {
+              "text": "With crystalloid, for symptomatic infants with significant hyperviscosity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous confirmation",
+          "cells": [
+            {
+              "text": "Capillary samples overestimate the value"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia and bilirubin",
+          "cells": [
+            {
+              "text": "Treat hypoglycaemia and monitor bilirubin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "End-organ observation",
+          "cells": [
+            {
+              "text": "Brain, gut and kidneys, including necrotising enterocolitis once feeds start"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying cause",
+          "cells": [
+            {
+              "text": "Maternal diabetes, intrauterine hypoxia or placental transfusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neonatal_polycythaemia-dx-mgmt",
+      "title": "Diagnosis and management of Neonatal polycythaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Plethora, lethargy or poor feeding in a newborn with a raised haematocrit",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures, marked lethargy, respiratory distress, NEC features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent partial exchange transfusion for symptomatic hyperviscosity",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Venous haematocrit, blood glucose, bilirubin, hydration assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Venous haematocrit above the mid-60s percent with hyperviscosity signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat dehydration or sepsis as the cause; repeat a venous sample",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Hydration for asymptomatic infants with a modestly raised haematocrit",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Partial exchange transfusion with crystalloid for symptomatic hyperviscosity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat accompanying hypoglycaemia and monitor bilirubin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Observe for end-organ effects, including necrotising enterocolitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Asymptomatic infants do well; symptomatic hyperviscosity has an uncertain outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

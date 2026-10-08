@@ -148,5 +148,316 @@
       "caption": "Overview comparison matrix for pleural empyema."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / GOLD & ATS guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pleural_empyema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diagnostic pleural aspiration with pH, glucose, LDH, protein, Gram stain and culture",
+          "cells": [
+            {
+              "text": "Fluid chemistry and microbiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest ultrasound",
+          "cells": [
+            {
+              "text": "Loculations; guides sampling and drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT of the chest",
+          "cells": [
+            {
+              "text": "Pleural collections and underlying pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures and inflammatory markers",
+          "cells": [
+            {
+              "text": "Systemic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytology and mycobacterial studies",
+          "cells": [
+            {
+              "text": "Malignancy or tuberculosis, where possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pleural_empyema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Malignant pleural effusion",
+          "cells": [
+            {
+              "text": "Cytology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculous pleural effusion",
+          "cells": [
+            {
+              "text": "Mycobacterial studies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pleural_empyema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Drainage",
+          "cells": [
+            {
+              "text": "Prompt intercostal chest tube drainage of the infected pleural space, guided by ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical antibiotics",
+          "cells": [
+            {
+              "text": "Broad-spectrum cover including anaerobes, then rationalised to culture results"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intrapleural therapy",
+          "cells": [
+            {
+              "text": "Fibrinolytic with DNase for loculated or septated collections that drain poorly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Video-assisted thoracoscopic surgery or decortication when drainage fails or an organised collection persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Treat the underlying pneumonia and any source of infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Nutrition, VTE prophylaxis and analgesia; recovery monitored with imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Respiratory medicine and thoracic surgery; escalate for persistent sepsis or failure to re-expand"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pleural_empyema-dx-mgmt",
+      "title": "Diagnosis and management of Pleural empyema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever with a complicated parapneumonic pleural effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe sepsis, respiratory compromise, bronchopleural fistula)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drainage and escalation for septic shock or respiratory compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pleural fluid pH, glucose, LDH, protein, Gram stain and culture; ultrasound; CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does pleural fluid analysis confirm an infected collection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider uncomplicated parapneumonic, malignant or tuberculous effusion, or abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Drain the infected space promptly with an intercostal chest tube, guided by ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Start empirical broad-spectrum antibiotics covering likely organisms and anaerobes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intrapleural fibrinolytic with DNase for loculated or septated collections",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Refer for thoracoscopic surgery or decortication when drainage fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat the underlying pneumonia and any source of infection for source control",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most recover with early drainage and antibiotics; delay allows loculation and thickening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

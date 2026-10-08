@@ -218,6 +218,11 @@
       "label": "Merck Manual Professional, Treatment of Acute COPD Exacerbation",
       "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/chronic-obstructive-pulmonary-disease-and-related-disorders/treatment-of-acute-copd-exacerbation",
       "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 254-4",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -548,6 +553,36 @@
         }
       ],
       "footnote": "Methylxanthines are no longer used. Antibiotic doses not stated in the source opened."
+    },
+    {
+      "id": "copd_exac_ni-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Factors affecting clearance of theophylline",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Factors"
+      ],
+      "rows": [
+        {
+          "parameter": "Increased clearance",
+          "cells": [
+            {
+              "text": "Enzyme induction (rifampicin, phenobarbitone, ethanol); smoking (tobacco, marijuana); high-protein, low-carbohydrate diet; barbecued meat; childhood"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Decreased clearance",
+          "cells": [
+            {
+              "text": "Enzyme inhibition (cimetidine, erythromycin, ciprofloxacin, allopurinol, zileuton, zafirlukast); congestive heart failure; liver disease; pneumonia; viral infection and vaccination; high carbohydrate diet; old age"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "The source table is cut off at the bottom of the page after old age and may continue on the next page."
     }
   ],
   "flowcharts": [

@@ -146,5 +146,287 @@
       "caption": "Overview comparison matrix for varicose veins."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "varicose_veins-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Duplex ultrasound",
+          "cells": [
+            {
+              "text": "Superficial and deep reflux; incompetent junctions and perforators"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-brachial pressure index",
+          "cells": [
+            {
+              "text": "Significant arterial disease before compression therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for prior DVT and deep venous patency",
+          "cells": [
+            {
+              "text": "Secondary varicosities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CEAP classification or clinical grading",
+          "cells": [
+            {
+              "text": "Severity of disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "varicose_veins-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Deep venous insufficiency or post-thrombotic syndrome",
+          "cells": [
+            {
+              "text": "Secondary varicosities from prior DVT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial disease contributing to ulceration",
+          "cells": [
+            {
+              "text": "Excluded by ankle-brachial pressure index before compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Klippel-Trenaunay syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic lymphoedema",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "varicose_veins-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative management first",
+          "cells": [
+            {
+              "text": "Graduated compression stockings, leg elevation, exercise and weight reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial supply check",
+          "cells": [
+            {
+              "text": "Ankle-brachial pressure index before applying compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endovenous thermal ablation",
+          "cells": [
+            {
+              "text": "Truncal saphenous reflux; radiofrequency or laser as first-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mapping of reflux",
+          "cells": [
+            {
+              "text": "Duplex ultrasound before intervention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "varicose_veins-dx-mgmt",
+      "title": "Diagnosis and management of Varicose veins",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected varicose veins: dilated, tortuous leg veins with ache, swelling or itch",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (haemorrhage, non-healing ulcer or signs of DVT)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of haemorrhage or assessment of DVT before compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Standing inspection, duplex ultrasound and ankle-brachial pressure index",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does duplex show saphenous reflux with no significant arterial disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider deep venous insufficiency or arterial disease; reassess before treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Graduated compression, leg elevation, exercise and weight reduction first",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Confirm arterial supply by ankle-brachial index before compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endovenous thermal ablation for truncal saphenous reflux",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Duplex mapping of reflux and perforators before intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most patients improve with conservative care or endovenous ablation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

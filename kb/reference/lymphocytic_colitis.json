@@ -144,5 +144,316 @@
       "caption": "Overview comparison matrix for lymphocytic colitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lymphocytic_colitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Colonoscopy with segmental biopsies",
+          "cells": [
+            {
+              "text": "Normal-looking mucosa; diagnosis is histological"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraepithelial lymphocyte count",
+          "cells": [
+            {
+              "text": "Raised count without a collagen band"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology and duodenal biopsy",
+          "cells": [
+            {
+              "text": "Associated coeliac disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Autoimmune thyroid disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool studies",
+          "cells": [
+            {
+              "text": "Infective causes excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphocytic_colitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Collagenous colitis",
+          "cells": [
+            {
+              "text": "Thickened subepithelial collagen band"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Duodenal histology and serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Irritable bowel syndrome with diarrhoea",
+          "cells": [
+            {
+              "text": "Normal biopsy; biopsy is needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Rectal bleeding is atypical"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphocytic_colitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral budesonide",
+          "cells": [
+            {
+              "text": "First-line to induce remission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw culprit drugs",
+          "cells": [
+            {
+              "text": "NSAIDs, proton-pump inhibitors and other agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic care",
+          "cells": [
+            {
+              "text": "Loperamide for mild symptoms; bile-acid sequestrants where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory disease",
+          "cells": [
+            {
+              "text": "Immunomodulators or biologic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Gluten-free diet when identified"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lymphocytic_colitis-dx-mgmt",
+      "title": "Diagnosis and management of Lymphocytic colitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic watery non-bloody diarrhoea with urgency in a middle-aged or older adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rectal bleeding, weight loss or anaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude coeliac disease or malignancy before continuing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Colonoscopy with segmental biopsies, coeliac serology, thyroid tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a raised intraepithelial lymphocyte count seen without a collagen band?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider collagenous colitis, coeliac disease or IBS",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw culprit drugs such as NSAIDs and proton-pump inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral budesonide to induce remission",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Loperamide for mild symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gluten-free diet if coeliac disease is found",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Repeat budesonide for relapse; escalate refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign with no increased colorectal cancer risk; spontaneous remission can occur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

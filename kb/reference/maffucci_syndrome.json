@@ -147,5 +147,316 @@
       "caption": "Overview comparison matrix for maffucci syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "maffucci_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Map of enchondromas and phleboliths"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of cartilaginous and vascular lesions",
+          "cells": [
+            {
+              "text": "Soft-tissue extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatic IDH1 or IDH2 testing on lesional tissue",
+          "cells": [
+            {
+              "text": "Confirms mosaic variant where uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance imaging of enchondromas",
+          "cells": [
+            {
+              "text": "Malignant transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted imaging for non-skeletal tumours",
+          "cells": [
+            {
+              "text": "Gliomas, ovarian or pancreatic neoplasm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "maffucci_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ollier disease",
+          "cells": [
+            {
+              "text": "Enchondromatosis without vascular lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple hereditary exostoses",
+          "cells": [
+            {
+              "text": "Osteochondromas rather than enchondromas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Klippel-Trenaunay syndrome",
+          "cells": [
+            {
+              "text": "Capillary and venous malformation pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chondrosarcoma",
+          "cells": [
+            {
+              "text": "Growth, pain and cortical change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "maffucci_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Lifelong imaging for malignant transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic enchondromas",
+          "cells": [
+            {
+              "text": "Curettage, grafting and deformity correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Suspicious lesion",
+          "cells": [
+            {
+              "text": "Biopsy and wide resection for suspected chondrosarcoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular lesions",
+          "cells": [
+            {
+              "text": "Surgery or sclerotherapy when symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Support",
+          "cells": [
+            {
+              "text": "Orthopaedic and rehabilitation care for deformity and fractures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "maffucci_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Maffucci syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multiple enchondromas with compressible bluish subcutaneous nodules in a child or adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (growth or pain in enchondroma, neurological or bleeding change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent oncology review and biopsy for suspected chondrosarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey, MRI of cartilaginous and vascular lesions, phlebolith check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are enchondromas and haemangiomas both present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Ollier disease, hereditary exostoses or Klippel-Trenaunay syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong skeletal surveillance for malignant transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Curettage and grafting for symptomatic enchondromas",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Biopsy and wide resection for suspected chondrosarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgery or sclerotherapy for symptomatic vascular lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Broader vigilance for gliomas and visceral tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Higher lifetime malignancy risk than Ollier disease; surveillance is essential",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

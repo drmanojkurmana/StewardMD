@@ -151,5 +151,352 @@
       "caption": "Overview comparison matrix for kcnt1-related epilepsy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / ILAE",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kcnt1_epilepsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Epilepsy gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "KCNT1 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged video EEG",
+          "cells": [
+            {
+              "text": "Migrating focal or nocturnal frontal seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Structural lesion excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG before and during quinidine",
+          "cells": [
+            {
+              "text": "QT prolongation or conduction change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and cognitive evaluation",
+          "cells": [
+            {
+              "text": "Impact of disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family segregation analysis",
+          "cells": [
+            {
+              "text": "Dominant sleep-related hypermotor cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kcnt1_epilepsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dravet syndrome",
+          "cells": [
+            {
+              "text": "SCN1A, with febrile and prolonged seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SCN2A or SCN8A encephalopathy",
+          "cells": [
+            {
+              "text": "Sodium channel genes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CHRNA4 or CHRNB2 hypermotor epilepsy",
+          "cells": [
+            {
+              "text": "Sleep-related hypermotor seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DEPDC5 familial focal epilepsy",
+          "cells": [
+            {
+              "text": "GATOR1 pathway, focal seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal cortical dysplasia",
+          "cells": [
+            {
+              "text": "Structural lesion on MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kcnt1_epilepsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Quinidine trial",
+          "cells": [
+            {
+              "text": "Targeted block of gain-of-function channel; response inconsistent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac monitoring",
+          "cells": [
+            {
+              "text": "ECG surveillance for QT prolongation before and during quinidine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Migrating focal seizures",
+          "cells": [
+            {
+              "text": "Broad-spectrum antiseizure medication; often drug-resistant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuncts",
+          "cells": [
+            {
+              "text": "Cannabidiol or ketogenic diet for refractory seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypermotor phenotype",
+          "cells": [
+            {
+              "text": "Seizure control with attention to psychiatric comorbidity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental",
+          "cells": [
+            {
+              "text": "Multidisciplinary support and rescue planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetics",
+          "cells": [
+            {
+              "text": "Counselling and segregation analysis in dominant families"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kcnt1_epilepsy-dx-mgmt",
+      "title": "Diagnosis and management of KCNT1-related epilepsy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with migrating focal seizures, or adult-onset nocturnal frontal seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Continuous seizures with developmental arrest, or cardiac conduction abnormality?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric neurology review; cardiac assessment before quinidine",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gene panel or exome, prolonged video EEG, MRI, ECG, developmental assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "KCNT1 variant with matching epilepsy phenotype confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Dravet, SCN2A, CHRNA4 or DEPDC5; reclassify nocturnal events",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Quinidine trial with ECG and cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Broad-spectrum antiseizure medication for migrating seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cannabidiol or ketogenic diet for refractory seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Seizure control for sleep-related hypermotor epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetics counselling and segregation analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Often drug-resistant; quinidine response inconsistent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

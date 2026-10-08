@@ -150,5 +150,334 @@
       "caption": "Overview comparison matrix for tardive dystonia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tardive_dystonia-dx-mgmt",
+      "title": "Diagnosis and management of tardive dystonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tardive dystonia: sustained twisting postures after dopamine-blocker exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: laryngeal or pharyngeal dystonia, or severe axial posturing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway assessment and neurology review for laryngeal or axial compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Longitudinal drug history; caeruloplasmin and copper; MRI brain; movement scales",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do sustained, directional postures fit drug exposure, with Wilson excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider idiopathic focal dystonia, Wilson disease or Huntington-related dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw or reduce the causative agent; clozapine if antipsychotic cover is needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Botulinum toxin for focal or segmental dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "VMAT2 inhibitor or tetrabenazine for generalised or refractory movements",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anticholinergic trial, which may relieve dystonic posturing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Pallidal deep brain stimulation assessment for refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Often persistent, possibly permanent; early drug cessation improves recovery chances",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tardive_dystonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Longitudinal drug-exposure history including antiemetics",
+          "cells": [
+            {
+              "text": "Hidden dopamine blockers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum caeruloplasmin, copper studies and slit-lamp",
+          "cells": [
+            {
+              "text": "Wilson disease, in younger patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Structural, iron-deposition or degenerative pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for inherited dystonia",
+          "cells": [
+            {
+              "text": "When phenotype or family history suggest it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abnormal Involuntary Movement Scale",
+          "cells": [
+            {
+              "text": "Dystonia severity, for monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for parkinsonism or tardive dyskinesia",
+          "cells": [
+            {
+              "text": "Coexisting features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tardive_dystonia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Idiopathic focal or segmental dystonia",
+          "cells": [
+            {
+              "text": "Sensory tricks relieve posturing in both; drug exposure separates tardive dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wilson disease and inherited metabolic dystonias",
+          "cells": [
+            {
+              "text": "Younger patients must be screened for Wilson disease before attributing dystonia to drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tardive dyskinesia",
+          "cells": [
+            {
+              "text": "Sustained, directional, posture-related movements distinguish dystonia from dyskinesia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tardive_dystonia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw or reduce the causative agent",
+          "cells": [
+            {
+              "text": "Switch to clozapine if antipsychotic cover remains necessary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulinum toxin",
+          "cells": [
+            {
+              "text": "Targeted to overactive muscles; mainstay for focal or segmental dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "VMAT2 inhibitor or tetrabenazine",
+          "cells": [
+            {
+              "text": "Generalised or refractory movements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticholinergic trial",
+          "cells": [
+            {
+              "text": "May relieve dystonic posturing, unlike in tardive dyskinesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop causative antiemetics",
+          "cells": [
+            {
+              "text": "Metoclopramide and prochlorperazine, where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pallidal deep brain stimulation assessment",
+          "cells": [
+            {
+              "text": "Severe, disabling, drug-refractory dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Involuntary-movement and dystonia severity scales"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

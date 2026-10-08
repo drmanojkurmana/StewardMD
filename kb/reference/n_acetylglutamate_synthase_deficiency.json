@@ -154,5 +154,332 @@
       "caption": "Overview comparison matrix for n-acetylglutamate synthase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "n_acetylglutamate_synthase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent plasma ammonia during suspected crises",
+          "cells": [
+            {
+              "text": "Hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids",
+          "cells": [
+            {
+              "text": "Low or normal citrulline, low arginine, raised glutamine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine orotic acid",
+          "cells": [
+            {
+              "text": "Characteristically low; separates it from OTC deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas",
+          "cells": [
+            {
+              "text": "Respiratory alkalosis of hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NAGS gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms the genetic defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trial of carglumic acid",
+          "cells": [
+            {
+              "text": "Documented biochemical response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma acylcarnitines and organic acids",
+          "cells": [
+            {
+              "text": "Excludes secondary hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "n_acetylglutamate_synthase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Carbamoyl phosphate synthetase 1 deficiency",
+          "cells": [
+            {
+              "text": "Biochemically near-identical; NAGS deficiency responds to carglumic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ornithine transcarbamylase deficiency",
+          "cells": [
+            {
+              "text": "Raised orotic acid, unlike the characteristically low orotic acid here"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "n_acetylglutamate_synthase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Carglumic acid",
+          "cells": [
+            {
+              "text": "A synthetic N-acetylglutamate analogue that restores CPS1 activity and can normalise ammonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein-restricted diet",
+          "cells": [
+            {
+              "text": "Adequate energy intake and essential amino-acid supplementation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute crisis management",
+          "cells": [
+            {
+              "text": "Stop protein intake; high-calorie glucose, with insulin if needed; intravenous carglumic acid with nitrogen-scavenger support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dialysis",
+          "cells": [
+            {
+              "text": "Haemodialysis or haemofiltration for severe or refractory hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term monitoring",
+          "cells": [
+            {
+              "text": "Plasma ammonia, amino acids and growth; avoid catabolic triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sick-day plan",
+          "cells": [
+            {
+              "text": "Emergency regimen and prompt hospital access during intercurrent illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; antenatal or newborn diagnostic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic team",
+          "cells": [
+            {
+              "text": "With specialist dietetic input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "n_acetylglutamate_synthase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of N-acetylglutamate synthase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonatal hyperammonaemic encephalopathy, or episodic hyperammonaemia later in life",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hyperammonaemic coma, cerebral oedema, rising ammonia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency ammonia lowering with carglumic acid and scavengers; dialysis if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma ammonia, amino acids, urine orotic acid, blood gas, NAGS sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low citrulline and orotic acid, with a response to carglumic acid?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CPS1 or OTC deficiency or secondary hyperammonaemia; check acylcarnitines",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Carglumic acid, a synthetic N-acetylglutamate analogue that restores CPS1 activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Protein-restricted diet with adequate energy and essential amino acids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Acute crises: stop protein, high-calorie glucose, IV carglumic acid and scavengers",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Haemodialysis or haemofiltration for severe or refractory hyperammonaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Carglumic acid can give excellent control; delayed treatment risks neurological injury",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

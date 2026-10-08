@@ -149,5 +149,296 @@
       "caption": "Overview comparison matrix for unstable angina."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ESC and ACC-AHA guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "unstable_angina-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial 12-lead ECG",
+          "cells": [
+            {
+              "text": "Transient ST depression or T-wave change; the ECG can also be normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial high-sensitivity troponin",
+          "cells": [
+            {
+              "text": "No troponin rise separates unstable angina from NSTEMI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous cardiac monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia and recurrent ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Wall motion and ventricular function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "unstable_angina-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "NSTEMI and STEMI",
+          "cells": [
+            {
+              "text": "Myocardial necrosis with a troponin rise, which unstable angina lacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortic dissection",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute pericarditis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "unstable_angina-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dual antiplatelet therapy",
+          "cells": [
+            {
+              "text": "Aspirin plus a P2Y12 inhibitor to counter platelet aggregation on the unstable plaque"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenteral anticoagulation",
+          "cells": [
+            {
+              "text": "Heparin or fondaparinux to limit thrombus propagation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-ischaemic therapy",
+          "cells": [
+            {
+              "text": "Nitrates and a beta-blocker to reduce myocardial oxygen demand"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early risk stratification",
+          "cells": [
+            {
+              "text": "Validated scoring to time invasive angiography and revascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Admission and monitoring",
+          "cells": [
+            {
+              "text": "Continuous monitoring, serial ECGs and high-sensitivity troponin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary prevention",
+          "cells": [
+            {
+              "text": "High-intensity statin, ACE inhibitor, risk-factor modification and cardiac rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "unstable_angina-dx-mgmt",
+      "title": "Diagnosis and management of Unstable angina",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected unstable angina: new or accelerating angina at rest or minimal exertion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ongoing rest pain, instability, new heart failure or arrhythmia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Medical emergency: urgent ACS assessment and continuous cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial 12-lead ECGs, serial high-sensitivity troponin and echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is serial troponin normal, so NSTEMI is excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Manage as NSTEMI; repeat troponin and ECG to track progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Dual antiplatelet therapy with aspirin plus a P2Y12 inhibitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Parenteral anticoagulation with heparin or fondaparinux",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nitrates and a beta-blocker to reduce myocardial oxygen demand",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Risk stratification to time coronary angiography and revascularisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome depends on risk stratification and timing of revascularisation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

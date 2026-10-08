@@ -150,5 +150,285 @@
       "caption": "Overview comparison matrix for pseudoxanthoma elasticum."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pseudoxanthoma_elasticum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with elastic-tissue staining",
+          "cells": [
+            {
+              "text": "Calcified, fragmented elastic fibres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundus examination and retinal imaging",
+          "cells": [
+            {
+              "text": "Angioid streaks and neovascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ABCC6 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-brachial pressure index and vascular imaging",
+          "cells": [
+            {
+              "text": "Peripheral arterial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular risk assessment",
+          "cells": [
+            {
+              "text": "Blood pressure and lipids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigation for gastrointestinal bleeding, when indicated",
+          "cells": [
+            {
+              "text": "Bleeding from mineralised mucosal arteries"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pseudoxanthoma_elasticum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiovascular risk",
+          "cells": [
+            {
+              "text": "Aggressive management; no disease-modifying drug exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eye surveillance",
+          "cells": [
+            {
+              "text": "Regular fundus examination and retinal imaging; prompt treatment of neovascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antithrombotic caution",
+          "cells": [
+            {
+              "text": "Avoid unnecessary antiplatelet and anticoagulant drugs and contact sports"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin",
+          "cells": [
+            {
+              "text": "Dermatological and plastic surgical management of lax cutaneous plaques"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral arterial disease",
+          "cells": [
+            {
+              "text": "Surveillance with supervised exercise for claudication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal haemorrhage",
+          "cells": [
+            {
+              "text": "Screening for and prompt treatment of bleeding from mineralised arteries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; testing of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pseudoxanthoma_elasticum-dx-mgmt",
+      "title": "Diagnosis and management of Pseudoxanthoma elasticum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pseudoxanthoma elasticum: lax cutaneous plaques with angioid streaks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sudden central visual loss, GI bleeding, ischaemia, or critical limb ischaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ophthalmology review for choroidal neovascularisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Elastic-stain skin biopsy; fundus imaging; ABCC6 testing; ABPI; CV risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is ABCC6 testing consistent with PXE, with angioid streaks confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cutis laxa or other causes of angioid streaks; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Aggressive cardiovascular risk management; no disease-modifying drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Regular fundus examination and retinal imaging for neovascularisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid unnecessary antiplatelet and anticoagulant drugs and contact sports",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for and treat GI haemorrhage from mineralised mucosal arteries",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling and testing of at-risk relatives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

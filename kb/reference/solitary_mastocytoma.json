@@ -141,5 +141,296 @@
       "caption": "Overview comparison matrix for solitary mastocytoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dermatology references / mastocytosis literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "solitary_mastocytoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis with a positive Darier sign",
+          "cells": [
+            {
+              "text": "Urtication on stroking, with blistering in infants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Where the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline tryptase",
+          "cells": [
+            {
+              "text": "Multiple lesions or systemic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for spontaneous regression",
+          "cells": [
+            {
+              "text": "Expected course in childhood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger history",
+          "cells": [
+            {
+              "text": "Degranulation triggers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "solitary_mastocytoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Juvenile xanthogranuloma",
+          "cells": [
+            {
+              "text": "A xanthogranulomatous lesion that can be confused with it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spitz naevus",
+          "cells": [
+            {
+              "text": "A melanocytic lesion that can be confused with it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "solitary_mastocytoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Most involute spontaneously during childhood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Friction, temperature extremes, NSAIDs and opioids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "H1-antihistamines",
+          "cells": [
+            {
+              "text": "Pruritus, flushing and urtication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids",
+          "cells": [
+            {
+              "text": "Symptomatic or blistering lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "Persistent, troublesome or diagnostically uncertain lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Review if more lesions or systemic symptoms appear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "solitary_mastocytoma-dx-mgmt",
+      "title": "Diagnosis and management of Solitary mastocytoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Single plaque with urtication on stroking in infancy: suspected mastocytoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (multiple lesions, systemic symptoms, persistence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Systemic mastocytosis work-up with baseline tryptase",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical Darier sign; skin biopsy if uncertain; tryptase if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a positive Darier sign present with a single lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider juvenile xanthogranuloma, Spitz naevus or other mastocytosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance; most regress spontaneously in childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid friction, temperature extremes, NSAIDs and opioids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "H1-antihistamines for pruritus and urtication",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Topical steroid for blistering; excision if persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually regresses in childhood; systemic disease is rare with a solitary lesion",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

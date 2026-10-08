@@ -150,5 +150,305 @@
       "caption": "Overview comparison matrix for neonatal onset multisystem inflammatory disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Textbook of Pediatric Rheumatology, Cassidy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neonatal_onset_multisystem_inflammatory_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "NLRP3 deep or next-generation sequencing",
+          "cells": [
+            {
+              "text": "Detects somatic mosaicism; a germline test can be negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid examination",
+          "cells": [
+            {
+              "text": "Raised opening pressure; sterile neutrophil-predominant pleocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Leptomeningeal enhancement and ventricular changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and ophthalmology with fundoscopy",
+          "cells": [
+            {
+              "text": "Hearing loss and papilloedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal radiographs",
+          "cells": [
+            {
+              "text": "Epiphyseal and physeal overgrowth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum amyloid A and urinalysis",
+          "cells": [
+            {
+              "text": "Acute-phase response and amyloid surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_onset_multisystem_inflammatory_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Muckle-Wells syndrome",
+          "cells": [
+            {
+              "text": "A milder cryopyrin-associated phenotype with episodic attacks, unlike this near-continuous rash"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal sepsis or congenital bacterial meningitis",
+          "cells": [
+            {
+              "text": "Sterile CSF neutrophilic pleocytosis argues against bacterial meningitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_onset_multisystem_inflammatory_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Interleukin-1 blockade",
+          "cells": [
+            {
+              "text": "Anakinra, canakinumab or rilonacept as the mainstay; preserves neurosensory function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raised intracranial pressure care",
+          "cells": [
+            {
+              "text": "Management of chronic aseptic meningitis; hearing and visual aids for deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute-phase monitoring",
+          "cells": [
+            {
+              "text": "Serum amyloid A to confirm inflammatory control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial audiometry and ophthalmology",
+          "cells": [
+            {
+              "text": "Fundoscopy and skeletal assessment of the arthropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloidosis screen",
+          "cells": [
+            {
+              "text": "Urinalysis for proteinuria as a late complication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NLRP3 confirmation and counselling",
+          "cells": [
+            {
+              "text": "Deep or next-generation sequencing to detect mosaicism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neonatal_onset_multisystem_inflammatory_disease-dx-mgmt",
+      "title": "Diagnosis and management of neonatal onset multisystem inflammatory disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonatal near-continuous urticarial rash with chronic meningitis features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (raised intracranial pressure, progressive hearing or visual loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent interleukin-1 blockade; manage raised intracranial pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "NLRP3 deep sequencing, CSF, brain MRI, audiometry, fundoscopy, skeletal films, SAA",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Activating NLRP3 variant with sterile CSF pleocytosis confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat NLRP3 testing for somatic mosaicism; exclude infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Interleukin-1 blockade with anakinra, canakinumab or rilonacept as mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Manage raised intracranial pressure; hearing and visual aids for deficits",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial audiometry, fundoscopy and skeletal assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for AA amyloidosis with urinalysis for proteinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Untreated leads to neurosensory and skeletal disability; early IL-1 blockade helps",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

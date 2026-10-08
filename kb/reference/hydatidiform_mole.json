@@ -151,5 +151,323 @@
       "caption": "Overview comparison matrix for hydatidiform mole."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / RCOG and international gestational trophoblastic disease guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hydatidiform_mole-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial quantitative serum beta-hCG",
+          "cells": [
+            {
+              "text": "Trophoblastic activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transvaginal pelvic ultrasound",
+          "cells": [
+            {
+              "text": "Molar features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology and ploidy analysis",
+          "cells": [
+            {
+              "text": "Complete or partial mole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and blood group with antibody screen",
+          "cells": [
+            {
+              "text": "Haemorrhage and Rhesus status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function and pre-eclampsia screen",
+          "cells": [
+            {
+              "text": "Hyperthyroidism and pre-eclampsia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Trophoblastic metastasis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hydatidiform_mole-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Choriocarcinoma or other gestational trophoblastic neoplasia",
+          "cells": [
+            {
+              "text": "Plateau or rise in beta-hCG after evacuation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Threatened or missed miscarriage",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectopic pregnancy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hydatidiform_mole-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Suction evacuation",
+          "cells": [
+            {
+              "text": "Definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-D immunoglobulin",
+          "cells": [
+            {
+              "text": "Rhesus-negative women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trophoblastic disease centre",
+          "cells": [
+            {
+              "text": "Registration and follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reliable contraception",
+          "cells": [
+            {
+              "text": "Avoids pregnancy during surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemotherapy such as methotrexate",
+          "cells": [
+            {
+              "text": "Persistent low-risk disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperthyroidism and pre-eclampsia",
+          "cells": [
+            {
+              "text": "Managed when present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology and ploidy",
+          "cells": [
+            {
+              "text": "Of evacuated tissue"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hydatidiform_mole-dx-mgmt",
+      "title": "Diagnosis and management of Hydatidiform mole",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Vaginal bleeding in early pregnancy with high beta-hCG and molar features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Heavy haemorrhage, early severe pre-eclampsia, thyroid storm, or breathlessness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent obstetric review for haemorrhage or severe pre-eclampsia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial beta-hCG; transvaginal ultrasound; histology and ploidy; FBC and blood group",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a hydatidiform mole confirmed on histology and ploidy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider miscarriage, ectopic pregnancy, multiple pregnancy or retained products",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Suction evacuation as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anti-D immunoglobulin for Rhesus-negative women",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Registration with a trophoblastic disease centre",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Chemotherapy such as methotrexate for persistent low-risk disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Hormone levels normalised; contraception and surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

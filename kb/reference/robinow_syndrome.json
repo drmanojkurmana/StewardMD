@@ -148,5 +148,269 @@
       "caption": "Overview comparison matrix for robinow syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "robinow_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular testing of ROR2 and dominant genes (WNT5A, DVL1, DVL3)",
+          "cells": [
+            {
+              "text": "Form of disease: recessive ROR2 or dominant variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Mesomelic shortening, brachydactyly, vertebral and rib anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal radiographs",
+          "cells": [
+            {
+              "text": "Segmentation defects and scoliosis in the recessive form"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "robinow_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Aarskog-Scott syndrome",
+          "cells": [
+            {
+              "text": "Facial and genital features overlap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Omodysplasia",
+          "cells": [
+            {
+              "text": "Mesomelic limb shortening overlaps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniofrontonasal syndrome",
+          "cells": [
+            {
+              "text": "Hypertelorism; associated with EFNB1"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "robinow_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Orthopaedic care",
+          "cells": [
+            {
+              "text": "Bracing and corrective surgery for mesomelic shortening, brachydactyly and limb deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal surveillance",
+          "cells": [
+            {
+              "text": "Treatment of segmentation defects, rib anomalies and scoliosis, especially in the recessive ROR2 form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine care",
+          "cells": [
+            {
+              "text": "Hormonal treatment of genital hypoplasia, including androgen therapy for micropenis where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and cardiac review",
+          "cells": [
+            {
+              "text": "Where associated anomalies are suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "robinow_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Robinow syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with mesomelic limb shortening and facial and genital hypoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (scoliosis, cardiac or renal anomaly, airway or feeding problems)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway, feeding or cardiac review in severely affected neonates",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ROR2 and dominant gene testing, skeletal survey, spine films, renal and cardiac review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a ROR2 variant found on molecular testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Aarskog-Scott, omodysplasia or other mesomelic dysplasias",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Orthopaedic bracing and corrective surgery for limb deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Spinal surveillance and treatment of scoliosis, especially in the recessive form",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endocrine assessment; androgen therapy for micropenis where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal and cardiac assessment for associated anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Severely affected neonates can have airway or feeding difficulty",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

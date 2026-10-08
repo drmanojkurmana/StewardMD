@@ -151,5 +151,334 @@
       "caption": "Overview comparison matrix for pityriasis lichenoides (chronica/plc spectrum)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pityriasis_lichenoides-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with histopathology",
+          "cells": [
+            {
+              "text": "Interface dermatitis and infiltrate characterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry and T-cell receptor gene rearrangement",
+          "cells": [
+            {
+              "text": "Lymphomatoid papulosis or cutaneous lymphoma excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology for triggers such as Toxoplasma, EBV or HIV",
+          "cells": [
+            {
+              "text": "Possible triggers, when clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and inflammatory markers",
+          "cells": [
+            {
+              "text": "Febrile or systemically unwell patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syphilis serology",
+          "cells": [
+            {
+              "text": "Secondary syphilis, when considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photographic documentation",
+          "cells": [
+            {
+              "text": "Evolution of successive crops"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pityriasis_lichenoides-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphomatoid papulosis",
+          "cells": [
+            {
+              "text": "Atypical or clonal lymphoid infiltrate needs clonality assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary syphilis",
+          "cells": [
+            {
+              "text": "Syphilis serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Guttate psoriasis",
+          "cells": [
+            {
+              "text": "Diagnostic biopsy distinguishes it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pityriasis_lichenoides-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, relapsing but generally self-limiting course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients and topical corticosteroids",
+          "cells": [
+            {
+              "text": "Relieve itch and inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral macrolide or tetracycline",
+          "cells": [
+            {
+              "text": "First-line systemic therapy for its anti-inflammatory effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototherapy",
+          "cells": [
+            {
+              "text": "Narrowband UVB for widespread or persistent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical calcineurin inhibitors",
+          "cells": [
+            {
+              "text": "Steroid-sparing adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-dose methotrexate",
+          "cells": [
+            {
+              "text": "Refractory or extensive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term follow-up",
+          "cells": [
+            {
+              "text": "Biopsy of atypical lesions to detect rare lymphoproliferative progression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pityriasis_lichenoides-dx-mgmt",
+      "title": "Diagnosis and management of Pityriasis lichenoides (chronica/PLC spectrum)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Successive crops of papules evolving into scaly plaques; suspected pityriasis lichenoides",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (febrile ulceronecrotic disease, persistent plaques, clonal infiltrate)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for febrile ulceronecrotic Mucha-Habermann disease or lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with histopathology; immunohistochemistry and TCR rearrangement if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show interface dermatitis with a non-clonal infiltrate?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lymphomatoid papulosis, guttate psoriasis, pityriasis rosea or syphilis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure about the benign, relapsing but generally self-limiting course",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients and topical corticosteroids to relieve itch and inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oral macrolide or tetracycline as first-line systemic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Narrowband UVB phototherapy for widespread or persistent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Low-dose methotrexate for refractory or extensive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally benign; most resolve without scarring; rare lymphoproliferative progression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

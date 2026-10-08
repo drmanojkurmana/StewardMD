@@ -149,5 +149,332 @@
       "caption": "Overview comparison matrix for hyper-ige syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyper_ige_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum IgE level and eosinophil count",
+          "cells": [
+            {
+              "text": "Raised IgE and eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "STAT3 and DOCK8 genetic testing",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphocyte subset analysis and Th17 enumeration",
+          "cells": [
+            {
+              "text": "Immune profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical scoring",
+          "cells": [
+            {
+              "text": "Severity of the syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pneumatoceles and bronchiectasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal and dental assessment",
+          "cells": [
+            {
+              "text": "Fractures, scoliosis and dental anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyper_ige_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "DOCK8 deficiency and other combined immunodeficiencies",
+          "cells": [
+            {
+              "text": "Different gene; genetic testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystic fibrosis",
+          "cells": [
+            {
+              "text": "Recurrent pneumonia with structural lung damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic granulomatous disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wiskott-Aldrich syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyper_ige_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Long-term antistaphylococcal prophylaxis",
+          "cells": [
+            {
+              "text": "Recurrent deep-seated infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifungal prophylaxis",
+          "cells": [
+            {
+              "text": "Chronic mucocutaneous candidiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aggressive pneumonia treatment",
+          "cells": [
+            {
+              "text": "And management of sequelae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Considered for severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DOCK8 deficiency",
+          "cells": [
+            {
+              "text": "Management of severe cutaneous viral infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic chest imaging",
+          "cells": [
+            {
+              "text": "Surveillance for lung damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyper_ige_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Hyper-IgE syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent deep staphylococcal abscesses, pneumonias and eczema with raised IgE",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Deep infections, fungal lung colonisation, disseminated viral disease, or malignancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for fungal infection or disseminated viral disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "IgE and eosinophils; STAT3 and DOCK8 testing; lymphocyte subsets; chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a STAT3 or DOCK8 variant found, with cystic fibrosis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider severe atopic dermatitis, CGD, cystic fibrosis or Wiskott-Aldrich syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Long-term antistaphylococcal antibiotic prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antifungal prophylaxis and treatment of chronic candidiasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aggressive treatment of pneumonias and their sequelae",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Allogeneic stem cell transplantation considered for severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Infections prevented; chest surveillance continued",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

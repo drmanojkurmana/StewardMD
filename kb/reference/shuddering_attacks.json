@@ -142,5 +142,305 @@
       "caption": "Overview comparison matrix for shuddering attacks of infancy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / paediatric neurology literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "shuddering_attacks-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical features",
+          "cells": [
+            {
+              "text": "Brief shivering with preserved awareness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Home video of episodes",
+          "cells": [
+            {
+              "text": "Supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Only if seizures cannot be excluded clinically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neurological assessment",
+          "cells": [
+            {
+              "text": "Normal findings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history",
+          "cells": [
+            {
+              "text": "Tremor in relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "shuddering_attacks-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Epileptic seizures (myoclonic or spasms)",
+          "cells": [
+            {
+              "text": "Loss of awareness or postictal features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign myoclonus of early infancy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gratification behaviour",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "shuddering_attacks-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Parental reassurance",
+          "cells": [
+            {
+              "text": "Episodes are benign and self-limiting; no drug treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical confirmation",
+          "cells": [
+            {
+              "text": "Home video; avoid needless investigation or antiepileptics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG reserved",
+          "cells": [
+            {
+              "text": "Only if seizures cannot be excluded clinically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental monitoring",
+          "cells": [
+            {
+              "text": "Re-review if episodes change in character"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling on essential tremor",
+          "cells": [
+            {
+              "text": "Possible later association; note family history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology re-referral",
+          "cells": [
+            {
+              "text": "If awareness is lost, events evolve or development regresses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "shuddering_attacks-dx-mgmt",
+      "title": "Diagnosis and management of Shuddering attacks of infancy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with brief shivering episodes and preserved awareness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (loss of awareness, developmental delay, abnormal neurology)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer to paediatric neurology; EEG to exclude seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Review a home video of episodes; developmental and neurological examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do the clinical features and video fit shuddering attacks?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider epileptic seizures or myoclonus; neurology review and EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure parents that episodes are benign and need no drug treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid antiepileptics and extensive investigation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor development; re-review if episodes change",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Counsel on possible later essential tremor",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Resolve in early childhood without treatment; development is normal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

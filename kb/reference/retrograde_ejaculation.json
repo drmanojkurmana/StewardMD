@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for retrograde ejaculation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "retrograde_ejaculation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Post-orgasmic urine analysis",
+          "cells": [
+            {
+              "text": "Sperm present, which confirms retrograde ejaculation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard semen analysis",
+          "cells": [
+            {
+              "text": "Ejaculate volume and sperm content"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose or HbA1c",
+          "cells": [
+            {
+              "text": "Diabetes as the driver of a neuropathic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Alpha-blockers and other implicated drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical and neurological history",
+          "cells": [
+            {
+              "text": "Bladder-neck, prostate or pelvic surgery, and neurological deficits"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retrograde_ejaculation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Failure of seminal emission (anejaculation)",
+          "cells": [
+            {
+              "text": "No semen is produced at all, so post-orgasmic urine has no sperm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ejaculatory duct obstruction",
+          "cells": [
+            {
+              "text": "Low ejaculate volume on semen analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypogonadism",
+          "cells": [
+            {
+              "text": "Reduced ejaculate volume from androgen deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retrograde_ejaculation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pharmacological bladder-neck closure",
+          "cells": [
+            {
+              "text": "Pseudoephedrine or imipramine; most effective when the cause is neuropathic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug withdrawal",
+          "cells": [
+            {
+              "text": "Withdraw or substitute causative drugs, particularly alpha-blockers, where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycaemic control",
+          "cells": [
+            {
+              "text": "In diabetic autonomic neuropathy, to limit progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sperm harvest",
+          "cells": [
+            {
+              "text": "If medical therapy fails: sperm from alkalinised post-orgasmic urine for assisted reproduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reproductive medicine referral",
+          "cells": [
+            {
+              "text": "Intrauterine insemination or IVF with ICSI when fertility is desired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign; does not threaten general health"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "retrograde_ejaculation-dx-mgmt",
+      "title": "Diagnosis and management of Retrograde ejaculation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Man with little or no antegrade ejaculate at orgasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new onset, recent pelvic surgery, neurological or voiding features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent workup for undiagnosed diabetes or neurological and surgical causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Post-orgasmic urine for sperm, semen analysis, glucose or HbA1c, medication review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is sperm found in post-orgasmic urine?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider failure of emission or other anejaculation; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Pharmacological bladder-neck closure, most effective when neuropathic",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withdraw causative drugs such as alpha-blockers; control diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sperm harvest from alkalinised post-orgasmic urine if medical therapy fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reproductive medicine referral for IUI or IVF with ICSI",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign; fertility often achievable through restored ejaculation or sperm retrieval",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

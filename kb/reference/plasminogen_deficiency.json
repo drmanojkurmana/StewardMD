@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for plasminogen deficiency (ligneous conjunctivitis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "plasminogen_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasminogen activity assay and antigen",
+          "cells": [
+            {
+              "text": "Type I versus type II deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of pseudomembranes",
+          "cells": [
+            {
+              "text": "Fibrin-rich amorphous material"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PLG gene analysis",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis; supports family counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp assessment",
+          "cells": [
+            {
+              "text": "Conjunctival involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway or CNS imaging",
+          "cells": [
+            {
+              "text": "Respiratory or ventricular disease, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for infection or inflammation",
+          "cells": [
+            {
+              "text": "Triggers of membrane formation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "plasminogen_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cicatricial pemphigoid",
+          "cells": [
+            {
+              "text": "Autoimmune conjunctival scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective membranous conjunctivitis",
+          "cells": [
+            {
+              "text": "Bacterial or viral; screened for infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "plasminogen_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasminogen replacement",
+          "cells": [
+            {
+              "text": "Human plasma-derived plasminogen concentrate as definitive disease-specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical therapy",
+          "cells": [
+            {
+              "text": "Topical plasminogen or fresh frozen plasma eye drops for conjunctival disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid surgery",
+          "cells": [
+            {
+              "text": "Minimise mucosal trauma; excision of membranes reliably provokes recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection",
+          "cells": [
+            {
+              "text": "Promptly treat intercurrent infection or inflammation that triggers membranes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Ophthalmology for the eyes; monitoring of the airway, ears and genital tract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive, biallelic PLG inheritance; family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Urgent care for airway obstruction, occlusive hydrocephalus or sight-threatening disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "plasminogen_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Plasminogen deficiency (ligneous conjunctivitis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent membranous conjunctivitis with fibrinous pseudomembranes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (airway pseudomembranes, hydrocephalus, rapid recurrence, visual compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway or neurosurgical care for obstruction or occlusive hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasminogen activity and antigen; PLG gene analysis; slit-lamp; airway or CNS imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does plasminogen activity assay confirm plasminogen deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider infective membranous conjunctivitis, cicatricial pemphigoid or chemical injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Plasminogen replacement with plasma-derived plasminogen concentrate as definitive therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical plasminogen or fresh frozen plasma eye drops for conjunctival disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid excision of membranes, which reliably provokes recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Promptly treat intercurrent infection or inflammation that triggers membranes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening for autosomal recessive PLG disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic and relapsing; plasminogen replacement markedly improves mucosal lesions",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

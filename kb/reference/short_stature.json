@@ -151,5 +151,332 @@
       "caption": "Overview comparison matrix for short stature."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "short_stature-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial height, weight and growth velocity",
+          "cells": [
+            {
+              "text": "Velocity over time, not a single measurement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone age radiograph",
+          "cells": [
+            {
+              "text": "Skeletal maturity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening bloods",
+          "cells": [
+            {
+              "text": "Full count, renal and liver function, inflammatory markers, coeliac serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function, IGF-1, GH provocation",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype or genetic testing",
+          "cells": [
+            {
+              "text": "Girls to exclude Turner syndrome; suspected syndromes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "When disproportion suggests a dysplasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "short_stature-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial short stature",
+          "cells": [
+            {
+              "text": "Normal variant with excellent prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constitutional delay of growth and puberty",
+          "cells": [
+            {
+              "text": "Normal variant, usually catches up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth hormone deficiency",
+          "cells": [
+            {
+              "text": "Treated with recombinant growth hormone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal dysplasia",
+          "cells": [
+            {
+              "text": "Disproportionate short stature"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "short_stature-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "GH for deficiency, levothyroxine for hypothyroidism, gluten-free diet for coeliac disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "For familial short stature and constitutional delay, with serial growth monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth hormone for licensed indications",
+          "cells": [
+            {
+              "text": "Turner syndrome, SHOX deficiency, small-for-gestational-age"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sex-steroid induction",
+          "cells": [
+            {
+              "text": "Short course for distressing constitutional delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial auxology and bone age",
+          "cells": [
+            {
+              "text": "Detect a falling trajectory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric endocrinology referral",
+          "cells": [
+            {
+              "text": "With dietetic and psychological support as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation and counselling",
+          "cells": [
+            {
+              "text": "Where a syndrome or skeletal dysplasia is found"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "short_stature-dx-mgmt",
+      "title": "Diagnosis and management of Short Stature",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with short stature: plot height, weight and growth velocity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (crossing centiles, neurological signs, disproportion, weight loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer promptly to paediatric endocrinology; image brain if intracranial lesion suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bone age, bloods with coeliac serology, thyroid function, IGF-1, karyotype in girls",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a pathological cause found rather than a normal variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Familial short stature or constitutional delay: observe growth velocity",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the cause: growth hormone, levothyroxine or gluten-free diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Growth hormone for Turner syndrome, SHOX deficiency or small for gestational age",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Short course of sex steroids for distressing constitutional delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial auxology with endocrine, dietetic and psychological support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Normal variants have excellent prognosis; others depend on the underlying cause",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

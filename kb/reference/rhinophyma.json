@@ -141,5 +141,296 @@
       "caption": "Overview comparison matrix for rhinophyma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dermatology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rhinophyma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Characteristic appearance with a rosacea history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of any suspicious nodule or ulcer",
+          "cells": [
+            {
+              "text": "Carcinoma, which must be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extent and functional impact, including the nasal airway",
+          "cells": [
+            {
+              "text": "Nasal airway obstruction from bulk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photography",
+          "cells": [
+            {
+              "text": "Progression over time"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rhinophyma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Basal or squamous cell carcinoma of the nose",
+          "cells": [
+            {
+              "text": "Non-healing ulcer or bleeding nodule suggests malignancy (red flag)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal lymphoma or other tumour",
+          "cells": [
+            {
+              "text": "Features suggesting lymphomatous infiltration are a red flag"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis or other granulomatous infiltration",
+          "cells": [
+            {
+              "text": "Features suggesting granulomatous infiltration are a red flag"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other phymas of rosacea",
+          "cells": [
+            {
+              "text": "Phymatous change at other sites such as the chin or ears"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rhinophyma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical and oral therapy",
+          "cells": [
+            {
+              "text": "Topical metronidazole, azelaic acid or ivermectin and oral tetracyclines to limit inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical recontouring",
+          "cells": [
+            {
+              "text": "Cold-steel excision, dermabrasion, electrosurgery or ablative carbon-dioxide laser for established bulbous deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Excised and suspicious tissue sent to exclude basal or squamous cell carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Avoid vasodilatory triggers and sun exposure to slow progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial photography and airway assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rhinophyma-dx-mgmt",
+      "title": "Diagnosis and management of Rhinophyma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bulbous, thickened nasal skin in a patient with rosacea",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (non-healing ulcer, bleeding nodule, airway obstruction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent biopsy to exclude carcinoma or lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical assessment, biopsy of suspicious lesions, airway assessment, photography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is carcinoma excluded on histology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider granulomatous or lymphomatous disease; reassess with biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical anti-rosacea agents and oral tetracyclines to limit inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical recontouring for bulbous deformity: excision, dermabrasion or laser",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Histology of excised and suspicious tissue",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Photoprotection, trigger avoidance and serial photography",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign but progressive untreated; recontouring gives good results, rosacea persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

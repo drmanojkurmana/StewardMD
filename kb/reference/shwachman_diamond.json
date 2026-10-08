@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for shwachman-diamond syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard haematology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "shwachman_diamond-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count, serial",
+          "cells": [
+            {
+              "text": "Neutropenia and other cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal elastase, trypsinogen, isoamylase",
+          "cells": [
+            {
+              "text": "Exocrine pancreatic function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sweat chloride",
+          "cells": [
+            {
+              "text": "Excludes cystic fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow with cytogenetics",
+          "cells": [
+            {
+              "text": "Cellularity and clonal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SBDS and related gene testing; skeletal imaging",
+          "cells": [
+            {
+              "text": "Molecular confirmation and skeletal features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "shwachman_diamond-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cystic fibrosis",
+          "cells": [
+            {
+              "text": "Pancreatic insufficiency with abnormal sweat chloride"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fanconi anaemia and dyskeratosis congenita",
+          "cells": [
+            {
+              "text": "Other inherited marrow failure syndromes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pearson marrow-pancreas syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "shwachman_diamond-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pancreatic enzyme replacement",
+          "cells": [
+            {
+              "text": "With fat-soluble vitamins for insufficiency and steatorrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "G-CSF",
+          "cells": [
+            {
+              "text": "Severe or symptomatic neutropenia; prompt broad-spectrum antibiotics for fever"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial counts and bone marrow with cytogenetics",
+          "cells": [
+            {
+              "text": "Detect marrow failure, MDS or AML"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Progressive marrow failure or leukaemic transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Growth monitoring and vitamin correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Haematology, gastroenterology, orthopaedics, dietetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive SBDS; cascade testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "shwachman_diamond-dx-mgmt",
+      "title": "Diagnosis and management of Shwachman-Diamond syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with steatorrhoea, failure to thrive and neutropenia: Shwachman-Diamond",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe neutropenic infection, pancytopenia, clonal change, sepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat sepsis urgently; marrow assessment for MDS or leukaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Counts, faecal elastase, sweat chloride, marrow cytogenetics, SBDS testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does SBDS testing confirm the syndrome and exclude cystic fibrosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cystic fibrosis, other marrow failure syndromes, Pearson syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Pancreatic enzymes and fat-soluble vitamins for steatorrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "G-CSF for severe neutropenia; prompt antibiotics for fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial counts and periodic marrow with cytogenetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Allogeneic transplant for marrow failure or leukaemic change",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Pancreatic disease often improves; prognosis driven by marrow failure and leukaemia risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

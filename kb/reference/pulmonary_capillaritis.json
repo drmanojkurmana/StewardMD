@@ -152,5 +152,285 @@
       "caption": "Overview comparison matrix for pulmonary capillaritis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Respiratory medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pulmonary_capillaritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Sequential bronchoalveolar lavage",
+          "cells": [
+            {
+              "text": "Increasingly haemorrhagic returns; haemosiderin-laden macrophages"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune serology (ANCA, anti-GBM, ANA)",
+          "cells": [
+            {
+              "text": "ANCA, anti-GBM and related autoimmunity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis with microscopy and renal function",
+          "cells": [
+            {
+              "text": "Accompanying glomerulonephritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT of the chest",
+          "cells": [
+            {
+              "text": "Bilateral ground-glass opacification and consolidation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and coagulation screen",
+          "cells": [
+            {
+              "text": "Falling haemoglobin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gas transfer measurement",
+          "cells": [
+            {
+              "text": "Typically raised in acute alveolar haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_capillaritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulsed corticosteroids",
+          "cells": [
+            {
+              "text": "Urgent, for immune-mediated diffuse alveolar haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Induction immunosuppression",
+          "cells": [
+            {
+              "text": "Cyclophosphamide or rituximab for ANCA-associated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "Anti-GBM disease and severe or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Oxygen, transfusion and correction of coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted serology",
+          "cells": [
+            {
+              "text": "ANCA, anti-GBM, ANA and related tests to identify the cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal input",
+          "cells": [
+            {
+              "text": "Nephrology input for associated glomerulonephritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance",
+          "cells": [
+            {
+              "text": "Immunosuppression with monitoring for relapse and treatment-related infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pulmonary_capillaritis-dx-mgmt",
+      "title": "Diagnosis and management of Pulmonary capillaritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pulmonary capillaritis: diffuse alveolar haemorrhage with falling haemoglobin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Falling haemoglobin, worsening hypoxaemia, AKI or active sediment, or haemoptysis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent pulsed steroids and ICU review for catastrophic alveolar haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Sequential BAL; ANCA, anti-GBM, ANA; urinalysis; HRCT; FBC; gas transfer",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is alveolar haemorrhage confirmed with an autoimmune cause identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bland haemorrhage, infective pneumonia or PE; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urgent pulsed corticosteroids for immune-mediated alveolar haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cyclophosphamide or rituximab for ANCA-associated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Plasma exchange for anti-GBM disease or severe refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supportive oxygen, transfusion and correction of coagulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Maintenance immunosuppression with relapse and infection monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -141,5 +141,315 @@
       "caption": "Overview comparison matrix for orbital varix."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Orbital disease references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "orbital_varix-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT or MRI with Valsalva or dependent position",
+          "cells": [
+            {
+              "text": "Distending lesion when venous pressure is raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical assessment of positional proptosis",
+          "cells": [
+            {
+              "text": "Proptosis that changes with bending or straining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging for phleboliths and fistula",
+          "cells": [
+            {
+              "text": "Phleboliths; a fistula is excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic nerve function assessment",
+          "cells": [
+            {
+              "text": "Compression, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular imaging",
+          "cells": [
+            {
+              "text": "A high-flow lesion excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orbital_varix-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Orbital lymphatic malformation",
+          "cells": [
+            {
+              "text": "Positional or Valsalva-induced proptosis is typical of a varix"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arteriovenous or carotid-cavernous fistula",
+          "cells": [
+            {
+              "text": "A high-flow lesion, which must be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orbital_varix-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Mainstay for asymptomatic or minimally symptomatic lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intervention for significant disease",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Surgical excision or endovascular embolisation and sclerotherapy for significant symptoms, recurrent thrombosis, disfiguring proptosis or visual compromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care for acute events",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Analgesia for acute thrombosis or haemorrhage, which is usually self-limiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic nerve monitoring",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Vision and optic nerve function where compression is a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Characterise and follow",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Valsalva or dependent-position imaging; exclude a high-flow malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Oculoplastic and interventional or vascular specialists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "orbital_varix-dx-mgmt",
+      "title": "Diagnosis and management of Orbital varix",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Positional proptosis that worsens on bending, straining or Valsalva",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (acute painful proptosis, optic nerve compromise or rapid enlargement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for thrombosis, haemorrhage or optic nerve compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT or MRI with Valsalva or dependent position; check for phleboliths and fistula",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show a distensible venous lesion, with high-flow malformation excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lymphatic malformation, fistula, orbital tumour or thyroid eye disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe asymptomatic or minimally symptomatic lesions, the mainstay of care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Excision or endovascular embolisation and sclerotherapy for significant symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Analgesia for acute thrombosis or haemorrhage, which is usually self-limiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor optic nerve function and vision where compression is a concern",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mostly benign and observed; intervention carries a risk of significant bleeding",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,325 @@
       "caption": "Overview comparison matrix for tarui disease (glycogen storage disease type vii)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Scriver's Metabolic and Molecular Bases of Inherited Disease",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tarui_disease-dx-mgmt",
+      "title": "Diagnosis and management of Tarui disease (glycogen storage disease type VII)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Tarui disease: exercise intolerance, cramps and compensated haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: severe exertional rhabdomyolysis, symptomatic anaemia, or gout?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent fluids and renal monitoring for rhabdomyolysis with pigmenturia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Forearm exercise test; FBC and reticulocytes; CK and urate; PFKM sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does forearm testing show a flat lactate response, with PFKM variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider McArdle disease, fatty acid oxidation disorders or mitochondrial myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid strenuous and high-intensity exercise",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid pre-exercise carbohydrate loading, which worsens symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "High-protein or ketogenic diet as alternative fuel",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urate-lowering therapy such as allopurinol for hyperuricaemia and gout",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Periodic blood counts to monitor haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Normal life expectancy with adaptation; rhabdomyolysis, haemolysis and gout are the risks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tarui_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Forearm exercise test",
+          "cells": [
+            {
+              "text": "Flat lactate response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC and reticulocyte count",
+          "cells": [
+            {
+              "text": "Compensated haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum uric acid and bilirubin",
+          "cells": [
+            {
+              "text": "Hyperuricaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CK at rest and after exertion, with urine myoglobin",
+          "cells": [
+            {
+              "text": "Rhabdomyolysis during episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PFKM molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with phosphofructokinase assay",
+          "cells": [
+            {
+              "text": "Enzyme deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tarui_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "McArdle disease",
+          "cells": [
+            {
+              "text": "Carbohydrate loading worsens Tarui symptoms; haemolysis and hyperuricaemia distinguish it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other distal glycolytic enzyme defects",
+          "cells": [
+            {
+              "text": "Flat lactate response on forearm testing, as in McArdle; PFKM testing separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tarui_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid strenuous exercise",
+          "cells": [
+            {
+              "text": "Prevents cramps and exertional rhabdomyolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No pre-exercise carbohydrate loading",
+          "cells": [
+            {
+              "text": "Worsens exertional tolerance in this disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-protein or ketogenic diet",
+          "cells": [
+            {
+              "text": "Alternative muscle fuel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute rhabdomyolysis care",
+          "cells": [
+            {
+              "text": "Generous hydration; monitor for acute kidney injury and hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urate-lowering therapy",
+          "cells": [
+            {
+              "text": "Hyperuricaemia and gout, such as allopurinol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis monitoring",
+          "cells": [
+            {
+              "text": "Periodic blood counts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic medicine and genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; carrier testing of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

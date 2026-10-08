@@ -147,5 +147,258 @@
       "caption": "Overview comparison matrix for miliaria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "miliaria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from morphology and history of heat, occlusion or fever",
+          "cells": [
+            {
+              "text": "Morphology with heat or occlusion history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin swab, if secondary bacterial infection is suspected",
+          "cells": [
+            {
+              "text": "Secondary bacterial infection in pustular miliaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy, for atypical or persistent cases",
+          "cells": [
+            {
+              "text": "Atypical or persistent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of the environment and clothing or dressing practices",
+          "cells": [
+            {
+              "text": "Heat, occlusion and clothing practices"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "miliaria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cooling",
+          "cells": [
+            {
+              "text": "A cooler, less humid environment and air conditioning, to let the ducts reopen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Loose, breathable clothing",
+          "cells": [
+            {
+              "text": "Avoid occlusive fabrics, dressings and overdressing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infant care",
+          "cells": [
+            {
+              "text": "Avoid heavy wrapping; keep the neck, groin and axillae cool and dry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Itch relief",
+          "cells": [
+            {
+              "text": "Cooling measures and, if needed, a short course of topical corticosteroid for miliaria rubra"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary infection",
+          "cells": [
+            {
+              "text": "Topical or systemic antibiotics guided by swab for pustular miliaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Self-limiting once overheating and occlusion are removed; avoid future heat exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "miliaria-dx-mgmt",
+      "title": "Diagnosis and management of Miliaria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Itchy, prickly papules or pustules after heat, sweating or occlusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Deep involvement with heat intolerance, spreading erythema, pain or fever?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat secondary bacterial infection; reconsider the diagnosis if systemically unwell",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; skin swab if pustules; biopsy only if atypical or persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the picture settle after cooling and removing occlusion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Failure to settle: reconsider the diagnosis and biopsy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cool the patient in a cooler, less humid environment with air conditioning",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Loose, breathable clothing; avoid occlusive fabrics and overdressing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "In infants, avoid heavy wrapping; keep neck, groin and axillae cool and dry",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antibiotics guided by swab for secondary pustular infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Self-limiting once overheating and occlusion are removed; avoid future heat exposure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

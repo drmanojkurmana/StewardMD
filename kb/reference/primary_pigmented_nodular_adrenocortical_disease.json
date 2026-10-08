@@ -148,5 +148,321 @@
       "caption": "Overview comparison matrix for primary pigmented nodular adrenocortical disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard endocrinology reference texts and adrenal disorder consensus guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_pigmented_nodular_adrenocortical_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "24-hour urinary free cortisol and late-night salivary cortisol",
+          "cells": [
+            {
+              "text": "Hypercortisolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paired low plasma ACTH with low-dose dexamethasone",
+          "cells": [
+            {
+              "text": "ACTH independence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-dose dexamethasone (Liddle) testing",
+          "cells": [
+            {
+              "text": "Paradoxical cortisol rise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal CT or MRI",
+          "cells": [
+            {
+              "text": "Glands may look near-normal despite active disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PRKAR1A germline genetic testing",
+          "cells": [
+            {
+              "text": "Carney complex features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and dermatological review",
+          "cells": [
+            {
+              "text": "Cardiac myxomas and lentigines"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_pigmented_nodular_adrenocortical_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary bilateral macronodular adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "Bilateral macronodular enlargement on imaging"
+            },
+            {
+              "text": "Adrenal CT or MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACTH-dependent (pituitary) Cushing disease",
+          "cells": [
+            {
+              "text": "ACTH-dependent cortisol excess"
+            },
+            {
+              "text": "Paired plasma ACTH"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_pigmented_nodular_adrenocortical_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Bilateral adrenalectomy",
+          "cells": [
+            {
+              "text": "Definitive curative treatment for ACTH-independent hypercortisolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong replacement",
+          "cells": [
+            {
+              "text": "Glucocorticoid and mineralocorticoid after adrenalectomy, with sick-day dosing and emergency steroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative control",
+          "cells": [
+            {
+              "text": "Metyrapone or ketoconazole where severe hypercortisolism needs controlling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perioperative cover",
+          "cells": [
+            {
+              "text": "Stress-dose corticosteroid cover; prompt recognition and treatment of adrenal crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carney complex surveillance",
+          "cells": [
+            {
+              "text": "Echocardiographic screening for cardiac myxomas; dermatological review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "PRKAR1A germline testing, genetic counselling and family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Coordinated endocrine and cardiac multidisciplinary follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_pigmented_nodular_adrenocortical_disease-dx-mgmt",
+      "title": "Diagnosis and management of Primary pigmented nodular adrenocortical disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PPNAD: ACTH-independent hypercortisolism with pigmented adrenal nodules",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cardiac myxoma, severe or cyclical hypercortisolism in a child, or inherited syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiac review for myxoma causing embolic events or obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinary and late-night salivary cortisol; dexamethasone tests; ACTH; imaging; PRKAR1A",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do cortisol and ACTH tests confirm ACTH-independent hypercortisolism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider adenoma, macronodular hyperplasia or pituitary Cushing disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Bilateral adrenalectomy as definitive curative treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lifelong glucocorticoid and mineralocorticoid replacement afterwards",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Metyrapone or ketoconazole for severe hypercortisolism before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Echocardiographic screening for cardiac myxomas; PRKAR1A testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Coordinated endocrine and cardiac follow-up with family screening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

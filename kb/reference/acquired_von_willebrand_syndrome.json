@@ -152,6 +152,16 @@
       "id": "c1",
       "label": "Williams Hematology",
       "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 115-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 58-1",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -330,6 +340,195 @@
             }
           ],
           "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acquired_von_willebrand_syndrome-ddx-2",
+      "kind": "ddx",
+      "title": "von Willebrand disease types by laboratory pattern",
+      "rowHeader": "Condition",
+      "columns": [
+        "aPTT",
+        "VWF antigen",
+        "VWF activity",
+        "FVIII activity",
+        "Multimer pattern"
+      ],
+      "rows": [
+        {
+          "parameter": "Type 1",
+          "cells": [
+            {
+              "text": "Normal or increased"
+            },
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Normal distribution, decreased in quantity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 2A",
+          "cells": [
+            {
+              "text": "Normal or increased"
+            },
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Markedly decreased"
+            },
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Loss of high- and intermediate-molecular-weight multimers"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 2B (footnote a)",
+          "cells": [
+            {
+              "text": "Normal or increased"
+            },
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Markedly decreased"
+            },
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Loss of high-molecular-weight multimers"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 2M",
+          "cells": [
+            {
+              "text": "Normal or increased"
+            },
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Markedly decreased"
+            },
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Normal distribution, decreased in quantity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 2N",
+          "cells": [
+            {
+              "text": "Markedly increased"
+            },
+            {
+              "text": "Normal or decreased (footnote b)"
+            },
+            {
+              "text": "Normal or decreased (footnote b)"
+            },
+            {
+              "text": "Markedly decreased"
+            },
+            {
+              "text": "Normal distribution"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 3",
+          "cells": [
+            {
+              "text": "Markedly increased"
+            },
+            {
+              "text": "Markedly decreased"
+            },
+            {
+              "text": "Markedly decreased"
+            },
+            {
+              "text": "Markedly decreased"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Footnotes a and b are referenced in the source but their text is not printed. Arrows in the source were read as increased or decreased, and a doubled arrow as marked."
+    },
+    {
+      "id": "acquired_von_willebrand_syndrome-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Primary hemostatic (platelet plug) disorders",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Disorders"
+      ],
+      "rows": [
+        {
+          "parameter": "Defects of platelet adhesion",
+          "cells": [
+            {
+              "text": "Von Willebrand disease; Bernard-Soulier syndrome (absence or dysfunction of GpIb-IX-V)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Defects of platelet aggregation",
+          "cells": [
+            {
+              "text": "Glanzmann's thrombasthenia (absence or dysfunction of GpIIbIIIa); afibrinogenemia"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Defects of platelet secretion",
+          "cells": [
+            {
+              "text": "Decreased cyclooxygenase activity (drug-induced: aspirin, nonsteroidal anti-inflammatory agents, thienopyridines; or inherited); granule storage pool defects (inherited or acquired); nonspecific inherited secretory defects; nonspecific drug effects; uremia; platelet coating (for example paraprotein, penicillin)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Defect of platelet coagulant activity",
+          "cells": [
+            {
+              "text": "Scott's syndrome"
+            }
+          ],
+          "cite": "c3"
         }
       ]
     }

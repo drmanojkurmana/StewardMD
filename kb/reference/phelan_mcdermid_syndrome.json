@@ -147,5 +147,296 @@
       "caption": "Overview comparison matrix for phelan-mcdermid syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "phelan_mcdermid_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "22q13.3 deletion, detected and sized"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SHANK3 sequencing",
+          "cells": [
+            {
+              "text": "When microarray is normal but the phenotype is suggestive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parental chromosome or array studies",
+          "cells": [
+            {
+              "text": "Balanced translocation and recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental, speech and autism assessments",
+          "cells": [
+            {
+              "text": "Development, speech and autism features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound and echocardiography",
+          "cells": [
+            {
+              "text": "Associated structural anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological review",
+          "cells": [
+            {
+              "text": "Regression, with psychiatric assessment where it occurs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phelan_mcdermid_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early developmental intervention",
+          "cells": [
+            {
+              "text": "Speech and language therapy, including augmentative and alternative communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Educational and behavioural support",
+          "cells": [
+            {
+              "text": "Tailored to intellectual disability and autism spectrum disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regression surveillance",
+          "cells": [
+            {
+              "text": "Adolescent or adult regression, with psychiatric assessment and treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structural anomaly screen",
+          "cells": [
+            {
+              "text": "Renal ultrasound and echocardiography, with management of any finding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain perception and seizures",
+          "cells": [
+            {
+              "text": "Monitor altered pain perception for safety; manage seizures where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetics referral",
+          "cells": [
+            {
+              "text": "Chromosomal microarray, SHANK3 testing and parental studies to define recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Paediatrics, neurology, genetics and allied health"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "phelan_mcdermid_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Phelan-McDermid syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Developmental delay, speech impairment and autistic features; suspected 22q13.3 deletion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (regression, new seizures, absent pain perception, renal or cardiac anomaly)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for new seizures or a significant renal or cardiac anomaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chromosomal microarray for 22q13.3 deletion; SHANK3 sequencing if microarray normal",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does microarray detect a 22q13.3 deletion or a SHANK3 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider idiopathic autism, Angelman, Pitt-Hopkins, Rett or Kleefstra syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early speech and language therapy, including augmentative communication",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Educational and behavioural support for intellectual disability and autism",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Psychiatric assessment and treatment for adolescent or adult regression",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal ultrasound and echocardiography to screen for structural anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Clinical genetics referral with parental studies to define recurrence risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Developmental disability is lifelong; regression adds long-term uncertainty",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

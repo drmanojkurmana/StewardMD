@@ -163,6 +163,16 @@
       "id": "c1",
       "label": "Postgraduate Haematology (Hoffbrand)",
       "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 103-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Acquired Iron Overload (p39)",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -340,6 +350,156 @@
             }
           ],
           "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_sideroblastic_anaemia-ddx-2",
+      "kind": "ddx",
+      "title": "Microcytic anemia: iron deficiency, inflammation, thalassemia, sideroblastic anemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Smear",
+        "Serum iron (SI)",
+        "TIBC",
+        "Percent saturation",
+        "Ferritin (ug/L)",
+        "Hemoglobin pattern on electrophoresis"
+      ],
+      "rows": [
+        {
+          "parameter": "Iron deficiency",
+          "cells": [
+            {
+              "text": "Micro/hypochromic"
+            },
+            {
+              "text": "<30"
+            },
+            {
+              "text": "Over 360"
+            },
+            {
+              "text": "<10"
+            },
+            {
+              "text": "<15"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Inflammation",
+          "cells": [
+            {
+              "text": "Normal to micro/hypochromic"
+            },
+            {
+              "text": "<50"
+            },
+            {
+              "text": "<300"
+            },
+            {
+              "text": "10 to 20"
+            },
+            {
+              "text": "30 to 200"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thalassemia",
+          "cells": [
+            {
+              "text": "Micro/hypochromic with targeting"
+            },
+            {
+              "text": "Normal to high"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "30 to 80"
+            },
+            {
+              "text": "50 to 300"
+            },
+            {
+              "text": "Abnormal with beta thalassemia; can be normal with alpha thalassemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sideroblastic anemia",
+          "cells": [
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "Normal to high"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "30 to 80"
+            },
+            {
+              "text": "50 to 300"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "congenital_sideroblastic_anaemia-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of acquired iron overload",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Iron-loading anemias",
+          "cells": [
+            {
+              "text": "Thalassemia major; sideroblastic anemia; chronic hemolytic anemias; transfusional and parenteral iron overload; dietary iron overload"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chronic liver disease",
+          "cells": [
+            {
+              "text": "Hepatitis C; alcoholic cirrhosis, especially when advanced; nonalcoholic steatohepatitis; porphyria cutanea tarda; dysmetabolic iron overload syndrome; post-portacaval shunting"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Miscellaneous",
+          "cells": [
+            {
+              "text": "Iron overload in sub-Saharan Africa; neonatal iron overload; aceruloplasminemia; congenital atransferrinemia"
+            }
+          ],
+          "cite": "c3"
         }
       ]
     }

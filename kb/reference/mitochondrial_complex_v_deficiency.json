@@ -154,5 +154,323 @@
       "caption": "Overview comparison matrix for mitochondrial complex v deficiency (atp synthase deficiency)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mitochondrial_complex_v_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood and CSF lactate and pyruvate with lactate-to-pyruvate ratio",
+          "cells": [
+            {
+              "text": "Lactate-to-pyruvate ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine organic acids seeking 3-methylglutaconic acid, and plasma ammonia",
+          "cells": [
+            {
+              "text": "3-methylglutaconic acid; hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and electrocardiography",
+          "cells": [
+            {
+              "text": "Hypertrophic cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Leigh-type basal ganglia and brainstem lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MT-ATP6 and MT-ATP8 sequencing with heteroplasmy quantification",
+          "cells": [
+            {
+              "text": "Heteroplasmy across tissues and in maternal relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nuclear gene testing (TMEM70, ATPAF2, ATP5F1A and others)",
+          "cells": [
+            {
+              "text": "Nuclear variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory chain enzymology and blue-native electrophoresis",
+          "cells": [
+            {
+              "text": "Isolated Complex V deficiency with reduced assembled enzyme"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mitochondrial_complex_v_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other 3-methylglutaconic aciduria syndromes (Barth, OPA3, DNAJC19, SERAC1)",
+          "cells": [
+            {
+              "text": "3-methylglutaconic aciduria on urine organic acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinitis pigmentosa with ataxia from other causes (NARP phenotype)",
+          "cells": [
+            {
+              "text": "Retinitis pigmentosa with ataxia and neuropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mitochondrial_complex_v_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cofactor supplementation",
+          "cells": [
+            {
+              "text": "Mitochondrial cofactors, with avoidance of fasting and catabolic stress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal metabolic crises",
+          "cells": [
+            {
+              "text": "Intravenous dextrose and fluids; correction of lactic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TMEM70 hyperammonaemia",
+          "cells": [
+            {
+              "text": "Ammonia-scavenging agents and protein modulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography, ECG and heart-failure therapy for hypertrophic cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizures and Leigh features",
+          "cells": [
+            {
+              "text": "Anticonvulsants and neurological symptomatic care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NARP support",
+          "cells": [
+            {
+              "text": "Visual rehabilitation for retinitis pigmentosa; physiotherapy for ataxia and neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive nuclear disease versus maternally inherited MT-ATP6, with heteroplasmy-dependent recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mitochondrial_complex_v_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Mitochondrial Complex V Deficiency (ATP Synthase Deficiency)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with lactic acidosis, hyperammonaemia and hypertrophic cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Brainstem regression, cardiorespiratory decompensation, or visual loss with ataxia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent IV dextrose and fluids for lactic acidosis; cardiorespiratory support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lactate ratio; urine organic acids and ammonia; echo; MRI; MT-ATP6 and nuclear genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is isolated Complex V deficiency confirmed with a causative variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Complex I, III or IV defects, or other 3-methylglutaconic aciduria syndromes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Mitochondrial cofactor supplementation; avoid fasting and catabolic stress",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intravenous dextrose and fluids for neonatal crises; ammonia-scavenging agents for TMEM70",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Echocardiography, ECG and heart-failure therapy for hypertrophic cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anticonvulsants for Leigh features; visual rehabilitation and physiotherapy for NARP",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling distinguishing nuclear recessive disease from maternal MT-ATP6",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

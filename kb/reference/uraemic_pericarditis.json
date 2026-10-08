@@ -153,5 +153,314 @@
       "caption": "Overview comparison matrix for uraemic pericarditis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "uraemic_pericarditis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Effusion size and tamponade physiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "Typically lacks diffuse ST or PR changes; assess for ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urea, creatinine and electrolytes",
+          "cells": [
+            {
+              "text": "Azotaemia and dialysis adequacy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pericardial fluid analysis",
+          "cells": [
+            {
+              "text": "Haemorrhagic exudate; excludes infection and malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Troponin",
+          "cells": [
+            {
+              "text": "Concurrent myocardial injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "uraemic_pericarditis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral or idiopathic acute pericarditis",
+          "cells": [
+            {
+              "text": "Typical diffuse ECG changes are often absent in uraemic pericarditis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myocardial infarction or acute coronary syndrome",
+          "cells": [
+            {
+              "text": "Widespread ST elevation signals concomitant myocardial injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculous pericarditis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant pericardial effusion",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "uraemic_pericarditis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal replacement therapy",
+          "cells": [
+            {
+              "text": "Initiate or intensify haemodialysis; definitive treatment that resolves most cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heparin-free or minimal-heparin dialysis",
+          "cells": [
+            {
+              "text": "Reduces the risk of provoking a haemorrhagic effusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic relief",
+          "cells": [
+            {
+              "text": "Pleuritic pain; NSAIDs and colchicine offer limited benefit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial echocardiography",
+          "cells": [
+            {
+              "text": "Enlarging effusion or early tamponade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent pericardiocentesis",
+          "cells": [
+            {
+              "text": "Cardiac tamponade or large symptomatic effusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pericardial window or pericardiectomy",
+          "cells": [
+            {
+              "text": "Recurrent, loculated or constrictive disease unresponsive to dialysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "uraemic_pericarditis-dx-mgmt",
+      "title": "Diagnosis and management of uraemic pericarditis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected uraemic pericarditis: friction rub with advanced renal failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hypotension, raised JVP, pulsus paradoxus or large effusion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent pericardiocentesis for tamponade or large haemorrhagic effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography, ECG, urea and creatinine, troponin, and fluid analysis if drained",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the cause uraemic, with infection and malignancy excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider viral, tuberculous, malignant or ischaemic pericarditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Initiate or intensify haemodialysis, the definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Heparin-free or minimal-heparin dialysis to limit haemorrhagic effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial echocardiography for an enlarging effusion or early tamponade",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pericardial window or pericardiectomy for recurrent or constrictive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most cases resolve with adequate dialysis; recurrent disease may need surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

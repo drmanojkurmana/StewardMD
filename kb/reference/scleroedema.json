@@ -151,5 +151,305 @@
       "caption": "Overview comparison matrix for scleroedema."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Bolognia Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scleroedema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy of back or neck",
+          "cells": [
+            {
+              "text": "Dermal thickening with mucin between collagen bundles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose and glycated haemoglobin",
+          "cells": [
+            {
+              "text": "Diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein electrophoresis and immunofixation",
+          "cells": [
+            {
+              "text": "Paraprotein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antistreptolysin O titre and infection history",
+          "cells": [
+            {
+              "text": "Post-infectious form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Excludes myxoedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest wall and joint mobility assessment",
+          "cells": [
+            {
+              "text": "Extent of functional restriction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scleroedema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic sclerosis",
+          "cells": [
+            {
+              "text": "Hands spared and no Raynaud phenomenon in scleroedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myxoedema of hypothyroidism",
+          "cells": [
+            {
+              "text": "Excluded by thyroid function tests"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scleroedema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the association",
+          "cells": [
+            {
+              "text": "Optimise glycaemic control; address any monoclonal gammopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Expectant care",
+          "cells": [
+            {
+              "text": "Post-infectious form usually resolves; treat residual streptococcal infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and stretching",
+          "cells": [
+            {
+              "text": "Preserve neck, back and chest-wall mobility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototherapy or immunomodulation",
+          "cells": [
+            {
+              "text": "PUVA, UVA1, methotrexate, corticosteroids or IVIG for progressive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for restrictive complications",
+          "cells": [
+            {
+              "text": "Chest wall, cardiac, tongue and pharyngeal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Dermatology, with haematology if a paraprotein is found"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scleroedema-dx-mgmt",
+      "title": "Diagnosis and management of scleroedema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Woody thickening of neck and upper back: suspected scleroedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Chest-wall restriction, cardiac involvement, dysphagia or rapid progression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess respiratory, cardiac and swallowing function; reassess diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, glucose and HbA1c, paraprotein screen, ASO titre, thyroid tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Mucin between collagen bundles with an identified association?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider scleromyxoedema, NSF, eosinophilic fasciitis or systemic sclerosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Optimise glycaemia and address any monoclonal gammopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Expectant care for post-infectious form",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy to keep chest-wall and neck mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "PUVA, UVA1 or immunomodulation for progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Post-infectious form resolves; diabetic and paraprotein forms tend to be chronic",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

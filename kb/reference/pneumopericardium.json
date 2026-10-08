@@ -146,5 +146,307 @@
       "caption": "Overview comparison matrix for pneumopericardium."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pneumopericardium-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiography",
+          "cells": [
+            {
+              "text": "Air surrounding the heart within the pericardium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac CT",
+          "cells": [
+            {
+              "text": "Quantifies pericardial air; identifies a source or fistula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Haemodynamic effect; air can limit windows"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fistula evaluation (contrast studies or endoscopy)",
+          "cells": [
+            {
+              "text": "Communicating fistula, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventilation and airway pressure assessment",
+          "cells": [
+            {
+              "text": "Ventilated or neonatal patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pneumopericardium-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Purulent pericarditis",
+          "cells": [
+            {
+              "text": "Gas-forming organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pericardial effusion or haemopericardium",
+          "cells": [
+            {
+              "text": "Fluid rather than gas"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pneumopericardium-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emergency decompression",
+          "cells": [
+            {
+              "text": "For tension pneumopericardium with tamponade physiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cause",
+          "cells": [
+            {
+              "text": "Repair of a traumatic or surgical pericardial breach; treat the underlying cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventilation",
+          "cells": [
+            {
+              "text": "Lung-protective ventilation to minimise barotrauma in ventilated or neonatal patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small, non-tension collections from a self-limiting cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial echocardiography",
+          "cells": [
+            {
+              "text": "Haemodynamic compromise and re-accumulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical referral",
+          "cells": [
+            {
+              "text": "Persistent fistula or when definitive repair is needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pneumopericardium-dx-mgmt",
+      "title": "Diagnosis and management of Pneumopericardium",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Air around the heart on chest radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (tension physiology, rapidly enlarging air, fistula, gas-forming infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency pericardial decompression for tension pneumopericardium with tamponade",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph; cardiac CT; echocardiography; fistula evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CT confirm pericardial air with a source or fistula identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pneumomediastinum, pneumothorax, haemopericardium or purulent pericarditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying cause, including repair of a pericardial breach",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lung-protective ventilation to minimise barotrauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Observe small, non-tension collections from a self-limiting cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial echocardiography for haemodynamic compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cardiothoracic surgical referral for a persistent fistula",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Small self-limiting collections resolve; tension pneumopericardium is an emergency",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

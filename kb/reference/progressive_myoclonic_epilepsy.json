@@ -147,5 +147,303 @@
       "caption": "Overview comparison matrix for progressive myoclonic epilepsies (overview)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ILAE classification / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "progressive_myoclonic_epilepsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted genetic and gene-panel testing after phenotyping",
+          "cells": [
+            {
+              "text": "Molecular diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Generalised discharges, background slowing and photosensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar or generalised atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enzyme assays and tissue biopsy in selected disorders",
+          "cells": [
+            {
+              "text": "Characteristic inclusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic and mitochondrial studies, including lactate",
+          "cells": [
+            {
+              "text": "Mitochondrial involvement; muscle biopsy where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_myoclonic_epilepsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Juvenile myoclonic epilepsy and other genetic generalised epilepsies",
+          "cells": [
+            {
+              "text": "Stable course rather than worsening myoclonus with declining cognition"
+            },
+            {
+              "text": "EEG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rapid dementia suggesting Lafora disease",
+          "cells": [
+            {
+              "text": "Rapid dementia"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_myoclonic_epilepsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antimyoclonic antiseizure therapy",
+          "cells": [
+            {
+              "text": "Valproate, levetiracetam or clonazepam; piracetam or zonisamide as adjuncts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid aggravating drugs",
+          "cells": [
+            {
+              "text": "Sodium-channel blockers such as carbamazepine, phenytoin and lamotrigine, and vigabatrin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disease-specific measures",
+          "cells": [
+            {
+              "text": "Coenzyme-Q10 and vitamin cofactor support in MERRF mitochondrial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and communication aids for ataxia and disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory myoclonus",
+          "cells": [
+            {
+              "text": "Vagus nerve stimulation or ketogenic dietary therapy in selected disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Predominantly autosomal recessive; molecular diagnosis guides prognosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "progressive_myoclonic_epilepsy-dx-mgmt",
+      "title": "Diagnosis and management of Progressive myoclonic epilepsies (overview)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected progressive myoclonic epilepsy: worsening action myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Declining cognition, lost walking, rapid dementia, or drug-aggravated myoclonus?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent specialist review; stop drugs that aggravate myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EEG; MRI; gene-panel testing; enzyme assays or biopsy; lactate and mitochondrial studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does gene-panel or enzyme testing give a molecular diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider JME, progressive ataxia or acquired myoclonus; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Valproate, levetiracetam or clonazepam for antimyoclonic control",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid sodium-channel blockers that aggravate myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Disease-specific cofactor support, such as coenzyme-Q10 in MERRF",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and communication support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling and family testing; molecular diagnosis guides prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

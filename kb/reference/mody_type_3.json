@@ -152,5 +152,323 @@
       "caption": "Overview comparison matrix for maturity-onset diabetes of the young type 3 (hnf1a-mody)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Endocrinology and clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mody_type_3-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular genetic testing of HNF1A",
+          "cells": [
+            {
+              "text": "HNF1A variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic islet autoantibodies",
+          "cells": [
+            {
+              "text": "Type 1 diabetes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting and stimulated C-peptide",
+          "cells": [
+            {
+              "text": "Preserved endogenous insulin secretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis for glycosuria relative to blood glucose",
+          "cells": [
+            {
+              "text": "Low renal glucose threshold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-sensitivity C-reactive protein",
+          "cells": [
+            {
+              "text": "Characteristically low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral glucose tolerance test",
+          "cells": [
+            {
+              "text": "Large glucose increment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Three-generation family pedigree",
+          "cells": [
+            {
+              "text": "Autosomal dominant diabetes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mody_type_3-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "HNF4A-MODY (MODY1)",
+          "cells": [
+            {
+              "text": "Normal renal glucose threshold and neonatal macrosomia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "Autoantibody positive, with low C-peptide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucokinase-MODY (MODY2)",
+          "cells": [
+            {
+              "text": "Mild, stable fasting hyperglycaemia and small OGTT increment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mody_type_3-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-dose sulfonylureas as first line",
+          "cells": [
+            {
+              "text": "Exploits sulfonylurea sensitivity; often allows insulin to be stopped"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious titration",
+          "cells": [
+            {
+              "text": "Start at a low dose to avoid hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation as secretion declines",
+          "cells": [
+            {
+              "text": "Additional agents or insulin as beta-cell function declines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication surveillance",
+          "cells": [
+            {
+              "text": "Glycaemic control with microvascular and macrovascular screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy care",
+          "cells": [
+            {
+              "text": "With specialists; maternal glucose surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; cascade testing of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mody_type_3-dx-mgmt",
+      "title": "Diagnosis and management of Maturity-Onset Diabetes of the Young Type 3 (HNF1A-MODY)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Young-onset diabetes with an autosomal dominant family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Ketoacidosis, retinopathy or nephropathy, or severe hypoglycaemia on sulfonylurea?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for ketoacidosis; consider type 1 diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "HNF1A testing; autoantibodies; C-peptide; urine glucose; OGTT; hsCRP",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an HNF1A variant confirmed with autoantibodies negative?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider HNF4A-MODY, GCK-MODY or type 1 diabetes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Low-dose sulfonylureas as first-line therapy, titrated cautiously from a low dose",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Escalate to insulin or other agents as beta-cell function declines",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Maintain glycaemic control and screen for complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Specialist-led pregnancy care with maternal glucose surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling and cascade testing of relatives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

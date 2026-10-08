@@ -145,5 +145,323 @@
       "caption": "Overview comparison matrix for palindromic rheumatism."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "palindromic_rheumatism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Rheumatoid factor and anti-CCP antibodies",
+          "cells": [
+            {
+              "text": "Risk of progression to rheumatoid arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR and CRP",
+          "cells": [
+            {
+              "text": "Raised during attacks, normal between them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint radiographs",
+          "cells": [
+            {
+              "text": "Normal, without erosions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound during an attack",
+          "cells": [
+            {
+              "text": "Synovitis and periarticular inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum urate and joint aspiration",
+          "cells": [
+            {
+              "text": "Crystal arthropathy, when relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "palindromic_rheumatism-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Early rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "Persistent swelling and seropositivity suggest progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crystal arthropathy (gout, calcium pyrophosphate disease)",
+          "cells": [
+            {
+              "text": "Urate measurement and joint aspiration distinguish it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus",
+          "cells": [
+            {
+              "text": "Rash, serositis or cytopenias point to lupus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "palindromic_rheumatism-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Attack control",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "NSAIDs and, where needed, short courses of corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydroxychloroquine",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Reduces attack frequency and possibly progression, particularly in seropositive patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk stratification",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Rheumatoid factor and anti-CCP antibodies to identify likely progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conventional DMARD",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Methotrexate if attacks become frequent or synovitis persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review and education",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Regular rheumatology review; prompt reporting of persistent swelling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "palindromic_rheumatism-dx-mgmt",
+      "title": "Diagnosis and management of Palindromic rheumatism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden, recurrent, self-limiting joint attacks with normal joints between them",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (persistent swelling, erosions, lupus features or fever with monoarthritis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: aspirate the joint to exclude septic or crystal arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "RF, anti-CCP, ESR and CRP, radiographs, ultrasound during attack, urate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the pattern of self-limiting attacks without erosions confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider early RA, gout or CPPD, reactive arthritis or lupus; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "NSAIDs and short courses of corticosteroids to abort attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hydroxychloroquine to reduce attack frequency and possibly progression risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rheumatoid factor and anti-CCP risk stratification to identify progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Conventional DMARD such as methotrexate if attacks are frequent or synovitis persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Regular rheumatology review and education on reporting persistent swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "No lasting damage between attacks; seropositive patients often progress to RA",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

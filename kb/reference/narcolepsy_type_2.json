@@ -142,5 +142,305 @@
       "caption": "Overview comparison matrix for narcolepsy type 2."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "American Academy of Sleep Medicine ICSD-3",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "narcolepsy_type_2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Overnight polysomnography followed by multiple sleep latency test",
+          "cells": [
+            {
+              "text": "Short sleep latency and two or more sleep-onset REM periods"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep diary and actigraphy",
+          "cells": [
+            {
+              "text": "Confirms sufficient prior sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid hypocretin measurement",
+          "cells": [
+            {
+              "text": "Normal or only borderline levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for sleep apnoea",
+          "cells": [
+            {
+              "text": "Other causes of hypersomnolence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Drugs affecting REM sleep"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "narcolepsy_type_2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Narcolepsy type 1",
+          "cells": [
+            {
+              "text": "Type 2 has no cataplexy and preserved hypocretin; cataplexy or low hypocretin reclassifies it to type 1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Insufficient sleep syndrome",
+          "cells": [
+            {
+              "text": "Excluded with sleep diary and actigraphy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive sleep apnoea",
+          "cells": [
+            {
+              "text": "Must be excluded before the diagnosis is made"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "narcolepsy_type_2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Behavioural management",
+          "cells": [
+            {
+              "text": "Scheduled naps, a regular sleep schedule and sleep hygiene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wake-promoting agents",
+          "cells": [
+            {
+              "text": "Modafinil, armodafinil, solriamfetol or pitolisant; or methylphenidate or amfetamines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude mimics and contributors",
+          "cells": [
+            {
+              "text": "Insufficient sleep, sleep apnoea and REM-affecting medications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Driving and occupational counselling",
+          "cells": [
+            {
+              "text": "Sleepiness-related safety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmation",
+          "cells": [
+            {
+              "text": "Polysomnography and MSLT under sleep-medicine oversight"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic reassessment",
+          "cells": [
+            {
+              "text": "Reclassify to type 1 if cataplexy emerges or hypocretin proves low"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "narcolepsy_type_2-dx-mgmt",
+      "title": "Diagnosis and management of Narcolepsy type 2",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic daytime sleepiness with early REM sleep on testing, without cataplexy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sleepiness impairing driving, mood disorder, secondary cause)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Counsel on driving safety; screen for secondary or medical causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Polysomnography with MSLT, sleep diary and actigraphy, apnoea screen, drug review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Short sleep latency with two or more REM onsets, after adequate prior sleep?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat as insufficient sleep or sleep apnoea; repeat MSLT after adequate sleep",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Behavioural management with scheduled naps and sleep hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Wake-promoting agents such as modafinil, armodafinil, solriamfetol or pitolisant",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Exclude and treat insufficient sleep, sleep apnoea and REM-affecting medications",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassess periodically; reclassify to type 1 if cataplexy emerges or hypocretin is low",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic and sometimes more variable than type 1; sleepiness usually responds to treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

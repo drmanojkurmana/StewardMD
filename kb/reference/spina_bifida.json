@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for spina bifida."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spina_bifida-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Antenatal ultrasound and maternal serum AFP",
+          "cells": [
+            {
+              "text": "Prenatal detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of spine and brain",
+          "cells": [
+            {
+              "text": "Lesion, cord tethering and Chiari II malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cranial imaging and head circumference",
+          "cells": [
+            {
+              "text": "Hydrocephalus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urodynamic and renal tract assessment",
+          "cells": [
+            {
+              "text": "Neurogenic bladder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic evaluation",
+          "cells": [
+            {
+              "text": "Spine, hips and lower limbs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spina_bifida-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tethered cord syndrome from other causes",
+          "cells": [
+            {
+              "text": "Cord tethering with similar deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal dysraphism variants (diastematomyelia, dermal sinus)",
+          "cells": [
+            {
+              "text": "Cutaneous markers may indicate occult dysraphism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple sacral dimple without dysraphism",
+          "cells": [
+            {
+              "text": "A cutaneous marker; occult dysraphism must be considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spina_bifida-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early closure of the myelomeningocele",
+          "cells": [
+            {
+              "text": "Protects exposed neural tissue; antenatal repair in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF diversion",
+          "cells": [
+            {
+              "text": "Ventriculoperitoneal shunt or endoscopic third ventriculostomy for hydrocephalus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurogenic bladder care",
+          "cells": [
+            {
+              "text": "Intermittent catheterisation, anticholinergics and renal surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bowel management programme",
+          "cells": [
+            {
+              "text": "Neurogenic bowel dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic and physiotherapy care",
+          "cells": [
+            {
+              "text": "Lower-limb weakness, spinal deformity and hip problems"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Untethering surgery",
+          "cells": [
+            {
+              "text": "Symptomatic tethered cord with progressive decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folic acid and genetic counselling",
+          "cells": [
+            {
+              "text": "Periconceptional folic acid reduces recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spina_bifida-dx-mgmt",
+      "title": "Diagnosis and management of Spina bifida",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neural tube defect with lower-limb weakness or open lesion: suspected spina bifida",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (open defect, hydrocephalus, fever or CSF leak)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical closure of open defect; treat meningitis or ventriculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI of spine and brain for lesion, tethering and Chiari II; head circumference",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI confirm the lesion with cord tethering or Chiari II?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider occult dysraphism or other tethered cord causes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early closure of the myelomeningocele defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "CSF diversion by shunt or endoscopic third ventriculostomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intermittent catheterisation and renal surveillance for neurogenic bladder",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Untethering for symptomatic tethered cord with progressive decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong multidisciplinary care; shunt failure and tethering can worsen outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

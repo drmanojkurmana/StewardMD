@@ -143,5 +143,316 @@
       "caption": "Overview comparison matrix for systemic mastocytosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO haematolymphoid classification / mastocytosis literature",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "systemic_mastocytosis-dx-mgmt",
+      "title": "Diagnosis and management of Systemic mastocytosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected systemic mastocytosis: recurrent anaphylaxis or flushing with organ symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cytopenias, hepatosplenomegaly, or pathological fracture)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review for aggressive disease or mast cell leukaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum baseline tryptase; bone marrow biopsy; KIT D816V mutation analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do marrow immunophenotyping and KIT D816V testing confirm systemic disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cutaneous mastocytosis, mast cell activation syndrome or idiopathic anaphylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antihistamines, sodium cromoglicate and leukotriene antagonists for mediator symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Trigger avoidance and a self-injectable adrenaline device",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avapritinib or midostaurin for advanced or symptomatic KIT D816V disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cladribine or interferon alfa for aggressive disease or mast cell leukaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Bone-protective treatment for mastocytosis-related osteoporosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Indolent disease has near-normal life expectancy; aggressive disease has poor prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "systemic_mastocytosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum baseline tryptase",
+          "cells": [
+            {
+              "text": "Raised baseline supports the diagnosis and is a diagnostic criterion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow aspirate and trephine",
+          "cells": [
+            {
+              "text": "Mast cell immunophenotyping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KIT D816V mutation analysis",
+          "cells": [
+            {
+              "text": "Activating mutation in the great majority of cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of organ involvement",
+          "cells": [
+            {
+              "text": "Blood counts, liver and spleen, and bone imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergy and anaphylaxis evaluation",
+          "cells": [
+            {
+              "text": "Trigger identification"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "systemic_mastocytosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cutaneous mastocytosis without systemic involvement",
+          "cells": [
+            {
+              "text": "Systemic disease infiltrates the marrow and often organs beyond the skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic anaphylaxis",
+          "cells": [
+            {
+              "text": "Recurrent anaphylaxis should prompt a tryptase check before it is labelled idiopathic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "systemic_mastocytosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Mediator-directed symptom control",
+          "cells": [
+            {
+              "text": "H1 and H2 antihistamines, sodium cromoglicate and leukotriene receptor antagonists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger avoidance and anaphylaxis preparedness",
+          "cells": [
+            {
+              "text": "Self-injectable adrenaline device"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KIT-targeted tyrosine kinase inhibitors",
+          "cells": [
+            {
+              "text": "Avapritinib or midostaurin for advanced or symptomatic KIT D816V disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytoreductive therapy",
+          "cells": [
+            {
+              "text": "Cladribine or interferon alfa in aggressive systemic mastocytosis or mast cell leukaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteoporosis care",
+          "cells": [
+            {
+              "text": "Surveillance and bone-protective agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Baseline tryptase, blood counts and organ involvement, to detect progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Haematology, allergy and dermatology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

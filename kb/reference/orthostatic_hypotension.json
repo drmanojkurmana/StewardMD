@@ -149,5 +149,347 @@
       "caption": "Overview comparison matrix for orthostatic hypotension."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "orthostatic_hypotension-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lying and standing blood pressure at one and three minutes",
+          "cells": [
+            {
+              "text": "A sustained systolic fall of at least 20 mmHg or diastolic fall of at least 10 mmHg"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Antihypertensives, diuretics, nitrates, alpha-blockers and anticholinergic or vasodilating drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration status and bloods",
+          "cells": [
+            {
+              "text": "Volume depletion, electrolytes and haemoglobin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and cardiac evaluation",
+          "cells": [
+            {
+              "text": "Arrhythmia or structural heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic evaluation",
+          "cells": [
+            {
+              "text": "Autonomic neuropathy or neurodegenerative disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orthostatic_hypotension-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dehydration or acute blood loss",
+          "cells": [
+            {
+              "text": "Volume depletion, which should always be corrected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-prandial hypotension",
+          "cells": [
+            {
+              "text": "A large fall after meals; a distinct contributor to falls"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac arrhythmia or structural heart disease",
+          "cells": [
+            {
+              "text": "Chest pain, palpitations or signs of cardiac disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orthostatic_hypotension-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Review and rationalise drugs",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Culprit antihypertensives, diuretics, nitrates and alpha-blockers; correct volume depletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-drug measures first",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Liberalised salt and fluid intake, compression garments or abdominal binder, counter-manoeuvres, slow rising and head-up sleeping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pharmacological therapy",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Fludrocortisone, midodrine or droxidopa when non-drug measures fail, particularly in neurogenic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Diabetic or other autonomic neuropathy; synucleinopathies such as Parkinson disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid supine hypertension",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Balance daytime symptom control against nocturnal blood pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Falls prevention and education",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Assessment, and recognising and aborting presyncopal symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Geriatric, cardiology or autonomic services for refractory or neurogenic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "orthostatic_hypotension-dx-mgmt",
+      "title": "Diagnosis and management of Orthostatic hypotension",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Light-headedness or falls on standing; systolic drop of 20 mmHg within three minutes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (syncope with injury, chest pain, bleeding or recurrent falls)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for bleeding or a cardiac cause of syncope",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lying and standing BP at one and three minutes, medication review, bloods, ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a drug, volume depletion or autonomic cause identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider vasovagal syncope, arrhythmia, post-prandial drop or adrenal insufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw contributing drugs and correct volume depletion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Liberal salt and fluids, compression garments, counter-manoeuvres and slow rising",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fludrocortisone, midodrine or droxidopa if non-drug measures fail",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat autonomic neuropathy or synucleinopathy such as Parkinson disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Falls-prevention assessment; monitor for supine hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Common in older adults and linked to falls; many improve once drugs are withdrawn",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

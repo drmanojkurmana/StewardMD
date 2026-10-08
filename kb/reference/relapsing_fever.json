@@ -189,5 +189,442 @@
       "caption": "Overview comparison matrix for relapsing fever."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Relapsing Fever",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/spirochetes/relapsing-fever"
+    },
+    {
+      "id": "c3",
+      "label": "CDC, Clinical Guidance for Soft Tick Relapsing Fever",
+      "kind": "web",
+      "url": "https://www.cdc.gov/relapsing-fever/hcp/soft-tick-relapsing-fever/index.html"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "relapsing_fever-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing relapsing fever",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Fever pattern",
+          "cells": [
+            {
+              "text": "2 or more febrile episodes separated by well intervals"
+            },
+            {
+              "text": "Antigenic variation of surface proteins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LBRF course",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "First fever 3 to 6 days, usually one milder relapse",
+              "range": [
+                3,
+                6
+              ]
+            },
+            {
+              "text": "B. recurrentis, body lice, crowding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thin or thick blood smear during fever",
+          "unit": "/mL",
+          "cells": [
+            {
+              "text": "Sensitive at 10^5 spirochetes/mL or more",
+              "op": ">=",
+              "value": 100000
+            },
+            {
+              "text": "{{hy:Draw the smear at or before the fever peak}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR of blood or CSF",
+          "cells": [
+            {
+              "text": "More sensitive, works between fevers"
+            },
+            {
+              "text": "Preferred for B. miyamotoi"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology",
+          "cells": [
+            {
+              "text": "Whole-cell and Lyme C6 tests cross-react"
+            },
+            {
+              "text": "GlpQ assay specific but negative early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF",
+          "cells": [
+            {
+              "text": "Mononuclear pleocytosis, raised protein"
+            },
+            {
+              "text": "CNS involvement needs parenteral therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Untreated mortality",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "LBRF 10 to 70% (Harrison) or 10 to 40% (Merck); STRF 4 to 10%",
+              "range": [
+                10,
+                70
+              ]
+            },
+            {
+              "text": "Treated: LBRF 2 to 5%, STRF under 2%"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Untreated LBRF mortality: Harrison gives about 10 to 70%, Merck 10 to 40%."
+    },
+    {
+      "id": "relapsing_fever-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic relapsing fever",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Malaria",
+          "cells": [
+            {
+              "text": "Periodic fever, co-endemic, may coexist"
+            },
+            {
+              "text": "Blood smear for parasites, RDT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Typhoid fever",
+          "cells": [
+            {
+              "text": "Stepwise fever, relative bradycardia"
+            },
+            {
+              "text": "Blood culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Louse-borne typhus",
+          "cells": [
+            {
+              "text": "Rash, same louse vector"
+            },
+            {
+              "text": "Rickettsial serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leptospirosis",
+          "cells": [
+            {
+              "text": "Water exposure, conjunctival suffusion, renal failure"
+            },
+            {
+              "text": "Leptospira serology or PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dengue",
+          "cells": [
+            {
+              "text": "Biphasic fever, rash, low platelets"
+            },
+            {
+              "text": "NS1 antigen, IgM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lyme disease",
+          "cells": [
+            {
+              "text": "Erythema migrans; Bell palsy overlaps STRF"
+            },
+            {
+              "text": "Two-tier serology, but cross-reactive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaplasmosis, ehrlichiosis, babesiosis",
+          "cells": [
+            {
+              "text": "Tick exposure, cytopenias"
+            },
+            {
+              "text": "PCR, smear for morulae or parasites"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "relapsing_fever-treatment",
+      "kind": "treatment",
+      "title": "Treating relapsing fever",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Doxycycline 100 mg every 12 h for 10 days",
+          "cells": [
+            {
+              "text": "Tick-borne relapsing fever"
+            },
+            {
+              "text": "Oral preferred; CDC gives 10 to 14 days overall"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Tetracycline or erythromycin 500 mg every 6 h for 10 days",
+          "cells": [
+            {
+              "text": "Tick-borne alternatives"
+            },
+            {
+              "text": "Erythromycin when tetracycline contraindicated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Single dose: doxycycline 200 mg, or tetracycline, erythromycin or azithromycin 500 mg",
+          "cells": [
+            {
+              "text": "Louse-borne relapsing fever"
+            },
+            {
+              "text": "Procaine penicillin 400,000 to 800,000 units IM alternative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ceftriaxone 2 g IV daily for 10 to 14 days",
+          "cells": [
+            {
+              "text": "CNS involvement, pregnancy, unable to take oral"
+            },
+            {
+              "text": "Parenteral beta-lactam first in pregnancy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Observe for Jarisch-Herxheimer reaction",
+          "cells": [
+            {
+              "text": "First hours after antibiotic"
+            },
+            {
+              "text": "Up to 50% of cases; IV fluids; acetaminophen 650 mg before and after first dose may help"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Delousing and vector control",
+          "cells": [
+            {
+              "text": "LBRF outbreaks"
+            },
+            {
+              "text": "Also rodent-proof cabins for STRF"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "relapsing_fever-dx-mgmt",
+      "title": "Diagnosis and management of relapsing fever",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent fevers after tick bite, rustic cabin stay or louse exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Blood smear during fever; PCR if available",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Spirochetes or PCR positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Test for malaria, typhoid, rickettsiae, leptospirosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "CNS signs or pregnancy?",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Ceftriaxone 2 g IV daily for 10 to 14 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Louse-borne?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Single-dose doxycycline 200 mg or alternative",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Doxycycline 100 mg twice daily for 10 days",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Watch for Jarisch-Herxheimer reaction; fluids and support",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

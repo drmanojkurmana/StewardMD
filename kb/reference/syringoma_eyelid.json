@@ -149,5 +149,325 @@
       "caption": "Overview comparison matrix for syringoma (eyelid)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "syringoma_eyelid-dx-mgmt",
+      "title": "Diagnosis and management of Syringoma (eyelid)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected eyelid syringoma: clustered soft papules on the lower lids",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (solitary indurated lesion, ulceration, or recurrence after excision)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Excisional biopsy to exclude microcystic adnexal carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp and external examination; dermoscopy; biopsy if uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology show the ductal structures characteristic of syringoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider xanthelasma, milia, sebaceous hyperplasia or trichoepithelioma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure that lesions are benign and cosmetic treatment is optional",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Carbon dioxide laser or electrodesiccation with corneal shielding",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical excision for isolated lesions, mindful of lid-margin scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Counsel on frequent recurrence and scarring risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Assess for Down syndrome where clinically indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign with an excellent prognosis; cosmetic treatment is partly effective and recurs",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "syringoma_eyelid-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp and external examination",
+          "cells": [
+            {
+              "text": "Periorbital distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Surface and vascular pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Histology when the diagnosis is uncertain or the lesion is atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "External photography",
+          "cells": [
+            {
+              "text": "Distribution, and monitoring after treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for associated conditions",
+          "cells": [
+            {
+              "text": "Down syndrome, where clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excisional biopsy",
+          "cells": [
+            {
+              "text": "Suspected microcystic adnexal carcinoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "syringoma_eyelid-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Xanthelasma palpebrarum",
+          "cells": [
+            {
+              "text": "Periorbital papules often confused with syringoma; lipid counselling is the point for xanthelasma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microcystic adnexal carcinoma",
+          "cells": [
+            {
+              "text": "Aggressive mimic; a solitary indurated lesion or deep infiltration raises concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Morphoeic basal cell carcinoma",
+          "cells": [
+            {
+              "text": "Solitary, indurated, ill-defined lesion can suggest it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "syringoma_eyelid-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, no threat to vision; intervention is cosmetic and optional"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ablative treatment",
+          "cells": [
+            {
+              "text": "Carbon dioxide laser, electrodesiccation or fine cautery, with corneal shielding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "Isolated lesions, mindful of lid-margin scarring and ectropion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling on recurrence",
+          "cells": [
+            {
+              "text": "Frequent recurrence; scarring and pigmentary change on periorbital skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological confirmation",
+          "cells": [
+            {
+              "text": "Atypical lesions, to distinguish from microcystic adnexal carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated conditions",
+          "cells": [
+            {
+              "text": "Down syndrome where indicated; ophthalmology-led follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

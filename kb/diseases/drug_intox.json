@@ -217,6 +217,16 @@
       "label": "Merck Manual Professional, General Principles of Poisoning",
       "url": "https://www.merckmanuals.com/professional/injuries-poisoning/poisoning/general-principles-of-poisoning",
       "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Drug-Induced Hyperthermia (p3)",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 47-4",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -637,6 +647,64 @@
         }
       ],
       "footnote": "Antidote doses other than naloxone and charcoal are not stated in the source opened."
+    },
+    {
+      "id": "drug_intox-ddx-2",
+      "kind": "ddx",
+      "title": "Drugs that cause hyperthermia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Drugs or agents listed"
+      ],
+      "rows": [
+        {
+          "parameter": "Drug-induced hyperthermia",
+          "cells": [
+            {
+              "text": "amphetamines, cocaine, phencyclidine (PCP), MDMA (ecstasy), LSD, salicylates, lithium, anticholinergics, sympathomimetics"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "drug_intox-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of high anion-gap metabolic acidosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acids and metabolic causes",
+          "cells": [
+            {
+              "text": "Lactic acidosis; ketoacidosis (diabetic, alcoholic, starvation)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Toxins",
+          "cells": [
+            {
+              "text": "Ethylene glycol; methanol; salicylates; propylene glycol; pyroglutamic acid"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Renal failure",
+          "cells": [
+            {
+              "text": "Acute and chronic"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
     }
   ],
   "flowcharts": [

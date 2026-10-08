@@ -185,6 +185,31 @@
       "label": "Merck Manual Professional, Aspergillosis",
       "url": "https://www.merckmanuals.com/professional/infectious-diseases/fungi/aspergillosis",
       "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 255-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 258-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 132-5",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 132-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c7",
+      "label": "Tables PDF, Table 282-5",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -516,6 +541,472 @@
         }
       ],
       "footnote": "No doses or durations were stated in the sources opened. Mortality of treated invasive disease 30 to 70% (Harrison)."
+    },
+    {
+      "id": "aspergillosis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Diagnostic features of ABPA",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Detail"
+      ],
+      "rows": [
+        {
+          "parameter": "Main criterion: asthma",
+          "cells": [
+            {
+              "text": "Bronchial asthma"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Main criterion: infiltrates",
+          "cells": [
+            {
+              "text": "Pulmonary infiltrates"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Main criterion: eosinophilia",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia above 1000/uL"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Main criterion: skin test",
+          "cells": [
+            {
+              "text": "Immediate wheal-and-flare skin response to Aspergillus fumigatus"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Main criterion: precipitins",
+          "cells": [
+            {
+              "text": "Serum precipitins to A. fumigatus"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Main criterion: IgE",
+          "cells": [
+            {
+              "text": "Elevated serum IgE"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Main criterion: bronchiectasis",
+          "cells": [
+            {
+              "text": "Central bronchiectasis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Other feature: sputum plugs",
+          "cells": [
+            {
+              "text": "History of brownish plugs in sputum"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Other feature: sputum culture",
+          "cells": [
+            {
+              "text": "Culture of A. fumigatus from sputum"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Other feature: specific antibodies",
+          "cells": [
+            {
+              "text": "Elevated IgE and IgG antibodies specific for A. fumigatus"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "aspergillosis-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Microbial pathogens causing cavitary lung infection",
+      "rowHeader": "Host setting",
+      "columns": [
+        "Pathogens"
+      ],
+      "rows": [
+        {
+          "parameter": "Aspiration-prone host",
+          "cells": [
+            {
+              "text": "Anaerobic bacteria plus microaerophilic and/or anaerobic streptococci, Gemella spp."
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Embolic (endovascular) lesions",
+          "cells": [
+            {
+              "text": "Usually Staphylococcus aureus, Pseudomonas aeruginosa, Fusobacterium necrophorum"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Endemic fungi",
+          "cells": [
+            {
+              "text": "Histoplasma, Blastomyces, Coccidioides spp."
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Mycobacteria",
+          "cells": [
+            {
+              "text": "M. tuberculosis, M. kansasii, M. avium"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Immunocompromised host",
+          "cells": [
+            {
+              "text": "M. tuberculosis, Nocardia asteroides, Rhodococcus equi, Legionella spp., P. aeruginosa, Enterobacteriaceae (especially Klebsiella pneumoniae), Aspergillus spp., Cryptococcus spp."
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Previously healthy host: bacteria",
+          "cells": [
+            {
+              "text": "S. aureus, S. milleri, K. pneumoniae, group A Streptococcus; Gemella, Legionella and Actinomyces spp."
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Previously healthy host: parasites",
+          "cells": [
+            {
+              "text": "Entamoeba histolytica, Paragonimus westermani, Strongyloides stercoralis"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "The source groups the first four rows as one block of mixed settings; source footnotes (a) and (b) are not legible."
+    },
+    {
+      "id": "aspergillosis-diagnostic-4",
+      "kind": "diagnostic",
+      "title": "Common infections after solid organ transplantation by site",
+      "rowHeader": "Infected site",
+      "columns": [
+        "Early (<1 month)",
+        "Middle (1 to 4 months)",
+        "Late (>6 months)"
+      ],
+      "rows": [
+        {
+          "parameter": "Donor organ",
+          "cells": [
+            {
+              "text": "Bacterial and fungal infections of the graft, anastomotic site and surgical wound"
+            },
+            {
+              "text": "CMV infection"
+            },
+            {
+              "text": "EBV infection (may present in the allograft organ)"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Systemic",
+          "cells": [
+            {
+              "text": "Bacteremia and candidemia (often from central venous catheter colonization)"
+            },
+            {
+              "text": "CMV infection (fever, bone marrow suppression)"
+            },
+            {
+              "text": "CMV infection, especially in patients given early posttransplantation prophylaxis; EBV proliferative syndromes (may occur in donor organs)"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Lung",
+          "cells": [
+            {
+              "text": "Bacterial aspiration pneumonia with prevalent nosocomial organisms associated with intubation and sedation (highest risk in lung transplantation)"
+            },
+            {
+              "text": "Pneumocystis infection; CMV pneumonia (highest risk in lung transplantation); Aspergillus infection (highest risk in lung transplantation)"
+            },
+            {
+              "text": "Pneumocystis infection; granulomatous lung diseases (nocardiae, reactivated fungal and mycobacterial diseases)"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Kidney",
+          "cells": [
+            {
+              "text": "Bacterial and fungal (Candida) infections (cystitis, pyelonephritis) associated with urinary tract catheters (highest risk in kidney transplantation)"
+            },
+            {
+              "text": "Renal transplantation: BK virus infection (associated with nephropathy); JC virus infection"
+            },
+            {
+              "text": "Renal transplantation: bacteria (late urinary tract infections, usually not associated with bacteremia); BK virus (nephropathy, graft failure, generalized vasculopathy)"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Liver and biliary tract",
+          "cells": [
+            {
+              "text": "Cholangitis"
+            },
+            {
+              "text": "CMV hepatitis"
+            },
+            {
+              "text": "CMV hepatitis"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Heart",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "Toxoplasma gondii infection (highest risk in heart transplantation)"
+            },
+            {
+              "text": "T. gondii (highest risk in heart transplantation)"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Gastrointestinal tract",
+          "cells": [
+            {
+              "text": "Peritonitis, especially after liver transplantation"
+            },
+            {
+              "text": "Colitis secondary to Clostridium difficile infection (risk can persist)"
+            },
+            {
+              "text": "Colitis secondary to C. difficile infection (risk can persist)"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Central nervous system",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "Listeria (meningitis); T. gondii infection"
+            },
+            {
+              "text": "Listeria meningitis; Cryptococcus meningitis; Nocardia abscess; JC virus-associated PML"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "The source column headings leave a gap between 4 and 6 months."
+    },
+    {
+      "id": "aspergillosis-diagnostic-5",
+      "kind": "diagnostic",
+      "title": "Common sources of infection after hematopoietic stem cell transplantation",
+      "rowHeader": "Infection site",
+      "columns": [
+        "Early (<1 month)",
+        "Middle (1 to 4 months)",
+        "Late (>6 months)"
+      ],
+      "rows": [
+        {
+          "parameter": "Disseminated",
+          "cells": [
+            {
+              "text": "Aerobic bacteria (gram-negative, gram-positive)"
+            },
+            {
+              "text": "Nocardia, Candida, Aspergillus, EBV"
+            },
+            {
+              "text": "Encapsulated bacteria (Streptococcus pneumoniae, Haemophilus influenzae, Neisseria meningitidis)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Skin and mucous membranes",
+          "cells": [
+            {
+              "text": "HSV"
+            },
+            {
+              "text": "HHV-6"
+            },
+            {
+              "text": "VZV"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Lungs",
+          "cells": [
+            {
+              "text": "Aerobic bacteria (gram-negative, gram-positive), Candida, Aspergillus, other molds, HSV"
+            },
+            {
+              "text": "CMV, seasonal respiratory viruses, Pneumocystis, Toxoplasma"
+            },
+            {
+              "text": "Pneumocystis, S. pneumoniae"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Gastrointestinal tract",
+          "cells": [
+            {
+              "text": "Clostridium difficile"
+            },
+            {
+              "text": "CMV, adenovirus"
+            },
+            {
+              "text": "EBV, CMV"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Kidney",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "BK virus, adenovirus"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Brain",
+          "cells": [
+            {
+              "text": "HHV-6"
+            },
+            {
+              "text": "HHV-6, Toxoplasma"
+            },
+            {
+              "text": "Toxoplasma, JC virus (rare)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Bone marrow",
+          "cells": [
+            {
+              "text": "HHV-6"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c6"
+        }
+      ]
+    },
+    {
+      "id": "aspergillosis-diagnostic-6",
+      "kind": "diagnostic",
+      "title": "Most common opportunistic infections in renal transplant recipients",
+      "rowHeader": "Period after transplant",
+      "columns": [
+        "Infections"
+      ],
+      "rows": [
+        {
+          "parameter": "Peritransplant (<1 month)",
+          "cells": [
+            {
+              "text": "Wound infections; herpesvirus; oral candidiasis; urinary tract infection"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Early (1 to 6 months)",
+          "cells": [
+            {
+              "text": "Pneumocystis carinii; cytomegalovirus; Legionella; Listeria; hepatitis B; hepatitis C"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Late (>6 months)",
+          "cells": [
+            {
+              "text": "Aspergillus; Nocardia; BK virus (polyoma); herpes zoster; hepatitis B; hepatitis C"
+            }
+          ],
+          "cite": "c7"
+        }
+      ]
     }
   ],
   "flowcharts": [

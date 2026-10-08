@@ -150,5 +150,343 @@
       "caption": "Overview comparison matrix for sympathetic ophthalmia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sympathetic_ophthalmia-dx-mgmt",
+      "title": "Diagnosis and management of Sympathetic ophthalmia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected sympathetic ophthalmia: fellow-eye uveitis after penetrating injury or surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fellow-eye inflammation, rapid bilateral loss, exudative detachment)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent prompt high-intensity systemic corticosteroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fluorescein and ICG angiography; OCT; fundus autofluorescence",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do angiography and OCT show granulomatous choroiditis with infection excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude endophthalmitis, lymphoma and Vogt-Koyanagi-Harada before long-term therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-intensity systemic corticosteroids to preserve the sympathising eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Steroid-sparing agents such as mycophenolate or azathioprine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "TNF-inhibitor biologics for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Topical corticosteroids and cycloplegics for anterior segment inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lifelong monitoring for flares and complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Prompt, sustained treatment preserves vision; disease is chronic and relapsing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sympathetic_ophthalmia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fundus fluorescein angiography",
+          "cells": [
+            {
+              "text": "Multiple early hyperfluorescent leakage points and late pooling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indocyanine green angiography",
+          "cells": [
+            {
+              "text": "Hypofluorescent choroidal lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Subretinal fluid and choroidal thickening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus autofluorescence",
+          "cells": [
+            {
+              "text": "Dalen-Fuchs nodules and outer retinal changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasonography",
+          "cells": [
+            {
+              "text": "Choroidal thickening where the media are opaque"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic and infective screen",
+          "cells": [
+            {
+              "text": "Tuberculosis, syphilis and sarcoidosis excluded as mimics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sympathetic_ophthalmia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vogt-Koyanagi-Harada disease",
+          "cells": [
+            {
+              "text": "Features can overlap; the history of penetrating injury or intraocular surgery points to sympathetic ophthalmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculous or syphilitic granulomatous uveitis",
+          "cells": [
+            {
+              "text": "Excluded by systemic and infective screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-operative or post-traumatic endophthalmitis",
+          "cells": [
+            {
+              "text": "Infective mimic to exclude before long-term immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular lymphoma masquerade",
+          "cells": [
+            {
+              "text": "Neoplastic mimic to exclude before long-term immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sympathetic_ophthalmia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-intensity systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Prompt, to control bilateral granulomatous panuveitis and preserve the sympathising eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "Mycophenolate, azathioprine, methotrexate or ciclosporin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TNF-inhibitor biologics",
+          "cells": [
+            {
+              "text": "Refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids and cycloplegics",
+          "cells": [
+            {
+              "text": "Adjuncts for anterior segment inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enucleation of exciting eye",
+          "cells": [
+            {
+              "text": "Considered for a blind, painful exciting eye, after exhausting the visual potential of any seeing eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication management",
+          "cells": [
+            {
+              "text": "Cataract, glaucoma and macular scarring; screen for immunosuppressant toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist long-term surveillance",
+          "cells": [
+            {
+              "text": "Ophthalmology and uveitis specialist; lifelong monitoring for flares"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

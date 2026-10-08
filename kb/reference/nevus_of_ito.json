@@ -143,5 +143,305 @@
       "caption": "Overview comparison matrix for naevus of ito."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nevus_of_ito-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Dermal melanocytic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full skin examination",
+          "cells": [
+            {
+              "text": "Coexisting naevus of Ota"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wood lamp examination",
+          "cells": [
+            {
+              "text": "Confirms the pigment is dermal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial photography",
+          "cells": [
+            {
+              "text": "Monitors stability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of any nodule",
+          "cells": [
+            {
+              "text": "Excludes melanoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nevus_of_ito-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mongolian spot",
+          "cells": [
+            {
+              "text": "Congenital dermal melanocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Naevus of Ota",
+          "cells": [
+            {
+              "text": "Periorbital and facial distribution rather than shoulder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blue naevus",
+          "cells": [
+            {
+              "text": "Solitary dermal melanocytic lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bruise or resolving haematoma",
+          "cells": [
+            {
+              "text": "Transient colour change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-inflammatory hyperpigmentation",
+          "cells": [
+            {
+              "text": "Follows injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nevus_of_ito-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Lesion is benign; treatment is cosmetic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pigment-specific Q-switched or picosecond laser",
+          "cells": [
+            {
+              "text": "Mainstay of cosmetic treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid topical lightening agents",
+          "cells": [
+            {
+              "text": "Ineffective on dermal pigment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of nodular change",
+          "cells": [
+            {
+              "text": "Melanoma must be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nevus_of_ito-dx-mgmt",
+      "title": "Diagnosis and management of Naevus of Ito",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Blue-grey pigmentation over the shoulder and supraclavicular region",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new nodule, focal change, rapid growth or ulceration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent biopsy of any nodule suspicious for melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dermoscopy, Wood lamp, full skin check, serial photography, biopsy if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Dermal melanocytic pigment in the typical distribution without suspicious change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Mongolian spot or blue naevus; biopsy if change",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure that the lesion is benign",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pigment-specific laser for cosmetic treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid topical lightening agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Biopsy any nodular or changing area",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and lifelong if untreated; very small risk of malignant change",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

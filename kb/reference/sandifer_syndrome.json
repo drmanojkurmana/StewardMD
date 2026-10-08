@@ -152,5 +152,305 @@
       "caption": "Overview comparison matrix for sandifer syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sandifer_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptom diary or home video",
+          "cells": [
+            {
+              "text": "Links episodes to feeds; clinical diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-reflux therapeutic trial",
+          "cells": [
+            {
+              "text": "Diagnostic-therapeutic step"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal pH-impedance monitoring",
+          "cells": [
+            {
+              "text": "Documents reflux"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper GI contrast study",
+          "cells": [
+            {
+              "text": "Hiatus hernia, malrotation or anatomical anomaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy with biopsy",
+          "cells": [
+            {
+              "text": "Oesophagitis or eosinophilic oesophagitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Typically normal; used if seizures cannot be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sandifer_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Epileptic seizures and infantile spasms",
+          "cells": [
+            {
+              "text": "Sandifer keeps awareness and has a normal EEG; episodes follow feeds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior fossa or cervical cord pathology",
+          "cells": [
+            {
+              "text": "Focal neurological signs or abnormal interictal examination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sandifer_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Positioning and feeding changes",
+          "cells": [
+            {
+              "text": "Upright positioning and feed modification for reflux"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acid suppression",
+          "cells": [
+            {
+              "text": "Proton pump inhibitor or H2-receptor antagonist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundoplication",
+          "cells": [
+            {
+              "text": "Refractory cases or significant hiatus hernia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, self-limiting; resolves with reflux control and sphincter maturation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid antiepileptic drugs",
+          "cells": [
+            {
+              "text": "Consciousness is preserved and EEG is normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastroenterology input",
+          "cells": [
+            {
+              "text": "Children with neurodisability, where reflux is common"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sandifer_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of sandifer syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with episodic torticollis or arching around feeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Altered awareness, apnoea, bilious vomiting, faltering growth or focal signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation for seizure, malrotation with volvulus or structural lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Feed-linked symptom diary or video; pH-impedance; contrast study if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do episodes track with feeds and respond to reflux control?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider seizures, dystonia, torticollis variants and spinal pathology",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Upright positioning and feeding modification",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Proton pump inhibitor or H2 blocker",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fundoplication only if refractory or large hiatus hernia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassure; avoid unnecessary antiepileptics",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent prognosis; resolves as the sphincter matures",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

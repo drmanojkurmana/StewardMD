@@ -144,5 +144,285 @@
       "caption": "Overview comparison matrix for mongolian spot (congenital dermal melanocytosis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mongolian_spot-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical appearance and site",
+          "cells": [
+            {
+              "text": "Diagnosis is clinical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Documentation and photography",
+          "cells": [
+            {
+              "text": "For medico-legal and safeguarding purposes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Where diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screening and organomegaly check",
+          "cells": [
+            {
+              "text": "If lesions are extensive or persistent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distribution mapping",
+          "cells": [
+            {
+              "text": "Review for associated vascular malformation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mongolian_spot-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bruise or non-accidental injury",
+          "cells": [
+            {
+              "text": "Blue-grey patch is a birthmark; documentation prevents misattribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phakomatosis pigmentovascularis",
+          "cells": [
+            {
+              "text": "Associated vascular malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Naevus of Ota",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mongolian_spot-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Typical lumbosacral lesions fade in early childhood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Documentation and photography",
+          "cells": [
+            {
+              "text": "Avoid misinterpretation as a bruise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pigment-specific laser",
+          "cells": [
+            {
+              "text": "Only for persistent, cosmetically significant lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assess extensive or aberrant lesions",
+          "cells": [
+            {
+              "text": "Underlying inborn error such as GM1 gangliosidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology, metabolic or genetics referral",
+          "cells": [
+            {
+              "text": "When a syndromic association is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mongolian_spot-dx-mgmt",
+      "title": "Diagnosis and management of Mongolian spot (congenital dermal melanocytosis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Blue-grey patch on the lumbosacral area of an infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Extensive or persistent lesions, dysmorphism, organomegaly or vascular birthmark?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Metabolic and genetics assessment for storage disease or phakomatosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; photograph and document site and extent",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Typical lumbosacral location and appearance?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider naevus of Ota or Ito, blue naevus, congenital melanocytic naevus",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and observe; no treatment for typical lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Record site and extent to avoid bruise or safeguarding confusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Laser only for persistent, cosmetically significant lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Benign; usually fades by mid-childhood",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

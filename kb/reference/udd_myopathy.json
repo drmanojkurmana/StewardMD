@@ -150,5 +150,296 @@
       "caption": "Overview comparison matrix for udd distal myopathy / tibial muscular dystrophy (titin)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "udd_myopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "A normal result does not exclude myopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Separates myopathy from neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle MRI",
+          "cells": [
+            {
+              "text": "Selective tibialis anterior involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy",
+          "cells": [
+            {
+              "text": "Dystrophic changes and rimmed vacuoles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TTN M-line sequencing or distal myopathy panel",
+          "cells": [
+            {
+              "text": "Genetic confirmation of the TTN variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "udd_myopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Peroneal nerve palsy or L5 radiculopathy",
+          "cells": [
+            {
+              "text": "Foot drop can be mistaken for these; EMG separates myopathy from neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laing distal myopathy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "udd_myopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy and stretching",
+          "cells": [
+            {
+              "text": "No disease-specific pharmacotherapy; preserves ankle range and function against tibialis anterior weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-foot orthoses",
+          "cells": [
+            {
+              "text": "Correct foot drop and improve gait stability and safety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational therapy and mobility aids",
+          "cells": [
+            {
+              "text": "Maintain independence as distal weakness progresses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory and cardiac assessment",
+          "cells": [
+            {
+              "text": "Severe homozygous or compound heterozygous limb-girdle phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular clinic follow-up",
+          "cells": [
+            {
+              "text": "Periodic reassessment of functional status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family evaluation",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; severe recessive phenotype in offspring of two carriers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "udd_myopathy-dx-mgmt",
+      "title": "Diagnosis and management of Udd distal myopathy / tibial muscular dystrophy (titin)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Udd myopathy: distal tibialis anterior weakness with foot drop",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe early generalised weakness, cardiac or respiratory symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory and cardiac assessment for the severe recessive phenotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Creatine kinase, nerve studies and EMG, muscle MRI and TTN sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does TTN sequencing confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Laing myopathy, neuropathy or radiculopathy; reassess the diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and stretching to preserve ankle range; no disease-specific drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ankle-foot orthoses to correct foot drop and improve gait",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Occupational therapy and mobility aids as distal weakness progresses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neuromuscular follow-up with cardiac and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Heterozygous form progresses slowly and most keep walking; recessive form is disabling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

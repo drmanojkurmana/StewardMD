@@ -154,5 +154,334 @@
       "caption": "Overview comparison matrix for pmm2-cdg (cdg type ia)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pmm2_cdg-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum transferrin isoelectric focusing or mass spectrometry",
+          "cells": [
+            {
+              "text": "Type 1 pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phosphomannomutase activity",
+          "cells": [
+            {
+              "text": "Enzyme activity in leukocytes or fibroblasts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PMM2 gene sequencing",
+          "cells": [
+            {
+              "text": "Confirmation and family counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation studies",
+          "cells": [
+            {
+              "text": "Antithrombin, protein C, protein S and factor XI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar or pontocerebellar hypoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Pericardial effusion and cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pmm2_cdg-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Inherited coagulopathies",
+          "cells": [
+            {
+              "text": "Unexplained bleeding or thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital muscular dystrophies with cerebellar involvement",
+          "cells": [
+            {
+              "text": "Cerebellar involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pmm2_cdg-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multisystem supportive care",
+          "cells": [
+            {
+              "text": "No curative therapy; coordinated by specialist teams"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition",
+          "cells": [
+            {
+              "text": "Enteral tube feeding where oral intake fails"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulopathy",
+          "cells": [
+            {
+              "text": "Correct and monitor antithrombin, protein C and S, and factor XI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid",
+          "cells": [
+            {
+              "text": "Hormone replacement for hypothyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ monitoring",
+          "cells": [
+            {
+              "text": "Hepatopathy, pericardial effusion and cardiac involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Development",
+          "cells": [
+            {
+              "text": "Developmental support, physiotherapy for hypotonia and ataxia, and ophthalmology review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stroke-like episodes",
+          "cells": [
+            {
+              "text": "Anticipate and treat; avoid dehydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive disorder; carrier testing and prenatal options"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pmm2_cdg-dx-mgmt",
+      "title": "Diagnosis and management of PMM2-CDG (CDG type Ia)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with hypotonia, cerebellar hypoplasia and multisystem involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (stroke-like or thrombotic events, pericardial effusion, severe hepatopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac and haematology review for effusion, heart failure or thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transferrin isoforms; PMM2 enzyme and gene testing; coagulation; brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the transferrin pattern with PMM2 testing confirm PMM2-CDG?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other CDG, congenital muscular dystrophy, mitochondrial disease or PCH",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Multisystem supportive care coordinated by specialist teams",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Enteral tube feeding for failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct and monitor antithrombin, protein C and S, and factor XI",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor and manage hepatopathy, pericardial effusion and cardiac involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for this autosomal recessive disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Substantial infant mortality; survivors often have static intellectual impairment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

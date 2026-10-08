@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for scleromalacia perforans."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scleromalacia_perforans-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp with red-free light",
+          "cells": [
+            {
+              "text": "Scleral thinning and avascular necrotic areas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatoid factor, anti-CCP, inflammatory markers",
+          "cells": [
+            {
+              "text": "Underlying rheumatoid disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANCA, ANA and complement",
+          "cells": [
+            {
+              "text": "Screen for systemic vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior-segment OCT or high-frequency ultrasound",
+          "cells": [
+            {
+              "text": "Residual scleral thickness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrape and culture",
+          "cells": [
+            {
+              "text": "When a necrotising process could be microbial"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging, urinalysis, renal function",
+          "cells": [
+            {
+              "text": "Systemic vasculitis and infection screen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scleromalacia_perforans-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Necrotising scleritis with inflammation",
+          "cells": [
+            {
+              "text": "Painful, injected eye, unlike the white painless eye here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective scleritis",
+          "cells": [
+            {
+              "text": "Mimics; needs urgent culture-directed antimicrobials"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Senile scleral hyaline plaques",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scleromalacia_perforans-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic immunosuppression",
+          "cells": [
+            {
+              "text": "Mainstay: corticosteroids with a steroid-sparing agent or biologic such as rituximab"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat rheumatoid disease",
+          "cells": [
+            {
+              "text": "With rheumatology, as the eye reflects systemic vasculitic activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive ocular care",
+          "cells": [
+            {
+              "text": "Lubricants and eye protection; topical therapy does not halt necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protect the thinned globe",
+          "cells": [
+            {
+              "text": "Avoid trauma and raised pressure; scleral or tectonic patch graft for impending perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Residual scleral thickness and screen for systemic vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Rheumatology and ophthalmology, addressing cardiovascular and systemic risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scleromalacia_perforans-dx-mgmt",
+      "title": "Diagnosis and management of Scleromalacia perforans",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "White, painless eye with scleral thinning in long-standing rheumatoid arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Staphyloma, uveal exposure, perforation risk, active vasculitis or infection signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: protect globe, culture if infective, patch graft, systemic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp, RF, anti-CCP, ANCA, ANA, scleral thickness imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Necrotic thinning with systemic rheumatoid or vasculitic disease and no infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Culture for infective or surgically induced necrosis; review other thinning causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroids plus steroid-sparing agent or rituximab",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat rheumatoid disease with rheumatology",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Protect globe from trauma; patch graft for impending perforation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor scleral thickness and systemic vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Guarded ocular prognosis; depends on early control of systemic disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

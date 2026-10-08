@@ -145,5 +145,326 @@
       "caption": "Overview comparison matrix for otosclerosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "otosclerosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pure tone audiometry",
+          "cells": [
+            {
+              "text": "Conductive or mixed loss with a Carhart notch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuning fork tests",
+          "cells": [
+            {
+              "text": "Confirm conductive hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tympanometry and reflexes",
+          "cells": [
+            {
+              "text": "Normal to reduced compliance with absent stapedial reflexes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech audiometry",
+          "cells": [
+            {
+              "text": "Discrimination before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT of the temporal bone",
+          "cells": [
+            {
+              "text": "Active foci and other pathology, in selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "otosclerosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Otitis media with effusion",
+          "cells": [
+            {
+              "text": "Effusion gives a different pattern; the drum is normal in otosclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Van der Hoeve syndrome",
+          "cells": [
+            {
+              "text": "Otosclerosis occurring with osteogenesis imperfecta"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "otosclerosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stapes surgery",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Stapedotomy or stapedectomy to bypass the fixed footplate in selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing aids",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "An effective alternative for those declining or unfit for surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry for selection",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Documents the conductive or mixed loss and guides candidacy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cochlear implantation",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "For advanced cochlear disease with profound sensorineural loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical therapy for cochlear disease",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Sodium fluoride or a bisphosphonate for active foci in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Established sensorineural cochlear involvement is not reversed by surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "otosclerosis-dx-mgmt",
+      "title": "Diagnosis and management of Otosclerosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slowly progressive bilateral conductive hearing loss with normal drums in a young adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid asymmetric sensorineural loss, vertigo or facial symptoms after surgery)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ENT review for post-surgery complication or vascular lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pure-tone and speech audiometry, tuning fork, tympanometry, HRCT if selected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does audiometry show conductive loss with a Carhart notch and normal drum?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ossicular fixation, effusion, tympanosclerosis or canal dehiscence",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stapedotomy or stapedectomy to bypass the fixed footplate in selected patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hearing aids as an effective alternative for those declining surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cochlear implantation for advanced cochlear disease with profound sensorineural loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sodium fluoride or a bisphosphonate for active foci in selected cochlear disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Counsel that established sensorineural loss is not reversed by surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Surgery restores useful hearing in most suitable patients; cochlear loss is permanent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

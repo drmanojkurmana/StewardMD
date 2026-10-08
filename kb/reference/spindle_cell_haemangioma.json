@@ -145,5 +145,296 @@
       "caption": "Overview comparison matrix for spindle cell haemangioma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Soft Tissue and Bone Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spindle_cell_haemangioma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Excisional biopsy with histology",
+          "cells": [
+            {
+              "text": "Cavernous vessels, phleboliths and spindle cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IDH1 and IDH2 mutation analysis",
+          "cells": [
+            {
+              "text": "Somatic mutations, shared with Maffucci enchondromas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs or MRI of the limb",
+          "cells": [
+            {
+              "text": "Enchondromas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Suspected Maffucci syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance imaging",
+          "cells": [
+            {
+              "text": "Malignant transformation of enchondromas"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spindle_cell_haemangioma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Kaposi sarcoma",
+          "cells": [
+            {
+              "text": "A histological mimic that should not be diagnosed by default"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angiosarcoma",
+          "cells": [
+            {
+              "text": "Atypical histology raises concern; it must be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spindle_cell_haemangioma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation or local excision",
+          "cells": [
+            {
+              "text": "Symptomatic or troublesome lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological confirmation",
+          "cells": [
+            {
+              "text": "Avoids aggressive surgery; the lesion is benign and does not metastasise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and cosmetic care",
+          "cells": [
+            {
+              "text": "Painful nodules and cosmetic concerns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maffucci evaluation",
+          "cells": [
+            {
+              "text": "Limb imaging and skeletal survey when lesions are multiple"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Malignant transformation of enchondromas to chondrosarcoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular anomalies service",
+          "cells": [
+            {
+              "text": "Counselling that IDH changes are somatic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spindle_cell_haemangioma-dx-mgmt",
+      "title": "Diagnosis and management of Spindle cell haemangioma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Firm blue-red nodules, often multiple: suspected spindle cell haemangioma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, new deep bony lesions, atypical histology)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for suspected chondrosarcoma or angiosarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Excisional biopsy with histology; IDH1 and IDH2 testing; limb imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology show cavernous vessels with phleboliths and spindle cells?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Kaposi sarcoma, angiosarcoma or venous malformation; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observation or local excision for symptomatic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Evaluate for Maffucci syndrome with limb imaging and skeletal survey",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Long-term surveillance for enchondroma transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Refer to a vascular anomalies service",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign, non-metastasising, but recurs often; Maffucci carries malignancy risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

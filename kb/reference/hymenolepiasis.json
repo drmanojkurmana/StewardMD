@@ -147,5 +147,276 @@
       "caption": "Overview comparison matrix for hymenolepiasis (hymenolepis nana)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell/Manson's Tropical Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hymenolepiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool microscopy",
+          "cells": [
+            {
+              "text": "Characteristic eggs with polar filaments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool concentration methods",
+          "cells": [
+            {
+              "text": "Improved detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated sampling",
+          "cells": [
+            {
+              "text": "Light or intermittent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with eosinophil count",
+          "cells": [
+            {
+              "text": "Eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and nutritional status in children",
+          "cells": [
+            {
+              "text": "Nutritional effects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune status assessment",
+          "cells": [
+            {
+              "text": "Where infection is unusually severe"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hymenolepiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Praziquantel",
+          "cells": [
+            {
+              "text": "First-line anthelmintic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated or extended courses",
+          "cells": [
+            {
+              "text": "Counter internal autoinfection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sanitation and hygiene",
+          "cells": [
+            {
+              "text": "Hand and food hygiene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of household contacts",
+          "cells": [
+            {
+              "text": "Reduces transmission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Growth monitoring in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune status assessment",
+          "cells": [
+            {
+              "text": "Unusual or persistent infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hymenolepiasis-dx-mgmt",
+      "title": "Diagnosis and management of Hymenolepiasis (Hymenolepis nana)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with diarrhoea or weight loss and small eggs with polar filaments in stool",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Heavy infection with weight loss, persistent severe infection, or dehydration?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: rehydration and nutrition support for dehydration or weight loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool microscopy with concentration; repeated sampling; FBC with eosinophils; growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are Hymenolepis nana eggs seen on repeated stool microscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider taeniasis, soil-transmitted helminths, giardiasis or functional pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Praziquantel as first-line anthelmintic",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Repeated or extended courses for autoinfection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sanitation and hand and food hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treatment of household contacts and growth monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Infection cleared; reinfection prevented in households",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

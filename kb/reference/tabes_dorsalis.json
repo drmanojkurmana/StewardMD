@@ -149,5 +149,336 @@
       "caption": "Overview comparison matrix for tabes dorsalis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tabes_dorsalis-dx-mgmt",
+      "title": "Diagnosis and management of Tabes dorsalis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tabes dorsalis: sensory ataxia, lightning pains and absent reflexes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (HIV co-infection, visceral crisis, or Charcot joint or ulcer)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent HIV testing and exclusion of other acute visceral pathology",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum treponemal serology; CSF VDRL, cell count and protein; HIV testing; spine MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are treponemal serology and CSF findings positive for neurosyphilis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider B12 deficiency, diabetic pseudotabes or compressive myelopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intravenous aqueous crystalline penicillin as specific treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Penicillin desensitisation in allergic patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Carbamazepine for lightning pains",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and walking aids for sensory ataxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Protective foot care for trophic ulcers and Charcot joints",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Follow-up CSF examination and serology to confirm response",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Antibiotics halt progression, but established dorsal column damage often persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tabes_dorsalis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum treponemal and non-treponemal serology (TPPA, RPR or VDRL)",
+          "cells": [
+            {
+              "text": "Treponemal infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF VDRL, cell count and protein",
+          "cells": [
+            {
+              "text": "Neurosyphilis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing",
+          "cells": [
+            {
+              "text": "Co-infection, which alters the natural history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the spine",
+          "cells": [
+            {
+              "text": "Posterior column change; excludes other myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Sensory involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Pupillary abnormalities"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tabes_dorsalis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Subacute combined degeneration from vitamin B12 deficiency",
+          "cells": [
+            {
+              "text": "Mimics sensory ataxia; treponemal serology must be sent to separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compressive posterior column myelopathy",
+          "cells": [
+            {
+              "text": "MRI of the spine excludes a compressive cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tabes_dorsalis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intravenous aqueous crystalline penicillin",
+          "cells": [
+            {
+              "text": "Neurosyphilis regimen; the specific antitreponemal treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penicillin desensitisation",
+          "cells": [
+            {
+              "text": "Allergic patients; penicillin remains the only reliable agent for neurosyphilis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticonvulsant for lightning pains",
+          "cells": [
+            {
+              "text": "Carbamazepine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and gait rehabilitation",
+          "cells": [
+            {
+              "text": "Walking aids for sensory ataxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protective foot care",
+          "cells": [
+            {
+              "text": "Trophic ulcers and Charcot joints from loss of protective sensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up CSF examination and serology",
+          "cells": [
+            {
+              "text": "Confirms treatment response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV co-management and ophthalmology",
+          "cells": [
+            {
+              "text": "Frequent co-infection; pupillary abnormalities"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

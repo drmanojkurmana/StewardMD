@@ -148,5 +148,296 @@
       "caption": "Overview comparison matrix for uric acid nephrolithiasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "uric_acid_nephrolithiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-contrast CT",
+          "cells": [
+            {
+              "text": "Characteristically low-density radiolucent stone, invisible on plain radiograph"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated fresh urine pH",
+          "cells": [
+            {
+              "text": "Persistently acidic urine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "24-hour urine for volume, uric acid, pH and citrate",
+          "cells": [
+            {
+              "text": "Urine volume and urate and citrate excretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum urate and metabolic screen",
+          "cells": [
+            {
+              "text": "Diabetes and insulin resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analysis of any retrieved stone",
+          "cells": [
+            {
+              "text": "Stone composition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "uric_acid_nephrolithiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Calcium oxalate stones",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Xanthine or 2,8-dihydroxyadenine stones",
+          "cells": [
+            {
+              "text": "Also radiolucent; stone analysis separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urothelial tumour producing a filling defect",
+          "cells": [
+            {
+              "text": "Radiolucent filling defect; needs exclusion before attributing it to stone"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "uric_acid_nephrolithiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinary alkalinisation",
+          "cells": [
+            {
+              "text": "Potassium citrate or sodium bicarbonate, shifting urate towards its soluble form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High fluid intake",
+          "cells": [
+            {
+              "text": "High, dilute urine output to reduce crystallisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allopurinol",
+          "cells": [
+            {
+              "text": "Lowers urate production in hyperuricosuria, gout or high cell turnover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diet and weight",
+          "cells": [
+            {
+              "text": "Reduce purine and animal-protein intake; lose weight; treat insulin resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute obstruction or infection",
+          "cells": [
+            {
+              "text": "Drainage and treatment of infected obstruction; sepsis is a red flag"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "uric_acid_nephrolithiasis-dx-mgmt",
+      "title": "Diagnosis and management of Uric acid nephrolithiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected uric acid stone: radiolucent stone with persistently acidic urine",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (obstruction with infection, or urate nephropathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drainage and sepsis management for obstruction with infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Non-contrast CT, repeated urine pH, 24-hour urine, serum urate, stone analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does stone analysis or CT confirm a uric acid stone?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider calcium oxalate stone or urothelial tumour; reassess the filling defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Alkalinise urine with potassium citrate or bicarbonate to dissolve the stone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Increase fluid intake to maintain high, dilute urine output",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Allopurinol for hyperuricosuria, gout or high cell turnover",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dietary purine reduction, weight loss and treatment of insulin resistance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Stones can dissolve with alkalinisation; over-alkalinising risks calcium phosphate stones",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

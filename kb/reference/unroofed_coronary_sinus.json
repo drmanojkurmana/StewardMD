@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for unroofed coronary sinus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "unroofed_coronary_sinus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography with agitated saline contrast",
+          "cells": [
+            {
+              "text": "Demonstrates the coronary sinus communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac CT or MR angiography",
+          "cells": [
+            {
+              "text": "Coronary sinus and systemic venous anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac catheterisation",
+          "cells": [
+            {
+              "text": "Shunt quantification and pressures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for persistent left superior vena cava",
+          "cells": [
+            {
+              "text": "Left SVC draining to the coronary sinus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Right heart volume loading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for heterotaxy",
+          "cells": [
+            {
+              "text": "Associated heterotaxy and complex defects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "unroofed_coronary_sinus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ostium secundum atrial septal defect",
+          "cells": [
+            {
+              "text": "A simple secundum label misses the coronary sinus communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent left SVC without unroofing",
+          "cells": [
+            {
+              "text": "Lacks the coronary sinus communication that defines the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sinus venosus atrial septal defect",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "unroofed_coronary_sinus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical correction",
+          "cells": [
+            {
+              "text": "Closes or baffles the coronary sinus communication and redirects any persistent left SVC"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Timely repair",
+          "cells": [
+            {
+              "text": "Before pulmonary vascular disease develops, given significant left-to-right shunt"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right-to-left component",
+          "cells": [
+            {
+              "text": "Paradoxical embolism risk when completely unroofed with persistent left SVC"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anatomy delineation",
+          "cells": [
+            {
+              "text": "Persistent left SVC and systemic venous anatomy, to plan the operation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heterotaxy and complex disease",
+          "cells": [
+            {
+              "text": "Associated lesions that shape haemodynamics and outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocarditis and surveillance",
+          "cells": [
+            {
+              "text": "Infective endocarditis risk and postoperative surveillance in a congenital cardiology service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "unroofed_coronary_sinus-dx-mgmt",
+      "title": "Diagnosis and management of Unroofed coronary sinus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected unroofed coronary sinus: right heart overload from an atrial communication",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cyanosis, paradoxical embolism or pulmonary hypertension)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent congenital cardiology review for cyanosis or paradoxical embolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast echo, cardiac CT or MR angiography, catheterisation and ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the coronary sinus communication confirmed on contrast echo or CT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider secundum or sinus venosus ASD; reassess the atrial septum",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical closure or baffling of the coronary sinus communication",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Timely repair before pulmonary vascular disease develops",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Plan redirection of any persistent left SVC from anatomy delineation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Evaluate heterotaxy; endocarditis and postoperative surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome depends on the timing of repair and associated anomalies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

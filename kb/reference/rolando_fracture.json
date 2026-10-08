@@ -144,5 +144,258 @@
       "caption": "Overview comparison matrix for rolando fracture (comminuted thumb base)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rockwood and Green's Fractures in Adults",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rolando_fracture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Anteroposterior, lateral and oblique thumb radiographs",
+          "cells": [
+            {
+              "text": "Fracture pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Robert view of the trapeziometacarpal joint",
+          "cells": [
+            {
+              "text": "Articular fracture detail"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Comminution and articular impaction; plans fixation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Articular congruity and fragment size",
+          "cells": [
+            {
+              "text": "Joint congruity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rolando_fracture-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bennett fracture",
+          "cells": [
+            {
+              "text": "Two-part intra-articular thumb base fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extra-articular first metacarpal base fracture",
+          "cells": [
+            {
+              "text": "Extra-articular; Rolando is intra-articular and comminuted"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rolando_fracture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Open reduction and internal fixation",
+          "cells": [
+            {
+              "text": "Anatomical restoration of the trapeziometacarpal surface for larger, reconstructable articular fragments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kirschner-wire or external fixation",
+          "cells": [
+            {
+              "text": "Bridging or external fixation for severe comminution not amenable to internal fixation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative CT",
+          "cells": [
+            {
+              "text": "Maps the articular fragments to plan reconstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immobilisation and therapy",
+          "cells": [
+            {
+              "text": "Thumb spica immobilisation followed by supervised hand therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rolando_fracture-dx-mgmt",
+      "title": "Diagnosis and management of Rolando fracture (comminuted thumb base)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Comminuted fracture at the thumb base with articular involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe comminution, articular impaction, persistent subluxation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer for surgical reconstruction with preoperative CT planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Thumb radiographs with Robert view; CT for comminution and impaction",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are the articular fragments reconstructable?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Severe comminution: Kirschner-wire or external fixation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Preoperative CT to map fragments and plan reconstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Open reduction and internal fixation for reconstructable articular fragments",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Thumb spica immobilisation, then supervised hand therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Poor joint congruity risks progressive trapeziometacarpal arthritis and stiffness",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

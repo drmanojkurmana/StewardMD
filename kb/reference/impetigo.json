@@ -154,6 +154,21 @@
       "id": "c1",
       "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
       "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 135-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 136-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 52-5",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -313,6 +328,332 @@
             }
           ],
           "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "impetigo-treatment-2",
+      "kind": "treatment",
+      "title": "Antistaphylococcal therapy by isolate sensitivity",
+      "rowHeader": "Option",
+      "columns": [
+        "Drug of choice",
+        "Alternatives",
+        "Comments"
+      ],
+      "rows": [
+        {
+          "parameter": "Parenteral, serious infection: sensitive to penicillin",
+          "cells": [
+            {
+              "text": "Penicillin G 4 mU q4h"
+            },
+            {
+              "text": "Nafcillin or oxacillin 2 g q4h, cefazolin 2 g q8h, vancomycin 1 g q12h (b)"
+            },
+            {
+              "text": "Fewer than 5% of isolates are sensitive to penicillin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Parenteral, serious infection: sensitive to methicillin",
+          "cells": [
+            {
+              "text": "Nafcillin or oxacillin 2 g q4h"
+            },
+            {
+              "text": "Cefazolin 2 g q8h (b), vancomycin 15 to 20 mg/kg q8 to 12h (b)"
+            },
+            {
+              "text": "Penicillin-allergic patients can have a cephalosporin if the allergy was not anaphylactic or accelerated; desensitization to beta-lactams may be indicated in selected serious infections needing maximal bactericidal activity (for example prosthetic valve endocarditis (d)). Type A beta-lactamase may rapidly hydrolyze cefazolin and reduce efficacy in endocarditis. Vancomycin is a less effective option"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Parenteral, serious infection: resistant to methicillin",
+          "cells": [
+            {
+              "text": "Vancomycin 15 to 20 mg/kg q8 to 12h (b)"
+            },
+            {
+              "text": "Daptomycin 6 mg/kg q24h (b,c) for bacteremia, endocarditis and complicated skin infections; linezolid 600 mg q12h (400 mg q12h for uncomplicated skin infections); quinupristin/dalfopristin 7.5 mg/kg q8h"
+            },
+            {
+              "text": "Test sensitivity before using an alternative. Adjunctive drugs, used only with other antimicrobials: gentamicin 1 mg/kg q8h (b), rifampin 300 mg PO q8h, fusidic acid 500 mg q8h (not readily available in the United States). Higher daptomycin doses have been used in some serious infections. Quinupristin/dalfopristin is bactericidal against methicillin-resistant isolates unless the strain is resistant to erythromycin or clindamycin. Efficacy of adjunctive therapy is not well established in many settings. Linezolid and quinupristin/dalfopristin have in vitro activity against most VISA and VRSA strains. See footnote (d) for prosthetic-valve endocarditis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Parenteral, serious infection: methicillin-resistant with intermediate or complete vancomycin resistance (e)",
+          "cells": [
+            {
+              "text": "Uncertain"
+            },
+            {
+              "text": "Same as for methicillin-resistant strains; check susceptibilities"
+            },
+            {
+              "text": "Same as for methicillin-resistant strains; check susceptibilities"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Parenteral, serious infection: not yet known (empirical)",
+          "cells": [
+            {
+              "text": "Vancomycin 15 to 20 mg/kg q8 to 12h (b)"
+            },
+            {
+              "text": "None listed"
+            },
+            {
+              "text": "Empirical therapy is used when susceptibility is unknown. Vancomycin with or without an aminoglycoside is recommended for suspected community- or hospital-acquired S. aureus infection because methicillin-resistant strains are more frequent in the community"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral, skin and soft tissue: sensitive to methicillin",
+          "cells": [
+            {
+              "text": "Dicloxacillin 500 mg qid, cephalexin 500 mg qid"
+            },
+            {
+              "text": "Minocycline or doxycycline 100 mg q12h (b), TMP-SMX 1 or 2 DS tablets bid, clindamycin 300 to 450 mg/kg tid (dose unit as printed)"
+            },
+            {
+              "text": "Know the local antibiotic susceptibility of isolates; culture all drainage"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral, skin and soft tissue: resistant to methicillin",
+          "cells": [
+            {
+              "text": "Clindamycin 300 to 450 mg/kg tid (dose unit as printed), TMP-SMX 1 or 2 DS tablets bid, minocycline or doxycycline 100 mg q12h (b), linezolid 400 to 600 mg bid"
+            },
+            {
+              "text": "None listed"
+            },
+            {
+              "text": "Know the local antibiotic susceptibility of isolates; culture all drainage"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Footnotes (a) to (e) were not shown on the printed page."
+    },
+    {
+      "id": "impetigo-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Classification of streptococci",
+      "rowHeader": "Lancefield group",
+      "columns": [
+        "Representative species",
+        "Hemolytic pattern",
+        "Typical infections"
+      ],
+      "rows": [
+        {
+          "parameter": "A",
+          "cells": [
+            {
+              "text": "S. pyogenes"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Pharyngitis, impetigo, cellulitis, scarlet fever"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "B",
+          "cells": [
+            {
+              "text": "S. agalactiae"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Neonatal sepsis and meningitis, puerperal infection, urinary tract infection, diabetic ulcer infection, endocarditis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "C, G",
+          "cells": [
+            {
+              "text": "S. dysgalactiae subsp. equisimilis"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Cellulitis, bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "D: enterococci",
+          "cells": [
+            {
+              "text": "E. faecalis; E. faecium"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Urinary tract infection, nosocomial bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "D: nonenterococci",
+          "cells": [
+            {
+              "text": "S. bovis"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Variable or nongroupable: viridans streptococci",
+          "cells": [
+            {
+              "text": "S. sanguis; S. mitis"
+            },
+            {
+              "text": "Alpha"
+            },
+            {
+              "text": "Endocarditis, dental abscess, brain abscess"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Variable or nongroupable: intermedius or milleri group",
+          "cells": [
+            {
+              "text": "S. intermedius, S. anginosus, S. constellatus"
+            },
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "Brain abscess, visceral abscess"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Variable or nongroupable: anaerobic streptococci",
+          "cells": [
+            {
+              "text": "Peptostreptococcus magnus"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Sinusitis, pneumonia, empyema, brain abscess, liver abscess"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Source footnotes (a) on enterococci and (b) on anaerobic streptococci are not legible in the transcription."
+    },
+    {
+      "id": "impetigo-ddx-2",
+      "kind": "ddx",
+      "title": "Common skin infections",
+      "rowHeader": "Infection",
+      "columns": [
+        "Clinical features",
+        "Etiologic agent",
+        "Treatment"
+      ],
+      "rows": [
+        {
+          "parameter": "Impetigo",
+          "cells": [
+            {
+              "text": "Honey-colored crusted papules, plaques or bullae"
+            },
+            {
+              "text": "Group A streptococcus and Staphylococcus aureus"
+            },
+            {
+              "text": "Systemic or topical antistaphylococcal antibiotics"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Dermatophytosis",
+          "cells": [
+            {
+              "text": "Inflammatory or noninflammatory annular scaly plaques; may have hair loss; groin involvement spares the scrotum; hyphae on KOH preparation"
+            },
+            {
+              "text": "Trichophyton, Epidermophyton or Microsporum sp."
+            },
+            {
+              "text": "Topical azoles, systemic griseofulvin, terbinafine, or azoles"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Candidiasis",
+          "cells": [
+            {
+              "text": "Inflammatory papules and plaques with satellite pustules, frequently in intertriginous areas; may involve the scrotum; pseudohyphae on KOH preparation"
+            },
+            {
+              "text": "Candida albicans and other Candida sp."
+            },
+            {
+              "text": "Topical nystatin or azoles; systemic azoles for resistant disease"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Tinea versicolor",
+          "cells": [
+            {
+              "text": "Hyper- or hypopigmented scaly patches on the trunk; mixture of hyphae and spores (spaghetti and meatballs) on KOH preparation"
+            },
+            {
+              "text": "Malassezia furfur"
+            },
+            {
+              "text": "Topical selenium sulfide lotion or azoles"
+            }
+          ],
+          "cite": "c4"
         }
       ]
     }

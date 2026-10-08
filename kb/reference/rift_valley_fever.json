@@ -149,5 +149,258 @@
       "caption": "Overview comparison matrix for rift valley fever."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / WHO guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rift_valley_fever-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "RT-PCR on blood",
+          "cells": [
+            {
+              "text": "Viral RNA in the acute viraemic phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rift Valley fever IgM and IgG serology",
+          "cells": [
+            {
+              "text": "Antibody response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Hepatitis and hepatic necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and coagulation studies",
+          "cells": [
+            {
+              "text": "Haemorrhagic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Retinitis, in patients with visual symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rift_valley_fever-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No licensed specific antiviral; fluid, electrolyte and organ support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemorrhagic form",
+          "cells": [
+            {
+              "text": "Correct coagulopathy, transfuse blood products and support hepatic failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Encephalitic form",
+          "cells": [
+            {
+              "text": "Supportive neurological care and airway protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinitis",
+          "cells": [
+            {
+              "text": "Ophthalmological review; corticosteroids considered for delayed macular retinitis threatening vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prevention",
+          "cells": [
+            {
+              "text": "Barrier precautions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rift_valley_fever-dx-mgmt",
+      "title": "Diagnosis and management of Rift Valley fever",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Febrile illness with hepatitis, bleeding or neurological signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bleeding, fulminant hepatitis, encephalitis, vision loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent organ support for shock, DIC or fulminant hepatitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "RT-PCR in the viraemic phase, IgM and IgG serology, liver tests, coagulation, eye exam",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is Rift Valley fever confirmed by RT-PCR or serology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider malaria, leptospirosis, viral hepatitis or other viral haemorrhagic fevers",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive fluid, electrolyte and organ support; no licensed antiviral",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct coagulopathy and transfuse for the haemorrhagic form",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Airway protection and neurological care for encephalitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ophthalmological review; consider corticosteroids for threatening retinitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Haemorrhagic, hepatic and encephalitic forms each need intensive organ support",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -153,5 +153,314 @@
       "caption": "Overview comparison matrix for sclerosing stromal tumour of the ovary."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Female Genital Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sclerosing_stromal_tumor_ovary-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Solid or mixed adnexal mass and its vascularity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic MRI",
+          "cells": [
+            {
+              "text": "Early peripheral enhancement with centripetal progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone profile including oestrogen",
+          "cells": [
+            {
+              "text": "If oestrogenic manifestations are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers such as CA125",
+          "cells": [
+            {
+              "text": "Mainly to help exclude malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology with inhibin and calretinin",
+          "cells": [
+            {
+              "text": "Confirms sex cord-stromal nature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endometrial assessment",
+          "cells": [
+            {
+              "text": "If unopposed oestrogen effects are suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sclerosing_stromal_tumor_ovary-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Krukenberg tumour",
+          "cells": [
+            {
+              "text": "Signet-ring-like appearance prompts exclusion of metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other sex cord-stromal tumours",
+          "cells": [
+            {
+              "text": "Malignant ones may need platinum-based chemotherapy, unlike this benign tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sclerosing_stromal_tumor_ovary-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical excision alone",
+          "cells": [
+            {
+              "text": "Removal of the mass or affected ovary is first and only line and is curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility-sparing surgery",
+          "cells": [
+            {
+              "text": "Cystectomy or unilateral oophorectomy when feasible in young patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frozen section",
+          "cells": [
+            {
+              "text": "Confirm benign sex cord-stromal process before a limited procedure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fuller staging",
+          "cells": [
+            {
+              "text": "If frozen section is uncertain or malignancy is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant therapy",
+          "cells": [
+            {
+              "text": "No role for chemotherapy, hormonal, targeted therapy or radiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oestrogen effects",
+          "cells": [
+            {
+              "text": "Manage endometrial hyperplasia per standard practice; confirm symptoms resolve after removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gynaecological oncology referral",
+          "cells": [
+            {
+              "text": "Diagnostic uncertainty or pregnancy-associated cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sclerosing_stromal_tumor_ovary-dx-mgmt",
+      "title": "Diagnosis and management of Sclerosing stromal tumour of the ovary",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Young woman with a solid adnexal mass: suspected sclerosing stromal tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Torsion pain, oestrogenic bleeding, or signet-ring features raising malignancy doubt?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent gynaecological oncology: surgery, frozen section, exclude Krukenberg",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transvaginal ultrasound, pelvic MRI, CA125, hormone profile",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Histology and inhibin or calretinin confirm benign sex cord-stromal tumour?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Fuller staging with contralateral ovary inspection; consider malignant mimics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fertility-sparing cystectomy or unilateral oophorectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intraoperative frozen section to confirm benignity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "No chemotherapy, radiotherapy or lymphadenectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Check oestrogenic symptoms and endometrium resolve",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent: cured by simple excision with no expected recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

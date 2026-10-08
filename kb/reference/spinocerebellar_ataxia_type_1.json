@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for spinocerebellar ataxia type 1 (sca1)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinocerebellar_ataxia_type_1-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted ATXN1 CAG repeat testing",
+          "cells": [
+            {
+              "text": "Expanded repeat length confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar and olivopontocerebellar atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Associated peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oculomotor assessment",
+          "cells": [
+            {
+              "text": "Saccadic slowing and nystagmus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallowing and speech evaluation",
+          "cells": [
+            {
+              "text": "Bulbar involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood tests for acquired causes",
+          "cells": [
+            {
+              "text": "Exclusion where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_1-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other autosomal dominant SCAs (SCA2, SCA3, SCA6, SCA7)",
+          "cells": [
+            {
+              "text": "Confirmed only by gene-specific testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Friedreich ataxia",
+          "cells": [
+            {
+              "text": "A recessive ataxia; the dominant family pattern separates it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_1-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multidisciplinary symptomatic care",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy for the repeat expansion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, occupational therapy and gait aids",
+          "cells": [
+            {
+              "text": "Mobility, balance and independence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stretching and antispasmodics",
+          "cells": [
+            {
+              "text": "Prominent pyramidal spasticity; neuropathic pain treated separately"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech therapy and swallow assessment",
+          "cells": [
+            {
+              "text": "Gastrostomy feeding if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory surveillance",
+          "cells": [
+            {
+              "text": "Anticipate respiratory complications in advanced disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progression monitoring",
+          "cells": [
+            {
+              "text": "Standardised ataxia scales"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; anticipation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinocerebellar_ataxia_type_1-dx-mgmt",
+      "title": "Diagnosis and management of Spinocerebellar ataxia type 1 (SCA1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ataxia with brisk reflexes and dysarthria in adulthood: suspected SCA1",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (dysphagia, rapid decline, respiratory compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent swallowing and respiratory assessment for aspiration or failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ATXN1 CAG repeat length; brain MRI; oculomotor and swallow assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an expanded ATXN1 CAG repeat confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other SCAs or Friedreich ataxia; repeat gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Multidisciplinary symptomatic care; no disease-modifying therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and gait aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stretching and antispasmodics for pyramidal spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Speech therapy, swallow assessment and gastrostomy if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Larger repeats give earlier onset; bulbar and respiratory complications drive morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

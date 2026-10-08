@@ -148,5 +148,345 @@
       "caption": "Overview comparison matrix for prolactinoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Endocrine Society",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "prolactinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting serum prolactin, with sample dilution if hook effect suspected",
+          "cells": [
+            {
+              "text": "Hyperprolactinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy test, thyroid function and renal function",
+          "cells": [
+            {
+              "text": "Secondary causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of medications that raise prolactin",
+          "cells": [
+            {
+              "text": "Drug-induced hyperprolactinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary MRI",
+          "cells": [
+            {
+              "text": "Adenoma size and suprasellar extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macroprolactin assessment",
+          "cells": [
+            {
+              "text": "Discordance between clinical picture and level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual fields and anterior pituitary hormone panel",
+          "cells": [
+            {
+              "text": "Macroadenomas"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prolactinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiological hyperprolactinaemia of pregnancy or lactation",
+          "cells": [
+            {
+              "text": "Pregnancy or lactation"
+            },
+            {
+              "text": "Pregnancy test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced hyperprolactinaemia",
+          "cells": [
+            {
+              "text": "Antipsychotics, antiemetics or some antidepressants"
+            },
+            {
+              "text": "Medication review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary hypothyroidism raising prolactin",
+          "cells": [
+            {
+              "text": "Primary hypothyroidism"
+            },
+            {
+              "text": "Thyroid function testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macroprolactinaemia",
+          "cells": [
+            {
+              "text": "Biologically inactive complexed prolactin"
+            },
+            {
+              "text": "Macroprolactin assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prolactinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dopamine agonist (first line)",
+          "cells": [
+            {
+              "text": "Usually cabergoline, to normalise prolactin, restore gonadal function and shrink the tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transsphenoidal surgery",
+          "cells": [
+            {
+              "text": "For agonist resistance or intolerance, acute chiasmal compression or pituitary apoplexy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial serum prolactin, pituitary MRI and formal visual fields in macroadenomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting deficiencies",
+          "cells": [
+            {
+              "text": "Screen for and replace anterior pituitary deficiencies in macroadenomas; sex steroids for hypogonadism-related bone loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy",
+          "cells": [
+            {
+              "text": "Switch to bromocriptine or withdraw treatment as advised; monitor for tumour enlargement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography for valvulopathy during prolonged higher-dose cabergoline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent referral",
+          "cells": [
+            {
+              "text": "Sudden headache, visual loss or apoplexy; pituitary team for resistant or aggressive tumours"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "prolactinoma-dx-mgmt",
+      "title": "Diagnosis and management of Prolactinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected prolactinoma: persistently raised fasting serum prolactin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bitemporal field loss, sudden severe headache or apoplexy, or hypopituitarism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent decompression or pituitary team review for apoplexy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeat fasting prolactin; pregnancy, thyroid and renal tests; drugs; pituitary MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the raise confirmed, not drug-induced, physiological or macroprolactin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the cause identified, such as drug withdrawal; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Dopamine agonist first-line, usually cabergoline",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Transsphenoidal surgery for agonist resistance, intolerance or apoplexy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial prolactin, pituitary MRI and visual fields in macroadenomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Replace coexisting pituitary deficiencies in macroadenomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Pituitary team review for resistant or aggressive tumours",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

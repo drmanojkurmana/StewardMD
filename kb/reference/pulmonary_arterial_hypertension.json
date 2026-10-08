@@ -152,5 +152,342 @@
       "caption": "Overview comparison matrix for pulmonary arterial hypertension."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ERS/ESC Guidelines for the Diagnosis and Treatment of Pulmonary Hypertension",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pulmonary_arterial_hypertension-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Right heart catheterisation with acute vasoreactivity testing",
+          "cells": [
+            {
+              "text": "Haemodynamics and vasoreactivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Right heart function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventilation/perfusion scan",
+          "cells": [
+            {
+              "text": "Chronic thromboembolic disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests with DLCO",
+          "cells": [
+            {
+              "text": "Lung function and gas transfer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Connective tissue disease serology and HIV testing",
+          "cells": [
+            {
+              "text": "Associated conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI and CT pulmonary angiography",
+          "cells": [
+            {
+              "text": "Right ventricle and pulmonary vasculature"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_arterial_hypertension-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary hypertension due to left heart disease",
+          "cells": [
+            {
+              "text": "Left heart disease"
+            },
+            {
+              "text": "Transthoracic echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary hypertension due to lung disease or hypoxia",
+          "cells": [
+            {
+              "text": "Lung disease or hypoxia"
+            },
+            {
+              "text": "Pulmonary function tests with DLCO"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic thromboembolic pulmonary hypertension",
+          "cells": [
+            {
+              "text": "Chronic thromboembolic disease"
+            },
+            {
+              "text": "Ventilation/perfusion scan"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_arterial_hypertension-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose calcium channel blockers",
+          "cells": [
+            {
+              "text": "For the minority with a positive acute vasoreactivity test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combination targeted therapy",
+          "cells": [
+            {
+              "text": "Endothelin receptor antagonists and related agents for non-vasoreactive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenteral prostacyclin",
+          "cells": [
+            {
+              "text": "For high-risk or rapidly progressive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk stratification",
+          "cells": [
+            {
+              "text": "Functional class, exercise capacity, natriuretic peptides"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Diuretics for right heart failure, oxygen for hypoxaemia, supervised exercise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated conditions",
+          "cells": [
+            {
+              "text": "Screen for and manage connective tissue disease, HIV and other associated conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "BMPR2 variants; pregnancy-avoidance counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension centre; lung transplantation for refractory disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pulmonary_arterial_hypertension-dx-mgmt",
+      "title": "Diagnosis and management of pulmonary arterial hypertension",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PAH: exertional dyspnoea with raised pulmonary pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Exertional syncope, right heart failure, falling exercise capacity, or hypotension?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent specialist review for haemodynamic instability or right heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Right heart catheterisation with vasoreactivity; echo; V/Q scan; DLCO; CTD serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does catheterisation confirm pre-capillary pulmonary hypertension with CTEPH excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider left heart, lung disease or chronic thromboembolic causes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-dose calcium channel blockers if acute vasoreactivity is positive",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Combination targeted therapy with endothelin antagonists and related agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Parenteral prostacyclin for high-risk or rapidly progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Diuretics, oxygen and supervised exercise; screen associated conditions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Specialist PH centre care; lung transplant for refractory disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

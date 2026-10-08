@@ -154,5 +154,278 @@
       "caption": "Overview comparison matrix for rigid spine muscular dystrophy type 1 (selenon-related)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuromuscular and paediatric neurology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rigid_spine_muscular_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Muscle damage marker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erect and supine forced vital capacity; overnight oximetry",
+          "cells": [
+            {
+              "text": "Diaphragmatic weakness and nocturnal hypoventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SELENON sequencing or congenital myopathy panel",
+          "cells": [
+            {
+              "text": "Causative SELENON variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with oxidative enzyme histochemistry",
+          "cells": [
+            {
+              "text": "Minicores and fibre typing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rigid_spine_muscular_dystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "RYR1-related congenital myopathy",
+          "cells": [
+            {
+              "text": "Multiminicore and central core disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Collagen VI-related myopathy",
+          "cells": [
+            {
+              "text": "Also causes spinal rigidity and contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emery-Dreifuss muscular dystrophy",
+          "cells": [
+            {
+              "text": "Contractures and spinal rigidity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rigid_spine_muscular_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "No therapy corrects the SELENON defect; respiratory management is the central priority"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory surveillance",
+          "cells": [
+            {
+              "text": "Erect and supine vital capacity, overnight oximetry; non-invasive nocturnal ventilation for hypoventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest infections",
+          "cells": [
+            {
+              "text": "Airway-clearance techniques and mechanical cough assistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scoliosis",
+          "cells": [
+            {
+              "text": "Spinal orthoses and spinal fusion surgery for progressive scoliosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rigid_spine_muscular_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Rigid spine muscular dystrophy type 1 (SELENON-related)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with spinal rigidity, contractures and weakness; nocturnal hypoventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (falling supine FVC, rapid scoliosis, weight loss, chest infections)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory support for hypoventilation or falling vital capacity",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum CK, erect and supine FVC, overnight oximetry, SELENON or myopathy panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are SELENON variants confirmed on sequencing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider RYR1, collagen VI or Emery-Dreifuss disorders; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Multidisciplinary care with respiratory management as the central priority",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial vital capacity and oximetry; non-invasive nocturnal ventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Airway-clearance techniques and mechanical cough assistance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Spinal orthoses or fusion for progressive scoliosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "No therapy corrects the SELENON defect; care is supportive",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

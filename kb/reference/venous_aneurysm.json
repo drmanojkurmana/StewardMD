@@ -152,5 +152,276 @@
       "caption": "Overview comparison matrix for venous aneurysm."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "venous_aneurysm-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Duplex ultrasound",
+          "cells": [
+            {
+              "text": "First-line study of the aneurysm and its thrombus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR venography",
+          "cells": [
+            {
+              "text": "Morphology and extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast venography",
+          "cells": [
+            {
+              "text": "Anatomy when it remains unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT pulmonary angiography",
+          "cells": [
+            {
+              "text": "Pulmonary embolism when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia screen",
+          "cells": [
+            {
+              "text": "Predisposition in patients presenting with thrombosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "venous_aneurysm-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Popliteal (Baker) cyst",
+          "cells": [
+            {
+              "text": "Misdiagnosis of a popliteal venous aneurysm; the aneurysm carries the embolic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Popliteal artery aneurysm",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep vein thrombosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymph node mass or cystic lymphangioma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "venous_aneurysm-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical repair",
+          "cells": [
+            {
+              "text": "Popliteal and other deep venous aneurysms by tangential aneurysmorrhaphy or resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Perioperative anticoagulation; therapeutic anticoagulation for thrombosis or embolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small, superficial or asymptomatic aneurysms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "venous_aneurysm-dx-mgmt",
+      "title": "Diagnosis and management of venous aneurysm",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected popliteal venous aneurysm: posterior knee swelling with recurrent embolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (pulmonary embolism, intraluminal thrombus or rapid enlargement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent anticoagulation and CT pulmonary angiography for pulmonary embolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Duplex ultrasound, CT or MR venography, thrombophilia screen, CT angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does venography confirm a saccular or fusiform venous aneurysm?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Baker cyst, popliteal artery aneurysm or deep vein thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Perioperative anticoagulation and treatment of established thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical repair of popliteal and other deep venous aneurysms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Observe small, superficial or asymptomatic aneurysms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Anticoagulation alone does not reliably prevent recurrent embolism",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

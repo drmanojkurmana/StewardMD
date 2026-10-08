@@ -151,5 +151,332 @@
       "caption": "Overview comparison matrix for nager acrofacial dysostosis (sf3b4)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nager_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular testing for SF3B4 variants",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper-limb radiographs",
+          "cells": [
+            {
+              "text": "Radial ray and thumb anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological assessment",
+          "cells": [
+            {
+              "text": "Conductive hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniofacial imaging",
+          "cells": [
+            {
+              "text": "Plans reconstruction and airway management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep study",
+          "cells": [
+            {
+              "text": "Obstructive sleep apnoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and swallowing assessment",
+          "cells": [
+            {
+              "text": "Neonatal feeding difficulty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nager_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Treacher Collins syndrome",
+          "cells": [
+            {
+              "text": "Mandibulofacial features without radial limb defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Miller syndrome",
+          "cells": [
+            {
+              "text": "Postaxial limb involvement, unlike the preaxial defects here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Holt-Oram syndrome",
+          "cells": [
+            {
+              "text": "Radial defects with cardiac disease rather than mandibulofacial dysostosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nager_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Secure the neonatal airway",
+          "cells": [
+            {
+              "text": "Positioning, nasopharyngeal airway, mandibular distraction or tracheostomy for severe micrognathia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support",
+          "cells": [
+            {
+              "text": "Specialised feeding techniques or gastrostomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staged craniofacial reconstruction",
+          "cells": [
+            {
+              "text": "Malar and mandibular hypoplasia, and cleft palate repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand surgery",
+          "cells": [
+            {
+              "text": "Pollicisation or thumb reconstruction, with occupational therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing management",
+          "cells": [
+            {
+              "text": "Audiology, hearing aids and speech and language therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep apnoea",
+          "cells": [
+            {
+              "text": "Sleep studies and appropriate airway support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Craniofacial, ENT, plastic and hand surgery, orthodontic and speech teams"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "SF3B4 variants, usually de novo; recurrence risk and family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nager_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Nager acrofacial dysostosis (SF3B4)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Mandibulofacial hypoplasia with preaxial thumb or radial limb defects at birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe micrognathia, feeding failure, aspiration, hard intubation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neonatal airway securing: positioning, airway device, distraction or tracheostomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SF3B4 testing, upper-limb radiographs, audiology, craniofacial imaging, sleep study",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "SF3B4 variant confirmed with preaxial radial ray defects?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Treacher Collins, Miller, Holt-Oram or another acrofacial syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Secure the neonatal airway; distraction or tracheostomy if severe micrognathia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Specialised feeding techniques or gastrostomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Staged craniofacial reconstruction and cleft palate repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hand surgery such as pollicisation or thumb reconstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early mortality relates to the airway; survivors usually have normal intellect",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

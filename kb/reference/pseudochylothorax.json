@@ -148,5 +148,345 @@
       "caption": "Overview comparison matrix for pseudochylothorax."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Light's Pleural Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pseudochylothorax-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pleural fluid cholesterol and triglyceride levels",
+          "cells": [
+            {
+              "text": "Cholesterol-rich fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural fluid microscopy and lipoprotein analysis",
+          "cells": [
+            {
+              "text": "Cholesterol crystals; chylomicrons"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Light's criteria (cell count, protein, LDH, glucose, pH)",
+          "cells": [
+            {
+              "text": "Exudate criteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adenosine deaminase and mycobacterial culture",
+          "cells": [
+            {
+              "text": "Tuberculosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatoid factor and connective tissue serology",
+          "cells": [
+            {
+              "text": "Rheumatoid or connective tissue disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT thorax",
+          "cells": [
+            {
+              "text": "Pleural thickening, calcification and trapped lung"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural biopsy where cause unclear",
+          "cells": [
+            {
+              "text": "Underlying cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pseudochylothorax-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "True chylothorax",
+          "cells": [
+            {
+              "text": "Chylomicrons present"
+            },
+            {
+              "text": "Lipoprotein analysis for chylomicrons"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic tuberculous pleural effusion",
+          "cells": [
+            {
+              "text": "Fever and weight loss"
+            },
+            {
+              "text": "Adenosine deaminase and mycobacterial culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatoid or connective tissue disease effusion",
+          "cells": [
+            {
+              "text": "Rheumatoid or connective tissue disease"
+            },
+            {
+              "text": "Rheumatoid factor and serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant pleural effusion",
+          "cells": [
+            {
+              "text": "New or enlarging pleural mass"
+            },
+            {
+              "text": "Pleural biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pseudochylothorax-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Anti-tuberculous chemotherapy for chronic tuberculous pleuritis, or optimised therapy for rheumatoid disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Therapeutic aspiration",
+          "cells": [
+            {
+              "text": "Aspiration or drainage to relieve breathlessness in symptomatic effusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative monitoring",
+          "cells": [
+            {
+              "text": "Stable, minimally symptomatic chronic effusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decortication",
+          "cells": [
+            {
+              "text": "Trapped lung causing persistent dyspnoea, with thoracic surgery referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iatrogenic causes",
+          "cells": [
+            {
+              "text": "Recognise historical causes such as prior artificial pneumothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory follow-up",
+          "cells": [
+            {
+              "text": "Monitoring of underlying disease and lung function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pseudochylothorax-dx-mgmt",
+      "title": "Diagnosis and management of pseudochylothorax",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pseudochylothorax: milky pleural effusion with cholesterol-rich fluid",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Fever and weight loss, new pleural mass, empyema or sepsis, or trapped lung?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent drainage and sepsis review for empyema",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fluid cholesterol and triglyceride; crystals; chylomicrons; Light's criteria; CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the fluid cholesterol-rich without chylomicrons?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider true chylothorax; reassess fluid analysis for chylomicrons",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the cause: anti-tuberculous therapy or rheumatoid treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Therapeutic aspiration or drainage for symptomatic effusions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Conservative monitoring for stable, minimally symptomatic effusions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Decortication for a trapped lung with persistent dyspnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Respiratory follow-up with monitoring of underlying disease and lung function",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

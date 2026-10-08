@@ -148,5 +148,276 @@
       "caption": "Overview comparison matrix for microphthalmia and anophthalmia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Taylor and Hoyt's Pediatric Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "microphthalmia_anophthalmia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed ophthalmic examination and ocular biometry",
+          "cells": [
+            {
+              "text": "Axial length"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orbital and cranial imaging (ultrasound, CT or MRI)",
+          "cells": [
+            {
+              "text": "Presence and size of ocular tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic and neurodevelopmental assessment",
+          "cells": [
+            {
+              "text": "Pituitary and brain anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal and molecular genetic testing including SOX2 and OTX2",
+          "cells": [
+            {
+              "text": "SOX2 and OTX2 variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of the fellow eye and orbit",
+          "cells": [
+            {
+              "text": "Prosthetic and reconstructive planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "microphthalmia_anophthalmia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Orbital growth from infancy",
+          "cells": [
+            {
+              "text": "Progressively enlarging conformers, orbital expanders and ocular prostheses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protect vision in any seeing eye",
+          "cells": [
+            {
+              "text": "Refractive correction, amblyopia therapy and protective eyewear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting ocular anomalies",
+          "cells": [
+            {
+              "text": "Coloboma or cataract; monitor for glaucoma and retinal detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic and neurodevelopmental assessment",
+          "cells": [
+            {
+              "text": "Pituitary and brain evaluation; treat any endocrine deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing",
+          "cells": [
+            {
+              "text": "SOX2 and OTX2, with genetic counselling and family assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Ophthalmology, oculoplastic surgery, clinical genetics and paediatrics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision rehabilitation",
+          "cells": [
+            {
+              "text": "Educational support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "microphthalmia_anophthalmia-dx-mgmt",
+      "title": "Diagnosis and management of Microphthalmia and anophthalmia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Small or absent eye at birth, with reduced orbital size",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bilateral severe microphthalmia, with neurological or endocrine anomalies?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent endocrine and neurological evaluation for associated anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biometry; orbital and cranial imaging; systemic review; SOX2 and OTX2 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a SOX2 or OTX2 variant confirmed on molecular testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider nanophthalmos, cryptophthalmos or a syndrome such as CHARGE",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Orbital and mid-facial growth from infancy with conformers and expanders",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Refractive correction, amblyopia therapy and protective eyewear for any seeing eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat coexisting coloboma or cataract; monitor for glaucoma and retinal detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat any endocrine deficiency found on pituitary and brain evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Low-vision rehabilitation, educational support and genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

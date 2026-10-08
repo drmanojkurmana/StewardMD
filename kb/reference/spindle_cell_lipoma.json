@@ -147,5 +147,303 @@
       "caption": "Overview comparison matrix for spindle cell lipoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Soft Tissue and Bone Tumours / Enzinger and Weiss's Soft Tissue Tumors",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spindle_cell_lipoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Subcutaneous fatty mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excisional or core biopsy",
+          "cells": [
+            {
+              "text": "Histology with mature fat and spindle cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CD34 immunohistochemistry",
+          "cells": [
+            {
+              "text": "CD34-positive spindle cells with bland cytology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RB1 loss testing",
+          "cells": [
+            {
+              "text": "Used in difficult cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MDM2 amplification testing",
+          "cells": [
+            {
+              "text": "Excludes atypical lipomatous tumour when in doubt"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Site and cytology correlation",
+          "cells": [
+            {
+              "text": "Classic neck, shoulder and upper back distribution"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spindle_cell_lipoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Atypical lipomatous tumour and well-differentiated liposarcoma",
+          "cells": [
+            {
+              "text": "Lacks MDM2 amplification, which separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleomorphic lipoma",
+          "cells": [
+            {
+              "text": "Related lesion with floret-type multinucleated giant cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Solitary fibrous tumour",
+          "cells": [
+            {
+              "text": "Also CD34-positive; confusing the two is a pitfall"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spindle_cell_lipoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Marginal surgical excision",
+          "cells": [
+            {
+              "text": "Curative; recurrence is uncommon"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology and CD34 staining",
+          "cells": [
+            {
+              "text": "Confirms the benign diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RB1 and MDM2 testing",
+          "cells": [
+            {
+              "text": "Distinguishes it from atypical lipomatous tumour and liposarcoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small, asymptomatic, typical lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Routine wound follow-up",
+          "cells": [
+            {
+              "text": "Not intensive surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoma referral",
+          "cells": [
+            {
+              "text": "When imaging or cytology raises doubt about liposarcoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spindle_cell_lipoma-dx-mgmt",
+      "title": "Diagnosis and management of Spindle cell lipoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slow, painless subcutaneous mass over the neck or shoulder: suspected spindle cell lipoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (deep or large lesion, atypia, rapid growth)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Sarcoma referral for suspected liposarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound or MRI; biopsy with CD34 staining; MDM2 testing if in doubt",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are CD34-positive spindle cells seen with bland cytology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider atypical lipomatous tumour, pleomorphic lipoma or SFT; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Marginal surgical excision, which is curative",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "RB1 and MDM2 testing to exclude liposarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Observation for small, typical, asymptomatic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Excellent prognosis; recurrence after marginal excision is uncommon",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

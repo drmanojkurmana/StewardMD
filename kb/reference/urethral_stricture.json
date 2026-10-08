@@ -151,5 +151,296 @@
       "caption": "Overview comparison matrix for urethral stricture."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "urethral_stricture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Uroflowmetry",
+          "cells": [
+            {
+              "text": "Prolonged, low, plateau-shaped flow curve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retrograde urethrography with voiding cystourethrography",
+          "cells": [
+            {
+              "text": "Localises and measures the stricture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexible urethroscopy",
+          "cells": [
+            {
+              "text": "Direct inspection of the stricture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-void residual and renal tract ultrasound",
+          "cells": [
+            {
+              "text": "Retention and upper tract dilatation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for lichen sclerosus",
+          "cells": [
+            {
+              "text": "Distal or meatal strictures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urethral_stricture-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign prostatic hyperplasia",
+          "cells": [
+            {
+              "text": "Obstructive symptoms overlap; a young man or prior trauma, catheter or urethritis favours stricture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder neck stenosis or contracture",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prostate cancer",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urethral_stricture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urethral dilatation or direct-vision urethrotomy",
+          "cells": [
+            {
+              "text": "Short strictures; repeated procedures can worsen scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urethroplasty",
+          "cells": [
+            {
+              "text": "Long, recurrent or complex strictures; excision with anastomosis or buccal mucosal graft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potent topical corticosteroids",
+          "cells": [
+            {
+              "text": "Meatal and distal lichen sclerosus; graft rather than local skin in reconstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Suprapubic catheter",
+          "cells": [
+            {
+              "text": "Acute urinary retention when urethral access is not possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection and stone treatment",
+          "cells": [
+            {
+              "text": "Associated urinary infection, bladder stones and back-pressure effects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "urethral_stricture-dx-mgmt",
+      "title": "Diagnosis and management of Urethral stricture",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected urethral stricture: obstructive voiding after catheter, trauma or urethritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute retention, upper tract dilatation or urethral fistula)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent suprapubic catheter if urethral access is not possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Uroflowmetry, retrograde urethrography with VCUG, urethroscopy, post-void residual",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does uroflowmetry show a low, plateau-shaped curve with a localised stricture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider prostate obstruction, bladder neck stenosis or neurogenic bladder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urethral dilatation or direct-vision internal urethrotomy for short strictures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Urethroplasty for long, recurrent or complex strictures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Potent topical steroids for lichen sclerosus, with graft-based reconstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat infection and stones; address back-pressure effects",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Repeated dilatation can worsen scarring; definitive repair suits complex disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

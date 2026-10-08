@@ -146,5 +146,276 @@
       "caption": "Overview comparison matrix for proctalgia fugax."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ASCRS Textbook of Colon and Rectal Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "proctalgia_fugax-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "History of brief, self-limiting attacks with symptom-free intervals",
+          "cells": [
+            {
+              "text": "Brief attacks with symptom-free intervals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digital rectal examination and proctoscopy between attacks",
+          "cells": [
+            {
+              "text": "Local pathology excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal manometry",
+          "cells": [
+            {
+              "text": "Atypical or frequent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoanal ultrasound",
+          "cells": [
+            {
+              "text": "Thickened internal sphincter, if hereditary internal sphincter myopathy is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sigmoidoscopy or colonoscopy",
+          "cells": [
+            {
+              "text": "Alarm features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic imaging",
+          "cells": [
+            {
+              "text": "Structural or neurological cause, if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "proctalgia_fugax-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Mainstay; attacks are usually too brief for acute abortive drug treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local measures during attacks",
+          "cells": [
+            {
+              "text": "Warm baths, local warmth or digital perineal pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger management",
+          "cells": [
+            {
+              "text": "Stress and constipation; stool softening and management of anxiety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smooth-muscle relaxants",
+          "cells": [
+            {
+              "text": "Topical glyceryl trinitrate or a topical calcium-channel blocker for frequent or severe episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory frequent attacks",
+          "cells": [
+            {
+              "text": "Botulinum toxin injection to the anal sphincter, or oral smooth-muscle relaxants under specialist supervision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm before reassurance",
+          "cells": [
+            {
+              "text": "Normal anorectal examination and exclusion of structural pathology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "proctalgia_fugax-dx-mgmt",
+      "title": "Diagnosis and management of Proctalgia fugax",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected proctalgia fugax: brief, self-limiting rectal pain attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rectal bleeding, weight loss, mass, persistent pain or onset in later life?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: colonoscopy or pelvic imaging to exclude organic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "History of brief attacks; digital rectal exam and proctoscopy between attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the examination normal with structural pathology excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Investigate further: manometry, endoanal ultrasound or pelvic imaging; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance; attacks usually too brief for acute drug treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Warm baths, local warmth or digital perineal pressure during attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stool softening and management of stress and anxiety triggers",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Refractory attacks: botulinum toxin or oral smooth-muscle relaxants",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign, self-limiting course; colorectal specialist input for refractory attacks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

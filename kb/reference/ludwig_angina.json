@@ -149,5 +149,343 @@
       "caption": "Overview comparison matrix for ludwig angina."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ludwig_angina-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Early airway assessment and monitoring",
+          "cells": [
+            {
+              "text": "Takes priority over imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT of the neck",
+          "cells": [
+            {
+              "text": "Spread, collections and mediastinal extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC, inflammatory markers and blood cultures",
+          "cells": [
+            {
+              "text": "Sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture of pus at drainage",
+          "cells": [
+            {
+              "text": "Causative organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental assessment or orthopantomogram",
+          "cells": [
+            {
+              "text": "Causative tooth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and immunosuppression screen",
+          "cells": [
+            {
+              "text": "Diabetes or immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ludwig_angina-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Peritonsillar or parapharyngeal abscess",
+          "cells": [
+            {
+              "text": "Localised abscess rather than floor-of-mouth cellulitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Submandibular sialadenitis or salivary gland abscess",
+          "cells": [
+            {
+              "text": "Gland-centred infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angioedema of the floor of mouth and neck",
+          "cells": [
+            {
+              "text": "Non-infective swelling without sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sublingual haematoma",
+          "cells": [
+            {
+              "text": "Non-infective haematoma, for example after anticoagulation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ludwig_angina-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway first",
+          "cells": [
+            {
+              "text": "Early anaesthetic and ENT involvement; low threshold for awake fibreoptic intubation or tracheostomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical intravenous antibiotics",
+          "cells": [
+            {
+              "text": "Broad-spectrum beta-lactam with beta-lactamase inhibitor, covering aerobes and anaerobes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Urgent incision and drainage of submandibular, sublingual and submental spaces when there is a collection or airway threat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source elimination",
+          "cells": [
+            {
+              "text": "Extraction or treatment of the causative molar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Intravenous fluids, analgesia and high-dependency monitoring; control of diabetes or immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spread surveillance",
+          "cells": [
+            {
+              "text": "Parapharyngeal, retropharyngeal or mediastinal spread; evolving sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Critical care with ENT, maxillofacial and anaesthetic management for airway failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ludwig_angina-dx-mgmt",
+      "title": "Diagnosis and management of Ludwig angina",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapidly spreading tense swelling of the floor of mouth and neck after dental infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (stridor, drooling, inability to swallow, trismus, chest pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: immediate airway assessment; intubation or tracheostomy by senior team",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Airway assessment first; contrast CT neck; FBC, cultures; dental source",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do CT or examination show bilateral submandibular, sublingual or submental spread?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider peritonsillar or parapharyngeal abscess, sialadenitis or angioedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Secure the airway early with ENT and anaesthetic input",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Broad-spectrum intravenous antibiotics covering aerobes and anaerobes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Urgent incision and drainage of the involved spaces",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Extract or treat the causative molar tooth",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor for mediastinal spread and escalate to critical care",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Good outlook with early airway control and drainage; delay risks fatal airway obstruction",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

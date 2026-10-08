@@ -153,5 +153,321 @@
       "caption": "Overview comparison matrix for pseudohypoparathyroidism type 1b."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Endocrinology and clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pseudohypoparathyroidism_type_1b-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Corrected or ionised calcium, phosphate and magnesium",
+          "cells": [
+            {
+              "text": "Calcium and phosphate status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intact parathyroid hormone",
+          "cells": [
+            {
+              "text": "Elevated in the context of hypocalcaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "25-hydroxyvitamin D and renal function",
+          "cells": [
+            {
+              "text": "Vitamin D status and renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "TSH resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GNAS methylation analysis (methylation-specific MLPA)",
+          "cells": [
+            {
+              "text": "Methylation at the GNAS differentially methylated region"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "STX16 deletion testing and uniparental disomy testing",
+          "cells": [
+            {
+              "text": "Maternally inherited deletion or uniparental disomy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pseudohypoparathyroidism_type_1b-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pseudohypoparathyroidism type 1A",
+          "cells": [
+            {
+              "text": "GNAS coding mutation with Albright features"
+            },
+            {
+              "text": "GNAS methylation analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin D deficiency or hereditary vitamin D resistance",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "25-hydroxyvitamin D"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pseudohypoparathyroidism_type_1b-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Calcium and active vitamin D",
+          "cells": [
+            {
+              "text": "Lifelong oral calcium and an active vitamin D analogue such as calcitriol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Calcium, phosphate, PTH, renal function and urinary calcium to avoid hypercalciuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid",
+          "cells": [
+            {
+              "text": "Mild TSH resistance treated with thyroid hormone replacement where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phosphate",
+          "cells": [
+            {
+              "text": "Dietary measures for hyperphosphataemia, avoiding ectopic calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No skeletal-specific therapy",
+          "cells": [
+            {
+              "text": "Albright hereditary osteodystrophy is absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Maternally inherited STX16 microdeletion; methylation counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Endocrinology and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pseudohypoparathyroidism_type_1b-dx-mgmt",
+      "title": "Diagnosis and management of Pseudohypoparathyroidism type 1B",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PHP1B: hypocalcaemia with PTH resistance and no Albright features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Tetany, laryngospasm, seizures, QT prolongation, or new neurological signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent correction of symptomatic hypocalcaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Calcium, phosphate, PTH, vitamin D, TFTs; GNAS methylation; STX16 and UPD testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does GNAS methylation analysis show a PHP1B pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PHP1A, PHP1C or other hypocalcaemia causes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong oral calcium and active vitamin D analogue",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Monitor calcium, PTH, renal function and urinary calcium",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Thyroid hormone for mild TSH resistance where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dietary phosphate control while avoiding ectopic calcification",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Endocrinology and clinical genetics follow-up with methylation counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

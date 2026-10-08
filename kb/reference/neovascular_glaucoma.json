@@ -150,5 +150,296 @@
       "caption": "Overview comparison matrix for neovascular glaucoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neovascular_glaucoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Undilated slit-lamp examination and gonioscopy",
+          "cells": [
+            {
+              "text": "Early rubeosis and new angle vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Applanation tonometry",
+          "cells": [
+            {
+              "text": "Pressure rise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundus examination and fluorescein angiography",
+          "cells": [
+            {
+              "text": "The ischaemic retinal driver"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carotid Doppler or vascular imaging",
+          "cells": [
+            {
+              "text": "When ocular ischaemic syndrome is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "When media opacity obscures the retina"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neovascular_glaucoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary acute angle-closure glaucoma",
+          "cells": [
+            {
+              "text": "New iris or angle vessels point to the neovascular cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory (uveitic) glaucoma with anterior segment vessels",
+          "cells": [
+            {
+              "text": "Iris vessels occur in both; retinal ischaemia is the driver here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-traumatic or ghost cell glaucoma",
+          "cells": [
+            {
+              "text": "Follows trauma; this disorder follows retinal ischaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neovascular_glaucoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Panretinal photocoagulation and intravitreal anti-VEGF",
+          "cells": [
+            {
+              "text": "Ablates the ischaemic drive and regresses the membrane"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical pressure-lowering agents",
+          "cells": [
+            {
+              "text": "Beta-blockers, alpha-agonists and carbonic anhydrase inhibitors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain and inflammation control",
+          "cells": [
+            {
+              "text": "Topical corticosteroid and cycloplegic drops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drainage or cyclodestructive surgery",
+          "cells": [
+            {
+              "text": "For pressure uncontrolled medically once synechial closure is established"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Retinal vein occlusion, diabetic retinopathy or carotid ischaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neovascular_glaucoma-dx-mgmt",
+      "title": "Diagnosis and management of Neovascular glaucoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful red eye with very high pressure and corneal oedema after retinal ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new iris or angle vessels, painful high pressure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent panretinal photocoagulation or anti-VEGF; lower pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gonioscopy, tonometry, fundus angiography, carotid Doppler if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "New iris or angle vessels confirmed on gonioscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary angle closure or uveitic glaucoma; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Panretinal photocoagulation and intravitreal anti-VEGF to regress vessels",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical pressure-lowering agents with pain and inflammation control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Drainage or cyclodestructive surgery once the angle is closed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat the underlying retinal or carotid ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Better outcome when treated at rubeosis; established synechial closure is poor",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

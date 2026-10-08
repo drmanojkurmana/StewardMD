@@ -142,5 +142,314 @@
       "caption": "Overview comparison matrix for rheumatic mitral stenosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Valvular heart disease guidelines / cardiology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rheumatic_mitral_stenosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography with valve area, gradient and morphology scoring",
+          "cells": [
+            {
+              "text": "Mitral valve area, gradient and morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Atrial fibrillation and left atrial enlargement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Left atrial enlargement and pulmonary congestion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for left atrial thrombus",
+          "cells": [
+            {
+              "text": "Left atrial thrombus, often seen on transoesophageal echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right heart assessment",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rheumatic_mitral_stenosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Left atrial myxoma",
+          "cells": [
+            {
+              "text": "Obstructs the valve; a mimic to exclude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other causes of pulmonary hypertension and breathlessness",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension and breathlessness from non-valvular causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rheumatic_mitral_stenosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Congestion",
+          "cells": [
+            {
+              "text": "Diuretics for congestive symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rate control",
+          "cells": [
+            {
+              "text": "Beta-blockers or other rate-limiting agents in atrial fibrillation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Vitamin K antagonist for atrial fibrillation or left atrial thrombus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Balloon valvuloplasty",
+          "cells": [
+            {
+              "text": "Percutaneous mitral valvuloplasty in suitable patients with favourable valve morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Mitral valve repair or replacement when valvuloplasty is unsuitable or the valve is heavily diseased"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombus screening",
+          "cells": [
+            {
+              "text": "Transoesophageal echocardiography before valvuloplasty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary prophylaxis",
+          "cells": [
+            {
+              "text": "Continued antibiotic prophylaxis against recurrent rheumatic fever"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial echocardiography for progression, pulmonary hypertension and right heart strain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rheumatic_mitral_stenosis-dx-mgmt",
+      "title": "Diagnosis and management of Rheumatic mitral stenosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Breathlessness or palpitations with rheumatic mitral valve narrowing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new AF with deterioration, embolism, severe pulmonary hypertension)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review for embolism, left atrial thrombus or right heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography with valve area and gradient, ECG, chest radiograph, right heart",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is significant stenosis confirmed with favourable valve morphology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess severity and alternative causes; repeat echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Diuretics and rate-limiting agents for congestion and atrial fibrillation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticoagulate for atrial fibrillation or left atrial thrombus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Balloon mitral valvuloplasty in suitable patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical repair or replacement when valvuloplasty is unsuitable",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive; timely valvuloplasty or surgery helps, though AF and embolism risk persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

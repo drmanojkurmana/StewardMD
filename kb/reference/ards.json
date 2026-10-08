@@ -175,6 +175,16 @@
       "label": "Merck Manual Professional, Acute Hypoxemic Respiratory Failure (ARDS)",
       "url": "https://www.merckmanuals.com/professional/critical-care-medicine/respiratory-failure-and-mechanical-ventilation/acute-hypoxemic-respiratory-failure-ahrf-ards",
       "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 268-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 33-3",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -543,6 +553,105 @@
             }
           ],
           "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "ards-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria for ALI and ARDS",
+      "rowHeader": "Criterion",
+      "columns": [
+        "ALI",
+        "ARDS"
+      ],
+      "rows": [
+        {
+          "parameter": "Oxygenation",
+          "cells": [
+            {
+              "text": "PaO2/FIO2 <=300 mmHg"
+            },
+            {
+              "text": "PaO2/FIO2 <=200 mmHg"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Onset",
+          "cells": [
+            {
+              "text": "Acute"
+            },
+            {
+              "text": "Acute"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Bilateral alveolar or interstitial infiltrates"
+            },
+            {
+              "text": "Bilateral alveolar or interstitial infiltrates"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Absence of left atrial hypertension",
+          "cells": [
+            {
+              "text": "PCWP <=18 mmHg or no clinical evidence of raised left atrial pressure"
+            },
+            {
+              "text": "PCWP <=18 mmHg or no clinical evidence of raised left atrial pressure"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "ALI, acute lung injury; ARDS, acute respiratory distress syndrome; FIO2, inspired O2 fraction; PaO2, arterial partial pressure of O2; PCWP, pulmonary capillary wedge pressure. Annual incidence is estimated at up to 80/100,000 for ALI and 60/100,000 for ARDS. About 10% of ICU admissions have acute respiratory failure, and about 20% of these meet ALI or ARDS criteria."
+    },
+    {
+      "id": "ards-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Common causes of noncardiogenic pulmonary edema",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Direct injury to lung",
+          "cells": [
+            {
+              "text": "Chest trauma, pulmonary contusion; aspiration; smoke inhalation; pneumonia; oxygen toxicity; pulmonary embolism, reperfusion"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Hematogenous injury to lung",
+          "cells": [
+            {
+              "text": "Sepsis; pancreatitis; nonthoracic trauma; leukoagglutination reactions; multiple transfusions; intravenous drug use (for example heroin); cardiopulmonary bypass"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Possible lung injury plus elevated hydrostatic pressure",
+          "cells": [
+            {
+              "text": "High-altitude pulmonary edema; neurogenic pulmonary edema; reexpansion pulmonary edema"
+            }
+          ],
+          "cite": "c4"
         }
       ]
     }

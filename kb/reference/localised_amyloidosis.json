@@ -149,5 +149,334 @@
       "caption": "Overview comparison matrix for localised amyloidosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "localised_amyloidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsy with Congo red and amyloid typing by mass spectrometry or immunohistochemistry",
+          "cells": [
+            {
+              "text": "Confirms amyloid and its type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum free light chains and immunofixation",
+          "cells": [
+            {
+              "text": "Excludes a systemic clone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SAP scintigraphy",
+          "cells": [
+            {
+              "text": "Confirms absence of systemic deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Where a systemic clone is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography, renal and liver function",
+          "cells": [
+            {
+              "text": "Systemic organ involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Site-specific imaging and endoscopy",
+          "cells": [
+            {
+              "text": "Local extent of disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "localised_amyloidosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic AL amyloidosis",
+          "cells": [
+            {
+              "text": "Systemic disease must be excluded before labelling as localised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy at the affected site (bladder or laryngeal carcinoma)",
+          "cells": [
+            {
+              "text": "Co-existing malignancy at the biopsy site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic inflammatory or granulomatous lesions",
+          "cells": [
+            {
+              "text": "Mimic on imaging and at biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "localised_amyloidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopic or surgical excision",
+          "cells": [
+            {
+              "text": "Mainstay of local treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local radiotherapy",
+          "cells": [
+            {
+              "text": "For laryngeal, tracheobronchial or other sites less amenable to excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Watchful waiting",
+          "cells": [
+            {
+              "text": "Stable, minimally symptomatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of systemic disease",
+          "cells": [
+            {
+              "text": "Free light chains, immunofixation, SAP scintigraphy and organ assessment before management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic chemotherapy",
+          "cells": [
+            {
+              "text": "Not indicated in truly localised disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Site-specific supportive care",
+          "cells": [
+            {
+              "text": "Haematuria, airway compromise or voice change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term monitoring",
+          "cells": [
+            {
+              "text": "Local recurrence and the uncommon progression to systemic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "localised_amyloidosis-dx-mgmt",
+      "title": "Diagnosis and management of Localised Amyloidosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless haematuria, hoarseness or airway lesion with amyloid on biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (proteinuria, cardiac symptoms, monoclonal protein, airway compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: systemic amyloid workup and airway protection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Congo red biopsy with typing, free light chains, immunofixation, SAP scintigraphy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is systemic amyloidosis excluded on serum and organ studies?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Manage as systemic AL amyloidosis with haematology referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Endoscopic or surgical excision as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Local radiotherapy for laryngeal or tracheobronchial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Watchful waiting for stable, minimally symptomatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid systemic chemotherapy in truly localised disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Long-term surveillance for local recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent prognosis with rare systemic progression; local recurrence can occur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

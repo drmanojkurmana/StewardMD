@@ -152,5 +152,296 @@
       "caption": "Overview comparison matrix for monocular elevation deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "monocular_elevation_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Forced duction testing",
+          "cells": [
+            {
+              "text": "Inferior rectus restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoptic assessment in all gaze positions",
+          "cells": [
+            {
+              "text": "Deficit pattern and head posture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bell's phenomenon and saccadic velocities",
+          "cells": [
+            {
+              "text": "Helps separate paretic and supranuclear causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic refraction",
+          "cells": [
+            {
+              "text": "Evaluates amblyopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lid height on fixation with affected eye",
+          "cells": [
+            {
+              "text": "Separates true ptosis from pseudoptosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "monocular_elevation_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Brown syndrome",
+          "cells": [
+            {
+              "text": "Limits elevation only in adduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital fibrosis of the extraocular muscles",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid eye disease or orbital floor fracture",
+          "cells": [
+            {
+              "text": "Restrictive inferior rectus; acquired history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "monocular_elevation_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Amblyopia treatment",
+          "cells": [
+            {
+              "text": "Cycloplegic correction and occlusion or penalisation of the sound eye first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery for hypotropia and chin-up posture",
+          "cells": [
+            {
+              "text": "Guided by forced duction testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ptosis repair",
+          "cells": [
+            {
+              "text": "After alignment; pseudoptosis resolves once the eye is realigned"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mechanism assessment",
+          "cells": [
+            {
+              "text": "Restrictive, paretic or supranuclear, before planning surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoptic follow-up",
+          "cells": [
+            {
+              "text": "Monitor alignment and binocular function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "monocular_elevation_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of monocular elevation deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with hypotropia, chin-up posture and limited elevation of one eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acquired deficit, orbital fracture signs, pupil involvement or dense amblyopia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent orbital and neuro imaging; fracture entrapment or third nerve lesion review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Forced duction, orthoptic gaze assessment, Bell's phenomenon, refraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Congenital elevation deficit in all gaze, not only in adduction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Brown syndrome, restriction, third nerve palsy, skew deviation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat amblyopia first",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgery for hypotropia guided by forced duction testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Repair true ptosis after realignment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthoptic follow-up of alignment and binocular function",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Congenital cases are non-progressive; surgery and amblyopia care improve outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

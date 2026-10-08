@@ -150,5 +150,335 @@
       "caption": "Overview comparison matrix for overhydrated hereditary stomatocytosis (rhag)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / Nathan and Oski",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "overhydrated_hereditary_stomatocytosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and reticulocytes",
+          "cells": [
+            {
+              "text": "Low mean corpuscular haemoglobin concentration and high mean cell volume"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral blood film",
+          "cells": [
+            {
+              "text": "Prominent stomatocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osmotic gradient ektacytometry",
+          "cells": [
+            {
+              "text": "Overhydrated red-cell profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red-cell membrane protein analysis",
+          "cells": [
+            {
+              "text": "Reduced stomatin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RHAG genetic testing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis markers and iron studies",
+          "cells": [
+            {
+              "text": "Haemolysis and iron status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "overhydrated_hereditary_stomatocytosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hereditary xerocytosis (PIEZO1)",
+          "cells": [
+            {
+              "text": "Dehydrated cells with the opposite red-cell indices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired stomatocytosis",
+          "cells": [
+            {
+              "text": "Alcohol, liver disease or drugs; the inherited form has its own genetic basis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "overhydrated_hereditary_stomatocytosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid splenectomy",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Contraindicated; markedly increases thrombotic risk in these disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folic acid",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Supports the increased erythropoiesis of chronic haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red-cell transfusion",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "For symptomatic anaemia, restricted to clinical need"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron overload",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Monitor and chelate where loading develops; avoid unnecessary iron"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Full blood count, reticulocytes, haemolysis markers and iron studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thromboprophylaxis and counselling",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Around surgery or immobility; genetic counselling for this autosomal dominant disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "overhydrated_hereditary_stomatocytosis-dx-mgmt",
+      "title": "Diagnosis and management of Overhydrated hereditary stomatocytosis (RHAG)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic haemolytic anaemia with stomatocytes and high MCV in a family member",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (thrombosis, especially after splenectomy, or decompensated anaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent haematology review for thrombosis or aplastic crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC, reticulocytes, blood film, ektacytometry, stomatin and RHAG testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ektacytometry show an overhydrated profile with reduced stomatin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider xerocytosis, spherocytosis, acquired stomatocytosis or other haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid splenectomy because of the high post-splenectomy thrombotic risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Folic acid to support erythropoiesis in chronic haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Red-cell transfusion for symptomatic anaemia, restricted to clinical need",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor and manage iron overload with chelation; avoid unnecessary iron",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Thromboprophylaxis around surgery or immobility; genetic counselling for RHAG",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Moderate anaemia, good quality of life; post-splenectomy thrombosis is the main hazard",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

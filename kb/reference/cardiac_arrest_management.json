@@ -161,358 +161,59 @@
     {
       "id": "cardiac_arrest_management-diagnostic",
       "kind": "diagnostic",
-      "title": "Investigations and what they show",
+      "title": "Assessment during cardiac arrest",
       "rowHeader": "Criterion",
-      "columns": [
-        "What it shows"
-      ],
+      "columns": ["What it shows"],
       "rows": [
-        {
-          "parameter": "Continuous rhythm analysis and cardiac monitoring throughout resuscitation",
-          "cells": [
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Point-of-care blood gas, potassium, and glucose to identify reversible metabolic causes",
-          "cells": [
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Bedside ultrasound to assess for tamponade, hypovolaemia, and cardiac activity during rhythm checks",
-          "cells": [
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Waveform capnography to confirm airway placement and gauge resuscitation quality and return of circulation",
-          "cells": [
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Post-arrest 12-lead ECG and coronary assessment when a cardiac cause is suspected",
-          "cells": [
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        }
-      ],
-      "footnote": "Source states no numeric thresholds; needs-source marks a cell the entry does not state."
-    },
-    {
-      "id": "cardiac_arrest_management-ddx",
-      "kind": "ddx",
-      "title": "Look-alike conditions",
-      "rowHeader": "Condition",
-      "columns": [
-        "Key distinguishing feature",
-        "Best test to separate"
-      ],
-      "rows": [
-        {
-          "parameter": "Reversible causes",
-          "cells": [
-            {
-              "text": "hypoxia, hypovolaemia, hypo/hyperkalaemia and metabolic disorders, hypothermia"
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Reversible causes: tension pneumothorax, tamponade, toxins, thrombosis",
-          "cells": [
-            {
-              "text": "coronary or pulmonary"
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Profound bradyarrhythmia or heart block preceding arrest",
-          "cells": [
-            {
-              "text": "needs-source"
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Near-arrest states (severe shock) mimicking pulselessness",
-          "cells": [
-            {
-              "text": "needs-source"
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Traumatic cardiac arrest with mechanism-specific causes",
-          "cells": [
-            {
-              "text": "needs-source"
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        }
+        {"parameter": "Rhythm analysis", "cells": [{"text": "Shockable (ventricular fibrillation or pulseless ventricular tachycardia) or non-shockable (asystole or pulseless electrical activity)"}], "cite": "c1"},
+        {"parameter": "Point-of-care blood gas, potassium and glucose", "cells": [{"text": "Reversible metabolic causes"}], "cite": "c1"},
+        {"parameter": "Bedside ultrasound", "cells": [{"text": "Tamponade, hypovolaemia and cardiac activity during rhythm checks"}], "cite": "c1"},
+        {"parameter": "Waveform capnography", "cells": [{"text": "Airway placement, resuscitation quality and return of circulation"}], "cite": "c1"},
+        {"parameter": "Post-arrest 12-lead ECG and coronary assessment", "cells": [{"text": "When a cardiac cause is suspected"}], "cite": "c1"}
       ]
     },
     {
       "id": "cardiac_arrest_management-treatment",
       "kind": "treatment",
-      "title": "Management options, in order",
+      "title": "Management options in cardiac arrest",
       "rowHeader": "Option",
-      "columns": [
-        "Step",
-        "Notes"
-      ],
+      "columns": ["Step", "Notes"],
       "rows": [
-        {
-          "parameter": "High-quality, minimally interrupted chest compressions of adequate depth and rate with full chest recoil",
-          "cells": [
-            {
-              "text": "High-quality, minimally interrupted chest compressions of adequate depth and rate with full chest recoil"
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Early defibrillation of shockable rhythms (ventricular fibrillation and pulseless ventricular tachycardia) with immediate resumption of compressions after each shock",
-          "cells": [
-            {
-              "text": "Early defibrillation of shockable rhythms (ventricular fibrillation and pulseless ventricular tachycardia) with immediate resumption of compressions after each shock"
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Adrenaline for all arrests, with amiodarone or lidocaine for refractory shockable rhythms",
-          "cells": [
-            {
-              "text": "Adrenaline for all arrests, with amiodarone or lidocaine for refractory shockable rhythms"
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Systematic identification and correction of the reversible causes, the four Hs and four Ts",
-          "cells": [
-            {
-              "text": "Systematic identification and correction of the reversible causes, the four Hs and four Ts"
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Airway management with waveform capnography to confirm placement and gauge resuscitation quality and return of circulation",
-          "cells": [
-            {
-              "text": "Airway management with waveform capnography to confirm placement and gauge resuscitation quality and return of circulation"
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Post-resuscitation care with targeted temperature management, coronary assessment and organ support once circulation returns",
-          "cells": [
-            {
-              "text": "Post-resuscitation care with targeted temperature management, coronary assessment and organ support once circulation returns"
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Clear team leadership minimising pauses around rhythm checks and shocks, with structured escalation and prognostication",
-          "cells": [
-            {
-              "text": "Clear team leadership minimising pauses around rhythm checks and shocks, with structured escalation and prognostication"
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        }
+        {"parameter": "Chest compressions", "cells": [{"text": "High-quality, minimally interrupted; adequate depth and rate with full recoil"}, {"text": "Core of resuscitation"}], "cite": "c1"},
+        {"parameter": "Defibrillation", "cells": [{"text": "Early for shockable rhythms; compressions resumed immediately after each shock"}, {"text": "Every minute of delay reduces survival"}], "cite": "c1"},
+        {"parameter": "Adrenaline", "cells": [{"text": "Given for all arrests"}, {"text": "Standard drug"}], "cite": "c1"},
+        {"parameter": "Refractory shockable rhythm", "cells": [{"text": "Amiodarone or lidocaine"}, {"text": "Refractory cases"}], "cite": "c1"},
+        {"parameter": "Reversible causes", "cells": [{"text": "Four Hs (hypoxia, hypovolaemia, hypo- or hyperkalaemia and metabolic, hypothermia) and four Ts (tension pneumothorax, tamponade, toxins, thrombosis)"}, {"text": "Systematic correction"}], "cite": "c1"},
+        {"parameter": "Airway", "cells": [{"text": "Management with waveform capnography for placement and quality"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Post-resuscitation care", "cells": [{"text": "Targeted temperature management, coronary assessment and organ support after circulation returns"}, {"text": "After return of circulation"}], "cite": "c1"},
+        {"parameter": "Team and traumatic arrest", "cells": [{"text": "Clear leadership, minimal pauses; treat hypovolaemia, tension pneumothorax and tamponade in traumatic arrest"}, {"text": "Structured"}], "cite": "c1"}
       ]
     }
   ],
   "flowcharts": [
     {
       "id": "cardiac_arrest_management-dx-mgmt",
-      "title": "Diagnosis and management of Cardiac arrest management",
+      "title": "Management of cardiac arrest",
       "start": "n1",
       "nodes": [
-        {
-          "id": "n1",
-          "type": "start",
-          "text": "Suspected Cardiac arrest management",
-          "cite": "c1"
-        },
-        {
-          "id": "n2",
-          "type": "decision",
-          "text": "Any red flag present?",
-          "cite": "c1"
-        },
-        {
-          "id": "n3",
-          "type": "outcome",
-          "text": "Escalate: A shockable rhythm requiring immediate defibrillation, where every minute...",
-          "cite": "c1"
-        },
-        {
-          "id": "n4",
-          "type": "action",
-          "text": "Investigate: Continuous rhythm analysis and cardiac monitoring throughout resuscitation",
-          "cite": "c1"
-        },
-        {
-          "id": "n5",
-          "type": "decision",
-          "text": "Does the workup confirm the diagnosis?",
-          "cite": "c1"
-        },
-        {
-          "id": "n6",
-          "type": "action",
-          "text": "High-quality, minimally interrupted chest compressions of adequate depth and rate...",
-          "cite": "c1"
-        },
-        {
-          "id": "n7",
-          "type": "action",
-          "text": "Review differentials: Reversible causes: hypoxia, hypovolaemia, hypo/hyperkalaemia...",
-          "cite": "c1"
-        },
-        {
-          "id": "n8",
-          "type": "action",
-          "text": "Early defibrillation of shockable rhythms (ventricular fibrillation and pulseless...",
-          "cite": "c1"
-        },
-        {
-          "id": "n9",
-          "type": "action",
-          "text": "Adrenaline for all arrests, with amiodarone or lidocaine for refractory shockable rhythms",
-          "cite": "c1"
-        },
-        {
-          "id": "n10",
-          "type": "action",
-          "text": "Systematic identification and correction of the reversible causes, the four Hs and...",
-          "cite": "c1"
-        },
-        {
-          "id": "n11",
-          "type": "outcome",
-          "text": "Outcome: Outcome depends on the initial rhythm, the promptness of high-quality...",
-          "cite": "c1"
-        }
+        {"id": "n1", "type": "start", "text": "Unresponsive, not breathing normally, with no palpable pulse", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: shockable rhythm on rhythm analysis?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Defibrillate without delay; resume compressions immediately", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Continue high-quality compressions; adrenaline; search for reversible causes", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Return of spontaneous circulation?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Post-resuscitation care: oxygenation, ventilation, haemodynamic support, targeted temperature management", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Continue resuscitation; amiodarone or lidocaine for refractory shockable rhythm; treat reversible cause", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Survival depends on early recognition, compressions and defibrillation", "cite": "c1"}
       ],
       "edges": [
-        {
-          "from": "n1",
-          "to": "n2",
-          "label": "Next"
-        },
-        {
-          "from": "n2",
-          "to": "n3",
-          "label": "Yes"
-        },
-        {
-          "from": "n2",
-          "to": "n4",
-          "label": "No"
-        },
-        {
-          "from": "n4",
-          "to": "n5",
-          "label": "Next"
-        },
-        {
-          "from": "n5",
-          "to": "n6",
-          "label": "Yes"
-        },
-        {
-          "from": "n5",
-          "to": "n7",
-          "label": "No"
-        },
-        {
-          "from": "n7",
-          "to": "n4",
-          "label": "Next"
-        },
-        {
-          "from": "n6",
-          "to": "n8",
-          "label": "Next"
-        },
-        {
-          "from": "n8",
-          "to": "n9",
-          "label": "Next"
-        },
-        {
-          "from": "n9",
-          "to": "n10",
-          "label": "Next"
-        },
-        {
-          "from": "n10",
-          "to": "n11",
-          "label": "Next"
-        }
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"}
       ]
     }
   ]

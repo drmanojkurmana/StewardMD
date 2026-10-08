@@ -164,5 +164,464 @@
       "caption": "Overview comparison matrix for viral gastroenteritis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC MMWR, Updated Norovirus Outbreak Management and Disease Prevention Guidelines, 2011",
+      "kind": "web",
+      "url": "https://www.cdc.gov/mmwr/preview/mmwrhtml/rr6003a1.htm"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 128-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "viral_gastroenteritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing viral gastroenteritis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Norovirus incubation",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "12 to 48 h",
+              "range": [
+                12,
+                48
+              ]
+            },
+            {
+              "text": "Sudden vomiting and watery diarrhoea"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Norovirus illness length",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Usually 1 to 3 days; 4 to 6 days in young, old, hospitalised",
+              "range": [
+                1,
+                3
+              ]
+            },
+            {
+              "text": "Self-limited"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Viral shedding",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Average about 4 weeks; peak 2 to 5 days",
+              "op": "=",
+              "value": 4
+            },
+            {
+              "text": "Infectivity of late shedding unknown"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "RT-qPCR or multiplex panel",
+          "cells": [
+            {
+              "text": "Main diagnostic test"
+            },
+            {
+              "text": "Very sensitive; low titres need caution"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Norovirus EIA",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 36 to 80%",
+              "range": [
+                36,
+                80
+              ]
+            },
+            {
+              "text": "{{hy:Not for sporadic cases; outbreak screening only}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rotavirus or adenovirus EIA",
+          "cells": [
+            {
+              "text": "Stool antigen"
+            },
+            {
+              "text": "Commercial assays available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kaplan clinical criteria",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "99% sensitive, 68% specific for norovirus outbreaks",
+              "op": "=",
+              "value": 99
+            },
+            {
+              "text": "Epidemiological tool"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Faecal blood or leukocytes",
+          "cells": [
+            {
+              "text": "Usually absent in viral disease"
+            },
+            {
+              "text": "Present suggests bacterial or inflammatory cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "viral_gastroenteritis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic viral gastroenteritis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "S. aureus or B. cereus toxin",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Incubation 1 to 6 h; ham, salads, pastries, fried rice",
+              "range": [
+                1,
+                6
+              ]
+            },
+            {
+              "text": "History; food testing"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "C. perfringens or B. cereus diarrhoeal",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Incubation 8 to 16 h, cramps, vomiting rare",
+              "range": [
+                8,
+                16
+              ]
+            },
+            {
+              "text": "History"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Salmonella, Campylobacter, Shigella",
+          "cells": [
+            {
+              "text": "Over 16 h; inflammatory or bloody diarrhoea"
+            },
+            {
+              "text": "Stool culture or PCR"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Enterohaemorrhagic E. coli",
+          "cells": [
+            {
+              "text": "Bloody diarrhoea, ground beef or raw milk"
+            },
+            {
+              "text": "Stool Shiga toxin test"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Clostridioides difficile",
+          "cells": [
+            {
+              "text": "Recent antibiotics or hospital stay"
+            },
+            {
+              "text": "C. difficile toxin or PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Giardia or Cryptosporidium",
+          "cells": [
+            {
+              "text": "Protracted diarrhoea"
+            },
+            {
+              "text": "Stool antigen or microscopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "viral_gastroenteritis-treatment",
+      "kind": "treatment",
+      "title": "Managing viral gastroenteritis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral rehydration solution",
+          "cells": [
+            {
+              "text": "All with diarrhoea or vomiting"
+            },
+            {
+              "text": "{{hy:Mainstay of treatment}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV fluids",
+          "cells": [
+            {
+              "text": "Severe dehydration or failed oral intake"
+            },
+            {
+              "text": "Correct electrolytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early feeding, continue breastfeeding",
+          "cells": [
+            {
+              "text": "Children"
+            },
+            {
+              "text": "Zinc in resource-limited settings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ondansetron",
+          "cells": [
+            {
+              "text": "Vomiting child unable to rehydrate orally"
+            },
+            {
+              "text": "Selective antiemetic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No antibiotics or antimotility agents",
+          "cells": [
+            {
+              "text": "Viral gastroenteritis"
+            },
+            {
+              "text": "Inappropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand washing with soap and water",
+          "unit": "s",
+          "cells": [
+            {
+              "text": "Prevention and outbreaks"
+            },
+            {
+              "text": "At least 20 s; alcohol gel only a supplement"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chlorine bleach disinfection",
+          "unit": "ppm",
+          "cells": [
+            {
+              "text": "Contaminated hard surfaces"
+            },
+            {
+              "text": "1000 to 5000 ppm"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Exclude ill food handlers",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Norovirus"
+            },
+            {
+              "text": "48 to 72 h after symptoms resolve"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "viral_gastroenteritis-dx-mgmt",
+      "title": "Diagnosis and management of viral gastroenteritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute vomiting and watery diarrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bloody stool, high fever or faecal leukocytes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Bacterial or inflammatory cause: stool culture or PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Onset 1 to 6 h after a meal?",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Preformed toxin food poisoning: supportive care",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Assess hydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Severe dehydration or cannot drink?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "IV fluids; ondansetron in children; correct electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Oral rehydration, early feeding, hand hygiene",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

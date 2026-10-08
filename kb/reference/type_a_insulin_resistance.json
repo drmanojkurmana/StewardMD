@@ -151,5 +151,323 @@
       "caption": "Overview comparison matrix for type a insulin resistance syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "type_a_insulin_resistance-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting insulin and C-peptide",
+          "cells": [
+            {
+              "text": "Marked hyperinsulinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose, HbA1c and glucose tolerance testing",
+          "cells": [
+            {
+              "text": "Glucose tolerance may be normal early, before overt diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Androgen profile",
+          "cells": [
+            {
+              "text": "Hyperandrogenism, with hirsutism and oligomenorrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound",
+          "cells": [
+            {
+              "text": "Polycystic ovarian morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "INSR gene sequencing with autoantibody testing",
+          "cells": [
+            {
+              "text": "Pathogenic INSR variant; autoantibodies exclude type B resistance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "type_a_insulin_resistance-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Polycystic ovary syndrome with ordinary insulin resistance",
+          "cells": [
+            {
+              "text": "Type A resistance is disproportionate to body weight"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HAIR-AN syndrome",
+          "cells": [
+            {
+              "text": "Acquired form; overlaps with the hyperandrogenism of type A"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type B insulin resistance",
+          "cells": [
+            {
+              "text": "Autoimmune rather than genetic; separated by autoantibody testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rabson-Mendenhall syndrome",
+          "cells": [
+            {
+              "text": "A more severe INSR defect; type A is the mildest end of the spectrum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "type_a_insulin_resistance-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Insulin sensitisers",
+          "cells": [
+            {
+              "text": "Metformin and, where appropriate, a thiazolidinedione"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recombinant IGF-1 (mecasermin)",
+          "cells": [
+            {
+              "text": "Severe insulin resistance; acts via the IGF-1 receptor, bypassing the defective insulin receptor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperandrogenism management",
+          "cells": [
+            {
+              "text": "Combined oral contraceptive and an anti-androgen such as spironolactone for hirsutism and menstrual disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Periodic glucose and HbA1c monitoring for progression to overt diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reproductive care",
+          "cells": [
+            {
+              "text": "Oligomenorrhoea and polycystic ovarian dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine and genetic input",
+          "cells": [
+            {
+              "text": "Endocrinology and clinical genetics, with dietetic support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family assessment for the heritable INSR mutation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "type_a_insulin_resistance-dx-mgmt",
+      "title": "Diagnosis and management of Type A insulin resistance syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected type A insulin resistance: lean patient with acanthosis and hyperandrogenism",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (overt diabetes, rapid virilisation or features of type B resistance)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent endocrine review for rapid virilisation or an alternative androgen source",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fasting insulin and C-peptide, androgen profile, pelvic ultrasound, INSR sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does INSR sequencing confirm type A, with autoantibodies excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider type B resistance or PCOS with ordinary insulin resistance; repeat workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Insulin sensitisers such as metformin to counter receptor-level resistance",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Recombinant IGF-1 in more severe insulin resistance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Combined oral contraceptive and anti-androgen for hyperandrogenism",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Periodic glucose and HbA1c surveillance for progression to overt diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mildest INSR disorder; many are managed for years, though diabetes may develop",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

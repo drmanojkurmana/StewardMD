@@ -147,5 +147,287 @@
       "caption": "Overview comparison matrix for naevus comedonicus syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nevus_comedonicus_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Follicular hamartoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Seizures or developmental delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal and limb radiographs",
+          "cells": [
+            {
+              "text": "Scoliosis and skeletal anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Cataract and other ocular anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nevus_comedonicus_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated naevus comedonicus",
+          "cells": [
+            {
+              "text": "Without systemic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acne vulgaris or acne conglobata",
+          "cells": [
+            {
+              "text": "Inflammatory acne lacks the segmental pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Linear epidermal naevus",
+          "cells": [
+            {
+              "text": "Segmental epidermal lesion without comedones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steatocystoma multiplex",
+          "cells": [
+            {
+              "text": "Cystic adnexal lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nevus_comedonicus_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical keratolytics and retinoids",
+          "cells": [
+            {
+              "text": "Such as tretinoin, to reduce comedonal plugging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical vitamin D analogues",
+          "cells": [
+            {
+              "text": "Alternative for comedonal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics for inflammatory complications",
+          "cells": [
+            {
+              "text": "Cysts, abscesses and secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neurological, ocular and skeletal involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nevus_comedonicus_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Naevus comedonicus syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Segmental clusters of comedone-like plugs, possibly with neurological signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new or refractory seizures, regression, scoliosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review for seizures; treat deep infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, brain MRI if indicated, spinal radiographs, eye review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Segmental follicular hamartoma with systemic features assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider isolated naevus comedonicus or acne; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical keratolytics and retinoids to reduce comedonal plugging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antibiotics for inflammatory cysts and abscesses",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neurological, ocular and skeletal surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Multidisciplinary long-term care for extensive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Cutaneous lesion is benign; outcome depends on neurological, ocular and skeletal disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,278 @@
       "caption": "Overview comparison matrix for venous malformation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mulliken and Young's Vascular Anomalies: Hemangiomas and Malformations",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "venous_malformation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Doppler ultrasound",
+          "cells": [
+            {
+              "text": "Compressible channels with monophasic slow or absent flow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced MRI",
+          "cells": [
+            {
+              "text": "Lobulated T2-hyperintense lesion with phleboliths"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiograph",
+          "cells": [
+            {
+              "text": "Phleboliths"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen with D-dimer and fibrinogen",
+          "cells": [
+            {
+              "text": "Localised intravascular coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "venous_malformation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphatic malformation",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infantile or congenital haemangioma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kaposiform haemangioendothelioma",
+          "cells": [
+            {
+              "text": "Consumes platelets; coagulation screen before intervention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "venous_malformation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sclerotherapy",
+          "cells": [
+            {
+              "text": "First-line for most symptomatic lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Well-localised disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sirolimus",
+          "cells": [
+            {
+              "text": "mTOR inhibitor for extensive or complex malformations not amenable to sclerotherapy or surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative measures",
+          "cells": [
+            {
+              "text": "Symptomatic management with correction of localised coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "venous_malformation-dx-mgmt",
+      "title": "Diagnosis and management of Venous malformation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected venous malformation: soft blue-purple lesion that swells with dependency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid painful swelling, airway or visceral involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for acute thrombosis, airway or visceral involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Doppler ultrasound, contrast MRI, phleboliths on radiograph, coagulation screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show compressible slow-flow venous channels with phleboliths?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lymphatic malformation or infantile haemangioma; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct localised intravascular coagulopathy before intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sclerotherapy as first-line for most symptomatic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical resection for well-localised disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sirolimus for extensive or complex malformations not amenable to other treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lesions grow with the child and do not involute; treatment targets symptoms",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

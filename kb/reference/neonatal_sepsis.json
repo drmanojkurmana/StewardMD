@@ -152,5 +152,296 @@
       "caption": "Overview comparison matrix for neonatal sepsis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neonatal_sepsis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood culture before antibiotics",
+          "cells": [
+            {
+              "text": "Diagnostic gold standard"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with differential and immature-to-total neutrophil ratio",
+          "cells": [
+            {
+              "text": "Inflammatory response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C-reactive protein or procalcitonin, serially",
+          "cells": [
+            {
+              "text": "Trend in response to treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture with CSF cell count, protein, glucose and culture",
+          "cells": [
+            {
+              "text": "Coexisting meningitis, which may be missed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine culture",
+          "cells": [
+            {
+              "text": "More relevant in late-onset disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_sepsis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Respiratory distress syndrome",
+          "cells": [
+            {
+              "text": "Presentations overlap; sepsis must be considered in any preterm respiratory distress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transient tachypnoea of the newborn",
+          "cells": [
+            {
+              "text": "Respiratory signs overlap; cultures and inflammatory markers help"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_sepsis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empirical broad-spectrum antibiotics after cultures",
+          "cells": [
+            {
+              "text": "Benzylpenicillin or ampicillin plus an aminoglycoside for early-onset disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Late-onset cover",
+          "cells": [
+            {
+              "text": "Tailored to nosocomial organisms; broadened to a cephalosporin when meningitis is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Narrowing to culture results",
+          "cells": [
+            {
+              "text": "Antifungal added if invasive fungal infection is identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive supportive care",
+          "cells": [
+            {
+              "text": "Fluids, inotropes for septic shock, respiratory support and correction of DIC"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat coexisting meningitis",
+          "cells": [
+            {
+              "text": "Lumbar puncture guides agent and duration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Intrapartum antibiotic prophylaxis for maternal group B streptococcus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neonatal_sepsis-dx-mgmt",
+      "title": "Diagnosis and management of Neonatal sepsis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate in the first 28 days with temperature instability, poor feeding or lethargy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (septic shock, apnoea, bulging fontanelle, petechiae)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Cultures, then immediate empirical broad-spectrum antibiotics; ICU support for shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood culture, CBC, CRP or procalcitonin, lumbar puncture, glucose and gas",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Culture-proven or compatible sepsis with raised inflammatory markers?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stop antibiotics early if cultures are negative and the infant is well",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Empirical penicillin plus aminoglycoside for early-onset; cover nosocomial organisms late",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Narrow therapy to culture results; add antifungal if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lumbar puncture and treatment of coexisting meningitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intrapartum antibiotic prophylaxis for group B streptococcus colonisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prompt treatment usually recovers; meningitis, shock and prematurity raise mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

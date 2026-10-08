@@ -150,5 +150,296 @@
       "caption": "Overview comparison matrix for schwannoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Soft Tissue and Bone Tumours / Enzinger and Weiss's Soft Tissue Tumors",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "schwannoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI with contrast",
+          "cells": [
+            {
+              "text": "Lesion and its relation to the nerve, with target and split-fat signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and internal auditory meatus imaging",
+          "cells": [
+            {
+              "text": "Suspected vestibular schwannoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Antoni A and B areas with Verocay bodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry",
+          "cells": [
+            {
+              "text": "S100 and SOX10 positivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic assessment (NF2, SMARCB1, LZTR1)",
+          "cells": [
+            {
+              "text": "Done when tumours are multiple or a syndrome is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "schwannoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Malignant peripheral nerve sheath tumour",
+          "cells": [
+            {
+              "text": "Rapid growth, pain or new deficit raise concern; atypia of ancient schwannoma should not be over-read as malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular schwannoma versus meningioma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "schwannoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation with serial imaging",
+          "cells": [
+            {
+              "text": "Small, asymptomatic tumours, as they are benign and slow-growing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microsurgical enucleation",
+          "cells": [
+            {
+              "text": "Symptomatic or enlarging lesions; dissect off the parent nerve to preserve function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular schwannoma options",
+          "cells": [
+            {
+              "text": "Surveillance, microsurgery or stereotactic radiosurgery by size, hearing and symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic care",
+          "cells": [
+            {
+              "text": "Pain and neurological deficit; nerve-conduction assessment if function impaired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "NF2, SMARCB1 or LZTR1 when tumours are multiple or a syndrome is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Neurosurgical, skull-base or soft-tissue multidisciplinary input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "schwannoma-dx-mgmt",
+      "title": "Diagnosis and management of Schwannoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Nerve-sheath mass on imaging: suspected schwannoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid growth, pain, new deficit, bilateral vestibular tumours or cord compression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent specialist review for malignant change, syndrome or compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI (target, split-fat signs); audiometry if vestibular; histology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Antoni A/B areas, Verocay bodies, S100 and SOX10 positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider neurofibroma, MPNST or traumatic neuroma; repeat sampling",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Small asymptomatic tumour: serial imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Symptomatic or enlarging: microsurgical enucleation preserving the nerve",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Vestibular lesion: surveillance, surgery or radiosurgery by size and hearing",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Multiple tumours: NF2, SMARCB1, LZTR1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent prognosis; enucleation usually curative, recurrence uncommon",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

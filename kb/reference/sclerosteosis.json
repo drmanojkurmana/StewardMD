@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for sclerosteosis (sost)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism (ASBMR)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sclerosteosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Generalised osteosclerosis, cortical thickening and calvarial hyperostosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SOST genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skull-base cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Foraminal narrowing and cranial nerve compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiology and visual assessment",
+          "cells": [
+            {
+              "text": "Hearing and optic nerve compromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundoscopy",
+          "cells": [
+            {
+              "text": "Raised intracranial pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for syndactyly and nail changes",
+          "cells": [
+            {
+              "text": "Syndactyly separates it from Van Buchem disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sclerosteosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Van Buchem disease",
+          "cells": [
+            {
+              "text": "Syndactyly present in sclerosteosis, which is also generally more severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bell palsy",
+          "cells": [
+            {
+              "text": "Progressive facial palsy here reflects bony entrapment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sclerosteosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Narrowed cranial foramina and skull base to relieve nerve entrapment and raised ICP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive neuro-sensory care",
+          "cells": [
+            {
+              "text": "Facial palsy, hearing aids or implants, optic compromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ICP monitoring",
+          "cells": [
+            {
+              "text": "Serial fundoscopy and skull-base imaging; intervene before brainstem compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance and rehabilitation",
+          "cells": [
+            {
+              "text": "Ongoing audiology and vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid bone-forming agents",
+          "cells": [
+            {
+              "text": "Avoid anti-sclerostin antibody and agents that increase bone mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive SOST disorder; family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Metabolic bone and genetics, with neurosurgery and ENT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sclerosteosis-dx-mgmt",
+      "title": "Diagnosis and management of Sclerosteosis (SOST)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive skull thickening, facial palsy or deafness with syndactyly: sclerosteosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Headache, papilloedema, vomiting, worsening vision or hearing, brainstem signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical decompression for raised ICP or brainstem crowding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs, SOST testing, skull-base imaging, audiology, fundoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Osteosclerosis with syndactyly and a SOST variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Van Buchem disease, osteopetrosis or Camurati-Engelmann disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Decompress narrowed foramina and skull base",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial fundoscopy and skull-base imaging for ICP",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hearing aids or implants and visual surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid bone-mass-increasing agents; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive; entrapment and raised ICP cause serious disability without intervention",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

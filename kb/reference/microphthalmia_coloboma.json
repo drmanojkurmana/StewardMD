@@ -152,5 +152,323 @@
       "caption": "Overview comparison matrix for microphthalmia-anophthalmia-coloboma spectrum."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical ophthalmology and genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "microphthalmia_coloboma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundus and slit-lamp examination of both eyes",
+          "cells": [
+            {
+              "text": "Chorioretinal and iris coloboma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular biometry and B-scan ultrasound",
+          "cells": [
+            {
+              "text": "Axial length in microphthalmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orbital and neuro-imaging (MRI)",
+          "cells": [
+            {
+              "text": "Optic nerves, chiasm, pituitary and brain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray with a targeted gene panel",
+          "cells": [
+            {
+              "text": "SOX2, OTX2, PAX6 or CHD7 variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic evaluation for CHARGE",
+          "cells": [
+            {
+              "text": "CHARGE association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of parents and relatives",
+          "cells": [
+            {
+              "text": "Subtle iris coloboma in dominant families"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "microphthalmia_coloboma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "CHARGE syndrome",
+          "cells": [
+            {
+              "text": "Coloboma, heart defects, choanal atresia and growth retardation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinoblastoma",
+          "cells": [
+            {
+              "text": "Leukocoria with an intraocular mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital infection with chorioretinal scarring",
+          "cells": [
+            {
+              "text": "Chorioretinal scarring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "microphthalmia_coloboma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Refractive error and amblyopia",
+          "cells": [
+            {
+              "text": "In eyes with useful visual potential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong retinal surveillance",
+          "cells": [
+            {
+              "text": "Chorioretinal colobomas; detachment treated promptly with vitreoretinal surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orbital conformers and expanders",
+          "cells": [
+            {
+              "text": "Early in severe microphthalmia and anophthalmia, followed by prostheses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glaucoma or cataract",
+          "cells": [
+            {
+              "text": "Managed as they arise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndromic investigation",
+          "cells": [
+            {
+              "text": "CHARGE: cardiac, hearing and endocrine assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and counselling",
+          "cells": [
+            {
+              "text": "Microarray and gene panel; examination of relatives for subtle iris coloboma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision and multidisciplinary care",
+          "cells": [
+            {
+              "text": "Ophthalmology, genetics and paediatric support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "microphthalmia_coloboma-dx-mgmt",
+      "title": "Diagnosis and management of Microphthalmia-anophthalmia-coloboma spectrum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Eye with coloboma or small globe on examination in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sudden visual loss, leukocoria, choanal atresia or a midline brain anomaly?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent retinal review for detachment; exclude retinoblastoma for leukocoria",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fundus and slit-lamp examination; biometry; MRI of optic nerves and brain; microarray",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a causative SOX2, OTX2, PAX6 or CHD7 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CHARGE, retinoblastoma or congenital infection with chorioretinal scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct refractive error and treat amblyopia in eyes with useful vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lifelong surveillance for retinal detachment; prompt vitreoretinal surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orbital conformers and expanders early in severe microphthalmia, then prostheses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Systemic evaluation for CHARGE: cardiac, hearing and endocrine assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary ophthalmology, genetics and paediatric support; low-vision aids",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

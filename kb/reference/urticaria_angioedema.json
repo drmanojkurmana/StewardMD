@@ -176,5 +176,480 @@
       "caption": "Overview comparison matrix for urticaria, angioedema & allergic rhinitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Urticaria",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/dermatologic-disorders/approach-to-the-dermatologic-patient/urticaria"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "urticaria_angioedema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Classifying urticaria, angioedema and rhinitis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Duration of episodes",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Acute under 6 weeks; chronic over 6 weeks",
+              "op": "=",
+              "value": 6
+            },
+            {
+              "text": "Sets work-up and treatment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Wheal lasting too long",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Over 48 h, painful, non-blanching or purpuric",
+              "op": ">",
+              "value": 48
+            },
+            {
+              "text": "Biopsy for urticarial vasculitis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Angioedema without wheals or itch",
+          "cells": [
+            {
+              "text": "Lasts over 24 h, gut involvement"
+            },
+            {
+              "text": "{{hy:Bradykinin-mediated (HAE, ACE inhibitor); antihistamine fails}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary angioedema type 1",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Low C1INH antigen, about 85% of HAE",
+              "op": "=",
+              "value": 85
+            },
+            {
+              "text": "Low C4 supports"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HAE type 2 and type 3",
+          "cells": [
+            {
+              "text": "Dysfunctional C1INH (type 2); normal C1INH, often factor XII (type 3)"
+            },
+            {
+              "text": "Functional C1INH assay, genetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inducible urticaria tests",
+          "cells": [
+            {
+              "text": "Ice-cube test (cold); stroking (dermatographism)"
+            },
+            {
+              "text": "Confirm trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic urticaria labs",
+          "cells": [
+            {
+              "text": "CBC, ESR or CRP, TSH, thyroid antibodies"
+            },
+            {
+              "text": "Most results normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Allergic rhinitis",
+          "cells": [
+            {
+              "text": "Seasonal or perennial"
+            },
+            {
+              "text": "Skin prick or specific IgE to confirm allergen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Harrison advises biopsy for lesions lasting over 36 h (lesions beyond 24 to 36 h are suspicious); Merck uses over 48 h. Both kept."
+    },
+    {
+      "id": "urticaria_angioedema-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic urticaria and angioedema",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Urticarial vasculitis",
+          "cells": [
+            {
+              "text": "Lesions persist, burn, leave bruising"
+            },
+            {
+              "text": "Skin biopsy, complement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mastocytosis",
+          "cells": [
+            {
+              "text": "Flushing, pigmented papules with Darier sign"
+            },
+            {
+              "text": "Skin biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACE inhibitor angioedema",
+          "cells": [
+            {
+              "text": "No urticaria, on ACE inhibitor"
+            },
+            {
+              "text": "Drug history; stop drug"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acquired C1INH deficiency",
+          "cells": [
+            {
+              "text": "Older onset, lymphoproliferative or autoimmune disease"
+            },
+            {
+              "text": "C1INH level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum sickness",
+          "cells": [
+            {
+              "text": "Fever, arthralgia after drug or antiserum"
+            },
+            {
+              "text": "Clinical history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasomotor rhinitis or NARES",
+          "cells": [
+            {
+              "text": "Rhinitis without allergic sensitisation"
+            },
+            {
+              "text": "Negative skin prick or IgE"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urticaria_angioedema-treatment",
+      "kind": "treatment",
+      "title": "Treating urticaria, angioedema and allergic rhinitis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid trigger",
+          "cells": [
+            {
+              "text": "Foods, NSAIDs, ACE inhibitors, physical triggers"
+            },
+            {
+              "text": "First step"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-generation H1 antihistamine",
+          "cells": [
+            {
+              "text": "All urticaria, first line"
+            },
+            {
+              "text": "E.g. cetirizine 10 mg or fexofenadine 180 mg daily, taken regularly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antihistamine up-dosing",
+          "cells": [
+            {
+              "text": "Persistent chronic urticaria"
+            },
+            {
+              "text": "Up to 4-fold dose or switch agent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "H2 antagonist or montelukast",
+          "cells": [
+            {
+              "text": "Adjunct"
+            },
+            {
+              "text": "Limited evidence"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Omalizumab, ciclosporin or remibrutinib",
+          "cells": [
+            {
+              "text": "Antihistamine-refractory chronic spontaneous urticaria"
+            },
+            {
+              "text": "Add-on biologic or immunomodulator"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Short prednisone course",
+          "cells": [
+            {
+              "text": "Severe flare only"
+            },
+            {
+              "text": "30 to 40 mg daily; not long term"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Epinephrine",
+          "cells": [
+            {
+              "text": "Oropharyngeal or airway angioedema"
+            },
+            {
+              "text": "0.3 mL of 1:1000 SC then admit; prescribe auto-injector"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C1INH concentrate, icatibant or kallikrein inhibitor",
+          "cells": [
+            {
+              "text": "Hereditary or bradykinin angioedema attack"
+            },
+            {
+              "text": "{{hy:Antihistamine and epinephrine do not work}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intranasal corticosteroid plus antihistamine",
+          "cells": [
+            {
+              "text": "Allergic rhinitis"
+            },
+            {
+              "text": "Allergen avoidance; immunotherapy for selected patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "urticaria_angioedema-dx-mgmt",
+      "title": "Diagnosis and management of urticaria and angioedema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Wheals, swelling or rhinitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Airway swelling or anaphylaxis?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Epinephrine, airway support, admit",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Angioedema without wheals or itch?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Check ACE inhibitor use; C4 and C1INH level and function",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Bradykinin angioedema: stop ACE inhibitor; C1INH or icatibant",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Wheals over 48 h, painful or bruising?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Biopsy for urticarial vasculitis",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Duration over 6 weeks?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Acute: find and avoid trigger; H1 antihistamine",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Chronic: regular H1 antihistamine, up to 4-fold",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Still active: omalizumab, ciclosporin or remibrutinib",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -152,5 +152,334 @@
       "caption": "Overview comparison matrix for phenylketonuria maternal."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics; Scriver's The Metabolic and Molecular Bases of Inherited Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "phenylketonuria_maternal-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial maternal blood phenylalanine and tyrosine",
+          "cells": [
+            {
+              "text": "Maternal control before and throughout pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal PKU genotype and sapropterin responsiveness testing",
+          "cells": [
+            {
+              "text": "Genotype and responsiveness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed fetal anomaly ultrasound and fetal echocardiography",
+          "cells": [
+            {
+              "text": "Fetal structural and cardiac anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial fetal growth scans and head circumference",
+          "cells": [
+            {
+              "text": "Microcephaly and growth restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal nutritional assessment",
+          "cells": [
+            {
+              "text": "Protein, vitamin B12, iron and micronutrient status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal developmental and cardiac assessment",
+          "cells": [
+            {
+              "text": "Neonatal development and cardiac status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phenylketonuria_maternal-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Foetal alcohol spectrum disorder",
+          "cells": [
+            {
+              "text": "Overlapping facies, microcephaly, growth restriction and cardiac defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital TORCH infections",
+          "cells": [
+            {
+              "text": "Microcephaly and growth restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Teratogen embryopathies",
+          "cells": [
+            {
+              "text": "Exposure to valproate, warfarin or retinoids"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phenylketonuria_maternal-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Preconception diet",
+          "cells": [
+            {
+              "text": "Reinstitute a strict phenylalanine-restricted diet with amino-acid substitute before conception"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal monitoring",
+          "cells": [
+            {
+              "text": "Frequent blood phenylalanine and tyrosine monitoring, with dietary titration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sapropterin",
+          "cells": [
+            {
+              "text": "In documented responders, as an adjunct to dietary control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal nutrition",
+          "cells": [
+            {
+              "text": "Adequate protein, tyrosine, vitamin B12, iron and micronutrients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal surveillance",
+          "cells": [
+            {
+              "text": "Anomaly ultrasound, fetal echocardiography and serial growth and head-circumference scans"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal assessment",
+          "cells": [
+            {
+              "text": "Paediatric developmental and cardiac assessment after delivery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Metabolic and obstetric care with adherence support and genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "phenylketonuria_maternal-dx-mgmt",
+      "title": "Diagnosis and management of phenylketonuria maternal",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Woman with PKU planning pregnancy, or pregnant with poorly controlled phenylalanine",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (poor control in pregnancy, microcephaly, growth restriction, cardiac anomaly)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent metabolic and obstetric review for fetal microcephaly or cardiac anomaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Maternal phenylalanine and tyrosine; fetal anomaly ultrasound and fetal echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is maternal phenylalanine controlled, with fetal anomaly scans normal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider foetal alcohol spectrum disorder, congenital infection or teratogen exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reinstitute a strict phenylalanine-restricted diet before conception",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Frequent blood phenylalanine and tyrosine monitoring with dietary titration",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Maternal nutritional support with adequate protein, tyrosine and micronutrients",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Detailed fetal anomaly ultrasound, fetal echocardiography and serial growth scans",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Neonatal developmental and cardiac assessment after delivery",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Strict control before conception and during pregnancy markedly lowers embryopathy risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

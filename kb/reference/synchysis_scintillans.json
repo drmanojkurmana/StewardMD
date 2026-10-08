@@ -145,5 +145,314 @@
       "caption": "Overview comparison matrix for synchysis scintillans."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "synchysis_scintillans-dx-mgmt",
+      "title": "Diagnosis and management of Synchysis scintillans",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected synchysis scintillans: golden cholesterol crystals sedimenting in the vitreous",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (recurrent vitreous haemorrhage, occult trauma, or painful blind eye)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of active disease such as proliferative retinopathy or retinal tear",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp and fundus examination; B-scan ultrasound; trauma and haemorrhage history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do the crystals settle inferiorly, implying a liquefied vitreous from past disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider asteroid hyalosis, vitreous haemorrhage or a retained foreign body",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe asymptomatic eyes; the crystals themselves are not treated",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat the underlying cause of recurrent vitreous haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pars plana vitrectomy if crystals or media opacity obscure the view",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Examine the fellow eye for laterality and systemic contribution",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Crystals are inert; visual outcome depends on the underlying ocular disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "synchysis_scintillans-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp and dilated fundus examination",
+          "cells": [
+            {
+              "text": "Crystals settling inferiorly at rest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Mobile echoes that settle with gravity, where the fundus view is poor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History of trauma, haemorrhage or chronic intraocular disease",
+          "cells": [
+            {
+              "text": "Previous disease that liquefied the vitreous"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of the fellow eye",
+          "cells": [
+            {
+              "text": "Laterality and any systemic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigation of recurrent vitreous haemorrhage",
+          "cells": [
+            {
+              "text": "Underlying cause, where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus imaging",
+          "cells": [
+            {
+              "text": "Crystals and underlying retina, where the media are clear enough"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "synchysis_scintillans-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Asteroid hyalosis",
+          "cells": [
+            {
+              "text": "Crystals here are flat, angular and golden-brown; asteroid crystals are round, white and do not sediment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitreous or anterior chamber haemorrhage",
+          "cells": [
+            {
+              "text": "Recurrent haemorrhage is the usual underlying cause; treat the cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retained intraocular foreign body or occult penetrating trauma",
+          "cells": [
+            {
+              "text": "Must be excluded in a previously injured eye"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "synchysis_scintillans-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No treatment of the crystals",
+          "cells": [
+            {
+              "text": "Crystals are inert; asymptomatic eyes are observed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying ocular disease",
+          "cells": [
+            {
+              "text": "Cause of recurrent or chronic vitreous haemorrhage, and sequelae of prior trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pars plana vitrectomy",
+          "cells": [
+            {
+              "text": "Where crystals or media opacity obscure the view, or vitreoretinal pathology needs surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigation of recurrent haemorrhage",
+          "cells": [
+            {
+              "text": "Where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and fellow-eye examination",
+          "cells": [
+            {
+              "text": "Affected eye; fellow eye for laterality and systemic contribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Expectation setting",
+          "cells": [
+            {
+              "text": "Visual prognosis is set by the underlying disease, not the crystals"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

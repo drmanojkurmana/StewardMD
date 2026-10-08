@@ -152,5 +152,316 @@
       "caption": "Overview comparison matrix for mohr-tranebjaerg syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mohr_tranebjaerg_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "TIMM8A sequencing and deletion/duplication analysis",
+          "cells": [
+            {
+              "text": "Confirms diagnosis; assess for a contiguous BTK deletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otoacoustic emissions and auditory brainstem responses",
+          "cells": [
+            {
+              "text": "Auditory-neuropathy pattern of hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT and visual evoked potentials",
+          "cells": [
+            {
+              "text": "Optic nerve involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Mainly to exclude alternative structural or metabolic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin quantification",
+          "cells": [
+            {
+              "text": "If a contiguous deletion is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mohr_tranebjaerg_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Wolfram syndrome",
+          "cells": [
+            {
+              "text": "Optic atrophy with diabetes mellitus and deafness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contiguous gene deletion with agammaglobulinaemia",
+          "cells": [
+            {
+              "text": "BTK involvement with recurrent serious infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leber hereditary optic neuropathy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mohr_tranebjaerg_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Auditory rehabilitation",
+          "cells": [
+            {
+              "text": "Early communication support for progressive auditory-neuropathy hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dystonia control",
+          "cells": [
+            {
+              "text": "Anticholinergics, benzodiazepines or botulinum toxin; consider deep brain stimulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision rehabilitation",
+          "cells": [
+            {
+              "text": "Visual aids for progressive optic atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychiatric support",
+          "cells": [
+            {
+              "text": "Dementia care as cognition declines in adulthood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BTK deletion management",
+          "cells": [
+            {
+              "text": "Immunoglobulin replacement and infection prophylaxis if agammaglobulinaemia coexists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked recessive; carrier testing of female relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mohr_tranebjaerg_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Mohr-Tranebjaerg syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Deaf boy with later visual loss, dystonia or cognitive decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Recurrent serious infections, swallowing or airway compromise, rapid decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Check immunoglobulins for BTK deletion; urgent airway and swallow assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TIMM8A testing with deletion analysis, ABR/OAE, OCT and VEP, immunoglobulins",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pathogenic TIMM8A variant or deletion found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Wolfram syndrome, mitochondrial disease, hereditary ataxias",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Auditory rehabilitation with early communication support",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat dystonia: anticholinergics, benzodiazepines, botulinum toxin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Low-vision rehabilitation and neuropsychiatric support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Immunoglobulin replacement if BTK deletion with agammaglobulinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and carrier testing of female relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Progressive, disabling course: hearing loss, then dystonia, visual failure, dementia",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

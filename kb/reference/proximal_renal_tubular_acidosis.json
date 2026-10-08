@@ -153,5 +153,342 @@
       "caption": "Overview comparison matrix for proximal renal tubular acidosis (type 2)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nephrology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "proximal_renal_tubular_acidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Venous blood gas with serum electrolytes",
+          "cells": [
+            {
+              "text": "Hyperchloraemic normal anion gap acidosis with hypokalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine pH and urine anion or osmolal gap",
+          "cells": [
+            {
+              "text": "Distal acidification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fractional excretion of bicarbonate after bicarbonate loading",
+          "cells": [
+            {
+              "text": "Characteristically raised in proximal RTA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fanconi screen (urinary glucose, phosphate, urate, amino acids, low-molecular-weight proteins)",
+          "cells": [
+            {
+              "text": "Fanconi syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum phosphate, calcium, alkaline phosphatase, vitamin D and radiographs",
+          "cells": [
+            {
+              "text": "Rickets or osteomalacia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leucocyte cystine assay, slit-lamp and serum and urine electrophoresis",
+          "cells": [
+            {
+              "text": "Cystinosis, and myeloma in adults"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted genetic testing (SLC4A4, CTNS, OCRL, ATP7B, FAH)",
+          "cells": [
+            {
+              "text": "Causative gene"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "proximal_renal_tubular_acidosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Distal (type 1) renal tubular acidosis",
+          "cells": [
+            {
+              "text": "Distal acidification defect"
+            },
+            {
+              "text": "Urine pH and urine anion gap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carbonic anhydrase inhibitor effect",
+          "cells": [
+            {
+              "text": "Carbonic anhydrase inhibitor exposure"
+            },
+            {
+              "text": "Medication review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal bicarbonate loss",
+          "cells": [
+            {
+              "text": "Chronic diarrhoea, ileal or ureteric diversion"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "proximal_renal_tubular_acidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral alkali",
+          "cells": [
+            {
+              "text": "Bicarbonate or citrate, typically in generous amounts because of ongoing urinary bicarbonate loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium supplementation",
+          "cells": [
+            {
+              "text": "Often as potassium citrate, as alkali therapy worsens hypokalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Remove the cause",
+          "cells": [
+            {
+              "text": "Withdraw offending drugs such as carbonic anhydrase inhibitors or ifosfamide; treat myeloma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fanconi syndrome",
+          "cells": [
+            {
+              "text": "Phosphate replacement and active vitamin D (calcitriol) for rickets or osteomalacia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystinosis",
+          "cells": [
+            {
+              "text": "Disease-specific therapy such as cysteamine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Electrolytes, acid-base status, growth in children and bone health"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Nephrology, with metabolic or genetics and dietetic input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "proximal_renal_tubular_acidosis-dx-mgmt",
+      "title": "Diagnosis and management of Proximal Renal Tubular Acidosis (Type 2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected proximal RTA: hyperchloraemic normal anion gap acidosis with hypokalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rickets or fractures, profound hypokalaemia, visual loss, or myeloma features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent treatment of profound hypokalaemia and arrhythmia risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "VBG and electrolytes; urine pH and anion gap; FE bicarbonate; Fanconi screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is FE bicarbonate raised after loading, with distal causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider distal, type 4 RTA, GI bicarbonate loss or CA inhibitor effect; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral bicarbonate or citrate in generous amounts",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Potassium citrate, as alkali worsens hypokalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Withdraw offending drugs; treat myeloma where present",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Phosphate replacement and calcitriol for Fanconi-related rickets",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Nephrology follow-up with monitoring of electrolytes, growth and bone health",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

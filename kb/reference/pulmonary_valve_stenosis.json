@@ -146,5 +146,312 @@
       "caption": "Overview comparison matrix for pulmonary valve stenosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pulmonary_valve_stenosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography with Doppler",
+          "cells": [
+            {
+              "text": "Obstruction level and gradient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echo assessment of RV size, hypertrophy and tricuspid regurgitation",
+          "cells": [
+            {
+              "text": "RV size, hypertrophy and function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "RV volumes and level of obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and chest radiography",
+          "cells": [
+            {
+              "text": "RV hypertrophy and post-stenotic dilatation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right heart catheterisation, if non-invasive gradient is discordant",
+          "cells": [
+            {
+              "text": "Discordant gradient assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_valve_stenosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Subvalvular (infundibular) RV outflow obstruction",
+          "cells": [
+            {
+              "text": "Subvalvular obstruction"
+            },
+            {
+              "text": "Echocardiography with Doppler"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atrial septal defect with a pulmonary flow murmur",
+          "cells": [
+            {
+              "text": "Atrial communication"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_valve_stenosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Mild stenosis",
+          "cells": [
+            {
+              "text": "Observe; rarely progresses and needs no intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Balloon valvuloplasty",
+          "cells": [
+            {
+              "text": "Moderate to severe obstruction of a suitable pliable domed valve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysplastic or calcified valves",
+          "cells": [
+            {
+              "text": "Refer; these respond poorly to balloon dilatation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right heart failure",
+          "cells": [
+            {
+              "text": "Diuretic therapy in advanced obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Echo and Doppler for gradient and RV function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Noonan syndrome",
+          "cells": [
+            {
+              "text": "Evaluate where a dysplastic valve is present; genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Cardiology or congenital heart disease service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pulmonary_valve_stenosis-dx-mgmt",
+      "title": "Diagnosis and management of Pulmonary valve stenosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pulmonary valve stenosis: systolic murmur with raised RV gradient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Exertional syncope, right heart failure, cyanosis from atrial shunt, or dysplastic valve?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiology review for syncope or right heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo with Doppler; RV size and function; CMR; ECG and CXR; RHC if discordant",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a significant valve gradient confirmed on echo or catheterisation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider subvalvular stenosis, ASD or innocent flow murmur; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe mild stenosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Balloon valvuloplasty for moderate to severe pliable valve obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Refer dysplastic or calcified valves that respond poorly to balloon",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Diuretics for right heart failure in advanced obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serial echo surveillance; genetic evaluation for Noonan syndrome where dysplastic valve",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

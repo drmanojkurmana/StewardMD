@@ -153,5 +153,323 @@
       "caption": "Overview comparison matrix for mitochondrial complex i deficiency (nadh:ubiquinone oxidoreductase deficiency)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mitochondrial_complex_i_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood and CSF lactate and pyruvate with lactate-to-pyruvate ratio",
+          "cells": [
+            {
+              "text": "Lactate-to-pyruvate ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spectrophotometric respiratory chain enzyme activities",
+          "cells": [
+            {
+              "text": "Isolated Complex I reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging with MRI and spectroscopy",
+          "cells": [
+            {
+              "text": "Symmetrical basal ganglia and brainstem lesions; lactate peak"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing: nuclear gene panel or exome, and mitochondrial genome",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and electrocardiography",
+          "cells": [
+            {
+              "text": "Hypertrophic cardiomyopathy and conduction disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blue-native gel electrophoresis",
+          "cells": [
+            {
+              "text": "Complex I assembly"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mitochondrial_complex_i_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Biotinidase deficiency (treatable Leigh-like disorder)",
+          "cells": [
+            {
+              "text": "Treatable cause of Leigh-like encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leber hereditary optic neuropathy",
+          "cells": [
+            {
+              "text": "Sudden bilateral painless visual loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MELAS-type presentation",
+          "cells": [
+            {
+              "text": "Stroke-like episodes with seizures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mitochondrial_complex_i_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Mitochondrial cofactor regimen",
+          "cells": [
+            {
+              "text": "Riboflavin, coenzyme Q10 and antioxidants; riboflavin trial in ACAD9-related disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idebenone",
+          "cells": [
+            {
+              "text": "Considered for the optic neuropathy phenotype caused by MT-ND variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute decompensation",
+          "cells": [
+            {
+              "text": "Intravenous dextrose and fluids; avoid prolonged fasting and catabolic stress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid mitochondrial toxins",
+          "cells": [
+            {
+              "text": "Sodium valproate and aminoglycosides"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizure and movement control",
+          "cells": [
+            {
+              "text": "Anticonvulsant choice mindful of hepatotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography and ECG for hypertrophic cardiomyopathy and conduction disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive, maternal or X-linked inheritance; prenatal options"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mitochondrial_complex_i_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Mitochondrial Complex I Deficiency (NADH:Ubiquinone Oxidoreductase Deficiency)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant or child with encephalopathy, lactic acidosis or Leigh-like features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Brainstem dysfunction with apnoea, acidosis, cardiomyopathy or sudden visual loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent dextrose and fluids for acidosis; cardiac and respiratory support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lactate ratio; enzyme assay; MRI and MRS; gene panel or exome; echo and ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is isolated Complex I reduction confirmed with a causative variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Complex III, IV or V defects, PDH or biotinidase deficiency; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Riboflavin, coenzyme Q10 and antioxidant cofactor regimen; riboflavin trial in ACAD9",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Idebenone considered for optic neuropathy from MT-ND variants",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intravenous dextrose and fluids for decompensation; avoid prolonged fasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid valproate and aminoglycosides; cardiomyopathy and conduction surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary care and genetic counselling for the relevant inheritance pattern",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

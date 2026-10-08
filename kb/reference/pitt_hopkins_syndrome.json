@@ -149,5 +149,325 @@
       "caption": "Overview comparison matrix for pitt-hopkins syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pitt_hopkins_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Sequencing and deletion/duplication analysis of TCF4, or chromosomal microarray",
+          "cells": [
+            {
+              "text": "TCF4 variants or deletions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methylation studies for Angelman syndrome",
+          "cells": [
+            {
+              "text": "When Angelman syndrome is in the differential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Structural anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for Hirschsprung disease",
+          "cells": [
+            {
+              "text": "When constipation is severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology review",
+          "cells": [
+            {
+              "text": "Myopia and strabismus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pitt_hopkins_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Angelman syndrome",
+          "cells": [
+            {
+              "text": "Distinguished by methylation studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other severe intellectual disability with breathing abnormalities",
+          "cells": [
+            {
+              "text": "Breathing abnormalities"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pitt_hopkins_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Developmental care",
+          "cells": [
+            {
+              "text": "Early physiotherapy, occupational therapy and speech and language input as the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breathing episodes",
+          "cells": [
+            {
+              "text": "Reassurance and trigger avoidance for hyperventilation-apnoea episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constipation and Hirschsprung",
+          "cells": [
+            {
+              "text": "Active constipation treatment; surgery for Hirschsprung disease when needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizures",
+          "cells": [
+            {
+              "text": "Antiepileptic drugs guided by electroencephalography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology",
+          "cells": [
+            {
+              "text": "Correction of myopia and management of strabismus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "TCF4 haploinsufficiency; mostly de novo, with low recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Lifelong care with behavioural and family support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pitt_hopkins_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Pitt-Hopkins syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe intellectual disability with breathing abnormalities; suspected TCF4 disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (apnoea with cyanosis, refractory seizures, Hirschsprung features, aspiration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for apnoea with cyanosis, refractory seizures or bowel obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "TCF4 sequencing and deletion analysis or microarray; EEG; MRI; ophthalmology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does TCF4 testing or microarray confirm a TCF4 deletion or variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Angelman, Mowat-Wilson, Rett, Christianson or Kleefstra syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive developmental care with physiotherapy, occupational therapy and speech input",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassurance and trigger avoidance for hyperventilation-apnoea episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Active constipation treatment and surgery for Hirschsprung disease when needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiepileptic drugs guided by electroencephalography for seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for TCF4 haploinsufficiency, which is mostly de novo",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Severe lifelong intellectual disability; generally compatible with adult survival",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

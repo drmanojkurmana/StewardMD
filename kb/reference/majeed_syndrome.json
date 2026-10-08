@@ -148,5 +148,316 @@
       "caption": "Overview comparison matrix for majeed syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Textbook of Autoinflammation / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "majeed_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "LPIN2 genetic testing",
+          "cells": [
+            {
+              "text": "Biallelic loss-of-function variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs and MRI of bones",
+          "cells": [
+            {
+              "text": "Multifocal osteomyelitis and periosteal reaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Microcytic dyserythropoietic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Dyserythropoiesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Neutrophilic dermatosis lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "majeed_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sporadic chronic recurrent multifocal osteomyelitis",
+          "cells": [
+            {
+              "text": "No anaemia or LPIN2 variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DIRA",
+          "cells": [
+            {
+              "text": "Interleukin-1 receptor antagonist deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective osteomyelitis",
+          "cells": [
+            {
+              "text": "Cultures and response to antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SAPHO syndrome",
+          "cells": [
+            {
+              "text": "Bone and skin inflammation without anaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "majeed_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Interleukin-1 blockade",
+          "cells": [
+            {
+              "text": "Anakinra or canakinumab as the disease-specific mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute flares",
+          "cells": [
+            {
+              "text": "Corticosteroids; NSAIDs give limited bone pain relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia",
+          "cells": [
+            {
+              "text": "Iron-appropriate care and transfusion when required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin and bone pain",
+          "cells": [
+            {
+              "text": "Symptomatic treatment and analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth",
+          "cells": [
+            {
+              "text": "Monitoring and nutritional support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "majeed_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Majeed syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent painful sterile bone lesions with anaemia in a young child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (transfusion-dependent anaemia or severe bone deformity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: paediatric haematology and rheumatology review for severe anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "LPIN2 testing, bone imaging, blood film, marrow, acute-phase reactants",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic LPIN2 variants found with anaemia and bone lesions?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sporadic CRMO, DIRA or infective osteomyelitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Interleukin-1 blockade with anakinra or canakinumab",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids for acute flares",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Transfusion and iron-appropriate care for anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Analgesia and symptomatic skin care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Growth monitoring with specialist surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Well controlled with interleukin-1 blockade; anaemia and growth effects may persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

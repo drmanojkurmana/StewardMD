@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for mngie."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews MNGIE / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mngie_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma or urine thymidine and deoxyuridine",
+          "cells": [
+            {
+              "text": "Markedly elevated thymidine and deoxyuridine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leucocyte thymidine phosphorylase activity assay",
+          "cells": [
+            {
+              "text": "Enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TYMP molecular genetic testing",
+          "cells": [
+            {
+              "text": "TYMP variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Diffuse leukoencephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Demyelinating or mixed neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal motility studies and nutritional assessment",
+          "cells": [
+            {
+              "text": "Dysmotility and nutrition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mngie_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic progressive external ophthalmoplegia from other mitochondrial causes",
+          "cells": [
+            {
+              "text": "Ophthalmoplegia and ptosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic inflammatory demyelinating polyneuropathy",
+          "cells": [
+            {
+              "text": "Demyelinating neuropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mngie_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Haematopoietic stem cell transplant",
+          "cells": [
+            {
+              "text": "Restores thymidine phosphorylase activity; principal disease-modifying option in selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplant or enzyme replacement",
+          "cells": [
+            {
+              "text": "Liver transplant as an alternative enzyme source; erythrocyte-encapsulated enzyme in trials"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Aggressive, often parenteral, against cachexia and intestinal failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysmotility",
+          "cells": [
+            {
+              "text": "Prokinetics, bowel rest and treatment of small-bowel bacterial overgrowth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic care",
+          "cells": [
+            {
+              "text": "Peripheral neuropathy, ptosis and ophthalmoplegia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional deficiencies",
+          "cells": [
+            {
+              "text": "Monitor and correct, with the metabolic effects of dysmotility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive TYMP inheritance; family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist centre",
+          "cells": [
+            {
+              "text": "Mitochondrial and metabolic medicine"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mngie_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of MNGIE",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Gastrointestinal dysmotility with cachexia and neuropathy; suspected MNGIE",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pseudo-obstruction or perforation, severe malnutrition, aspiration, or rapid neuropathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Nutritional rescue; treat pseudo-obstruction or perforation urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma thymidine and deoxyuridine; TP activity; TYMP testing; MRI; NCS",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are markedly raised thymidine and deoxyuridine confirmed with TYMP testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CIPO, anorexia, coeliac disease or CIDP; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Allogeneic haematopoietic stem cell transplant in selected patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aggressive nutritional support, often parenteral, for cachexia and intestinal failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prokinetics, bowel rest and treatment of small-bowel overgrowth",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct nutritional deficiencies and the metabolic effects of dysmotility",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Specialist mitochondrial and metabolic centre; genetic counselling and family testing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -142,5 +142,267 @@
       "caption": "Overview comparison matrix for sclerocornea."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Paediatric ophthalmology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sclerocornea-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Corneal clarity and limbal boundary examination",
+          "cells": [
+            {
+              "text": "Extent of corneal opacification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior segment imaging",
+          "cells": [
+            {
+              "text": "Extent and associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular pressure assessment",
+          "cells": [
+            {
+              "text": "Associated glaucoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic evaluation",
+          "cells": [
+            {
+              "text": "Associated malformations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia and visual development assessment",
+          "cells": [
+            {
+              "text": "Form-deprivation amblyopia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sclerocornea-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Mild peripheral sclerocornea with a clear visual axis; monitor clarity and visual development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refraction and amblyopia therapy",
+          "cells": [
+            {
+              "text": "Correct refractive error; aggressive occlusion for form-deprivation amblyopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penetrating keratoplasty",
+          "cells": [
+            {
+              "text": "Total sclerocornea obstructing the visual axis; counsel on guarded graft outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glaucoma screening and treatment",
+          "cells": [
+            {
+              "text": "Topical agents or surgery to lower intraocular pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic evaluation",
+          "cells": [
+            {
+              "text": "Coexisting anterior segment dysgenesis and extraocular malformations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral and counselling",
+          "cells": [
+            {
+              "text": "Paediatric ophthalmology, low-vision services and genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sclerocornea-dx-mgmt",
+      "title": "Diagnosis and management of Sclerocornea",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with scleralised, opaque cornea: suspected sclerocornea",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Total opacification, glaucoma, bilateral severe disease or systemic malformations?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric ophthalmology: visual axis, pressure and syndrome work-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Corneal and limbal exam, anterior segment imaging, IOP, systemic review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the visual axis obstructed by total sclerocornea?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Observe with monitoring of corneal clarity and visual development",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct refractive error and give occlusion for amblyopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Screen for and treat associated glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Penetrating keratoplasty for total opacity, with guarded counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Low-vision services and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild peripheral disease has little visual impact; total disease has poor outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

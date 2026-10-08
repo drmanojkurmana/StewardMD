@@ -146,5 +146,305 @@
       "caption": "Overview comparison matrix for mittelschmerz."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard gynaecology reference textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mittelschmerz-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pregnancy test",
+          "cells": [
+            {
+              "text": "Early or ectopic pregnancy excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Cyst, torsion or free fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and inflammatory markers, if an infective cause is considered",
+          "cells": [
+            {
+              "text": "Infective or inflammatory cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Urinary tract infection or renal pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Menstrual symptom diary",
+          "cells": [
+            {
+              "text": "Pain timing relative to ovulation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mittelschmerz-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ectopic pregnancy",
+          "cells": [
+            {
+              "text": "Positive pregnancy test with pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian torsion",
+          "cells": [
+            {
+              "text": "Atypical or severe pain; ultrasound assesses torsion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic inflammatory disease",
+          "cells": [
+            {
+              "text": "Fever or systemic upset"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mittelschmerz-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, self-limiting mid-cycle ovulatory pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple analgesia",
+          "cells": [
+            {
+              "text": "Paracetamol or an NSAID for transient discomfort"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovulation suppression",
+          "cells": [
+            {
+              "text": "Combined oral contraceptive pill for recurrent troublesome pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local heat and diary",
+          "cells": [
+            {
+              "text": "Correlates pain with ovulation to confirm the pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude alternative pathology",
+          "cells": [
+            {
+              "text": "Pregnancy test and pelvic ultrasound when features are atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gynaecology referral",
+          "cells": [
+            {
+              "text": "If pain is severe, persistent or atypical, or diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mittelschmerz-dx-mgmt",
+      "title": "Diagnosis and management of Mittelschmerz",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Mid-cycle unilateral lower abdominal pain at ovulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Positive pregnancy test with pain, peritonism, fever, or atypical severe pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for ectopic pregnancy, torsion or peritonitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pregnancy test; transvaginal ultrasound; FBC and markers if infection; urinalysis; diary",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are pregnancy, cyst, torsion and infection excluded on testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Atypical or persistent pain: gynaecology referral for further assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance that mid-cycle ovulatory pain is benign and self-limiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Paracetamol or an NSAID for transient discomfort",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Combined oral contraceptive pill to suppress ovulation for recurrent troublesome pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Menstrual diary correlating pain with ovulation to confirm the pattern",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Gynaecology referral if pain is severe, persistent or atypical",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

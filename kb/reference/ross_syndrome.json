@@ -146,5 +146,231 @@
       "caption": "Overview comparison matrix for ross syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ross_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Thermoregulatory sweat test",
+          "cells": [
+            {
+              "text": "Delineates anhidrotic and hyperhidrotic segments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "QSART",
+          "cells": [
+            {
+              "text": "Postganglionic sudomotor function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilute pilocarpine pupil testing",
+          "cells": [
+            {
+              "text": "Cholinergic supersensitivity of the tonic pupil"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ross_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Control compensatory hyperhidrosis",
+          "cells": [
+            {
+              "text": "Topical antiperspirants, anticholinergic agents or botulinum toxin injection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heat avoidance and active cooling",
+          "cells": [
+            {
+              "text": "Manages impaired thermoregulation from the reduced sweating surface"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilute pilocarpine drops",
+          "cells": [
+            {
+              "text": "Symptomatic photophobia or near-vision difficulty from the tonic pupil"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for autoimmune disease",
+          "cells": [
+            {
+              "text": "Associated autoimmune or paraneoplastic process"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ross_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Ross syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Patient with segmental anhidrosis and compensatory sweating",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid anhidrosis with heat intolerance, wider autonomic signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for hyperthermia risk and wider autonomic disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Thermoregulatory sweat test, QSART, dilute pilocarpine pupil test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the sweat test show anhidrotic and compensatory hyperhidrotic segments?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Holmes-Adie syndrome, pure autonomic failure or other autonomic neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical antiperspirant, anticholinergic or botulinum toxin for compensatory sweating",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Heat-avoidance and active cooling strategies",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dilute pilocarpine for photophobia or near-vision difficulty",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for associated autoimmune disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign, slowly progressive course; reassure the patient",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

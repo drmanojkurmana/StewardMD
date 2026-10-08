@@ -145,5 +145,305 @@
       "caption": "Overview comparison matrix for spinal stenosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinal_stenosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the spinal region",
+          "cells": [
+            {
+              "text": "Level and severity of compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or CT myelography",
+          "cells": [
+            {
+              "text": "When MRI is contraindicated or bony detail is needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexion-extension radiographs",
+          "cells": [
+            {
+              "text": "Instability or spondylolisthesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies or EMG",
+          "cells": [
+            {
+              "text": "When peripheral neuropathy is a competing diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-brachial index or vascular studies",
+          "cells": [
+            {
+              "text": "Arterial claudication excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_stenosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Peripheral vascular claudication",
+          "cells": [
+            {
+              "text": "Distinguished by the posture-dependent pattern; peripheral pulses are preserved in neurogenic cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar disc herniation with radiculopathy",
+          "cells": [
+            {
+              "text": "Radicular pain from a single level, defined on MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral neuropathy",
+          "cells": [
+            {
+              "text": "A competing diagnosis; nerve conduction studies or EMG separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_stenosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Physiotherapy, flexion-based exercise, activity modification and analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain agents",
+          "cells": [
+            {
+              "text": "Gabapentinoids; epidural corticosteroid for radicular pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompressive surgery",
+          "cells": [
+            {
+              "text": "Laminectomy with fusion where instability or spondylolisthesis coexists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical decompression",
+          "cells": [
+            {
+              "text": "Timely surgery to arrest progressive myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Claudication assessment",
+          "cells": [
+            {
+              "text": "Neurogenic versus vascular claudication, before treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Escalate for myelopathy, bladder or bowel dysfunction, or cauda equina features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinal_stenosis-dx-mgmt",
+      "title": "Diagnosis and management of Spinal stenosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Leg pain, heaviness or numbness on standing or walking: suspected lumbar stenosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cauda equina, rapid myelopathy, bilateral deficit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency spinal surgery review for cauda equina syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI of the spinal region; flexion-extension films; ABI if vascular doubt",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI correlate with posture-dependent symptoms, with vascular causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider vascular claudication or neuropathy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy, flexion-based exercise, activity change and analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gabapentinoids or epidural corticosteroid for radicular pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Laminectomy with fusion where instability coexists",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Timely decompression for cervical myelopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Initial conservative care is usual; progressive myelopathy needs prompt surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

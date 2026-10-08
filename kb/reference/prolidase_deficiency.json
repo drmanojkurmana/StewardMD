@@ -149,5 +149,321 @@
       "caption": "Overview comparison matrix for prolidase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "prolidase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine amino acid and peptide analysis",
+          "cells": [
+            {
+              "text": "Marked imidodipeptiduria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolidase enzyme activity assay",
+          "cells": [
+            {
+              "text": "Enzyme activity in erythrocytes, leucocytes or fibroblasts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PEPD gene analysis",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy and wound swabs",
+          "cells": [
+            {
+              "text": "Ulcer characterisation and infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunological workup",
+          "cells": [
+            {
+              "text": "Recurrent infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging or examination for splenomegaly",
+          "cells": [
+            {
+              "text": "Associated features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prolidase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunodeficiency with recurrent skin and respiratory infection",
+          "cells": [
+            {
+              "text": "Recurrent severe respiratory infections"
+            },
+            {
+              "text": "Immunological workup"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus",
+          "cells": [
+            {
+              "text": "Lupus-like features"
+            },
+            {
+              "text": "Screen for lupus-like manifestations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prolidase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic wound management",
+          "cells": [
+            {
+              "text": "Debridement, appropriate dressings, compression and skin protection for leg ulcers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical amino acids",
+          "cells": [
+            {
+              "text": "Proline- and glycine-containing ointments applied to ulcers as substrate for collagen repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection",
+          "cells": [
+            {
+              "text": "Culture-directed antibiotics for ulcers and recurrent skin and respiratory infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunology",
+          "cells": [
+            {
+              "text": "Immunological assessment and screen for lupus-like manifestations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up monitoring",
+          "cells": [
+            {
+              "text": "Splenomegaly, cytopenias and progressive dermatological disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Dermatology, wound care, metabolic medicine and immunology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "prolidase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Prolidase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected prolidase deficiency: chronic leg ulceration with imidodipeptiduria",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Infected or extensive ulcers, severe respiratory infections, or lupus-like features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for systemic sepsis or infected extensive ulceration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine amino acid and peptide analysis; prolidase enzyme assay; PEPD gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is prolidase deficiency confirmed by enzyme assay or PEPD testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider venous or arterial ulcer, pyoderma gangrenosum or immunodeficiency; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Meticulous chronic wound management: debridement, dressings, compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical proline- and glycine-containing ointments on ulcers",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Culture-directed antibiotics for infected ulcers and recurrent infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Immunological assessment and screen for lupus-like features",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary care in dermatology, wound care, metabolic medicine and immunology",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

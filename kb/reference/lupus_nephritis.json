@@ -149,5 +149,325 @@
       "caption": "Overview comparison matrix for lupus nephritis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / KDIGO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lupus_nephritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis with microscopy and proteinuria quantification",
+          "cells": [
+            {
+              "text": "Silent early nephritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complement C3 and C4, anti-dsDNA titres",
+          "cells": [
+            {
+              "text": "Active renal disease and flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphospholipid antibodies",
+          "cells": [
+            {
+              "text": "Thrombotic microangiopathy risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kidney biopsy for class and activity indices",
+          "cells": [
+            {
+              "text": "Guides intensity of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection and extrarenal screen before immunosuppression",
+          "cells": [
+            {
+              "text": "Safety before treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lupus_nephritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary membranous nephropathy",
+          "cells": [
+            {
+              "text": "Distinguished on biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANCA-associated or anti-GBM crescentic disease",
+          "cells": [
+            {
+              "text": "Crescentic disease; serology and biopsy separate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphospholipid thrombotic microangiopathy",
+          "cells": [
+            {
+              "text": "Haemolysis and thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced lupus-like nephritis",
+          "cells": [
+            {
+              "text": "Drug exposure history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lupus_nephritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Induction immunosuppression",
+          "cells": [
+            {
+              "text": "Glucocorticoids with mycophenolate or cyclophosphamide for proliferative disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Add-on agents",
+          "cells": [
+            {
+              "text": "Belimumab or voclosporin to intensify induction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance",
+          "cells": [
+            {
+              "text": "Mycophenolate or azathioprine to prevent relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Background therapy",
+          "cells": [
+            {
+              "text": "Hydroxychloroquine and renin-angiotensin blockade for proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crescentic disease",
+          "cells": [
+            {
+              "text": "Pulsed intravenous methylprednisolone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progression",
+          "cells": [
+            {
+              "text": "Nephrology referral; renal replacement or transplantation planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lupus_nephritis-dx-mgmt",
+      "title": "Diagnosis and management of Lupus nephritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lupus patient with proteinuria, haematuria or rising creatinine on urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rising creatinine, nephrotic range proteinuria, TMA features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent nephrology review and pulsed steroids if crescentic",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinalysis, complement, anti-dsDNA, antiphospholipid tests, kidney biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy confirm lupus nephritis with its histological class?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ANCA or anti-GBM disease, membranous nephropathy or drug effect",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Class-guided induction with steroids and mycophenolate or cyclophosphamide",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Belimumab or voclosporin to intensify induction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Maintenance mycophenolate or azathioprine to prevent relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hydroxychloroquine and renin-angiotensin blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer to nephrology for progression to end-stage kidney disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Improved with modern immunosuppression; proliferative disease still progresses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

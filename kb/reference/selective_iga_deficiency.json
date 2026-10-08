@@ -148,5 +148,341 @@
       "caption": "Overview comparison matrix for selective iga deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Middleton's Allergy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "selective_iga_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum IgA, IgG and IgM",
+          "cells": [
+            {
+              "text": "Very low or absent IgA with normal IgG and IgM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgG subclasses and vaccine-specific antibody responses",
+          "cells": [
+            {
+              "text": "Broader antibody deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac evaluation (IgG serology or duodenal biopsy)",
+          "cells": [
+            {
+              "text": "IgA-based serology can be falsely negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune screening",
+          "cells": [
+            {
+              "text": "Associated autoimmune disease, when indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-IgA antibodies before transfusion",
+          "cells": [
+            {
+              "text": "Risk of anaphylaxis in patients with prior reactions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic immunoglobulin reassessment",
+          "cells": [
+            {
+              "text": "Evolution toward CVID"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "selective_iga_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Common variable immunodeficiency",
+          "cells": [
+            {
+              "text": "Can evolve from IgA deficiency; falling IgG or poor vaccine responses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transient low IgA in early childhood",
+          "cells": [
+            {
+              "text": "Seen before immune maturation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced IgA suppression",
+          "cells": [
+            {
+              "text": "Certain anticonvulsants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgG subclass or specific antibody deficiency",
+          "cells": [
+            {
+              "text": "Recurrent infection; assessed by subclass levels and vaccine responses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary immunodeficiency from protein loss",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "selective_iga_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prompt antibiotic treatment of infections",
+          "cells": [
+            {
+              "text": "Immunoglobulin replacement is not indicated for isolated deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylactic antibiotics",
+          "cells": [
+            {
+              "text": "For frequent or severe recurrent infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen and manage coeliac and autoimmune disease",
+          "cells": [
+            {
+              "text": "Use IgG-based serology or duodenal biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Washed or IgA-deficient blood components",
+          "cells": [
+            {
+              "text": "If anti-IgA antibodies or prior transfusion reaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "Reserved for evolution to CVID or a proven additional antibody defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic immunoglobulin monitoring",
+          "cells": [
+            {
+              "text": "Detects progression toward CVID"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Education and medical alert",
+          "cells": [
+            {
+              "text": "Transfusion reaction risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "selective_iga_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Selective IgA deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Low or absent serum IgA, often incidental or with recurrent sinopulmonary infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Transfusion anaphylaxis, falling IgG, invasive infection or malabsorption?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Use washed or IgA-deficient products; reassess full antibody profile for CVID",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "IgA, IgG, IgM; IgG subclasses and vaccine responses; IgG-based coeliac testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Isolated low IgA with normal IgG and IgM?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Evaluate for CVID, IgG subclass deficiency, drugs or transient childhood low IgA",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat infections promptly; prophylactic antibiotics if frequent or severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Screen for coeliac disease and autoimmunity with IgG-based tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Washed or IgA-deficient blood components; medical alert",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Periodic immunoglobulins; replacement only if CVID evolves",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most remain well; a subset progress to CVID or have more infections",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

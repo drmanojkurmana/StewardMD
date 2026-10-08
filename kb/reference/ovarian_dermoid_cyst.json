@@ -145,5 +145,315 @@
       "caption": "Overview comparison matrix for ovarian dermoid cyst (mature cystic teratoma)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard gynaecology reference textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ovarian_dermoid_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Echogenic and shadowing features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI with fat-suppression sequences",
+          "cells": [
+            {
+              "text": "Macroscopic fat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Fat, calcification or teeth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers",
+          "cells": [
+            {
+              "text": "Atypical appearance or suspected malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral ovary assessment",
+          "cells": [
+            {
+              "text": "Bilateral disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ovarian_dermoid_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Immature teratoma",
+          "cells": [
+            {
+              "text": "Another germ cell tumour; markers help when the appearance is atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian torsion",
+          "cells": [
+            {
+              "text": "Acute severe pelvic pain, a recognised complication of larger cysts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ovarian_dermoid_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ovary-sparing cystectomy",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Preferred treatment, preserving fertility where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retrieval in a bag",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Usually laparoscopic, to avoid spillage of sebaceous contents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency detorsion or cystectomy",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "For ovarian torsion presenting as acute severe pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral ovary",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Inspect and treat if involved; about a tenth are bilateral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Expectant surveillance",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "For small, asymptomatic incidental cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Excludes the rare malignant transformation, especially in older women"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ovarian_dermoid_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Ovarian dermoid cyst (mature cystic teratoma)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Echogenic, shadowing adnexal mass in a woman of reproductive age",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (acute torsion pain, rupture, solid vascular areas or rapid growth)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency detorsion or cystectomy for acute torsion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound, MRI or CT for fat, markers if atypical, and contralateral ovary check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is macroscopic fat confirmed, with malignant features excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider haemorrhagic cyst, endometrioma, immature teratoma or epithelial neoplasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ovary-sparing cystectomy as the preferred treatment, preserving fertility",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Usually laparoscopic retrieval in a bag to avoid spillage of sebaceous contents",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Inspect and treat the contralateral ovary, as about a tenth are bilateral",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Histological assessment to exclude rare malignant transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent; low recurrence after complete excision; transformation risk rises with age",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

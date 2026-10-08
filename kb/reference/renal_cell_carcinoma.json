@@ -159,5 +159,477 @@
       "caption": "Overview comparison matrix for renal cell carcinoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Renal Cell Carcinoma",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/genitourinary-cancer/renal-cell-carcinoma"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 108-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "renal_cell_carcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and staging renal cell carcinoma",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast CT or MRI",
+          "cells": [
+            {
+              "text": "Enhancing solid renal mass"
+            },
+            {
+              "text": "{{hy:Solid mass is malignant until proven otherwise}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T1a",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "4 cm or less",
+              "op": "<=",
+              "value": 4
+            },
+            {
+              "text": "Partial nephrectomy standard"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stage I",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "7 cm or less, confined to kidney",
+              "op": "<=",
+              "value": 7
+            },
+            {
+              "text": "About 65% present at stage I to II"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stage II",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Over 7 cm, confined to kidney",
+              "op": ">",
+              "value": 7
+            },
+            {
+              "text": "T2a 7 to 10 cm, T2b over 10 cm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stage III",
+          "cells": [
+            {
+              "text": "Through capsule within Gerota fascia, renal vein or IVC, or N1"
+            },
+            {
+              "text": "T3b IVC below diaphragm, T3c above"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stage IV",
+          "cells": [
+            {
+              "text": "Adjacent organ invasion or distant metastases"
+            },
+            {
+              "text": "5-year survival under 20%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Paraneoplastic syndromes",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 20% of patients",
+              "op": "=",
+              "value": 20
+            },
+            {
+              "text": "Erythrocytosis, hypercalcemia, Stauffer syndrome, anemia, fever"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Staging tests",
+          "cells": [
+            {
+              "text": "Chest x-ray (CT if abnormal), bone scan if ALP raised"
+            },
+            {
+              "text": "MRI for IVC thrombus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Needle biopsy",
+          "cells": [
+            {
+              "text": "Limited sensitivity"
+            },
+            {
+              "text": "Only when result changes management"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IMDC risk model",
+          "cells": [
+            {
+              "text": "6 factors: performance status, anemia, high calcium, neutrophilia, thrombocytosis, under 1 year to treatment"
+            },
+            {
+              "text": "Guides metastatic therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "renal_cell_carcinoma-ddx",
+      "kind": "ddx",
+      "title": "Renal masses that mimic RCC",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Simple or complex cyst",
+          "cells": [
+            {
+              "text": "No solid enhancing component"
+            },
+            {
+              "text": "Contrast CT or MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angiomyolipoma",
+          "cells": [
+            {
+              "text": "Macroscopic fat"
+            },
+            {
+              "text": "CT fat density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oncocytoma",
+          "cells": [
+            {
+              "text": "Central scar, benign"
+            },
+            {
+              "text": "Biopsy, often only after resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyelonephritis or renal abscess",
+          "cells": [
+            {
+              "text": "Fever, pyuria"
+            },
+            {
+              "text": "Urine culture, follow-up imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urothelial carcinoma of renal pelvis",
+          "cells": [
+            {
+              "text": "Filling defect in collecting system"
+            },
+            {
+              "text": "CT urography, ureteroscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal lymphoma or metastasis",
+          "cells": [
+            {
+              "text": "Systemic disease, multiple lesions"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other causes of erythrocytosis",
+          "cells": [
+            {
+              "text": "Hypoxia, drugs, other tumors, polycythemia vera"
+            },
+            {
+              "text": "EPO level, imaging, JAK2"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "renal_cell_carcinoma-treatment",
+      "kind": "treatment",
+      "title": "Treating renal cell carcinoma",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Partial nephrectomy",
+          "cells": [
+            {
+              "text": "cT1a; consider T1b or T2, solitary kidney, CKD"
+            },
+            {
+              "text": "Preserves nephrons"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Radical nephrectomy",
+          "cells": [
+            {
+              "text": "cT1b to T4 with normal contralateral kidney"
+            },
+            {
+              "text": "IVC thrombus does not preclude surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ablation or active surveillance",
+          "cells": [
+            {
+              "text": "Tumors under 3 cm, older or comorbid patients"
+            },
+            {
+              "text": "Cryoablation or radiofrequency"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adjuvant pembrolizumab",
+          "cells": [
+            {
+              "text": "High-risk resected clear cell RCC"
+            },
+            {
+              "text": "Improves disease-free and overall survival"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Checkpoint inhibitor plus VEGF TKI",
+          "cells": [
+            {
+              "text": "Metastatic clear cell RCC"
+            },
+            {
+              "text": "Pembrolizumab plus axitinib or lenvatinib, or nivolumab plus cabozantinib"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cytoreductive nephrectomy, metastasectomy",
+          "cells": [
+            {
+              "text": "Selected metastatic patients"
+            },
+            {
+              "text": "Symptomatic primary or good performance"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid cytotoxic chemotherapy",
+          "cells": [
+            {
+              "text": "Metastatic RCC"
+            },
+            {
+              "text": "Refractory to it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "renal_cell_carcinoma-dx-mgmt",
+      "title": "Diagnosis and management of renal mass",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Incidental renal mass, hematuria or flank pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Contrast CT or MRI of abdomen",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Solid enhancing mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Cyst or benign lesion: manage by imaging features",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Chest imaging; bone scan if ALP high",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Distant metastases?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "IMDC risk; checkpoint inhibitor plus VEGF TKI",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Under 3 cm or high surgical risk?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Surveillance or ablation, biopsy if it changes plan",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Partial or radical nephrectomy; adjuvant pembrolizumab if high risk",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

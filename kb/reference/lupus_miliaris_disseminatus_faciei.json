@@ -149,5 +149,325 @@
       "caption": "Overview comparison matrix for lupus miliaris disseminatus faciei."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lupus_miliaris_disseminatus_faciei-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diascopy",
+          "cells": [
+            {
+              "text": "Apple-jelly colour of dermal granulomata"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Dermal epithelioid granulomata, sometimes with central necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycobacterial stains, culture and molecular testing",
+          "cells": [
+            {
+              "text": "Tuberculosis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging and sarcoidosis work-up",
+          "cells": [
+            {
+              "text": "Sarcoidosis excluded when granulomata are found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of previous topical steroid use",
+          "cells": [
+            {
+              "text": "Aggravating factor"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lupus_miliaris_disseminatus_faciei-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Granulomatous rosacea",
+          "cells": [
+            {
+              "text": "Overlapping features; relationship debated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous sarcoidosis of the face",
+          "cells": [
+            {
+              "text": "Granulomata; chest work-up separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous tuberculosis and tuberculids",
+          "cells": [
+            {
+              "text": "Caseating histology; microbiology separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perioral dermatitis, granulomatous form",
+          "cells": [
+            {
+              "text": "Periorificial distribution"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lupus_miliaris_disseminatus_faciei-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral tetracyclines",
+          "cells": [
+            {
+              "text": "Doxycycline or minocycline as mainstay, used for anti-inflammatory effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory or scarring disease",
+          "cells": [
+            {
+              "text": "Isotretinoin or dapsone considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short oral corticosteroid courses",
+          "cells": [
+            {
+              "text": "To dampen intense granulomatous inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop topical corticosteroids",
+          "cells": [
+            {
+              "text": "Provoking agents that aggravate the eruption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude tuberculosis and sarcoidosis",
+          "cells": [
+            {
+              "text": "Before and during immunomodulatory treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scar revision",
+          "cells": [
+            {
+              "text": "Laser resurfacing once active disease settles"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lupus_miliaris_disseminatus_faciei-dx-mgmt",
+      "title": "Diagnosis and management of Lupus miliaris disseminatus faciei",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Crops of monomorphic dome-shaped papules on the central face and periocular skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (necrosis, ulceration, eyelid or ocular threat, heavy scarring)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent tuberculosis exclusion and dermatology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, mycobacterial testing, tuberculin or interferon-gamma test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are epithelioid granulomata seen with tuberculosis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider granulomatous rosacea, sarcoidosis or cutaneous tuberculosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Long-course oral tetracycline-class antibiotics as mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Isotretinoin or dapsone for refractory or scarring disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Short oral corticosteroid course for intense inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Stop provoking topical corticosteroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Laser resurfacing for residual scars once quiescent",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Self-limiting over one to two years, often with permanent pitted scars",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -156,5 +156,488 @@
       "caption": "Overview comparison matrix for non-hodgkin's lymphoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "NCI PDQ, Indolent B-Cell Non-Hodgkin Lymphoma Treatment (Health Professional)",
+      "kind": "web",
+      "url": "https://www.cancer.gov/types/lymphoma/hp/adult-nhl-treatment-pdq"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 59-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "non_hodgkin_lymphoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis, staging and prognosis of NHL",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Excision or core biopsy",
+          "cells": [
+            {
+              "text": "Expert haematopathology with immunophenotype"
+            },
+            {
+              "text": "{{hy:FNA is not enough to classify}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-cell share",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 85 to 90% of NHL",
+              "range": [
+                85,
+                90
+              ]
+            },
+            {
+              "text": "DLBCL commonest overall (about a third); follicular about 20%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "B symptoms",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Fever, drenching sweats, weight loss over 10% in 6 months",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Suffix B in staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lugano stage I to II",
+          "cells": [
+            {
+              "text": "Single site (I) or 2 or more nodal regions on one side of diaphragm (II)"
+            },
+            {
+              "text": "E suffix for extranodal extension"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lugano stage III to IV",
+          "cells": [
+            {
+              "text": "Nodes both sides of diaphragm (III) or disseminated extranodal (IV)"
+            },
+            {
+              "text": "Marrow, liver, CSF are stage IV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "FLIPI",
+          "cells": [
+            {
+              "text": "Age over 60, high LDH, stage III to IV, Hb under 120 g/L, over 4 nodal areas",
+              "op": ">",
+              "value": 60
+            },
+            {
+              "text": "10-year survival 67% with 0 to 1 factors, 36% with 4 to 5"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Baseline tests",
+          "cells": [
+            {
+              "text": "CBC, LDH, beta-2 microglobulin, uric acid, calcium, SPEP, HIV, HBV, HCV"
+            },
+            {
+              "text": "LDH and beta-2 microglobulin are prognostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "PET-CT for aggressive lymphoma; CT chest, abdomen, pelvis"
+            },
+            {
+              "text": "End-of-treatment PET 6 to 8 weeks after chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CNS risk",
+          "cells": [
+            {
+              "text": "Testis, breast, kidney, adrenal, sinus, epidural, Burkitt"
+            },
+            {
+              "text": "Lumbar puncture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "B-cell proportion: Harrison 22e about 90%; NCI PDQ about 85%."
+    },
+    {
+      "id": "non_hodgkin_lymphoma-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic NHL",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Hodgkin lymphoma",
+          "cells": [
+            {
+              "text": "Reed-Sternberg cells, contiguous spread"
+            },
+            {
+              "text": "Biopsy with CD15 and CD30"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reactive follicular hyperplasia",
+          "cells": [
+            {
+              "text": "Polyclonal, no BCL2 in follicles"
+            },
+            {
+              "text": "Biopsy with immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious mononucleosis or viral adenopathy",
+          "cells": [
+            {
+              "text": "Young, sore throat, atypical lymphocytes"
+            },
+            {
+              "text": "EBV serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multicentric Castleman disease",
+          "cells": [
+            {
+              "text": "HHV-8, fever and nodes"
+            },
+            {
+              "text": "Biopsy, HHV-8 PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CLL or myeloma",
+          "cells": [
+            {
+              "text": "Lymphocytosis or paraprotein"
+            },
+            {
+              "text": "Flow cytometry, SPEP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis or autoimmune disease",
+          "cells": [
+            {
+              "text": "Granulomas or systemic autoimmune features"
+            },
+            {
+              "text": "Biopsy, autoantibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other massive splenomegaly",
+          "cells": [
+            {
+              "text": "CML, myelofibrosis, hairy cell, Gaucher, PV"
+            },
+            {
+              "text": "Blood film, marrow, genetics"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "non_hodgkin_lymphoma-treatment",
+      "kind": "treatment",
+      "title": "Treatment of NHL",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Watchful waiting",
+          "cells": [
+            {
+              "text": "{{hy:Asymptomatic advanced follicular or indolent lymphoma}}"
+            },
+            {
+              "text": "Treating early does not improve survival"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anti-CD20 immunochemotherapy (R-CHOP)",
+          "cells": [
+            {
+              "text": "Diffuse large B-cell lymphoma"
+            },
+            {
+              "text": "Curative intent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive chemotherapy with CNS prophylaxis",
+          "cells": [
+            {
+              "text": "Burkitt lymphoma"
+            },
+            {
+              "text": "Start quickly; doubling time under 24 h"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour lysis prophylaxis",
+          "cells": [
+            {
+              "text": "Burkitt and bulky aggressive disease"
+            },
+            {
+              "text": "Hydration plus allopurinol or rasburicase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Involved-site radiotherapy",
+          "cells": [
+            {
+              "text": "Localised disease or consolidation"
+            },
+            {
+              "text": "Early indolent disease may be cured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapsed aggressive lymphoma",
+          "cells": [
+            {
+              "text": "Relapse or refractory"
+            },
+            {
+              "text": "Autologous transplant, CAR T-cells or bispecific antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rebiopsy for transformation",
+          "cells": [
+            {
+              "text": "Rapid node growth with B symptoms in indolent disease"
+            },
+            {
+              "text": "About 3% per year transform to DLBCL"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HBV screening and prophylaxis",
+          "cells": [
+            {
+              "text": "Before anti-CD20 therapy"
+            },
+            {
+              "text": "Prevents reactivation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "No doses are given in the opened sources; regimens set by haemato-oncology."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "non_hodgkin_lymphoma-dx-mgmt",
+      "title": "Diagnosis and management of non-Hodgkin lymphoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless lymphadenopathy, B symptoms or mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Excision or core biopsy with immunophenotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Lymphoma confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Reactive, infectious or other cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Stage: PET-CT, LDH, beta-2 microglobulin, HIV and hepatitis tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Aggressive histology (DLBCL, Burkitt)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "TLS prophylaxis; LP if CNS risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Curative immunochemotherapy; PET response check",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Symptomatic or high tumour burden?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Watchful waiting; biopsy if rapid growth",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Anti-CD20 based therapy or radiotherapy if localised",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

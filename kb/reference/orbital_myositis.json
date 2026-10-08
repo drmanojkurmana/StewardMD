@@ -150,5 +150,344 @@
       "caption": "Overview comparison matrix for orbital myositis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "orbital_myositis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Orbital CT or MRI",
+          "cells": [
+            {
+              "text": "Enlarged muscle with tendon involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular motility, diplopia and pain on movement",
+          "cells": [
+            {
+              "text": "Restriction and pain on eye movement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual acuity, colour vision and pupils",
+          "cells": [
+            {
+              "text": "Optic nerve involvement excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloods, thyroid function, autoantibodies and serum IgG4",
+          "cells": [
+            {
+              "text": "Mimics such as thyroid eye disease and IgG4-related disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANCA and systemic workup",
+          "cells": [
+            {
+              "text": "Vasculitis or systemic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Atypical, recurrent or steroid-unresponsive cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orbital_myositis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Thyroid eye disease",
+          "cells": [
+            {
+              "text": "Tendon-sparing muscle enlargement, unlike this condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orbital cellulitis",
+          "cells": [
+            {
+              "text": "An infective mimic; antibiotics alone are inappropriate for myositis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orbital lymphoma",
+          "cells": [
+            {
+              "text": "A poor steroid response suggests an alternative diagnosis such as lymphoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orbital_myositis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "The mainstay, usually giving brisk relief of pain and restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs alone",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "For mild, isolated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppression or biologics",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Methotrexate or mycophenolate, or biologics, for recurrent, steroid-dependent or refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-dose orbital radiotherapy",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "For disease refractory to immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm before long-term therapy",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Imaging, with mimics such as thyroid eye disease and IgG4-related disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence and residual diplopia",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Monitor for recurrence and fibrosis; prisms or strabismus surgery once stable"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "orbital_myositis-dx-mgmt",
+      "title": "Diagnosis and management of Orbital myositis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful diplopia with pain on eye movement and a swollen rectus muscle",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (poor steroid response, bilateral or recurrent disease, or optic nerve signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: biopsy and lymphoma or IgG4 review for poor steroid response",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Orbital MRI or CT for tendon involvement; motility, acuity, bloods, IgG4 and ANCA",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show a painful enlarged muscle with tendon involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider thyroid eye disease, orbital cellulitis, carotid-cavernous fistula or lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroids as mainstay, with brisk relief of pain and restriction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "NSAIDs alone for mild, isolated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Methotrexate, mycophenolate or biologics for recurrent or steroid-dependent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Low-dose orbital radiotherapy for disease refractory to immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Prisms or strabismus surgery for residual diplopia once stable",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally good for single-muscle disease; recurrence and fibrosis can persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

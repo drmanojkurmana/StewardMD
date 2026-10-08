@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for sinusoidal obstruction syndrome (veno-occlusive disease)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System / EBMT-EASL guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sinusoidal_obstruction_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial bilirubin, transaminases and weight",
+          "cells": [
+            {
+              "text": "Measured against modified Seattle or Baltimore, or paediatric EBMT criteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler ultrasound of the liver",
+          "cells": [
+            {
+              "text": "Hepatomegaly, ascites, gallbladder-wall oedema and reversed or absent portal flow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and coagulation studies",
+          "cells": [
+            {
+              "text": "Coagulopathy and platelet transfusion trends"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic venous pressure gradient",
+          "cells": [
+            {
+              "text": "Raised gradient in selected uncertain cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transjugular liver biopsy",
+          "cells": [
+            {
+              "text": "Histology when the diagnosis is in doubt and bleeding risk allows"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for infection and graft-versus-host disease",
+          "cells": [
+            {
+              "text": "Concurrent infection or graft-versus-host disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sinusoidal_obstruction_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Graft-versus-host disease of the liver",
+          "cells": [
+            {
+              "text": "Early weight gain and jaundice are sometimes wrongly attributed to it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis with cholestasis",
+          "cells": [
+            {
+              "text": "Early weight gain and jaundice are sometimes wrongly attributed to sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced or conditioning-related hepatotoxicity",
+          "cells": [
+            {
+              "text": "Concurrent hepatotoxic and nephrotoxic drugs compound endothelial injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sinusoidal_obstruction_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Defibrotide",
+          "cells": [
+            {
+              "text": "For severe or very severe disease; the principal disease-directed therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid and sodium restriction with diuretics",
+          "cells": [
+            {
+              "text": "Controls fluid overload and ascites while preserving renal perfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid further hepatotoxins",
+          "cells": [
+            {
+              "text": "Review concurrent nephrotoxic and hepatotoxic drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ursodeoxycholic acid prophylaxis",
+          "cells": [
+            {
+              "text": "Risk-factor mitigation in high-risk myeloablative transplant recipients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ support",
+          "cells": [
+            {
+              "text": "Paracentesis for tense ascites; renal replacement or respiratory support in multi-organ failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Bilirubin, weight, fluid balance and Doppler against diagnostic criteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Intensive care and transplant hepatology for severe or multi-organ disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sinusoidal_obstruction_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Sinusoidal obstruction syndrome (veno-occlusive disease)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tender hepatomegaly, weight gain and jaundice after conditioning: suspected SOS",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rising bilirubin with renal or respiratory failure, tense ascites)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate to intensive care and transplant hepatology for multi-organ SOS",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial bilirubin and weight; liver Doppler; coagulation and platelet trends",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do modified Seattle or Baltimore criteria, with Doppler, support SOS?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider GVHD, sepsis or drug hepatotoxicity; biopsy if still in doubt",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Defibrotide for severe or very severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fluid and sodium restriction with diuretics to control ascites",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid further hepatotoxins; ursodeoxycholic acid prophylaxis if high risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Organ support, including paracentesis for tense ascites",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild to moderate SOS often resolves; very severe multi-organ disease has high mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

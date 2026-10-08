@@ -161,5 +161,316 @@
       "caption": "Overview comparison matrix for malignant peripheral nerve sheath tumour (nf1-associated)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours of Soft Tissue and Bone",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "malignant_peripheral_nerve_sheath_tumor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of primary lesion and nerve",
+          "cells": [
+            {
+              "text": "Extent and features of malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body functional imaging",
+          "cells": [
+            {
+              "text": "Transformation within a plexiform neurofibroma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest CT",
+          "cells": [
+            {
+              "text": "Pulmonary metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided biopsy of the most suspicious area",
+          "cells": [
+            {
+              "text": "Malignant component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "S100, SOX10 and H3K27me3 staining",
+          "cells": [
+            {
+              "text": "Loss of H3K27me3 supports diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "malignant_peripheral_nerve_sheath_tumor-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Plexiform or atypical neurofibroma",
+          "cells": [
+            {
+              "text": "Benign counterpart; sampling needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Synovial sarcoma",
+          "cells": [
+            {
+              "text": "Spindle-cell sarcoma without NF1 link"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Melanoma, spindle-cell or desmoplastic",
+          "cells": [
+            {
+              "text": "Melanocytic markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leiomyosarcoma",
+          "cells": [
+            {
+              "text": "Smooth muscle differentiation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "malignant_peripheral_nerve_sheath_tumor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete resection",
+          "cells": [
+            {
+              "text": "Negative margins are the most important treatment for resectable disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy",
+          "cells": [
+            {
+              "text": "Close margins or high grade; relatively radioresistant tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemotherapy",
+          "cells": [
+            {
+              "text": "Selected high-grade or advanced disease; modest response rates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging",
+          "cells": [
+            {
+              "text": "MRI of primary site and screening for pulmonary metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastasectomy",
+          "cells": [
+            {
+              "text": "Limited pulmonary disease in selected patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "malignant_peripheral_nerve_sheath_tumor-dx-mgmt",
+      "title": "Diagnosis and management of Malignant peripheral nerve sheath tumour (NF1-associated)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pain, growth or new deficit in a known neurofibroma in a patient with NF1",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, new deficit or respiratory symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent sarcoma team review and image-guided biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI, functional whole-body imaging, chest CT, image-guided biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show a malignant nerve sheath tumour with H3K27me3 loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider benign neurofibroma, synovial sarcoma or other spindle-cell sarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical resection with negative margins",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adjuvant radiotherapy for close margins or high grade",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Chemotherapy for selected high-grade or advanced disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Metastasectomy for limited pulmonary disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Long-term surveillance with clinical and cross-sectional review",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Aggressive sarcoma with substantial recurrence and metastatic risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

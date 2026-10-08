@@ -178,5 +178,481 @@
       "caption": "Overview comparison matrix for seizures and epilepsy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Seizure Disorders",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/seizure-disorders/seizure-disorders"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 369-5",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 369-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "seizures_and_epilepsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing seizures and epilepsy",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Epilepsy definition",
+          "cells": [
+            {
+              "text": "Lasting tendency to recurrent unprovoked seizures"
+            },
+            {
+              "text": "One provoked seizure is not epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ILAE 2017 onset types",
+          "cells": [
+            {
+              "text": "Focal (aware or impaired awareness), generalized, unknown"
+            },
+            {
+              "text": "Guides drug choice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Convulsive status epilepticus",
+          "unit": "min",
+          "cells": [
+            {
+              "text": "Over 5 minutes, or 2 or more seizures without recovery",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "{{hy:Treat as an emergency at 5 minutes}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Interictal EEG",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Normal in 50 to 80% of known epilepsy on first recording",
+              "range": [
+                50,
+                80
+              ]
+            },
+            {
+              "text": "Normal EEG does not exclude epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video-EEG monitoring",
+          "cells": [
+            {
+              "text": "Captures events"
+            },
+            {
+              "text": "Separates psychogenic from epileptic seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Hippocampal sclerosis, tumor, malformation"
+            },
+            {
+              "text": "Preferred over CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mesial temporal lobe epilepsy",
+          "cells": [
+            {
+              "text": "Aura, impaired awareness, automatisms; hippocampal sclerosis on MRI"
+            },
+            {
+              "text": "Often drug resistant; surgical candidate"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Bloods and toxicology",
+          "cells": [
+            {
+              "text": "Glucose, sodium, calcium, magnesium, renal and liver tests"
+            },
+            {
+              "text": "Find provoked causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug resistance",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 30% keep seizing despite optimal drugs",
+              "op": "=",
+              "value": 30
+            },
+            {
+              "text": "Refer for surgery evaluation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "seizures_and_epilepsy-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic seizures",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Syncope",
+          "cells": [
+            {
+              "text": "Prodrome, pallor, brief jerks, rapid recovery"
+            },
+            {
+              "text": "ECG, orthostatic vitals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychogenic nonepileptic seizures",
+          "cells": [
+            {
+              "text": "Eyes closed, side-to-side head, pelvic thrusting, waxing course"
+            },
+            {
+              "text": "Video-EEG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TIA",
+          "cells": [
+            {
+              "text": "Negative symptoms, vascular risk"
+            },
+            {
+              "text": "MRI, vascular imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Migraine aura",
+          "cells": [
+            {
+              "text": "Slow march of symptoms, headache"
+            },
+            {
+              "text": "Clinical history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic disturbance",
+          "cells": [
+            {
+              "text": "Hypoglycemia, hyponatremia, hypocalcemia"
+            },
+            {
+              "text": "Bloods at the time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced or withdrawal seizure",
+          "cells": [
+            {
+              "text": "Beta-lactams, quinolones, isoniazid, tramadol, bupropion-type antidepressants, theophylline, cocaine; alcohol or benzodiazepine withdrawal"
+            },
+            {
+              "text": "Drug history, toxicology"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Sleep and movement disorders",
+          "cells": [
+            {
+              "text": "Cataplexy, myoclonus, parasomnias"
+            },
+            {
+              "text": "Polysomnography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "seizures_and_epilepsy-treatment",
+      "kind": "treatment",
+      "title": "Treating seizures and epilepsy",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "IV lorazepam",
+          "cells": [
+            {
+              "text": "Status epilepticus, first line"
+            },
+            {
+              "text": "0.05 to 0.1 mg/kg (typically 4 mg) at 2 mg/min"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Midazolam or diazepam",
+          "cells": [
+            {
+              "text": "Status epilepticus when no IV lorazepam"
+            },
+            {
+              "text": "Midazolam 0.2 mg/kg up to 10 mg; diazepam 0.15 to 0.2 mg/kg up to 10 mg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fosphenytoin, levetiracetam or valproate",
+          "cells": [
+            {
+              "text": "After benzodiazepine in status"
+            },
+            {
+              "text": "Then anesthetic infusion if refractory"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lamotrigine or carbamazepine",
+          "cells": [
+            {
+              "text": "Focal epilepsy"
+            },
+            {
+              "text": "Sodium channel blockers can worsen generalized epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Valproate or levetiracetam",
+          "cells": [
+            {
+              "text": "Generalized epilepsy"
+            },
+            {
+              "text": "Avoid valproate in women of childbearing potential where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Defer drug after a single seizure",
+          "cells": [
+            {
+              "text": "Low recurrence risk"
+            },
+            {
+              "text": "Usually start after a second seizure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgery, VNS, ketogenic diet",
+          "cells": [
+            {
+              "text": "Drug-resistant epilepsy"
+            },
+            {
+              "text": "Mesial temporal lobe epilepsy responds well to surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Driving restriction",
+          "cells": [
+            {
+              "text": "Uncontrolled seizures"
+            },
+            {
+              "text": "Most US states: 6 months to 1 year seizure free"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "seizures_and_epilepsy-dx-mgmt",
+      "title": "Diagnosis and management of seizures",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Witnessed transient event with loss of awareness or convulsion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Still seizing over 5 minutes?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Status: lorazepam, then second-line IV drug, then anesthesia",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Glucose, electrolytes, toxicology; ECG to exclude syncope",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Provoked cause found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Correct cause; antiseizure drug usually not needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "MRI brain and EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Second seizure, or EEG or MRI shows high recurrence risk?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Start drug chosen by seizure type; driving advice",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Observe; driving advice; start drug if it recurs",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

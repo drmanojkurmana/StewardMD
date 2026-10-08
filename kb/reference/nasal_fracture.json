@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for nasal fracture."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Grabb & Smith's Plastic Surgery / standard references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nasal_fracture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination for deformity, mobility and airflow",
+          "cells": [
+            {
+              "text": "Diagnosis is largely clinical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Internal speculum examination of the septum",
+          "cells": [
+            {
+              "text": "Septal haematoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-injury photographs",
+          "cells": [
+            {
+              "text": "Original nasal shape for judging deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Naso-orbito-ethmoid, midface or skull base injury when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for CSF rhinorrhoea",
+          "cells": [
+            {
+              "text": "Clear nasal discharge after injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nasal_fracture-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Naso-orbito-ethmoid fracture",
+          "cells": [
+            {
+              "text": "Telecanthus and medial canthal disruption point toward it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septal haematoma without nasal bone fracture",
+          "cells": [
+            {
+              "text": "Found only on internal speculum examination; needs urgent drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frontal sinus or skull base fracture with CSF leak",
+          "cells": [
+            {
+              "text": "Clear rhinorrhoea after nasal trauma raises concern for a CSF leak"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nasal_fracture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Drain septal haematoma",
+          "cells": [
+            {
+              "text": "Urgent drainage to prevent cartilage necrosis and saddle-nose deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Initial care",
+          "cells": [
+            {
+              "text": "Epistaxis control, analgesia and reduction of swelling; photograph the pre-injury shape"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Closed reduction",
+          "cells": [
+            {
+              "text": "Within the appropriate window, before swelling or after it subsides but before the fracture sets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted CT",
+          "cells": [
+            {
+              "text": "For suspected naso-orbito-ethmoid, midface or skull base injury; assess for CSF rhinorrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No routine radiographs",
+          "cells": [
+            {
+              "text": "Isolated fractures are managed on clinical diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotic cover",
+          "cells": [
+            {
+              "text": "Considered after septal haematoma drainage or with an open injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ENT or plastic follow-up",
+          "cells": [
+            {
+              "text": "Residual deformity or obstruction; septorhinoplasty if needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nasal_fracture-dx-mgmt",
+      "title": "Diagnosis and management of Nasal fracture",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Nasal trauma with bridge deformity, swelling, epistaxis and mobile or tender bones",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (septal haematoma, clear rhinorrhoea, telecanthus)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drainage of septal haematoma; CT if naso-orbito-ethmoid or skull base injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Speculum examination of the septum, pre-injury photographs, CT if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Septal haematoma excluded on speculum examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Drain the septal haematoma urgently, then re-examine the fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Control epistaxis, analgesia and swelling; photograph the pre-injury shape",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Closed reduction within the window before the fracture sets",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "CT only for suspected naso-orbito-ethmoid, midface or skull base injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "ENT or plastic follow-up; septorhinoplasty for residual deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most isolated fractures heal well; an undrained septal haematoma causes saddle nose",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

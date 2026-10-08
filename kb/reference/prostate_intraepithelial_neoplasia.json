@@ -149,5 +149,312 @@
       "caption": "Overview comparison matrix for prostatic intraepithelial neoplasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO Classification of Tumours: Urinary and Male Genital Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "prostate_intraepithelial_neoplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Histopathological review by a specialist uropathologist",
+          "cells": [
+            {
+              "text": "Grade and focality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Basal cell markers (high-molecular-weight cytokeratin, p63) and AMACR immunohistochemistry",
+          "cells": [
+            {
+              "text": "Separates PIN from invasive carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PSA monitoring",
+          "cells": [
+            {
+              "text": "Part of overall prostate cancer risk assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiparametric MRI",
+          "cells": [
+            {
+              "text": "Suspicious areas for targeted rebiopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat or targeted biopsy",
+          "cells": [
+            {
+              "text": "Multifocal HGPIN or coexisting ASAP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Documentation of cores involved",
+          "cells": [
+            {
+              "text": "Extent of involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prostate_intraepithelial_neoplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Invasive prostatic adenocarcinoma",
+          "cells": [
+            {
+              "text": "Separated by basal cell markers and AMACR"
+            },
+            {
+              "text": "Basal cell marker and AMACR immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atypical small acinar proliferation (ASAP)",
+          "cells": [
+            {
+              "text": "Coexisting with high-grade PIN"
+            },
+            {
+              "text": "Repeat or targeted biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prostate_intraepithelial_neoplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No direct treatment",
+          "cells": [
+            {
+              "text": "PIN is not itself malignant; follow-up for the associated cancer risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm grade and focality",
+          "cells": [
+            {
+              "text": "Specialist uropathology with basal-cell markers and AMACR to exclude invasive carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated single-focus HGPIN",
+          "cells": [
+            {
+              "text": "No routine rebiopsy; continue PSA monitoring and clinical follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multifocal or extensive HGPIN, or ASAP",
+          "cells": [
+            {
+              "text": "Repeat, extended or targeted biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted rebiopsy",
+          "cells": [
+            {
+              "text": "Multiparametric MRI to identify suspicious areas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ongoing surveillance",
+          "cells": [
+            {
+              "text": "PSA surveillance within overall risk assessment; urology follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "prostate_intraepithelial_neoplasia-dx-mgmt",
+      "title": "Diagnosis and management of Prostatic intraepithelial neoplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Prostatic intraepithelial neoplasia on biopsy: high-grade PIN identified",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Coexisting ASAP, multifocal HGPIN, rising PSA, or an MRI lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urology referral and targeted biopsy for suspected occult carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Uropathology review; basal cell markers and AMACR; mpMRI; PSA; core count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is invasive carcinoma excluded on uropathology with markers?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "If invasive carcinoma is found, manage as cancer under urology",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "PIN is not itself malignant; no direct treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Isolated single-focus HGPIN: no routine rebiopsy; PSA monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Multifocal or extensive HGPIN, or ASAP: repeat or targeted biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Continue PSA surveillance and urology follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Ongoing urology follow-up for associated prostate cancer risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

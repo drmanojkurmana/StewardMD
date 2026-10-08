@@ -150,5 +150,341 @@
       "caption": "Overview comparison matrix for hydrops fetalis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cloherty and Stark Manual of Neonatal Care / Creasy and Resnik's Maternal-Fetal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hydrops_fetalis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Maternal blood group and red-cell antibody screen",
+          "cells": [
+            {
+              "text": "Alloimmune cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foetal ultrasound and echocardiography",
+          "cells": [
+            {
+              "text": "Effusions and cardiac structure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Middle cerebral artery Doppler peak systolic velocity",
+          "cells": [
+            {
+              "text": "Foetal anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype or microarray",
+          "cells": [
+            {
+              "text": "Chromosomal or syndromic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal and neonatal infection screen",
+          "cells": [
+            {
+              "text": "Congenital infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal full blood count, blood film and bilirubin",
+          "cells": [
+            {
+              "text": "Anaemia and haemolysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hydrops_fetalis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated foetal ascites or pleural effusion",
+          "cells": [
+            {
+              "text": "Isolated effusion rather than generalised hydrops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foetal or neonatal cardiac failure from structural heart disease",
+          "cells": [
+            {
+              "text": "Structural cardiac lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital chylothorax or lymphatic malformation",
+          "cells": [
+            {
+              "text": "Lymphatic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital infection such as parvovirus or cytomegalovirus",
+          "cells": [
+            {
+              "text": "Infection on screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal disorders such as Turner syndrome",
+          "cells": [
+            {
+              "text": "Karyotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hydrops_fetalis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intrauterine transfusion",
+          "cells": [
+            {
+              "text": "For foetal anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of the identified cause",
+          "cells": [
+            {
+              "text": "Where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial surveillance",
+          "cells": [
+            {
+              "text": "Foetal ultrasound, echocardiography and Doppler"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Planned delivery",
+          "cells": [
+            {
+              "text": "Tertiary centre with neonatal support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal exchange transfusion and phototherapy",
+          "cells": [
+            {
+              "text": "For neonatal haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Foetal medicine and neonatal teams"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and anti-D",
+          "cells": [
+            {
+              "text": "Immune hydrops and future pregnancies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hydrops_fetalis-dx-mgmt",
+      "title": "Diagnosis and management of Hydrops fetalis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Foetal or neonatal generalised oedema with effusions",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe anaemia with heart failure, large effusions, or a lethal anomaly?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent foetal medicine review for anaemia or large effusions",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Maternal antibody screen; foetal echo and MCA Doppler; karyotype; infection screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is foetal or neonatal anaemia confirmed, with an alloimmune cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider heart disease, chylothorax, infection, chromosomal disorder or thalassaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intrauterine transfusion for foetal anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treatment of the identified cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial foetal ultrasound and Doppler surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Planned delivery at a tertiary centre with neonatal support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Anaemia corrected; neonatal care and genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

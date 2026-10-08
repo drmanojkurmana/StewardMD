@@ -154,5 +154,343 @@
       "caption": "Overview comparison matrix for telomere biology disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Inherited bone marrow failure and telomere biology references",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "telomere_biology_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Telomere biology disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected telomere biology disorder: marrow failure with lung or liver fibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: new cytopenias, progressive fibrosis, or portal hypertension?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology and respiratory review for marrow failure or fibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Flow-FISH telomere length; telomere-gene panel or exome; marrow with cytogenetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do short leucocyte telomeres and a pathogenic gene variant confirm the disorder?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Fanconi anaemia, aplastic anaemia or idiopathic pulmonary fibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Danazol to stimulate residual marrow",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Allogeneic transplant for severe cytopenias, with reduced-intensity conditioning",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care and lung transplant for pulmonary fibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Leucodepleted, irradiated blood products and iron chelation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lifelong surveillance for myelodysplasia, leukaemia and carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Highly variable; life expectancy reduced by marrow failure, fibrosis and malignancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "telomere_biology_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Leucocyte telomere length by flow-FISH",
+          "cells": [
+            {
+              "text": "Abnormally short telomeres against age-matched values"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Telomere-gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "Pathogenic telomere-maintenance variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC, reticulocytes and bone marrow with cytogenetics",
+          "cells": [
+            {
+              "text": "Marrow failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosome breakage testing",
+          "cells": [
+            {
+              "text": "Fanconi anaemia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution chest CT and lung function",
+          "cells": [
+            {
+              "text": "Pulmonary fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver tests with imaging and elastography",
+          "cells": [
+            {
+              "text": "Hepatic fibrosis or cirrhosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "telomere_biology_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fanconi anaemia",
+          "cells": [
+            {
+              "text": "Excluded by chromosome breakage testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aplastic anaemia, acquired",
+          "cells": [
+            {
+              "text": "Short leucocyte telomeres on flow-FISH point to a telomeropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic pulmonary fibrosis",
+          "cells": [
+            {
+              "text": "Unexplained adult fibrosis may be a telomeropathy; telomere testing separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "telomere_biology_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Androgen therapy",
+          "cells": [
+            {
+              "text": "Danazol to stimulate residual marrow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic stem cell transplant",
+          "cells": [
+            {
+              "text": "Severe or transfusion-dependent cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reduced-intensity conditioning",
+          "cells": [
+            {
+              "text": "Patients are sensitive to DNA-damaging chemotherapy and radiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory and hepatic care",
+          "cells": [
+            {
+              "text": "Supportive care and lung transplant; liver transplant for progressive hepatic fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion support",
+          "cells": [
+            {
+              "text": "Leucodepleted, irradiated products; iron chelation where burden is high"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid DNA-damaging exposures",
+          "cells": [
+            {
+              "text": "Smoking, excess alcohol and unnecessary radiation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong malignancy surveillance",
+          "cells": [
+            {
+              "text": "Myelodysplasia, leukaemia and squamous cell carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening",
+          "cells": [
+            {
+              "text": "Telomere-length testing in relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

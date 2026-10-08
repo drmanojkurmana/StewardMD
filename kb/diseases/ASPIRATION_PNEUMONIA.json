@@ -313,6 +313,16 @@
       "label": "Merck Manual Professional, Chemical Pneumonitis and Aspiration Pneumonia, 2026",
       "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/pneumonia/aspiration-pneumonitis-and-pneumonia",
       "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 164-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 258-2",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -685,6 +695,200 @@
         }
       ],
       "footnote": "Doses were not stated in the sources opened."
+    },
+    {
+      "id": "ASPIRATION_PNEUMONIA-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Anaerobic human flora by anatomic site",
+      "rowHeader": "Anatomic site",
+      "columns": [
+        "Total bacteria",
+        "Anaerobic/aerobic ratio",
+        "Potential pathogens"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral cavity: saliva",
+          "cells": [
+            {
+              "text": "10^8 to 10^9"
+            },
+            {
+              "text": "1:1"
+            },
+            {
+              "text": "Fusobacterium nucleatum, Prevotella melaninogenica, Prevotella oralis group, Bacteroides ureolyticus group, Peptostreptococcus spp. (listed for the oral cavity as a whole)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Oral cavity: tooth surface",
+          "cells": [
+            {
+              "text": "10^10 to 10^11"
+            },
+            {
+              "text": "1:1"
+            },
+            {
+              "text": "As for the oral cavity above"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Oral cavity: gingival crevices",
+          "cells": [
+            {
+              "text": "10^11 to 10^12"
+            },
+            {
+              "text": "10^3:1"
+            },
+            {
+              "text": "As for the oral cavity above"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Gastrointestinal tract: stomach",
+          "cells": [
+            {
+              "text": "0 to 10^5"
+            },
+            {
+              "text": "1:1"
+            },
+            {
+              "text": "Bacteroides spp. (principally the B. fragilis group), Prevotella spp., Clostridium spp., Peptostreptococcus spp. (listed for the GI tract as a whole)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Gastrointestinal tract: jejunum/ileum",
+          "cells": [
+            {
+              "text": "10^4 to 10^7"
+            },
+            {
+              "text": "1:1"
+            },
+            {
+              "text": "As for the GI tract above"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Gastrointestinal tract: terminal ileum and colon",
+          "cells": [
+            {
+              "text": "10^11 to 10^12"
+            },
+            {
+              "text": "10^3:1"
+            },
+            {
+              "text": "As for the GI tract above"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Female genital tract",
+          "cells": [
+            {
+              "text": "10^7 to 10^9"
+            },
+            {
+              "text": "10:1"
+            },
+            {
+              "text": "Peptostreptococcus spp., Bacteroides spp., Prevotella bivia"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Footnote (a) on total bacteria is not shown on the page."
+    },
+    {
+      "id": "ASPIRATION_PNEUMONIA-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Microbial pathogens causing cavitary lung infection",
+      "rowHeader": "Host setting",
+      "columns": [
+        "Pathogens"
+      ],
+      "rows": [
+        {
+          "parameter": "Aspiration-prone host",
+          "cells": [
+            {
+              "text": "Anaerobic bacteria plus microaerophilic and/or anaerobic streptococci, Gemella spp."
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Embolic (endovascular) lesions",
+          "cells": [
+            {
+              "text": "Usually Staphylococcus aureus, Pseudomonas aeruginosa, Fusobacterium necrophorum"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Endemic fungi",
+          "cells": [
+            {
+              "text": "Histoplasma, Blastomyces, Coccidioides spp."
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Mycobacteria",
+          "cells": [
+            {
+              "text": "M. tuberculosis, M. kansasii, M. avium"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Immunocompromised host",
+          "cells": [
+            {
+              "text": "M. tuberculosis, Nocardia asteroides, Rhodococcus equi, Legionella spp., P. aeruginosa, Enterobacteriaceae (especially Klebsiella pneumoniae), Aspergillus spp., Cryptococcus spp."
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Previously healthy host: bacteria",
+          "cells": [
+            {
+              "text": "S. aureus, S. milleri, K. pneumoniae, group A Streptococcus; Gemella, Legionella and Actinomyces spp."
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Previously healthy host: parasites",
+          "cells": [
+            {
+              "text": "Entamoeba histolytica, Paragonimus westermani, Strongyloides stercoralis"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "The source groups the first four rows as one block of mixed settings; source footnotes (a) and (b) are not legible."
     }
   ],
   "flowcharts": [

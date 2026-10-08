@@ -148,5 +148,332 @@
       "caption": "Overview comparison matrix for p14 deficiency (lamtor2 deficiency)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "p14_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "LAMTOR2 sequencing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial full blood count",
+          "cells": [
+            {
+              "text": "Neutropenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neutrophil function studies",
+          "cells": [
+            {
+              "text": "Impaired neutrophil function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin levels and specific antibody responses",
+          "cells": [
+            {
+              "text": "Reduced B-cell antibody responses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytotoxic T-cell and natural killer cell assays",
+          "cells": [
+            {
+              "text": "Impaired cytotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hair shaft and skin pigmentation examination",
+          "cells": [
+            {
+              "text": "Partial hypopigmentation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "p14_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chediak-Higashi syndrome",
+          "cells": [
+            {
+              "text": "Pigmentary defect with immunodeficiency; LAMTOR2 testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Griscelli syndrome",
+          "cells": [
+            {
+              "text": "Pigmentary and immune overlap; sequencing differentiates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe congenital neutropenia",
+          "cells": [
+            {
+              "text": "Neutropenia without the hypopigmentation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "p14_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prophylaxis and infection treatment",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Prophylactic antimicrobials; prompt and aggressive treatment of bronchopulmonary and skin infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Granulocyte colony-stimulating factor",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Raises counts during infection or severe neutropenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "For hypogammaglobulinaemia or recurrent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stem cell transplantation",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Potentially curative in severe multi-lineage immune disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and counselling",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Serial counts, immunoglobulins and growth; genetic counselling and family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "p14_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of p14 Deficiency (LAMTOR2 Deficiency)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neutropenia with recurrent chest or skin infection and hypopigmentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (infection with neutropenia, growth failure or haemophagocytic features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent immunology review for haemophagocytic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "LAMTOR2 sequencing, serial counts, marrow, neutrophil function, immunoglobulins",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a LAMTOR2 variant found, with neutropenia and immune defects confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Chediak-Higashi, Griscelli, Hermansky-Pudlak or congenital neutropenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prophylactic antimicrobials and prompt, aggressive treatment of infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Granulocyte colony-stimulating factor during infection or severe neutropenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunoglobulin replacement for hypogammaglobulinaemia or recurrent infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Stem cell transplantation for severe multi-lineage disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial counts, immunoglobulins and growth; genetic counselling and family testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Limited data; many do reasonably with prophylaxis, though infection risk persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

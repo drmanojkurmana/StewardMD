@@ -156,5 +156,316 @@
       "caption": "Overview comparison matrix for lymphomatoid papulosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Haematolymphoid Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lymphomatoid_papulosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with CD30 and T-cell markers",
+          "cells": [
+            {
+              "text": "CD30-positive atypical T cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T-cell receptor clonality analysis",
+          "cells": [
+            {
+              "text": "Clonal rearrangement; not proof of systemic malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinicopathological correlation",
+          "cells": [
+            {
+              "text": "Self-regressing course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging only if a concurrent lymphoma is suspected",
+          "cells": [
+            {
+              "text": "Targeted investigation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photographic mapping",
+          "cells": [
+            {
+              "text": "Recurrent, migratory eruption"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphomatoid_papulosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary cutaneous anaplastic large-cell lymphoma",
+          "cells": [
+            {
+              "text": "Persistent, enlarging lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycosis fungoides",
+          "cells": [
+            {
+              "text": "Persistent plaques or tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PLEVA",
+          "cells": [
+            {
+              "text": "Pityriasis lichenoides-type lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthropod bite reactions",
+          "cells": [
+            {
+              "text": "Benign papular eruption"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphomatoid_papulosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Expectant management",
+          "cells": [
+            {
+              "text": "Reassurance for limited, asymptomatic, self-regressing disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin-directed or low-dose therapy",
+          "cells": [
+            {
+              "text": "Methotrexate or PUVA for extensive or symptomatic eruptions; suppresses rather than cures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical therapy",
+          "cells": [
+            {
+              "text": "Corticosteroids or retinoids for troublesome lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory disease",
+          "cells": [
+            {
+              "text": "Brentuximab vedotin; bexarotene as a further option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lesion that persists",
+          "cells": [
+            {
+              "text": "Manage as cutaneous anaplastic large-cell lymphoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lymphomatoid_papulosis-dx-mgmt",
+      "title": "Diagnosis and management of Lymphomatoid papulosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent crops of self-regressing papules or nodules with scarring in an adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (lesion fails to regress, lymphadenopathy or systemic symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: haemato-oncology review and re-biopsy for suspected lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with CD30 and T-cell markers, clonality analysis, clinical correlation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do CD30-positive atypical cells show a self-regressing clinical course?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cutaneous anaplastic large-cell lymphoma or mycosis fungoides",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe with reassurance for limited, asymptomatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical corticosteroids or retinoids for individual lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Low-dose methotrexate or PUVA for extensive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Brentuximab vedotin for refractory or symptomatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Re-biopsy any lesion that fails to regress or enlarges",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent prognosis; lifelong surveillance because a subset develop lymphoma",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

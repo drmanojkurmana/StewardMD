@@ -151,5 +151,276 @@
       "caption": "Overview comparison matrix for venous leg ulcer."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rutherford's Vascular Surgery / NICE-SIGN venous guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "venous_leg_ulcer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankle-brachial index",
+          "cells": [
+            {
+              "text": "Excludes arterial disease and makes compression safe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous duplex ultrasound",
+          "cells": [
+            {
+              "text": "Sites of reflux and obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound swab or tissue culture",
+          "cells": [
+            {
+              "text": "Clinical infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of atypical or non-healing ulcers",
+          "cells": [
+            {
+              "text": "Malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes and anaemia assessment",
+          "cells": [
+            {
+              "text": "Factors that impair healing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "venous_leg_ulcer-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Arterial (ischaemic) ulcer",
+          "cells": [
+            {
+              "text": "Excluded by ankle-brachial index before compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic or diabetic foot ulcer",
+          "cells": [
+            {
+              "text": "Found in the foot rather than the gaiter area"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marjolin ulcer",
+          "cells": [
+            {
+              "text": "Squamous cell carcinoma in a chronic ulcer; rolled edges and exuberant granulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyoderma gangrenosum",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "venous_leg_ulcer-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Graduated multilayer compression",
+          "cells": [
+            {
+              "text": "Mainstay of healing, only after arterial disease is excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Cleansing, debridement of slough, non-adherent dressings and exudate management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endovenous ablation of superficial reflux",
+          "cells": [
+            {
+              "text": "Accelerates healing when superficial reflux is present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "venous_leg_ulcer-dx-mgmt",
+      "title": "Diagnosis and management of Venous leg ulcer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected venous leg ulcer: shallow ulcer in the gaiter area above the medial malleolus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rolled edges, spreading infection or sudden pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for malignant change, cellulitis or sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ankle-brachial index, venous duplex, wound swab, biopsy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is arterial disease excluded by ankle-brachial index?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat arterial or other ulcer type; compression is unsafe until reassessed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Graduated multilayer compression once arterial disease is excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Wound cleansing, debridement and non-adherent dressings",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endovenous ablation of superficial reflux to accelerate healing",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Compression is the mainstay; reassess ulcers that fail to heal for malignancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,323 @@
       "caption": "Overview comparison matrix for miyoshi myopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "miyoshi_myopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Markedly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Myopathic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle MRI",
+          "cells": [
+            {
+              "text": "Posterior calf and later thigh involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with dysferlin immunostaining",
+          "cells": [
+            {
+              "text": "Dysferlin deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted DYSF genetic testing",
+          "cells": [
+            {
+              "text": "DYSF variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment to exclude inflammatory myopathy",
+          "cells": [
+            {
+              "text": "Inflammatory myopathy excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "miyoshi_myopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Limb-girdle muscular dystrophy",
+          "cells": [
+            {
+              "text": "Rapidly progressive proximal weakness suggests a limb-girdle phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory myopathy such as polymyositis",
+          "cells": [
+            {
+              "text": "Biopsy inflammation can mimic myositis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic myopathy",
+          "cells": [
+            {
+              "text": "Exercise intolerance with high creatine kinase"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "miyoshi_myopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No disease-modifying drug",
+          "cells": [
+            {
+              "text": "Physiotherapy with graded exercise and stretching to preserve function and prevent contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid corticosteroids",
+          "cells": [
+            {
+              "text": "Do not help dysferlinopathy and may worsen it despite biopsy inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mobility aids and orthoses",
+          "cells": [
+            {
+              "text": "Occupational therapy as distal then proximal weakness progresses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory and cardiac assessment",
+          "cells": [
+            {
+              "text": "Periodic; relatively uncommon in this phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight and metabolic health",
+          "cells": [
+            {
+              "text": "Reduces load on weakening muscle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive DYSF inheritance; test at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular service",
+          "cells": [
+            {
+              "text": "Multidisciplinary care and access to dysferlinopathy trials"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "miyoshi_myopathy-dx-mgmt",
+      "title": "Diagnosis and management of Miyoshi myopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Posterior calf weakness with markedly elevated creatine kinase",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Immunosuppression for presumed myositis, proximal weakness or respiratory involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Review immunosuppression; refer to neuromuscular service",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK; EMG; muscle MRI; muscle biopsy with dysferlin staining; DYSF testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is dysferlin deficiency confirmed on biopsy or by DYSF testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider limb-girdle dystrophy, inflammatory or metabolic myopathy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy with graded exercise and stretching to preserve function",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid corticosteroids, which do not help dysferlinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Mobility aids, orthoses and occupational therapy as weakness progresses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Periodic respiratory and cardiac assessment; support weight and metabolic health",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Autosomal recessive DYSF counselling; neuromuscular service and trial referral",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

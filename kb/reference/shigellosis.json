@@ -167,5 +167,399 @@
       "caption": "Overview comparison matrix for shigellosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Shigellosis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/gram-negative-bacilli/shigellosis"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 128-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "shigellosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing shigellosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Dysentery",
+          "cells": [
+            {
+              "text": "Fever, cramps, tenesmus, small bloody mucopurulent stools"
+            },
+            {
+              "text": "Classic picture; may start as watery diarrhea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious dose",
+          "unit": "CFU",
+          "cells": [
+            {
+              "text": "About 100 organisms",
+              "op": "=",
+              "value": 100
+            },
+            {
+              "text": "High attack rates in day care (33 to 73%) and households (26 to 33%)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Food sources",
+          "cells": [
+            {
+              "text": "Potato or egg salad, lettuce, raw vegetables"
+            },
+            {
+              "text": "Incubation over 16 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stool culture",
+          "cells": [
+            {
+              "text": "Gold standard; sample bloody mucus or rectal swab"
+            },
+            {
+              "text": "{{hy:Use transport medium; Shigella dies in transit}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy",
+          "cells": [
+            {
+              "text": "Many neutrophils and red cells"
+            },
+            {
+              "text": "Supports invasive colitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Poor-prognosis markers",
+          "cells": [
+            {
+              "text": "Moderate to severe dehydration, bacteremia, no fever, abdominal tenderness, rectal prolapse, altered consciousness"
+            },
+            {
+              "text": "Admit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Susceptibility testing",
+          "cells": [
+            {
+              "text": "Common resistance to ampicillin, TMP-SMX, tetracycline; XDR strains rising"
+            },
+            {
+              "text": "Guides therapy"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "shigellosis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic shigellosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Enterohemorrhagic E. coli",
+          "cells": [
+            {
+              "text": "Bloody diarrhea with little fever, HUS"
+            },
+            {
+              "text": "Shiga toxin testing"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Campylobacter enteritis",
+          "cells": [
+            {
+              "text": "Poultry or raw milk; inflammatory diarrhea"
+            },
+            {
+              "text": "Stool culture or PCR"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Nontyphoidal salmonellosis",
+          "cells": [
+            {
+              "text": "Eggs and poultry; less tenesmus"
+            },
+            {
+              "text": "Stool culture"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Amebic dysentery",
+          "cells": [
+            {
+              "text": "Gradual onset, less fever, travel"
+            },
+            {
+              "text": "E. histolytica antigen or PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vibrio parahaemolyticus",
+          "cells": [
+            {
+              "text": "Seafood, dysentery"
+            },
+            {
+              "text": "Stool culture on TCBS"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Chronic or relapsing course"
+            },
+            {
+              "text": "Colonoscopy and biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C. difficile colitis",
+          "cells": [
+            {
+              "text": "Recent antibiotics"
+            },
+            {
+              "text": "C. difficile toxin or PCR"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "shigellosis-treatment",
+      "kind": "treatment",
+      "title": "Treating shigellosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral rehydration and electrolytes",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Foundation of care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ciprofloxacin or another fluoroquinolone, or azithromycin",
+          "cells": [
+            {
+              "text": "Adults with moderate or severe disease, elderly, immunocompromised"
+            },
+            {
+              "text": "Choose by local resistance"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azithromycin orally or ceftriaxone IV",
+          "cells": [
+            {
+              "text": "Children"
+            },
+            {
+              "text": "Ceftriaxone also for severe adult disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Carbapenem with ID advice",
+          "cells": [
+            {
+              "text": "Extensively drug-resistant Shigella"
+            },
+            {
+              "text": "Guided by susceptibility"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "No antimotility agents",
+          "cells": [
+            {
+              "text": "All"
+            },
+            {
+              "text": "{{hy:Can worsen invasive colitis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand hygiene and exclusion",
+          "cells": [
+            {
+              "text": "Cases, food handlers, day-care staff"
+            },
+            {
+              "text": "Low infectious dose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor for complications",
+          "cells": [
+            {
+              "text": "Children with S. dysenteriae type 1"
+            },
+            {
+              "text": "HUS about 7 days after onset; reactive arthritis in HLA-B27"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "shigellosis-dx-mgmt",
+      "title": "Diagnosis and management of shigellosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bloody mucoid diarrhea with fever and tenesmus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Stool culture in transport medium; assess hydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Severe disease, dehydration or poor-prognosis signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Admit; IV fluids; ceftriaxone; watch for HUS and toxic megacolon",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Child, elderly, immunocompromised or moderate illness?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Oral azithromycin or fluoroquinolone; adjust to susceptibility",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Oral rehydration; hygiene; no antimotility drugs",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

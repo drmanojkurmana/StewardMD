@@ -147,5 +147,323 @@
       "caption": "Overview comparison matrix for huntington disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "huntington_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Genetic testing for the HTT CAG repeat expansion",
+          "cells": [
+            {
+              "text": "Expanded CAG repeat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Striatal atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for reversible or secondary causes of chorea",
+          "cells": [
+            {
+              "text": "Alternative causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric assessment",
+          "cells": [
+            {
+              "text": "Depression and suicide risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological evaluation",
+          "cells": [
+            {
+              "text": "Cognitive profile"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "huntington_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other genetic choreas, including Huntington-like disorders",
+          "cells": [
+            {
+              "text": "Genetic testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sydenham chorea and other post-infectious chorea",
+          "cells": [
+            {
+              "text": "Autoimmune or post-infectious cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced chorea or tardive dyskinesia",
+          "cells": [
+            {
+              "text": "Drug exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wilson disease",
+          "cells": [
+            {
+              "text": "Copper and hepatic involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "huntington_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dopamine-depleting VMAT2 inhibitors",
+          "cells": [
+            {
+              "text": "Disabling chorea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric features",
+          "cells": [
+            {
+              "text": "Treated on their own merits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structure for cognition and behaviour",
+          "cells": [
+            {
+              "text": "Supportive measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and multidisciplinary care",
+          "cells": [
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and feeding support",
+          "cells": [
+            {
+              "text": "Weight loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Predictive and diagnostic testing",
+          "cells": [
+            {
+              "text": "HTT CAG repeat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advance care planning",
+          "cells": [
+            {
+              "text": "As the disease progresses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "huntington_disease-dx-mgmt",
+      "title": "Diagnosis and management of Huntington disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive chorea with cognitive and behavioural change and family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Depression or suicidal thoughts, dysphagia, rapid decline, or psychosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent psychiatric assessment for suicidal thoughts or psychosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "HTT CAG repeat testing; brain MRI for striatal atrophy; secondary causes; cognition",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an expanded HTT CAG repeat confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other genetic chorea, Sydenham chorea, drug-induced chorea or Wilson disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Dopamine-depleting VMAT2 inhibitors for disabling chorea",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Psychiatric treatment on its own merits",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Multidisciplinary physiotherapy and supportive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nutrition support and feeding for weight loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptoms managed; advance care planning as disease progresses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

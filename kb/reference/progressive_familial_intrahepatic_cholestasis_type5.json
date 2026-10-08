@@ -148,5 +148,312 @@
       "caption": "Overview comparison matrix for progressive familial intrahepatic cholestasis type 5."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System / Suchy Liver Disease in Children",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type5-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum bile acids and GGT",
+          "cells": [
+            {
+              "text": "Cholestasis with low or normal GGT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation profile",
+          "cells": [
+            {
+              "text": "Vitamin K-independent coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum alpha-fetoprotein",
+          "cells": [
+            {
+              "text": "Typically markedly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy with BSEP and FXR immunostaining",
+          "cells": [
+            {
+              "text": "Absent BSEP and FXR expression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat-soluble vitamin levels and liver synthetic markers",
+          "cells": [
+            {
+              "text": "Malabsorption and synthetic function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NR1H4 and PFIC gene panel",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type5-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "PFIC type 1 (ATP8B1) and type 2 (ABCB11)",
+          "cells": [
+            {
+              "text": "Different gene: ATP8B1 or ABCB11"
+            },
+            {
+              "text": "PFIC gene panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PFIC type 4 (TJP2)",
+          "cells": [
+            {
+              "text": "Different gene: TJP2"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type5-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early transplant referral",
+          "cells": [
+            {
+              "text": "Usually required as definitive treatment given rapid progression to infantile liver failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "Correction of coagulopathy with vitamin K, clotting factor or plasma support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin and nutritional support",
+          "cells": [
+            {
+              "text": "Fat-soluble vitamins and medium-chain-triglyceride support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antipruritic measures",
+          "cells": [
+            {
+              "text": "Bile acid sequestrants and rifampicin; consider interrupting bile acid recycling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance while waiting",
+          "cells": [
+            {
+              "text": "Alpha-fetoprotein and imaging; monitor synthetic function until transplant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive NR1H4 (farnesoid X receptor) disorder; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type5-dx-mgmt",
+      "title": "Diagnosis and management of Progressive familial intrahepatic cholestasis type 5",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PFIC type 5 (NR1H4): cholestasis with raised AFP and coagulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Coagulopathy unresponsive to vitamin K, rapid liver failure, or decompensation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent liver transplant referral for rapid liver failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bile acids, GGT, coagulation, AFP; biopsy with BSEP and FXR staining; NR1H4 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does NR1H4 testing or biopsy confirm PFIC type 5?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PFIC types 1, 2 or 4, or neonatal haemochromatosis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early liver transplant referral as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct coagulopathy with vitamin K, clotting factors or plasma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bile acid sequestrants and rifampicin for pruritus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "AFP and imaging surveillance while awaiting transplant",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Liver transplantation; genetic counselling and family testing for NR1H4",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

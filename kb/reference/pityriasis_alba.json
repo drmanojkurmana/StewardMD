@@ -150,5 +150,334 @@
       "caption": "Overview comparison matrix for pityriasis alba."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pityriasis_alba-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin scraping with KOH microscopy",
+          "cells": [
+            {
+              "text": "Excludes pityriasis versicolor and dermatophytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wood's lamp examination",
+          "cells": [
+            {
+              "text": "Mild, incomplete accentuation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Fine white scale and preserved pigment network"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy in atypical, persistent or resistant lesions",
+          "cells": [
+            {
+              "text": "Excludes hypopigmented mycosis fungoides"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for atopic dermatitis features",
+          "cells": [
+            {
+              "text": "Coexisting atopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial review",
+          "cells": [
+            {
+              "text": "Gradual spontaneous resolution"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pityriasis_alba-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vitiligo",
+          "cells": [
+            {
+              "text": "Sharply demarcated, truly depigmented macules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycosis fungoides (hypopigmented variant)",
+          "cells": [
+            {
+              "text": "Lesions that fail to resolve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pityriasis versicolor",
+          "cells": [
+            {
+              "text": "Widespread scaly lesions with positive mycology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pityriasis_alba-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, self-limiting nature with expected spontaneous repigmentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients",
+          "cells": [
+            {
+              "text": "Regular use to correct the underlying xerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroid",
+          "cells": [
+            {
+              "text": "Short courses of a low-potency steroid for the erythematous, scaly phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical calcineurin inhibitors",
+          "cells": [
+            {
+              "text": "Tacrolimus or pimecrolimus as a steroid-sparing option for facial lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Sunscreen to reduce contrast between affected and tanned skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting atopic dermatitis",
+          "cells": [
+            {
+              "text": "Optimise treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical review",
+          "cells": [
+            {
+              "text": "Confirm gradual resolution and exclude alternative hypopigmenting disorders"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pityriasis_alba-dx-mgmt",
+      "title": "Diagnosis and management of pityriasis alba",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ill-defined hypopigmented scaly patches, often on the face",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (adult persistence, indurated or atrophic plaques, sharp depigmentation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Dermatology review for suspected hypopigmented mycosis fungoides or morphoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "KOH scraping; Wood's lamp; dermoscopy; biopsy if atypical or persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are fungal infection and atypical features excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider vitiligo, pityriasis versicolor, tinea, morphoea or mycosis fungoides",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure about the benign, self-limiting course with spontaneous repigmentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Regular emollients to correct the underlying xerosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Short courses of low-potency topical corticosteroid for the scaly inflammatory phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Tacrolimus or pimecrolimus as a steroid-sparing option for facial lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Sunscreen to reduce contrast between affected and tanned skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Entirely benign; pigmentation returns over months to years; relapses common in childhood",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

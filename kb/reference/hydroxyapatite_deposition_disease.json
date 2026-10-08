@@ -149,5 +149,341 @@
       "caption": "Overview comparison matrix for hydroxyapatite deposition disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hydroxyapatite_deposition_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Radiographs",
+          "cells": [
+            {
+              "text": "Calcific deposits identified and staged"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Deposit characterisation; guides aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Rotator cuff pathology, or atypical cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration and analysis of bursal fluid with culture",
+          "cells": [
+            {
+              "text": "Excludes septic bursitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alizarin red staining",
+          "cells": [
+            {
+              "text": "Calcium-containing deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT for deep or atypical sites",
+          "cells": [
+            {
+              "text": "Deep deposits"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hydroxyapatite_deposition_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gout or CPP crystal arthritis",
+          "cells": [
+            {
+              "text": "Crystal analysis on aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic bursitis or arthritis",
+          "cells": [
+            {
+              "text": "Culture of aspirate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rotator cuff tear",
+          "cells": [
+            {
+              "text": "Cuff pathology on MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumoral calcinosis or soft-tissue calcification",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hydroxyapatite_deposition_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Acute calcific tendinitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Restores range of movement and function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound-guided barbotage",
+          "cells": [
+            {
+              "text": "Needle aspiration and lavage of the deposit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local corticosteroid injection",
+          "cells": [
+            {
+              "text": "Subacromial space"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extracorporeal shockwave therapy",
+          "cells": [
+            {
+              "text": "Chronic or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthroscopic or surgical removal",
+          "cells": [
+            {
+              "text": "Deposit, where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration and culture",
+          "cells": [
+            {
+              "text": "Exclude septic bursitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Often self-limiting"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hydroxyapatite_deposition_disease-dx-mgmt",
+      "title": "Diagnosis and management of Hydroxyapatite deposition disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute painful shoulder with a calcific deposit on radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe pain with fever, retropharyngeal calcific tendinitis, or destructive joint change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude septic bursitis or arthritis by aspiration and culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs; ultrasound; MRI if cuff pathology; aspiration and culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does aspiration show calcium-containing deposits without infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider septic bursitis, gout or CPP crystal disease, cuff tear or tumoral calcinosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Conservative care for acute calcific tendinitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ultrasound-guided barbotage",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Local corticosteroid injection into the subacromial space",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Extracorporeal shockwave for chronic or recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often self-limiting; procedures for persistent pain",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

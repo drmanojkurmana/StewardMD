@@ -148,5 +148,316 @@
       "caption": "Overview comparison matrix for lymphangioma circumscriptum."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lymphangioma_circumscriptum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical and dermoscopic assessment",
+          "cells": [
+            {
+              "text": "Lacunae and frogspawn-like vesicles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Dilated papillary dermal lymphatics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Depth and extent of deep cisterns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PIK3CA mutation testing",
+          "cells": [
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for secondary infection",
+          "cells": [
+            {
+              "text": "Inflamed lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphangioma_circumscriptum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Macrocystic lymphatic malformation",
+          "cells": [
+            {
+              "text": "Larger cysts rather than microcystic vesicles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpes simplex or zoster",
+          "cells": [
+            {
+              "text": "Grouped vesicles; viral features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molluscum contagiosum",
+          "cells": [
+            {
+              "text": "Umbilicated papules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous malformation",
+          "cells": [
+            {
+              "text": "Blue, compressible lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphangioma_circumscriptum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete excision",
+          "cells": [
+            {
+              "text": "Includes the deep cisterns; most definitive but must address them to avoid recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ablative options",
+          "cells": [
+            {
+              "text": "Carbon dioxide laser, sclerotherapy or radiofrequency for superficial vesicles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary cellulitis",
+          "cells": [
+            {
+              "text": "Prompt antibiotics; skin and wound care for lymph leakage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extensive or recurrent disease",
+          "cells": [
+            {
+              "text": "Sirolimus for PIK3CA-driven lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-treatment planning",
+          "cells": [
+            {
+              "text": "MRI of deep cisterns before intervention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lymphangioma_circumscriptum-dx-mgmt",
+      "title": "Diagnosis and management of Lymphangioma circumscriptum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Clusters of translucent vesicles on the proximal limb or trunk, sometimes haemorrhagic",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sepsis, persistent leakage with skin breakdown or new nodularity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for sepsis or suspected lymphangiosarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dermoscopy, skin biopsy, MRI to define deep cisterns",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show dilated papillary dermal lymphatics?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider venous malformation, herpes infection or molluscum",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete excision including the deep cisternal component",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Laser, sclerotherapy or radiofrequency for superficial vesicles",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prompt antibiotics for secondary cellulitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sirolimus for extensive or recurrent PIK3CA-driven disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer to a vascular anomalies service for planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign but recurrent unless the deep cisterns are treated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

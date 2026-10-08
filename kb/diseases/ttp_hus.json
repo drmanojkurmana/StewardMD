@@ -254,6 +254,26 @@
       "label": "Merck Manual Professional, Hemolytic-Uremic Syndrome",
       "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/thrombocytopenia-and-platelet-dysfunction/hemolytic-uremic-syndrome-hus",
       "kind": "web"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 106-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 106-6",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c7",
+      "label": "Tables PDF, Table 143-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c8",
+      "label": "Tables PDF, Table 149-2",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -679,6 +699,344 @@
         }
       ],
       "footnote": "Sources conflict on plasma exchange in HUS: Harrison notes aHUS is often started on exchange until ADAMTS13 returns (without proven benefit), while Merck states exchange is not used in HUS. Doses for steroids, rituximab and caplacizumab were not given by the sources opened."
+    },
+    {
+      "id": "ttp_hus-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Classification of hemolytic anemias",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Intracorpuscular defects",
+        "Extracorpuscular factors"
+      ],
+      "rows": [
+        {
+          "parameter": "Hereditary",
+          "cells": [
+            {
+              "text": "Hemoglobinopathies; enzymopathies; membrane-cytoskeletal defects"
+            },
+            {
+              "text": "Familial (atypical) hemolytic uremic syndrome"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Acquired",
+          "cells": [
+            {
+              "text": "Paroxysmal nocturnal hemoglobinuria (PNH)"
+            },
+            {
+              "text": "Mechanical destruction (microangiopathic); toxic agents; drugs; infectious; autoimmune"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "The source table carries an asterisk whose footnote text is not printed."
+    },
+    {
+      "id": "ttp_hus-ddx-2",
+      "kind": "ddx",
+      "title": "Predominantly intravascular hemolysis situations",
+      "rowHeader": "Condition",
+      "columns": [
+        "Onset/time course",
+        "Main mechanism",
+        "Appropriate diagnostic procedure",
+        "Comments"
+      ],
+      "rows": [
+        {
+          "parameter": "Mismatched blood transfusion",
+          "cells": [
+            {
+              "text": "Abrupt"
+            },
+            {
+              "text": "Nearly always ABO incompatibility"
+            },
+            {
+              "text": "Repeat cross-match"
+            },
+            {
+              "text": "None printed"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Paroxysmal nocturnal hemoglobinuria (PNH)",
+          "cells": [
+            {
+              "text": "Chronic with acute exacerbations"
+            },
+            {
+              "text": "Complement-mediated destruction of CD59-negative red cells"
+            },
+            {
+              "text": "Flow cytometry to display a CD59-negative red cell population"
+            },
+            {
+              "text": "Exacerbations due to complement activation through any pathway"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Paroxysmal cold hemoglobinuria (PCH)",
+          "cells": [
+            {
+              "text": "Acute"
+            },
+            {
+              "text": "Immune lysis of normal red cells"
+            },
+            {
+              "text": "Test for Donath-Landsteiner antibody"
+            },
+            {
+              "text": "Often triggered by viral infection"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Septicemia",
+          "cells": [
+            {
+              "text": "Very acute"
+            },
+            {
+              "text": "Exotoxins produced by Clostridium perfringens"
+            },
+            {
+              "text": "Blood cultures"
+            },
+            {
+              "text": "Other organisms may be responsible"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Microangiopathic",
+          "cells": [
+            {
+              "text": "Acute or chronic"
+            },
+            {
+              "text": "Red cell fragmentation"
+            },
+            {
+              "text": "Red cell morphology on blood smear"
+            },
+            {
+              "text": "Causes range from endothelial damage to hemangioma to leaky prosthetic heart valve"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "March hemoglobinuria",
+          "cells": [
+            {
+              "text": "Abrupt"
+            },
+            {
+              "text": "Mechanical destruction"
+            },
+            {
+              "text": "Targeted history taking"
+            },
+            {
+              "text": "None printed"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Favism",
+          "cells": [
+            {
+              "text": "Acute"
+            },
+            {
+              "text": "Destruction of the older fraction of G6PD-deficient red cells"
+            },
+            {
+              "text": "G6PD assay"
+            },
+            {
+              "text": "Triggered by a large dish of fava beans, but infection or a drug can be the trigger instead"
+            }
+          ],
+          "cite": "c6"
+        }
+      ]
+    },
+    {
+      "id": "ttp_hus-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Common causes of petechial or purpuric rashes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral infections",
+          "cells": [
+            {
+              "text": "Enteroviruses; influenza and other respiratory viruses; measles virus; Epstein-Barr virus; cytomegalovirus; parvovirus"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Coagulation",
+          "cells": [
+            {
+              "text": "Deficiency of protein C or S (including postvaricella protein S deficiency)"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Platelet disorders",
+          "cells": [
+            {
+              "text": "Idiopathic thrombocytopenic purpura, drug effects, bone marrow infiltration"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Other noninfective",
+          "cells": [
+            {
+              "text": "Henoch-Schonlein purpura; connective tissue disorders; trauma (including nonaccidental injury in children)"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Bacterial sepsis",
+          "cells": [
+            {
+              "text": "Pneumococcal, streptococcal, staphylococcal, or gram-negative bacterial sepsis"
+            }
+          ],
+          "cite": "c7"
+        }
+      ]
+    },
+    {
+      "id": "ttp_hus-ddx-3",
+      "kind": "ddx",
+      "title": "Intestinal pathogenic E. coli pathotypes",
+      "rowHeader": "Pathotype",
+      "columns": [
+        "Epidemiology",
+        "Clinical syndrome",
+        "Defining molecular trait",
+        "Responsible genetic element"
+      ],
+      "rows": [
+        {
+          "parameter": "STEC/EHEC",
+          "cells": [
+            {
+              "text": "Food, water, person-to-person; all ages, industrialized countries"
+            },
+            {
+              "text": "Hemorrhagic colitis, hemolytic-uremic syndrome"
+            },
+            {
+              "text": "Shiga toxin"
+            },
+            {
+              "text": "Lambda-like Stx1- or Stx2-encoding bacteriophage"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "ETEC",
+          "cells": [
+            {
+              "text": "Food, water; young children in and travelers to developing countries"
+            },
+            {
+              "text": "Traveler's diarrhea"
+            },
+            {
+              "text": "Heat-stable and heat-labile enterotoxins, colonization factors"
+            },
+            {
+              "text": "Virulence plasmid(s)"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "EPEC",
+          "cells": [
+            {
+              "text": "Person-to-person; young children and neonates in developing countries"
+            },
+            {
+              "text": "Watery diarrhea, persistent diarrhea"
+            },
+            {
+              "text": "Localized adherence, attaching and effacing lesion on intestinal epithelium"
+            },
+            {
+              "text": "EPEC adherence factor plasmid and pathogenicity island [locus for enterocyte effacement (LEE)]"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "EIEC",
+          "cells": [
+            {
+              "text": "Food, water; children in and travelers to developing countries"
+            },
+            {
+              "text": "Dysentery"
+            },
+            {
+              "text": "Invasion of colonic epithelial cells, intracellular multiplication, cell-to-cell spread"
+            },
+            {
+              "text": "Multiple genes contained primarily in a large virulence plasmid"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "EAEC",
+          "cells": [
+            {
+              "text": "Possibly food, water; children in and travelers to developing countries; all ages in industrialized countries"
+            },
+            {
+              "text": "Traveler's diarrhea, acute diarrhea, persistent diarrhea"
+            },
+            {
+              "text": "Aggregative/diffuse adherence, virulence factors regulated by AggR"
+            },
+            {
+              "text": "Chromosomal or plasmid-associated adherence and toxin genes"
+            }
+          ],
+          "cite": "c8"
+        }
+      ],
+      "footnote": "Source footnotes (a) to (c) are not shown on the page; the question mark before food and water for EAEC is rendered here as possibly."
     }
   ],
   "flowcharts": [

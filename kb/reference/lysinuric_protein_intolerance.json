@@ -148,5 +148,316 @@
       "caption": "Overview comparison matrix for lysinuric protein intolerance."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lysinuric_protein_intolerance-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma and urine amino acid profiles",
+          "cells": [
+            {
+              "text": "Low plasma and high urinary dibasic amino acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood ammonia after protein intake",
+          "cells": [
+            {
+              "text": "Hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orotic acid measurement",
+          "cells": [
+            {
+              "text": "Urea-cycle consequence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC7A7 molecular testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging for alveolar proteinosis",
+          "cells": [
+            {
+              "text": "Pulmonary complication"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lysinuric_protein_intolerance-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Urea cycle disorders",
+          "cells": [
+            {
+              "text": "Primary hyperammonaemia with different amino acid pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystinuria",
+          "cells": [
+            {
+              "text": "Dibasic aminoaciduria without hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organic acidaemias",
+          "cells": [
+            {
+              "text": "Hyperammonaemia with different biochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemophagocytic lymphohistiocytosis",
+          "cells": [
+            {
+              "text": "Overlapping hepatosplenomegaly and cytopenias"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lysinuric_protein_intolerance-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Protein restriction with citrulline",
+          "cells": [
+            {
+              "text": "Moderate protein limit with citrulline to support ureagenesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nitrogen scavengers",
+          "cells": [
+            {
+              "text": "Sodium benzoate or sodium phenylbutyrate for hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperammonaemic crisis",
+          "cells": [
+            {
+              "text": "Stop protein, intravenous glucose and dialysis if severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteoporosis",
+          "cells": [
+            {
+              "text": "Calcium, vitamin D and bisphosphonates where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary alveolar proteinosis",
+          "cells": [
+            {
+              "text": "Surveillance and whole-lung lavage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lysinuric_protein_intolerance-dx-mgmt",
+      "title": "Diagnosis and management of Lysinuric protein intolerance",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Vomiting, protein aversion and failure to thrive after weaning onto protein-rich feeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (encephalopathy, respiratory decline or haemophagocytosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency ammonia lowering and dialysis for severe hyperammonaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Amino acid profiles, blood ammonia after protein, orotic acid, SLC7A7 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are low plasma and high urinary dibasic amino acids found with SLC7A7 variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider urea cycle disorder, cystinuria or organic acidaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Moderate protein restriction with citrulline supplementation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nitrogen scavengers such as sodium benzoate for hyperammonaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Emergency regimen for crises with intravenous glucose",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Calcium, vitamin D and bisphosphonates for osteoporosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surveillance and lavage for pulmonary alveolar proteinosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Stable with treatment; pulmonary alveolar proteinosis is a major cause of morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

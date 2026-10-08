@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for spinal dural arteriovenous fistula."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinal_dural_arteriovenous_fistula-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the whole spine with contrast",
+          "cells": [
+            {
+              "text": "Cord oedema and dorsal serpentine flow voids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR angiography of the spine",
+          "cells": [
+            {
+              "text": "Level of the shunt"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter digital subtraction spinal angiography",
+          "cells": [
+            {
+              "text": "Feeding artery and fistulous point; the gold standard"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid analysis",
+          "cells": [
+            {
+              "text": "Mildly raised protein; inflammatory causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12 and metabolic screen",
+          "cells": [
+            {
+              "text": "Mimics of progressive myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional and bladder assessment",
+          "cells": [
+            {
+              "text": "Baseline for response to treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_dural_arteriovenous_fistula-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Transverse myelitis",
+          "cells": [
+            {
+              "text": "An inflammatory myelopathy; corticosteroids can worsen the fistula-related picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Degenerative compressive myelopathy",
+          "cells": [
+            {
+              "text": "Attribution to degenerative disease misses a treatable fistula"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_dural_arteriovenous_fistula-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Definitive obliteration",
+          "cells": [
+            {
+              "text": "Endovascular embolisation or surgical ligation of the draining radicular vein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angiographic localisation",
+          "cells": [
+            {
+              "text": "Catheter digital subtraction angiography to plan treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early intervention",
+          "cells": [
+            {
+              "text": "Before fixed deficits develop; motor and gait recovery is more reliable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid corticosteroids",
+          "cells": [
+            {
+              "text": "Can precipitate deterioration in venous congestive myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gait rehabilitation and bladder and bowel care",
+          "cells": [
+            {
+              "text": "Physiotherapy and neurogenic bladder management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-treatment follow-up",
+          "cells": [
+            {
+              "text": "Serial functional and bladder assessment; MRI or angiography to confirm closure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Interventional neuroradiology and spinal neurosurgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinal_dural_arteriovenous_fistula-dx-mgmt",
+      "title": "Diagnosis and management of Spinal dural arteriovenous fistula",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive paraparesis worse on standing in an older man: suspected spinal dural AVF",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (abrupt deterioration, sensory level, worsening after steroids)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neuroradiology review for abrupt deterioration or suspected thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI of the whole spine with contrast; MR angiography; catheter spinal angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does spinal angiography localise a fistula with a feeding artery?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider transverse myelitis, degenerative myelopathy or other mimics; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Definitive obliteration by endovascular embolisation or surgical ligation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early intervention, before fixed deficits develop",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid corticosteroids, which can worsen venous congestive myelopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gait rehabilitation with bladder and bowel management",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Motor and gait recovery is more reliable than sphincter recovery after treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

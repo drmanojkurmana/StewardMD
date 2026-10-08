@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for segmental neurofibromatosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "segmental_neurofibromatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dermatological mapping",
+          "cells": [
+            {
+              "text": "Segmental distribution with midline demarcation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy of a representative nodule",
+          "cells": [
+            {
+              "text": "Histological confirmation of neurofibroma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NF1 molecular testing on lesional tissue",
+          "cells": [
+            {
+              "text": "Mosaic NF1; peripheral blood can be falsely negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Lisch nodules or optic pathway involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of affected region",
+          "cells": [
+            {
+              "text": "Deep plexiform or nerve involvement, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family assessment and genetic counselling",
+          "cells": [
+            {
+              "text": "Reproductive risk from possible germline mosaicism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "segmental_neurofibromatosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Generalised neurofibromatosis type 1",
+          "cells": [
+            {
+              "text": "Features are generalised, not confined to one or a few segments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated multiple cafe-au-lait macules",
+          "cells": [
+            {
+              "text": "Segmental, midline-respecting distribution points to mosaic NF1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Schwannomatosis or segmental schwannomas",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "segmental_neurofibromatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Most disease is confined to the affected segment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision of neurofibromas",
+          "cells": [
+            {
+              "text": "Symptomatic, disfiguring or functionally troublesome lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor for malignant transformation",
+          "cells": [
+            {
+              "text": "Rapid growth, pain or deficit prompts MRI and biopsy for MPNST"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology and regional MRI",
+          "cells": [
+            {
+              "text": "If deep plexiform or optic pathway involvement is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Low reproductive risk of generalised NF1 through gonadal mosaicism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology follow-up",
+          "cells": [
+            {
+              "text": "With access to a neurofibromatosis specialist service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "segmental_neurofibromatosis-dx-mgmt",
+      "title": "Diagnosis and management of segmental neurofibromatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cafe-au-lait macules, freckling or neurofibromas confined to one body segment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid growth, new pain or deficit in a lesion, or spread beyond the segment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "MRI and biopsy for malignant peripheral nerve sheath tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Map segmental distribution; biopsy a nodule; test NF1 on lesional tissue, not blood",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is mosaic NF1 shown in lesional tissue or the picture classic?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider generalised NF1, schwannomatosis or pigmentary mosaicism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe, as most disease stays within the segment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Excise symptomatic or disfiguring neurofibromas",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ophthalmology review; regional MRI if deep or optic involvement suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling on gonadal mosaicism risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally favourable; small lifelong risk of malignant transformation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,316 @@
       "caption": "Overview comparison matrix for pigmented purpuric dermatosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pigmented_purpuric_dermatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment with dermoscopy",
+          "cells": [
+            {
+              "text": "Coppery-red background and pigment dots"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and platelet count",
+          "cells": [
+            {
+              "text": "Thrombocytopenia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen",
+          "cells": [
+            {
+              "text": "Bleeding disorder, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy in atypical, persistent or lichenoid cases",
+          "cells": [
+            {
+              "text": "Capillaritis; vasculitis or lymphoma excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of lower-limb venous insufficiency",
+          "cells": [
+            {
+              "text": "Venous insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Possible drug trigger"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pigmented_purpuric_dermatosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Leukocytoclastic vasculitis",
+          "cells": [
+            {
+              "text": "Palpable purpura or systemic symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early mycosis fungoides",
+          "cells": [
+            {
+              "text": "Persistent, widespread or lichenoid patches"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pigmented_purpuric_dermatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, chronic capillaritis without thrombocytopenia or coagulation defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous hypertension",
+          "cells": [
+            {
+              "text": "Graduated compression stockings and leg elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical therapy",
+          "cells": [
+            {
+              "text": "Topical corticosteroids and emollients for pruritus and inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug review",
+          "cells": [
+            {
+              "text": "Withdraw any suspected drug trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extensive or persistent disease",
+          "cells": [
+            {
+              "text": "Oral ascorbic acid with rutoside, or narrowband UVB phototherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy and monitoring",
+          "cells": [
+            {
+              "text": "Biopsy in atypical, widespread or lichenoid cases; monitor for mycosis fungoides"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pigmented_purpuric_dermatosis-dx-mgmt",
+      "title": "Diagnosis and management of Pigmented purpuric dermatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Coppery-red purpuric patches on the lower legs with pigment dots",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (palpable purpura, thrombocytopenia, lichenoid or persistent patches)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology or dermatology review for vasculitis or cutaneous lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dermoscopy; full blood count and platelets; coagulation screen if bleeding suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is capillaritis confirmed, with normal platelets and no vasculitis on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider leukocytoclastic vasculitis, mycosis fungoides or drug-induced purpura",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure about its benign, chronic nature; no thrombocytopenia or coagulation defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Graduated compression stockings and leg elevation for venous hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical corticosteroids and emollients for pruritus and inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Withdraw any suspected drug trigger",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Biopsy atypical or lichenoid cases and monitor for mycosis fungoides",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign and chronic, often recurring; pigmentation fades slowly; treatment is cosmetic",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

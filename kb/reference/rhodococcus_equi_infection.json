@@ -148,5 +148,287 @@
       "caption": "Overview comparison matrix for rhodococcus equi infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rhodococcus_equi_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Sputum, blood and respiratory cultures",
+          "cells": [
+            {
+              "text": "Coccobacillus with salmon-pink colonies and partial acid-fastness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiography and CT",
+          "cells": [
+            {
+              "text": "Cavitary upper-lobe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing with CD4 count",
+          "cells": [
+            {
+              "text": "Immunosuppression, the key host factor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopy with lavage or biopsy",
+          "cells": [
+            {
+              "text": "Tissue diagnosis when sputum is inadequate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rhodococcus_equi_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Invasive pulmonary aspergillosis",
+          "cells": [
+            {
+              "text": "Other fungal cavitary disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumocystis pneumonia in HIV",
+          "cells": [
+            {
+              "text": "Opportunistic pneumonia in the immunosuppressed host"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rhodococcus_equi_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prolonged combination therapy",
+          "cells": [
+            {
+              "text": "Intracellular-active agents such as macrolides, rifampicin, fluoroquinolones and aminoglycosides; carbapenems or vancomycin in severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid beta-lactam monotherapy",
+          "cells": [
+            {
+              "text": "Because of relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune restoration",
+          "cells": [
+            {
+              "text": "Antiretroviral therapy in HIV; reduce immunosuppression in transplant recipients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Susceptibility testing",
+          "cells": [
+            {
+              "text": "Tailors the combination and guards against resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drainage or resection",
+          "cells": [
+            {
+              "text": "Persistent abscesses or cavitary necrotic lung disease that fails to respond"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extrapulmonary foci",
+          "cells": [
+            {
+              "text": "Imaging and directed treatment of brain abscess and osteomyelitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rhodococcus_equi_infection-dx-mgmt",
+      "title": "Diagnosis and management of Rhodococcus equi infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Immunocompromised patient with cavitating pneumonia and bacteraemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neurological signs, respiratory failure, relapse)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: dissemination, respiratory failure or brain abscess; surgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cultures for coccobacillus, chest CT, HIV and CD4 count, bronchoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is Rhodococcus equi identified on culture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tuberculosis, nocardiosis, aspergillosis or malignancy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged combination therapy with intracellular-active agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid beta-lactam monotherapy because of relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Restore cell-mediated immunity: antiretrovirals or reduced immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Drain or resect persistent abscesses or necrotic lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on immune status; disseminated disease carries appreciable mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

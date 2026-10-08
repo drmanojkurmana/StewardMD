@@ -167,5 +167,492 @@
       "caption": "Overview comparison matrix for occupational and environmental lung disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC NIOSH, About Silica and Worker Health",
+      "kind": "web",
+      "url": "https://www.cdc.gov/niosh/silica/about/index.html"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 261-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 165-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "occupational_lung_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of occupational lung disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Exposure history",
+          "cells": [
+            {
+              "text": "Jobs, hobbies, home, past and short exposures"
+            },
+            {
+              "text": "{{hy:Single most important step}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre and post-shift FEV1",
+          "cells": [
+            {
+              "text": "Fall across a work shift"
+            },
+            {
+              "text": "Acute occupational bronchoconstriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rounded small opacities",
+          "cells": [
+            {
+              "text": "Silicosis or coal worker pneumoconiosis"
+            },
+            {
+              "text": "ILO classification of chest films"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Linear irregular opacities",
+          "cells": [
+            {
+              "text": "Asbestosis"
+            },
+            {
+              "text": "HRCT more sensitive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural plaques",
+          "cells": [
+            {
+              "text": "Mark past asbestos exposure only"
+            },
+            {
+              "text": "Not impairment by themselves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complicated silicosis or PMF",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Nodules or masses 1 cm or more",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "text": "Restrictive plus obstructive impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asbestos latency",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Lung cancer at least 15 to 19 years; mesothelioma up to about 40 years",
+              "range": [
+                15,
+                40
+              ]
+            },
+            {
+              "text": "Mesothelioma can follow 1 to 2 years of exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BAL findings",
+          "cells": [
+            {
+              "text": "Asbestos: ferruginous bodies; silica: particles under polarised light; beryllium: positive lymphocyte transformation"
+            },
+            {
+              "text": "Hypersensitivity pneumonitis: lymphocytes over 50%"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Beryllium lymphocyte proliferation test",
+          "cells": [
+            {
+              "text": "Beryllium sensitisation"
+            },
+            {
+              "text": "Separates CBD from sarcoidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Silicosis and TB",
+          "cells": [
+            {
+              "text": "Relative risk of active TB about 30",
+              "op": "=",
+              "value": 30
+            },
+            {
+              "text": "Screen and treat latent TB longer"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    },
+    {
+      "id": "occupational_lung_disease-ddx",
+      "kind": "ddx",
+      "title": "Conditions confused with occupational lung disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Idiopathic pulmonary fibrosis",
+          "cells": [
+            {
+              "text": "No asbestos exposure, no plaques"
+            },
+            {
+              "text": "Exposure history, HRCT, BAL for ferruginous bodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis vs chronic beryllium disease",
+          "cells": [
+            {
+              "text": "Beryllium exposure in aerospace, electronics, shrapnel"
+            },
+            {
+              "text": "BeLPT; BAL CD4:CD8 over 3.5 favours sarcoid"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pulmonary alveolar proteinosis vs acute silicosis",
+          "cells": [
+            {
+              "text": "Heavy short silica exposure"
+            },
+            {
+              "text": "BAL: milky PAS-positive fluid; silica particles"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Influenza or pneumonia vs acute farmer lung",
+          "cells": [
+            {
+              "text": "Fever 4 to 8 h after mouldy hay exposure"
+            },
+            {
+              "text": "Precipitating antibodies, HRCT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-occupational asthma vs occupational asthma",
+          "cells": [
+            {
+              "text": "Symptoms improve away from work"
+            },
+            {
+              "text": "Serial peak flow, shift spirometry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Miliary TB vs acute silicosis",
+          "cells": [
+            {
+              "text": "Fever, weight loss"
+            },
+            {
+              "text": "Sputum AFB and culture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "occupational_lung_disease-treatment",
+      "kind": "treatment",
+      "title": "Management of occupational lung disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remove from exposure",
+          "cells": [
+            {
+              "text": "{{hy:All patients}}"
+            },
+            {
+              "text": "Silicosis is irreversible and can progress after exposure ends"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Workplace controls",
+          "cells": [
+            {
+              "text": "Prevention for co-workers"
+            },
+            {
+              "text": "Elimination, engineering, administrative controls, then respirators"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "All, especially asbestos-exposed"
+            },
+            {
+              "text": "Asbestos and smoking multiply lung cancer risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Latent TB screening and treatment",
+          "cells": [
+            {
+              "text": "Silicosis"
+            },
+            {
+              "text": "Longer course for latent TB"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhaled therapy",
+          "cells": [
+            {
+              "text": "Occupational asthma or COPD"
+            },
+            {
+              "text": "Bronchodilators and inhaled steroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroids with antigen avoidance",
+          "cells": [
+            {
+              "text": "Hypersensitivity pneumonitis"
+            },
+            {
+              "text": "Avoidance is key"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation and oxygen",
+          "cells": [
+            {
+              "text": "Chronic hypoxaemia"
+            },
+            {
+              "text": "Vaccinate against influenza and pneumococcus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Notification and compensation",
+          "cells": [
+            {
+              "text": "Confirmed occupational disease"
+            },
+            {
+              "text": "Report as notifiable"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "NIOSH lists lung cancer, COPD, autoimmune disease and kidney failure as other silica harms."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "occupational_lung_disease-dx-mgmt",
+      "title": "Diagnosis and management of occupational and environmental lung disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cough, dyspnoea or abnormal film in an exposed worker",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Detailed exposure history; spirometry, DLCO, chest film",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Airway obstruction linked to work?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Occupational asthma: remove from exposure, inhaled therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "HRCT",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Rounded opacities with silica or coal exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Silicosis or CWP: stop exposure, screen for TB",
+          "cite": "c4"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Plaques or basal fibrosis with asbestos exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Asbestos disease: stop smoking, cancer and mesothelioma watch",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "BAL and BeLPT or antibody tests",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Treat as beryllium disease, HP or refer for biopsy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

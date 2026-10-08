@@ -152,5 +152,276 @@
       "caption": "Overview comparison matrix for reversible infantile respiratory chain deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mitochondrial medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "reversible_infantile_respiratory_chain_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial blood and CSF lactate",
+          "cells": [
+            {
+              "text": "Lactic acidosis over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with COX and SDH histochemistry",
+          "cells": [
+            {
+              "text": "Respiratory-chain deficiency; the defect normalises over time (pitfall of a single early biopsy)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted mtDNA testing for MT-TE",
+          "cells": [
+            {
+              "text": "MT-TE variant, which allows recovery to be predicted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nuclear gene testing including TRMU",
+          "cells": [
+            {
+              "text": "Predominant hepatopathy phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial neurophysiology and respiratory function",
+          "cells": [
+            {
+              "text": "Muscle and respiratory function during recovery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "reversible_infantile_respiratory_chain_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intensive supportive care",
+          "cells": [
+            {
+              "text": "Mechanical ventilation through the early critical phase; the disorder is self-limiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm the genotype",
+          "cells": [
+            {
+              "text": "MT-TE genotype predicts recovery and prevents premature withdrawal of ventilatory support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lactic acidosis",
+          "cells": [
+            {
+              "text": "Correct and monitor with serial blood and CSF lactate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition",
+          "cells": [
+            {
+              "text": "Support nutrition and feeding during profound weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy as strength recovers; serial neurophysiology and respiratory function testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TRMU-related hepatopathy",
+          "cells": [
+            {
+              "text": "Supportive management; cysteine supplementation as proposed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Maternally inherited mitochondrial variant, or the autosomal recessive TRMU form"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "reversible_infantile_respiratory_chain_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Reversible infantile respiratory chain deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with respiratory failure, severe hypotonia and lactic acidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (feeding failure, acute liver failure, no expected recovery)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: intensive care with ventilation; avoid premature withdrawal",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial lactate, muscle biopsy with COX and SDH, targeted MT-TE and TRMU testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the MT-TE variant confirmed, predicting recovery?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider fatal COX-deficient myopathy or congenital myopathy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intensive supportive care and ventilation through the critical phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct lactic acidosis with serial blood and CSF lactate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Support feeding; physiotherapy as strength recovers",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling on mitochondrial and TRMU inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Muscle disorder typically resolves; most children reach normal or near-normal function",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

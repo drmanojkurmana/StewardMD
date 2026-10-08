@@ -316,6 +316,16 @@
       "label": "Guideline Central, SCCM/ESICM sepsis guideline spotlight, March 2026",
       "url": "https://www.guidelinecentral.com/insights/mar-2026-sccmesicm-sepsis-guideline-spotlight/",
       "kind": "web"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 267-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c7",
+      "label": "Tables PDF, Table 143-2",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -719,6 +729,441 @@
         }
       ],
       "footnote": "From the 2021 Surviving Sepsis Campaign guideline; the 2026 SCCM/ESICM update keeps a MAP target of 65 mm Hg, upgrades prolonged infusion and de-escalation to recommendations, and downgrades norepinephrine to a suggestion over vasopressin or angiotensin II."
+    },
+    {
+      "id": "SEPSIS-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "APACHE II physiologic variables and points",
+      "rowHeader": "Variable",
+      "columns": [
+        "+4",
+        "+3",
+        "+2",
+        "+1",
+        "0",
+        "+1 (low side)",
+        "+2 (low side)",
+        "+3 (low side)"
+      ],
+      "rows": [
+        {
+          "parameter": "Rectal temperature, C",
+          "cells": [
+            {
+              "text": "41 or more"
+            },
+            {
+              "text": "39.0 to 40.9"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "38.5 to 38.9"
+            },
+            {
+              "text": "36.0 to 38.4"
+            },
+            {
+              "text": "34.0 to 35.9"
+            },
+            {
+              "text": "32.0 to 33.9"
+            },
+            {
+              "text": "30.0 to 31.9"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Mean blood pressure, mmHg",
+          "cells": [
+            {
+              "text": "160 or more"
+            },
+            {
+              "text": "130 to 159"
+            },
+            {
+              "text": "110 to 129"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "70 to 109"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "50 to 69"
+            },
+            {
+              "text": "(not legible)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Heart rate",
+          "cells": [
+            {
+              "text": "180 or more"
+            },
+            {
+              "text": "140 to 179"
+            },
+            {
+              "text": "110 to 139"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "70 to 109"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "55 to 69"
+            },
+            {
+              "text": "40 to 5x (cut off)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Respiratory rate",
+          "cells": [
+            {
+              "text": "50 or more"
+            },
+            {
+              "text": "35 to 49"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "25 to 34"
+            },
+            {
+              "text": "12 to 24"
+            },
+            {
+              "text": "10 to 11"
+            },
+            {
+              "text": "6 to 9"
+            },
+            {
+              "text": "(blank)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Arterial pH",
+          "cells": [
+            {
+              "text": "7.70 or more"
+            },
+            {
+              "text": "7.60 to 7.69"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "7.50 to 7.59"
+            },
+            {
+              "text": "7.33 to 7.49"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "7.25 to 7.32"
+            },
+            {
+              "text": "7.15 to 7.24"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Oxygenation, if FiO2 above 0.5 use (A-a)DO2",
+          "cells": [
+            {
+              "text": "500 or more"
+            },
+            {
+              "text": "350 to 499"
+            },
+            {
+              "text": "200 to 349"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "below 200"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "(blank)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Oxygenation, if FiO2 0.5 or less use PaO2",
+          "cells": [
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "70 or more"
+            },
+            {
+              "text": "61 to 70"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "55 to 6x (cut off)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Serum sodium, meq/L",
+          "cells": [
+            {
+              "text": "180 or more"
+            },
+            {
+              "text": "160 to 179"
+            },
+            {
+              "text": "155 to 159"
+            },
+            {
+              "text": "150 to 154"
+            },
+            {
+              "text": "130 to 149"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "120 to 129"
+            },
+            {
+              "text": "111 to 119 (partly cut off)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Serum potassium, meq/L",
+          "cells": [
+            {
+              "text": "7.0 or more"
+            },
+            {
+              "text": "6.0 to 6.9"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "5.5 to 5.9"
+            },
+            {
+              "text": "3.5 to 5.4"
+            },
+            {
+              "text": "3.0 to 3.4"
+            },
+            {
+              "text": "2.5 to 2.9"
+            },
+            {
+              "text": "(not legible)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Serum creatinine, mg/dL",
+          "cells": [
+            {
+              "text": "3.5 or more"
+            },
+            {
+              "text": "2.0 to 3.4"
+            },
+            {
+              "text": "1.5 to 1.9"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "0.6 to 1.4"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "below 0.6"
+            },
+            {
+              "text": "(blank)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Hematocrit",
+          "cells": [
+            {
+              "text": "60 or more"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "50 to 59.9"
+            },
+            {
+              "text": "46 to 49.9"
+            },
+            {
+              "text": "30 to 45.9"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "20 to 29.9"
+            },
+            {
+              "text": "(blank)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "WBC count, 10^3/mL",
+          "cells": [
+            {
+              "text": "40 or more"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "20 to 39.9"
+            },
+            {
+              "text": "15 to 19.9"
+            },
+            {
+              "text": "3 to 14.9"
+            },
+            {
+              "text": "(blank)"
+            },
+            {
+              "text": "1 to 2.9"
+            },
+            {
+              "text": "(blank)"
+            }
+          ],
+          "cite": "c6"
+        }
+      ],
+      "footnote": "Points are shown by column. The page image is cut off at the right edge, so a further column (presumably 4) and some cells are missing; those cells are marked as cut off or not legible."
+    },
+    {
+      "id": "SEPSIS-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Common causes of petechial or purpuric rashes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral infections",
+          "cells": [
+            {
+              "text": "Enteroviruses; influenza and other respiratory viruses; measles virus; Epstein-Barr virus; cytomegalovirus; parvovirus"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Coagulation",
+          "cells": [
+            {
+              "text": "Deficiency of protein C or S (including postvaricella protein S deficiency)"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Platelet disorders",
+          "cells": [
+            {
+              "text": "Idiopathic thrombocytopenic purpura, drug effects, bone marrow infiltration"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Other noninfective",
+          "cells": [
+            {
+              "text": "Henoch-Schonlein purpura; connective tissue disorders; trauma (including nonaccidental injury in children)"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Bacterial sepsis",
+          "cells": [
+            {
+              "text": "Pneumococcal, streptococcal, staphylococcal, or gram-negative bacterial sepsis"
+            }
+          ],
+          "cite": "c7"
+        }
+      ]
     }
   ],
   "flowcharts": [

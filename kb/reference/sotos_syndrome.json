@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for sotos syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sotos_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "NSD1 testing",
+          "cells": [
+            {
+              "text": "Sequence variants or 5q35 deletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Contiguous 5q35 microdeletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone age radiograph",
+          "cells": [
+            {
+              "text": "Characteristically advanced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Learning and behavioural needs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and renal ultrasound",
+          "cells": [
+            {
+              "text": "Associated structural anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cranial imaging",
+          "cells": [
+            {
+              "text": "Ventricular or midline findings, where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sotos_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Weaver syndrome (EZH2-related overgrowth)",
+          "cells": [
+            {
+              "text": "Shares overgrowth; distinct facial features and gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beckwith-Wiedemann syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sotos_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Early intervention, speech therapy, physiotherapy and educational assistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal care",
+          "cells": [
+            {
+              "text": "Feeding support and phototherapy for jaundice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural support",
+          "cells": [
+            {
+              "text": "Autistic features and behavioural difficulties"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and bone age monitoring",
+          "cells": [
+            {
+              "text": "Reassurance that adult height is usually near the normal range"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography, renal ultrasound, and management of scoliosis and seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetics referral",
+          "cells": [
+            {
+              "text": "NSD1 testing and diagnostic confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant, usually de novo inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sotos_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Sotos syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tall stature, macrocephaly and facial gestalt with delay: suspected Sotos syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid head growth, seizures, feeding failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical review for hydrocephalus or neurological signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "NSD1 testing; microarray for 5q35 deletion; bone age X-ray; echo and renal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an NSD1 variant or 5q35 deletion found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Weaver syndrome or other overgrowth syndromes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early developmental, speech and educational support",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Behavioural support for autistic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surveillance for scoliosis, seizures and structural anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for usually de novo inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Adult height is often near normal; learning and behaviour needs vary",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

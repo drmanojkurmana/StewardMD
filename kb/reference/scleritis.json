@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for scleritis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scleritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Deep vessel involvement and response to topical phenylephrine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Posterior scleritis: scleral thickening and T-sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory and autoimmune workup",
+          "cells": [
+            {
+              "text": "FBC, ESR/CRP, ANA, ANCA, rheumatoid factor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective screen",
+          "cells": [
+            {
+              "text": "Syphilis and tuberculosis when indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging or systemic referral",
+          "cells": [
+            {
+              "text": "When underlying vasculitis is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scleritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Episcleritis",
+          "cells": [
+            {
+              "text": "Benign and self-limiting; mistaking scleritis for it leads to undertreatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective scleritis",
+          "cells": [
+            {
+              "text": "Herpetic or pseudomonal; suspect with rapid progression despite therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior scleritis mimics",
+          "cells": [
+            {
+              "text": "Orbital inflammation, choroidal tumour or exudative detachment; B-scan T-sign supports scleritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scleritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic NSAIDs",
+          "cells": [
+            {
+              "text": "First line for non-necrotising anterior scleritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "NSAID-refractory, necrotising or posterior disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "Methotrexate, mycophenolate, ciclosporin, rituximab or a TNF inhibitor for severe or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat underlying disease",
+          "cells": [
+            {
+              "text": "Such as rheumatoid arthritis or ANCA-associated vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude infection",
+          "cells": [
+            {
+              "text": "Tuberculosis and syphilis: antimicrobials and withhold immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication care",
+          "cells": [
+            {
+              "text": "Uveitis, glaucoma, keratitis; scleral patch graft for impending perforation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scleritis-dx-mgmt",
+      "title": "Diagnosis and management of Scleritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe deep ocular pain with scleral inflammation: suspected scleritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Scleral thinning, reduced vision, systemic vasculitis or rapid progression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology and rheumatology: systemic steroids, exclude infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp with phenylephrine, B-scan, ESR/CRP, ANA, ANCA, infective screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Non-necrotising anterior disease without infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat infection or escalate to steroids for necrotising or posterior disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic NSAIDs first line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids if NSAID-refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Add methotrexate, mycophenolate, rituximab or TNF inhibitor if severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat the underlying vasculitis or connective-tissue disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Anterior forms respond well; necrotising disease carries risk to the eye and life",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,352 @@
       "caption": "Overview comparison matrix for lmna cardiomyopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard cardiology and inherited cardiac conditions references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lmna_cardiomyopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial 12-lead ECGs",
+          "cells": [
+            {
+              "text": "Evolving conduction disease and atrial arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory ECG monitoring",
+          "cells": [
+            {
+              "text": "Non-sustained ventricular tachycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Chamber size and systolic function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Ventricular function and myocardial fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LMNA genetic testing with cascade screening",
+          "cells": [
+            {
+              "text": "Confirms the variant; relatives screened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase and neurological assessment",
+          "cells": [
+            {
+              "text": "Where skeletal myopathy is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lmna_cardiomyopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Titin-related dilated cardiomyopathy",
+          "cells": [
+            {
+              "text": "Another genetic cardiomyopathy; LMNA testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SCN5A-related progressive conduction disease",
+          "cells": [
+            {
+              "text": "Conduction disease from a sodium-channel gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac sarcoidosis",
+          "cells": [
+            {
+              "text": "Infiltrative conduction-system disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arrhythmogenic cardiomyopathy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lmna_cardiomyopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Heart-failure therapy",
+          "cells": [
+            {
+              "text": "ACE inhibitor, ARB or ARNI, beta-blocker and mineralocorticoid antagonist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-threshold defibrillator",
+          "cells": [
+            {
+              "text": "Given the sudden-death risk, even with mildly reduced ejection fraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conduction disease",
+          "cells": [
+            {
+              "text": "Pacing where indicated, preferably within a defibrillator"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atrial arrhythmia",
+          "cells": [
+            {
+              "text": "Anticoagulation; rate or rhythm control for atrial fibrillation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise advice",
+          "cells": [
+            {
+              "text": "Advise against competitive or intense exertion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rhythm and imaging surveillance",
+          "cells": [
+            {
+              "text": "ECG, ambulatory monitoring and serial imaging of ventricular function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "Cascade screening; assess for coexisting skeletal myopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced heart failure",
+          "cells": [
+            {
+              "text": "Transplantation evaluation in end-stage disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lmna_cardiomyopathy-dx-mgmt",
+      "title": "Diagnosis and management of LMNA cardiomyopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Conduction disease in a young adult with cardiomyopathy, or a family history of LMNA",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (NSVT or VT, high-grade block, falling EF, family sudden death)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent arrhythmia review and defibrillator assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial ECG, ambulatory monitoring, echo, cardiac MRI, LMNA testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a pathogenic LMNA variant confirmed on genetic testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider titin or SCN5A cardiomyopathy, sarcoidosis or arrhythmogenic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Heart-failure therapy with ACE inhibitor or ARB, beta-blocker and MRA",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Low-threshold defibrillator given the sudden-death risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pacing for conduction disease, within a defibrillator where possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anticoagulation for atrial arrhythmia; rate or rhythm control",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic testing with cascade screening of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Aggressive inherited cardiomyopathy; high arrhythmic and sudden-death risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

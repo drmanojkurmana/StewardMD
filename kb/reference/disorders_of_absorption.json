@@ -216,6 +216,11 @@
       "label": "Merck Manual Professional, Whipple Disease",
       "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/malabsorption-syndromes/whipple-disease",
       "kind": "web"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table e37-1",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -589,6 +594,92 @@
         }
       ],
       "footnote": "No drug doses are given because the opened sources stated durations only."
+    },
+    {
+      "id": "disorders_of_absorption-ddx-2",
+      "kind": "ddx",
+      "title": "Schilling test results by cause of cobalamin malabsorption",
+      "rowHeader": "Condition",
+      "columns": [
+        "58Co-Cbl alone",
+        "With intrinsic factor",
+        "With pancreatic enzymes",
+        "After 5 days of antibiotics"
+      ],
+      "rows": [
+        {
+          "parameter": "Pernicious anemia",
+          "cells": [
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Chronic pancreatitis",
+          "cells": [
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Reduced"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Bacterial overgrowth",
+          "cells": [
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Ileal disease",
+          "cells": [
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            }
+          ],
+          "cite": "c6"
+        }
+      ]
     }
   ],
   "flowcharts": [

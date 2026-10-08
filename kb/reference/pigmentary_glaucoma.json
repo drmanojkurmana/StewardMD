@@ -154,5 +154,334 @@
       "caption": "Overview comparison matrix for pigmentary glaucoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pigmentary_glaucoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Gonioscopy",
+          "cells": [
+            {
+              "text": "Dense homogeneous trabecular pigment and a concave peripheral iris"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Krukenberg spindle and iris transillumination defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior segment OCT or ultrasound biomicroscopy",
+          "cells": [
+            {
+              "text": "Posterior iris bowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diurnal intraocular pressure phasing",
+          "cells": [
+            {
+              "text": "Exercise or dilatation-related pressure spikes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard automated perimetry",
+          "cells": [
+            {
+              "text": "Glaucomatous field loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT of the retinal nerve fibre layer and ganglion cell complex",
+          "cells": [
+            {
+              "text": "Nerve fibre layer thinning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic disc stereo-photography",
+          "cells": [
+            {
+              "text": "Baseline documentation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pigmentary_glaucoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Uveitic glaucoma with pigment dispersion",
+          "cells": [
+            {
+              "text": "Inflammation with pigment dispersion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iris melanoma with secondary dispersion",
+          "cells": [
+            {
+              "text": "Markedly asymmetric pressures or pigmentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary open-angle glaucoma",
+          "cells": [
+            {
+              "text": "Young myope with raised pressure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pigmentary_glaucoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical pressure-lowering therapy",
+          "cells": [
+            {
+              "text": "Usually a prostaglandin analogue, with adjunctive beta-blockers and alpha-agonists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laser peripheral iridotomy",
+          "cells": [
+            {
+              "text": "Flattens the posteriorly bowed iris and interrupts reverse pupillary block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laser trabeculoplasty",
+          "cells": [
+            {
+              "text": "Used judiciously, given dense meshwork pigmentation and risk of post-laser pressure rise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise and dilatation",
+          "cells": [
+            {
+              "text": "Avoid strenuous exercise and situations that trigger pupillary dilatation and pigment release"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Filtration surgery",
+          "cells": [
+            {
+              "text": "Filtration surgery or a drainage device when pressure or field loss progresses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Diurnal pressure phasing, gonioscopy, nerve fibre layer OCT and perimetry"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pigmentary_glaucoma-dx-mgmt",
+      "title": "Diagnosis and management of pigmentary glaucoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Young myope with raised intraocular pressure and dense trabecular pigment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (acute pressure spike, progressive cupping, asymmetric pressure or pigment)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent pressure lowering for an acute spike with corneal oedema and haloes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gonioscopy for pigment; slit-lamp for Krukenberg spindle; OCT of nerve fibre layer",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do gonioscopy and iris findings show pigment dispersion with posterior iris bowing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary open-angle, pseudoexfoliation or uveitic glaucoma; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Start topical pressure-lowering therapy, usually a prostaglandin analogue",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Laser peripheral iridotomy to flatten the bowed iris and stop reverse pupillary block",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Judicious laser trabeculoplasty given dense pigment and pressure-rise risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid strenuous exercise and situations that trigger pupillary dilatation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Filtration surgery or a drainage device when pressure or field loss progresses",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early pressure control gives generally good vision; dispersion may diminish with age",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

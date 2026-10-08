@@ -154,5 +154,321 @@
       "caption": "Overview comparison matrix for pseudohypoaldosteronism type 1."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oxford Handbook of Nephrology and Hypertension / Comprehensive Clinical Nephrology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pseudohypoaldosteronism_type_1-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum sodium, potassium and bicarbonate",
+          "cells": [
+            {
+              "text": "Salt-wasting hyperkalaemic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma renin and aldosterone",
+          "cells": [
+            {
+              "text": "Markedly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary electrolytes",
+          "cells": [
+            {
+              "text": "Renal sodium loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sweat chloride testing",
+          "cells": [
+            {
+              "text": "Systemic involvement; cystic fibrosis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tract imaging",
+          "cells": [
+            {
+              "text": "Obstruction or infection excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NR3C2 and ENaC subunit gene testing",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pseudohypoaldosteronism_type_1-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary adrenal insufficiency",
+          "cells": [
+            {
+              "text": "Aldosterone deficiency"
+            },
+            {
+              "text": "Plasma renin and aldosterone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystic fibrosis",
+          "cells": [
+            {
+              "text": "Raised sweat chloride"
+            },
+            {
+              "text": "Sweat chloride testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pseudohypoaldosteronism_type_1-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sodium chloride",
+          "cells": [
+            {
+              "text": "Generous supplementation, the mainstay of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperkalaemia",
+          "cells": [
+            {
+              "text": "Dietary potassium restriction and cation-exchange resins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acidosis",
+          "cells": [
+            {
+              "text": "Alkali where required to correct the metabolic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mineralocorticoids",
+          "cells": [
+            {
+              "text": "Not effective, as the defect is in the receptor or channel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic form",
+          "cells": [
+            {
+              "text": "Management of cutaneous, respiratory and other epithelial salt loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Electrolytes, hydration and growth with paediatric nephrology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "NR3C2 in the dominant renal form; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pseudohypoaldosteronism_type_1-dx-mgmt",
+      "title": "Diagnosis and management of Pseudohypoaldosteronism type 1",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pseudohypoaldosteronism type 1: neonatal salt wasting with hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Salt-wasting crisis with severe hyperkalaemia, arrhythmia, collapse, or poor growth?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent sodium replacement and treatment of hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Electrolytes and bicarbonate; renin and aldosterone; urinary sodium; sweat chloride",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are renin and aldosterone markedly raised with renal sodium loss confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider adrenal insufficiency, aldosterone synthase deficiency or CF; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Generous sodium chloride supplementation, the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dietary potassium restriction and cation-exchange resins",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Alkali where acidosis requires correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Do not expect benefit from mineralocorticoids; defect is receptor or channel",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Electrolyte, hydration and growth monitoring with paediatric nephrology",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

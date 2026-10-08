@@ -147,5 +147,316 @@
       "caption": "Overview comparison matrix for malakoplakia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "malakoplakia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsy with von Hansemann cells",
+          "cells": [
+            {
+              "text": "Michaelis-Gutmann bodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Kossa, Perls and PAS stains",
+          "cells": [
+            {
+              "text": "Inclusions highlighted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine and tissue cultures",
+          "cells": [
+            {
+              "text": "Coliform organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystoscopy or endoscopy",
+          "cells": [
+            {
+              "text": "Soft yellow-brown mucosal plaques"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Extent of organ involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "malakoplakia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Genitourinary or gastrointestinal malignancy",
+          "cells": [
+            {
+              "text": "Biopsy shows inclusions rather than tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Xanthogranulomatous pyelonephritis",
+          "cells": [
+            {
+              "text": "Lipid-laden macrophages without inclusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis",
+          "cells": [
+            {
+              "text": "Caseating granulomas; microbiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whipple disease",
+          "cells": [
+            {
+              "text": "Gut involvement; PAS-positive macrophages"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "malakoplakia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intracellular antibiotics",
+          "cells": [
+            {
+              "text": "Fluoroquinolones or trimethoprim-sulfamethoxazole for prolonged courses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjunctive agents",
+          "cells": [
+            {
+              "text": "Bethanechol and ascorbic acid to enhance macrophage killing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression",
+          "cells": [
+            {
+              "text": "Reduce or modify wherever feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Excision or debulking for mass, obstructive or refractory lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Predisposing factors",
+          "cells": [
+            {
+              "text": "Screen for occult malignancy and correct debilitated states"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "malakoplakia-dx-mgmt",
+      "title": "Diagnosis and management of Malakoplakia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Yellow-brown bladder plaques in an immunosuppressed or debilitated patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (obstructive uropathy, renal impairment or systemic sepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent urology review for obstruction or sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy with inclusion stains, cultures, cystoscopy, cross-sectional imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are von Hansemann cells with Michaelis-Gutmann bodies seen on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider malignancy, xanthogranulomatous pyelonephritis or tuberculosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged intracellularly active antibiotics guided by culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bethanechol and ascorbic acid as adjuncts",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reduce immunosuppression where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Excise or debulk obstructive or refractory lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Repeat imaging or cystoscopy to check resolution",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Localised disease often responds; renal disease is worse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

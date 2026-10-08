@@ -147,5 +147,324 @@
       "caption": "Overview comparison matrix for prothrombin g20210a mutation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "prothrombin_g20210a_mutation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted F2 gene analysis for G20210A",
+          "cells": [
+            {
+              "text": "Heterozygous or homozygous status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma prothrombin activity",
+          "cells": [
+            {
+              "text": "May be elevated but not diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Concurrent factor V Leiden testing",
+          "cells": [
+            {
+              "text": "Combined thrombophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional antithrombin, protein C and protein S assays",
+          "cells": [
+            {
+              "text": "Coexisting deficiencies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphospholipid antibody screen",
+          "cells": [
+            {
+              "text": "Acquired thrombophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Objective imaging for suspected VTE",
+          "cells": [
+            {
+              "text": "Confirms and characterises the event"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prothrombin_g20210a_mutation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Factor V Leiden and activated protein C resistance",
+          "cells": [
+            {
+              "text": "Combined thrombophilia"
+            },
+            {
+              "text": "Concurrent factor V Leiden testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antithrombin deficiency",
+          "cells": [
+            {
+              "text": "Coexisting deficiency"
+            },
+            {
+              "text": "Functional antithrombin assay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphospholipid syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Antiphospholipid antibody screen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prothrombin_g20210a_mutation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute VTE",
+          "cells": [
+            {
+              "text": "Standard anticoagulation: heparin followed by a DOAC or vitamin K antagonist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duration",
+          "cells": [
+            {
+              "text": "Extended therapy after unprovoked or recurrent thrombosis, and in homozygotes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thromboprophylaxis",
+          "cells": [
+            {
+              "text": "Surgery, immobility and pregnancy; LMWH in pregnancy where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contraception and risk factors",
+          "cells": [
+            {
+              "text": "Avoid combined oestrogen-containing contraception; address modifiable risk factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asymptomatic carriers",
+          "cells": [
+            {
+              "text": "Avoid indefinite anticoagulation; reserve treatment for thrombotic events and high-risk situations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family",
+          "cells": [
+            {
+              "text": "Family testing and genetic counselling; detection mainly guides prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "prothrombin_g20210a_mutation-dx-mgmt",
+      "title": "Diagnosis and management of Prothrombin G20210A mutation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected prothrombin G20210A thrombophilia: venous thromboembolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Massive PE, unusual-site thrombosis, recurrence on anticoagulation, or pregnancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent anticoagulation for massive or life-threatening VTE",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Targeted F2 G20210A testing; factor V Leiden; antithrombin, protein C and S; APL screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is G20210A confirmed, with coexisting thrombophilia assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider factor V Leiden, antithrombin or antiphospholipid causes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Heparin followed by a DOAC or vitamin K antagonist for acute VTE",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Extended therapy after unprovoked or recurrent thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Thromboprophylaxis in surgery, immobility and pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid combined oestrogen contraception; no indefinite treatment of carriers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Family testing and genetic counselling to guide prophylaxis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

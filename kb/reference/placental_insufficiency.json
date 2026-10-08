@@ -153,5 +153,334 @@
       "caption": "Overview comparison matrix for placental insufficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "RCOG small-for-gestational-age fetus guidance / Williams Obstetrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "placental_insufficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial ultrasound biometry",
+          "cells": [
+            {
+              "text": "Fetal size and growth velocity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amniotic fluid volume (deepest pocket or amniotic fluid index)",
+          "cells": [
+            {
+              "text": "Amniotic fluid volume"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Umbilical artery Doppler",
+          "cells": [
+            {
+              "text": "Placental resistance and end-diastolic flow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Middle cerebral artery Doppler and cerebroplacental ratio",
+          "cells": [
+            {
+              "text": "Redistribution of fetal blood flow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ductus venosus Doppler in early-onset severe restriction",
+          "cells": [
+            {
+              "text": "Timing of delivery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiotocography with short-term variation analysis",
+          "cells": [
+            {
+              "text": "Fetal wellbeing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "placental_insufficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Constitutionally small but healthy fetus",
+          "cells": [
+            {
+              "text": "Doppler and growth trajectory assessment distinguish it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital infection",
+          "cells": [
+            {
+              "text": "Screened for in the investigation of cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "placental_insufficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intensive surveillance",
+          "cells": [
+            {
+              "text": "Serial growth biometry, umbilical artery and ductus venosus Doppler, and cardiotocography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Timing of delivery",
+          "cells": [
+            {
+              "text": "Doppler and cardiotocographic deterioration guide definitive timing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antenatal corticosteroids",
+          "cells": [
+            {
+              "text": "Foetal lung maturity ahead of anticipated preterm delivery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Magnesium sulfate",
+          "cells": [
+            {
+              "text": "Foetal neuroprotection when very preterm delivery is planned"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal disease",
+          "cells": [
+            {
+              "text": "Hypertension, diabetes or antiphospholipid syndrome optimised with aspirin and heparin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylactic aspirin",
+          "cells": [
+            {
+              "text": "Low-dose aspirin from early pregnancy in women at high risk of placental disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contributory factors",
+          "cells": [
+            {
+              "text": "Smoking cessation and modification of contributory factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delivery setting",
+          "cells": [
+            {
+              "text": "Neonatal care at an appropriate level of support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "placental_insufficiency-dx-mgmt",
+      "title": "Diagnosis and management of Placental insufficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fetus with growth restriction or small size; suspected placental insufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (absent or reversed umbilical flow, reduced movements, falling growth)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent delivery planning for absent or reversed end-diastolic flow or abnormal CTG",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial biometry; umbilical artery Doppler; MCA and cerebroplacental ratio; CTG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do Doppler and growth trajectory confirm placental insufficiency, not a small fetus?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider constitutional small size, incorrect dating, aneuploidy or congenital infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intensive foetal surveillance with growth scans, Doppler and cardiotocography",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Time delivery by Doppler and cardiotocographic deterioration",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antenatal corticosteroids ahead of anticipated preterm delivery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Magnesium sulfate for foetal neuroprotection when very preterm delivery is planned",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Low-dose aspirin from early pregnancy in women at high risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on severity and gestation at onset; early severe disease carries high risks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

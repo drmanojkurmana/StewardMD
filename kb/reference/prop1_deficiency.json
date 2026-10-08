@@ -153,5 +153,341 @@
       "caption": "Overview comparison matrix for prop1 deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Endocrine genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "prop1_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Growth hormone axis with IGF-1, and prolactin",
+          "cells": [
+            {
+              "text": "Growth hormone deficiency; prolactin typically low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TSH with free thyroxine",
+          "cells": [
+            {
+              "text": "Central hypothyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonadotrophins with sex steroids and puberty staging",
+          "cells": [
+            {
+              "text": "Gonadal axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial assessment of the adrenal axis",
+          "cells": [
+            {
+              "text": "Late-onset cortisol deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary MRI",
+          "cells": [
+            {
+              "text": "Gland size; repeat if a mass is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted PROP1 sequencing or pituitary gene panel",
+          "cells": [
+            {
+              "text": "Recurrent deletion hotspot or gene variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone age radiograph and growth monitoring",
+          "cells": [
+            {
+              "text": "Growth and skeletal maturation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prop1_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "POU1F1 (PIT-1) deficiency",
+          "cells": [
+            {
+              "text": "Spares the gonadotroph axis; puberty preserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HESX1 mutation with septo-optic dysplasia",
+          "cells": [
+            {
+              "text": "Midline anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LHX3 deficiency",
+          "cells": [
+            {
+              "text": "Limited neck rotation and sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired hypopituitarism from a sellar or suprasellar tumour",
+          "cells": [
+            {
+              "text": "Enlarged pituitary on imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prop1_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Growth hormone replacement",
+          "cells": [
+            {
+              "text": "Recombinant human growth hormone to correct childhood growth failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levothyroxine",
+          "cells": [
+            {
+              "text": "For central hypothyroidism, after glucocorticoid status is assessed first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Puberty and fertility",
+          "cells": [
+            {
+              "text": "Sex steroid replacement to induce and maintain puberty; gonadotrophins when fertility is desired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal axis",
+          "cells": [
+            {
+              "text": "Lifelong monitoring; glucocorticoid replacement with sick-day dosing and steroid alert card once ACTH deficiency emerges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Serial pituitary MRI to track fluctuating gland size and avoid misreading transient enlargement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated follow-up",
+          "cells": [
+            {
+              "text": "Lifelong specialist endocrine follow-up; hormone replacement sequenced appropriately"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; screening of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "prop1_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of PROP1 deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PROP1 deficiency: growth failure with combined pituitary hormone deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Adrenal insufficiency, enlarging gland, arrested puberty, or collapse in illness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent endocrine review for adrenal crisis risk or collapse during illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "GH with IGF-1 and prolactin; TSH and free T4; gonadotrophins; pituitary MRI; PROP1",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does PROP1 testing confirm the deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider POU1F1, HESX1, LHX3 or acquired tumour; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Recombinant growth hormone to correct childhood growth failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Levothyroxine for central hypothyroidism, after glucocorticoid status is checked",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sex steroid replacement; gonadotrophins when fertility is desired",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Glucocorticoid replacement with sick-day dosing once ACTH deficiency emerges",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong endocrine follow-up with serial MRI and genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

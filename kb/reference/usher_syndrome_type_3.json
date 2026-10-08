@@ -152,5 +152,296 @@
       "caption": "Overview comparison matrix for usher syndrome type 3."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics and audiology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "usher_syndrome_type_3-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial pure-tone audiometry",
+          "cells": [
+            {
+              "text": "Progression over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular testing",
+          "cells": [
+            {
+              "text": "Repeated, as function may deteriorate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroretinography",
+          "cells": [
+            {
+              "text": "Rod-cone dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT and fundus autofluorescence",
+          "cells": [
+            {
+              "text": "Retinal follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual field perimetry",
+          "cells": [
+            {
+              "text": "Peripheral loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CLRN1 genetic testing",
+          "cells": [
+            {
+              "text": "Attention to population founder variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "usher_syndrome_type_3-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Usher syndrome type 1",
+          "cells": [
+            {
+              "text": "Congenital profound deafness with vestibular areflexia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Usher syndrome type 2",
+          "cells": [
+            {
+              "text": "Congenital, stable moderate-to-severe loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired progressive sensorineural hearing loss",
+          "cells": [
+            {
+              "text": "Acquired causes can mask the genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "usher_syndrome_type_3-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial audiometry and hearing aids",
+          "cells": [
+            {
+              "text": "Transition to cochlear implantation as loss deteriorates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aural rehabilitation and speech support",
+          "cells": [
+            {
+              "text": "Adapted to changing hearing over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision rehabilitation",
+          "cells": [
+            {
+              "text": "Orientation and mobility training as retinitis pigmentosa develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmic monitoring",
+          "cells": [
+            {
+              "text": "Electroretinography, OCT, fundus autofluorescence and perimetry"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "usher_syndrome_type_3-dx-mgmt",
+      "title": "Diagnosis and management of Usher syndrome type 3",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Usher type 3: near-normal hearing in early childhood, then progressive loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (falling hearing thresholds, night blindness or unsteadiness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent audiology review for documented decline in hearing thresholds",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial audiometry, vestibular testing, ERG, OCT, fundus autofluorescence, CLRN1",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CLRN1 testing confirm an Usher type 3 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acquired progressive hearing loss or another retinal dystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Serial audiometry with hearing aids; cochlear implant as loss deteriorates",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aural rehabilitation and speech support adapted to changing hearing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Low-vision rehabilitation and orientation training as retinitis pigmentosa develops",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ophthalmic monitoring with ERG, OCT, autofluorescence and perimetry",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive hearing and retinal loss; vestibular function varies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

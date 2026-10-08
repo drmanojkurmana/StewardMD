@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for sweet syndrome (acute febrile neutrophilic dermatosis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Bolognia Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sweet_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Sweet syndrome (acute febrile neutrophilic dermatosis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Sweet syndrome: tender red-violaceous plaques with fever and neutrophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cytopenias, abnormal blood film, or organ involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review for suspected myeloid malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy; full blood count with differential; blood film; ESR and CRP",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show a dense neutrophilic infiltrate without vasculitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider erythema nodosum, pyoderma gangrenosum, cellulitis or vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroids, the mainstay, for rapid resolution",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withdraw a culprit drug such as G-CSF; treat infection or IBD",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Colchicine, dapsone or potassium iodide for recurrent or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Investigate for acute myeloid leukaemia, which the skin disease can track",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Classic and drug-induced disease usually resolves with steroids; recurrence occurs",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sweet_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Dense dermal neutrophilic infiltrate without vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with differential",
+          "cells": [
+            {
+              "text": "Neutrophilia; screens for haematological disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR and CRP",
+          "cells": [
+            {
+              "text": "Systemic inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood film and haematology referral",
+          "cells": [
+            {
+              "text": "Myeloid malignancy excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Recent colony-stimulating factors such as G-CSF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection and inflammatory bowel disease screen",
+          "cells": [
+            {
+              "text": "Trigger, as guided by history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sweet_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cellulitis",
+          "cells": [
+            {
+              "text": "Tender plaques are often misdiagnosed as cellulitis and treated with antibiotics alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous leukocytoclastic vasculitis",
+          "cells": [
+            {
+              "text": "Biopsy shows neutrophils without true vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leukaemia cutis",
+          "cells": [
+            {
+              "text": "Acute myeloid leukaemia is the malignancy linked to Sweet syndrome; blood film and haematology exclude it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sweet_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Mainstay; rapid resolution of skin lesions and systemic inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Remove or treat the trigger",
+          "cells": [
+            {
+              "text": "Withdraw a culprit drug such as G-CSF; treat associated infection or inflammatory bowel disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing agents",
+          "cells": [
+            {
+              "text": "Colchicine, dapsone or potassium iodide for recurrent, refractory or steroid-intolerant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical or intralesional corticosteroids",
+          "cells": [
+            {
+              "text": "Localised disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy evaluation",
+          "cells": [
+            {
+              "text": "Particularly acute myeloid leukaemia; paraneoplastic disease tracks the cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence monitoring",
+          "cells": [
+            {
+              "text": "During corticosteroid tapering and reactivation of associated disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,334 @@
       "caption": "Overview comparison matrix for tardive akathisia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tardive_akathisia-dx-mgmt",
+      "title": "Diagnosis and management of tardive akathisia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tardive akathisia: inner restlessness after long dopamine-blocker exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: suicidal ideation, severe dysphoria, or neuroleptic malignant features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent psychiatric safety assessment; exclude neuroleptic malignant syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Temporal drug history including antiemetics; Barnes rating; suicide-risk review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does restlessness persist or worsen after the drug is reduced?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acute akathisia, anxiety, restless legs syndrome or agitated psychosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reduce or withdraw the dopamine blocker, avoiding masking dose increases",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Switch to a lower-potency antipsychotic or to clozapine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "VMAT2 inhibitor such as valbenazine or deutetrabenazine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Beta-blocker or clonidine for subjective restlessness",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Stop offending antiemetics such as metoclopramide",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Often chronic for years; some improve once the offending drug is stopped or switched",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tardive_akathisia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Temporal history of dopamine-blocking agents",
+          "cells": [
+            {
+              "text": "Late onset after prolonged exposure, including antiemetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Barnes Akathisia Rating Scale",
+          "cells": [
+            {
+              "text": "Severity, for standardised monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mood, impulsivity and suicide-risk evaluation",
+          "cells": [
+            {
+              "text": "Recognised association with dysphoria and suicide risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Restless legs screen with iron studies",
+          "cells": [
+            {
+              "text": "Overlapping restlessness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Metabolic driver of restlessness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for tardive dyskinesia, dystonia or parkinsonism",
+          "cells": [
+            {
+              "text": "Coexisting movement disorders"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tardive_akathisia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute drug-induced akathisia",
+          "cells": [
+            {
+              "text": "Delayed emergence and persistence after dose reduction distinguish it from acute akathisia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychomotor agitation of the underlying psychiatric disorder",
+          "cells": [
+            {
+              "text": "Often mistaken for worsening psychosis, anxiety or agitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Restless legs syndrome",
+          "cells": [
+            {
+              "text": "Coexisting RLS may respond to iron repletion; iron studies are needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tardive_akathisia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reduce or withdraw the dopamine blocker",
+          "cells": [
+            {
+              "text": "Gradually where safe; avoid dose increases that only mask symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Switch antipsychotic",
+          "cells": [
+            {
+              "text": "Lower-potency agent or clozapine, where antipsychotic treatment must continue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "VMAT2 inhibitor",
+          "cells": [
+            {
+              "text": "Valbenazine, deutetrabenazine or tetrabenazine to suppress the movement disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjunct for restlessness",
+          "cells": [
+            {
+              "text": "Beta-blocker or clonidine for subjective restlessness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop offending antiemetics",
+          "cells": [
+            {
+              "text": "Metoclopramide and prochlorperazine; use non-dopaminergic alternatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysphoria and suicide risk",
+          "cells": [
+            {
+              "text": "Assess and treat comorbid mood symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severity monitoring",
+          "cells": [
+            {
+              "text": "Structured akathisia rating scale over time"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

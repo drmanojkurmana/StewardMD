@@ -150,5 +150,316 @@
       "caption": "Overview comparison matrix for macrophage activation syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "macrophage_activation_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum ferritin, trended",
+          "cells": [
+            {
+              "text": "Very high levels; tracks response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Evolving cytopenias across lineages"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrinogen, D-dimer and coagulation profile",
+          "cells": [
+            {
+              "text": "Low fibrinogen and coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting triglycerides and liver tests",
+          "cells": [
+            {
+              "text": "Hypertriglyceridaemia and hepatic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow aspirate",
+          "cells": [
+            {
+              "text": "Haemophagocytosis when uncertain; a normal marrow does not exclude it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "macrophage_activation_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary haemophagocytic lymphohistiocytosis",
+          "cells": [
+            {
+              "text": "Genetic basis; trigger-independent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis with disseminated intravascular coagulation",
+          "cells": [
+            {
+              "text": "Infection-driven; cultures help"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flare of the underlying rheumatic disease",
+          "cells": [
+            {
+              "text": "Disease activity without cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy such as lymphoma or leukaemia",
+          "cells": [
+            {
+              "text": "Marrow and imaging evaluation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "macrophage_activation_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulsed corticosteroids",
+          "cells": [
+            {
+              "text": "High-dose methylprednisolone as first-line, escalated early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line immunomodulation",
+          "cells": [
+            {
+              "text": "Anakinra and or ciclosporin for inadequate response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted or cytotoxic therapy",
+          "cells": [
+            {
+              "text": "Emapalumab or etoposide-based regimen where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger control",
+          "cells": [
+            {
+              "text": "Control the rheumatic disease and treat precipitating infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive support",
+          "cells": [
+            {
+              "text": "Blood products for coagulopathy and organ support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "macrophage_activation_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Macrophage Activation Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent high fever and hepatosplenomegaly in a child with a rheumatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (multi-organ dysfunction, bleeding or neurological change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency critical care and senior paediatric haematology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ferritin, full blood count, fibrinogen, triglycerides, liver tests, marrow",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are cytopenias, high ferritin and low fibrinogen present with fever?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sepsis, flare of the rheumatic disease or primary HLH",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Pulsed methylprednisolone as first-line immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anakinra or ciclosporin for inadequate response",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Emapalumab or etoposide-based therapy when refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat the trigger, including infection and rheumatic activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial ferritin, counts and coagulation monitoring with intensive support",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Life-threatening if unrecognised; early immunosuppression can be life-saving",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

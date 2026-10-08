@@ -159,5 +159,316 @@
       "caption": "Overview comparison matrix for lynch syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "DeVita, Hellman and Rosenberg's Cancer / NCCN genetic/familial guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lynch_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Mismatch-repair immunohistochemistry and MSI analysis",
+          "cells": [
+            {
+              "text": "Tumour testing that guides germline testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MLH1 promoter methylation and BRAF V600E testing",
+          "cells": [
+            {
+              "text": "Sporadic cause excluded when MLH1 is lost"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline sequencing of mismatch-repair genes and EPCAM",
+          "cells": [
+            {
+              "text": "Confirms pathogenic variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gynaecological assessment",
+          "cells": [
+            {
+              "text": "Endometrial evaluation in women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Accelerated colonoscopy surveillance",
+          "cells": [
+            {
+              "text": "Polyp detection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lynch_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial adenomatous polyposis",
+          "cells": [
+            {
+              "text": "Polyposis phenotype with APC variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MUTYH-associated polyposis",
+          "cells": [
+            {
+              "text": "Biallelic MUTYH disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sporadic MSI cancer with MLH1 methylation",
+          "cells": [
+            {
+              "text": "Promoter methylation and BRAF testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polymerase proofreading-associated polyposis",
+          "cells": [
+            {
+              "text": "POLE or POLD1 variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lynch_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Colonoscopy with polypectomy",
+          "cells": [
+            {
+              "text": "Backbone of colorectal cancer risk reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspirin chemoprevention",
+          "cells": [
+            {
+              "text": "Supported by Lynch-specific trial evidence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colorectal cancer in a carrier",
+          "cells": [
+            {
+              "text": "Extended rather than segmental colectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk-reducing surgery",
+          "cells": [
+            {
+              "text": "Total hysterectomy and bilateral salpingo-oophorectomy after childbearing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic referral",
+          "cells": [
+            {
+              "text": "Germline confirmation and cascade testing of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lynch_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Lynch syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Early-onset or right-sided colorectal cancer with mismatch-repair deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (synchronous tumours, abnormal bleeding or painless haematuria)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: genetics referral and organ-specific work-up for suspicious symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MMR immunohistochemistry, MSI testing, MLH1 methylation, BRAF, germline testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a pathogenic MMR gene or EPCAM variant confirmed on germline testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider FAP, MUTYH polyposis or sporadic MSI-high cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Colonoscopy with polypectomy at accelerated intervals",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Consider aspirin chemoprevention in carriers",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Extended colectomy after colorectal cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Risk-reducing hysterectomy and salpingo-oophorectomy after childbearing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Clinical genetics referral and cascade testing of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Cancer risk is high but gene-dependent; surveillance cuts colorectal mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

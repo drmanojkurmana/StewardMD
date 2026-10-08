@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for millard-gubler syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "millard_gubler_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffusion-weighted MRI of the pons",
+          "cells": [
+            {
+              "text": "Ventral caudal pontine lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR or CT angiography of the basilar artery and posterior circulation",
+          "cells": [
+            {
+              "text": "Basilar artery and posterior circulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of facial nerve function",
+          "cells": [
+            {
+              "text": "Upper versus lower motor neurone facial weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular motility testing",
+          "cells": [
+            {
+              "text": "Abduction deficit and horizontal gaze"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular and stroke risk workup",
+          "cells": [
+            {
+              "text": "Stroke risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vessel wall imaging, where atherosclerosis or dissection is suspected",
+          "cells": [
+            {
+              "text": "Atherosclerosis or dissection, if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "millard_gubler_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Foville syndrome",
+          "cells": [
+            {
+              "text": "Conjugate gaze palsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Locked-in syndrome from extensive ventral pontine infarction",
+          "cells": [
+            {
+              "text": "Bilateral pontine signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Basilar artery thrombosis with evolving brainstem signs",
+          "cells": [
+            {
+              "text": "Progressive drowsiness or quadriparesis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "millard_gubler_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute stroke treatment",
+          "cells": [
+            {
+              "text": "IV thrombolysis within the therapeutic window; thrombectomy considered for basilar artery occlusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stroke unit care",
+          "cells": [
+            {
+              "text": "Close monitoring for progression to basilar thrombosis or locked-in state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary prevention",
+          "cells": [
+            {
+              "text": "Antiplatelet therapy, a statin and blood pressure control; anticoagulation if cardioembolic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eye protection and diplopia",
+          "cells": [
+            {
+              "text": "Lubricants and lid taping; occlusion or prisms for horizontal diplopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and speech and language therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying cause",
+          "cells": [
+            {
+              "text": "Basilar atherosclerosis or arterial dissection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "millard_gubler_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Millard-Gubler syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute ventral pontine stroke with facial weakness and abduction deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive drowsiness, quadriparesis, bilateral pontine signs or respiratory compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent stroke pathway; monitor for basilar thrombosis and locked-in state",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Diffusion-weighted MRI of the pons; MR or CT angiography of the basilar artery",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a ventral caudal pontine lesion confirmed on diffusion-weighted MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Foville, lateral pontine syndrome, demyelination or tumour; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Acute stroke treatment: IV thrombolysis in window; thrombectomy for basilar occlusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stroke unit care with monitoring for basilar thrombosis or locked-in state",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiplatelet, statin and blood pressure control; anticoagulation if cardioembolic",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Eye protection with lubricants and lid taping; occlusion or prisms for diplopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary rehabilitation; address basilar atherosclerosis or dissection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for scleredema (of buschke)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Bolognia Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scleredema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Dermal thickening, separated collagen bundles and mucin deposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein electrophoresis with immunofixation",
+          "cells": [
+            {
+              "text": "Monoclonal gammopathy (serum and urine)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose and HbA1c",
+          "cells": [
+            {
+              "text": "Diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Streptococcal and viral serology",
+          "cells": [
+            {
+              "text": "Post-infectious form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function",
+          "cells": [
+            {
+              "text": "Excludes myxoedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoantibody screen",
+          "cells": [
+            {
+              "text": "Helps exclude systemic sclerosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scleredema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic sclerosis",
+          "cells": [
+            {
+              "text": "Fingers spared and no Raynaud phenomenon in scleredema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scleromyxoedema",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myxoedema of hypothyroidism",
+          "cells": [
+            {
+              "text": "Excluded by thyroid function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scleredema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the association",
+          "cells": [
+            {
+              "text": "Optimise glycaemic control; treat streptococcal or viral infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototherapy",
+          "cells": [
+            {
+              "text": "UVA1 or PUVA, with variable benefit; no reliably effective specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunomodulation",
+          "cells": [
+            {
+              "text": "Methotrexate, corticosteroids or IVIG for progressive or disabling disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paraproteinaemic form",
+          "cells": [
+            {
+              "text": "Treat a significant plasma-cell dyscrasia with haematology input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Preserve neck and trunk mobility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Post-infectious form may resolve; follow diabetes- or paraprotein-linked disease long term"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scleredema-dx-mgmt",
+      "title": "Diagnosis and management of Scleredema (of Buschke)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Woody induration of upper back and neck: suspected scleredema",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Monoclonal protein, restricted chest movement, dysphagia or rapid spread?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Haematology evaluation for myeloma; assess respiratory and swallowing function",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, protein electrophoresis, glucose and HbA1c, thyroid function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biopsy shows mucin and separated collagen with spared fingers?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider systemic sclerosis or scleromyxoedema; check autoantibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Tighten diabetic control or treat the infection or paraprotein",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "UVA1 or PUVA phototherapy for induration",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Methotrexate, steroids or IVIG for progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy to preserve neck and trunk mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Post-infectious form often resolves; diabetic and paraprotein forms persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

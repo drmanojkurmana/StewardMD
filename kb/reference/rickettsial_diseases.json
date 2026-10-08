@@ -199,5 +199,544 @@
       "caption": "Overview comparison matrix for rickettsial diseases."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 174-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "CDC, Rocky Mountain Spotted Fever Clinical Care",
+      "kind": "web",
+      "url": "https://www.cdc.gov/rocky-mountain-spotted-fever/hcp/clinical-care/index.html"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rickettsial_diseases-diagnostic",
+      "kind": "diagnostic",
+      "title": "Features of selected rickettsial infections",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Incubation",
+        "Rash and eschar"
+      ],
+      "rows": [
+        {
+          "parameter": "Rocky Mountain spotted fever (R. rickettsii, tick)",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "2 to 14 days",
+              "range": [
+                2,
+                14
+              ]
+            },
+            {
+              "text": "Rash 90%, eschar under 1%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mediterranean spotted fever (R. conorii, tick)",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "5 to 7 days",
+              "range": [
+                5,
+                7
+              ]
+            },
+            {
+              "text": "Rash 97%, eschar 50%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "African tick-bite fever (R. africae)",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "4 to 10 days",
+              "range": [
+                4,
+                10
+              ]
+            },
+            {
+              "text": "Rash 50%, eschar 90%, marked nodes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rickettsialpox (R. akari, mite)",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "10 to 17 days",
+              "range": [
+                10,
+                17
+              ]
+            },
+            {
+              "text": "Rash 100%, eschar 90%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Epidemic typhus (R. prowazekii, louse)",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "7 to 14 days",
+              "range": [
+                7,
+                14
+              ]
+            },
+            {
+              "text": "Rash 80%, no eschar"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Murine typhus (R. typhi, flea)",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "8 to 16 days",
+              "range": [
+                8,
+                16
+              ]
+            },
+            {
+              "text": "Rash 80%, no eschar"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Scrub typhus (O. tsutsugamushi, mite)",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "9 to 18 days",
+              "range": [
+                9,
+                18
+              ]
+            },
+            {
+              "text": "Rash 50%, eschar 35%, prominent nodes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ehrlichiosis (E. chaffeensis) and anaplasmosis",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "1 to 21 days and 4 to 8 days",
+              "range": [
+                1,
+                21
+              ]
+            },
+            {
+              "text": "Rash 26% and rare; leukopenia, low platelets, raised AST"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Q fever (C. burnetii, aerosol)",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "3 to 30 days",
+              "range": [
+                3,
+                30
+              ]
+            },
+            {
+              "text": "Rash under 1%; pneumonia, hepatitis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serology (IFA paired sera)",
+          "cells": [
+            {
+              "text": "RMSF titer 64 or more appears only 7 to 10 days after onset",
+              "op": ">=",
+              "value": 64
+            },
+            {
+              "text": "{{hy:Negative at presentation; never wait to treat}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy immunohistochemistry",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 70% sensitive, 100% specific",
+              "op": "=",
+              "value": 70
+            },
+            {
+              "text": "Best acute RMSF test; PCR of eschar swab useful"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rickettsial_diseases-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic rickettsial disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Meningococcemia",
+          "cells": [
+            {
+              "text": "Rapid purpura, shock"
+            },
+            {
+              "text": "Blood culture, CSF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Typhoid fever",
+          "cells": [
+            {
+              "text": "Often confused with epidemic typhus"
+            },
+            {
+              "text": "Blood culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leptospirosis",
+          "cells": [
+            {
+              "text": "Water exposure, conjunctival suffusion, jaundice, renal failure"
+            },
+            {
+              "text": "Leptospira serology or PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dengue",
+          "cells": [
+            {
+              "text": "Retro-orbital pain, low platelets, no eschar"
+            },
+            {
+              "text": "NS1 antigen, IgM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Measles or other viral exanthems",
+          "cells": [
+            {
+              "text": "Coryza, Koplik spots"
+            },
+            {
+              "text": "Viral serology or PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug eruption",
+          "cells": [
+            {
+              "text": "Recent new drug"
+            },
+            {
+              "text": "History"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ITP or TTP",
+          "cells": [
+            {
+              "text": "Low platelets without fever pattern"
+            },
+            {
+              "text": "Smear, ADAMTS13"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lyme disease",
+          "cells": [
+            {
+              "text": "Erythema migrans; HGA can mimic"
+            },
+            {
+              "text": "Serology, PCR for Anaplasma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rickettsial_diseases-treatment",
+      "kind": "treatment",
+      "title": "Treating rickettsial infections",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Doxycycline 100 mg every 12 h (children under 45 kg: 2.2 mg/kg twice daily)",
+          "cells": [
+            {
+              "text": "All ages, including children and pregnancy, on clinical suspicion"
+            },
+            {
+              "text": "Best if started within 5 days of illness"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Duration",
+          "cells": [
+            {
+              "text": "All"
+            },
+            {
+              "text": "At least 3 days after fever settles; minimum 5 to 7 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chloramphenicol",
+          "cells": [
+            {
+              "text": "Only alternative for RMSF"
+            },
+            {
+              "text": "Higher death risk than doxycycline"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Avoid sulfonamides",
+          "cells": [
+            {
+              "text": "Suspected RMSF"
+            },
+            {
+              "text": "May worsen illness"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Doxycycline plus hydroxychloroquine",
+          "cells": [
+            {
+              "text": "Chronic Q fever endocarditis or vascular infection"
+            },
+            {
+              "text": "Prolonged course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Severe disease with capillary leak"
+            },
+            {
+              "text": "Careful fluids, organ support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No prophylaxis after tick bite",
+          "cells": [
+            {
+              "text": "Asymptomatic bite"
+            },
+            {
+              "text": "Seek care if fever within 2 weeks"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rickettsial_diseases-dx-mgmt",
+      "title": "Diagnosis and management of suspected rickettsial infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, headache, myalgia after tick, mite, flea or louse exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rash, eschar, low platelets or raised transaminases?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Start doxycycline now; do not wait for serology",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Consider other causes; reassess daily",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Worsening or new rash?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Acute serology, eschar PCR or skin biopsy; repeat serology in 2 to 4 weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Shock, encephalitis or respiratory failure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "ICU support with IV doxycycline",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Continue 3 days after defervescence, 5 to 7 days minimum",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Manage the alternative diagnosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

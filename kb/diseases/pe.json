@@ -250,6 +250,31 @@
       "label": "MDCalc, Wells' Criteria for Pulmonary Embolism",
       "url": "https://www.mdcalc.com/calc/115/wells-criteria-pulmonary-embolism",
       "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 33-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 118-9",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 58-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c7",
+      "label": "Tables PDF, Table 118-5",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c8",
+      "label": "Tables PDF, Table 118-6",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -668,6 +693,408 @@
         }
       ],
       "footnote": "The Merck page gives no alteplase or initial anticoagulant doses, so none are listed."
+    },
+    {
+      "id": "pe-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Common causes of noncardiogenic pulmonary edema",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Direct injury to lung",
+          "cells": [
+            {
+              "text": "Chest trauma, pulmonary contusion; aspiration; smoke inhalation; pneumonia; oxygen toxicity; pulmonary embolism, reperfusion"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Hematogenous injury to lung",
+          "cells": [
+            {
+              "text": "Sepsis; pancreatitis; nonthoracic trauma; leukoagglutination reactions; multiple transfusions; intravenous drug use (for example heroin); cardiopulmonary bypass"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Possible lung injury plus elevated hydrostatic pressure",
+          "cells": [
+            {
+              "text": "High-altitude pulmonary edema; neurogenic pulmonary edema; reexpansion pulmonary edema"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    },
+    {
+      "id": "pe-treatment-2",
+      "kind": "treatment",
+      "title": "Features of new oral anticoagulants",
+      "rowHeader": "Option",
+      "columns": [
+        "Rivaroxaban",
+        "Apixaban",
+        "Dabigatran etexilate"
+      ],
+      "rows": [
+        {
+          "parameter": "Target",
+          "cells": [
+            {
+              "text": "Xa"
+            },
+            {
+              "text": "Xa"
+            },
+            {
+              "text": "IIa"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Molecular weight",
+          "cells": [
+            {
+              "text": "436"
+            },
+            {
+              "text": "460"
+            },
+            {
+              "text": "628"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Prodrug",
+          "cells": [
+            {
+              "text": "No"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Bioavailability (%)",
+          "cells": [
+            {
+              "text": "80"
+            },
+            {
+              "text": "50"
+            },
+            {
+              "text": "6"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Time to peak (h)",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "3"
+            },
+            {
+              "text": "2"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Half-life (h)",
+          "cells": [
+            {
+              "text": "9"
+            },
+            {
+              "text": "9-14"
+            },
+            {
+              "text": "12-17"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Renal excretion (%)",
+          "cells": [
+            {
+              "text": "65"
+            },
+            {
+              "text": "25"
+            },
+            {
+              "text": "80"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Antidote",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "None"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "The printed table is cut off at the right page edge; any further columns are unreadable."
+    },
+    {
+      "id": "pe-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Risk factors for thrombosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Risk factors"
+      ],
+      "rows": [
+        {
+          "parameter": "Venous: inherited",
+          "cells": [
+            {
+              "text": "Factor V Leiden; prothrombin G20210A; antithrombin deficiency; protein C deficiency; protein S deficiency; elevated FVIII"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Venous: acquired",
+          "cells": [
+            {
+              "text": "Age; previous thrombosis; immobilization; major surgery; pregnancy and puerperium; hospitalization; obesity; infection; APC resistance (nongenetic); smoking"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Venous: unknown (*)",
+          "cells": [
+            {
+              "text": "Elevated factor II, IX, XI; elevated TAFI levels; low levels of TFPI"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Venous and arterial: inherited",
+          "cells": [
+            {
+              "text": "Homocystinuria; dysfibrinogenemia"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Venous and arterial: mixed (inherited and acquired)",
+          "cells": [
+            {
+              "text": "Hyperhomocysteinemia"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Venous and arterial: acquired",
+          "cells": [
+            {
+              "text": "Malignancy; antiphospholipid antibody syndrome; hormonal therapy; polycythemia vera; essential thrombocythemia; paroxysmal nocturnal hemoglobinuria; thrombotic thrombocytopenic purpura; heparin-induced thrombocytopenia; disseminated intravascular coagulation"
+            }
+          ],
+          "cite": "c6"
+        }
+      ],
+      "footnote": "The footnote text for the asterisk is cut off at the bottom of the printed page."
+    },
+    {
+      "id": "pe-diagnostic-4",
+      "kind": "diagnostic",
+      "title": "Advantages of low-molecular-weight heparin over heparin",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Consequence"
+      ],
+      "rows": [
+        {
+          "parameter": "Better bioavailability and longer half-life after subcutaneous injection",
+          "cells": [
+            {
+              "text": "Can be given subcutaneously once or twice daily for both prophylaxis and treatment"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Dose-independent clearance",
+          "cells": [
+            {
+              "text": "Simplified dosing"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Predictable anticoagulant response",
+          "cells": [
+            {
+              "text": "Coagulation monitoring is unnecessary in most patients"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Lower risk of heparin-induced thrombocytopenia",
+          "cells": [
+            {
+              "text": "Safer than heparin for short- or long-term administration"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Lower risk of osteoporosis",
+          "cells": [
+            {
+              "text": "Safer than heparin for extended administration"
+            }
+          ],
+          "cite": "c7"
+        }
+      ]
+    },
+    {
+      "id": "pe-diagnostic-5",
+      "kind": "diagnostic",
+      "title": "Comparison of LMWH and fondaparinux",
+      "rowHeader": "Feature",
+      "columns": [
+        "LMWH",
+        "Fondaparinux"
+      ],
+      "rows": [
+        {
+          "parameter": "Number of saccharide units",
+          "cells": [
+            {
+              "text": "15-17"
+            },
+            {
+              "text": "5"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Catalysis of factor Xa inhibition",
+          "cells": [
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Yes"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Catalysis of thrombin inhibition",
+          "cells": [
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Bioavailability after subcutaneous administration (%)",
+          "cells": [
+            {
+              "text": "90"
+            },
+            {
+              "text": "100"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Plasma half-life (h)",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "17"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Renal excretion",
+          "cells": [
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Yes"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Induces release of tissue factor pathway inhibitor",
+          "cells": [
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Neutralized by protamine sulfate",
+          "cells": [
+            {
+              "text": "Partially"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c8"
+        }
+      ]
     }
   ],
   "flowcharts": [

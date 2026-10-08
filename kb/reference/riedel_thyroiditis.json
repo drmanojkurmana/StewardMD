@@ -149,5 +149,296 @@
       "caption": "Overview comparison matrix for riedel thyroiditis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / thyroid disease reference literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "riedel_thyroiditis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Neck ultrasound and cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Extent of infiltration and compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Open surgical biopsy",
+          "cells": [
+            {
+              "text": "Definitive histology when aspiration is non-diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum IgG4",
+          "cells": [
+            {
+              "text": "Associated fibrosclerotic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Hypothyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium and parathyroid hormone",
+          "cells": [
+            {
+              "text": "Hypoparathyroidism, when the parathyroids are involved"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "riedel_thyroiditis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anaplastic thyroid carcinoma",
+          "cells": [
+            {
+              "text": "Cannot be confidently excluded without tissue (red flag)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid lymphoma",
+          "cells": [
+            {
+              "text": "Cannot be confidently excluded without tissue (red flag)"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "riedel_thyroiditis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Glucocorticoids",
+          "cells": [
+            {
+              "text": "First-line; arrest the fibrosclerotic process and relieve compressive symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tamoxifen",
+          "cells": [
+            {
+              "text": "Suppresses fibroblast proliferation, alone or with corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "Rituximab or mycophenolate for refractory IgG4-related disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone replacement",
+          "cells": [
+            {
+              "text": "Levothyroxine for hypothyroidism; calcium and active vitamin D for hypoparathyroidism if involved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limited surgical decompression",
+          "cells": [
+            {
+              "text": "Such as wedge isthmusectomy for tracheal or oesophageal compression, rather than radical resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Open surgical biopsy",
+          "cells": [
+            {
+              "text": "To exclude anaplastic carcinoma and lymphoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "riedel_thyroiditis-dx-mgmt",
+      "title": "Diagnosis and management of Riedel thyroiditis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Firm, fibrotic neck swelling with compressive symptoms or hypothyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid enlargement, stridor, dysphagia, hypocalcaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway protection; decompression for tracheal or oesophageal compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Neck ultrasound, cross-sectional imaging, thyroid function, calcium and PTH, biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are anaplastic carcinoma and lymphoma excluded on open biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess for anaplastic carcinoma or lymphoma; repeat biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Glucocorticoids as first-line therapy to arrest fibrosclerosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tamoxifen alone or with corticosteroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rituximab or mycophenolate for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Levothyroxine; calcium and vitamin D if parathyroids are involved",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Treatment aims to arrest fibrosis and relieve compression, not radical resection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

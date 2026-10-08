@@ -149,5 +149,285 @@
       "caption": "Overview comparison matrix for short-rib thoracic dysplasia spectrum."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "short_rib_thoracic_dysplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Rib length, thoracic dimensions, pelvis and limb bones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging and respiratory assessment",
+          "cells": [
+            {
+              "text": "Thoracic insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound and renal function",
+          "cells": [
+            {
+              "text": "Cystic or tubulointerstitial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and imaging",
+          "cells": [
+            {
+              "text": "Hepatic fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology with electroretinography",
+          "cells": [
+            {
+              "text": "Retinal dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal ciliopathy gene panel",
+          "cells": [
+            {
+              "text": "Molecular confirmation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "short_rib_thoracic_dysplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Oxygen and assisted ventilation, and treatment of recurrent infection, matched to thoracic insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thoracic expansion surgery",
+          "cells": [
+            {
+              "text": "Expansion thoracoplasty or vertical expandable titanium rib in selected survivable cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal surveillance",
+          "cells": [
+            {
+              "text": "Monitor renal function, treat hypertension, renal replacement for progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic monitoring",
+          "cells": [
+            {
+              "text": "Liver function tests and imaging for fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology",
+          "cells": [
+            {
+              "text": "Surveillance and low-vision support for retinal dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Respiratory, thoracic surgery, nephrology, hepatology, ophthalmology and genetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; cascade and prenatal testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "short_rib_thoracic_dysplasia-dx-mgmt",
+      "title": "Diagnosis and management of Short-rib thoracic dysplasia spectrum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Short ribs and narrow thorax with respiratory difficulty: short-rib thoracic dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (newborn respiratory failure, progressive renal or hepatic disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory support and assessment of thoracic insufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey, renal ultrasound, liver tests, retinal assessment, ciliopathy panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the ciliopathy gene panel confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Do not exclude because polydactyly is absent; consider other dysplasias",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Respiratory support, with expansion thoracoplasty or VEPTR in selected survivors",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Monitor renal function and treat hypertension; renal replacement if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Liver function and imaging for fibrosis; ophthalmology for retinal dystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling with cascade and prenatal testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Variable: lethal in the perinatal short-rib polydactyly forms, better in Jeune syndrome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

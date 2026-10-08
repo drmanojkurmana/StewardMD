@@ -147,5 +147,324 @@
       "caption": "Overview comparison matrix for progressive muscular atrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "progressive_muscular_atrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Electromyography and nerve conduction studies",
+          "cells": [
+            {
+              "text": "Widespread denervation and no conduction block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain and spine",
+          "cells": [
+            {
+              "text": "Structural and compressive lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-GM1 antibody testing",
+          "cells": [
+            {
+              "text": "Multifocal motor neuropathy, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase and myopathy screen",
+          "cells": [
+            {
+              "text": "Primary muscle disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing including the androgen receptor gene",
+          "cells": [
+            {
+              "text": "Kennedy disease, when clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory function testing",
+          "cells": [
+            {
+              "text": "Ventilatory involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_muscular_atrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Amyotrophic lateral sclerosis at an early or lower motor neurone predominant stage",
+          "cells": [
+            {
+              "text": "Lower motor neurone predominance"
+            },
+            {
+              "text": "Electromyography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multifocal motor neuropathy with conduction block",
+          "cells": [
+            {
+              "text": "Conduction block on nerve conduction studies"
+            },
+            {
+              "text": "Anti-GM1 antibody testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kennedy disease (spinobulbar muscular atrophy)",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Androgen receptor gene testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_muscular_atrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Riluzole",
+          "cells": [
+            {
+              "text": "Disease-modifying therapy across the motor neurone disease spectrum, to modestly slow progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory surveillance",
+          "cells": [
+            {
+              "text": "Regular function testing; non-invasive ventilation for ventilatory insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysphagia and nutrition",
+          "cells": [
+            {
+              "text": "Dysphagia management; gastrostomy feeding when swallowing fails"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic care",
+          "cells": [
+            {
+              "text": "Cramps, spasticity, sialorrhoea and secretions; physiotherapy, occupational therapy and aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude mimics",
+          "cells": [
+            {
+              "text": "Multifocal motor neuropathy with conduction block, which responds to intravenous immunoglobulin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MND clinic care",
+          "cells": [
+            {
+              "text": "Early palliative care and advance care planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "progressive_muscular_atrophy-dx-mgmt",
+      "title": "Diagnosis and management of Progressive muscular atrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected progressive muscular atrophy: lower motor neurone wasting and weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Conduction block, upper motor neurone signs, declining breathing, or bulbar weakness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for MMN with conduction block; respiratory support if failing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EMG and nerve conduction; MRI brain and spine; anti-GM1; CK; respiratory function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is widespread denervation confirmed with conduction block excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Conduction block present: consider multifocal motor neuropathy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Riluzole to modestly slow progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Non-invasive ventilation and regular respiratory function testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dysphagia management; gastrostomy feeding when swallowing fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Exclude multifocal motor neuropathy, which responds to IVIG",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "MND clinic care with early palliative care and advance care planning",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

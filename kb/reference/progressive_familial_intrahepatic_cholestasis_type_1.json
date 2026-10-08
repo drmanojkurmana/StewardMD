@@ -152,5 +152,342 @@
       "caption": "Overview comparison matrix for progressive familial intrahepatic cholestasis type 1."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Inherited cholestasis references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type_1-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum total bile acids with paired serum GGT",
+          "cells": [
+            {
+              "text": "Markedly raised bile acids with low or normal GGT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of ATP8B1",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy with electron microscopy",
+          "cells": [
+            {
+              "text": "Coarse granular Byler bile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sweat chloride testing",
+          "cells": [
+            {
+              "text": "Raised sweat chloride, which overlaps with cystic fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat-soluble vitamin levels and coagulation profile",
+          "cells": [
+            {
+              "text": "Malabsorption and coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic function assessment",
+          "cells": [
+            {
+              "text": "Pancreatitis, where suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type_1-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "PFIC type 2 (ABCB11/BSEP deficiency)",
+          "cells": [
+            {
+              "text": "Liver-restricted, with no diarrhoea or deafness"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PFIC type 3 (ABCB4/MDR3 deficiency)",
+          "cells": [
+            {
+              "text": "High GGT"
+            },
+            {
+              "text": "Serum GGT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystic fibrosis",
+          "cells": [
+            {
+              "text": "Raised sweat chloride"
+            },
+            {
+              "text": "Sweat chloride testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type_1-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ileal bile acid transporter inhibitor",
+          "cells": [
+            {
+              "text": "Odevixibat to interrupt enterohepatic recycling and relieve intractable pruritus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antipruritic therapy",
+          "cells": [
+            {
+              "text": "Rifampicin, bile acid sequestrants and antihistamines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and vitamins",
+          "cells": [
+            {
+              "text": "Fat-soluble vitamin replacement, medium-chain-triglyceride nutrition, treatment of secretory diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical biliary diversion",
+          "cells": [
+            {
+              "text": "Relieves pruritus and slows progression; often preferred over transplantation because grafts may develop steatosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extrahepatic monitoring",
+          "cells": [
+            {
+              "text": "Pancreatitis, sensorineural hearing loss with audiometry, and secretory diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Reserved for end-stage disease, with counselling on persistent extrahepatic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive ATP8B1 disorder; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type_1-dx-mgmt",
+      "title": "Diagnosis and management of Progressive Familial Intrahepatic Cholestasis Type 1",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PFIC type 1 (ATP8B1): intractable pruritus with cholestasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Intractable pruritus, vitamin K bleeding, cirrhosis or failure to thrive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for bleeding or progression to cirrhosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bile acids and GGT; ATP8B1 testing; biopsy with EM; sweat chloride; audiometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an ATP8B1 defect confirmed with PFIC types 2 and 3 excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PFIC type 2, type 3 or cystic fibrosis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Odevixibat, an ileal bile acid transporter inhibitor, for pruritus",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rifampicin, bile acid sequestrants and antihistamines for itch",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fat-soluble vitamins and medium-chain-triglyceride nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Biliary diversion, or liver transplantation if end-stage",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor extrahepatic features such as pancreatitis and hearing; genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

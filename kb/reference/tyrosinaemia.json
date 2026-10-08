@@ -160,5 +160,341 @@
       "caption": "Overview comparison matrix for tyrosinaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics; Scriver's Metabolic and Molecular Bases of Inherited Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tyrosinaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Succinylacetone in urine or blood",
+          "cells": [
+            {
+              "text": "Pathognomonic and most sensitive marker; raised tyrosine alone is non-specific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids",
+          "cells": [
+            {
+              "text": "Raised tyrosine, methionine and phenylalanine; tyrosine may be only modestly raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum alpha-fetoprotein and coagulation",
+          "cells": [
+            {
+              "text": "Rising or newly elevated AFP suggests hepatocellular carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FAH gene sequencing",
+          "cells": [
+            {
+              "text": "Molecular confirmation; erythrocyte FAH enzyme assay where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver ultrasound and MRI",
+          "cells": [
+            {
+              "text": "Hepatic nodules and hepatocellular carcinoma surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tubular profile and bone imaging",
+          "cells": [
+            {
+              "text": "Phosphate, bicarbonate, glucose and aminoaciduria; rickets on bone imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tyrosinaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute intermittent porphyria",
+          "cells": [
+            {
+              "text": "Crises are clinically similar; succinylacetone inhibits porphobilinogen synthase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Guillain-Barre syndrome",
+          "cells": [
+            {
+              "text": "Painful peripheral neuropathy during a crisis can mimic it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Galactosaemia or hereditary fructose intolerance",
+          "cells": [
+            {
+              "text": "Other inherited causes of infantile hepatic failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transient tyrosinaemia of the newborn",
+          "cells": [
+            {
+              "text": "Lacks succinylacetone, unlike the inherited disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tyrosinaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nitisinone",
+          "cells": [
+            {
+              "text": "Blocks 4-hydroxyphenylpyruvate dioxygenase upstream, preventing toxic fumarylacetoacetate and succinylacetone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tyrosine- and phenylalanine-restricted diet",
+          "cells": [
+            {
+              "text": "Specialist metabolic amino-acid formula; must accompany nitisinone to prevent keratopathy and skin lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biochemical monitoring",
+          "cells": [
+            {
+              "text": "Succinylacetone and plasma tyrosine to confirm control and guide diet and drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatocellular carcinoma surveillance",
+          "cells": [
+            {
+              "text": "Serial AFP and cross-sectional liver imaging, lifelong even on treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crisis and renal management",
+          "cells": [
+            {
+              "text": "Supportive care for porphyria-like crises; correct Fanconi tubulopathy with phosphate and vitamin D"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "For hepatocellular carcinoma or decompensated liver failure unresponsive to therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Metabolic medicine, hepatology, dietetics and ophthalmology with slit-lamp review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family testing and newborn screening for succinylacetone"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tyrosinaemia-dx-mgmt",
+      "title": "Diagnosis and management of tyrosinaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tyrosinaemia type 1: liver disease, neurological crisis or rickets",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neurological crisis, rapid liver failure or rising AFP)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent metabolic and hepatology review for crisis, coagulopathy or a hepatic nodule",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine and blood succinylacetone, plasma amino acids, AFP and FAH gene sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is succinylacetone raised, confirming tyrosinaemia type 1?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider transient tyrosinaemia of the newborn or hypertyrosinaemia from liver failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Nitisinone to block toxic fumarylacetoacetate and succinylacetone formation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tyrosine and phenylalanine-restricted diet with metabolic formula",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor succinylacetone and tyrosine; adjust diet and drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lifelong hepatocellular carcinoma surveillance with AFP and liver imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early treatment gives excellent survival; late or untreated disease has high mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,306 @@
       "caption": "Overview comparison matrix for osteopetrosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "osteopetrosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Diffuse sclerosis, bone-in-bone appearance and metaphyseal flaring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Cytopenias and extramedullary haematopoiesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteopetrosis gene panel including TCIRG1 and CLCN7",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging of cranial foramina",
+          "cells": [
+            {
+              "text": "Cranial nerve compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological and audiological assessment",
+          "cells": [
+            {
+              "text": "Optic and auditory involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow evaluation and calcium metabolism",
+          "cells": [
+            {
+              "text": "Marrow involvement and calcium status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteopetrosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "For severe infantile autosomal recessive osteoclast-intrinsic disease; can be curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive haematological care",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Transfusion for anaemia and thrombocytopenia; prompt treatment of intercurrent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fracture care",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Dense bone is brittle and prone to malunion; vigilance for mandibular osteomyelitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eye and hearing surveillance",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Surgical decompression of narrowed foramina where sight or hearing is threatened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene-panel testing",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Identifies osteoclast-poor defects in which transplantation is unlikely to help"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium monitoring and genetics",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Watch for hypocalcaemia in infantile disease; family screening and counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "osteopetrosis-dx-mgmt",
+      "title": "Diagnosis and management of Osteopetrosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dense brittle bones with cytopenias, hepatosplenomegaly or cranial nerve signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (visual loss, marrow failure, mandible infection or hypocalcaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent optic nerve decompression and haematology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey, blood count and film, TCIRG1 and CLCN7 testing, foramina imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does gene testing confirm an osteoclast-intrinsic defect suitable for transplant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Osteoclast-poor forms: transplant unlikely; supportive care and surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stem cell transplantation for severe infantile osteoclast-intrinsic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Transfusion for anaemia and thrombocytopenia; prompt treatment of infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Careful fracture care, as dense bone is brittle; watch for mandibular osteomyelitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Eye and hearing surveillance; decompress foramina if vision or hearing is threatened",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor calcium in infantile disease; genetics referral and family counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated severe infantile disease is often fatal early; transplant can be curative",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,335 @@
       "caption": "Overview comparison matrix for pallister-hall syndrome (gli3)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pallister_hall_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Hypothalamic hamartoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine evaluation",
+          "cells": [
+            {
+              "text": "Precocious puberty and anterior pituitary function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand and foot radiographs",
+          "cells": [
+            {
+              "text": "Central or postaxial polydactyly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngoscopy",
+          "cells": [
+            {
+              "text": "Bifid epiglottis and airway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal and renal examination and imaging",
+          "cells": [
+            {
+              "text": "Imperforate anus and renal anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GLI3 molecular testing",
+          "cells": [
+            {
+              "text": "Truncating variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pallister_hall_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Greig cephalopolysyndactyly syndrome",
+          "cells": [
+            {
+              "text": "Shares the GLI3 basis; a different position or class of variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated hypothalamic hamartoma",
+          "cells": [
+            {
+              "text": "Lacks the polydactyly and GLI3 pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pallister_hall_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anti-seizure medication",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "For gelastic and other seizures from the hamartoma; laser ablation or disconnection if refractory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine treatment",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Hormone replacement for hypopituitarism; GnRH analogue for central precocious puberty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Assessment and repair of a symptomatic bifid epiglottis or laryngotracheal cleft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal and renal care",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Surgical correction of imperforate anus; evaluation of renal anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb surgery",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Orthopaedic or plastic review of central or postaxial polydactyly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Autosomal dominant GLI3 inheritance and family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pallister_hall_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Pallister-Hall syndrome (GLI3)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypothalamic hamartoma-related seizures or early puberty with polydactyly",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (gelastic or intractable seizures, hypopituitarism or airway compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent endocrine replacement for neonatal hypopituitarism and adrenal risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI, endocrine panel, hand and foot films, laryngoscopy, GLI3 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does GLI3 testing confirm a truncating variant with hamartoma and polydactyly?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Greig syndrome, isolated hamartoma or other central polydactyly syndromes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Anti-seizure medication, with laser ablation or disconnection for refractory epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hormone replacement for hypopituitarism and a GnRH analogue for precocious puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Airway assessment and repair of a symptomatic bifid epiglottis or laryngeal cleft",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Repair of imperforate anus; evaluation and treatment of renal anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Orthopaedic review of polydactyly; genetic counselling for autosomal dominant GLI3",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally good with endocrine and airway care; normal intellect is usual",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

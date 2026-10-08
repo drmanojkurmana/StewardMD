@@ -148,5 +148,357 @@
       "caption": "Overview comparison matrix for primary lateral sclerosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_lateral_sclerosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain and whole spine",
+          "cells": [
+            {
+              "text": "Compressive, demyelinating and structural lesions excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography and nerve conduction studies",
+          "cells": [
+            {
+              "text": "Absence of lower motor neurone denervation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum vitamin B12, copper and very-long-chain fatty acids",
+          "cells": [
+            {
+              "text": "Metabolic myelopathies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HTLV-1 serology",
+          "cells": [
+            {
+              "text": "Where exposure risk exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for hereditary spastic paraparesis genes",
+          "cells": [
+            {
+              "text": "Familial pattern, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid analysis",
+          "cells": [
+            {
+              "text": "Inflammatory or infective myelopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_lateral_sclerosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Amyotrophic lateral sclerosis with predominant upper motor neurone signs",
+          "cells": [
+            {
+              "text": "Emergence of muscle wasting, fasciculation or a positive EMG"
+            },
+            {
+              "text": "Electromyography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary spastic paraparesis",
+          "cells": [
+            {
+              "text": "Familial pattern"
+            },
+            {
+              "text": "Genetic testing for HSP genes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spondylotic or other compressive myelopathy",
+          "cells": [
+            {
+              "text": "Sensory level or sphincter disturbance"
+            },
+            {
+              "text": "MRI of the brain and whole spine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tropical spastic paraparesis (HTLV-1 associated myelopathy)",
+          "cells": [
+            {
+              "text": "HTLV-1 exposure risk"
+            },
+            {
+              "text": "HTLV-1 serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subacute combined degeneration from vitamin B12 deficiency",
+          "cells": [
+            {
+              "text": "Vitamin B12 deficiency"
+            },
+            {
+              "text": "Serum vitamin B12"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_lateral_sclerosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antispasticity agents",
+          "cells": [
+            {
+              "text": "Oral baclofen or tizanidine; focal botulinum toxin; intrathecal baclofen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and mobility",
+          "cells": [
+            {
+              "text": "Stretching, orthoses and mobility aids to preserve function and prevent contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudobulbar affect",
+          "cells": [
+            {
+              "text": "SSRI, tricyclic antidepressant or dextromethorphan-quinidine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and swallowing",
+          "cells": [
+            {
+              "text": "Communication aids for spastic dysarthria; gastrostomy feeding if swallowing fails"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder symptoms",
+          "cells": [
+            {
+              "text": "Antimuscarinic therapy and urology input for spastic bladder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic review",
+          "cells": [
+            {
+              "text": "Detect emerging lower motor neurone signs that would reclassify the disorder as ALS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Motor neurone disease clinic with occupational therapy and psychological support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_lateral_sclerosis-dx-mgmt",
+      "title": "Diagnosis and management of Primary lateral sclerosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary lateral sclerosis: spasticity without lower motor neurone signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Muscle wasting, fasciculation, sensory level, sphincter loss or bulbar dysfunction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: reassess for ALS or structural cord lesion; urgent review if bulbar",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain and spine; EMG and nerve conduction; B12, copper, VLCFA; HTLV-1; CSF",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are mimics excluded, with no lower motor neurone denervation on EMG?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reclassify as ALS or another myelopathy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral antispastic agents such as baclofen or tizanidine",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, stretching, orthoses and mobility aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat pseudobulbar affect with an SSRI or dextromethorphan-quinidine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Periodic review for emerging lower motor neurone signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Motor neurone disease clinic care with occupational therapy and psychological support",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

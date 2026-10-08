@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for tarsal tunnel syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery / Campbell's Operative Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tarsal_tunnel_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Tarsal tunnel syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tarsal tunnel syndrome: burning sole pain with a positive Tinel sign",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: tunnel mass, progressive motor loss, or features of systemic neuropathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for tumour, infection or acute trauma around the ankle",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction and EMG; MRI of the tunnel; ultrasound; Tinel and eversion tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI or ultrasound show a space-occupying lesion in the tunnel?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider plantar fasciitis, diabetic polyneuropathy or S1 radiculopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Excise an identifiable lesion such as a ganglion or accessory muscle",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Orthoses and footwear for hindfoot deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Activity modification, NSAIDs and neuropathic medication",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Corticosteroid injection for inflammatory or milder cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Division of the flexor retinaculum when conservative treatment fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most reliable outcome when a lesion is excised; idiopathic cases respond less predictably",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tarsal_tunnel_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Results can be less reliable than at other sites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the tarsal tunnel",
+          "cells": [
+            {
+              "text": "Space-occupying lesion or accessory muscle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dynamic ultrasound",
+          "cells": [
+            {
+              "text": "Nerve and surrounding structures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight-bearing plain radiographs",
+          "cells": [
+            {
+              "text": "Bony deformity, coalition or osteophytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tinel sign and dorsiflexion-eversion test",
+          "cells": [
+            {
+              "text": "Reproduction of symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for diabetes or systemic neuropathy",
+          "cells": [
+            {
+              "text": "Systemic causes of nerve vulnerability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tarsal_tunnel_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Plantar fasciitis",
+          "cells": [
+            {
+              "text": "Burning sole pain and paraesthesiae with a Tinel sign behind the medial malleolus favour tunnel entrapment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral polyneuropathy, for example diabetic",
+          "cells": [
+            {
+              "text": "Bilateral or diffuse sensory loss points to generalised neuropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tarsal_tunnel_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Excision of an identifiable lesion",
+          "cells": [
+            {
+              "text": "Ganglion, lipoma, varicosities or accessory muscle; the most reliable outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correction of hindfoot deformity",
+          "cells": [
+            {
+              "text": "Orthoses and appropriate footwear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Activity modification, NSAIDs and neuropathic medication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroid injection",
+          "cells": [
+            {
+              "text": "Inflammatory or milder cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Division of the flexor retinaculum when conservative treatment fails"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic screening",
+          "cells": [
+            {
+              "text": "Diabetes mellitus and other neuropathies contributing to vulnerability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Hand or foot and ankle surgery; idiopathic cases respond less predictably"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

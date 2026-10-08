@@ -164,5 +164,323 @@
       "caption": "Overview comparison matrix for tumour lysis syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "British Committee for Standards in Haematology / Cairo-Bishop tumour lysis guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tumour_lysis_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum urate, potassium, phosphate and calcium",
+          "cells": [
+            {
+              "text": "Two or more of hyperuricaemia, hyperkalaemia, hyperphosphataemia and hypocalcaemia (laboratory TLS)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatinine",
+          "cells": [
+            {
+              "text": "Renal impairment, which with other features marks clinical TLS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lactate dehydrogenase and uric acid",
+          "cells": [
+            {
+              "text": "Tumour burden and risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "Hyperkalaemic changes and QT prolongation from hypocalcaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "G6PD assay",
+          "cells": [
+            {
+              "text": "Deficiency contraindicates rasburicase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and coagulation screen",
+          "cells": [
+            {
+              "text": "Concurrent DIC or leukostasis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tumour_lysis_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pseudohyperkalaemia",
+          "cells": [
+            {
+              "text": "Spurious result from a haemolysed or delayed sample, or extreme leucocytosis; confirm before treating"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rhabdomyolysis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tumour_lysis_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Risk stratification",
+          "cells": [
+            {
+              "text": "Low, intermediate, high or established TLS, set before cytoreductive therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-treatment intravenous hydration",
+          "cells": [
+            {
+              "text": "Start about a day before chemotherapy to drive high urine output; avoid routine urinary alkalinisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allopurinol or febuxostat",
+          "cells": [
+            {
+              "text": "Prevents new urate formation only; does not lower an existing urate load"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rasburicase",
+          "cells": [
+            {
+              "text": "High-risk or established TLS; avoid in G6PD deficiency because of haemolysis and methaemoglobinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperkalaemia",
+          "cells": [
+            {
+              "text": "Cation exchange resins, dextrose with insulin and calcium gluconate; sodium bicarbonate or loop diuretics as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperphosphataemia",
+          "cells": [
+            {
+              "text": "Hydration and oral phosphate binders; calcium-containing binders used cautiously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypocalcaemia",
+          "cells": [
+            {
+              "text": "Correct only when symptomatic, since calcium can worsen calcium-phosphate deposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement therapy",
+          "cells": [
+            {
+              "text": "Refractory hyperkalaemia or renal impairment not responding to medical measures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tumour_lysis_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of tumour lysis syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected TLS: high-burden proliferative malignancy starting cytoreductive therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ECG change, tetany or seizure, oliguria, rapidly rising potassium)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent hyperkalaemia treatment; early nephrology and renal replacement therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urate, potassium, phosphate, calcium, creatinine, LDH, ECG and G6PD assay",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are two or more of urate, potassium, phosphate and calcium abnormal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat monitoring twice daily through the at-risk window; check for haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intravenous hydration before chemotherapy; avoid routine urinary alkalinisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Allopurinol or febuxostat for prevention; rasburicase for high-risk or established TLS",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat hyperkalaemia; correct hypocalcaemia only when symptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal replacement therapy for refractory hyperkalaemia or renal impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most cases are preventable or reversible; established clinical TLS carries morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

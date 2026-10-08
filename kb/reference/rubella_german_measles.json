@@ -167,5 +167,439 @@
       "caption": "Overview comparison matrix for rubella (german measles)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Rubella Clinical Overview",
+      "kind": "web",
+      "url": "https://www.cdc.gov/rubella/hcp/clinical-overview/index.html"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 193-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rubella_german_measles-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing rubella and congenital rubella",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Incubation",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "12 to 23 days; mean 14 (Harrison) or 17 (CDC)",
+              "range": [
+                12,
+                23
+              ]
+            },
+            {
+              "text": "Prodrome 1 to 5 days in adults"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rash",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Starts on face, generalized in 24 h, lasts median 3 days",
+              "op": "=",
+              "value": 3
+            },
+            {
+              "text": "With postauricular and suboccipital nodes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Subclinical infection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "25 to 50%",
+              "range": [
+                25,
+                50
+              ]
+            },
+            {
+              "text": "Clinical diagnosis unreliable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infectious period",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "7 days before to 7 days after rash",
+              "op": "=",
+              "value": 7
+            },
+            {
+              "text": "Most contagious as rash erupts"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rubella IgM or fourfold IgG rise",
+          "cells": [
+            {
+              "text": "IgM capture ELISA most accurate"
+            },
+            {
+              "text": "Repeat IgM if negative before day 5 of rash"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR of throat or nasopharyngeal swab or urine",
+          "cells": [
+            {
+              "text": "Confirms acute infection"
+            },
+            {
+              "text": "Use with serology"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IgG avidity",
+          "cells": [
+            {
+              "text": "Low avidity means recent primary infection"
+            },
+            {
+              "text": "Key in pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CRS risk by gestation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to about 90% if infected in first 10 weeks",
+              "op": "<=",
+              "value": 90
+            },
+            {
+              "text": "{{hy:Risk falls sharply after about 16 weeks}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CRS permanent features",
+          "cells": [
+            {
+              "text": "Deafness, PDA and pulmonary artery stenosis, cataract, glaucoma, retinopathy, microcephaly, developmental delay"
+            },
+            {
+              "text": "Transient: hepatosplenomegaly, blueberry muffin purpura, hemolysis, IUGR, meningoencephalitis"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Mean incubation: Harrison gives 14 days, CDC 17 days; both give a 12 to 23 day range."
+    },
+    {
+      "id": "rubella_german_measles-ddx",
+      "kind": "ddx",
+      "title": "Rash illnesses that mimic rubella",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Measles",
+          "cells": [
+            {
+              "text": "High fever, cough, coryza, conjunctivitis, Koplik spots"
+            },
+            {
+              "text": "Measles IgM or PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parvovirus B19",
+          "cells": [
+            {
+              "text": "Slapped cheek, lacy rash, arthralgia"
+            },
+            {
+              "text": "B19 IgM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Roseola",
+          "cells": [
+            {
+              "text": "Rash after fever resolves in infants"
+            },
+            {
+              "text": "Clinical, HHV-6 serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scarlet fever",
+          "cells": [
+            {
+              "text": "Sandpaper rash, strawberry tongue, pharyngitis"
+            },
+            {
+              "text": "Throat culture, ASO"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Zika virus",
+          "cells": [
+            {
+              "text": "Travel, conjunctivitis, arthralgia"
+            },
+            {
+              "text": "Zika PCR or IgM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug eruption",
+          "cells": [
+            {
+              "text": "New drug exposure"
+            },
+            {
+              "text": "History"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other TORCH infections in newborn",
+          "cells": [
+            {
+              "text": "CMV, toxoplasmosis with similar neonatal signs"
+            },
+            {
+              "text": "Specific IgM, PCR"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rubella_german_measles-treatment",
+      "kind": "treatment",
+      "title": "Managing rubella",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Acquired rubella"
+            },
+            {
+              "text": "Antipyretics, NSAIDs for arthralgia; no antiviral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolation",
+          "cells": [
+            {
+              "text": "Cases"
+            },
+            {
+              "text": "7 days after rash onset; keep from pregnant women"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Notification and contact tracing",
+          "cells": [
+            {
+              "text": "Every case"
+            },
+            {
+              "text": "Exclude non-immune contacts in outbreaks for 23 days after last rash"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serology and counselling",
+          "cells": [
+            {
+              "text": "Exposed or symptomatic pregnant woman"
+            },
+            {
+              "text": "IgM with avidity; counsel on CRS risk by gestation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MMR vaccination",
+          "cells": [
+            {
+              "text": "Children (2 doses), non-immune adults"
+            },
+            {
+              "text": "Live vaccine; not in pregnancy; vaccinate postpartum"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CRS multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Infected infants"
+            },
+            {
+              "text": "Hearing, eye, heart care; infants shed virus for months"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rubella_german_measles-dx-mgmt",
+      "title": "Diagnosis and management of rubella",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Mild fever, maculopapular rash and posterior cervical nodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Rubella IgM and PCR; isolate for 7 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Pregnant patient or pregnant contact?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "IgM with IgG avidity to confirm primary infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Primary infection confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Counsel on CRS risk by gestational age; fetal follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Reassure; vaccinate after delivery if non-immune",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Supportive care, notify public health, check contacts",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

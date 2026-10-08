@@ -183,6 +183,11 @@
       "label": "Merck Manual Professional, Ascites",
       "url": "https://www.merckmanuals.com/professional/hepatic-and-biliary-disorders/approach-to-the-patient-with-liver-disease/ascites",
       "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 306-4",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -558,6 +563,255 @@
         }
       ],
       "footnote": "Avoid NSAIDs and aminoglycosides in ascites."
+    },
+    {
+      "id": "cirrhosis_and_its_complications-treatment-2",
+      "kind": "treatment",
+      "title": "Chronic hepatitis B treatment recommendations",
+      "rowHeader": "Condition",
+      "columns": [
+        "Clinical",
+        "HBV DNA (IU/mL)",
+        "ALT",
+        "Recommendation"
+      ],
+      "rows": [
+        {
+          "parameter": "HBeAg-reactive, no specific clinical stage (b)",
+          "cells": [
+            {
+              "text": "(b)"
+            },
+            {
+              "text": ">2 x 10^4"
+            },
+            {
+              "text": "<2 x ULN (c)"
+            },
+            {
+              "text": "No treatment; monitor. In patients over 40, with family history of hepatocellular carcinoma, and/or ALT persistently at the high end of the twofold range, liver biopsy may help decide on treatment"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "HBeAg-reactive, chronic hepatitis",
+          "cells": [
+            {
+              "text": "Chronic hepatitis"
+            },
+            {
+              "text": ">2 x 10^4 (d)"
+            },
+            {
+              "text": ">2 x ULN (d)"
+            },
+            {
+              "text": "Treat (e)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "HBeAg-reactive, compensated cirrhosis, high DNA",
+          "cells": [
+            {
+              "text": "Compensated cirrhosis"
+            },
+            {
+              "text": ">2 x 10^3"
+            },
+            {
+              "text": "Below or above ULN"
+            },
+            {
+              "text": "Treat (e) with oral agents, not PEG IFN"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "HBeAg-reactive, compensated cirrhosis, low DNA",
+          "cells": [
+            {
+              "text": "Compensated cirrhosis"
+            },
+            {
+              "text": "<2 x 10^3"
+            },
+            {
+              "text": "Above ULN"
+            },
+            {
+              "text": "Consider treatment (f)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "HBeAg-reactive, decompensated cirrhosis, DNA detectable",
+          "cells": [
+            {
+              "text": "Decompensated cirrhosis"
+            },
+            {
+              "text": "Detectable"
+            },
+            {
+              "text": "Below or above ULN"
+            },
+            {
+              "text": "Treat (e) with oral agents (g), not PEG IFN; refer for liver transplantation"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "HBeAg-reactive, decompensated cirrhosis, DNA undetectable",
+          "cells": [
+            {
+              "text": "Decompensated cirrhosis"
+            },
+            {
+              "text": "Undetectable"
+            },
+            {
+              "text": "Below or above ULN"
+            },
+            {
+              "text": "Observe; refer for liver transplantation"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "HBeAg-negative, no specific clinical stage (b)",
+          "cells": [
+            {
+              "text": "(b)"
+            },
+            {
+              "text": "2 x 10^3 or less"
+            },
+            {
+              "text": "ULN or less"
+            },
+            {
+              "text": "Inactive carrier; treatment not necessary"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "HBeAg-negative, chronic hepatitis, lower DNA",
+          "cells": [
+            {
+              "text": "Chronic hepatitis"
+            },
+            {
+              "text": ">10^3"
+            },
+            {
+              "text": "1 to over 2 x ULN (d)"
+            },
+            {
+              "text": "Consider liver biopsy; treat (h) if biopsy shows moderate to severe inflammation or fibrosis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "HBeAg-negative, chronic hepatitis, higher DNA",
+          "cells": [
+            {
+              "text": "Chronic hepatitis"
+            },
+            {
+              "text": ">10^4"
+            },
+            {
+              "text": ">2 x ULN (d)"
+            },
+            {
+              "text": "Treat (h,i)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "HBeAg-negative, compensated cirrhosis, high DNA",
+          "cells": [
+            {
+              "text": "Compensated cirrhosis"
+            },
+            {
+              "text": ">2 x 10^3"
+            },
+            {
+              "text": "Below or above ULN"
+            },
+            {
+              "text": "Treat (e) with oral agents, not PEG IFN"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "HBeAg-negative, compensated cirrhosis, low DNA",
+          "cells": [
+            {
+              "text": "Compensated cirrhosis"
+            },
+            {
+              "text": "<2 x 10^3"
+            },
+            {
+              "text": "Above ULN"
+            },
+            {
+              "text": "Consider treatment (f)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "HBeAg-negative, decompensated cirrhosis, DNA detectable",
+          "cells": [
+            {
+              "text": "Decompensated cirrhosis"
+            },
+            {
+              "text": "Detectable"
+            },
+            {
+              "text": "Below or above ULN"
+            },
+            {
+              "text": "Treat (h) with oral agents (g), not PEG IFN; refer for liver transplantation"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "HBeAg-negative, decompensated cirrhosis, DNA undetectable",
+          "cells": [
+            {
+              "text": "Decompensated cirrhosis"
+            },
+            {
+              "text": "Undetectable"
+            },
+            {
+              "text": "Below or above ULN"
+            },
+            {
+              "text": "Observe; refer for liver transplantation"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Footnotes (a) to (i) were not shown on the printed page. ULN means upper limit of normal."
     }
   ],
   "flowcharts": [

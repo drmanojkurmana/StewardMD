@@ -148,5 +148,326 @@
       "caption": "Overview comparison matrix for oral squamous cell carcinoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard oral medicine & OMFS references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oral_squamous_cell_carcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Incisional biopsy with grading",
+          "cells": [
+            {
+              "text": "Histological diagnosis and grade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neck examination and imaging",
+          "cells": [
+            {
+              "text": "Lymph node involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "Local extent and staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for distant metastasis and synchronous primaries",
+          "cells": [
+            {
+              "text": "Staging beyond the primary site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary evaluation",
+          "cells": [
+            {
+              "text": "Treatment planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oral_squamous_cell_carcinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Traumatic ulcer",
+          "cells": [
+            {
+              "text": "A lesion persisting beyond two to three weeks needs referral rather than assumed trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral leukoplakia or erythroplakia",
+          "cells": [
+            {
+              "text": "Premalignant; without invasion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oral_squamous_cell_carcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Wide surgical excision",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Tumour-free margins, neck dissection for nodal disease and microvascular reconstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Cisplatin-based chemoradiotherapy for adverse features such as positive margins or extracapsular extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Definitive treatment",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Radiotherapy or chemoradiotherapy where the tumour is unresectable or surgery is declined"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifestyle and pre-treatment care",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Stop tobacco, areca nut and alcohol; pre-treatment dental review, nutrition, prosthetic, speech and swallowing rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team-based staging and planning",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Head and neck multidisciplinary team"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance and palliation",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Recurrence and second primaries; palliative cetuximab or immune checkpoint inhibitors when needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oral_squamous_cell_carcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Oral squamous cell carcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Oral ulcer or patch persisting beyond two to three weeks; cancer suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (induration, fixation, rolled margins, firm neck node or bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent specialist referral and head and neck MDT review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Incisional biopsy with grading, neck examination, CT or MRI, chest staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show squamous cell carcinoma, with the neck and staging assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider traumatic ulcer, leukoplakia or infective ulcer; re-biopsy if persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Wide surgical excision with tumour-free margins, neck dissection and reconstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adjuvant radiotherapy; cisplatin chemoradiotherapy for positive margins or spread",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Definitive radiotherapy or chemoradiotherapy if unresectable or surgery declined",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Stop tobacco, areca nut and alcohol; pre-treatment dental and nutritional review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surveillance for recurrence and second primaries; palliative therapy if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Stage-dependent; early disease is favourable, advanced nodal disease much poorer",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

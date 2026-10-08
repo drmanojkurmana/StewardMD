@@ -151,5 +151,341 @@
       "caption": "Overview comparison matrix for neuronal ceroid lipofuscinosis type 10 (cln10 / cathepsin d deficiency)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics and inherited metabolic disease references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neuronal_ceroid_lipofuscinosis_cln10-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CTSD sequencing, NCL gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "Molecular confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cathepsin D enzyme activity in fibroblasts or leucocytes",
+          "cells": [
+            {
+              "text": "Reduced activity supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Severe atrophy with cerebellar and brainstem hypoplasia in the congenital form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electron microscopy",
+          "cells": [
+            {
+              "text": "Granular osmiophilic deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Burst-suppression pattern with neonatal seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroretinography and ophthalmology",
+          "cells": [
+            {
+              "text": "Retinopathy in later-onset forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antenatal imaging and foetal assessment",
+          "cells": [
+            {
+              "text": "Where congenital disease is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neuronal_ceroid_lipofuscinosis_cln10-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "CLN1 (PPT1) disease",
+          "cells": [
+            {
+              "text": "Shares granular osmiophilic deposits and saposin storage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital infection, malformation or other metabolic encephalopathy",
+          "cells": [
+            {
+              "text": "Other causes of congenital microcephaly with neonatal seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early infantile epileptic encephalopathies",
+          "cells": [
+            {
+              "text": "Other genetic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pontocerebellar hypoplasias",
+          "cells": [
+            {
+              "text": "Cerebellar and brainstem hypoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal peroxisomal or mitochondrial encephalopathies",
+          "cells": [
+            {
+              "text": "Neonatal onset with seizures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neuronal_ceroid_lipofuscinosis_cln10-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No disease-modifying therapy",
+          "cells": [
+            {
+              "text": "Management is supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal respiratory and seizure support",
+          "cells": [
+            {
+              "text": "For respiratory insufficiency and refractory neonatal seizures or status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure drugs in later-onset disease",
+          "cells": [
+            {
+              "text": "For seizures and myoclonus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and eye care",
+          "cells": [
+            {
+              "text": "Gastrostomy as swallowing declines; ophthalmology for retinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perinatal palliative care",
+          "cells": [
+            {
+              "text": "In the congenital form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and prenatal diagnosis",
+          "cells": [
+            {
+              "text": "Autosomal recessive; antenatal counselling where foetal movements are reduced"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neuronal_ceroid_lipofuscinosis_cln10-dx-mgmt",
+      "title": "Diagnosis and management of Neuronal ceroid lipofuscinosis type 10 (CLN10 / cathepsin D deficiency)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Congenital microcephaly with refractory neonatal seizures or reduced foetal movements",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (respiratory failure, refractory status, rapid deterioration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Neonatal respiratory and seizure support; early palliative discussion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CTSD sequencing, cathepsin D activity, MRI, EEG, electron microscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low cathepsin D activity with biallelic CTSD variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hypoxic-ischaemic injury or congenital infection; retest",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care; no disease-modifying therapy exists",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Respiratory support and control of refractory neonatal seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nutrition with gastrostomy and eye care for retinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Perinatal palliative care and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Congenital form is often lethal in the neonatal period; later-onset forms vary widely",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

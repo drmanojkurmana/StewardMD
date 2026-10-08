@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for sphincter of oddi dysfunction."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sphincter_of_oddi_dysfunction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Liver enzymes and pancreatic enzymes during pain",
+          "cells": [
+            {
+              "text": "Raised values show objective obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRCP",
+          "cells": [
+            {
+              "text": "Stones and structural disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic ultrasound",
+          "cells": [
+            {
+              "text": "Distal duct and ampulla"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sphincter of Oddi manometry",
+          "cells": [
+            {
+              "text": "Elevated basal sphincter pressure, in selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Pancreas and biliary tree"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sphincter_of_oddi_dysfunction-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Retained or recurrent bile duct stones",
+          "cells": [
+            {
+              "text": "Excluded by MRCP before the diagnosis is made"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic pancreatitis",
+          "cells": [
+            {
+              "text": "Structural pancreatic disease must be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ampullary or pancreaticobiliary tumour",
+          "cells": [
+            {
+              "text": "Weight loss or a mass suggests malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sphincter_of_oddi_dysfunction-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Subtype classification",
+          "cells": [
+            {
+              "text": "Objective obstruction versus pain alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biliary sphincterotomy",
+          "cells": [
+            {
+              "text": "Objective enzyme or duct abnormalities only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid sphincterotomy in pain-only cases",
+          "cells": [
+            {
+              "text": "Little benefit against real procedural risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical therapy",
+          "cells": [
+            {
+              "text": "Antispasmodics such as calcium channel blockers or nitrates; neuromodulators such as tricyclics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective manometry",
+          "cells": [
+            {
+              "text": "Accepting the risk of post-procedure pancreatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-ERCP prophylaxis",
+          "cells": [
+            {
+              "text": "Rectal NSAIDs and pancreatic duct stenting when intervention is undertaken"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional gut-brain management",
+          "cells": [
+            {
+              "text": "Realistic expectations and multidisciplinary support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sphincter_of_oddi_dysfunction-dx-mgmt",
+      "title": "Diagnosis and management of Sphincter of Oddi dysfunction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent biliary-type pain, often after cholecystectomy: suspected SOD",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (jaundice, cholangitis, weight loss or mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for cholangitis, obstruction or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Enzymes during pain; MRCP to exclude stones; EUS of the ampulla",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are objective abnormalities present, with stones and structural disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Manage as a functional gut-brain disorder with medical therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Classify into objective obstruction versus pain alone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sphincterotomy only for objective enzyme or duct abnormalities",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antispasmodics or neuromodulators for pain-only cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Rectal NSAIDs and duct stenting if intervention is undertaken",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Pain-only cases gain little from sphincterotomy; procedural pancreatitis is a real risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

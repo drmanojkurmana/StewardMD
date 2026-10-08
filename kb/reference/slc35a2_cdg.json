@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for slc35a2-cdg (udp-galactose transporter)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "slc35a2_cdg-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transferrin isoelectric focusing or mass spectrometry",
+          "cells": [
+            {
+              "text": "Type II pattern when abnormal; a normal result does not exclude the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC35A2 genetic testing",
+          "cells": [
+            {
+              "text": "Variants, including somatic mosaicism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Hypsarrhythmia or other epileptic patterns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Structural or malformative change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and growth assessment",
+          "cells": [
+            {
+              "text": "Developmental delay and hypotonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Galactose trial with biochemical monitoring",
+          "cells": [
+            {
+              "text": "Biochemical response in confirmed cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "slc35a2_cdg-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "PMM2-CDG and other type I disorders",
+          "cells": [
+            {
+              "text": "An intermediate transferrin pattern points towards a type I disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TMEM165-CDG and B4GALT1-CDG",
+          "cells": [
+            {
+              "text": "Other type II subtypes with a galactosylation defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other early-onset epileptic encephalopathies",
+          "cells": [
+            {
+              "text": "Infantile spasms and hypsarrhythmia occur; metabolic evaluation is still needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "slc35a2_cdg-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral galactose supplementation",
+          "cells": [
+            {
+              "text": "Partially bypasses the transport defect; biochemical monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure treatment and infantile spasms therapy",
+          "cells": [
+            {
+              "text": "Antiseizure medication; hormonal therapy or vigabatrin for infantile spasms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and speech therapy for delay and hypotonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycoform monitoring",
+          "cells": [
+            {
+              "text": "Transferrin glycoforms and clinical response; the pattern may normalise with age"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked inheritance and somatic mosaicism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Metabolic, neurology and neurodevelopmental teams"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "slc35a2_cdg-dx-mgmt",
+      "title": "Diagnosis and management of SLC35A2-CDG (UDP-galactose transporter)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Early-onset epilepsy with infantile spasms and delay: suspected SLC35A2-CDG",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (infantile spasms, drug-resistant seizures, regression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent epilepsy review for infantile spasms and drug-resistant seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transferrin IEF or MS; SLC35A2 sequencing with mosaicism; EEG; neuroimaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does SLC35A2 testing confirm a variant, including a mosaic variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "A normal transferrin test does not exclude; repeat genetic testing and reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral galactose supplementation with biochemical monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure medication; hormonal therapy or vigabatrin for infantile spasms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy, occupational and speech therapy for delay and hypotonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling on X-linked inheritance and mosaicism",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome varies; epilepsy and delay dominate, though galactose helps some patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

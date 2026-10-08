@@ -147,5 +147,325 @@
       "caption": "Overview comparison matrix for testicular lymphoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "testicular_lymphoma-dx-mgmt",
+      "title": "Diagnosis and management of Testicular lymphoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected testicular lymphoma: painless testicular mass in an older man",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: B symptoms, neurological signs, or contralateral testicular enlargement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haemato-oncology review for CNS involvement or disseminated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Scrotal ultrasound; normal AFP and beta-hCG; CT or PET staging; CSF examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does orchidectomy histology show diffuse large B-cell lymphoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider germ cell tumour, epididymo-orchitis or leukaemic infiltration",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Radical inguinal orchidectomy for histology and local control",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Systemic rituximab with anthracycline-based chemotherapy such as R-CHOP",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "CNS-directed prophylaxis with intrathecal or high-dose methotrexate",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prophylactic radiotherapy to the contralateral testis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Complete staging including CSF examination and PET-CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Aggressive, with CNS and contralateral relapse risk; prolonged follow-up needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "testicular_lymphoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Scrotal ultrasound",
+          "cells": [
+            {
+              "text": "Diffuse or multifocal hypoechoic infiltration, sometimes bilateral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AFP and beta-hCG, with LDH",
+          "cells": [
+            {
+              "text": "Typically normal; separates it from germ cell tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radical inguinal orchidectomy",
+          "cells": [
+            {
+              "text": "Histology and immunophenotyping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT chest, abdomen and pelvis, often with PET",
+          "cells": [
+            {
+              "text": "Systemic staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF examination and CNS imaging",
+          "cells": [
+            {
+              "text": "Sanctuary-site relapse pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow assessment",
+          "cells": [
+            {
+              "text": "Lymphoma staging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "testicular_lymphoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Germ cell tumour (seminoma or NSGCT)",
+          "cells": [
+            {
+              "text": "Germ cell tumour markers are normal in testicular lymphoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epididymo-orchitis",
+          "cells": [
+            {
+              "text": "Testicular lymphoma is the commonest testicular tumour over about 60 years"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leukaemic infiltration of the testis",
+          "cells": [
+            {
+              "text": "Systemic haematological disease; bone marrow assessment is part of lymphoma staging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "testicular_lymphoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Radical inguinal orchidectomy",
+          "cells": [
+            {
+              "text": "Tissue diagnosis and local control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic immunochemotherapy",
+          "cells": [
+            {
+              "text": "Rituximab with an anthracycline-based regimen such as R-CHOP, led by haemato-oncology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CNS-directed prophylaxis",
+          "cells": [
+            {
+              "text": "Intrathecal or high-dose methotrexate for CNS sanctuary relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral testis radiotherapy",
+          "cells": [
+            {
+              "text": "Prophylactic, for the other sanctuary site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complete staging",
+          "cells": [
+            {
+              "text": "CSF examination, bone marrow assessment and PET-CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged surveillance",
+          "cells": [
+            {
+              "text": "Late relapse in the CNS and contralateral testis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,323 @@
       "caption": "Overview comparison matrix for urethritis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "urethritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "First-void urine or urethral swab NAAT",
+          "cells": [
+            {
+              "text": "Gonorrhoea and chlamydia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urethral Gram-stain smear",
+          "cells": [
+            {
+              "text": "Leucocytes and Gram-negative intracellular diplococci"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonococcal culture with antimicrobial sensitivities",
+          "cells": [
+            {
+              "text": "Antimicrobial resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycoplasma genitalium and Trichomonas testing",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full STI screen with HIV and syphilis serology",
+          "cells": [
+            {
+              "text": "Co-existing infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Excludes urinary tract infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urethritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cystitis or lower urinary tract infection",
+          "cells": [
+            {
+              "text": "Urinalysis separates it from urethritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epididymo-orchitis",
+          "cells": [
+            {
+              "text": "Ascending complication of urethritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-infective urethritis",
+          "cells": [
+            {
+              "text": "Traumatic or chemical cause without infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reactive arthritis-associated urethritis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urethritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Gonococcal culture before treatment",
+          "cells": [
+            {
+              "text": "Given rising cephalosporin resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical antibiotics",
+          "cells": [
+            {
+              "text": "Covers gonococcal and chlamydial infection; intramuscular ceftriaxone for gonorrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abstinence",
+          "cells": [
+            {
+              "text": "Until the patient and partners complete treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Partner notification",
+          "cells": [
+            {
+              "text": "Epidemiological treatment of recent sexual contacts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full STI screen",
+          "cells": [
+            {
+              "text": "Including HIV and syphilis serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassessment",
+          "cells": [
+            {
+              "text": "Persistent or recurrent symptoms for reinfection or resistance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "urethritis-dx-mgmt",
+      "title": "Diagnosis and management of Urethritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected urethritis: urethral discharge, dysuria or itch after sexual exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fever, skin lesions, arthritis or epididymo-orchitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for disseminated gonococcal infection or ascending infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "First-void NAAT, urethral Gram stain, gonococcal culture, full STI screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is urethral inflammation shown by smear leucocytes or leucocyte esterase?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider non-infective urethritis or cystitis; reassess the diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Gonococcal culture with sensitivities before treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Empirical treatment covering gonococcal and chlamydial infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Abstinence until patient and partners complete treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Partner notification and epidemiological treatment of recent contacts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Persistent or recurrent urethritis suggests resistance or reinfection; reassess",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

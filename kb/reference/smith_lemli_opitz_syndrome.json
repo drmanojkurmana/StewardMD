@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for smith-lemli-opitz syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "smith_lemli_opitz_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma sterol analysis",
+          "cells": [
+            {
+              "text": "Raised 7-dehydrocholesterol with low cholesterol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DHCR7 genetic testing",
+          "cells": [
+            {
+              "text": "Molecular confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and renal ultrasound",
+          "cells": [
+            {
+              "text": "Structural cardiac and renal anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genital anatomy and karyotype in undervirilised males",
+          "cells": [
+            {
+              "text": "Impaired genital development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain imaging",
+          "cells": [
+            {
+              "text": "Midline and other malformations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and behavioural evaluation",
+          "cells": [
+            {
+              "text": "Learning and behavioural difficulties"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "smith_lemli_opitz_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Trisomy 13 and other chromosomal malformation syndromes",
+          "cells": [
+            {
+              "text": "Phenotype can be attributed to a chromosomal syndrome without sterol testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndromic autism with dysmorphism",
+          "cells": [
+            {
+              "text": "Autism-spectrum behaviour overlaps with this condition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "smith_lemli_opitz_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dietary cholesterol supplementation",
+          "cells": [
+            {
+              "text": "Raises cholesterol and lowers precursor sterols; may improve growth; neurodevelopmental benefit uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support",
+          "cells": [
+            {
+              "text": "Nasogastric or gastrostomy feeding and management of reflux for failure to thrive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical correction",
+          "cells": [
+            {
+              "text": "Cleft palate, cardiac and genital anomalies, and toe syndactyly where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Against the characteristic cutaneous photosensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stress-dose corticosteroid cover",
+          "cells": [
+            {
+              "text": "Adrenal insufficiency during illness or surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Growth, development and plasma sterols, with developmental and behavioural intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; carrier testing and prenatal diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "smith_lemli_opitz_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Smith-Lemli-Opitz syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Microcephaly, dysmorphism and 2-3 toe syndactyly: suspected Smith-Lemli-Opitz",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ambiguous genitalia, feeding failure, adrenal stress)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent endocrine evaluation for ambiguous genitalia or adrenal insufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma sterols; DHCR7 testing; echocardiography and renal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is 7-dehydrocholesterol raised with low cholesterol, and DHCR7 confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider chromosomal syndromes such as trisomy 13; repeat sterol profiling",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Dietary cholesterol supplementation, with uncertain neurodevelopmental benefit",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Feeding support and reflux management for failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgery for cleft palate, cardiac, genital anomalies and syndactyly",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Stress-dose corticosteroid cover during illness or surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Ranges from mild learning difficulty to lethal malformations",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

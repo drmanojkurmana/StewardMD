@@ -148,5 +148,323 @@
       "caption": "Overview comparison matrix for neonatal adrenoleukodystrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews Zellweger Spectrum Disorder / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neonatal_adrenoleukodystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma very-long-chain fatty acids",
+          "cells": [
+            {
+              "text": "Elevated; the principal screening test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma phytanic and pristanic acids and bile acid intermediates",
+          "cells": [
+            {
+              "text": "Raised phytanic and pristanic acids; abnormal bile acid intermediates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythrocyte plasmalogen levels",
+          "cells": [
+            {
+              "text": "Reduced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PEX gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms the genetic defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Demyelination and neuronal migration abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal function, ophthalmological and audiological assessment",
+          "cells": [
+            {
+              "text": "Adrenal insufficiency, retinopathy and hearing loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_adrenoleukodystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "X-linked adrenoleukodystrophy",
+          "cells": [
+            {
+              "text": "Different inheritance and mechanism; this recessive PEX disorder is a biogenesis defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Classic Zellweger syndrome or infantile Refsum disease",
+          "cells": [
+            {
+              "text": "Same spectrum; this form is milder with a later course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Single-enzyme peroxisomal defects, such as acyl-CoA oxidase deficiency",
+          "cells": [
+            {
+              "text": "Only one pathway is affected; a broad peroxisomal panel shows multiple defects here"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_adrenoleukodystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Glucocorticoid and mineralocorticoid replacement",
+          "cells": [
+            {
+              "text": "For adrenal insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticonvulsants",
+          "cells": [
+            {
+              "text": "For seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Gastrostomy feeding and fat-soluble vitamin supplementation; hepatic dysfunction and coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sensory support",
+          "cells": [
+            {
+              "text": "Hearing aids for sensorineural loss; ophthalmological care for retinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative and developmental care",
+          "cells": [
+            {
+              "text": "Given the progressive neurodegeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary coordination",
+          "cells": [
+            {
+              "text": "Metabolic medicine, neurology, ophthalmology and audiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive PEX disorder; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neonatal_adrenoleukodystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Neonatal adrenoleukodystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with hypotonia, seizures, poor feeding, liver or eye disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (adrenal crisis, refractory seizures, liver failure, aspiration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent adrenal cover and seizure control; assess for aspiration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma VLCFA, phytanic and pristanic acids, plasmalogens, PEX sequencing, MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Multiple peroxisomal abnormalities with PEX variants confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider X-linked ALD or a single-enzyme peroxisomal defect; broaden testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Glucocorticoid and mineralocorticoid replacement for adrenal insufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticonvulsants for seizures; gastrostomy and fat-soluble vitamins",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hearing aids and ophthalmological care for sensory loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Palliative and developmental supportive care given progressive neurodegeneration",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive; poor prognosis with severe neurodevelopmental impairment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

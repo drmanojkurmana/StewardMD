@@ -148,5 +148,316 @@
       "caption": "Overview comparison matrix for lunotriquetral instability."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lunotriquetral_instability-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "PA, lateral and clenched-fist radiographs",
+          "cells": [
+            {
+              "text": "Gilula arc breaks and step-off"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lateral view for VISI pattern",
+          "cells": [
+            {
+              "text": "Scaphoid flexion and capitolunate angulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR arthrography of the lunotriquetral ligament and TFCC",
+          "cells": [
+            {
+              "text": "Ligament and cartilage injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wrist arthroscopy",
+          "cells": [
+            {
+              "text": "Reference standard for diagnosis and grading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of ulnar variance",
+          "cells": [
+            {
+              "text": "Coexisting ulnar impaction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lunotriquetral_instability-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "TFCC tear",
+          "cells": [
+            {
+              "text": "Primary triangular fibrocartilage injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulnar impaction syndrome",
+          "cells": [
+            {
+              "text": "Positive ulnar variance; often coexists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extensor carpi ulnaris tendinopathy",
+          "cells": [
+            {
+              "text": "Tendon-based ulnar pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hamate or triquetral fracture",
+          "cells": [
+            {
+              "text": "Acute fracture after injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lunotriquetral_instability-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-operative care",
+          "cells": [
+            {
+              "text": "Splinting, activity modification, hand therapy and corticosteroid injection for isolated partial injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address ulnar impaction",
+          "cells": [
+            {
+              "text": "Ulnar shortening osteotomy or wafer procedure for positive ulnar variance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ligament repair or reconstruction",
+          "cells": [
+            {
+              "text": "Complete or symptomatic chronic instability without fixed deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lunotriquetral arthrodesis",
+          "cells": [
+            {
+              "text": "Refractory or chronic instability, especially with established VISI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand surgery referral",
+          "cells": [
+            {
+              "text": "Persistent ulnar-sided pain or clunking"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lunotriquetral_instability-dx-mgmt",
+      "title": "Diagnosis and management of lunotriquetral instability",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ulnar-sided wrist pain and clunking after a fall on the extended, deviated wrist",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fixed VISI deformity, perilunate pattern, neurovascular compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent hand surgery review for perilunate injury or neurovascular compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "PA, lateral and clenched-fist radiographs; MR arthrography; arthroscopy if unclear",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is lunotriquetral instability confirmed by MR or arthroscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider TFCC tear, ulnar impaction or midcarpal instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Splint, activity change, hand therapy and corticosteroid injection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat coexisting ulnar impaction with osteotomy or wafer procedure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ligament repair or reconstruction for complete chronic instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lunotriquetral arthrodesis for refractory or VISI instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Hand therapy rehabilitation after intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Partial injuries often settle; outcome is influenced by coexisting pathology",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

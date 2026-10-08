@@ -143,5 +143,296 @@
       "caption": "Overview comparison matrix for sleep-related hypermotor epilepsy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "American Academy of Sleep Medicine ICSD-3 / epilepsy literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sleep_related_hypermotor_epilepsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Video-EEG and video polysomnography",
+          "cells": [
+            {
+              "text": "Capture and characterisation of events"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Structural focus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Semiological and stereotypy assessment",
+          "cells": [
+            {
+              "text": "Brief, sudden and highly stereotyped events"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation in an autosomal dominant pattern",
+          "cells": [
+            {
+              "text": "Neuronal nicotinic acetylcholine receptor subunit variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history of nocturnal events",
+          "cells": [
+            {
+              "text": "Suggests the inherited form"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sleep_related_hypermotor_epilepsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "NREM parasomnias (sleepwalking, sleep terrors, confusional arousals)",
+          "cells": [
+            {
+              "text": "Video-EEG separates these from epileptic events"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "REM sleep behaviour disorder",
+          "cells": [
+            {
+              "text": "Video-EEG and video polysomnography separate it from hypermotor seizures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sleep_related_hypermotor_epilepsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Carbamazepine or oxcarbazepine often effective, titrated against clustering"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video-EEG and video polysomnography",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and distinguishes it from parasomnias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structural focus evaluation",
+          "cells": [
+            {
+              "text": "Epilepsy surgery considered in drug-resistant cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep optimisation",
+          "cells": [
+            {
+              "text": "Avoids precipitants such as sleep deprivation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant nicotinic receptor form, where identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Neurology and sleep medicine; counselling on driving and nocturnal safety"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sleep_related_hypermotor_epilepsy-dx-mgmt",
+      "title": "Diagnosis and management of Sleep-related hypermotor epilepsy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Stereotyped night-time hyperkinetic events in clusters: suspected hypermotor epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (frequent clusters with injury, daytime seizures, structural lesion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review for injurious clusters or new focal neurological signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Video-EEG and video polysomnography; MRI brain; family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do recordings show stereotyped seizures arising from non-REM sleep?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider NREM or REM parasomnias or sleep apnoea with arousals; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiseizure medication such as carbamazepine or oxcarbazepine, titrated to clustering",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Evaluate for a resectable focus; epilepsy surgery if drug-resistant",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Optimise sleep and avoid precipitants such as sleep deprivation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling where an autosomal dominant receptor form is found",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often responds to antiseizure medication; some are drug-resistant; usually lifelong",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,285 @@
       "caption": "Overview comparison matrix for propofol infusion syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies / Miller's Anesthesia",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "propofol_infusion_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial arterial blood gases and lactate",
+          "cells": [
+            {
+              "text": "Metabolic acidosis with rising lactate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase and myoglobin",
+          "cells": [
+            {
+              "text": "Rhabdomyolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium and renal function",
+          "cells": [
+            {
+              "text": "Hyperkalaemia and renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and continuous cardiac monitoring",
+          "cells": [
+            {
+              "text": "Bradyarrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Triglyceride levels",
+          "cells": [
+            {
+              "text": "Often raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Myocardial function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "propofol_infusion_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop propofol",
+          "cells": [
+            {
+              "text": "Stop the infusion immediately at first suspicion; substitute benzodiazepine, dexmedetomidine or opioid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiorespiratory support",
+          "cells": [
+            {
+              "text": "Vasopressors or inotropes; cardiac pacing for refractory bradyarrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct metabolic derangement",
+          "cells": [
+            {
+              "text": "Correct acidosis, hyperkalaemia and electrolytes; fluid resuscitation for rhabdomyolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement therapy",
+          "cells": [
+            {
+              "text": "Renal replacement or haemofiltration to clear the drug and its metabolites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Energy supply",
+          "cells": [
+            {
+              "text": "Adequate carbohydrate and glucose delivery to counter the energy deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory collapse",
+          "cells": [
+            {
+              "text": "Extracorporeal membrane oxygenation for refractory cardiovascular collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Limit infusion rate and duration; monitor lactate, CK, potassium and ECG on prolonged infusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "propofol_infusion_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Propofol infusion syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected propofol infusion syndrome: unexplained acidosis during propofol infusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rising lactate, new bradyarrhythmia, hyperkalaemia, or refractory cardiac dysfunction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: extracorporeal membrane oxygenation for refractory collapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial ABG and lactate; CK and myoglobin; potassium; ECG; triglycerides; echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are CK, lactate and ECG changes consistent with propofol infusion syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sepsis, other rhabdomyolysis or metabolic causes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop propofol immediately; substitute benzodiazepine, dexmedetomidine or opioid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vasopressors or inotropes; cardiac pacing for refractory bradyarrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct acidosis and hyperkalaemia; fluid resuscitation for rhabdomyolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal replacement or haemofiltration to clear drug and metabolites",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prevent recurrence by limiting infusion rate and duration and monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

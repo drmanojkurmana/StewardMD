@@ -148,5 +148,307 @@
       "caption": "Overview comparison matrix for testicular torsion."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "testicular_torsion-dx-mgmt",
+      "title": "Diagnosis and management of Testicular torsion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected testicular torsion: sudden severe scrotal pain with a high-riding testis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: sudden severe pain, high-riding testis, or absent cremasteric reflex?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate scrotal exploration and detorsion; do not delay for imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical examination; colour Doppler if uncertain; urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is torsion confirmed at exploration, with flow restored after detorsion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Torsion excluded: consider appendage torsion or epididymo-orchitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immediate scrotal exploration and detorsion as a time-critical emergency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Orchidopexy if the testis is viable, or orchidectomy if not",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fix the contralateral testis at the same operation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manual detorsion only as a temporising measure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Counselling on fertility and on cosmesis after orchidectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Salvage is high within about six hours and falls sharply after",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "testicular_torsion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Colour Doppler ultrasound",
+          "cells": [
+            {
+              "text": "Absent or reduced intratesticular flow; a normal study does not reliably exclude torsion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Typically normal; helps distinguish from infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical examination",
+          "cells": [
+            {
+              "text": "Swollen, tender, high-riding testis with horizontal lie and absent cremasteric reflex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral testis assessment",
+          "cells": [
+            {
+              "text": "Bilateral anatomical predisposition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "testicular_torsion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Epididymo-orchitis",
+          "cells": [
+            {
+              "text": "Sudden severe pain with a high-riding testis; attributing it to infection is a recognised pitfall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Torsion of the testicular appendage",
+          "cells": [
+            {
+              "text": "Gradual pain, normal cremasteric reflex and a tender blue dot point to the appendage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "testicular_torsion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immediate scrotal exploration and detorsion",
+          "cells": [
+            {
+              "text": "Time-critical; imaging must not delay surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orchidopexy",
+          "cells": [
+            {
+              "text": "Viable testis at exploration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orchidectomy",
+          "cells": [
+            {
+              "text": "Non-viable testis at exploration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral fixation",
+          "cells": [
+            {
+              "text": "Same operation, as the predisposing anomaly is often bilateral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manual detorsion",
+          "cells": [
+            {
+              "text": "Temporising measure only, if definitive surgery will be delayed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "Fertility, and cosmesis after orchidectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent urology referral",
+          "cells": [
+            {
+              "text": "On clinical suspicion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

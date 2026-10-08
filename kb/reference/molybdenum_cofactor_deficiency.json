@@ -150,5 +150,305 @@
       "caption": "Overview comparison matrix for molybdenum cofactor deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "molybdenum_cofactor_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fresh urine sulphite dipstick and S-sulphocysteine",
+          "cells": [
+            {
+              "text": "Sulphite and S-sulphocysteine accumulate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma uric acid",
+          "cells": [
+            {
+              "text": "Characteristically low; separates it from isolated sulphite oxidase deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma total homocysteine",
+          "cells": [
+            {
+              "text": "Tends to be low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Diffuse injury, cystic change, later atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MOCS1, MOCS2 and GPHN testing",
+          "cells": [
+            {
+              "text": "Defines genetic subtype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "molybdenum_cofactor_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated sulphite oxidase deficiency",
+          "cells": [
+            {
+              "text": "Uric acid is not low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoxic-ischaemic encephalopathy",
+          "cells": [
+            {
+              "text": "Imaging may mimic it without a supporting perinatal history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-ketotic hyperglycinaemia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "molybdenum_cofactor_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Fosdenopterin (cyclic pyranopterin monophosphate)",
+          "cells": [
+            {
+              "text": "Disease-specific for type A (MOCS1); start early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care for other subtypes",
+          "cells": [
+            {
+              "text": "No substrate therapy for type B and others"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary sulphur amino acid reduction",
+          "cells": [
+            {
+              "text": "Adjunct to limit sulphite and S-sulphocysteine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiepileptics and feeding support",
+          "cells": [
+            {
+              "text": "Nasogastric or gastrostomy feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biochemical monitoring",
+          "cells": [
+            {
+              "text": "Urinary sulphite, S-sulphocysteine, plasma urate, homocysteine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; prenatal diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "molybdenum_cofactor_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Molybdenum cofactor deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with intractable seizures and progressive encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Intractable seizures, HIE-like imaging without perinatal cause, low urate?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Test urine sulphite now; urgent metabolic referral, fosdenopterin if type A",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine sulphite and S-sulphocysteine, plasma urate, homocysteine, MOCS1/2 and GPHN",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Sulphite positive with low urate and a pathogenic variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider isolated sulphite oxidase deficiency, HIE, NKH, vitamin-responsive epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fosdenopterin for MOCS1 (type A) disease, started as early as possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dietary sulphur reduction, antiepileptics and feeding support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor urinary sulphite, S-sulphocysteine, urate and homocysteine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling, family screening and prenatal diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Classic form devastating; type A may respond to early treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

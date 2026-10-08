@@ -152,5 +152,344 @@
       "caption": "Overview comparison matrix for overactive bladder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "overactive_bladder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Frequency-volume bladder diary",
+          "cells": [
+            {
+              "text": "Frequency, voided volumes and urgency pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and urine culture",
+          "cells": [
+            {
+              "text": "Infection and haematuria excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-void residual by bladder ultrasound",
+          "cells": [
+            {
+              "text": "Retention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine cytology",
+          "cells": [
+            {
+              "text": "Carcinoma in situ, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urodynamic study",
+          "cells": [
+            {
+              "text": "Refractory, complex or pre-surgical cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystoscopy",
+          "cells": [
+            {
+              "text": "Haematuria, pain or malignancy risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "overactive_bladder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinary tract infection or bacterial cystitis",
+          "cells": [
+            {
+              "text": "Causes urgency and frequency; urinalysis and culture exclude it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder carcinoma",
+          "cells": [
+            {
+              "text": "Visible haematuria accompanying storage symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder pain syndrome",
+          "cells": [
+            {
+              "text": "Pain rather than urgency drives the frequency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "overactive_bladder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Behavioural therapy",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Fluid and caffeine change, bladder retraining and pelvic floor muscle training"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimuscarinic first-line",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Solifenacin or oxybutynin, minimising anticholinergic burden in older patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-3 agonist",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Mirabegron as an alternative or add-on where anticholinergic effects are a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contributing factors",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Treat constipation; review medications that worsen urgency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory symptoms",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Intradetrusor botulinum toxin, posterior tibial nerve stimulation or sacral neuromodulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusions",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Infection, haematuria and retention excluded before treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "overactive_bladder-dx-mgmt",
+      "title": "Diagnosis and management of Overactive bladder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Urgency with frequency and nocturia; no infection on urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (visible haematuria, sterile pyuria, retention or neurological signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: cystoscopy and urology review for haematuria or malignancy risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Frequency-volume diary, urinalysis, culture, post-void residual, cystoscopy if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the storage pattern confirmed, with infection, retention and cancer excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider UTI, bladder carcinoma, bladder pain syndrome, outlet obstruction or polyuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Behavioural therapy: fluid and caffeine change, bladder retraining, pelvic floor training",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antimuscarinic first-line, such as solifenacin or oxybutynin; watch anticholinergic load",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Mirabegron as an alternative or add-on where anticholinergic effects are a concern",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat constipation and review contributing medication",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Botulinum toxin, tibial nerve stimulation or sacral neuromodulation if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic and fluctuating but controllable with stepped treatment in most patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

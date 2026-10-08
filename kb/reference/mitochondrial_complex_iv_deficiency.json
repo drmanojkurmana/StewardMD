@@ -154,5 +154,332 @@
       "caption": "Overview comparison matrix for mitochondrial complex iv deficiency (cytochrome c oxidase deficiency)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mitochondrial_complex_iv_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood and CSF lactate and pyruvate with ratio",
+          "cells": [
+            {
+              "text": "Lactate-to-pyruvate ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine organic acids and renal tubular function screen",
+          "cells": [
+            {
+              "text": "Fanconi syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle histochemistry with combined COX/SDH staining",
+          "cells": [
+            {
+              "text": "COX-negative and ragged-red fibres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spectrophotometric respiratory chain enzymology",
+          "cells": [
+            {
+              "text": "Isolated Complex IV deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging for symmetrical basal ganglia and brainstem lesions",
+          "cells": [
+            {
+              "text": "Leigh-type lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing of nuclear genes and MT-CO genes",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and liver function tests",
+          "cells": [
+            {
+              "text": "Hypertrophic cardiomyopathy and hepatopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mitochondrial_complex_iv_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyruvate dehydrogenase complex deficiency",
+          "cells": [
+            {
+              "text": "Treatable Leigh-like disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infantile hypertrophic cardiomyopathy from other causes (e.g. Pompe disease)",
+          "cells": [
+            {
+              "text": "Infantile hypertrophic cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reversible infantile COX-deficient myopathy (MT-TE variant)",
+          "cells": [
+            {
+              "text": "Benign, reversible infantile myopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mitochondrial_complex_iv_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cofactor regimen",
+          "cells": [
+            {
+              "text": "Coenzyme Q10, riboflavin and antioxidants, while a treatable CoQ10 defect is excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic crises",
+          "cells": [
+            {
+              "text": "Intravenous dextrose and fluids; correction of acidosis; avoid fasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological care",
+          "cells": [
+            {
+              "text": "Anticonvulsants and symptomatic care for Leigh-type encephalopathy in SURF1 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography, ECG and heart-failure treatment for SCO2 and COX15 cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and hepatic involvement",
+          "cells": [
+            {
+              "text": "Electrolyte and bicarbonate replacement for Fanconi and hepatic disease in SCO1 and COX10"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reversible myopathy",
+          "cells": [
+            {
+              "text": "Supportive respiratory and nutritional care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; prenatal testing offered to the family"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mitochondrial_complex_iv_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Mitochondrial Complex IV Deficiency (Cytochrome c Oxidase Deficiency)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with Leigh-type brainstem features, lactic acidosis or cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Brainstem dysfunction with abnormal breathing, heart failure or severe acidotic crises?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent acidosis correction with IV dextrose; respiratory and cardiac support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lactate ratio; urine organic acids; muscle histochemistry; enzymology; MRI; gene panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is isolated Complex IV deficiency confirmed with a causative variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Complex I, III or V deficiency, PDH or biotinidase deficiency; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Coenzyme Q10, riboflavin and antioxidant cofactors while a treatable defect is excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intravenous dextrose, fluids and correction of acidosis; avoid fasting in crises",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticonvulsants and symptomatic care for Leigh-type encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Echocardiography, ECG and heart-failure treatment for cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Renal and hepatic monitoring; autosomal recessive counselling and prenatal testing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

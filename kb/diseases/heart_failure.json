@@ -273,6 +273,21 @@
       "id": "c4",
       "label": "Tables PDF, Table 234-4 and NYHA classification table",
       "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 243-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 230-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c7",
+      "label": "Tables PDF, Table 33-3",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -653,6 +668,198 @@
         }
       ],
       "footnote": "Drug doses are not stated in the sources opened."
+    },
+    {
+      "id": "heart_failure-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "NYHA and CCS functional classes",
+      "rowHeader": "Class",
+      "columns": [
+        "New York Heart Association (NYHA) functional class",
+        "Canadian Cardiovascular Society (CCS) functional class"
+      ],
+      "rows": [
+        {
+          "parameter": "Class I",
+          "cells": [
+            {
+              "text": "Cardiac disease without limitation of physical activity. Ordinary activity does not cause undue fatigue, palpitation, dyspnea or anginal pain."
+            },
+            {
+              "text": "Ordinary activity such as walking and climbing stairs does not cause angina. Angina occurs with strenuous, rapid or prolonged exertion at work or recreation."
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Class II",
+          "cells": [
+            {
+              "text": "Cardiac disease with slight limitation of physical activity. Comfortable at rest. Ordinary activity causes fatigue, palpitation, dyspnea or anginal pain."
+            },
+            {
+              "text": "Slight limitation of ordinary activity. Angina on walking or climbing stairs rapidly, walking uphill, walking or climbing stairs after meals, in cold, under emotional stress, or only in the few hours after awakening. Angina on walking more than two blocks on the level or climbing more than one flight of stairs at a normal pace in normal conditions."
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Class III",
+          "cells": [
+            {
+              "text": "Cardiac disease with marked limitation of physical activity. Comfortable at rest. Less than ordinary activity causes fatigue, palpitation, dyspnea or anginal pain."
+            },
+            {
+              "text": "Marked limitation of ordinary physical activity. Angina on walking one to two blocks on the level and climbing more than one flight of stairs in normal conditions."
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Class IV",
+          "cells": [
+            {
+              "text": "Cardiac disease with inability to carry on any physical activity without discomfort. Symptoms of cardiac insufficiency or the anginal syndrome may be present even at rest. Any activity increases discomfort."
+            },
+            {
+              "text": "Inability to carry on any physical activity without discomfort. Anginal syndrome may be present at rest."
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "CCS class III wording is kept as printed in the source."
+    },
+    {
+      "id": "heart_failure-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Indications for cardiac catheterization and coronary angiography",
+      "rowHeader": "Condition",
+      "columns": [
+        "Indications"
+      ],
+      "rows": [
+        {
+          "parameter": "Coronary artery disease, asymptomatic or symptomatic",
+          "cells": [
+            {
+              "text": "High risk for adverse outcome on noninvasive testing; sudden cardiac death; sustained (>30 sc) monomorphic ventricular tachycardia; nonsustained (<30 sc) polymorphic ventricular tachycardia"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Coronary artery disease, symptomatic",
+          "cells": [
+            {
+              "text": "Canadian Cardiology Society class III or IV angina on medical therapy; unstable angina at high or intermediate risk; chest-pain syndrome of unclear cause with equivocal noninvasive tests"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Acute myocardial infarction",
+          "cells": [
+            {
+              "text": "Reperfusion with primary percutaneous coronary intervention; persistent or recurrent ischemia; severe pulmonary edema; cardiogenic shock or hemodynamic instability; mechanical complications, mitral regurgitation, ventricular septal defect"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Valvular heart disease",
+          "cells": [
+            {
+              "text": "Suspected valve disease in symptomatic patients (dyspnea, angina, heart failure, syncope); infective endocarditis with coronary embolization; asymptomatic aortic regurgitation with cardiac enlargement or decreased ejection fraction; pre-valve surgery in older patients with coronary artery disease risk factors"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Congestive heart failure",
+          "cells": [
+            {
+              "text": "New onset with angina or suspected undiagnosed coronary artery disease"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Congenital heart disease",
+          "cells": [
+            {
+              "text": "Before surgical correction when symptoms or noninvasive testing suggest coronary disease; suspicion of congenital coronary anomalies; forms of congenital heart disease associated with coronary anomalies"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Pericardial disease",
+          "cells": [
+            {
+              "text": "Symptomatic patients with suspected cardiac tamponade or constrictive pericarditis"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Cardiac transplantation",
+          "cells": [
+            {
+              "text": "Preoperative and postsurgical evaluation"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Other conditions",
+          "cells": [
+            {
+              "text": "Hypertrophic cardiomyopathy with angina; diseases of the aorta when knowledge of coronary involvement is needed for management"
+            }
+          ],
+          "cite": "c6"
+        }
+      ],
+      "footnote": "Printed 'sc' is kept as in the source."
+    },
+    {
+      "id": "heart_failure-diagnostic-4",
+      "kind": "diagnostic",
+      "title": "Common causes of noncardiogenic pulmonary edema",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Direct injury to lung",
+          "cells": [
+            {
+              "text": "Chest trauma, pulmonary contusion; aspiration; smoke inhalation; pneumonia; oxygen toxicity; pulmonary embolism, reperfusion"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Hematogenous injury to lung",
+          "cells": [
+            {
+              "text": "Sepsis; pancreatitis; nonthoracic trauma; leukoagglutination reactions; multiple transfusions; intravenous drug use (for example heroin); cardiopulmonary bypass"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Possible lung injury plus elevated hydrostatic pressure",
+          "cells": [
+            {
+              "text": "High-altitude pulmonary edema; neurogenic pulmonary edema; reexpansion pulmonary edema"
+            }
+          ],
+          "cite": "c7"
+        }
+      ]
     }
   ],
   "flowcharts": [

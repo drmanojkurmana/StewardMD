@@ -152,5 +152,296 @@
       "caption": "Overview comparison matrix for neurotoxic shellfish poisoning."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Toxicology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neurotoxic_shellfish_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brevetoxin detection in shellfish, serum or urine",
+          "cells": [
+            {
+              "text": "Reference laboratory confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse oximetry, peak flow or spirometry",
+          "cells": [
+            {
+              "text": "Inhalational or respiratory symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Lower respiratory involvement or aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical history of shellfish meal or coastal exposure",
+          "cells": [
+            {
+              "text": "Red tide link"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neurotoxic_shellfish_poisoning-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Paralytic shellfish poisoning",
+          "cells": [
+            {
+              "text": "Saxitoxin with more severe paralysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ciguatera fish poisoning",
+          "cells": [
+            {
+              "text": "Temperature reversal and paraesthesiae from fish"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amnesic shellfish poisoning",
+          "cells": [
+            {
+              "text": "Domoic acid toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scombroid fish poisoning",
+          "cells": [
+            {
+              "text": "Histamine reaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asthma or allergic reaction",
+          "cells": [
+            {
+              "text": "Inhalational syndrome can mimic these"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neurotoxic_shellfish_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "The mainstay; illness is self-limiting with no antidote"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop eating contaminated shellfish",
+          "cells": [
+            {
+              "text": "Toxin is heat-stable and survives cooking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Move affected people from the aerosol",
+          "cells": [
+            {
+              "text": "Inhalational symptoms settle after exposure ends"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchodilator for wheeze",
+          "cells": [
+            {
+              "text": "Particularly in people with asthma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neurotoxic_shellfish_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Neurotoxic shellfish poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Reversed hot and cold sensation after a shellfish meal or coastal exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bronchospasm, ataxia or vertigo, marked bradycardia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Airway and respiratory support; monitor for autonomic disturbance",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brevetoxin testing, oximetry, peak flow or spirometry, chest radiograph if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Temperature reversal after shellfish or red tide exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider paralytic shellfish or ciguatera poisoning; reassess the exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stop eating contaminated shellfish, even if cooked",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Move people out of the aerosol and treat wheeze",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor respiratory and autonomic function until recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent; most recover within days, though asthma can make the course harder",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for netherton syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "netherton_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Light microscopy of eyebrow and scalp hair shafts",
+          "cells": [
+            {
+              "text": "Trichorrhexis invaginata, bamboo hair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SPINK5 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms biallelic loss-of-function variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy with LEKTI immunostaining",
+          "cells": [
+            {
+              "text": "Reduced LEKTI expression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum IgE and eosinophil count",
+          "cells": [
+            {
+              "text": "Atopic diathesis with high IgE"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum electrolytes and hydration status",
+          "cells": [
+            {
+              "text": "Neonatal fluid and electrolyte risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "netherton_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Severe early-onset atopic dermatitis",
+          "cells": [
+            {
+              "text": "Shares atopy; hair shaft defect and genetics separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital ichthyosiform erythroderma",
+          "cells": [
+            {
+              "text": "Other autosomal recessive congenital ichthyoses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peeling skin syndrome",
+          "cells": [
+            {
+              "text": "Superficial skin peeling without the hair defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Omenn syndrome",
+          "cells": [
+            {
+              "text": "Erythroderma from immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staphylococcal scalded skin syndrome",
+          "cells": [
+            {
+              "text": "Neonatal blistering erythroderma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "netherton_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal stabilisation",
+          "cells": [
+            {
+              "text": "Fluid, electrolyte and temperature management; nutritional support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liberal bland emollients",
+          "cells": [
+            {
+              "text": "Restores the skin barrier"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious topical therapy",
+          "cells": [
+            {
+              "text": "Avoid large areas of topical calcineurin inhibitor because of systemic absorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection control",
+          "cells": [
+            {
+              "text": "Treat sepsis and recurrent skin infection promptly"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "netherton_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Netherton syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Congenital erythroderma with a migratory rash, atopy and a hair shaft defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hypernatraemia, sepsis, failure to thrive, drug toxicity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Neonatal fluid, electrolyte and temperature stabilisation; treat infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hair shaft microscopy, SPINK5 testing, LEKTI immunostaining, IgE, electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "SPINK5 variants with trichorrhexis invaginata and high IgE?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider severe atopic dermatitis or congenital ichthyosis; retest",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stabilise fluids, electrolytes and temperature in the neonate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Liberal bland emollients to restore the barrier",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cautious topical use, avoiding systemic absorption of calcineurin inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lifelong dermatology and growth follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong; neonatal dehydration and infection carry the highest mortality risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

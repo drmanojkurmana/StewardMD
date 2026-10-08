@@ -146,5 +146,324 @@
       "caption": "Overview comparison matrix for oral leukoplakia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard oral medicine & OMFS references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oral_leukoplakia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Incisional or excisional biopsy",
+          "cells": [
+            {
+              "text": "Grades dysplasia and excludes invasive carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Documentation of site, size and pattern",
+          "cells": [
+            {
+              "text": "Baseline record for follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Removal of irritants and reassessment",
+          "cells": [
+            {
+              "text": "Excludes frictional keratosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal investigation",
+          "cells": [
+            {
+              "text": "Hyperplastic candidiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging or referral",
+          "cells": [
+            {
+              "text": "When carcinoma is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oral_leukoplakia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Frictional or traumatic keratosis",
+          "cells": [
+            {
+              "text": "Resolves when local irritants are removed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic hyperplastic candidiasis",
+          "cells": [
+            {
+              "text": "Fungal investigation separates it from an adherent leukoplakic patch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Established oral squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "Ulceration, induration or a developing mass suggests transformation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oral_leukoplakia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop tobacco, areca nut and alcohol",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Including smokeless forms; remove local mechanical irritants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy to grade dysplasia",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Incisional biopsy; excisional biopsy for small lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excision of high-risk lesions",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "High-grade dysplasia, non-homogeneous lesions or high-risk sites such as floor of mouth and ventrolateral tongue, by surgery or laser"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Photographic documentation and re-biopsy of changing lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proliferative verrucous leukoplakia",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Treated aggressively with close follow-up, given its high transformation rate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Oral medicine or head and neck services when carcinoma is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oral_leukoplakia-dx-mgmt",
+      "title": "Diagnosis and management of Oral leukoplakia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "White patch that cannot be wiped off, with no other definable cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (speckled or red component, induration, or moderate to severe dysplasia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent referral to oral medicine or head and neck services for carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Incisional or excisional biopsy for grading; irritant removal; fungal test if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is high-grade dysplasia or a high-risk site present on assessment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Lower risk: stop tobacco, areca nut and alcohol; reassess at follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop tobacco, areca nut and alcohol, and remove local irritants",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Excise high-grade or high-risk-site lesions by surgery or laser",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat proliferative verrucous leukoplakia aggressively with close follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term surveillance with photographs and re-biopsy of changing lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many stay stable after risk removal; transformation risk rises with grade and site",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

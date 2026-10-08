@@ -190,6 +190,11 @@
       "label": "IDSA Guidance on Treatment of Antimicrobial-Resistant Gram-Negative Infections, 2024",
       "url": "https://www.idsociety.org/practice-guideline/amr-guidance/",
       "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 149-2",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -549,6 +554,111 @@
         }
       ],
       "footnote": "Proteus, Morganella and Providencia are intrinsically less susceptible to imipenem; tetracyclines and polymyxins are poorly active against Proteeae and Serratia."
+    },
+    {
+      "id": "diseases_caused_by_gram_negative-ddx-2",
+      "kind": "ddx",
+      "title": "Intestinal pathogenic E. coli pathotypes",
+      "rowHeader": "Pathotype",
+      "columns": [
+        "Epidemiology",
+        "Clinical syndrome",
+        "Defining molecular trait",
+        "Responsible genetic element"
+      ],
+      "rows": [
+        {
+          "parameter": "STEC/EHEC",
+          "cells": [
+            {
+              "text": "Food, water, person-to-person; all ages, industrialized countries"
+            },
+            {
+              "text": "Hemorrhagic colitis, hemolytic-uremic syndrome"
+            },
+            {
+              "text": "Shiga toxin"
+            },
+            {
+              "text": "Lambda-like Stx1- or Stx2-encoding bacteriophage"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "ETEC",
+          "cells": [
+            {
+              "text": "Food, water; young children in and travelers to developing countries"
+            },
+            {
+              "text": "Traveler's diarrhea"
+            },
+            {
+              "text": "Heat-stable and heat-labile enterotoxins, colonization factors"
+            },
+            {
+              "text": "Virulence plasmid(s)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "EPEC",
+          "cells": [
+            {
+              "text": "Person-to-person; young children and neonates in developing countries"
+            },
+            {
+              "text": "Watery diarrhea, persistent diarrhea"
+            },
+            {
+              "text": "Localized adherence, attaching and effacing lesion on intestinal epithelium"
+            },
+            {
+              "text": "EPEC adherence factor plasmid and pathogenicity island [locus for enterocyte effacement (LEE)]"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "EIEC",
+          "cells": [
+            {
+              "text": "Food, water; children in and travelers to developing countries"
+            },
+            {
+              "text": "Dysentery"
+            },
+            {
+              "text": "Invasion of colonic epithelial cells, intracellular multiplication, cell-to-cell spread"
+            },
+            {
+              "text": "Multiple genes contained primarily in a large virulence plasmid"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "EAEC",
+          "cells": [
+            {
+              "text": "Possibly food, water; children in and travelers to developing countries; all ages in industrialized countries"
+            },
+            {
+              "text": "Traveler's diarrhea, acute diarrhea, persistent diarrhea"
+            },
+            {
+              "text": "Aggregative/diffuse adherence, virulence factors regulated by AggR"
+            },
+            {
+              "text": "Chromosomal or plasmid-associated adherence and toxin genes"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Source footnotes (a) to (c) are not shown on the page; the question mark before food and water for EAEC is rendered here as possibly."
     }
   ],
   "flowcharts": [

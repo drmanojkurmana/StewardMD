@@ -152,5 +152,305 @@
       "caption": "Overview comparison matrix for neuroleptic malignant syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neuroleptic_malignant_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Creatine kinase",
+          "cells": [
+            {
+              "text": "Markedly raised, reflecting muscle injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and potassium",
+          "cells": [
+            {
+              "text": "Rhabdomyolysis-related kidney injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core temperature monitoring",
+          "cells": [
+            {
+              "text": "Hyperthermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and inflammatory markers",
+          "cells": [
+            {
+              "text": "Excludes infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation profile",
+          "cells": [
+            {
+              "text": "Disseminated intravascular coagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging and lumbar puncture",
+          "cells": [
+            {
+              "text": "When CNS infection is possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neuroleptic_malignant_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Serotonin syndrome",
+          "cells": [
+            {
+              "text": "Rapid onset with hyperreflexia and clonus; NMS is slow in onset with hyporeflexia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meningitis or encephalitis",
+          "cells": [
+            {
+              "text": "Excluded by lumbar puncture and neuroimaging when infection is possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neuroleptic_malignant_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw the offending dopamine antagonist",
+          "cells": [
+            {
+              "text": "Or reinstate dopaminergic therapy if withdrawal precipitated it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Active cooling and intravenous fluids",
+          "cells": [
+            {
+              "text": "Supportive care in a high-dependency setting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rhabdomyolysis care",
+          "cells": [
+            {
+              "text": "Generous fluids and urinary alkalinisation while monitoring potassium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dantrolene and bromocriptine",
+          "cells": [
+            {
+              "text": "Dantrolene for rigidity; a dopamine agonist to reverse blockade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benzodiazepines",
+          "cells": [
+            {
+              "text": "For agitation; electroconvulsive therapy in refractory or catatonic cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious later antipsychotic use",
+          "cells": [
+            {
+              "text": "Lower-potency agent, titrated slowly, after recovery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neuroleptic_malignant_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Neuroleptic malignant syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hyperthermia, rigidity, altered consciousness and autonomic upset after an antipsychotic",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe hyperthermia, rising CK with kidney injury, arrhythmia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Stop the causative drug; start cooling and fluids in high-dependency care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK, renal function, potassium, temperature, FBC, coagulation, lumbar puncture if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Dopamine antagonist exposure with slow onset and hyporeflexia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider serotonin syndrome or CNS infection; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immediate withdrawal of the offending dopamine antagonist",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Active cooling, fluids and monitoring of CK and renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dantrolene for rigidity; bromocriptine to reverse dopamine blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cautious later antipsychotic reintroduction with a lower-potency agent",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most recover within one to two weeks with prompt care; can be fatal without it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

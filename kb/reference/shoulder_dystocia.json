@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for shoulder dystocia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "shoulder_dystocia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical recognition at delivery",
+          "cells": [
+            {
+              "text": "Priority in the acute event, not investigation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal arm, clavicle and neurological assessment",
+          "cells": [
+            {
+              "text": "Brachial plexus injury or fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cord blood gas",
+          "cells": [
+            {
+              "text": "Degree of acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal assessment",
+          "cells": [
+            {
+              "text": "Postpartum haemorrhage and perineal or anal sphincter trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antenatal fetal weight estimate and diabetes screening",
+          "cells": [
+            {
+              "text": "In at-risk pregnancies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "shoulder_dystocia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tight nuchal cord",
+          "cells": [
+            {
+              "text": "Difficulty without true shoulder impaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Locked twins",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cephalopelvic disproportion",
+          "cells": [
+            {
+              "text": "Obstructed labour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "shoulder_dystocia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Declare emergency",
+          "cells": [
+            {
+              "text": "Summon senior obstetric, midwifery, neonatal and anaesthetic help"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "McRoberts manoeuvre with suprapubic pressure",
+          "cells": [
+            {
+              "text": "First-line step to free the anterior shoulder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid fundal pressure and excess traction",
+          "cells": [
+            {
+              "text": "Mother stops pushing while shoulders are impacted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Internal rotation or posterior arm delivery",
+          "cells": [
+            {
+              "text": "If first-line fails, with episiotomy for room"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Last-resort manoeuvres",
+          "cells": [
+            {
+              "text": "All-fours position; then cleidotomy, symphysiotomy or cephalic replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal assessment",
+          "cells": [
+            {
+              "text": "Brachial plexus injury, fractures, cord blood gas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal assessment and debrief",
+          "cells": [
+            {
+              "text": "Haemorrhage and sphincter trauma, documented contemporaneously"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "shoulder_dystocia-dx-mgmt",
+      "title": "Diagnosis and management of Shoulder Dystocia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Head delivered with turtle sign, shoulders not delivering with routine traction",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Shoulders impacted despite routine traction (obstetric emergency)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Declare shoulder dystocia, call senior help, stop pushing, no fundal pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Continue routine delivery and assess progress",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Did McRoberts with suprapubic pressure free the shoulder?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Episiotomy, internal rotation, posterior arm; then all-fours or last-resort manoeuvres",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "McRoberts with suprapubic pressure; avoid fundal pressure and excess traction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Neonatal check for brachial plexus injury and fracture; cord gas",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Maternal check for haemorrhage and sphincter trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Document contemporaneously and debrief",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most resolve without lasting harm; brachial plexus injury is the commonest sequela",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

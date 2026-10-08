@@ -149,5 +149,334 @@
       "caption": "Overview comparison matrix for longitudinal melanonychia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "longitudinal_melanonychia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Onychoscopy",
+          "cells": [
+            {
+              "text": "Regular parallel lines in benign bands; irregular lines with disrupted parallelism in melanoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hutchinson sign assessment",
+          "cells": [
+            {
+              "text": "Pigment spread onto the proximal or lateral nail folds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail matrix biopsy",
+          "cells": [
+            {
+              "text": "Histology of a suspicious or changing band"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photographic documentation",
+          "cells": [
+            {
+              "text": "Change over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug history and examination of other nails and skin",
+          "cells": [
+            {
+              "text": "Provoking causes; multiple-nail involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycology or microbiology",
+          "cells": [
+            {
+              "text": "Where an infective pigment source is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "longitudinal_melanonychia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Subungual melanoma",
+          "cells": [
+            {
+              "text": "Single broad, irregular or widening band in an adult; biopsy needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail matrix naevus",
+          "cells": [
+            {
+              "text": "Benign band; onychoscopy and change over time guide the assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subungual haematoma",
+          "cells": [
+            {
+              "text": "Usually non-longitudinal and moves out with nail growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal or bacterial pigmentation (Pseudomonas, dematiaceous fungi)",
+          "cells": [
+            {
+              "text": "Infective source; mycology or microbiology identifies it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "longitudinal_melanonychia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Risk stratification",
+          "cells": [
+            {
+              "text": "ABCDEF features, Hutchinson sign and onychoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Benign patterns such as racial pigmentation or multiple-nail involvement, with photographs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdrawal of provoking causes",
+          "cells": [
+            {
+              "text": "Offending drugs, trauma or inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail matrix biopsy",
+          "cells": [
+            {
+              "text": "Any single, changing, irregular or worrying band, to exclude melanoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmed melanoma",
+          "cells": [
+            {
+              "text": "Definitive surgical excision and oncological staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology referral",
+          "cells": [
+            {
+              "text": "Timely re-review; biopsy rather than delay"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "longitudinal_melanonychia-dx-mgmt",
+      "title": "Diagnosis and management of Longitudinal melanonychia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Brown or black longitudinal nail band, with or without pigment spread to the nail folds",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (single broad irregular band in adult, Hutchinson sign, rapid change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent nail matrix biopsy for suspected subungual melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Onychoscopy, Hutchinson sign check, photographs, drug history, mycology if infective",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the band single, irregular or suspicious on onychoscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassure and observe; photograph to monitor change",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Biopsy any single, changing or irregular band to exclude melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withdraw provoking drugs or trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reassure benign patterns with photographic follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Excision and staging if melanoma is confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Dermatology re-review; biopsy rather than delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most bands are benign; subungual melanoma prognosis worsens with delayed diagnosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

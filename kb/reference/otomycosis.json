@@ -144,5 +144,306 @@
       "caption": "Overview comparison matrix for otomycosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "otomycosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Otoscopy",
+          "cells": [
+            {
+              "text": "Characteristic fungal debris; tympanic membrane integrity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microscopy and fungal culture of canal debris",
+          "cells": [
+            {
+              "text": "Organisms when the diagnosis is uncertain or disease is resistant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose or diabetic screen",
+          "cells": [
+            {
+              "text": "Diabetes in recurrent or severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune status assessment",
+          "cells": [
+            {
+              "text": "Immunosuppression in aggressive or persistent infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "otomycosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Necrotising (malignant) otitis externa",
+          "cells": [
+            {
+              "text": "Deep pain and granulation in a diabetic or immunocompromised patient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contact dermatitis to ear drops",
+          "cells": [
+            {
+              "text": "Itch after topical drops; stopping them is part of management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "otomycosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Repeated aural toilet",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Thorough clearance of fungal debris under otoscopy or microsuction; the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical antifungal",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Clotrimazole applied after debris clearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keep the ear dry",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Avoid water exposure, which sustains fungal growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop unnecessary drops",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Topical antibiotic-corticosteroid drops that suppress normal flora"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Predisposing conditions",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Optimise glycaemic control; consider immunosuppression in persistent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resistant cases and follow-up",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Microscopy and culture to guide therapy; review for frequent recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "otomycosis-dx-mgmt",
+      "title": "Diagnosis and management of Otomycosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Intense itch, blockage and discharge in a damp ear, often after swimming",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (deep pain with granulation, facial weakness or spread beyond the canal)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent necrotising otitis externa work-up in a diabetic or immunocompromised",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Otoscopy, microscopy and culture of debris; glucose screen in recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is fungal debris seen on otoscopy or culture, with necrotising disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bacterial otitis externa, keratosis obturans or malignant otitis externa",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Repeated thorough aural toilet under otoscopy or microsuction, the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical antifungal such as clotrimazole after debris clearance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Keep the ear dry; stop unnecessary antibiotic-steroid ear drops",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Optimise glycaemic control and address immunosuppression in persistent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent with debris clearance and antifungal drops; recurs often if the ear is wet",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

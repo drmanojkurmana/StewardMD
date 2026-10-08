@@ -152,5 +152,285 @@
       "caption": "Overview comparison matrix for middle lobe syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Murray and Nadel's Textbook of Respiratory Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "middle_lobe_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest CT with attention to the middle lobe bronchus, nodes and bronchiectasis",
+          "cells": [
+            {
+              "text": "Middle lobe bronchus and bronchiectasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexible bronchoscopy",
+          "cells": [
+            {
+              "text": "Obstruction; samples obtained"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sputum and bronchoalveolar lavage for bacteria, mycobacteria and fungi",
+          "cells": [
+            {
+              "text": "Causative organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytology or biopsy of any endobronchial lesion",
+          "cells": [
+            {
+              "text": "Endobronchial lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function testing and assessment for asthma",
+          "cells": [
+            {
+              "text": "Asthma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for impaired mucociliary clearance or immunodeficiency",
+          "cells": [
+            {
+              "text": "Impaired clearance or immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "middle_lobe_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Bronchoscopic relief of obstruction",
+          "cells": [
+            {
+              "text": "Foreign body or broncholith removed; endobronchial tumour treated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asthma control",
+          "cells": [
+            {
+              "text": "Inhaled corticosteroids for non-obstructive causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway clearance",
+          "cells": [
+            {
+              "text": "Chest physiotherapy and secretion-clearance techniques, especially with bronchiectasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted antibiotics",
+          "cells": [
+            {
+              "text": "Recurrent or post-obstructive infection, guided by sputum and lavage cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Middle lobectomy for refractory disease, localised bronchiectasis or a resectable obstructing lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying defects",
+          "cells": [
+            {
+              "text": "Impaired mucociliary clearance or immunodeficiency in recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging follow-up",
+          "cells": [
+            {
+              "text": "Confirm resolution and ensure malignancy has been excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "middle_lobe_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of middle lobe syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent or persistent middle lobe disease with bronchiectasis on CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Haemoptysis or endobronchial lesion, lobar collapse in a smoker, or systemic symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent bronchoscopy and tissue sampling for suspected malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest CT of the middle lobe bronchus; bronchoscopy; sputum and BAL cultures; PFTs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is endobronchial obstruction confirmed on bronchoscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Non-obstructive disease: optimise asthma, treat infection and check clearance",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Bronchoscopic removal of foreign body or broncholith; treat endobronchial tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Inhaled corticosteroids and antibiotics guided by sputum and lavage cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Chest physiotherapy and secretion-clearance techniques for bronchiectasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Middle lobectomy for refractory disease or a resectable obstructing lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Investigate clearance or immunodeficiency; imaging to confirm resolution",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

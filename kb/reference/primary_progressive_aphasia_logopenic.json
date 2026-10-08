@@ -148,5 +148,333 @@
       "caption": "Overview comparison matrix for logopenic variant primary progressive aphasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_progressive_aphasia_logopenic-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Speech and language assessment of naming, repetition and comprehension",
+          "cells": [
+            {
+              "text": "Naming, repetition and comprehension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological evaluation",
+          "cells": [
+            {
+              "text": "Verbal working memory and other domains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Left temporoparietal atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FDG-PET",
+          "cells": [
+            {
+              "text": "Left temporoparietal hypometabolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloid PET or CSF biomarkers",
+          "cells": [
+            {
+              "text": "Alzheimer pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Peripheral hearing loss contributing to communication difficulty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_progressive_aphasia_logopenic-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Typical amnestic Alzheimer's disease",
+          "cells": [
+            {
+              "text": "Typical amnestic presentation"
+            },
+            {
+              "text": "Amyloid PET or CSF biomarkers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular or post-stroke aphasia",
+          "cells": [
+            {
+              "text": "Sudden onset or stepwise deterioration"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anxiety or depression causing word-finding complaints",
+          "cells": [
+            {
+              "text": "Subjective word-finding complaints"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_progressive_aphasia_logopenic-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Speech and language therapy",
+          "cells": [
+            {
+              "text": "Targets word-retrieval and sentence-repetition deficits; communication strategies and aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm Alzheimer pathology",
+          "cells": [
+            {
+              "text": "Amyloid PET or CSF biomarkers to guide treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholinesterase inhibitor",
+          "cells": [
+            {
+              "text": "Donepezil trial; memantine added as generalised Alzheimer-type decline emerges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloid-directed antibody therapy",
+          "cells": [
+            {
+              "text": "Confirmed, eligible Alzheimer pathology, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychiatric symptoms",
+          "cells": [
+            {
+              "text": "Non-pharmacological management first; attention to swallowing, nutrition and safety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carer support",
+          "cells": [
+            {
+              "text": "Education, psychological support and timely advance care planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Cognitive neurology services; monitor cognitive progression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_progressive_aphasia_logopenic-dx-mgmt",
+      "title": "Diagnosis and management of Logopenic variant primary progressive aphasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected logopenic PPA: impaired word retrieval and sentence repetition",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Stepwise or sudden decline, rapid progression, focal signs or early behaviour change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for vascular, prion or inflammatory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Language assessment; neuropsychology; MRI and FDG-PET; amyloid PET or CSF; audiometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show left temporoparietal change with Alzheimer pathology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider non-fluent or semantic PPA, vascular aphasia or hearing loss; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Speech and language therapy for word retrieval and repetition",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Confirm Alzheimer pathology with amyloid PET or CSF biomarkers",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cholinesterase inhibitor such as donepezil; memantine if decline generalises",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Non-drug management of mood and neuropsychiatric symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Carer support, advance care planning and cognitive neurology follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

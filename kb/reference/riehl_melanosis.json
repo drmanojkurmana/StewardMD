@@ -145,5 +145,287 @@
       "caption": "Overview comparison matrix for riehl melanosis (pigmented contact dermatitis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "riehl_melanosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Patch and photopatch testing",
+          "cells": [
+            {
+              "text": "Causative allergen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cosmetic, fragrance and hair-dye history",
+          "cells": [
+            {
+              "text": "Exposure source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wood-lamp examination",
+          "cells": [
+            {
+              "text": "Depth of pigment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Where the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "riehl_melanosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Exogenous ochronosis",
+          "cells": [
+            {
+              "text": "Features from misuse of topical lightening agents (red flag)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced facial pigmentation",
+          "cells": [
+            {
+              "text": "Widespread or systemic pigmentation suggests a drug cause (red flag)"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "riehl_melanosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Culprit allergen",
+          "cells": [
+            {
+              "text": "Identify and avoid it through patch and photopatch testing; the central step"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop cosmetics",
+          "cells": [
+            {
+              "text": "Discontinue offending cosmetics, fragrances and hair dyes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical lightening",
+          "cells": [
+            {
+              "text": "Hydroquinone or azelaic acid to fade dermal pigment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laser",
+          "cells": [
+            {
+              "text": "Q-switched laser as an adjunct for persistent pigmentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Broad-spectrum photoprotection to limit further pigmentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Expectations",
+          "cells": [
+            {
+              "text": "Pigment improves slowly over months to years once the allergen is avoided"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "riehl_melanosis-dx-mgmt",
+      "title": "Diagnosis and management of Riehl melanosis (pigmented contact dermatitis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pigmented facial dermatitis linked to cosmetic or fragrance exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (no improvement with avoidance, ochronosis, widespread pigment)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Reconsider the diagnosis: exogenous ochronosis, drug or systemic cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Patch and photopatch testing, cosmetic history, Wood-lamp, dermoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a causative allergen identified on patch testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Skin biopsy and reconsider melasma or other pigmentary disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Identify and avoid the culprit allergen",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stop offending cosmetics, fragrances and hair dyes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical hydroquinone or azelaic acid to fade pigment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Photoprotection; Q-switched laser for persistent pigment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Pigmentation improves slowly over months to years once the allergen is avoided",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

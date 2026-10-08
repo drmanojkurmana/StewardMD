@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for tarsal tunnel posterior."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stewart's Focal Peripheral Neuropathies",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tarsal_tunnel_posterior-dx-mgmt",
+      "title": "Diagnosis and management of tarsal tunnel posterior",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected posterior tarsal tunnel syndrome: burning plantar pain with paraesthesiae",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: firm enlarging mass, progressive weakness, or bilateral sensory loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent imaging and specialist review for tumour or systemic neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plantar and tibial nerve conduction; EMG of intrinsic foot muscles; ankle MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI identify a compressive lesion such as a ganglion or varicosity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider plantar fasciitis, diabetic polyneuropathy or S1 radiculopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Excise any space-occupying lesion such as a ganglion or accessory muscle",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Orthoses and footwear to correct hindfoot valgus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Activity modification, NSAIDs and neuropathic pain agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Corticosteroid injection for milder or inflammatory presentations",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Flexor retinaculum release when conservative care fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Best when a discrete compressive lesion is released; idiopathic cases less predictable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tarsal_tunnel_posterior-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction of medial and lateral plantar nerves with tibial motor studies",
+          "cells": [
+            {
+              "text": "Plantar nerve conduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Needle EMG of intrinsic foot muscles",
+          "cells": [
+            {
+              "text": "Denervation of intrinsic muscles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the ankle",
+          "cells": [
+            {
+              "text": "Space-occupying lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution ultrasound of the tarsal tunnel",
+          "cells": [
+            {
+              "text": "Dynamic assessment of the tunnel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight-bearing foot radiographs",
+          "cells": [
+            {
+              "text": "Alignment and bony anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for diabetes and polyneuropathy",
+          "cells": [
+            {
+              "text": "Alternative causes of plantar symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tarsal_tunnel_posterior-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Plantar fasciitis",
+          "cells": [
+            {
+              "text": "Burning plantar pain with a Tinel sign behind the medial malleolus favours tunnel entrapment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral polyneuropathy, including diabetic",
+          "cells": [
+            {
+              "text": "Bilateral or diffuse sensory loss points to a generalised neuropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tarsal_tunnel_posterior-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Excision of a space-occupying lesion",
+          "cells": [
+            {
+              "text": "Ganglion, lipoma, varicosity or accessory muscle; gives the best outcomes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correction of biomechanical factors",
+          "cells": [
+            {
+              "text": "Orthoses and footwear for hindfoot valgus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Activity modification, NSAIDs and neuropathic pain agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroid injection",
+          "cells": [
+            {
+              "text": "Milder or inflammatory presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexor retinaculum release",
+          "cells": [
+            {
+              "text": "When conservative care fails and a compressive lesion is confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic screening",
+          "cells": [
+            {
+              "text": "Diabetes and other causes of neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Peripheral nerve or foot and ankle surgery for persistent symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

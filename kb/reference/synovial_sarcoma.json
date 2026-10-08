@@ -158,5 +158,363 @@
       "caption": "Overview comparison matrix for synovial sarcoma (ss18-ssx)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours of Soft Tissue and Bone",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "synovial_sarcoma-dx-mgmt",
+      "title": "Diagnosis and management of Synovial sarcoma (SS18-SSX)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected synovial sarcoma: enlarging, deep, painful soft-tissue mass near a joint",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (enlarging deep mass, new respiratory symptoms, or recurrence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent sarcoma team referral with chest imaging for metastases",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI of the primary site; core biopsy with SS18 testing; chest CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the SS18-SSX fusion confirmed by molecular testing and immunohistochemistry?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider malignant peripheral nerve sheath tumour, fibrosarcoma or mesothelioma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Wide en bloc excision with negative margins, limb sparing where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Perioperative radiotherapy for high-grade, deep or large tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ifosfamide-based chemotherapy for high-risk localised disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anthracycline plus ifosfamide for first-line metastatic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Metastasectomy for isolated pulmonary recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Surveillance of primary site and chest for up to 15 years",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Outcome depends on size, depth, grade and resection; late recurrence can occur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "synovial_sarcoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the primary site",
+          "cells": [
+            {
+              "text": "Deep extent and relation to joint and neurovascular structures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Characteristic soft-tissue calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest CT",
+          "cells": [
+            {
+              "text": "Pulmonary metastatic surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body functional imaging",
+          "cells": [
+            {
+              "text": "Higher-risk or large tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core or open biopsy with molecular testing",
+          "cells": [
+            {
+              "text": "SS18 rearrangement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry",
+          "cells": [
+            {
+              "text": "Cytokeratins, EMA, TLE1 and SS18-SSX-specific antibodies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "synovial_sarcoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign nerve sheath tumours and other slow-growing soft-tissue masses",
+          "cells": [
+            {
+              "text": "Slow growth or long duration does not exclude synovial sarcoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrosarcoma and other spindle-cell sarcomas",
+          "cells": [
+            {
+              "text": "Spindle-cell morphology; molecular confirmation of the SS18 fusion when morphology is ambiguous"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mesothelioma, for biphasic pleural lesions",
+          "cells": [
+            {
+              "text": "Focal keratin positivity alone is not diagnostic; full immunohistochemistry and molecular context are needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "synovial_sarcoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical local control",
+          "cells": [
+            {
+              "text": "Localised disease: wide en bloc excision with negative margins, limb sparing where feasible, including the biopsy tract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Function-sparing nerve dissection",
+          "cells": [
+            {
+              "text": "Tumour can encase a major nerve; nerve resection may be needed for high-grade disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perioperative radiotherapy",
+          "cells": [
+            {
+              "text": "High-grade, deep or large tumours, or close or positive margins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemotherapy for high-risk localised disease",
+          "cells": [
+            {
+              "text": "Neoadjuvant or adjuvant, often ifosfamide-based such as anthracycline plus ifosfamide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "First-line metastatic therapy",
+          "cells": [
+            {
+              "text": "Anthracycline plus ifosfamide when a response is needed; single-agent anthracycline where combination therapy is not suited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Later-line systemic options",
+          "cells": [
+            {
+              "text": "Gemcitabine plus docetaxel, single-agent ifosfamide, pazopanib, dacarbazine or trabectedin; sorafenib, sunitinib and mTOR inhibitors not favoured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastasectomy",
+          "cells": [
+            {
+              "text": "Isolated or oligometastatic pulmonary recurrence; associated with prolonged survival"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical trials of engineered T-cell receptor therapy",
+          "cells": [
+            {
+              "text": "Targets NY-ESO-1 and MAGE-A4; meaningful responses in early-phase studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Primary site and chest imaging, given late recurrence up to 15 years"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

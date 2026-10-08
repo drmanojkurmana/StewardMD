@@ -147,5 +147,267 @@
       "caption": "Overview comparison matrix for slipped capital femoral epiphysis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon's System of Orthopaedics and Fractures",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "slipped_capital_femoral_epiphysis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "AP and frog-lateral pelvic radiographs of both hips",
+          "cells": [
+            {
+              "text": "Subtle slips are seen best on the lateral view"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Klein's line and physeal appearance",
+          "cells": [
+            {
+              "text": "Whether Klein's line intersects the epiphysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or ultrasound",
+          "cells": [
+            {
+              "text": "Equivocal cases or a pre-slip"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine and metabolic workup",
+          "cells": [
+            {
+              "text": "Thyroid and renal function in young, atypical or bilateral cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hip examination",
+          "cells": [
+            {
+              "text": "Loss of internal rotation and obligatory external rotation on flexion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "slipped_capital_femoral_epiphysis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immediate non-weight-bearing and urgent referral",
+          "cells": [
+            {
+              "text": "Prevents further slippage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "In-situ fixation with a single cannulated screw",
+          "cells": [
+            {
+              "text": "Standard surgical treatment for stable slips"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent gentle reduction and fixation",
+          "cells": [
+            {
+              "text": "For unstable slips, with counselling on the high risk of avascular necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral prophylactic fixation",
+          "cells": [
+            {
+              "text": "Considered in young children or those with an underlying endocrinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine and metabolic investigation",
+          "cells": [
+            {
+              "text": "Hypothyroidism or renal disease in atypical, young or bilateral presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance and corrective surgery",
+          "cells": [
+            {
+              "text": "Avascular necrosis, chondrolysis and femoroacetabular impingement; osteotomy where needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "slipped_capital_femoral_epiphysis-dx-mgmt",
+      "title": "Diagnosis and management of Slipped capital femoral epiphysis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adolescent hip, groin or knee pain with limp: suspected SCFE",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (inability to weight-bear, bilateral or very young presentation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent orthopaedic referral; unstable slip needs gentle reduction and fixation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Frog-lateral and AP pelvic films of both hips; Klein's line; hip examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show a physeal slip on the frog-lateral view?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Perthes disease, transient synovitis or septic arthritis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop weight-bearing and refer urgently to orthopaedics",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "In-situ fixation with a single cannulated screw for stable slips",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider contralateral prophylactic fixation in young or endocrine cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Investigate hypothyroidism or renal disease in atypical presentations",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Stable slips fixed promptly do well; unstable slips carry avascular necrosis risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

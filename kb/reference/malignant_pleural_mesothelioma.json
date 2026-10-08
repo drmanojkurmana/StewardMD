@@ -150,5 +150,307 @@
       "caption": "Overview comparison matrix for malignant pleural mesothelioma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Murray & Nadel's Textbook of Respiratory Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "malignant_pleural_mesothelioma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Image-guided or thoracoscopic pleural biopsy",
+          "cells": [
+            {
+              "text": "Tissue diagnosis; cytology often insufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nodular or rind-like pleural thickening on imaging",
+          "cells": [
+            {
+              "text": "Encasement of the lung"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subtyping: epithelioid, sarcomatoid, biphasic",
+          "cells": [
+            {
+              "text": "Behaviour and outlook"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exposure history",
+          "cells": [
+            {
+              "text": "Asbestos latency of several decades"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "malignant_pleural_mesothelioma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign pleural plaques",
+          "cells": [
+            {
+              "text": "Focal and non-invasive; do not exclude mesothelioma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural metastasis from carcinoma",
+          "cells": [
+            {
+              "text": "Biopsy and immunohistochemistry separate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant pleural effusion",
+          "cells": [
+            {
+              "text": "Adenocarcinoma origin on tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign asbestos-related effusion",
+          "cells": [
+            {
+              "text": "No diffuse invasive thickening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "malignant_pleural_mesothelioma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multimodality treatment",
+          "cells": [
+            {
+              "text": "Systemic therapy with selected surgery and radiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Effusion control",
+          "cells": [
+            {
+              "text": "Drainage and pleurodesis or catheter for symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative care",
+          "cells": [
+            {
+              "text": "Alongside active treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drain tracts",
+          "cells": [
+            {
+              "text": "Risk of tumour seeding along biopsy or drain tracts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exposure documentation",
+          "cells": [
+            {
+              "text": "Compensation advice where recognised as occupational"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "malignant_pleural_mesothelioma-dx-mgmt",
+      "title": "Diagnosis and management of Malignant pleural mesothelioma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive breathlessness and unilateral effusion with prior asbestos exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid effusion, chest wall invasion or sarcomatoid features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent specialist referral for tissue diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Image-guided or thoracoscopic pleural biopsy; cytology alone is often insufficient",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does pleural tissue show mesothelioma with exposure history?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider benign plaques, metastatic carcinoma or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Multimodality treatment with systemic therapy and selected surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Radiotherapy as part of multimodal care",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Drainage and pleurodesis for effusion control",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Early palliative care alongside treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Document exposure and advise on compensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Aggressive with poor prognosis; sarcomatoid subtype has the worst outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

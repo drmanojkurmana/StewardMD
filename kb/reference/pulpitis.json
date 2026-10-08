@@ -146,5 +146,306 @@
       "caption": "Overview comparison matrix for pulpitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard oral medicine & OMFS references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pulpitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Thermal and electric pulp sensibility testing",
+          "cells": [
+            {
+              "text": "Pulp vitality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Percussion and palpation",
+          "cells": [
+            {
+              "text": "Periapical involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periapical radiography",
+          "cells": [
+            {
+              "text": "Caries depth and apical change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bite test and transillumination",
+          "cells": [
+            {
+              "text": "Suspected cracks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective anaesthesia",
+          "cells": [
+            {
+              "text": "Source of poorly localised pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulpitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Cracked tooth syndrome",
+          "cells": [
+            {
+              "text": "Pain on biting a cracked tooth"
+            },
+            {
+              "text": "Bite test and transillumination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periapical periodontitis or abscess",
+          "cells": [
+            {
+              "text": "Periapical involvement"
+            },
+            {
+              "text": "Periapical radiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maxillary sinusitis",
+          "cells": [
+            {
+              "text": "Pain referred to upper teeth"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulpitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reversible pulpitis",
+          "cells": [
+            {
+              "text": "Remove the carious or offending irritant and restore"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Irreversible pulpitis",
+          "cells": [
+            {
+              "text": "Root canal treatment (pulpectomy) where the tooth is restorable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "NSAIDs or other analgesics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Reserved for spreading or systemic infection, not localised pulpitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulp status",
+          "cells": [
+            {
+              "text": "Confirm with thermal testing before definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pulpitis-dx-mgmt",
+      "title": "Diagnosis and management of Pulpitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pulpitis: tooth pain with thermal sensitivity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Facial swelling, fever, trismus, or airway-threatening swelling?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for deep neck space infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Sensibility testing; percussion; periapical radiograph; bite test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the pulp irreversibly inflamed on sensibility testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reversible pulpitis: remove the irritant and restore; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Remove the carious or offending irritant for reversible pulpitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Root canal treatment for irreversible pulpitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "NSAIDs or other analgesics",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antibiotics only for spreading or systemic infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Restore the tooth; review symptoms and periapical status",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

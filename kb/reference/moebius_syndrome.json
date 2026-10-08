@@ -150,5 +150,276 @@
       "caption": "Overview comparison matrix for moebius syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "moebius_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cranial MRI",
+          "cells": [
+            {
+              "text": "Brainstem and cranial nerve nuclei"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment of eye movements and corneal protection",
+          "cells": [
+            {
+              "text": "Eye movement and corneal protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and swallowing evaluation with aspiration screening",
+          "cells": [
+            {
+              "text": "Aspiration risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological assessment",
+          "cells": [
+            {
+              "text": "Hearing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular investigation, where a myopathic differential is considered",
+          "cells": [
+            {
+              "text": "Neuromuscular differential"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "moebius_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ocular lubrication and eyelid surgery",
+          "cells": [
+            {
+              "text": "Regular lubricants; eyelid surgery where the cornea is at risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support and airway protection",
+          "cells": [
+            {
+              "text": "Swallowing assessment; gastrostomy where aspiration risk is high"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Strabismus surgery",
+          "cells": [
+            {
+              "text": "Corrects impaired abduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Facial reanimation",
+          "cells": [
+            {
+              "text": "Gracilis free-muscle transfer to restore a smile and oral competence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and craniofacial care",
+          "cells": [
+            {
+              "text": "Speech and language therapy; craniofacial or orthodontic input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb and chest-wall anomalies",
+          "cells": [
+            {
+              "text": "Orthopaedic care for talipes and reduction defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Audiology, developmental support and genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "moebius_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Moebius syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with facial weakness, feeding difficulty and poor eye closure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Aspiration, feeding failure, corneal exposure, airway compromise or apnoea?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Protect the cornea and airway; feeding support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cranial MRI; eye movement and corneal assessment; swallow screen; audiology; genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a cranial nerve nuclear pattern confirmed on MRI and examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital myasthenic syndrome, myopathy or birth-related nerve injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Regular lubricants and eyelid surgery where the cornea is at risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Feeding support, swallowing assessment and gastrostomy if aspiration risk is high",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Strabismus surgery for impaired abduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Facial reanimation such as gracilis free-muscle transfer",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary follow-up with audiology, development and genetics",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

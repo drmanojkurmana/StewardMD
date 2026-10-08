@@ -150,5 +150,361 @@
       "caption": "Overview comparison matrix for keratoacanthoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "keratoacanthoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Excisional biopsy including the deep base",
+          "cells": [
+            {
+              "text": "Assess invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Central keratin, peripheral white circles, looped vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression and drug history",
+          "cells": [
+            {
+              "text": "Including BRAF inhibitors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiplicity and family history",
+          "cells": [
+            {
+              "text": "Syndromic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mismatch repair immunohistochemistry",
+          "cells": [
+            {
+              "text": "Muir-Torre syndrome when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regional lymph node examination",
+          "cells": [
+            {
+              "text": "If invasive squamous carcinoma confirmed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "keratoacanthoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Invasive squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "Deep invasion on biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nodular basal cell carcinoma",
+          "cells": [
+            {
+              "text": "Peripheral palisading, no keratin crater"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertrophic actinic keratosis",
+          "cells": [
+            {
+              "text": "Thinner, slower growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Verruca vulgaris",
+          "cells": [
+            {
+              "text": "Viral warty papillomatosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Giant molluscum contagiosum",
+          "cells": [
+            {
+              "text": "Central umbilication with core"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amelanotic melanoma",
+          "cells": [
+            {
+              "text": "Pigmentation absent; histology required"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "keratoacanthoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Complete excision with deep margin as preferred"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pathology",
+          "cells": [
+            {
+              "text": "Histology of excised deep base to detect invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Large or difficult lesions",
+          "cells": [
+            {
+              "text": "Intralesional methotrexate or 5-fluorouracil"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple or eruptive lesions",
+          "cells": [
+            {
+              "text": "Systemic retinoids such as acitretin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drivers",
+          "cells": [
+            {
+              "text": "Review immunosuppression and BRAF inhibitor therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muir-Torre",
+          "cells": [
+            {
+              "text": "Mismatch repair testing and colonoscopy when indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Sun protection and dermatological surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "keratoacanthoma-dx-mgmt",
+      "title": "Diagnosis and management of keratoacanthoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapidly growing dome-shaped nodule with central keratin crater on sun-exposed skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Ulceration, persistent growth, lip or ear site, immunosuppression, or recurrence?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent excision with deep margin; refer if invasive carcinoma suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Excisional biopsy with deep base, dermoscopy, drug history, mismatch repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Keratin-filled crater lesion with no invasion on deep margin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat as invasive squamous cell carcinoma or other mimic; widen the workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete excision with deep margin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Histology of deep base to detect invasion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intralesional methotrexate or 5-fluorouracil for large lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Acitretin for multiple or eruptive lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Review immunosuppression and BRAF inhibitor exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Spontaneous involution may leave scar; cannot reliably exclude invasion clinically",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

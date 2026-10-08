@@ -151,5 +151,316 @@
       "caption": "Overview comparison matrix for lumbar disc herniation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rothman-Simeone and Herkowitz's The Spine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lumbar_disc_herniation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Neurological examination with straight-leg-raise",
+          "cells": [
+            {
+              "text": "Dermatomal deficit; localises the root"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI when severe, persistent or progressive",
+          "cells": [
+            {
+              "text": "Herniation; asymptomatic bulges are common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Alignment and bony pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Equivocal cases; peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective nerve-root block",
+          "cells": [
+            {
+              "text": "Confirms the symptomatic level"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lumbar_disc_herniation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lumbar spinal stenosis",
+          "cells": [
+            {
+              "text": "Neurogenic claudication, relieved by flexion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Facet or sacroiliac joint pain",
+          "cells": [
+            {
+              "text": "Referred pain without a dermatomal pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Piriformis syndrome",
+          "cells": [
+            {
+              "text": "Extraspinal sciatic entrapment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal tumour or infection",
+          "cells": [
+            {
+              "text": "Excluded when red flags are present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lumbar_disc_herniation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care first",
+          "cells": [
+            {
+              "text": "Reassurance, activity, simple analgesia, NSAIDs and physiotherapy; favourable natural history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic agents",
+          "cells": [
+            {
+              "text": "Amitriptyline or gabapentinoids when simple analgesia is insufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidural or transforaminal steroid",
+          "cells": [
+            {
+              "text": "Persistent radicular pain not settling with conservative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microdiscectomy",
+          "cells": [
+            {
+              "text": "Severe radiculopathy, no improvement over weeks to months, or progressive deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cauda equina syndrome",
+          "cells": [
+            {
+              "text": "Surgical emergency: urgent MRI and immediate decompression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lumbar_disc_herniation-dx-mgmt",
+      "title": "Diagnosis and management of Lumbar disc herniation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Radicular leg pain following a dermatomal distribution, with or without back pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (saddle anaesthesia, bladder or bowel change, progressive weakness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent MRI and emergency spinal surgical decompression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Neurological examination, straight-leg-raise, MRI if severe or persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging correlate with the clinical root level?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider spinal stenosis, facet pain, piriformis syndrome or neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance, activity, simple analgesia and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Neuropathic agents such as amitriptyline or gabapentinoids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Epidural or transforaminal corticosteroid injection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Microdiscectomy for refractory or progressive radiculopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer to spinal surgery for progressive weakness or intractable pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most improve within six to twelve weeks with conservative care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

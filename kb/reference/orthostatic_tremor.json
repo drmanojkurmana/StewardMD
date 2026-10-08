@@ -147,5 +147,338 @@
       "caption": "Overview comparison matrix for orthostatic tremor."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "orthostatic_tremor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Surface EMG of the leg muscles",
+          "cells": [
+            {
+              "text": "High-frequency, highly coherent leg tremor; the key test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical comparison of standing, sitting and walking",
+          "cells": [
+            {
+              "text": "Symptoms on standing, relieved by sitting or walking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "A secondary or structural cause, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DAT imaging",
+          "cells": [
+            {
+              "text": "Coexisting parkinsonism, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral neuropathy and vestibular assessment",
+          "cells": [
+            {
+              "text": "Neuropathy or vestibular dysfunction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orthostatic_tremor-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Parkinson disease and parkinsonian syndromes",
+          "cells": [
+            {
+              "text": "Coexisting parkinsonism indicates orthostatic-tremor-plus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anxiety-related unsteadiness",
+          "cells": [
+            {
+              "text": "Often misattributed; the relief on sitting or walking is the clue"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orthostatic_tremor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Clonazepam",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "The usual first-line drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gabapentin",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Common alternative or add-on for a partially responsive tremor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Further agents",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Primidone, valproate, levetiracetam or a dopaminergic agent if response is inadequate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational adaptation",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Perching stool, walking aid and opportunities to sit or walk, as symptoms remit on unloading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and falls prevention",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Addresses the fear of falling when standing still"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassessment for parkinsonism",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Dopaminergic treatment if a synucleinopathy is confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Movement-disorder neurology; thalamic deep brain stimulation in severely refractory cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "orthostatic_tremor-dx-mgmt",
+      "title": "Diagnosis and management of Orthostatic tremor",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unsteadiness on standing still, relieved by sitting, walking or leaning",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid progression, falls, parkinsonism, ataxia or early autonomic failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neurology review for a secondary cause or additional movement disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Surface EMG of legs, history on standing, MRI, DAT imaging if parkinsonism",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does surface EMG show a high-frequency tremor on standing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider anxiety, neuropathy, vestibular disorder or parkinsonism; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clonazepam as the usual first-line drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gabapentin as alternative or add-on for partial responders",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Primidone, valproate, levetiracetam or a dopaminergic agent if response is inadequate",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Perching stool, walking aid and sitting breaks to limit prolonged standing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Physiotherapy and falls prevention for the fear of falling; thalamic DBS if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Slowly progressive and disabling, not life-shortening; medication response often partial",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

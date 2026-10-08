@@ -148,5 +148,335 @@
       "caption": "Overview comparison matrix for panayiotopoulos syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ILAE classification and clinical guidance on the epilepsy syndromes",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "panayiotopoulos_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "EEG with sleep recording",
+          "cells": [
+            {
+              "text": "Multifocal, shifting spikes, often occipital"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Only if features are atypical or examination abnormal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and metabolic screen during an event",
+          "cells": [
+            {
+              "text": "Metabolic cause excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Syncope or arrhythmia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture",
+          "cells": [
+            {
+              "text": "Only if encephalitis is suspected during prolonged status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental assessment",
+          "cells": [
+            {
+              "text": "Developmental status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "panayiotopoulos_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gastroenteritis or cyclical vomiting syndrome",
+          "cells": [
+            {
+              "text": "Vomiting with pallor, eye deviation and impaired responsiveness, often from sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Late-onset (Gastaut) occipital epilepsy",
+          "cells": [
+            {
+              "text": "Visual seizures and a different course"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "panayiotopoulos_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and education",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Self-limited; many children need no regular anti-seizure medication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rescue medication",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Buccal midazolam or rectal diazepam for prolonged seizures or autonomic status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance medication",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Carbamazepine, levetiracetam or valproate only if seizures are frequent or distressing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "First-aid guidance",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Recovery position and timing of seizures for parents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cause exclusion",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Distinguish acute cardiac and metabolic causes and treat them during episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Developmental and neurological review; remission expected within a couple of years"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "panayiotopoulos_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Panayiotopoulos syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Prolonged vomiting, pallor and eye deviation in a child, often from sleep",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (seizure over 30 minutes, focal deficit or atypical occipital lesion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent rescue benzodiazepine and neurology review for prolonged event",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EEG with sleep recording, glucose, ECG, MRI if atypical, LP if encephalitis suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does EEG show shifting spikes, often occipital, with no cardiac cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider gastroenteritis, migraine, syncope or late-onset occipital epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance and education; many children need no regular anti-seizure medication",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rescue buccal midazolam or rectal diazepam for prolonged seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Maintenance carbamazepine, levetiracetam or valproate only if seizures are frequent",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "First-aid guidance for parents on the recovery position and seizure timing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Distinguish acute cardiac and metabolic causes and treat them during episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent; remission usually within one to two years with normal long-term outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

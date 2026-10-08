@@ -154,5 +154,278 @@
       "caption": "Overview comparison matrix for vanishing white matter disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurology textbooks and peer-reviewed leukodystrophy reviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vanishing_white_matter_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI with FLAIR and T2 sequences",
+          "cells": [
+            {
+              "text": "Diffuse white matter rarefaction with progressive CSF-like signal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EIF2B1-5 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen (arylsulfatase A, very-long-chain fatty acids, lactate)",
+          "cells": [
+            {
+              "text": "Excludes other leukodystrophies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial neuroimaging",
+          "cells": [
+            {
+              "text": "Progression and cavitation of white matter"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vanishing_white_matter_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Metachromatic leukodystrophy",
+          "cells": [
+            {
+              "text": "Other lysosomal leukodystrophy; arylsulfatase A screen separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute disseminated encephalomyelitis or post-infectious demyelination",
+          "cells": [
+            {
+              "text": "Post-infectious picture; FLAIR suppression favours white matter disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alexander disease",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vanishing_white_matter_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No curative therapy; strict avoidance of stress triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aggressive fever management",
+          "cells": [
+            {
+              "text": "Antipyretics and early antibiotics, with head-injury precautions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perioperative and vaccination planning",
+          "cells": [
+            {
+              "text": "Reduces stress-related decompensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and antispasticity measures",
+          "cells": [
+            {
+              "text": "Cerebellar ataxia and spasticity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vanishing_white_matter_disease-dx-mgmt",
+      "title": "Diagnosis and management of Vanishing white matter disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vanishing white matter disease: stepwise decline after fever or head injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (stupor or coma after a trigger, loss of skills or status epilepticus)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of stupor, status epilepticus or intractable seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FLAIR and T2 MRI, EIF2B1-5 testing, metabolic screen, serial neuroimaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does molecular testing confirm biallelic EIF2B1-5 variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider metachromatic leukodystrophy or other leukodystrophy; re-examine",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care with strict avoidance of stress triggers",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prompt antipyretic and early antibiotic treatment of febrile illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Perioperative and vaccination planning to reduce decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and antispasticity measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "No curative therapy; the course is episodic and stepwise",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,316 @@
       "caption": "Overview comparison matrix for male infertility."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "male_infertility-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Repeated semen analysis",
+          "cells": [
+            {
+              "text": "Concentration, motility and morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FSH, LH, testosterone and prolactin",
+          "cells": [
+            {
+              "text": "Pre-testicular versus testicular cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrotal examination and ultrasound",
+          "cells": [
+            {
+              "text": "Varicocele or obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype and Y-chromosome microdeletion testing",
+          "cells": [
+            {
+              "text": "Severe oligozoospermia or non-obstructive azoospermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-ejaculatory urinalysis",
+          "cells": [
+            {
+              "text": "Retrograde ejaculation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "male_infertility-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypogonadotrophic hypogonadism",
+          "cells": [
+            {
+              "text": "Low gonadotrophins; central cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Klinefelter syndrome",
+          "cells": [
+            {
+              "text": "Primary testicular failure with karyotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive azoospermia",
+          "cells": [
+            {
+              "text": "Normal hormones; congenital absence of the vas deferens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exogenous androgen use",
+          "cells": [
+            {
+              "text": "Suppressed spermatogenesis with drug history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "male_infertility-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reversible contributors",
+          "cells": [
+            {
+              "text": "Stop exogenous androgens; reduce alcohol and smoking; avoid scrotal heat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypogonadotrophic disease",
+          "cells": [
+            {
+              "text": "Gonadotrophins or pulsatile GnRH; dopamine agonist for hyperprolactinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Varicocele",
+          "cells": [
+            {
+              "text": "Surgical repair in selected men with impaired parameters"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstruction or no sperm",
+          "cells": [
+            {
+              "text": "Reconstruction or sperm retrieval"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe spermatogenic failure",
+          "cells": [
+            {
+              "text": "Intracytoplasmic sperm injection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "male_infertility-dx-mgmt",
+      "title": "Diagnosis and management of Male infertility",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Couple with failure to conceive; man with low or absent sperm on semen analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (azoospermia with pituitary signs, testicular mass or gynaecomastia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent endocrine or urology review for pituitary or testicular mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeated semen analysis, FSH, LH, testosterone, prolactin, scrotal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an abnormal semen result repeated and the cause localised?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider varicocele, obstruction, ejaculatory failure or androgen effect",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop exogenous androgens and correct lifestyle factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gonadotrophin therapy for hypogonadotrophic hypogonadism",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Varicocele repair in selected men",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Relieve obstruction or retrieve sperm surgically",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Assisted conception with intracytoplasmic sperm injection",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on cause; obstruction and hypogonadotrophism are often correctable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

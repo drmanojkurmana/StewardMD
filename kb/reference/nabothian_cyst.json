@@ -147,5 +147,296 @@
       "caption": "Overview comparison matrix for nabothian cyst."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard gynaecology textbook and colposcopy guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nabothian_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Speculum examination",
+          "cells": [
+            {
+              "text": "Smooth, translucent or yellowish-white raised cervical nodules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Well-defined cystic spaces within the cervix"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Unusually large or deep lesions, to reassure and exclude neoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colposcopy",
+          "cells": [
+            {
+              "text": "If the appearance is atypical or screening is abnormal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical cytology and HPV testing",
+          "cells": [
+            {
+              "text": "Routine screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nabothian_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Adenoma malignum or minimal-deviation adenocarcinoma",
+          "cells": [
+            {
+              "text": "Deep or extensive atypical cystic change raises this question; rare"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical malignancy",
+          "cells": [
+            {
+              "text": "Very large or clustered deep cysts (tunnel clusters) can mimic a neoplasm on imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nabothian_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "A benign mucus-retention cyst; no treatment needed when characteristic and asymptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speculum and screening correlation",
+          "cells": [
+            {
+              "text": "Confirm on speculum; correlate with routine cytology and HPV testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging for large or deep cysts",
+          "cells": [
+            {
+              "text": "Transvaginal ultrasound or MRI for unusually large, deep or clustered cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colposcopy",
+          "cells": [
+            {
+              "text": "If the appearance is atypical or screening is abnormal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intervention",
+          "cells": [
+            {
+              "text": "Marsupialisation, electrocautery or excision only in the rare symptomatic case"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid over-investigation",
+          "cells": [
+            {
+              "text": "Once the benign diagnosis is secure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nabothian_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Nabothian cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Smooth translucent cervical nodules on speculum examination, usually asymptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, abnormal bleeding, abnormal screening result)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Colposcopy and gynaecology review for suspected neoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Speculum examination, transvaginal ultrasound, cytology and HPV testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Characteristic smooth cysts on speculum with normal screening?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Colposcopy; consider MRI for large or deep cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance; no treatment for characteristic asymptomatic cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Continue routine cervical screening as normal",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Imaging only for unusually large, deep or clustered cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Marsupialisation or excision only for rare symptomatic cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign with an excellent prognosis; no malignant potential",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

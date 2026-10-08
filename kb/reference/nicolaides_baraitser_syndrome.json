@@ -147,5 +147,296 @@
       "caption": "Overview comparison matrix for nicolaides-baraitser syndrome (smarca2)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nicolaides_baraitser_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hand and skeletal radiographs",
+          "cells": [
+            {
+              "text": "Prominent interphalangeal joints and phalangeal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG and brain MRI",
+          "cells": [
+            {
+              "text": "When seizures occur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and speech assessment",
+          "cells": [
+            {
+              "text": "Intellectual disability and speech"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Excludes copy-number variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nicolaides_baraitser_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Coffin-Siris syndrome",
+          "cells": [
+            {
+              "text": "Similar intellectual disability; gene-level testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cornelia de Lange syndrome",
+          "cells": [
+            {
+              "text": "Facial and limb features with growth restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectodermal dysplasia",
+          "cells": [
+            {
+              "text": "Sparse hair alone is not enough for this diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cockayne syndrome",
+          "cells": [
+            {
+              "text": "Progressive neurological decline and photosensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucopolysaccharidoses",
+          "cells": [
+            {
+              "text": "Joint changes with storage features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nicolaides_baraitser_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptom-directed supportive care",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy for this chromatin disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Epilepsy is often difficult to treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and growth support",
+          "cells": [
+            {
+              "text": "Faltering growth and feeding difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and behavioural support",
+          "cells": [
+            {
+              "text": "Speech and safety"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nicolaides_baraitser_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Nicolaides-Baraitser syndrome (SMARCA2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Intellectual disability with sparse scalp hair and prominent interphalangeal joints",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (drug-resistant seizures, feeding failure, rapid change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review of drug-resistant seizures; feeding and growth support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal radiographs, EEG and MRI if seizures, developmental and speech assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "SMARCA2 variant with the typical facial and digital features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Coffin-Siris or Cornelia de Lange syndrome; retest genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Symptom-directed supportive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure medication, expecting difficult epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Feeding and growth support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Developmental, speech and behavioural support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong moderate to severe intellectual disability; epilepsy severity drives outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

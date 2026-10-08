@@ -148,5 +148,323 @@
       "caption": "Overview comparison matrix for rheumatological overlap syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kelley & Firestein's Textbook of Rheumatology / international connective tissue disease guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "overlap_syndrome_rheum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ANA with extractable nuclear antigen and myositis panel",
+          "cells": [
+            {
+              "text": "Overlap-specific antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-PM/Scl and anti-Ku testing",
+          "cells": [
+            {
+              "text": "Scleromyositis, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase and inflammatory markers",
+          "cells": [
+            {
+              "text": "Myositis activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and pulmonary function tests",
+          "cells": [
+            {
+              "text": "Cardiopulmonary involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT",
+          "cells": [
+            {
+              "text": "Interstitial lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urinalysis",
+          "cells": [
+            {
+              "text": "Nephritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "overlap_syndrome_rheum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mixed connective tissue disease",
+          "cells": [
+            {
+              "text": "Shares a defining antibody; an overlap meets full criteria for each component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Undifferentiated connective tissue disease",
+          "cells": [
+            {
+              "text": "Incomplete criteria; an overlap meets full criteria for each component"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "overlap_syndrome_rheum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the dominant organ threat",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "The most organ-threatening manifestation, rather than a single label"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids with a steroid-sparing agent",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Methotrexate, azathioprine or mycophenolate for arthritis and myositis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potent agents for severe organ disease",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Cyclophosphamide or rituximab for nephritis or progressive interstitial lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scleroderma-spectrum features",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Calcium-channel blocker for Raynaud; treat pulmonary arterial hypertension where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-system monitoring",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Creatine kinase, renal function, urinalysis, lung function and echocardiography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "overlap_syndrome_rheum-dx-mgmt",
+      "title": "Diagnosis and management of Rheumatological overlap syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Features of two connective tissue diseases, such as myositis with sclerodactyly",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (bulbar or respiratory myositis, nephritis or digital ischaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent renal, pulmonary and immunosuppression review for organ threat",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ANA with ENA and myositis panel, CK, echo, PFT, HRCT, renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do both disease sets of criteria appear to be met, with antibodies mapped?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider MCTD, lupus, systemic sclerosis or undifferentiated connective tissue disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the dominant, most organ-threatening manifestation across the combined diseases",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids with a steroid-sparing agent for arthritis and myositis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cyclophosphamide or rituximab for severe nephritis or progressive lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Calcium-channel blocker for Raynaud; treat pulmonary arterial hypertension if present",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor CK, renal function, lung function and echocardiography across systems",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on component diseases and organ involvement; tailored treatment controls many",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

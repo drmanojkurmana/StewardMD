@@ -153,5 +153,352 @@
       "caption": "Overview comparison matrix for locked-in syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "locked_in_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI with diffusion imaging",
+          "cells": [
+            {
+              "text": "Ventral pontine infarction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR or CT angiography",
+          "cells": [
+            {
+              "text": "Basilar artery occlusion or stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Preserved reactive background; supports awareness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of vertical eye movements and blinking",
+          "cells": [
+            {
+              "text": "Communication and awareness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte and osmolality review",
+          "cells": [
+            {
+              "text": "Where central pontine myelinolysis is possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Where a neuromuscular mimic is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "locked_in_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Coma from bilateral hemispheric or brainstem dysfunction",
+          "cells": [
+            {
+              "text": "Unresponsive, whereas locked-in patients are conscious"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent vegetative or minimally conscious state",
+          "cells": [
+            {
+              "text": "Awareness is preserved in locked-in; eye movements distinguish it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe Guillain-Barre syndrome with total paralysis",
+          "cells": [
+            {
+              "text": "Neuromuscular cause; nerve studies distinguish it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Akinetic mutism from bifrontal lesions",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "locked_in_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Thrombolysis or thrombectomy",
+          "cells": [
+            {
+              "text": "For basilar occlusion within the treatment window"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurocritical care",
+          "cells": [
+            {
+              "text": "Airway protection, ventilatory support and acute stroke management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Communication",
+          "cells": [
+            {
+              "text": "Vertical eye movements and blinking; eye-tracking and assistive technology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Gastrostomy feeding, tracheostomy, pressure-area and eye care, VTE prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complications",
+          "cells": [
+            {
+              "text": "Aspiration pneumonia, contractures, spasticity and autonomic instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary prevention",
+          "cells": [
+            {
+              "text": "Antithrombotic therapy and vascular risk control; cautious sodium correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and speech and communication therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological and goals-of-care support",
+          "cells": [
+            {
+              "text": "Honest prognostic discussion and family support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "locked_in_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Locked-in syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Quadriplegia and mutism with preserved consciousness, communicating by eye movements",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (evolving basilar thrombosis, respiratory failure, rapid sodium shift)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent thrombectomy consideration and airway protection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI with diffusion, MR or CT angiography, EEG, eye-movement communication check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is ventral pontine infarction with basilar occlusion confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider coma, vegetative state, severe GBS or neuromuscular crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Thrombolysis or thrombectomy for basilar occlusion within the window",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Neurocritical care with airway protection and ventilatory support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Establish eye-blink or vertical-gaze communication with assistive technology",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prevent aspiration, contractures and autonomic instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Intensive neurorehabilitation and goals-of-care planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "High acute mortality; survivors are often severely disabled but may keep communication",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

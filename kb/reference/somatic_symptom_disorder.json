@@ -149,5 +149,305 @@
       "caption": "Overview comparison matrix for somatic symptom disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "somatic_symptom_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Focused, proportionate medical evaluation",
+          "cells": [
+            {
+              "text": "Guided by objective findings, not repeated broad tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of prior investigations",
+          "cells": [
+            {
+              "text": "Avoids duplication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for depression and anxiety",
+          "cells": [
+            {
+              "text": "Comorbid conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional impairment and healthcare use",
+          "cells": [
+            {
+              "text": "Impact of symptoms and utilisation pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "somatic_symptom_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Illness anxiety disorder",
+          "cells": [
+            {
+              "text": "Preoccupation with illness, with few or no somatic symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conversion disorder (functional neurological symptom disorder)",
+          "cells": [
+            {
+              "text": "Neurological symptoms are the presentation; distinguished from this disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Undiagnosed genuine medical illness",
+          "cells": [
+            {
+              "text": "New objective signs need re-evaluation; a medical illness does not exclude the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "somatic_symptom_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Single coordinating clinician",
+          "cells": [
+            {
+              "text": "Regular scheduled appointments rather than symptom-driven visits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limit unnecessary investigations",
+          "cells": [
+            {
+              "text": "While validating the patient's distress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive behavioural therapy",
+          "cells": [
+            {
+              "text": "Reframes catastrophic interpretation of bodily symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat comorbid depression and anxiety",
+          "cells": [
+            {
+              "text": "SSRIs or SNRIs where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional focus",
+          "cells": [
+            {
+              "text": "Improving daily functioning and coping, not only symptom elimination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graded activity",
+          "cells": [
+            {
+              "text": "Structured exercise as rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Primary care, psychiatry and relevant specialists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "somatic_symptom_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Somatic symptom disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Distressing symptoms with disproportionate health anxiety: suspected SSD",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new objective signs, suicidal ideation, escalating sedative use)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for a new medical problem or suicide risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Focused proportionate evaluation; review prior results; depression and anxiety screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the response disproportionate and persistent, with no new objective disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Re-evaluate for a genuine medical illness or another diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Single coordinating clinician with regular scheduled visits",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Limit repeated investigations while validating distress",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "CBT to reframe catastrophic interpretation of symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat comorbid depression and anxiety with SSRIs or SNRIs where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Aim is better function and coping rather than symptom elimination",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

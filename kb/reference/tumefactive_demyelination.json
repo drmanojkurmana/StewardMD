@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for tumefactive demyelination."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tumefactive_demyelination-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain with contrast, diffusion, perfusion and spectroscopy",
+          "cells": [
+            {
+              "text": "Incomplete (open) ring enhancement; mass effect less than the lesion size suggests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of spinal cord and orbits",
+          "cells": [
+            {
+              "text": "Additional demyelinating lesions elsewhere"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Oligoclonal bands"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain biopsy",
+          "cells": [
+            {
+              "text": "Used only in genuinely indeterminate cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Evolution expected of a demyelinating lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tumefactive_demyelination-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "High-grade glioma",
+          "cells": [
+            {
+              "text": "Mass effect and oedema are less than expected for the lesion size"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neoplasm on biopsy",
+          "cells": [
+            {
+              "text": "Active demyelination can resemble neoplasm histologically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary CNS lymphoma, cerebral abscess or metastasis",
+          "cells": [
+            {
+              "text": "Imaging that cannot confidently exclude malignancy or infection is a red flag"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tumefactive_demyelination-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose corticosteroids",
+          "cells": [
+            {
+              "text": "First-line for the acute demyelinating lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "Steroid-refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude tumour and infection",
+          "cells": [
+            {
+              "text": "Avoid unnecessary resection; biopsy only when genuinely indeterminate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of implicated drugs",
+          "cells": [
+            {
+              "text": "Any disease-modifying drug that may have precipitated the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term disease-modifying therapy",
+          "cells": [
+            {
+              "text": "If the disorder declares itself as multiple sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Mass effect and oedema, seizures, focal deficits and neurorehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging and referral",
+          "cells": [
+            {
+              "text": "Confirm the expected evolution; neurology and neuroimmunology referral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tumefactive_demyelination-dx-mgmt",
+      "title": "Diagnosis and management of Tumefactive demyelination",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tumefactive demyelination: lesion over 2 cm mimicking a brain tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive mass effect, rapid decline or steroid-refractory course)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of mass effect and raised intracranial pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI for the open-ring sign; spinal and orbital MRI; CSF oligoclonal bands",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show an open ring and features favouring demyelination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Biopsy only if genuinely indeterminate, to exclude tumour or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-dose corticosteroids as first-line treatment of the acute lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Plasma exchange for steroid-refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Review any disease-modifying drug that may have precipitated the lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term disease-modifying therapy if it declares itself as multiple sclerosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many recover well and lesions shrink; outcome depends on evolution to MS",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

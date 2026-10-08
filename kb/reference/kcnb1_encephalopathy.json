@@ -148,5 +148,343 @@
       "caption": "Overview comparison matrix for kcnb1 encephalopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / ILAE",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kcnb1_encephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Epilepsy gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "KCNB1 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Multifocal or generalised discharges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Exclude structural causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and autism-spectrum assessment",
+          "cells": [
+            {
+              "text": "Cognitive and behavioural profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional characterisation where available",
+          "cells": [
+            {
+              "text": "Variant effect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kcnb1_encephalopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "KCNQ2 or KCNA2 potassium channel encephalopathy",
+          "cells": [
+            {
+              "text": "Other potassium channel gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SCN2A or SCN8A encephalopathy",
+          "cells": [
+            {
+              "text": "Sodium channel gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "STXBP1 or SYNGAP1 encephalopathy",
+          "cells": [
+            {
+              "text": "Synaptic gene causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CDKL5 deficiency disorder",
+          "cells": [
+            {
+              "text": "Early-onset seizures, mainly in girls"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other infantile developmental and epileptic encephalopathy",
+          "cells": [
+            {
+              "text": "Genetic causes beyond the panel"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kcnb1_encephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Valproate, levetiracetam or benzodiazepines titrated to seizure type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ketogenic diet",
+          "cells": [
+            {
+              "text": "Considered for drug-resistant seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental",
+          "cells": [
+            {
+              "text": "Speech, occupational and physiotherapy for intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behaviour",
+          "cells": [
+            {
+              "text": "Psychological and educational support for attention and behaviour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG review",
+          "cells": [
+            {
+              "text": "Reassess antiseizure regimen as discharges and seizures evolve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rescue plan",
+          "cells": [
+            {
+              "text": "Benzodiazepine protocol and status epilepticus plan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetics",
+          "cells": [
+            {
+              "text": "Counselling; most variants de novo, parental testing refines advice"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kcnb1_encephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of KCNB1 encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Developmental and epileptic encephalopathy with onset in infancy or early childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Epileptic spasms with hypsarrhythmia, status epilepticus, or regression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review; rescue medication and status plan",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gene panel or exome, EEG, brain MRI, developmental and behavioural assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pathogenic KCNB1 variant confirmed on sequencing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other developmental and epileptic encephalopathy genes; repeat testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Broad-spectrum antiseizure medication titrated to seizure type",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ketogenic diet for drug-resistant seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Multidisciplinary developmental and behavioural support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "EEG-guided medication review as the disorder evolves",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Rescue benzodiazepine protocol and genetics counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Seizures and intellectual disability often persist; no targeted therapy yet",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

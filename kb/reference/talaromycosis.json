@@ -152,5 +152,334 @@
       "caption": "Overview comparison matrix for talaromycosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "talaromycosis-dx-mgmt",
+      "title": "Diagnosis and management of Talaromycosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected talaromycosis: fever, weight loss and umbilicated papules in advanced HIV",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sepsis, multi-organ involvement, or respiratory failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent intensive care and immediate liposomal amphotericin B",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fungal culture of blood, skin, marrow or node; microscopy for fission yeasts; HIV and CD4",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does culture or microscopy show Talaromyces marneffei?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider disseminated TB, histoplasmosis, cryptococcosis or molluscum; re-test",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Liposomal amphotericin B induction for disseminated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Itraconazole consolidation; voriconazole as an alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Secondary itraconazole prophylaxis until immune reconstitution",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Start or optimise antiretroviral therapy, timed to limit IRIS",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen for concurrent tuberculosis and other opportunistic infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated disease is almost uniformly fatal; early induction and ART give good outcomes",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "talaromycosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fungal culture of blood, skin, marrow or lymph node",
+          "cells": [
+            {
+              "text": "Confirms Talaromyces marneffei"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microscopy of skin scrapings or tissue",
+          "cells": [
+            {
+              "text": "Intracellular fission yeasts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing and CD4 count",
+          "cells": [
+            {
+              "text": "Advanced HIV with low CD4 count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antigen-based assays",
+          "cells": [
+            {
+              "text": "Earlier diagnosis, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for tuberculosis",
+          "cells": [
+            {
+              "text": "Concurrent opportunistic infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "talaromycosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Disseminated tuberculosis",
+          "cells": [
+            {
+              "text": "Closely mimicked; misdiagnosis as TB delays antifungal therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated histoplasmosis",
+          "cells": [
+            {
+              "text": "Closely mimicked; fungal culture identifies the organism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryptococcosis",
+          "cells": [
+            {
+              "text": "Can produce umbilicated skin lesions; culture separates the two"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molluscum contagiosum",
+          "cells": [
+            {
+              "text": "Umbilicated lesions attributed to molluscum alone is a recognised pitfall"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "talaromycosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Liposomal amphotericin B induction",
+          "cells": [
+            {
+              "text": "Disseminated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Itraconazole consolidation",
+          "cells": [
+            {
+              "text": "Voriconazole as an alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary itraconazole prophylaxis",
+          "cells": [
+            {
+              "text": "Continued until immune reconstitution on antiretroviral therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiretroviral therapy",
+          "cells": [
+            {
+              "text": "Started or optimised, timed to reduce immune reconstitution inflammatory syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Sepsis, anaemia and organ dysfunction during the acute illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for tuberculosis",
+          "cells": [
+            {
+              "text": "Concurrent opportunistic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "CD4 count and treatment response; escalate for severe sepsis or multi-organ disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

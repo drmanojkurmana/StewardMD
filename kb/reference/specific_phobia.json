@@ -144,5 +144,296 @@
       "caption": "Overview comparison matrix for specific phobia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "specific_phobia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Focused clinical interview",
+          "cells": [
+            {
+              "text": "Feared stimulus and avoidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of functional impairment",
+          "cells": [
+            {
+              "text": "Restriction caused by the phobia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for anxiety, mood and substance use",
+          "cells": [
+            {
+              "text": "Comorbid disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History of syncope",
+          "cells": [
+            {
+              "text": "Blood-injection-injury type"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "specific_phobia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Panic disorder with situational attacks",
+          "cells": [
+            {
+              "text": "Situational panic attacks, rather than an isolated phobia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Agoraphobia",
+          "cells": [
+            {
+              "text": "Situational avoidance, mislabelled as a phobia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Social anxiety disorder",
+          "cells": [
+            {
+              "text": "Avoidance centres on scrutiny rather than the stimulus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "specific_phobia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Graded in vivo exposure-based CBT",
+          "cells": [
+            {
+              "text": "First-line and highly effective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Applied tension",
+          "cells": [
+            {
+              "text": "Blood-injection-injury type, to prevent fainting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pharmacotherapy",
+          "cells": [
+            {
+              "text": "Limited adjunct role; long-term medication usually unnecessary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short-term benzodiazepine or beta-blocker",
+          "cells": [
+            {
+              "text": "For an unavoidable single exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbidity treatment",
+          "cells": [
+            {
+              "text": "Anxiety, mood and substance use disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse prevention",
+          "cells": [
+            {
+              "text": "Psychoeducation to maintain gains"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "specific_phobia-dx-mgmt",
+      "title": "Diagnosis and management of Specific phobia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Marked, persistent fear of a specific object or situation: suspected specific phobia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (avoidance of needed care, syncope with injury, suicidal ideation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for suicidal ideation or injury from syncope",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Interview of feared stimulus; impairment; comorbidity screen; syncope history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the fear persistent, typically six months or more, and impairing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider panic disorder, social anxiety or PTSD; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Graded in vivo exposure-based CBT, the first-line treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Applied tension for the blood-injection-injury type",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Limited medication; short-term use for an unavoidable exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat comorbid anxiety, mood and substance use disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Highly treatable with exposure-based CBT; relapse prevention maintains gains",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,296 @@
       "caption": "Overview comparison matrix for prostatic utricle cyst."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / EAU Guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "utricle_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Voiding cystourethrography",
+          "cells": [
+            {
+              "text": "Communication with the urethra"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic MRI",
+          "cells": [
+            {
+              "text": "Midline anatomy and associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retrograde urethrography or urethroscopy",
+          "cells": [
+            {
+              "text": "The utricular opening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyst fluid analysis",
+          "cells": [
+            {
+              "text": "Spermatozoa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tract imaging",
+          "cells": [
+            {
+              "text": "Associated renal anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "utricle_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mullerian duct cyst",
+          "cells": [
+            {
+              "text": "No urethral communication; presents later than utricle cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seminal vesicle cyst",
+          "cells": [
+            {
+              "text": "Laterally placed rather than midline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ejaculatory duct cyst",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "utricle_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small, asymptomatic cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimicrobials",
+          "cells": [
+            {
+              "text": "Recurrent urinary tract infection and epididymitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic incision or de-roofing",
+          "cells": [
+            {
+              "text": "Symptomatic cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Open, laparoscopic or robotic excision",
+          "cells": [
+            {
+              "text": "Large or recurrent cysts, preserving the ejaculatory ducts and continence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Removal of intracystic calculi",
+          "cells": [
+            {
+              "text": "Any calculi found within the cyst"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "utricle_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Prostatic utricle cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected utricle cyst: midline cyst in a child with hypospadias or cryptorchidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (infection, stone, disorder of sex development or obstruction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent urology and endocrine review for obstruction or disorder of sex development",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cystourethrography, pelvic MRI, retrograde urethrography, renal tract imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does cystourethrography show communication with the urethra?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Mullerian duct, ejaculatory duct or seminal vesicle cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe small, asymptomatic cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antibiotics for recurrent UTI or epididymitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endoscopic incision or de-roofing for symptomatic cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Excision for large or recurrent cysts, preserving the ejaculatory ducts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptomatic or infected cysts need endoscopic or surgical treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

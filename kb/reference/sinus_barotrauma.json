@@ -145,5 +145,307 @@
       "caption": "Overview comparison matrix for sinus barotrauma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sinus_barotrauma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical correlation with the dive or flight",
+          "cells": [
+            {
+              "text": "Facial pain and epistaxis timed to descent or ascent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior rhinoscopy or nasendoscopy",
+          "cells": [
+            {
+              "text": "Ostial obstruction, polyps or inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otoscopy",
+          "cells": [
+            {
+              "text": "Coexisting ear barotrauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the sinuses",
+          "cells": [
+            {
+              "text": "Recurrent, severe or diagnostically unclear cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for rhinitis or structural abnormality",
+          "cells": [
+            {
+              "text": "Underlying nasal pathology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sinus_barotrauma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ear barotrauma",
+          "cells": [
+            {
+              "text": "Can coexist; checked by otoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute or chronic sinusitis",
+          "cells": [
+            {
+              "text": "Secondary bacterial sinusitis can follow the injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sinus_barotrauma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical and systemic decongestants",
+          "cells": [
+            {
+              "text": "Restore sinus ventilation; the mainstay of acute treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia, intranasal corticosteroids and antihistamines",
+          "cells": [
+            {
+              "text": "Facial pain, with the latter two where rhinitis or allergy contributes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid diving and flying",
+          "cells": [
+            {
+              "text": "Until the sinuses can equalise; teach equalisation technique"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat underlying nasal pathology",
+          "cells": [
+            {
+              "text": "Rhinitis, polyps or structural obstruction; endoscopic surgery for recurrent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Reserved for secondary bacterial sinusitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otolaryngology referral",
+          "cells": [
+            {
+              "text": "Recurrent or severe episodes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sinus_barotrauma-dx-mgmt",
+      "title": "Diagnosis and management of Sinus barotrauma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Facial pain and epistaxis after diving or flying with sinus congestion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe headache with visual or neurological signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for orbital or intracranial extension of infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nasendoscopy for ostial obstruction; otoscopy for ear barotrauma; CT if recurrent",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is ostial obstruction present, with features of sinus barotrauma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sinusitis, ear barotrauma, migraine or trigeminal neuralgia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Decongestants to restore sinus ventilation, the mainstay of treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Analgesia; intranasal steroids and antihistamines if allergy contributes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "No diving or flying until the sinuses can equalise",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat underlying rhinitis, polyps or structural obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Antibiotics only for secondary bacterial sinusitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually settles within days to weeks; recurs if underlying disease persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

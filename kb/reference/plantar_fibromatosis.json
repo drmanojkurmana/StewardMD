@@ -149,5 +149,325 @@
       "caption": "Overview comparison matrix for plantar fibromatosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mann's Surgery of the Foot and Ankle / Enzinger and Weiss's Soft Tissue Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "plantar_fibromatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the foot",
+          "cells": [
+            {
+              "text": "Fascial origin, collagen-rich signal and extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Hypoechoic fusiform nodule contiguous with the plantar fascia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of the hands and penis",
+          "cells": [
+            {
+              "text": "Associated superficial fibromatoses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core or excisional biopsy",
+          "cells": [
+            {
+              "text": "Malignancy not excluded on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for diabetes and chronic liver disease",
+          "cells": [
+            {
+              "text": "Associated conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photographic and clinical mapping",
+          "cells": [
+            {
+              "text": "Nodule number and size, for monitoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "plantar_fibromatosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Soft-tissue sarcoma (synovial sarcoma or fibrosarcoma)",
+          "cells": [
+            {
+              "text": "Deep and poorly defined mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "plantar_fibromatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Reassurance for asymptomatic nodules, given the benign nature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Accommodative orthoses",
+          "cells": [
+            {
+              "text": "Soft padding and insoles to offload and cushion painful nodules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity modification and physiotherapy",
+          "cells": [
+            {
+              "text": "Including stretching"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intralesional corticosteroid",
+          "cells": [
+            {
+              "text": "Reduces symptomatic nodule size"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Selected symptomatic cases not suitable for surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wide local excision or fasciectomy",
+          "cells": [
+            {
+              "text": "For refractory, disabling disease; high recurrence rate accepted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Long-term surveillance for local recurrence after intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated fibromatoses",
+          "cells": [
+            {
+              "text": "Screen for and manage superficial fibromatoses such as Dupuytren and Peyronie disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "plantar_fibromatosis-dx-mgmt",
+      "title": "Diagnosis and management of Plantar fibromatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful firm nodule in the plantar fascia, benign-looking on ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid growth, deep poorly defined mass, skin ulceration, lymphadenopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent sarcoma assessment with biopsy for rapid growth or a deep ill-defined mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI of foot for fascial origin and extent; ultrasound; examination of hands and penis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show a benign fascial fibromatosis without atypical features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider soft-tissue sarcoma; biopsy when malignancy cannot be excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observation with reassurance for asymptomatic nodules, given the benign nature",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Accommodative orthoses, soft padding and insoles to offload painful nodules",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intralesional corticosteroid injection to reduce symptomatic nodule size",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Wide local excision or fasciectomy for refractory disease, accepting recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Long-term monitoring for local recurrence after intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign and does not metastasise, but prone to local recurrence after limited excision",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -141,5 +141,305 @@
       "caption": "Overview comparison matrix for monoclonal mast cell activation syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mastocytosis and mast cell activation literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "monoclonal_mast_cell_activation_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum tryptase",
+          "cells": [
+            {
+              "text": "During and between episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KIT D816V mutation analysis",
+          "cells": [
+            {
+              "text": "Shows clonality, often on blood or marrow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow with mast cell immunophenotyping",
+          "cells": [
+            {
+              "text": "Characterises the clone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic mastocytosis criteria",
+          "cells": [
+            {
+              "text": "Distinguishes it from full systemic mastocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergy and trigger evaluation",
+          "cells": [
+            {
+              "text": "Includes venom testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "monoclonal_mast_cell_activation_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic mastocytosis",
+          "cells": [
+            {
+              "text": "Meets systemic mastocytosis criteria, unlike this syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-clonal mast cell activation syndrome",
+          "cells": [
+            {
+              "text": "No KIT clone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary alpha-tryptasaemia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "monoclonal_mast_cell_activation_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "H1 and H2 antihistamines, mast cell stabiliser, leukotriene antagonist",
+          "cells": [
+            {
+              "text": "Mediator-directed foundation of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Notably Hymenoptera venom"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaphylaxis preparedness",
+          "cells": [
+            {
+              "text": "Adrenaline auto-injector and personalised action plan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venom immunotherapy",
+          "cells": [
+            {
+              "text": "For Hymenoptera venom anaphylaxis, often long term"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tryptase and criteria reassessment",
+          "cells": [
+            {
+              "text": "Detect progression to systemic mastocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KIT-directed therapy",
+          "cells": [
+            {
+              "text": "If clonal disease progresses, with specialist input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "monoclonal_mast_cell_activation_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Monoclonal mast cell activation syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unexplained recurrent anaphylaxis or mediator-release episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Recurrent severe anaphylaxis, cardiovascular collapse or cytopenias?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat anaphylaxis with adrenaline; urgent allergy and haematology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Tryptase in and out of episodes, KIT D816V, marrow, venom testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "KIT clone present without systemic mastocytosis criteria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider systemic mastocytosis, non-clonal MCAS, idiopathic anaphylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "H1/H2 antihistamines, sodium cromoglicate and leukotriene antagonist",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid triggers; adrenaline auto-injector and action plan",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Venom immunotherapy for Hymenoptera anaphylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor tryptase; KIT-directed therapy if progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally favourable with mediator therapy; risk of severe reactions persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

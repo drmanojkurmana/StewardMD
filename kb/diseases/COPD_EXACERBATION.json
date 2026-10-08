@@ -307,6 +307,11 @@
       "label": "US Pharmacist, Overview of the Diagnosis and Treatment of COPD Exacerbations, 2024",
       "url": "https://www.uspharmacist.com/article/overview-of-the-diagnosis-and-treatment-of-copd-exacerbations",
       "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 254-4",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -643,6 +648,36 @@
         }
       ],
       "footnote": "Steroid duration differs by source: GOLD 5 days, ERS/ATS up to 14 days. Ventilation mortality figure is from Harrison 22e."
+    },
+    {
+      "id": "COPD_EXACERBATION-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Factors affecting clearance of theophylline",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Factors"
+      ],
+      "rows": [
+        {
+          "parameter": "Increased clearance",
+          "cells": [
+            {
+              "text": "Enzyme induction (rifampicin, phenobarbitone, ethanol); smoking (tobacco, marijuana); high-protein, low-carbohydrate diet; barbecued meat; childhood"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Decreased clearance",
+          "cells": [
+            {
+              "text": "Enzyme inhibition (cimetidine, erythromycin, ciprofloxacin, allopurinol, zileuton, zafirlukast); congestive heart failure; liver disease; pneumonia; viral infection and vaccination; high carbohydrate diet; old age"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "The source table is cut off at the bottom of the page after old age and may continue on the next page."
     }
   ],
   "flowcharts": [

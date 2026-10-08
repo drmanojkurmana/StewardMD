@@ -151,5 +151,316 @@
       "caption": "Overview comparison matrix for major depressive disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "major_depressive_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Structured suicide risk assessment",
+          "cells": [
+            {
+              "text": "Risk level guides setting of care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standardised symptom rating scales",
+          "cells": [
+            {
+              "text": "Severity and response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function testing",
+          "cells": [
+            {
+              "text": "Hypothyroidism excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and metabolic panel",
+          "cells": [
+            {
+              "text": "Anaemia and medical contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Substance use screening",
+          "cells": [
+            {
+              "text": "Substance-related contribution"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "major_depressive_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bipolar disorder in a depressive phase",
+          "cells": [
+            {
+              "text": "Prior manic or hypomanic episode"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent depressive disorder",
+          "cells": [
+            {
+              "text": "Chronic lower-grade course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjustment disorder with depressed mood",
+          "cells": [
+            {
+              "text": "Clear stressor and time frame"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothyroidism",
+          "cells": [
+            {
+              "text": "Biochemical testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "major_depressive_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "First-line antidepressant",
+          "cells": [
+            {
+              "text": "SSRI chosen by side-effect profile; SNRI, mirtazapine or bupropion alternatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychotherapy",
+          "cells": [
+            {
+              "text": "CBT or interpersonal therapy, alone or with medication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Suicide risk",
+          "cells": [
+            {
+              "text": "Repeated assessment, safety planning and restriction of means"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment-resistant disease",
+          "cells": [
+            {
+              "text": "Switching, lithium or atypical antipsychotic augmentation, ECT for severe cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse prevention",
+          "cells": [
+            {
+              "text": "Continue treatment beyond remission"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "major_depressive_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Major depressive disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent low mood or anhedonia for at least two weeks with associated symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (active suicidal intent, psychosis or catatonia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent psychiatric review and consider admission for high suicide risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Suicide risk assessment, rating scales, thyroid tests, full blood count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are DSM-5-TR criteria met with medical and substance causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bipolar depression, adjustment disorder or hypothyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "First-line SSRI chosen by side-effect profile",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "CBT or interpersonal therapy alone or combined",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Safety planning and restriction of access to means",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Augmentation or ECT for treatment-resistant or severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Continue treatment beyond remission to prevent relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Often recurrent; relapse risk rises with each episode and with residual symptoms",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

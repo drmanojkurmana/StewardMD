@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for supraventricular tachycardia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "supraventricular_tachycardia-dx-mgmt",
+      "title": "Diagnosis and management of Supraventricular tachycardia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected SVT: abrupt regular palpitations with sudden termination",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Unstable, or wide complex that cannot be separated from VT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent synchronised cardioversion; treat wide complex as VT until proven otherwise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "12-lead ECG in tachycardia and sinus rhythm for mechanism and pre-excitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a reentrant SVT confirmed, rather than pre-excited or atrial tachycardia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Pre-excited tachycardia: avoid AV nodal blockers; consider atrial tachycardia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Vagal manoeuvres to interrupt AV nodal reentry",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "AV nodal blocking agent under monitoring if vagal manoeuvres fail",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Catheter ablation for recurrent reentrant SVT",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Beta-blocker or calcium-channel blocker if ablation is declined",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Correct reversible triggers; refer to electrophysiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most forms are not life-threatening; ablation cures most reentrant cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "supraventricular_tachycardia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG in tachycardia and sinus rhythm",
+          "cells": [
+            {
+              "text": "Mechanism of the tachycardia and pre-excitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous or ambulatory rhythm monitoring",
+          "cells": [
+            {
+              "text": "Paroxysmal episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte and thyroid function",
+          "cells": [
+            {
+              "text": "Reversible triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Structural heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrophysiology study",
+          "cells": [
+            {
+              "text": "Defines the circuit when ablation is considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "supraventricular_tachycardia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Atrial fibrillation and atrial flutter",
+          "cells": [
+            {
+              "text": "Regular narrow-complex tachycardia is distinguished from these; different management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventricular tachycardia",
+          "cells": [
+            {
+              "text": "Wide QRS can mimic SVT with aberrancy; treat as VT until proven otherwise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-excited tachycardia (Wolff-Parkinson-White)",
+          "cells": [
+            {
+              "text": "Accessory pathway; AV nodal blocking drugs may be hazardous"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "supraventricular_tachycardia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Vagal manoeuvres",
+          "cells": [
+            {
+              "text": "First-line acute intervention to interrupt AV nodal reentry in a stable patient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AV nodal blocking agent under monitoring",
+          "cells": [
+            {
+              "text": "When vagal manoeuvres fail; adenosine, with verapamil, diltiazem or a beta-blocker as alternatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Synchronised cardioversion",
+          "cells": [
+            {
+              "text": "Haemodynamically unstable patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter ablation",
+          "cells": [
+            {
+              "text": "Curative for recurrent AV nodal reentrant and AV reentrant tachycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term beta-blocker or calcium-channel blocker",
+          "cells": [
+            {
+              "text": "Prevention when ablation is declined or unsuitable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct reversible triggers",
+          "cells": [
+            {
+              "text": "Electrolyte disturbance, thyroid dysfunction, stimulants; refer to electrophysiology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

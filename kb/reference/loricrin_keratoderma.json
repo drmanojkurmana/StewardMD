@@ -148,5 +148,334 @@
       "caption": "Overview comparison matrix for loricrin keratoderma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "loricrin_keratoderma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "LOR molecular testing",
+          "cells": [
+            {
+              "text": "Confirms the frameshift variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Hyperkeratosis with retained nuclei (parakeratosis)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for pseudo-ainhum and starfish keratoses",
+          "cells": [
+            {
+              "text": "Constricting fibrous bands"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological assessment",
+          "cells": [
+            {
+              "text": "Distinguishes from connexin-related Vohwinkel syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and pedigree analysis",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of hand and foot function",
+          "cells": [
+            {
+              "text": "Functional impairment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "loricrin_keratoderma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vohwinkel syndrome due to GJB2 (connexin 26)",
+          "cells": [
+            {
+              "text": "Sensorineural deafness; this variant gives ichthyosis, not deafness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mal de Meleda",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Olmsted syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "loricrin_keratoderma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emollients and keratolytics",
+          "cells": [
+            {
+              "text": "Urea or salicylic acid for palmoplantar keratoderma and ichthyosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic retinoids",
+          "cells": [
+            {
+              "text": "Acitretin for severe hyperkeratosis, with monitoring of side effects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constricting bands",
+          "cells": [
+            {
+              "text": "Timely release to prevent digital strangulation and autoamputation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection",
+          "cells": [
+            {
+              "text": "Treatment of secondary bacterial or fungal infection of fissured skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand and foot function",
+          "cells": [
+            {
+              "text": "Podiatry, physiotherapy and appropriate footwear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiology",
+          "cells": [
+            {
+              "text": "Distinguishes it from connexin-related Vohwinkel syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant LOR disorder; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "loricrin_keratoderma-dx-mgmt",
+      "title": "Diagnosis and management of Loricrin keratoderma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Honeycomb palmoplantar keratoderma with ichthyosis and constricting finger bands",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (threatened digit, deep infection, rapid asymmetric change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical review for threatened digits",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "LOR gene testing, skin biopsy, audiology, pedigree",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an LOR frameshift variant confirmed with ichthyosis present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider GJB2 Vohwinkel with deafness, Mal de Meleda or Olmsted syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Emollients and keratolytics such as urea or salicylic acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Acitretin for severe hyperkeratosis, with side-effect monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Timely release of constricting bands to prevent autoamputation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat secondary infection of fissured skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifelong; function usually preserved with keratolytics, retinoids and timely band release",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

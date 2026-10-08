@@ -151,5 +151,314 @@
       "caption": "Overview comparison matrix for neonatal jaundice."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neonatal_jaundice-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Total and direct bilirubin, read against age in hours",
+          "cells": [
+            {
+              "text": "Measured thresholds rather than clinical appearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transcutaneous bilirubinometry",
+          "cells": [
+            {
+              "text": "Screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood group and direct Coombs test, infant and mother",
+          "cells": [
+            {
+              "text": "Isoimmune haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, reticulocytes and blood film",
+          "cells": [
+            {
+              "text": "Haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "G6PD assay",
+          "cells": [
+            {
+              "text": "Where clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholestasis assessment when direct bilirubin is raised",
+          "cells": [
+            {
+              "text": "Pale stools and dark urine"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_jaundice-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rh or ABO haemolytic disease",
+          "cells": [
+            {
+              "text": "Isoimmune; confirmed by Coombs testing of infant and mother"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "G6PD deficiency",
+          "cells": [
+            {
+              "text": "Red cell enzyme defect; G6PD assay when indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biliary atresia",
+          "cells": [
+            {
+              "text": "Conjugated hyperbilirubinaemia with pale stools and dark urine; needs early surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_jaundice-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Phototherapy",
+          "cells": [
+            {
+              "text": "First-line for significant unconjugated hyperbilirubinaemia, by level against age in hours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exchange transfusion",
+          "cells": [
+            {
+              "text": "Severe or rapidly rising bilirubin, or signs of acute bilirubin encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "In isoimmune haemolytic disease, to reduce haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and hydration",
+          "cells": [
+            {
+              "text": "Adequate intake; support breastfeeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the cause",
+          "cells": [
+            {
+              "text": "Antibiotics for sepsis; early Kasai portoenterostomy for biliary atresia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilirubin monitoring",
+          "cells": [
+            {
+              "text": "Trends and neurological signs, to prevent kernicterus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neonatal_jaundice-dx-mgmt",
+      "title": "Diagnosis and management of Neonatal jaundice",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Yellow skin and sclera in a newborn; bilirubin read against age in hours",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (jaundice under 24 hours, rising bilirubin, encephalopathy signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent exchange-level assessment; treat signs of acute bilirubin encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Total and direct bilirubin, blood group and Coombs, FBC and film, G6PD",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Bilirubin predominantly unconjugated on fractionation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Evaluate for cholestasis and biliary atresia; urgent surgical referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Phototherapy for significant unconjugated hyperbilirubinaemia, by level against age",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Exchange transfusion for severe or rapidly rising bilirubin or encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "IVIG in isoimmune haemolytic disease to reduce haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat the cause: antibiotics for sepsis, adequate feeding and hydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most jaundice is benign; kernicterus is largely preventable with timely treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

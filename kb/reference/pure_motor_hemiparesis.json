@@ -149,5 +149,294 @@
       "caption": "Overview comparison matrix for pure motor hemiparesis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pure_motor_hemiparesis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffusion-weighted and T2/FLAIR MRI",
+          "cells": [
+            {
+              "text": "Acute infarct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-contrast CT head",
+          "cells": [
+            {
+              "text": "Haemorrhage excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular imaging of carotids and intracranial vessels",
+          "cells": [
+            {
+              "text": "Alternative embolic source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and prolonged rhythm monitoring",
+          "cells": [
+            {
+              "text": "Atrial fibrillation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose, HbA1c and lipid profile",
+          "cells": [
+            {
+              "text": "Vascular risk factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pure_motor_hemiparesis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Small deep intracerebral haemorrhage",
+          "cells": [
+            {
+              "text": "Depressed consciousness or headache"
+            },
+            {
+              "text": "Non-contrast CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subdural haematoma or mass lesion",
+          "cells": [
+            {
+              "text": "Compression of the internal capsule"
+            },
+            {
+              "text": "CT or MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pure_motor_hemiparesis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute stroke care",
+          "cells": [
+            {
+              "text": "Stroke unit care with intravenous thrombolysis where eligible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiplatelet therapy",
+          "cells": [
+            {
+              "text": "Once haemorrhage is excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk factor control",
+          "cells": [
+            {
+              "text": "Blood-pressure lowering and statin therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Capsular warning syndrome",
+          "cells": [
+            {
+              "text": "Treated as high-risk and managed urgently"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Early multidisciplinary rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pure_motor_hemiparesis-dx-mgmt",
+      "title": "Diagnosis and management of pure motor hemiparesis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pure motor hemiparesis: acute face, arm and leg weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Stuttering weakness, reduced consciousness or headache, rapid worsening, or fever?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent stroke pathway with thrombolysis if eligible",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "DWI MRI; non-contrast CT; vascular imaging; rhythm monitoring; glucose and lipids",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a small capsular infarct confirmed with haemorrhage excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cortical stroke, haemorrhage or Todd paresis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Acute stroke unit care with thrombolysis if eligible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiplatelet therapy once haemorrhage excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rigorous blood pressure lowering and statin therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Early multidisciplinary rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Secondary prevention and rehabilitation; urgent review if capsular warning syndrome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

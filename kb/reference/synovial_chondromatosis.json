@@ -145,5 +145,325 @@
       "caption": "Overview comparison matrix for synovial chondromatosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "synovial_chondromatosis-dx-mgmt",
+      "title": "Diagnosis and management of Synovial chondromatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected synovial chondromatosis: monoarticular joint pain, swelling and locking",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, bone destruction, or recurrence after surgery)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review to exclude chondrosarcoma with histological examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs for calcified bodies; MRI for non-calcified bodies and synovial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show multiple intra-articular cartilaginous bodies?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider osteochondromatosis from osteoarthritis, PVNS or synovial sarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Arthroscopic or open removal of loose bodies with synovectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat underlying osteoarthritis or trauma in secondary disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Analgesia, physiotherapy, and joint replacement for advanced arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for recurrence when active synovium persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Submit resected tissue for histology to exclude chondrosarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Primary disease is benign and treatable; recurrence is not uncommon",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "synovial_chondromatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Multiple calcified intra-articular bodies of similar size"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Non-calcified cartilaginous bodies and the synovial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Ossified loose bodies and bony involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Effusion and intra-articular bodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of resected tissue",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and excludes chondrosarcoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "synovial_chondromatosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pigmented villonodular synovitis",
+          "cells": [
+            {
+              "text": "Can be confused on imaging; histology confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary osteochondromatosis from osteoarthritis or trauma",
+          "cells": [
+            {
+              "text": "Cartilage fragments generated by underlying osteoarthritis or trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Synovial chondrosarcoma",
+          "cells": [
+            {
+              "text": "Rapid growth or aggressive bone destruction raises concern for malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "synovial_chondromatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Removal of loose bodies with synovectomy",
+          "cells": [
+            {
+              "text": "Arthroscopic or open; removes the active synovium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying joint disease",
+          "cells": [
+            {
+              "text": "In secondary disease, such as osteoarthritis that generated the fragments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and physiotherapy",
+          "cells": [
+            {
+              "text": "Secondary degenerative change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint replacement",
+          "cells": [
+            {
+              "text": "Advanced arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence monitoring",
+          "cells": [
+            {
+              "text": "Common when active synovium persists after incomplete synovectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological examination",
+          "cells": [
+            {
+              "text": "Resected tissue, given rare transformation to chondrosarcoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic referral",
+          "cells": [
+            {
+              "text": "Rheumatology input as appropriate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

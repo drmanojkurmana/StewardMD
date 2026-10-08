@@ -150,5 +150,296 @@
       "caption": "Overview comparison matrix for variegate porphyria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "variegate_porphyria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma fluorescence scanning",
+          "cells": [
+            {
+              "text": "Characteristic emission peak of variegate porphyria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal porphyrin profile",
+          "cells": [
+            {
+              "text": "Protoporphyrin and coproporphyrin pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary ALA and PBG during symptomatic attacks",
+          "cells": [
+            {
+              "text": "Porphyrin precursors in an attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PPOX gene testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and enables family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy in atypical cases",
+          "cells": [
+            {
+              "text": "Subepidermal bullae; excludes other blistering disorders"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "variegate_porphyria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Porphyria cutanea tarda",
+          "cells": [
+            {
+              "text": "Identical skin picture but no acute attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary coproporphyria",
+          "cells": [
+            {
+              "text": "The other mixed acute porphyria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudoporphyria from drugs or dialysis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidermolysis bullosa acquisita",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "variegate_porphyria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prevent attacks",
+          "cells": [
+            {
+              "text": "Avoid porphyrinogenic drugs, alcohol and fasting; treat intercurrent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haem arginate and glucose loading",
+          "cells": [
+            {
+              "text": "Acute neurovisceral attacks, with porphyria-safe analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct hyponatraemia",
+          "cells": [
+            {
+              "text": "Attack-related hyponatraemia; porphyria-safe anticonvulsants for seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin care and sun protection",
+          "cells": [
+            {
+              "text": "Photocutaneous fragility"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "variegate_porphyria-dx-mgmt",
+      "title": "Diagnosis and management of Variegate porphyria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected variegate porphyria: acute attack or blistering skin fragility on sun exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (motor neuropathy, respiratory compromise or seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent porphyria-safe care for motor neuropathy or respiratory compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma fluorescence scan, faecal porphyrins, urinary ALA and PBG, PPOX testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does plasma fluorescence show the variegate porphyria peak?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider porphyria cutanea tarda or other blistering disorder; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid porphyrinogenic drugs, alcohol and fasting to prevent attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Haem arginate and carbohydrate loading for acute neurovisceral attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct hyponatraemia; use porphyria-safe anticonvulsants",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sun protection and skin care for photocutaneous fragility",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Attacks are preventable with drug avoidance; skin disease needs sun protection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

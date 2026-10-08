@@ -148,5 +148,240 @@
       "caption": "Overview comparison matrix for rotator cuff tendinopathy / subacromial impingement."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Brukner and Khan's Clinical Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rotator_cuff_tendinopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Tendon integrity, thickness and bursal change, assessed dynamically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Tendinopathy, tears and cuff muscle atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Acromial morphology, calcification and arthritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rotator_cuff_tendinopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Progressive eccentric loading",
+          "cells": [
+            {
+              "text": "Scapular rehabilitation under physiotherapy; mainstay of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relative rest and load modification",
+          "cells": [
+            {
+              "text": "Avoid aggravating overhead positions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple analgesia or NSAIDs",
+          "cells": [
+            {
+              "text": "Symptom control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subacromial corticosteroid injection",
+          "cells": [
+            {
+              "text": "Persistent pain limiting rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address biomechanical contributors",
+          "cells": [
+            {
+              "text": "Posture, scapular dyskinesis and overhead technique"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rotator_cuff_tendinopathy-dx-mgmt",
+      "title": "Diagnosis and management of Rotator cuff tendinopathy / subacromial impingement",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Shoulder pain on overhead activity suggesting subacromial impingement",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sudden loss of elevation, fever, weight loss, fixed restriction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for large acute cuff tear, infection or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound and MRI of the cuff, radiographs for acromial shape and calcification",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show tendinopathy without a full-thickness tear?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider full-thickness tear, calcific tendinitis or frozen shoulder; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Progressive eccentric loading with scapular rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Relative rest and load modification; simple analgesia or NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Subacromial corticosteroid injection for persistent pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct posture, scapular dyskinesis and overhead technique",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Rehabilitation is the mainstay; refer for surgical opinion if it fails",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

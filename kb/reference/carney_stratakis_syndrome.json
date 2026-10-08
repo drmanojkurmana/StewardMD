@@ -167,331 +167,49 @@
     {
       "id": "carney_stratakis_syndrome-diagnostic",
       "kind": "diagnostic",
-      "title": "Investigations and what they show",
+      "title": "Diagnostic investigations in Carney-Stratakis syndrome",
       "rowHeader": "Criterion",
-      "columns": [
-        "What it shows"
-      ],
+      "columns": ["What it shows"],
       "rows": [
-        {
-          "parameter": "Germline sequencing and deletion/duplication analysis of the SDHx genes",
-          "cells": [
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Tumour SDHB immunohistochemistry and testing for absence of KIT/PDGFRA mutations",
-          "cells": [
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Plasma or urinary metanephrines and normetanephrines for catecholamine excess",
-          "cells": [
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Whole-body MRI or functional imaging to localise paragangliomas and phaeochromocytomas",
-          "cells": [
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Endoscopy and cross-sectional imaging to characterise gastric stromal tumours",
-          "cells": [
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Histopathological review confirming succinate dehydrogenase-deficient GIST",
-          "cells": [
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        }
-      ],
-      "footnote": "Source states no numeric thresholds; needs-source marks a cell the entry does not state."
+        {"parameter": "Germline SDHx sequencing and deletion or duplication analysis", "cells": [{"text": "SDHB, SDHC or SDHD variant"}], "cite": "c1"},
+        {"parameter": "Tumour SDHB immunohistochemistry", "cells": [{"text": "Loss of SDHB expression flags an SDH defect"}], "cite": "c1"},
+        {"parameter": "KIT and PDGFRA mutation testing on the GIST", "cells": [{"text": "Absence of driver mutation in SDH-deficient GIST"}], "cite": "c1"},
+        {"parameter": "Plasma or urinary metanephrines and normetanephrines", "cells": [{"text": "Catecholamine excess"}], "cite": "c1"},
+        {"parameter": "Whole-body MRI or functional imaging", "cells": [{"text": "Paragangliomas and phaeochromocytomas"}], "cite": "c1"},
+        {"parameter": "Endoscopy and cross-sectional imaging", "cells": [{"text": "Gastric stromal tumours"}], "cite": "c1"},
+        {"parameter": "Histopathological review", "cells": [{"text": "Confirms SDH-deficient GIST"}], "cite": "c1"}
+      ]
     },
     {
       "id": "carney_stratakis_syndrome-ddx",
       "kind": "ddx",
-      "title": "Look-alike conditions",
+      "title": "Look-alike GIST and paraganglioma syndromes",
       "rowHeader": "Condition",
-      "columns": [
-        "Key distinguishing feature",
-        "Best test to separate"
-      ],
+      "columns": ["Key distinguishing feature"],
       "rows": [
-        {
-          "parameter": "Carney triad",
-          "cells": [
-            {
-              "text": "non-hereditary GIST, paraganglioma and pulmonary chondroma"
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Hereditary paraganglioma-phaeochromocytoma syndrome without GIST",
-          "cells": [
-            {
-              "text": "needs-source"
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "KIT or PDGFRA-mutated sporadic gastrointestinal stromal tumour",
-          "cells": [
-            {
-              "text": "needs-source"
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Neurofibromatosis type 1 with GIST",
-          "cells": [
-            {
-              "text": "needs-source"
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Von Hippel-Lindau disease",
-          "cells": [
-            {
-              "text": "needs-source"
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Multiple endocrine neoplasia type 2",
-          "cells": [
-            {
-              "text": "needs-source"
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        }
+        {"parameter": "Carney triad", "cells": [{"text": "Non-hereditary; includes pulmonary chondroma; not caused by germline SDHx variants"}], "cite": "c1"},
+        {"parameter": "Sporadic KIT or PDGFRA-mutated gastrointestinal stromal tumour", "cells": [{"text": "KIT or PDGFRA driver mutation present, unlike the wild-type SDH-deficient GIST"}], "cite": "c1"}
       ]
     },
     {
       "id": "carney_stratakis_syndrome-treatment",
       "kind": "treatment",
-      "title": "Management options, in order",
+      "title": "Management options in Carney-Stratakis syndrome",
       "rowHeader": "Option",
-      "columns": [
-        "Step",
-        "Notes"
-      ],
+      "columns": ["Step", "Notes"],
       "rows": [
-        {
-          "parameter": "Confirm molecular subtype",
-          "cells": [
-            {
-              "text": "Confirm molecular subtype"
-            },
-            {
-              "text": "SDHB immunohistochemistry on any KIT/PDGFRA-negative GIST, followed by germline SDHx testing and genetic counseling if SDHB is negative."
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Coordinate care between a sarcoma-experienced surgical/medical oncology team and an endocrine oncology team, with genetic counseling involved from diagnosis onward.",
-          "cells": [
-            {
-              "text": "Coordinate care between a sarcoma-experienced surgical/medical oncology team and an endocrine oncology team, with genetic counseling involved from diagnosis onward."
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "For localized GIST, surgical resection is primary treatment, with the extent individualized given typically multifocal, gastric-confined SDH-deficient disease.",
-          "cells": [
-            {
-              "text": "For localized GIST, surgical resection is primary treatment, with the extent individualized given typically multifocal, gastric-confined SDH-deficient disease."
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "SDH-deficient GIST is largely insensitive to imatinib, so adjuvant tyrosine kinase inhibitor therapy is not routinely used after resection in this subtype.",
-          "cells": [
-            {
-              "text": "SDH-deficient GIST is largely insensitive to imatinib, so adjuvant tyrosine kinase inhibitor therapy is not routinely used after resection in this subtype."
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "For metastatic or unresectable GIST, sunitinib or regorafenib are the systemic options with the most support, since imatinib is unreliable in SDH-deficient disease.",
-          "cells": [
-            {
-              "text": "For metastatic or unresectable GIST, sunitinib or regorafenib are the systemic options with the most support, since imatinib is unreliable in SDH-deficient disease."
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Given the often indolent course of SDH-deficient GIST, consider observation of asymptomatic low-volume metastatic disease and case-by-case resection of limited resectable metastases rather than defaulting to immediate systemic therapy.",
-          "cells": [
-            {
-              "text": "Given the often indolent course of SDH-deficient GIST, consider observation of asymptomatic low-volume metastatic disease and case-by-case resection of limited resectable metastases rather than defaulting to immediate systemic therapy."
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "For resectable, hormonally active or potentially active paraganglioma, surgery is treatment of choice, but only after preoperative alpha-adrenergic blockade (such as phenoxybenzamine, prazosin, or doxazosin) with salt and fluid loading over roughly ten to fourteen days; a beta-blocker may be added afterward for tachycardia only once alpha-blockade is established, to avoid unopposed alpha stimulation.",
-          "cells": [
-            {
-              "text": "For resectable, hormonally active or potentially active paraganglioma, surgery is treatment of choice, but only after preoperative alpha-adrenergic blockade (such as phenoxybenzamine, prazosin, or doxazosin) with salt and fluid loading over roughly ten to fourteen days; a beta-blocker may be added afterward for tachycardia only once alpha-blockade is established, to avoid unopposed alpha stimulation."
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Provide invasive intraoperative blood pressure monitoring with rapidly acting antihypertensives, and close postoperative monitoring, typically in an intensive care setting.",
-          "cells": [
-            {
-              "text": "Provide invasive intraoperative blood pressure monitoring with rapidly acting antihypertensives, and close postoperative monitoring, typically in an intensive care setting."
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "For metastatic paraganglioma, especially SDHB-associated disease that is often asymptomatic and slowly progressive, a watch-and-wait approach with symptom control is often appropriate.",
-          "cells": [
-            {
-              "text": "For metastatic paraganglioma, especially SDHB-associated disease that is often asymptomatic and slowly progressive, a watch-and-wait approach with symptom control is often appropriate."
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "For symptomatic or progressive metastatic paraganglioma, options include debulking or metastasectomy, locoregional techniques such as radiofrequency ablation or transarterial chemoembolization, external-beam radiation, radiopharmaceutical therapy (MIBG or DOTATATE based on avidity), and cytotoxic chemotherapy regimens such as cyclophosphamide-dacarbazine-vincristine or capecitabine-temozolomide, all requiring adequate preoperative alpha-blockade before any procedure.",
-          "cells": [
-            {
-              "text": "For symptomatic or progressive metastatic paraganglioma, options include debulking or metastasectomy, locoregional techniques such as radiofrequency ablation or transarterial chemoembolization, external-beam radiation, radiopharmaceutical therapy (MIBG or DOTATATE based on avidity), and cytotoxic chemotherapy regimens such as cyclophosphamide-dacarbazine-vincristine or capecitabine-temozolomide, all requiring adequate preoperative alpha-blockade before any procedure."
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Maintain supportive alpha- and if needed beta-blockade for catecholamine-driven hypertension, plus antiresorptive therapy for bone metastases.",
-          "cells": [
-            {
-              "text": "Maintain supportive alpha- and if needed beta-blockade for catecholamine-driven hypertension, plus antiresorptive therapy for bone metastases."
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Provide lifelong surveillance for both tumor types given the risk of metachronous and multifocal disease, using biochemical testing (plasma free metanephrines/normetanephrines or 24-hour urine catecholamines) as the primary paraganglioma surveillance tool once secretory status is known, and periodic imaging of the at-risk field for GIST.",
-          "cells": [
-            {
-              "text": "Provide lifelong surveillance for both tumor types given the risk of metachronous and multifocal disease, using biochemical testing (plasma free metanephrines/normetanephrines or 24-hour urine catecholamines) as the primary paraganglioma surveillance tool once secretory status is known, and periodic imaging of the at-risk field for GIST."
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Offer genetic counseling and SDHx testing to at-risk first-degree relatives given the autosomal dominant inheritance.",
-          "cells": [
-            {
-              "text": "Offer genetic counseling and SDHx testing to at-risk first-degree relatives given the autosomal dominant inheritance."
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        },
-        {
-          "parameter": "Refer to specialized sarcoma or endocrine oncology/surgery teams and to genetic counseling at diagnosis of either tumor type, and to a center experienced in rare hereditary tumor syndromes for complex multifocal, recurrent, or advanced disease decisions.",
-          "cells": [
-            {
-              "text": "Refer to specialized sarcoma or endocrine oncology/surgery teams and to genetic counseling at diagnosis of either tumor type, and to a center experienced in rare hereditary tumor syndromes for complex multifocal, recurrent, or advanced disease decisions."
-            },
-            {
-              "text": "needs-source"
-            }
-          ],
-          "cite": "c1"
-        }
+        {"parameter": "Molecular subtype", "cells": [{"text": "SDHB immunohistochemistry on KIT and PDGFRA-negative GIST, then germline SDHx testing"}, {"text": "Establishes the subtype"}], "cite": "c1"},
+        {"parameter": "Localised GIST", "cells": [{"text": "Surgical resection as primary treatment; extent individualised for multifocal gastric disease"}, {"text": "Primary treatment"}], "cite": "c1"},
+        {"parameter": "Adjuvant therapy", "cells": [{"text": "Tyrosine kinase inhibitor not routinely used after resection in SDH-deficient GIST"}, {"text": "Imatinib largely insensitive"}], "cite": "c1"},
+        {"parameter": "Metastatic or unresectable GIST", "cells": [{"text": "Sunitinib or regorafenib as the most supported systemic options"}, {"text": "Imatinib unreliable"}], "cite": "c1"},
+        {"parameter": "Indolent metastatic GIST", "cells": [{"text": "Observation of asymptomatic low-volume disease; resection of limited resectable metastases case by case"}, {"text": "Often indolent"}], "cite": "c1"},
+        {"parameter": "Paraganglioma preparation", "cells": [{"text": "Alpha-blockade (phenoxybenzamine, prazosin or doxazosin) with salt and fluid loading for about 10 to 14 days before surgery; beta-blocker added only after alpha-blockade"}, {"text": "Before surgery"}], "cite": "c1"},
+        {"parameter": "Intraoperative and postoperative care", "cells": [{"text": "Invasive blood pressure monitoring with rapidly acting antihypertensives; close postoperative monitoring"}, {"text": "Intensive care setting"}], "cite": "c1"},
+        {"parameter": "Metastatic paraganglioma", "cells": [{"text": "Watch and wait with symptom control if asymptomatic; debulking, locoregional, radiopharmaceutical or chemotherapy when symptomatic or progressive"}, {"text": "SDHB disease often slow"}], "cite": "c1"},
+        {"parameter": "Bone metastases", "cells": [{"text": "Antiresorptive therapy"}, {"text": "Supportive"}], "cite": "c1"},
+        {"parameter": "Surveillance", "cells": [{"text": "Lifelong biochemical testing for paraganglioma; periodic imaging of the at-risk field for GIST"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "SDHx testing for at-risk first-degree relatives"}, {"text": "Autosomal dominant"}], "cite": "c1"},
+        {"parameter": "Referral", "cells": [{"text": "Sarcoma or endocrine oncology and surgery teams; hereditary tumour centre for complex disease"}, {"text": "Multidisciplinary"}], "cite": "c1"}
       ]
     }
   ],
@@ -501,129 +219,24 @@
       "title": "Diagnosis and management of Carney-Stratakis syndrome",
       "start": "n1",
       "nodes": [
-        {
-          "id": "n1",
-          "type": "start",
-          "text": "Suspected Carney-Stratakis syndrome",
-          "cite": "c1"
-        },
-        {
-          "id": "n2",
-          "type": "decision",
-          "text": "Any red flag present?",
-          "cite": "c1"
-        },
-        {
-          "id": "n3",
-          "type": "outcome",
-          "text": "Escalate: Paroxysmal hypertension, palpitations and headache indicating a...",
-          "cite": "c1"
-        },
-        {
-          "id": "n4",
-          "type": "action",
-          "text": "Investigate: Germline sequencing and deletion/duplication analysis of the SDHx genes",
-          "cite": "c1"
-        },
-        {
-          "id": "n5",
-          "type": "decision",
-          "text": "Does the workup confirm the diagnosis?",
-          "cite": "c1"
-        },
-        {
-          "id": "n6",
-          "type": "action",
-          "text": "Confirm molecular subtype: SDHB immunohistochemistry on any KIT/PDGFRA-negative GIST,...",
-          "cite": "c1"
-        },
-        {
-          "id": "n7",
-          "type": "action",
-          "text": "Review differentials: Carney triad (non-hereditary GIST, paraganglioma and pulmonary...",
-          "cite": "c1"
-        },
-        {
-          "id": "n8",
-          "type": "action",
-          "text": "Coordinate care between a sarcoma-experienced surgical/medical oncology team and an...",
-          "cite": "c1"
-        },
-        {
-          "id": "n9",
-          "type": "action",
-          "text": "For localized GIST, surgical resection is primary treatment, with the extent...",
-          "cite": "c1"
-        },
-        {
-          "id": "n10",
-          "type": "action",
-          "text": "SDH-deficient GIST is largely insensitive to imatinib, so adjuvant tyrosine kinase...",
-          "cite": "c1"
-        },
-        {
-          "id": "n11",
-          "type": "outcome",
-          "text": "Outcome: Succinate dehydrogenase-deficient GISTs tend to be indolent but can...",
-          "cite": "c1"
-        }
+        {"id": "n1", "type": "start", "text": "Gastrointestinal stromal tumour in a young patient, with or without paraganglioma or phaeochromocytoma", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: paroxysmal hypertension, GI bleeding, or rapidly enlarging or metastatic tumour?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent surgical and endocrine oncology review; alpha-blockade before any procedure", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Tumour SDHB immunohistochemistry; KIT and PDGFRA testing; plasma metanephrines; germline SDHx testing", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "SDHB loss with absent KIT and PDGFRA mutation, and pathogenic SDHx variant confirmed?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Surgery for localised disease; watchful surveillance; lifelong paraganglioma and GIST surveillance; family SDHx testing", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Manage as sporadic or KIT-driven GIST; consider Carney triad or other syndromes", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Often indolent; lifelong surveillance needed for metachronous and multifocal disease", "cite": "c1"}
       ],
       "edges": [
-        {
-          "from": "n1",
-          "to": "n2",
-          "label": "Next"
-        },
-        {
-          "from": "n2",
-          "to": "n3",
-          "label": "Yes"
-        },
-        {
-          "from": "n2",
-          "to": "n4",
-          "label": "No"
-        },
-        {
-          "from": "n4",
-          "to": "n5",
-          "label": "Next"
-        },
-        {
-          "from": "n5",
-          "to": "n6",
-          "label": "Yes"
-        },
-        {
-          "from": "n5",
-          "to": "n7",
-          "label": "No"
-        },
-        {
-          "from": "n7",
-          "to": "n4",
-          "label": "Next"
-        },
-        {
-          "from": "n6",
-          "to": "n8",
-          "label": "Next"
-        },
-        {
-          "from": "n8",
-          "to": "n9",
-          "label": "Next"
-        },
-        {
-          "from": "n9",
-          "to": "n10",
-          "label": "Next"
-        },
-        {
-          "from": "n10",
-          "to": "n11",
-          "label": "Next"
-        }
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"}
       ]
     }
   ]

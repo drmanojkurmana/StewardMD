@@ -146,5 +146,314 @@
       "caption": "Overview comparison matrix for oxygen toxicity."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oxygen_toxicity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Review of oxygen exposure and dive or treatment profile",
+          "cells": [
+            {
+              "text": "Recognition of the exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of oxygen fraction and depth or pressure",
+          "cells": [
+            {
+              "text": "Partial pressure of oxygen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological assessment after any seizure",
+          "cells": [
+            {
+              "text": "Other causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function and chest examination",
+          "cells": [
+            {
+              "text": "Pulmonary toxicity, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of hypercapnia and gas contamination",
+          "cells": [
+            {
+              "text": "Contributing factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oxygen_toxicity-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypercapnia (carbon dioxide retention)",
+          "cells": [
+            {
+              "text": "Lowers the seizure threshold; must be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompression illness with neurological features",
+          "cells": [
+            {
+              "text": "Easily confused; the oxygen exposure history separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oxygen_toxicity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reduce oxygen exposure",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Lower oxygen fraction or ascend; reduce inspired oxygen in hyperbaric therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protect the airway in a seizure",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Prevent aspiration; keep the airway sealed and control ascent in the water"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heed premonitory features",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Visual disturbance, tinnitus, nausea or facial twitching prompt curtailing exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary form",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Supportive respiratory care until hyperoxia is stopped"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contributing factors",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Exclude and correct hypercapnia and gas contamination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oxygen_toxicity-dx-mgmt",
+      "title": "Diagnosis and management of Oxygen toxicity",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Seizure or visual, tinnitus or twitching symptoms during high oxygen exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (seizure underwater, progressive breathlessness or persisting deficit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: remove oxygen exposure, protect the airway and seek diving medicine advice",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Review oxygen fraction and depth, neurological exam, lung function, CO2 and gas check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the event linked to high oxygen partial pressure, with other causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider nitrogen narcosis, hypercapnia, decompression illness or epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lower the oxygen fraction or ascend; reduce inspired oxygen in hyperbaric therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Protect the airway in a seizure; keep the airway sealed and control ascent in water",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stop exposure at premonitory signs such as visual change, tinnitus or facial twitching",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supportive respiratory care for the pulmonary form until hyperoxia is stopped",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Exclude and correct hypercapnia and gas contamination as contributors",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally reversible once exposure stops; the main danger is drowning after a seizure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

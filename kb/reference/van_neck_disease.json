@@ -142,5 +142,296 @@
       "caption": "Overview comparison matrix for van neck disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Paediatric orthopaedic references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "van_neck_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Radiographs of both sides with follow-up",
+          "cells": [
+            {
+              "text": "Exuberant or asymmetric ischiopubic ossification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Excludes infection or tumour where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Helps exclude infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical observation over time",
+          "cells": [
+            {
+              "text": "Resolution as the synchondrosis fuses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "van_neck_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteomyelitis of the pelvis",
+          "cells": [
+            {
+              "text": "Radiographic appearance can mimic it; inflammatory markers help separate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ewing sarcoma or other bone tumour",
+          "cells": [
+            {
+              "text": "Aggressive imaging features or a soft-tissue mass suggest tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic stress or avulsion fracture",
+          "cells": [
+            {
+              "text": "A healing fracture can mimic the appearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other osteochondroses",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "van_neck_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Recognition as a benign variant",
+          "cells": [
+            {
+              "text": "Avoids unnecessary intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Resolves once the ischiopubic synchondrosis fuses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity modification and analgesia",
+          "cells": [
+            {
+              "text": "Paracetamol or NSAIDs for pain and limp"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comparison radiographs with follow-up",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid biopsy",
+          "cells": [
+            {
+              "text": "Once the diagnosis is recognised"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "van_neck_disease-dx-mgmt",
+      "title": "Diagnosis and management of Van Neck disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected van Neck disease: groin or hip pain and limp in a growing child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (systemic features, raised markers or tumour features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation for infection or tumour before any intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Comparison radiographs of both sides, inflammatory markers, MRI if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the change a symmetric benign ischiopubic variant on follow-up imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider osteomyelitis, Ewing sarcoma or pelvic stress fracture; investigate further",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Recognise as a benign variant to avoid unnecessary intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassurance and observation until the synchondrosis fuses",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Activity modification with paracetamol or NSAIDs for pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid biopsy once the diagnosis is recognised",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Self-limiting; resolves as the ischiopubic synchondrosis fuses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for tertiary hyperparathyroidism."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / WHO Classification of Endocrine Tumours",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tertiary_hyperparathyroidism-dx-mgmt",
+      "title": "Diagnosis and management of Tertiary hyperparathyroidism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tertiary hyperparathyroidism: hypercalcaemia with high PTH after renal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: progressive hypercalcaemia threatening graft, or calciphylaxis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of symptomatic hypercalcaemic crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum calcium, phosphate and intact PTH; renal function; neck ultrasound and sestamibi",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is hypercalcaemia present with inappropriately high PTH?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider secondary hyperparathyroidism or primary adenoma; re-check biochemistry",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Calcimimetic such as cinacalcet to lower calcium and PTH",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Control hyperphosphataemia and use active vitamin D cautiously",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Parathyroidectomy for refractory autonomous disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for hypocalcaemia and hungry-bone syndrome after surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Protect the transplanted kidney by correcting hypercalcaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Surgery is usually curative; trade-off is recurrence versus permanent hypoparathyroidism",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tertiary_hyperparathyroidism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum calcium, phosphate and intact PTH",
+          "cells": [
+            {
+              "text": "Hypercalcaemia with inappropriately high PTH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and transplant status",
+          "cells": [
+            {
+              "text": "Chronic kidney disease or graft function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin D status and bone turnover markers",
+          "cells": [
+            {
+              "text": "Mineral metabolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neck ultrasound with sestamibi or 4D-CT",
+          "cells": [
+            {
+              "text": "Gland number and enlargement before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone density and skeletal imaging",
+          "cells": [
+            {
+              "text": "Renal osteodystrophy and fractures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tertiary_hyperparathyroidism-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Secondary hyperparathyroidism of chronic kidney disease",
+          "cells": [
+            {
+              "text": "Calcium is low or normal in secondary disease; hypercalcaemia points to tertiary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary hyperparathyroidism from an adenoma",
+          "cells": [
+            {
+              "text": "Long renal history with chronic stimulation favours tertiary disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parathyroid carcinoma",
+          "cells": [
+            {
+              "text": "Persistent hypercalcaemia with very high PTH warrants exclusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tertiary_hyperparathyroidism-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Calcimimetic such as cinacalcet",
+          "cells": [
+            {
+              "text": "Lowers calcium and PTH in autonomous disease, as a bridge or alternative to surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mineral metabolism control",
+          "cells": [
+            {
+              "text": "Hyperphosphataemia and cautious active vitamin D use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parathyroidectomy",
+          "cells": [
+            {
+              "text": "Refractory autonomous disease; subtotal or total with autotransplantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative localisation",
+          "cells": [
+            {
+              "text": "Neck ultrasound with sestamibi or 4D-CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-operative monitoring",
+          "cells": [
+            {
+              "text": "Hypocalcaemia and hungry-bone syndrome; replace calcium and vitamin D"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protect the transplanted kidney",
+          "cells": [
+            {
+              "text": "Correct persistent hypercalcaemia that accelerates graft dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone surveillance",
+          "cells": [
+            {
+              "text": "Renal osteodystrophy with bone density monitoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

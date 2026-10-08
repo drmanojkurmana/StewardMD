@@ -146,5 +146,298 @@
       "caption": "Overview comparison matrix for pilonidal sinus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pilonidal_sinus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical inspection",
+          "cells": [
+            {
+              "text": "Midline pits and lateral tracks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination to distinguish from anal fistula",
+          "cells": [
+            {
+              "text": "Relationship to the anal canal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Complex or recurrent disease, or a deeper or connecting track"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of chronic non-healing lesions",
+          "cells": [
+            {
+              "text": "Malignancy excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pilonidal_sinus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anorectal abscess or fistula-in-ano",
+          "cells": [
+            {
+              "text": "Tracking posteriorly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perianal Crohn disease",
+          "cells": [
+            {
+              "text": "Atypical features suggesting an alternative diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pilonidal_sinus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute abscess",
+          "cells": [
+            {
+              "text": "Incision and drainage, usually off the midline, to relieve sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic or recurrent sinus",
+          "cells": [
+            {
+              "text": "Elective options from pit-picking and laying open to wide excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Off-midline and flap techniques",
+          "cells": [
+            {
+              "text": "Generally lower recurrence and better healing than midline closure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hair control",
+          "cells": [
+            {
+              "text": "Depilation or laser epilation and improved local hygiene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distinguish and map",
+          "cells": [
+            {
+              "text": "Clinical distinction from anal fistula; MRI for complex or deeper tracks before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy exclusion",
+          "cells": [
+            {
+              "text": "Biopsy of chronic non-healing lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pilonidal_sinus-dx-mgmt",
+      "title": "Diagnosis and management of Pilonidal sinus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Midline pit or lateral track in the natal cleft with recurrent discharge",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (spreading cellulitis, indurated non-healing sinus, immunosuppression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drainage and surgical review for spreading cellulitis or sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical inspection for pits and tracks; distinguish from anal fistula; MRI if complex",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a midline pit with lateral tracks confirmed, with no anal canal connection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider anal fistula, hidradenitis, infected sebaceous cyst or Crohn disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Incision and drainage, usually off the midline, for an acute abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Elective pit-picking, laying open or wide excision for chronic or recurrent sinus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Off-midline and flap techniques for lower recurrence than midline closure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hair control with depilation or laser epilation and local hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Biopsy chronic non-healing lesions to exclude malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Abscesses settle with drainage, but disease recurs; flap-based surgery improves healing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

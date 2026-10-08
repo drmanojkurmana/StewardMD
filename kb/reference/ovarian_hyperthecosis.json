@@ -147,5 +147,312 @@
       "caption": "Overview comparison matrix for ovarian hyperthecosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Yen and Jaffe's Reproductive Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ovarian_hyperthecosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum total testosterone and other androgens",
+          "cells": [
+            {
+              "text": "Quantifies hyperandrogenism; testosterone usually substantially elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose and lipid profile",
+          "cells": [
+            {
+              "text": "Insulin resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound",
+          "cells": [
+            {
+              "text": "Ovarian size and morphology; enlarged and solid rather than polycystic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging of adrenals and ovaries",
+          "cells": [
+            {
+              "text": "A tumour, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "17-hydroxyprogesterone and adrenal workup",
+          "cells": [
+            {
+              "text": "Congenital adrenal hyperplasia and Cushing syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ovarian_hyperthecosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Polycystic ovary syndrome",
+          "cells": [
+            {
+              "text": "Virilisation is disproportionately severe and the ovaries are solid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Androgen-secreting ovarian or adrenal tumour",
+          "cells": [
+            {
+              "text": "Rapid virilisation or very high testosterone raises concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-classic congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "Excluded by 17-hydroxyprogesterone measurement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ovarian_hyperthecosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Suppress ovarian androgen production",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "GnRH agonist or, in the appropriate patient, a combined oral contraceptive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-androgen therapy",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Spironolactone or cyproterone acetate, with mechanical and cosmetic hair reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilateral oophorectomy",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Definitive treatment where fertility is not wanted, particularly peri- and postmenopausal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Insulin resistance",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Lifestyle change and metformin, given the link between hyperinsulinaemia and hyperandrogenism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiometabolic risk",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Treat dyslipidaemia and dysglycaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ovarian_hyperthecosis-dx-mgmt",
+      "title": "Diagnosis and management of Ovarian hyperthecosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Virilisation with marked hyperandrogenism and enlarged solid ovaries",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid virilisation, very high testosterone or an adnexal or adrenal mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent imaging to exclude an androgen-secreting tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Testosterone and androgens, ovarian ultrasound, 17-OHP, glucose and lipids",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are testosterone and ovarian findings consistent with hyperthecosis, tumour excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PCOS, congenital adrenal hyperplasia, Cushing syndrome or drug-induced androgens",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "GnRH agonist or combined oral contraceptive to suppress ovarian androgen production",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Spironolactone or cyproterone acetate, with hair-reduction measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bilateral oophorectomy as definitive treatment where fertility is not wanted",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Metformin and lifestyle change for insulin resistance; treat cardiometabolic risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign but distressing; androgen suppression or oophorectomy controls virilisation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

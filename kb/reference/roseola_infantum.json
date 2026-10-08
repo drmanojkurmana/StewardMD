@@ -150,5 +150,231 @@
       "caption": "Overview comparison matrix for roseola infantum."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "roseola_infantum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Fever followed by rash in a well child"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HHV-6 PCR or serology",
+          "cells": [
+            {
+              "text": "Reserved for atypical, severe or immunocompromised cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Basic bloods",
+          "cells": [
+            {
+              "text": "Exclude bacterial sepsis when the febrile child appears unwell"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "roseola_infantum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Hydration and antipyretics such as paracetamol for fever in the immunocompetent child"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, self-limiting course with the fever-then-rash sequence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Febrile seizure first aid",
+          "cells": [
+            {
+              "text": "Parental advice on recognition and simple first-aid management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiviral therapy",
+          "cells": [
+            {
+              "text": "Ganciclovir or foscarnet reserved for immunocompromised hosts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "roseola_infantum-dx-mgmt",
+      "title": "Diagnosis and management of Roseola infantum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Well child with fever followed by a rash",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (toxic appearance, complex seizure, encephalitis, immunocompromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent sepsis or meningitis assessment for a toxic or lethargic child",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; basic bloods if unwell; HHV-6 PCR only if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the typical fever-then-rash sequence present in a well child?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Investigate for sepsis, encephalitis or other exanthems; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Hydration and antipyretics such as paracetamol for fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassure about the benign, self-limiting course",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Parental advice on febrile seizures and first aid",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiviral therapy only for immunocompromised hosts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign, self-limiting illness in immunocompetent children",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,296 @@
       "caption": "Overview comparison matrix for neonatal seizures."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neonatal_seizures-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "EEG or amplitude-integrated EEG",
+          "cells": [
+            {
+              "text": "Electrographic seizures; clinical signs are unreliable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose, electrolytes, calcium and magnesium",
+          "cells": [
+            {
+              "text": "Readily treatable causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cranial ultrasound and MRI",
+          "cells": [
+            {
+              "text": "Structural or haemorrhagic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture and sepsis evaluation",
+          "cells": [
+            {
+              "text": "When infection is possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic and genetic testing",
+          "cells": [
+            {
+              "text": "Unexplained or refractory cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_seizures-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Jitteriness or benign neonatal sleep myoclonus",
+          "cells": [
+            {
+              "text": "Stimulus-sensitive and suppressible by gentle restraint; no ocular or autonomic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia or electrolyte disturbance",
+          "cells": [
+            {
+              "text": "Corrected first, before anticonvulsants are escalated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meningitis or encephalitis",
+          "cells": [
+            {
+              "text": "Lumbar puncture and sepsis evaluation when infection is possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_seizures-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dextrose and electrolyte correction first",
+          "cells": [
+            {
+              "text": "Glucose, calcium, magnesium and electrolytes corrected before escalating drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phenobarbital first-line",
+          "cells": [
+            {
+              "text": "Phenytoin, levetiracetam or a benzodiazepine added as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Therapeutic hypothermia",
+          "cells": [
+            {
+              "text": "For hypoxic-ischaemic encephalopathy, the commonest cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics and aciclovir",
+          "cells": [
+            {
+              "text": "For suspected infection pending CSF and culture results"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyridoxine trial",
+          "cells": [
+            {
+              "text": "In refractory seizures, to detect vitamin-responsive causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neonatal_seizures-dx-mgmt",
+      "title": "Diagnosis and management of Neonatal Seizures",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Newborn with subtle eye, oral or limb movements, or apnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (status epilepticus, refractory seizures, depressed consciousness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Correct glucose and electrolytes; start anticonvulsant therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EEG or aEEG, glucose, electrolytes, cranial imaging, lumbar puncture if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Electrographic seizures confirmed on EEG, not jitteriness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat as jitteriness or benign myoclonus; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Dextrose and correction of calcium, magnesium and electrolytes first",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Phenobarbital first-line; add phenytoin, levetiracetam or a benzodiazepine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Therapeutic hypothermia for hypoxic-ischaemic encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pyridoxine trial in refractory seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on cause; severe brain injury carries an epilepsy risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

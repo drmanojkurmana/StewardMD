@@ -146,5 +146,294 @@
       "caption": "Overview comparison matrix for mody type 3 (hnf1a)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mody_type_3_hnf1a-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting glucose and HbA1c",
+          "cells": [
+            {
+              "text": "Progressive hyperglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of HNF1A",
+          "cells": [
+            {
+              "text": "HNF1A variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic autoantibodies",
+          "cells": [
+            {
+              "text": "Type 1 diabetes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis or paired glucose testing",
+          "cells": [
+            {
+              "text": "Low renal glucose threshold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-sensitivity C-reactive protein",
+          "cells": [
+            {
+              "text": "Supportive biomarker"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mody_type_3_hnf1a-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "Autoantibody positive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GCK-MODY",
+          "cells": [
+            {
+              "text": "Mild, stable hyperglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HNF4A-MODY",
+          "cells": [
+            {
+              "text": "Overlapping phenotype with a normal renal glucose threshold"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mody_type_3_hnf1a-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-dose sulfonylureas as first line",
+          "cells": [
+            {
+              "text": "Often allows insulin to be discontinued"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious titration",
+          "cells": [
+            {
+              "text": "From a low starting dose to avoid hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Additional oral agents or insulin as secretion declines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication surveillance",
+          "cells": [
+            {
+              "text": "Sustained glycaemic control with regular screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy care",
+          "cells": [
+            {
+              "text": "Coordinated with specialists; maternal glucose monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; cascade testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mody_type_3_hnf1a-dx-mgmt",
+      "title": "Diagnosis and management of MODY type 3 (HNF1A)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive hyperglycaemia in a young adult with a low renal glucose threshold",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Ketoacidosis, rapid decompensation or severe hypoglycaemia after sulfonylurea?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for ketoacidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "HNF1A sequencing; autoantibodies; urine glucose; hsCRP",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an HNF1A variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider type 1 diabetes, GCK-MODY or HNF4A-MODY; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Low-dose sulfonylurea as first-line treatment, titrated cautiously",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Escalate as insulin secretory capacity declines",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sustain glycaemic control and complication surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Genetic counselling and cascade testing of relatives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

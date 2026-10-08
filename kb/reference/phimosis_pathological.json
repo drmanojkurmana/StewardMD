@@ -151,5 +151,343 @@
       "caption": "Overview comparison matrix for pathological phimosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "phimosis_pathological-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination of retractility",
+          "cells": [
+            {
+              "text": "Cicatricial white ring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inspection of glans and meatus",
+          "cells": [
+            {
+              "text": "Coexisting lichen sclerosus or malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of the urinary stream",
+          "cells": [
+            {
+              "text": "Obstruction or ballooning, where reported"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose testing",
+          "cells": [
+            {
+              "text": "Diabetes predisposing to recurrent balanitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swab or microscopy",
+          "cells": [
+            {
+              "text": "Active infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of tissue removed at circumcision",
+          "cells": [
+            {
+              "text": "Confirms lichen sclerosus and excludes malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phimosis_pathological-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiological phimosis of childhood",
+          "cells": [
+            {
+              "text": "Developmental non-retractility, not disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paraphimosis",
+          "cells": [
+            {
+              "text": "Retracted foreskin cannot be reduced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Balanitis xerotica obliterans",
+          "cells": [
+            {
+              "text": "Firm cicatricial white ring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phimosis_pathological-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Circumcision",
+          "cells": [
+            {
+              "text": "Definitive treatment for the firm cicatricial ring of true scarring phimosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potent topical corticosteroid trial",
+          "cells": [
+            {
+              "text": "First, for narrow but non-scarred foreskins, which may loosen the ring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lichen sclerosus treatment",
+          "cells": [
+            {
+              "text": "Potent topical corticosteroid for the glans and prepuce"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection before surgery",
+          "cells": [
+            {
+              "text": "Swab-directed topical or oral antimicrobials for active balanoposthitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycaemic control",
+          "cells": [
+            {
+              "text": "Optimise glycaemic control in diabetes to reduce recurrent infection and scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid forcible retraction",
+          "cells": [
+            {
+              "text": "Tears the foreskin, worsens scarring and can precipitate paraphimosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Excised preputial tissue to confirm lichen sclerosus and exclude malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Meatal or urethral stenosis and long-term penile cancer risk with lichen sclerosus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "phimosis_pathological-dx-mgmt",
+      "title": "Diagnosis and management of Pathological phimosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Firm cicatricial white ring at the preputial orifice preventing retraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (acute paraphimosis, persistent ulcer or mass, obstructed voiding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent reduction of acute paraphimosis; urgent review for penile carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Retractility and white ring check; glans and meatus; urinary stream; glucose; swab",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a firm cicatricial ring confirmed, rather than a narrow non-scarred foreskin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Trial a topical corticosteroid for a non-scarred foreskin and reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Offer circumcision as definitive treatment for the firm cicatricial ring",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Trial a potent topical corticosteroid first for narrow, non-scarred foreskins",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat lichen sclerosus of the glans and prepuce with a potent topical corticosteroid",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat active balanoposthitis with swab-directed antimicrobials before elective surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Send excised preputial tissue for histology to exclude malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Physiological phimosis resolves with growth; scarring phimosis is cured by circumcision",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

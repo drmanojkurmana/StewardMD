@@ -150,5 +150,334 @@
       "caption": "Overview comparison matrix for tangier disease (abca1, analphalipoproteinaemia neuropathy)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley and Daroff Neurology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tangier_disease-dx-mgmt",
+      "title": "Diagnosis and management of Tangier disease (ABCA1, analphalipoproteinaemia neuropathy)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Tangier disease: very low HDL, enlarged orange tonsils and neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: severe neuropathy, premature vascular disease, or painless injuries?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiovascular and neurological review for vascular or functional compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fasting lipid panel for very low HDL and apoA-I; NCS; tonsil examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ABCA1 sequencing confirm biallelic loss-of-function variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other HDL-deficiency states, CIDP, vasculitic neuropathy or syringomyelia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No therapy corrects the ABCA1 defect; target atherosclerotic risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "LDL-lowering therapy despite low total cholesterol",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and neuropathic pain agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Tonsillectomy where enlarged tonsils obstruct",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Periodic neurological and cardiovascular surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Neuropathy may relapse or progress; premature atherosclerosis drives long-term risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tangier_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting lipid panel",
+          "cells": [
+            {
+              "text": "Very low HDL cholesterol, low total cholesterol and reduced apolipoprotein A-I"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ABCA1 sequencing",
+          "cells": [
+            {
+              "text": "Biallelic loss-of-function variants confirm the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Multifocal or sensory-predominant neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve biopsy",
+          "cells": [
+            {
+              "text": "Lipid-laden Schwann cells, in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of tonsils, liver and spleen",
+          "cells": [
+            {
+              "text": "Lipid deposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular risk assessment",
+          "cells": [
+            {
+              "text": "Predisposition to atherosclerosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tangier_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Analphalipoproteinaemia and other HDL-deficiency states",
+          "cells": [
+            {
+              "text": "Very low HDL cholesterol with low total cholesterol is the clue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syringomyelia and other intramedullary cord lesions",
+          "cells": [
+            {
+              "text": "Pseudosyringomyelic loss of pain and temperature with sparing of touch mimics a cord lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mononeuritis multiplex from vasculitis",
+          "cells": [
+            {
+              "text": "Relapsing-remitting multifocal neuropathy resembles it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tangier_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No therapy for the ABCA1 defect",
+          "cells": [
+            {
+              "text": "Management centres on complications and cardiovascular risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atherosclerotic risk reduction",
+          "cells": [
+            {
+              "text": "Lifestyle measures and LDL-lowering therapy despite low total cholesterol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathy rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and neuropathic pain agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tonsillectomy",
+          "cells": [
+            {
+              "text": "Where enlarged tonsils cause obstructive symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological monitoring",
+          "cells": [
+            {
+              "text": "Periodic clinical and nerve conduction assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular surveillance",
+          "cells": [
+            {
+              "text": "Premature atherosclerotic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; carrier testing of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

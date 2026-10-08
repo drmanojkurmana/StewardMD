@@ -151,5 +151,305 @@
       "caption": "Overview comparison matrix for neurogenic bladder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neurogenic_bladder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Video-urodynamic studies",
+          "cells": [
+            {
+              "text": "Detrusor pressure, compliance and sphincter coordination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and upper tract ultrasound",
+          "cells": [
+            {
+              "text": "Hydronephrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-void residual measurement",
+          "cells": [
+            {
+              "text": "Emptying"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and culture",
+          "cells": [
+            {
+              "text": "Infection surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance for stones or malignancy",
+          "cells": [
+            {
+              "text": "Long-term catheterised patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neurogenic_bladder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Idiopathic overactive bladder",
+          "cells": [
+            {
+              "text": "Detrusor overactivity without a neurological cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder outlet obstruction from BPH or stricture",
+          "cells": [
+            {
+              "text": "Urodynamics separates outlet obstruction from neurogenic dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cauda equina syndrome",
+          "cells": [
+            {
+              "text": "Acute retention with neurological deficit is a red flag"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neurogenic_bladder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-pressure storage and emptying",
+          "cells": [
+            {
+              "text": "The overriding goal, guided by video-urodynamics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clean intermittent catheterisation",
+          "cells": [
+            {
+              "text": "Cornerstone for poorly emptying bladders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimuscarinics or mirabegron",
+          "cells": [
+            {
+              "text": "Reduce detrusor overactivity and storage pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intradetrusor botulinum toxin",
+          "cells": [
+            {
+              "text": "For refractory overactivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha-blockers or sphincter botulinum",
+          "cells": [
+            {
+              "text": "For detrusor-sphincter dyssynergia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Augmentation cystoplasty, sacral neuromodulation or diversion when conservative care fails"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neurogenic_bladder-dx-mgmt",
+      "title": "Diagnosis and management of Neurogenic bladder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bladder dysfunction in a patient with neurological disease or injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hydronephrosis, rising creatinine, autonomic dysreflexia, urosepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drainage and renal assessment; treat dysreflexia or urosepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Video-urodynamics, post-void residual, renal function, upper tract ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "High storage pressures or dyssynergia on video-urodynamics?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider overactive bladder or outlet obstruction; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clean intermittent catheterisation for poor emptying",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antimuscarinics or mirabegron; intradetrusor botulinum toxin for refractory overactivity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Alpha-blockers or sphincter botulinum for dyssynergia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Augmentation cystoplasty or sacral neuromodulation if conservative care fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Low-pressure management protects renal function; high-pressure bladders risk harm",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,501 @@
       "caption": "Overview comparison matrix for osteoarthritis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Osteoarthritis (cites 2019 ACR/AF guideline)",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/joint-disorders/osteoarthritis-oa"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "osteoarthritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of osteoarthritis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Pain pattern",
+          "cells": [
+            {
+              "text": "Activity-related, eased by rest; later constant or nocturnal"
+            },
+            {
+              "text": "Gradual onset in one or a few joints"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Morning stiffness",
+          "unit": "min",
+          "cells": [
+            {
+              "text": "Under 30 minutes",
+              "op": "<",
+              "value": 30
+            },
+            {
+              "text": "{{hy:Longer stiffness points to inflammatory arthritis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint distribution",
+          "cells": [
+            {
+              "text": "Knees, hips, first MTP, spine, DIP, PIP, thumb base"
+            },
+            {
+              "text": "MCP, wrist, elbow or ankle involvement suggests secondary OA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand nodes",
+          "cells": [
+            {
+              "text": "Heberden (DIP) and Bouchard (PIP)"
+            },
+            {
+              "text": "Bony enlargement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hip sign",
+          "cells": [
+            {
+              "text": "Loss of internal rotation"
+            },
+            {
+              "text": "Early hip OA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiograph",
+          "cells": [
+            {
+              "text": "Osteophytes, joint space narrowing, subchondral sclerosis and cysts"
+            },
+            {
+              "text": "Correlates poorly with pain; not routinely needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Synovial fluid",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "Noninflammatory, 2000 WBC/uL or less (Merck)",
+              "op": "<=",
+              "value": 2000
+            },
+            {
+              "text": "Harrison: over 1000/uL suggests inflammatory or crystal arthritis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood tests",
+          "cells": [
+            {
+              "text": "Normal in OA"
+            },
+            {
+              "text": "Only to exclude other disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Not indicated for diagnosis"
+            },
+            {
+              "text": "Meniscal tears common in painless knees"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Synovial WBC cutoff differs: Merck calls 2000/uL or less noninflammatory; Harrison 22e flags over 1000/uL as suggesting inflammation or crystals."
+    },
+    {
+      "id": "osteoarthritis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic osteoarthritis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "Symmetric MCP and wrist synovitis, long morning stiffness"
+            },
+            {
+              "text": "RF, anti-CCP, CRP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gout or pseudogout",
+          "cells": [
+            {
+              "text": "Acute hot joint attacks"
+            },
+            {
+              "text": "{{hy:Synovial fluid crystals}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic arthritis",
+          "cells": [
+            {
+              "text": "Fever, hot swollen joint"
+            },
+            {
+              "text": "Synovial WBC, Gram stain, culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anserine or trochanteric bursitis",
+          "cells": [
+            {
+              "text": "Point tenderness off the joint line"
+            },
+            {
+              "text": "Examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meniscal or ligament tear",
+          "cells": [
+            {
+              "text": "Locking or giving way after injury"
+            },
+            {
+              "text": "MRI if after acute injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibromyalgia",
+          "cells": [
+            {
+              "text": "Widespread pain, no joint signs"
+            },
+            {
+              "text": "Clinical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary OA (haemochromatosis, Wilson, CPPD)",
+          "cells": [
+            {
+              "text": "MCP or ankle involvement"
+            },
+            {
+              "text": "Ferritin, iron studies, X-ray chondrocalcinosis"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "osteoarthritis-treatment",
+      "kind": "treatment",
+      "title": "Management of osteoarthritis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Education, exercise, weight loss",
+          "cells": [
+            {
+              "text": "{{hy:All patients}}"
+            },
+            {
+              "text": "Strengthening and aerobic exercise; moderate weight loss reduces knee pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical NSAID",
+          "cells": [
+            {
+              "text": "First-line for knee and hand OA"
+            },
+            {
+              "text": "Preferred over oral"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral NSAID or coxib",
+          "cells": [
+            {
+              "text": "Refractory pain"
+            },
+            {
+              "text": "Shortest duration; consider gastric protection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duloxetine",
+          "cells": [
+            {
+              "text": "NSAIDs fail or contraindicated"
+            },
+            {
+              "text": "Modest benefit"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intra-articular corticosteroid",
+          "cells": [
+            {
+              "text": "Painful flare"
+            },
+            {
+              "text": "Short-term relief; frequent injections may hasten cartilage loss"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Paracetamol",
+          "cells": [
+            {
+              "text": "Intolerant of other agents"
+            },
+            {
+              "text": "Minimal effect; avoid with liver disease or heavy alcohol"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid",
+          "cells": [
+            {
+              "text": "Tramadol and opioids, hyaluronate for hip, systemic steroids"
+            },
+            {
+              "text": "High harm, little benefit"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aids and bracing",
+          "cells": [
+            {
+              "text": "Mechanical support"
+            },
+            {
+              "text": "Walking aids, footwear, braces"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint replacement",
+          "cells": [
+            {
+              "text": "End-stage disease with refractory pain and disability"
+            },
+            {
+              "text": "Osteotomy or arthroplasty"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "osteoarthritis-dx-mgmt",
+      "title": "Diagnosis and management of osteoarthritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Joint pain in adult over 40",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Stiffness over 30 min, many joints or systemic features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Evaluate inflammatory arthritis: RF, anti-CCP, CRP",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Hot swollen joint or effusion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Aspirate: cell count, crystals, culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Treat septic or crystal arthritis; if bland, manage as OA",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clinical diagnosis of OA; X-ray only if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Education, exercise, weight loss, topical NSAID",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Pain still limiting?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Oral NSAID, duloxetine or steroid injection",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Joint replacement if end-stage and refractory",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Continue core care and review",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

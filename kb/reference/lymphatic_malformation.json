@@ -150,5 +150,316 @@
       "caption": "Overview comparison matrix for lymphatic malformation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mulliken and Young's Vascular Anomalies: Hemangiomas and Malformations",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lymphatic_malformation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Macrocystic versus microcystic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced MRI",
+          "cells": [
+            {
+              "text": "Cysts with fluid-fluid levels after bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyst fluid aspiration",
+          "cells": [
+            {
+              "text": "Diagnosis unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PIK3CA mutation testing",
+          "cells": [
+            {
+              "text": "Somatic activating variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway assessment with nasendoscopy or imaging",
+          "cells": [
+            {
+              "text": "Cervicofacial lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphatic_malformation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Venous malformation",
+          "cells": [
+            {
+              "text": "Vascular channel lesion; separated by imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infantile haemangioma",
+          "cells": [
+            {
+              "text": "Proliferative phase and age of onset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroglossal or branchial cyst",
+          "cells": [
+            {
+              "text": "Midline or lateral cervical cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kaposiform lymphangiomatosis",
+          "cells": [
+            {
+              "text": "Aggressive lymphatic lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphatic_malformation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sclerotherapy",
+          "cells": [
+            {
+              "text": "First-line for macrocystic lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sirolimus",
+          "cells": [
+            {
+              "text": "Extensive, microcystic or complicated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Resection or debulking for localised or troublesome lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection or bleeding",
+          "cells": [
+            {
+              "text": "Prompt antibiotics; manage intralesional haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway",
+          "cells": [
+            {
+              "text": "Emergency assessment and protection for large cervicofacial lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lymphatic_malformation-dx-mgmt",
+      "title": "Diagnosis and management of Lymphatic malformation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Soft, transilluminant swelling of the neck, axilla or limb that enlarges suddenly",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (airway compromise, sepsis or orbital threat)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency airway assessment and protection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound, contrast MRI, airway assessment, PIK3CA testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a macrocystic or microcystic lymphatic lesion confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider venous malformation, haemangioma or cervical cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sclerotherapy as first line for macrocystic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sirolimus for microcystic or complicated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical resection or debulking when localised",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antibiotics for infection and manage bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Multidisciplinary vascular anomalies team review",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on site and type; diffuse microcystic and cervicofacial disease recur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

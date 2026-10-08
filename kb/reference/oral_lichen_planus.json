@@ -143,5 +143,347 @@
       "caption": "Overview comparison matrix for oral lichen planus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oral medicine and dermatology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oral_lichen_planus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of distribution and morphology",
+          "cells": [
+            {
+              "text": "Bilateral striae, plaques, and atrophic or erosive lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy with histopathology and direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Excludes immunobullous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of medications and dental materials",
+          "cells": [
+            {
+              "text": "Lichenoid triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Malignant change, especially in erosive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for cutaneous or other mucosal lichen planus",
+          "cells": [
+            {
+              "text": "Disease elsewhere"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oral_lichen_planus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral lichenoid drug or contact reaction",
+          "cells": [
+            {
+              "text": "Clinically similar; triggered by drugs or dental materials"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucous membrane pemphigoid or pemphigus",
+          "cells": [
+            {
+              "text": "Presents as desquamative gingivitis; immunofluorescence excludes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic graft-versus-host disease",
+          "cells": [
+            {
+              "text": "Causes a lichenoid reaction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oral_lichen_planus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical corticosteroids",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "First-line for symptomatic erosive or atrophic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical calcineurin inhibitor",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Tacrolimus for lesions refractory to topical steroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic therapy for severe disease",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Systemic corticosteroids or steroid-sparing immunomodulators for severe, widespread refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic measures",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Analgesic or anaesthetic mouthwashes, oral hygiene, avoidance of spicy and acidic foods, treatment of candidiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Remove lichenoid triggers",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Culprit drugs and adjacent dental restorative materials"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "For malignant transformation, particularly in erosive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Oral medicine or dermatology, with assessment for other lichen planus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oral_lichen_planus-dx-mgmt",
+      "title": "Diagnosis and management of Oral lichen planus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bilateral white striae or erosive buccal and gingival lesions, often painful",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (indurated or non-healing area, rapid change or blistering disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent biopsy for dysplasia or carcinoma; immunobullous review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy with histopathology and immunofluorescence; review drugs and dental materials",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy confirm lichen planus, with immunobullous disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lichenoid drug reaction, graft-versus-host disease or pemphigoid; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical corticosteroids first-line for symptomatic erosive or atrophic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical tacrolimus for lesions refractory to topical steroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Systemic steroids or steroid-sparing agents for severe, widespread disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Analgesic mouthwashes, hygiene, avoidance of spicy and acidic foods",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Remove culprit drugs or dental materials; long-term surveillance for transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic with relapses; erosive forms carry a small transformation risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

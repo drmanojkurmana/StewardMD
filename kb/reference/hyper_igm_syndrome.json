@@ -155,5 +155,332 @@
       "caption": "Overview comparison matrix for hyper-igm syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyper_igm_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunoglobulin panel",
+          "cells": [
+            {
+              "text": "Normal or raised IgM with low IgG and IgA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow cytometry for CD40L on activated T cells",
+          "cells": [
+            {
+              "text": "CD40L expression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing (CD40LG, CD40, AICDA, UNG and others)",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Neutropenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for Pneumocystis and Cryptosporidium",
+          "cells": [
+            {
+              "text": "Opportunistic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and imaging",
+          "cells": [
+            {
+              "text": "Sclerosing cholangitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyper_igm_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "X-linked agammaglobulinaemia",
+          "cells": [
+            {
+              "text": "Low IgM as well as low IgG and IgA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Common variable immunodeficiency",
+          "cells": [
+            {
+              "text": "Low IgM rather than raised IgM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe combined immunodeficiency",
+          "cells": [
+            {
+              "text": "Opportunistic infection in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary causes of low class-switched immunoglobulin",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyper_igm_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "Regular, as the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumocystis prophylaxis",
+          "cells": [
+            {
+              "text": "Co-trimoxazole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryptosporidial exposure",
+          "cells": [
+            {
+              "text": "Reduced with boiled or filtered water"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neutropenia",
+          "cells": [
+            {
+              "text": "Granulocyte colony-stimulating factor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver monitoring",
+          "cells": [
+            {
+              "text": "Sclerosing cholangitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked inheritance for the family"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyper_igm_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Hyper-IgM syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent infections in an infant boy with normal or high IgM and low IgG",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Opportunistic infection, chronic cryptosporidial diarrhoea, or severe neutropenia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent treatment of Pneumocystis or severe neutropenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Immunoglobulin panel; CD40L flow; CD40LG and related testing; FBC; PJP screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is CD40L deficiency confirmed on flow cytometry with genetic confirmation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider X-linked agammaglobulinaemia, CVID, SCID or secondary hypogammaglobulinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Regular immunoglobulin replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pneumocystis prophylaxis with co-trimoxazole",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reduce cryptosporidial exposure with safe water",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Allogeneic stem cell transplantation for definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Infection risk reduced; liver monitored; genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

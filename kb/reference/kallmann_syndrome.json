@@ -146,5 +146,316 @@
       "caption": "Overview comparison matrix for kallmann syndrome (hypogonadotropic hypogonadism + anosmia)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kallmann_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Basal LH, FSH and sex steroids",
+          "cells": [
+            {
+              "text": "Low gonadotropins and sex steroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Formal assessment of the sense of smell",
+          "cells": [
+            {
+              "text": "Hyposmia or anosmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary and hypothalamic MRI",
+          "cells": [
+            {
+              "text": "Olfactory bulb hypoplasia or aplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANOS1 and FGFR1 testing",
+          "cells": [
+            {
+              "text": "Causal gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal imaging and screen for midline or skeletal anomalies",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kallmann_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Normosmic congenital hypogonadotropic hypogonadism",
+          "cells": [
+            {
+              "text": "Preserved sense of smell"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constitutional delay of growth and puberty",
+          "cells": [
+            {
+              "text": "Biochemically similar; delayed puberty that resolves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperprolactinaemia",
+          "cells": [
+            {
+              "text": "Raised prolactin suppresses gonadotropins"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kallmann_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sex-steroid replacement",
+          "cells": [
+            {
+              "text": "Testosterone in males; oestrogen-progestogen in females; puberty and bone health"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility",
+          "cells": [
+            {
+              "text": "Gonadotropin therapy or pulsatile GnRH when fertility is wanted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone",
+          "cells": [
+            {
+              "text": "Monitor and optimise bone mineral density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated anomalies",
+          "cells": [
+            {
+              "text": "Screen for unilateral renal agenesis, cleft lip or palate and dental agenesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetics",
+          "cells": [
+            {
+              "text": "Genetic counselling with ANOS1 and FGFR1 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Support",
+          "cells": [
+            {
+              "text": "Multidisciplinary endocrinology, fertility and genetics with psychological support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kallmann_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Kallmann syndrome (hypogonadotropic hypogonadism + anosmia)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Absent puberty with reduced or absent sense of smell",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Expanding mass signs, midline or renal anomalies, or other pituitary deficits?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Pituitary MRI; renal imaging; endocrine review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "LH, FSH, sex steroids, smell testing, MRI olfactory structures, ANOS1, FGFR1",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low gonadotropins with hyposmia or anosmia and gene findings consistent?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider normosmic hypogonadism or constitutional delay; repeat testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Testosterone or oestrogen-progestogen to induce puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gonadotropin therapy or pulsatile GnRH for fertility",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor and optimise bone mineral density",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for renal agenesis, cleft and dental anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and psychological support",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Puberty induced and fertility possible with therapy; long-term bone and endocrine care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

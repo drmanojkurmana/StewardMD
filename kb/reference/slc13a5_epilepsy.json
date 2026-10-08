@@ -150,5 +150,305 @@
       "caption": "Overview comparison matrix for slc13a5 (citrate transporter) epilepsy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / ILAE",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "slc13a5_epilepsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "Biallelic SLC13A5 variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid and plasma citrate",
+          "cells": [
+            {
+              "text": "Characteristic citrate elevation, classically in CSF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged EEG",
+          "cells": [
+            {
+              "text": "Characterises neonatal seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Excludes structural and other metabolic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental assessment",
+          "cells": [
+            {
+              "text": "Amelogenesis imperfecta with yellow-brown hypoplastic enamel"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "slc13a5_epilepsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Kohlschutter-Tonz syndrome (ROGDI)",
+          "cells": [
+            {
+              "text": "Enamel defects overlap with epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyridoxine-dependent and pyridoxal-phosphate-responsive epilepsies",
+          "cells": [
+            {
+              "text": "Vitamin-responsive treatment is trialled while genetic results are awaited"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "slc13a5_epilepsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ketogenic dietary therapy",
+          "cells": [
+            {
+              "text": "Supplies ketone bodies as an alternative neuronal fuel; helps some patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Tailored to response for multifocal neonatal-onset seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental therapy",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational and speech therapy for hypotonia and delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental surveillance",
+          "cells": [
+            {
+              "text": "Restorative treatment of amelogenesis imperfecta"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency seizure plan",
+          "cells": [
+            {
+              "text": "Heightened monitoring during intercurrent illness and status epilepticus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive biallelic inheritance; family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Neurology, metabolic and neurodevelopmental team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "slc13a5_epilepsy-dx-mgmt",
+      "title": "Diagnosis and management of SLC13A5 (citrate transporter) epilepsy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonatal multifocal seizures with raised CSF citrate: suspected SLC13A5 epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (refractory neonatal status, clusters, feeding failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent emergency seizure management and rescue plan",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gene panel or exome for SLC13A5; CSF and plasma citrate; EEG; brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic SLC13A5 variants found with characteristic citrate elevation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other neonatal epileptic encephalopathies; trial vitamin-responsive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Trial a ketogenic diet to supply ketone bodies as an alternative fuel",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure medication tailored to seizure response",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Developmental, dental and seizure-plan support across the team",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling and family testing for recessive inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Seizures often improve after infancy; most keep developmental impairment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

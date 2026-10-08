@@ -149,5 +149,296 @@
       "caption": "Overview comparison matrix for taeniasis (taenia solium/saginata)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell/Manson's Tropical Diseases",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "taeniasis-dx-mgmt",
+      "title": "Diagnosis and management of Taeniasis (Taenia solium/saginata)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected taeniasis: passed motile proglottids, or abdominal symptoms after raw meat",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new seizures, raised intracranial pressure, or ocular cysts)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neuroimaging and neurology review for suspected neurocysticercosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool microscopy; proglottid or scolex examination; PCR for species",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is Taenia solium identified, rather than Taenia saginata?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Taenia saginata: treat the adult tapeworm and confirm cure",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Single-dose praziquantel or niclosamide to eradicate the adult tapeworm",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Exclude neurocysticercosis before treatment where T. solium is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Albendazole with corticosteroid cover for neurocysticercosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen and treat household contacts of a T. solium carrier",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Confirm cure with follow-up stool examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Intestinal taeniasis is readily cured; cysticercosis drives long-term morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "taeniasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool microscopy for taenid eggs",
+          "cells": [
+            {
+              "text": "Eggs cannot separate the species"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of expelled proglottids or scolex",
+          "cells": [
+            {
+              "text": "Species identification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular PCR",
+          "cells": [
+            {
+              "text": "Species differentiation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cysticercosis serology",
+          "cells": [
+            {
+              "text": "Taenia solium exposure, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging with CT or MRI",
+          "cells": [
+            {
+              "text": "Neurocysticercosis, when a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with eosinophil count",
+          "cells": [
+            {
+              "text": "Eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "taeniasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Single-dose anthelmintic",
+          "cells": [
+            {
+              "text": "Praziquantel or niclosamide to eradicate the adult tapeworm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude neurocysticercosis before treatment",
+          "cells": [
+            {
+              "text": "Where Taenia solium is suspected, given the risk of inflammatory reaction to dying cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurocysticercosis therapy",
+          "cells": [
+            {
+              "text": "Albendazole, with or without praziquantel, under corticosteroid cover; antiepileptic drugs for seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Household contact screening",
+          "cells": [
+            {
+              "text": "Screen and treat contacts of a Taenia solium carrier"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmation of cure",
+          "cells": [
+            {
+              "text": "Follow-up stool examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preventive advice",
+          "cells": [
+            {
+              "text": "Thorough cooking of beef and pork; hand hygiene and sanitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Infectious diseases and neurology when cysticercosis is present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

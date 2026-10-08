@@ -151,5 +151,324 @@
       "caption": "Overview comparison matrix for prurigo of pregnancy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "prurigo_of_pregnancy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum bile acids and liver function tests",
+          "cells": [
+            {
+              "text": "Obstetric cholestasis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Total serum IgE",
+          "cells": [
+            {
+              "text": "Frequently elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy if diagnosis uncertain",
+          "cells": [
+            {
+              "text": "Parakeratosis, acanthosis and dermal inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct immunofluorescence in atypical cases",
+          "cells": [
+            {
+              "text": "Pemphigoid gestationis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin scrapings where itch is severe and contacts affected",
+          "cells": [
+            {
+              "text": "Scabies mites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prurigo_of_pregnancy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Intrahepatic cholestasis of pregnancy",
+          "cells": [
+            {
+              "text": "Widespread pruritus without primary lesions; abnormal bile acids"
+            },
+            {
+              "text": "Serum bile acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pemphigoid gestationis",
+          "cells": [
+            {
+              "text": "Tense blisters or umbilical involvement"
+            },
+            {
+              "text": "Direct immunofluorescence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scabies",
+          "cells": [
+            {
+              "text": "Burrows, web-space involvement or affected household contacts"
+            },
+            {
+              "text": "Skin scrapings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prurigo_of_pregnancy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, self-limiting, no foetal risk; usually resolves in the weeks after delivery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Itch relief",
+          "cells": [
+            {
+              "text": "Regular emollients and topical corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antihistamines",
+          "cells": [
+            {
+              "text": "Pregnancy-appropriate oral antihistamines for troublesome pruritus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude cholestasis",
+          "cells": [
+            {
+              "text": "Check bile acids and liver function given the prominent itch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe refractory disease",
+          "cells": [
+            {
+              "text": "Narrowband UVB or short oral corticosteroid course, in discussion with obstetrics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence",
+          "cells": [
+            {
+              "text": "Counsel on possible recurrence in future pregnancies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "prurigo_of_pregnancy-dx-mgmt",
+      "title": "Diagnosis and management of prurigo of pregnancy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected prurigo of pregnancy: widespread itch without primary lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Abnormal bile acids, tense blisters, jaundice, burrows, or secondary infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent obstetric and hepatology review for cholestasis or pemphigoid",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum bile acids and LFTs; total IgE; FBC; biopsy if uncertain; skin scrapings",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are bile acids normal and pemphigoid and scabies excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the mimic found: cholestasis, pemphigoid gestationis or scabies; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance: benign, self-limiting, no foetal risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Regular emollients and topical corticosteroids for itch",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pregnancy-appropriate oral antihistamines",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Narrowband UVB or short oral steroid for severe disease, with obstetrics input",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually resolves after delivery; counsel on recurrence in future pregnancies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

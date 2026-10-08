@@ -245,6 +245,16 @@
       "id": "c4",
       "label": "Tables PDF, Table 151-2",
       "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 293-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 293-5",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -633,6 +643,139 @@
         }
       ],
       "footnote": "Source conflict: the tables PDF (Table 151-2) lists 7 to 14 day clarithromycin triple therapy first and metronidazole 500 mg bid or tid, while the 2024 Merck page (citing ACG 2024) prefers 14 day bismuth quadruple therapy with metronidazole 250 mg qid. The PDF prints levofloxacin as qid; this is kept as printed."
+    },
+    {
+      "id": "peptic_ulcer-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Tests for detecting H. pylori",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Sensitivity / specificity (%)",
+        "Comments"
+      ],
+      "rows": [
+        {
+          "parameter": "Invasive (endoscopy and biopsy needed): rapid urease",
+          "cells": [
+            {
+              "text": "80-95 / 95-100"
+            },
+            {
+              "text": "Simple; false negative with recent PPI, antibiotic or bismuth use"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Invasive: histology",
+          "cells": [
+            {
+              "text": "80-90 / >95"
+            },
+            {
+              "text": "Needs pathology processing and staining; gives histologic information"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Invasive: culture",
+          "cells": [
+            {
+              "text": "Not given / not given"
+            },
+            {
+              "text": "Slow, expensive, experience dependent; allows antibiotic susceptibility testing"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Noninvasive: serology",
+          "cells": [
+            {
+              "text": ">80 / >90"
+            },
+            {
+              "text": "Inexpensive, convenient; not useful for early follow-up"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Noninvasive: urea breath test",
+          "cells": [
+            {
+              "text": ">90 / >90"
+            },
+            {
+              "text": "Simple, rapid; useful for early follow-up; false negatives after recent therapy (as for rapid urease); low-dose radiation exposure with the 14C test"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Noninvasive: stool antigen",
+          "cells": [
+            {
+              "text": ">90 / >90"
+            },
+            {
+              "text": "Inexpensive, convenient; not established for confirming eradication but promising"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "PPI, proton pump inhibitor."
+    },
+    {
+      "id": "peptic_ulcer-treatment-2",
+      "kind": "treatment",
+      "title": "Treatment of NSAID-related mucosal injury",
+      "rowHeader": "Option",
+      "columns": [
+        "Recommendation"
+      ],
+      "rows": [
+        {
+          "parameter": "Active ulcer, NSAID discontinued",
+          "cells": [
+            {
+              "text": "H2 receptor antagonist or PPI"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Active ulcer, NSAID continued",
+          "cells": [
+            {
+              "text": "PPI"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Prophylactic therapy",
+          "cells": [
+            {
+              "text": "Misoprostol; PPI; or selective COX-2 inhibitor"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "H. pylori infection",
+          "cells": [
+            {
+              "text": "Eradicate if an active ulcer is present or there is a past history of peptic ulcer disease"
+            }
+          ],
+          "cite": "c6"
+        }
+      ],
+      "footnote": "COX-2, isoenzyme of cyclooxygenase; PPI, proton pump inhibitor."
     }
   ],
   "flowcharts": [

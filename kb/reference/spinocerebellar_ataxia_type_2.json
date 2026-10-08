@@ -147,5 +147,305 @@
       "caption": "Overview comparison matrix for spinocerebellar ataxia type 2 (sca2)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinocerebellar_ataxia_type_2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ATXN2 CAG repeat sizing",
+          "cells": [
+            {
+              "text": "Expanded repeat confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Olivopontocerebellar atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oculomotor recording",
+          "cells": [
+            {
+              "text": "Slowed saccades"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parkinsonism assessment",
+          "cells": [
+            {
+              "text": "When extrapyramidal features are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallowing evaluation",
+          "cells": [
+            {
+              "text": "Bulbar dysfunction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other dominant SCAs (SCA1, SCA3, SCA6, SCA7)",
+          "cells": [
+            {
+              "text": "Gene-specific testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyotrophic lateral sclerosis",
+          "cells": [
+            {
+              "text": "Intermediate ATXN2 repeats are an ALS risk factor; motor neurone signs suggest ALS"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy for gait; no disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levodopa trial",
+          "cells": [
+            {
+              "text": "For parkinsonian features, which can respond in SCA2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain agents and orthoses",
+          "cells": [
+            {
+              "text": "Sensorimotor neuropathy and distal weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bulbar surveillance",
+          "cells": [
+            {
+              "text": "Swallow assessment, dietitian input and gastrostomy consideration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory monitoring",
+          "cells": [
+            {
+              "text": "Bulbar and respiratory complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Anticipation with larger repeats and earlier onset"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinocerebellar_ataxia_type_2-dx-mgmt",
+      "title": "Diagnosis and management of Spinocerebellar ataxia type 2 (SCA2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slow saccades, areflexia and ataxia with neuropathy: suspected SCA2",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (dysphagia, falls, motor neurone signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent swallow assessment and review for ALS features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ATXN2 CAG repeat sizing; brain MRI; oculomotor recording; nerve conduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an expanded ATXN2 CAG repeat confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other SCAs, MSA or Friedreich ataxia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and neurorehabilitation for gait",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Levodopa trial for parkinsonian features",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthoses and neuropathic pain agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bulbar and respiratory surveillance with swallow review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slow saccades point to SCA2; bulbar and respiratory complications drive morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

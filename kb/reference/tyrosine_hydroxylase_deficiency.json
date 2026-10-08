@@ -147,5 +147,332 @@
       "caption": "Overview comparison matrix for tyrosine hydroxylase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tyrosine_hydroxylase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CSF homovanillic acid and 5-hydroxyindoleacetic acid",
+          "cells": [
+            {
+              "text": "Low homovanillic acid with normal 5-hydroxyindoleacetic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF pterins",
+          "cells": [
+            {
+              "text": "Normal pterin profile, separating it from BH4 disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma phenylalanine",
+          "cells": [
+            {
+              "text": "Normal, separating it from BH4 disorders found on newborn screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TH gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms the molecular diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levodopa trial",
+          "cells": [
+            {
+              "text": "Documented clinical and biochemical response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Usually unremarkable; excludes structural causes of the movement disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tyrosine_hydroxylase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "GTP cyclohydrolase I deficiency",
+          "cells": [
+            {
+              "text": "Autosomal dominant dopa-responsive (Segawa) dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tetrahydrobiopterin (BH4) synthesis or recycling defects",
+          "cells": [
+            {
+              "text": "Need cofactor and sometimes serotonin-precursor therapy; pterin profile is normal in TH deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral palsy of dystonic type",
+          "cells": [
+            {
+              "text": "A treatable dopa-responsive disorder should be considered before accepting a CP label"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AADC deficiency",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tyrosine_hydroxylase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Levodopa with peripheral dopa decarboxylase inhibitor",
+          "cells": [
+            {
+              "text": "Mainstay; replaces the dopamine that tyrosine hydroxylase cannot synthesise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gradual dose titration",
+          "cells": [
+            {
+              "text": "Especially in the severe phenotype, to avoid dyskinesia, irritability and dystonic storms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjunctive dopaminergic agents",
+          "cells": [
+            {
+              "text": "Dopamine agonists; anticholinergics where dystonia persists despite levodopa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "Oculogyric crises, autonomic instability and feeding difficulty in the encephalopathic form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, occupational therapy and developmental support",
+          "cells": [
+            {
+              "text": "Motor function and developmental milestones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Paediatric neurology and metabolic medicine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive disorder; family assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tyrosine_hydroxylase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Tyrosine hydroxylase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected TH deficiency: unexplained childhood dystonia, parkinsonism or encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (encephalopathy with autonomic instability or oculogyric crises)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review of severe encephalopathy with autonomic instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CSF neurotransmitter metabolites and pterins, plasma phenylalanine, TH gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is CSF homovanillic acid low with normal 5-HIAA and pterins?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider GTP cyclohydrolase I, AADC or BH4 defects; repeat the CSF studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Levodopa with a peripheral dopa decarboxylase inhibitor as mainstay therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gradual titration to avoid dyskinesia, irritability and dystonic storms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adjunctive dopamine agonists or anticholinergics where dystonia persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and developmental support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Milder dopa-responsive form often improves durably; severe form may leave disability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

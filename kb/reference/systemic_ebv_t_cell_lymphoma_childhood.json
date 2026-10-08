@@ -156,5 +156,379 @@
       "caption": "Overview comparison matrix for systemic ebv-positive t-cell lymphoma of childhood."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Haematolymphoid Tumours",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "systemic_ebv_t_cell_lymphoma_childhood-dx-mgmt",
+      "title": "Diagnosis and management of Systemic EBV-positive T-cell lymphoma of childhood",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected systemic EBV-positive T-cell lymphoma: fever, hepatosplenomegaly, HLH picture",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fulminant HLH, rapid liver failure, or bleeding with cytopenias)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent intensive care with immediate HLH-directed immunochemotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EBER in situ hybridisation; blood EBV load; T-cell clonality; ferritin and HLH markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a clonal EBV-positive cytotoxic T-cell population demonstrated?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider reactive HLH or chronic active EBV infection; repeat clonality testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "HLH-directed immunochemotherapy: etoposide, corticosteroids and ciclosporin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lymphoma-directed combination chemotherapy in parallel",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early referral for allogeneic stem cell transplant",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intensive supportive care, blood products and infection prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor HLH markers, EBV load and clonality for response",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Highly aggressive; allogeneic transplant is the main route to long-term cure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "systemic_ebv_t_cell_lymphoma_childhood-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "EBV studies including EBER in situ hybridisation",
+          "cells": [
+            {
+              "text": "EBV-positive neoplastic cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood EBV viral load",
+          "cells": [
+            {
+              "text": "Viral burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunophenotyping",
+          "cells": [
+            {
+              "text": "EBV-positive cytotoxic T cells, usually CD8-positive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T-cell receptor clonality analysis",
+          "cells": [
+            {
+              "text": "Clonal T-cell population"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLH workup: ferritin, triglycerides, fibrinogen, soluble IL-2 receptor, bone marrow",
+          "cells": [
+            {
+              "text": "Haemophagocytic activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function and coagulation studies",
+          "cells": [
+            {
+              "text": "Frequent hepatic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Hepatosplenomegaly and disease extent"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "systemic_ebv_t_cell_lymphoma_childhood-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Infection-associated (reactive) HLH",
+          "cells": [
+            {
+              "text": "Lacks the clonal EBV-positive T-cell population; clonality testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic active EBV infection of T/NK-cell type",
+          "cells": [
+            {
+              "text": "Has a different course; the clonal T-cell population separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "systemic_ebv_t_cell_lymphoma_childhood-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent start of treatment",
+          "cells": [
+            {
+              "text": "Treatment must begin urgently once the diagnosis is made"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery and radiotherapy",
+          "cells": [
+            {
+              "text": "Surgery has no curative role beyond diagnostic biopsy; radiotherapy is not standard for systemic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLH-directed immunochemotherapy first",
+          "cells": [
+            {
+              "text": "Etoposide-based cytotoxic agent, corticosteroids and a calcineurin inhibitor such as ciclosporin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma-directed combination chemotherapy",
+          "cells": [
+            {
+              "text": "Given in parallel, because HLH therapy alone does not eliminate the clonal population"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic stem cell transplant",
+          "cells": [
+            {
+              "text": "Definitive step and main route to durable cure once disease control is achieved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early transplant referral",
+          "cells": [
+            {
+              "text": "Ideally in parallel with induction, given the pace of disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Salvage therapy",
+          "cells": [
+            {
+              "text": "No established standard regimen for relapsed, refractory or transplant-ineligible disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive supportive care",
+          "cells": [
+            {
+              "text": "Critical care; correction of coagulopathy and cytopenias; hepatic and haemodynamic support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood products and infection prophylaxis",
+          "cells": [
+            {
+              "text": "Profound cytopenia and immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "HLH markers, blood counts, liver function, coagulation, EBV viral load and clonality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist centre referral",
+          "cells": [
+            {
+              "text": "Paediatric haemato-oncology centre with transplant capability at diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family counselling",
+          "cells": [
+            {
+              "text": "Evaluation of a possible genetic predisposition to abnormal EBV handling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,305 @@
       "caption": "Overview comparison matrix for moesin (msn) deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immunologic Disorders / IUIS classification",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "moesin_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphocyte subsets",
+          "cells": [
+            {
+              "text": "Combined T, B and natural killer cell lymphopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Detects associated neutropenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T-cell proliferation and migration or adhesion assays",
+          "cells": [
+            {
+              "text": "Functional T-cell defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MSN sequencing",
+          "cells": [
+            {
+              "text": "Confirms the genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Newborn screening TREC result",
+          "cells": [
+            {
+              "text": "Where available, flags T-cell lymphopenia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "moesin_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Typical SCID of other genetic cause",
+          "cells": [
+            {
+              "text": "Profound lymphopenia is not unique to classic SCID"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wiskott-Aldrich syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired lymphopenia including HIV",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "moesin_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "Compensates for impaired antibody responses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibacterial and antiviral prophylaxis",
+          "cells": [
+            {
+              "text": "Aciclovir-class agents for herpesviruses such as varicella-zoster"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt treatment of infections",
+          "cells": [
+            {
+              "text": "Treat intercurrent bacterial and viral infections aggressively"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Definitive option in severe, persistent combined immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safe blood and vaccine practice",
+          "cells": [
+            {
+              "text": "No live vaccines; irradiated, leucodepleted blood products"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked inheritance; test at-risk male relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "moesin_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Moesin (MSN) deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Male infant with combined lymphopenia and early recurrent infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (herpesvirus reactivation, neutropenia with bacterial infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent immunology review; antiviral treatment and infection control",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lymphocyte subsets, FBC for neutropenia, T-cell function, MSN sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Combined T, B, NK lymphopenia with MSN variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other SCID genes, DOCK deficiencies, Wiskott-Aldrich, HIV",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immunoglobulin replacement plus antibacterial and antiviral prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid live vaccines; irradiated, leucodepleted blood products",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider stem cell transplantation if severe and persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling; test at-risk male relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Variable course; some stabilise on supportive care, severe cases need transplant",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

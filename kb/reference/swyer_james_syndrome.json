@@ -150,5 +150,343 @@
       "caption": "Overview comparison matrix for swyer james syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fishman's Pulmonary Diseases and Disorders",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "swyer_james_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of swyer james syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Swyer-James-MacLeod syndrome: unilateral hyperlucent lung after infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (recurrent infection, haemoptysis, or new focal obstruction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent bronchoscopy to exclude an endobronchial lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Inspiratory and expiratory CT; ventilation-perfusion scintigraphy; lung function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do expiratory images show air trapping with matched perfusion loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider compensatory overinflation, hypoplastic pulmonary artery or emphysema",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prompt antimicrobial treatment; influenza and pneumococcal vaccination",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Airway clearance physiotherapy and care of bronchiectasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Inhaled bronchodilators where airflow obstruction is shown",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial pulmonary function testing for progressive symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lobectomy for a destroyed lobe causing intractable disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many stay stable for life; extensive bronchiectasis can progress",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "swyer_james_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Inspiratory and expiratory CT",
+          "cells": [
+            {
+              "text": "Air trapping and mosaic attenuation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventilation-perfusion scintigraphy",
+          "cells": [
+            {
+              "text": "Matched reduction in perfusion on the affected side"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Unilateral hyperlucency, small lung and reduced vascular markings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function testing",
+          "cells": [
+            {
+              "text": "Airflow obstruction and gas trapping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopy",
+          "cells": [
+            {
+              "text": "Endobronchial obstruction, when it needs excluding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT pulmonary angiography",
+          "cells": [
+            {
+              "text": "Absent or hypoplastic pulmonary artery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sputum culture",
+          "cells": [
+            {
+              "text": "Infection related to bronchiectasis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "swyer_james_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Endobronchial obstruction by tumour or foreign body",
+          "cells": [
+            {
+              "text": "Causes air trapping and can mimic the appearance; bronchoscopy excludes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compensatory overinflation after contralateral collapse or resection",
+          "cells": [
+            {
+              "text": "Swyer-James lung is small and hypoperfused, not overinflated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Absent or hypoplastic pulmonary artery",
+          "cells": [
+            {
+              "text": "Identified by CT pulmonary angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emphysema, including alpha-1 antitrypsin deficiency",
+          "cells": [
+            {
+              "text": "Hyperlucency is not emphysema; expiratory imaging shows the air trapping"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "swyer_james_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "Obliterative bronchiolitis cannot be reversed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt antimicrobial treatment",
+          "cells": [
+            {
+              "text": "Respiratory infections; influenza and pneumococcal immunisation to prevent further damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway clearance physiotherapy",
+          "cells": [
+            {
+              "text": "Manage associated bronchiectasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhaled bronchodilators",
+          "cells": [
+            {
+              "text": "Where airflow obstruction is demonstrated; avoid smoking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial pulmonary function testing",
+          "cells": [
+            {
+              "text": "Review for recurrent infection or progressive symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lobectomy",
+          "cells": [
+            {
+              "text": "Destroyed lobe causing intractable infection or haemoptysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,314 @@
       "caption": "Overview comparison matrix for spinal cord injury rehabilitation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinal_cord_injury_rehab-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ISNCSCI examination with ASIA grading",
+          "cells": [
+            {
+              "text": "Neurological level and completeness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT and MRI of the spine",
+          "cells": [
+            {
+              "text": "Injury and cord signal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urodynamic studies and renal tract imaging",
+          "cells": [
+            {
+              "text": "Neurogenic bladder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory function assessment",
+          "cells": [
+            {
+              "text": "Cervical and high thoracic injuries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for VTE, pressure injury and heterotopic ossification",
+          "cells": [
+            {
+              "text": "Complications"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_cord_injury_rehab-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Guillain-Barre syndrome",
+          "cells": [
+            {
+              "text": "An acute polyneuropathy rather than a cord lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal cord compression",
+          "cells": [
+            {
+              "text": "An ascending or new deficit suggests compression, haematoma or syrinx"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_cord_injury_rehab-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Organ-system rehabilitation",
+          "cells": [
+            {
+              "text": "Goal-directed functional targets in a specialist spinal unit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurogenic bladder programme",
+          "cells": [
+            {
+              "text": "Intermittent catheterisation over indwelling catheters to protect the upper tracts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pressure care",
+          "cells": [
+            {
+              "text": "Regular repositioning, pressure-relief cushions and skin surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spasticity management",
+          "cells": [
+            {
+              "text": "Stretching, oral baclofen, or intrathecal baclofen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "VTE prophylaxis and respiratory care",
+          "cells": [
+            {
+              "text": "Assisted coughing and ventilatory support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic dysreflexia",
+          "cells": [
+            {
+              "text": "Sit upright and urgently remove the noxious trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychosocial and vocational support",
+          "cells": [
+            {
+              "text": "Sexuality, fertility, adjustment and reintegration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Heterotopic ossification, orthostatic hypotension and pressure injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinal_cord_injury_rehab-dx-mgmt",
+      "title": "Diagnosis and management of Spinal cord injury rehabilitation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Spinal cord injury with a neurological level: start the rehabilitation pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (autonomic dysreflexia, ascending deficit, respiratory failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency treatment of autonomic dysreflexia or cord compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ISNCSCI and ASIA grading; CT and MRI; urodynamics; respiratory function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the level and completeness defined by ASIA grading?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat serial ISNCSCI; reconsider GBS, transverse myelitis or compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Organ-system rehabilitation with goal-directed therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intermittent catheterisation to protect the upper urinary tract",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pressure care: repositioning, relief cushions and skin surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "VTE prophylaxis and respiratory care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Function is maximised by goal-directed therapy and equipment; complications persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

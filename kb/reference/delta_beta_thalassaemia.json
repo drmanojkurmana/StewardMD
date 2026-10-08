@@ -157,6 +157,11 @@
       "id": "c1",
       "label": "Haematology references",
       "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 103-4",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -325,6 +330,118 @@
             }
           ],
           "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "delta_beta_thalassaemia-ddx-2",
+      "kind": "ddx",
+      "title": "Microcytic anemia: iron deficiency, inflammation, thalassemia, sideroblastic anemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Smear",
+        "Serum iron (SI)",
+        "TIBC",
+        "Percent saturation",
+        "Ferritin (ug/L)",
+        "Hemoglobin pattern on electrophoresis"
+      ],
+      "rows": [
+        {
+          "parameter": "Iron deficiency",
+          "cells": [
+            {
+              "text": "Micro/hypochromic"
+            },
+            {
+              "text": "<30"
+            },
+            {
+              "text": "Over 360"
+            },
+            {
+              "text": "<10"
+            },
+            {
+              "text": "<15"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Inflammation",
+          "cells": [
+            {
+              "text": "Normal to micro/hypochromic"
+            },
+            {
+              "text": "<50"
+            },
+            {
+              "text": "<300"
+            },
+            {
+              "text": "10 to 20"
+            },
+            {
+              "text": "30 to 200"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thalassemia",
+          "cells": [
+            {
+              "text": "Micro/hypochromic with targeting"
+            },
+            {
+              "text": "Normal to high"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "30 to 80"
+            },
+            {
+              "text": "50 to 300"
+            },
+            {
+              "text": "Abnormal with beta thalassemia; can be normal with alpha thalassemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sideroblastic anemia",
+          "cells": [
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "Normal to high"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "30 to 80"
+            },
+            {
+              "text": "50 to 300"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
         }
       ]
     }

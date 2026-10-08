@@ -148,5 +148,258 @@
       "caption": "Overview comparison matrix for ring chromosome 14 syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ring_chromosome_14-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Conventional karyotype",
+          "cells": [
+            {
+              "text": "The ring and the degree of mosaicism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Deleted segment; may not reveal the ring itself"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Seizure types"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Structural anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Progressive retinal pigmentary change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ring_chromosome_14-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiepileptic drugs",
+          "cells": [
+            {
+              "text": "Escalate to combination regimens for drug-resistant epilepsy, the dominant problem"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental intervention",
+          "cells": [
+            {
+              "text": "Speech, physical and occupational therapy and special education"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological surveillance",
+          "cells": [
+            {
+              "text": "Progressive retinal pigmentary change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunological review",
+          "cells": [
+            {
+              "text": "Infection surveillance for recurrent respiratory infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial investigation",
+          "cells": [
+            {
+              "text": "Serial EEG and brain MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ring_chromosome_14-dx-mgmt",
+      "title": "Diagnosis and management of Ring chromosome 14 syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with drug-resistant epilepsy and intellectual disability",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (refractory seizures, status epilepticus, retinal change, infections)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent epilepsy management for refractory seizures or status epilepticus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype, chromosomal microarray, EEG, brain MRI, retinal examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a ring chromosome 14 found on karyotype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider 14q deletion, other ring syndromes or single-gene epilepsies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiepileptic drugs, escalating to combination regimens",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early speech, physical and occupational therapy and special education",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ophthalmological surveillance for retinal pigmentary change",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Immunological review and infection surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Drug-resistant epilepsy is the dominant clinical problem",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

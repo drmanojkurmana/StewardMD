@@ -147,5 +147,276 @@
       "caption": "Overview comparison matrix for mondor disease of the breast."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard breast surgery textbook and benign breast disease guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mondor_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination",
+          "cells": [
+            {
+              "text": "Tender palpable cord with skin groove"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Confirms thrombosed superficial vein; excludes an underlying mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mammography",
+          "cells": [
+            {
+              "text": "As part of triple assessment in women of appropriate age"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core biopsy",
+          "cells": [
+            {
+              "text": "Any associated discrete lump"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mondor_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Breast carcinoma with skin tethering",
+          "cells": [
+            {
+              "text": "Triple assessment needed to exclude it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphangitis or lymphatic obstruction",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellulitis or breast abscess",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mondor_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and analgesia",
+          "cells": [
+            {
+              "text": "Simple analgesia or NSAIDs; benign and self-limiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address precipitants",
+          "cells": [
+            {
+              "text": "Local trauma, tight garments, strenuous exertion, dehydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Triple assessment",
+          "cells": [
+            {
+              "text": "Clinical examination, ultrasound and age-appropriate mammography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity restriction",
+          "cells": [
+            {
+              "text": "Temporary limit on strenuous upper-limb activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Further evaluation",
+          "cells": [
+            {
+              "text": "Thrombophilia or malignancy if recurrent or atypical"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mondor_disease-dx-mgmt",
+      "title": "Diagnosis and management of Mondor disease of the breast",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tender subcutaneous cord with skin groove on the breast",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Associated lump, peau d'orange or recurrent migratory thrombophlebitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent breast clinic triple assessment; consider thrombophilia or malignancy work-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound of the cord, mammography if age-appropriate, core biopsy of any lump",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Thrombosed superficial vein with no underlying mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider carcinoma, lymphangitis, duct ectasia, abscess, fat necrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure; analgesia or NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Remove precipitants and limit strenuous upper-limb activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor for spontaneous resolution",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Benign; cord resolves over a few weeks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

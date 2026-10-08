@@ -150,5 +150,294 @@
       "caption": "Overview comparison matrix for mog antibody-associated disease (mogad)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mog_antibody_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum MOG-IgG by live cell-based assay",
+          "cells": [
+            {
+              "text": "Confirms MOGAD; interpret with the titre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aquaporin-4 antibody",
+          "cells": [
+            {
+              "text": "Positive result points to NMOSD instead"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain, orbits and spinal cord",
+          "cells": [
+            {
+              "text": "Lesion pattern and enhancement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT and visual evoked potentials",
+          "cells": [
+            {
+              "text": "Optic nerve involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Oligoclonal bands less often than in multiple sclerosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mog_antibody_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Multiple sclerosis",
+          "cells": [
+            {
+              "text": "Oligoclonal bands are more common than in MOGAD; MS drugs are ineffective or harmful in MOGAD"
+            },
+            {
+              "text": "Serum MOG-IgG by live cell-based assay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aquaporin-4-positive NMOSD",
+          "cells": [
+            {
+              "text": "Defined by aquaporin-4 antibody"
+            },
+            {
+              "text": "Aquaporin-4 antibody testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mog_antibody_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose IV corticosteroids",
+          "cells": [
+            {
+              "text": "First-line for acute attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange or IV immunoglobulin",
+          "cells": [
+            {
+              "text": "Severe or steroid-refractory attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slow steroid taper",
+          "cells": [
+            {
+              "text": "Abrupt withdrawal precipitates relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance immunotherapy",
+          "cells": [
+            {
+              "text": "IV immunoglobulin, rituximab, mycophenolate mofetil or azathioprine in relapsing disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid MS disease-modifying drugs",
+          "cells": [
+            {
+              "text": "Ineffective or harmful in MOGAD"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mog_antibody_disease-dx-mgmt",
+      "title": "Diagnosis and management of MOG antibody-associated disease (MOGAD)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Optic neuritis, myelitis or ADEM-like illness; MOG-IgG suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe or bilateral visual loss, LETM with sphincter or respiratory compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent high-dose IV steroids; plasma exchange if severe or refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Live cell-based MOG-IgG, AQP4 antibody, MRI brain/orbit/cord, infective screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "MOG-IgG positive with a compatible phenotype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider MS, AQP4 NMOSD or infective mimics; do not over-read low titres",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "IV methylprednisolone for the attack, then slow steroid taper",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Plasma exchange or IVIG if severe or steroid-refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Maintenance immunotherapy if relapsing; avoid MS drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial MOG-IgG titres, MRI and OCT; neuroimmunology and ophthalmology input",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good recovery from most attacks; relapsing course in a substantial minority",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,334 @@
       "caption": "Overview comparison matrix for telogen effluvium."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "telogen_effluvium-dx-mgmt",
+      "title": "Diagnosis and management of Telogen effluvium",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected telogen effluvium: diffuse non-scarring shedding 2 to 3 months after a trigger",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: scarring signs, shedding beyond six months, or patchy loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Scalp biopsy and dermatology review to exclude scarring alopecia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hair-pull test; trichoscopy; FBC and ferritin; thyroid function tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does trichoscopy show preserved follicular ostia with increased telogen hairs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider androgenetic alopecia, alopecia areata or anagen effluvium from toxins",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Identify and remove the precipitating trigger, the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Replace iron where ferritin is low; correct vitamin D or zinc deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat thyroid dysfunction to normalise the hair cycle",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Review and withdraw or substitute a culprit medication",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reassure about reversibility; topical minoxidil if chronic",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Acute form is self-limiting with regrowth over months; chronic form fluctuates",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "telogen_effluvium-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hair-pull test",
+          "cells": [
+            {
+              "text": "Increased telogen shedding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichoscopy",
+          "cells": [
+            {
+              "text": "Follicular ostia, hair-shaft calibre and regrowth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and ferritin",
+          "cells": [
+            {
+              "text": "Iron deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Thyroid dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted nutritional screen",
+          "cells": [
+            {
+              "text": "Vitamin D or zinc, where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichogram or scalp biopsy",
+          "cells": [
+            {
+              "text": "Telogen ratio in uncertain or chronic cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "telogen_effluvium-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Androgenetic alopecia",
+          "cells": [
+            {
+              "text": "Effluvium may unmask or accelerate it; look for a thinning pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alopecia areata, diffuse (incognita) variant",
+          "cells": [
+            {
+              "text": "Patchy rather than diffuse loss points to alopecia areata"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anagen effluvium from chemotherapy or toxin exposure",
+          "cells": [
+            {
+              "text": "Anagen rather than telogen shedding after a toxic exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "telogen_effluvium-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remove the precipitating trigger",
+          "cells": [
+            {
+              "text": "Childbirth, febrile illness, surgery, crash dieting or a new drug; the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct nutritional deficiency",
+          "cells": [
+            {
+              "text": "Iron where ferritin is low; vitamin D or zinc where deficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat thyroid dysfunction",
+          "cells": [
+            {
+              "text": "Restoring euthyroid status allows the hair cycle to normalise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Withdraw or substitute a culprit drug where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and gentle hair care",
+          "cells": [
+            {
+              "text": "Non-scarring; avoid traction and harsh chemical treatments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical minoxidil",
+          "cells": [
+            {
+              "text": "Persistent or chronic telogen effluvium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology referral",
+          "cells": [
+            {
+              "text": "Chronic or uncertain shedding, or unmasked androgenetic thinning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

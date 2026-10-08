@@ -148,5 +148,343 @@
       "caption": "Overview comparison matrix for loiasis (loa loa filariasis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / WHO guidance on filariasis",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "loa_loa_filariasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Daytime (midday) blood film for sheathed microfilariae",
+          "cells": [
+            {
+              "text": "Diagnosis, given daytime periodicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantification of microfilarial density",
+          "cells": [
+            {
+              "text": "Before treatment; sets encephalopathy risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Filarial serology or antigen testing",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp or direct examination",
+          "cells": [
+            {
+              "text": "If a worm is visible in the eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR for species confirmation",
+          "cells": [
+            {
+              "text": "Where accessible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "loa_loa_filariasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Onchocerciasis",
+          "cells": [
+            {
+              "text": "Co-endemic; overlapping treatment considerations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphatic filariasis",
+          "cells": [
+            {
+              "text": "Co-endemic; overlapping treatment considerations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gnathostomiasis and other migratory helminths",
+          "cells": [
+            {
+              "text": "Migratory worm mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous larva migrans",
+          "cells": [
+            {
+              "text": "Migratory skin lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "loa_loa_filariasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Diethylcarbamazine",
+          "cells": [
+            {
+              "text": "Definitive therapy against microfilariae and adult worms; only after quantifying microfilarial density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Albendazole or apheresis",
+          "cells": [
+            {
+              "text": "Reduce heavy microfilaraemia first, to lower encephalopathy risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ivermectin and DEC caution",
+          "cells": [
+            {
+              "text": "Avoid, or use extreme caution, with high microfilarial loads"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical removal of worm",
+          "cells": [
+            {
+              "text": "When a worm migrates across the conjunctiva or subcutis and is accessible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Encephalopathy and other reactions during treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vector avoidance",
+          "cells": [
+            {
+              "text": "Against the day-biting Chrysops fly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist input",
+          "cells": [
+            {
+              "text": "Tropical medicine or infectious diseases; repeat courses given relapse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "loa_loa_filariasis-dx-mgmt",
+      "title": "Diagnosis and management of Loiasis (Loa loa filariasis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Transient localised angio-oedema and a migrating worm, with peripheral eosinophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (very high microfilarial load, neurological change, renal involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurological management if encephalopathy occurs during therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Midday blood film, FBC, microfilarial density, filarial serology or PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are sheathed microfilariae found on a midday blood film?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider onchocerciasis, lymphatic filariasis or other migratory helminths",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Quantify microfilarial density before any treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reduce heavy microfilaraemia with albendazole or apheresis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Diethylcarbamazine for microfilariae and adult worms, when safe",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical removal of accessible migrating worms",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor closely for encephalopathy and reactions",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic, non-fatal; good prognosis when managed; severe reactions are the danger",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

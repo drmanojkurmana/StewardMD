@@ -148,5 +148,334 @@
       "caption": "Overview comparison matrix for terrien marginal degeneration."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "terrien_marginal_degeneration-dx-mgmt",
+      "title": "Diagnosis and management of Terrien marginal degeneration",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Terrien marginal degeneration: painless superior peripheral corneal thinning",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: severe thinning, new pain and redness, or epithelial breakdown?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent corneal review for perforation risk or infective ulceration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp examination for thinning with intact epithelium and lipid line; topography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the slit lamp show peripheral thinning with intact epithelium and a lipid line?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Mooren ulcer, vasculitic keratitis or keratoconus; repeat workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Optical correction of against-the-rule astigmatism",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial corneal topography, pachymetry and anterior segment imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Crescentic lamellar keratoplasty for severe thinning threatening perforation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anti-inflammatory therapy during episodes of the inflammatory variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Protective eyewear to reduce traumatic rupture risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Slowly progressive; vision limited by astigmatism; perforation risk when advanced",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "terrien_marginal_degeneration-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Peripheral thinning with intact epithelium and a lipid line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal topography",
+          "cells": [
+            {
+              "text": "Against-the-rule or oblique astigmatism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior segment OCT or pachymetry",
+          "cells": [
+            {
+              "text": "Quantifies the thinning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory and autoimmune workup",
+          "cells": [
+            {
+              "text": "Peripheral ulcerative keratitis excluded, when signs are atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refraction",
+          "cells": [
+            {
+              "text": "Visual impact of astigmatism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "terrien_marginal_degeneration-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mooren ulcer and other peripheral ulcerative keratitis",
+          "cells": [
+            {
+              "text": "Painful ulceration; Terrien keeps an intact epithelium over the thinned gutter"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral ulcerative keratitis from systemic vasculitis",
+          "cells": [
+            {
+              "text": "Inflammatory and autoimmune workup excludes it when signs are atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keratoconus and other ectatic disorders",
+          "cells": [
+            {
+              "text": "Topography characterises the induced astigmatism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "terrien_marginal_degeneration-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Optical correction",
+          "cells": [
+            {
+              "text": "Spectacles or rigid contact lenses for astigmatism; main means of preserving vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Topography, pachymetry and anterior segment imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tectonic surgery",
+          "cells": [
+            {
+              "text": "Crescentic lamellar keratoplasty or corneoscleral graft for severe thinning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent perforation care",
+          "cells": [
+            {
+              "text": "Tissue adhesive or patch graft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-inflammatory therapy",
+          "cells": [
+            {
+              "text": "Uncommon inflammatory variant during episodes of redness and pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protective eyewear",
+          "cells": [
+            {
+              "text": "Reduces the risk of traumatic rupture of the thinned cornea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal specialist referral",
+          "cells": [
+            {
+              "text": "Ongoing management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

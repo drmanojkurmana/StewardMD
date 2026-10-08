@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for urea cycle disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "urea_cycle_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma ammonia and arterial blood gas",
+          "cells": [
+            {
+              "text": "Hyperammonaemia with respiratory alkalosis; urgent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids and urine orotic acid",
+          "cells": [
+            {
+              "text": "Localises the enzymatic block (citrulline, arginine, argininosuccinate)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma glucose, lactate and acid-base status",
+          "cells": [
+            {
+              "text": "Separates the picture from organic acidaemias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Newborn screening markers",
+          "cells": [
+            {
+              "text": "Citrulline and arginine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enzyme assays and molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the specific defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Cerebral oedema in severe hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urea_cycle_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Organic acidaemias",
+          "cells": [
+            {
+              "text": "Hyperammonaemia with metabolic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal sepsis or meningitis",
+          "cells": [
+            {
+              "text": "A neonate who deteriorates after a normal period may be mistaken for sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fatty acid oxidation disorders",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urea_cycle_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop protein intake",
+          "cells": [
+            {
+              "text": "Acute crisis; intravenous glucose with or without insulin reverses catabolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nitrogen-scavenging drugs",
+          "cells": [
+            {
+              "text": "Sodium benzoate and sodium or glycerol phenylbutyrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong protein restriction",
+          "cells": [
+            {
+              "text": "With essential amino acid supplements and high non-protein calorie intake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arginine or citrulline supplementation",
+          "cells": [
+            {
+              "text": "According to the enzymatic block; avoid arginine in arginase deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dialysis",
+          "cells": [
+            {
+              "text": "Haemodialysis or haemofiltration for severe or refractory hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Plasma ammonia, amino acids, growth and neurodevelopment; written sick-day regimen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "urea_cycle_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Urea cycle disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected urea cycle disorder: poor feeding, lethargy and encephalopathy in a newborn",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe hyperammonaemia, falling consciousness or seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Medical emergency: stop protein, lower ammonia and start dialysis if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma ammonia, blood gas, amino acids, urine orotic acid, glucose and lactate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the amino acid profile localise a urea cycle enzyme block?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider organic acidaemia, fatty acid oxidation disorder or transient hyperammonaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop protein; intravenous glucose with or without insulin to reverse catabolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nitrogen-scavenging drugs such as sodium benzoate and phenylbutyrate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lifelong protein restriction with essential amino acid supplements",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor ammonia, amino acids, growth and neurodevelopment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome depends on the enzyme defect, timing of treatment and neurological injury",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

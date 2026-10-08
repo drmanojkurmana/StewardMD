@@ -155,5 +155,352 @@
       "caption": "Overview comparison matrix for long-chain 3-hydroxyacyl-coa dehydrogenase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "long_chain_3_hydroxyacyl_coa_dehydrogenase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma acylcarnitine profile",
+          "cells": [
+            {
+              "text": "Raised long-chain hydroxyacylcarnitines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine organic acids during crisis",
+          "cells": [
+            {
+              "text": "3-hydroxydicarboxylic aciduria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HADHA and HADHB molecular testing",
+          "cells": [
+            {
+              "text": "Confirms the variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trifunctional protein enzyme or flux assay in fibroblasts",
+          "cells": [
+            {
+              "text": "Enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology with fundoscopy, electroretinography and OCT",
+          "cells": [
+            {
+              "text": "Chorioretinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and ECG",
+          "cells": [
+            {
+              "text": "Cardiomyopathy and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "long_chain_3_hydroxyacyl_coa_dehydrogenase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Generalised trifunctional protein deficiency",
+          "cells": [
+            {
+              "text": "Different severity and counselling from isolated LCHAD deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Very long-chain acyl-CoA dehydrogenase deficiency",
+          "cells": [
+            {
+              "text": "Another long-chain defect with overlapping crises"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carnitine palmitoyltransferase 2 deficiency",
+          "cells": [
+            {
+              "text": "Long-chain defect with exercise-induced rhabdomyolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peroxisomal disorders with retinopathy and neuropathy",
+          "cells": [
+            {
+              "text": "Retinopathy and neuropathy can mimic this disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "long_chain_3_hydroxyacyl_coa_dehydrogenase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid fasting",
+          "cells": [
+            {
+              "text": "Frequent carbohydrate-rich feeds; overnight feeds or uncooked cornstarch in infants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary fat",
+          "cells": [
+            {
+              "text": "Restrict long-chain fat; medium-chain triglyceride oil bypasses the blocked step; essential fats ensured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Docosahexaenoic acid",
+          "cells": [
+            {
+              "text": "Supplement to slow the chorioretinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency regimen",
+          "cells": [
+            {
+              "text": "Intravenous glucose during intercurrent illness to abort hypoglycaemia and rhabdomyolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication monitoring",
+          "cells": [
+            {
+              "text": "Serial echo for cardiomyopathy; ophthalmology with electroretinography; neurology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Metabolic physician, dietitian, cardiologist and ophthalmologist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; cascade testing; maternal risk of acute fatty liver of pregnancy or HELLP"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "long_chain_3_hydroxyacyl_coa_dehydrogenase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Long-chain 3-hydroxyacyl-CoA dehydrogenase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypoketotic hypoglycaemia, cardiomyopathy or rhabdomyolysis in infancy or childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cardiorespiratory collapse, worsening cardiomyopathy, rhabdomyolysis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent intravenous glucose and cardiac support for decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Acylcarnitine profile, urine organic acids, HADHA and HADHB sequencing, enzyme assay",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are raised long-chain hydroxyacylcarnitines and HADHA variants found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider VLCAD or CPT2 deficiency, or a peroxisomal disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid fasting with frequent carbohydrate-rich feeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Restrict long-chain fat; medium-chain triglyceride oil",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Docosahexaenoic acid supplementation for chorioretinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Emergency intravenous glucose during intercurrent illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial echo, retinal and neurological surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Retinopathy and neuropathy progress; early cardiac decompensation can be fatal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

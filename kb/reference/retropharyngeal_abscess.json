@@ -145,5 +145,285 @@
       "caption": "Overview comparison matrix for retropharyngeal abscess."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "retropharyngeal_abscess-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lateral soft-tissue neck radiograph",
+          "cells": [
+            {
+              "text": "Prevertebral soft-tissue widening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast CT of the neck",
+          "cells": [
+            {
+              "text": "Abscess and spread toward the mediastinum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and inflammatory markers",
+          "cells": [
+            {
+              "text": "Severity of infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood and pus cultures",
+          "cells": [
+            {
+              "text": "Organisms to guide antibiotic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis testing",
+          "cells": [
+            {
+              "text": "Needed when a chronic cold abscess from cervical spine disease is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retropharyngeal_abscess-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway protection",
+          "cells": [
+            {
+              "text": "Immediate priority; intubation or, rarely, tracheostomy if the airway is threatened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical antibiotics",
+          "cells": [
+            {
+              "text": "Broad-spectrum IV covering streptococci, staphylococci and oral anaerobes, such as a beta-lactam with inhibitor or clindamycin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical drainage",
+          "cells": [
+            {
+              "text": "Usually transoral in the acute form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic tuberculous abscess",
+          "cells": [
+            {
+              "text": "External approach rather than transoral drainage (pitfall)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted antibiotics",
+          "cells": [
+            {
+              "text": "De-escalate using pus and blood culture results"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "IV fluids and analgesia during the acute illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication monitoring",
+          "cells": [
+            {
+              "text": "Descending mediastinitis, aspiration on rupture and airway obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis treatment",
+          "cells": [
+            {
+              "text": "Antitubercular therapy when a chronic cold abscess from cervical spine disease is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "retropharyngeal_abscess-dx-mgmt",
+      "title": "Diagnosis and management of Retropharyngeal abscess",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with fever, neck pain or stiffness after an upper respiratory infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (stridor, drooling, respiratory distress, signs of mediastinitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Secure the airway urgently; intubation, rarely tracheostomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lateral neck radiograph, contrast CT of the neck, FBC, blood and pus cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CT confirm a retropharyngeal collection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider epiglottitis, croup or tuberculosis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Empirical broad-spectrum IV antibiotics covering oral anaerobes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical drainage, usually transoral in the acute form",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "De-escalate to targeted antibiotics using culture results",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supportive care; monitor for mediastinitis and airway obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Acute abscess resolves well with prompt airway, antibiotics and drainage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

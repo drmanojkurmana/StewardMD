@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for neuroblastoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neuroblastoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinary catecholamine metabolites, HVA and VMA",
+          "cells": [
+            {
+              "text": "Biochemical marker of neuroblastic tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI of the primary site",
+          "cells": [
+            {
+              "text": "Local extent and paraspinal component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MIBG scintigraphy",
+          "cells": [
+            {
+              "text": "Functional imaging and metastasis detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow aspirate and trephine biopsy",
+          "cells": [
+            {
+              "text": "Marrow involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour biopsy with MYCN status",
+          "cells": [
+            {
+              "text": "MYCN amplification changes management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neuroblastoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Wilms tumour",
+          "cells": [
+            {
+              "text": "Abdominal mass in young children; histology separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rhabdomyosarcoma",
+          "cells": [
+            {
+              "text": "Small round blue cell tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma or leukaemic infiltration",
+          "cells": [
+            {
+              "text": "Marrow and lymph node disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phaeochromocytoma",
+          "cells": [
+            {
+              "text": "Adrenal catecholamine-secreting tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ewing sarcoma",
+          "cells": [
+            {
+              "text": "Other small round blue cell tumours"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neuroblastoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Risk-stratified treatment",
+          "cells": [
+            {
+              "text": "Stage, age, MYCN status and tumour biology decide intensity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation or resection for low-risk disease",
+          "cells": [
+            {
+              "text": "Stage 4S and infant disease often regress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multimodal therapy for high-risk disease",
+          "cells": [
+            {
+              "text": "Intensive treatment for MYCN amplification or widespread metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal cord compression care",
+          "cells": [
+            {
+              "text": "Urgent decompression for paraspinal tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neuroblastoma-dx-mgmt",
+      "title": "Diagnosis and management of Neuroblastoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Abdominal or paraspinal mass with raised urinary catecholamines in a young child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cord compression, orbital metastases, marrow failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent decompression for cord compression; supportive care for marrow failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinary HVA and VMA, CT or MRI, MIBG scan, marrow biopsy, MYCN status",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Neuroblastic tumour on biopsy with MYCN status defined?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Wilms tumour, lymphoma or sarcoma; repeat histology",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stratify treatment by stage, age and MYCN status",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observation or resection for low-risk and stage 4S disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intensive multimodal therapy for high-risk disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urgent decompression for spinal cord compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Highly variable; low-risk disease often survives well, MYCN-amplified disease does poorly",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

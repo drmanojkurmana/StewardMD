@@ -173,5 +173,509 @@
       "caption": "Overview comparison matrix for oncologic emergencies."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "WikEM, Tumor Lysis Syndrome (Cairo-Bishop criteria)",
+      "kind": "web",
+      "url": "https://wikem.org/wiki/Tumor_Lysis_Syndrome"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oncologic_emergencies-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising oncologic emergencies",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Laboratory TLS (Cairo-Bishop)",
+          "cells": [
+            {
+              "text": "2 or more within 3 days before to 7 days after chemotherapy",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "Uric acid 8 mg/dL or more, K 6 or more, phosphate 4.5 mg/dL or more, Ca 7 mg/dL or less (or 25% change)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clinical TLS",
+          "unit": "x ULN",
+          "cells": [
+            {
+              "text": "Lab TLS plus creatinine over 1.5 x ULN, arrhythmia or seizure",
+              "op": ">",
+              "value": 1.5
+            },
+            {
+              "text": "High LDH over 1500 U/L marks high risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Uric acid nephropathy",
+          "cells": [
+            {
+              "text": "Urine uric acid to creatinine ratio over 1",
+              "op": ">",
+              "value": 1
+            },
+            {
+              "text": "Under 1 suggests other cause of AKI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudohyperkalaemia",
+          "cells": [
+            {
+              "text": "High K without ECG change in leukocytosis"
+            },
+            {
+              "text": "Check plasma potassium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SVC syndrome",
+          "cells": [
+            {
+              "text": "Face and neck swelling, distended neck and chest veins, worse lying down"
+            },
+            {
+              "text": "Lung cancer about 85% of malignant cases; devices cause at least 40% overall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SVC imaging",
+          "cells": [
+            {
+              "text": "Chest film: right superior mediastinal widening; CT most reliable"
+            },
+            {
+              "text": "Normal film does not exclude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal cord compression",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "In 5 to 10% of cancer patients; thoracic 70%",
+              "range": [
+                5,
+                10
+              ]
+            },
+            {
+              "text": "{{hy:Back pain worse lying down is the first symptom}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cord compression imaging",
+          "cells": [
+            {
+              "text": "Whole-spine MRI"
+            },
+            {
+              "text": "Plain films are insensitive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Febrile neutropenia",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "Fever with granulocytes under 1500/uL",
+              "op": "<",
+              "value": 1500
+            },
+            {
+              "text": "Treat as an emergency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oncologic_emergencies-ddx",
+      "kind": "ddx",
+      "title": "Mimics of oncologic emergencies",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteoporotic vertebral collapse",
+          "cells": [
+            {
+              "text": "About 20% of collapses; older women"
+            },
+            {
+              "text": "MRI marrow signal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidural abscess or spinal TB",
+          "cells": [
+            {
+              "text": "Fever, raised inflammatory markers"
+            },
+            {
+              "text": "MRI and blood cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disc disease",
+          "cells": [
+            {
+              "text": "Pain eases lying down"
+            },
+            {
+              "text": "MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign SVC obstruction",
+          "cells": [
+            {
+              "text": "Catheter or pacemaker lead, fibrosing mediastinitis"
+            },
+            {
+              "text": "CT venography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemorrhage into brain metastasis",
+          "cells": [
+            {
+              "text": "Sudden stroke-like onset; melanoma, renal, germ cell"
+            },
+            {
+              "text": "CT or MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudohyperkalaemia or pseudohypoglycaemia",
+          "cells": [
+            {
+              "text": "Very high white or platelet count"
+            },
+            {
+              "text": "Plasma K; repeat on ice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cauda equina syndrome",
+          "cells": [
+            {
+              "text": "Saddle anaesthesia, sphincter loss, absent reflexes"
+            },
+            {
+              "text": "Lumbosacral MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oncologic_emergencies-treatment",
+      "kind": "treatment",
+      "title": "Emergency management",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dexamethasone then MRI",
+          "cells": [
+            {
+              "text": "{{hy:Suspected cord compression}}"
+            },
+            {
+              "text": "Then radiotherapy or surgical decompression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SVC syndrome care",
+          "cells": [
+            {
+              "text": "SVC obstruction"
+            },
+            {
+              "text": "Head up, oxygen, steroids; tissue diagnosis; stent if severe or airway or brain oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TLS hydration",
+          "cells": [
+            {
+              "text": "High risk or established TLS"
+            },
+            {
+              "text": "Target urine output 3 L/24 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Allopurinol",
+          "cells": [
+            {
+              "text": "TLS prevention"
+            },
+            {
+              "text": "10 mg/kg/day PO in 3 doses or 200 to 400 mg/m2 IV every 12 h; renally adjust"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rasburicase",
+          "cells": [
+            {
+              "text": "High risk or uric acid 8 mg/dL or more"
+            },
+            {
+              "text": "0.05 to 0.2 mg/kg IV; not in G6PD deficiency; cool samples"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "No urine alkalinisation",
+          "cells": [
+            {
+              "text": "TLS"
+            },
+            {
+              "text": "Raises xanthine and calcium phosphate crystallisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dialysis",
+          "cells": [
+            {
+              "text": "K over 6, uric acid over 10, phosphate over 10, creatinine over 10, symptomatic hypocalcaemia, overload"
+            },
+            {
+              "text": "Refractory derangement"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Raised ICP from metastases",
+          "cells": [
+            {
+              "text": "Vasogenic oedema"
+            },
+            {
+              "text": "Steroids, osmotic therapy, then radiotherapy or surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Febrile neutropenia",
+          "cells": [
+            {
+              "text": "Fever with neutropenia"
+            },
+            {
+              "text": "Prompt cultures and empiric broad antibiotics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oncologic_emergencies-dx-mgmt",
+      "title": "Diagnosis and management of oncologic emergencies",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Patient with known or suspected cancer and acute deterioration",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Back pain with neuro signs or sphincter change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Dexamethasone now; whole-spine MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Radiotherapy or surgery by NOMS assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Face or neck swelling with distended veins?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "CT chest; tissue diagnosis; stent if airway or cerebral oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Recent chemotherapy with high K, phosphate or uric acid?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hydrate, rasburicase or allopurinol; cardiac monitor",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Refractory K, uric acid, phosphate or overload?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Urgent dialysis",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Continue hydration and repeat electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Assess for febrile neutropenia, hypercalcaemia, raised ICP",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

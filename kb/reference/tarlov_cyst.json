@@ -149,5 +149,325 @@
       "caption": "Overview comparison matrix for tarlov (perineural) cyst."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rothman-Simeone and Herkowitz's The Spine",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tarlov_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Tarlov (perineural) cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Tarlov cyst: sacral or perineal pain with positional radicular symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: new bladder or bowel dysfunction, or progressive neurological deficit?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent spinal neurosurgical review for progressive deficit or sphincter disturbance",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI lumbosacral spine; CT myelography for bony scalloping; urodynamics if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show a CSF-signal sacral cyst that matches the symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider disc disease, solid sacral tumour, endometriosis or other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and observe incidental, asymptomatic cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Analgesia, neuropathic agents and physiotherapy for symptomatic cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Image-guided aspiration with fibrin glue for selected cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical fenestration or imbrication for refractory cases, given recurrence risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Assess bladder, bowel and sexual dysfunction with urodynamics where needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most are incidental; intervention helps selected cases, but recurrence is common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tarlov_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the lumbosacral spine and sacrum",
+          "cells": [
+            {
+              "text": "CSF-signal cyst containing nerve-root fibres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or CT myelography",
+          "cells": [
+            {
+              "text": "Bony scalloping and communication with the thecal sac"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical correlation",
+          "cells": [
+            {
+              "text": "Symptoms matched to cyst location and level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urodynamic studies",
+          "cells": [
+            {
+              "text": "Bladder dysfunction, when present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging for alternative sacral pathology",
+          "cells": [
+            {
+              "text": "Other causes of symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tarlov_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sacral tumour such as chordoma or schwannoma",
+          "cells": [
+            {
+              "text": "Solid tumour features, rather than a fluid-filled cyst, need to be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbosacral disc herniation or stenosis with radiculopathy",
+          "cells": [
+            {
+              "text": "An alternative treatable cause of sacral radicular symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endometriosis",
+          "cells": [
+            {
+              "text": "Cyclical perineal or pelvic symptoms point to it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tarlov_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Incidental, asymptomatic cysts, which are the majority"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Analgesia, neuropathic pain agents, physiotherapy, and avoiding activities that raise CSF pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided aspiration",
+          "cells": [
+            {
+              "text": "Often with fibrin glue, for selected symptomatic cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical fenestration, imbrication or wrapping",
+          "cells": [
+            {
+              "text": "Refractory cases; recurrence and CSF complications are accepted risks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder, bowel and sexual dysfunction review",
+          "cells": [
+            {
+              "text": "Urodynamic studies where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent escalation",
+          "cells": [
+            {
+              "text": "Progressive deficit or new sphincter disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal neurosurgery referral",
+          "cells": [
+            {
+              "text": "Symptomatic or enlarging cysts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,321 @@
       "caption": "Overview comparison matrix for progressive familial intrahepatic cholestasis type 2."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Inherited cholestasis references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type_2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum total bile acids with paired serum GGT",
+          "cells": [
+            {
+              "text": "Markedly raised bile acids with low or normal GGT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum alpha-fetoprotein",
+          "cells": [
+            {
+              "text": "Baseline and surveillance level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of ABCB11",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy with BSEP immunostaining",
+          "cells": [
+            {
+              "text": "BSEP expression and giant-cell hepatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver ultrasound and cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Tumour surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation profile and fat-soluble vitamin levels",
+          "cells": [
+            {
+              "text": "Coagulation and fat-soluble vitamin status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type_2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "PFIC type 1 (ATP8B1/FIC1 deficiency)",
+          "cells": [
+            {
+              "text": "Extrahepatic diarrhoea and deafness"
+            },
+            {
+              "text": "ATP8B1 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PFIC type 3 (ABCB4/MDR3 deficiency)",
+          "cells": [
+            {
+              "text": "High GGT"
+            },
+            {
+              "text": "Serum GGT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type_2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ileal bile acid transporter inhibitors",
+          "cells": [
+            {
+              "text": "Odevixibat or maralixibat to interrupt bile acid recycling and reduce pruritus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antipruritics and ursodeoxycholic acid",
+          "cells": [
+            {
+              "text": "Rifampicin and bile acid sequestrants, with ursodeoxycholic acid as adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamins and nutrition",
+          "cells": [
+            {
+              "text": "Fat-soluble vitamins including vitamin K; medium-chain-triglyceride support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical biliary diversion",
+          "cells": [
+            {
+              "text": "Symptom control and disease modification in suitable children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy surveillance",
+          "cells": [
+            {
+              "text": "Alpha-fetoprotein, liver ultrasound and cross-sectional imaging from early childhood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "End-stage disease or malignancy, with awareness of antibody-mediated BSEP recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive ABCB11 disorder; cascade family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type_2-dx-mgmt",
+      "title": "Diagnosis and management of Progressive Familial Intrahepatic Cholestasis Type 2",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PFIC type 2 (ABCB11): raised bile acids with low or normal GGT",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bleeding from vitamin K deficiency, rising AFP or liver lesion, or decompensation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for decompensation, bleeding or suspected malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bile acids and GGT; ABCB11 testing; biopsy with BSEP staining; AFP; liver imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an ABCB11 defect confirmed with PFIC types 1 and 3 excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PFIC type 1, type 3 or biliary atresia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Odevixibat or maralixibat to interrupt bile acid recycling",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rifampicin and bile acid sequestrants, with ursodeoxycholic acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Vitamin K and fat-soluble vitamin supplementation; MCT nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Liver transplantation for end-stage disease or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Hepatobiliary malignancy surveillance from early childhood with AFP and imaging",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,325 @@
       "caption": "Overview comparison matrix for phlegmasia cerulea dolens."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "phlegmasia_cerulea_dolens-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Venous duplex ultrasound",
+          "cells": [
+            {
+              "text": "Extensive proximal thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR venography",
+          "cells": [
+            {
+              "text": "Extent, and iliac compression or obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb perfusion and compartment pressures",
+          "cells": [
+            {
+              "text": "Ischaemia, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy or thrombophilia investigation",
+          "cells": [
+            {
+              "text": "Underlying prothrombotic state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation and renal function",
+          "cells": [
+            {
+              "text": "Baseline before thrombolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging or CT pulmonary angiography",
+          "cells": [
+            {
+              "text": "Pulmonary embolism, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phlegmasia_cerulea_dolens-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute arterial occlusion or acute limb ischaemia",
+          "cells": [
+            {
+              "text": "Absent arterial signals indicate a threatened limb"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iliofemoral deep vein thrombosis",
+          "cells": [
+            {
+              "text": "Rapidly advancing cyanosis and pain despite anticoagulation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phlegmasia_cerulea_dolens-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emergency anticoagulation",
+          "cells": [
+            {
+              "text": "Intravenous unfractionated heparin as the immediate priority"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid resuscitation and elevation",
+          "cells": [
+            {
+              "text": "Aggressive fluids for hypovolaemia and shock; elevate the limb to reduce congestion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Restore venous outflow",
+          "cells": [
+            {
+              "text": "Catheter-directed thrombolysis or venous thrombectomy in suitable patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasciotomy or amputation",
+          "cells": [
+            {
+              "text": "Fasciotomy for compartment syndrome; debridement or amputation for established venous gangrene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prothrombotic state",
+          "cells": [
+            {
+              "text": "Investigate and treat, particularly occult malignancy or thrombophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary embolism",
+          "cells": [
+            {
+              "text": "Monitor for and manage concurrent pulmonary embolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Immediate vascular surgery and critical care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "phlegmasia_cerulea_dolens-dx-mgmt",
+      "title": "Diagnosis and management of Phlegmasia cerulea dolens",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Massively swollen, cyanotic, painful limb with extensive proximal venous thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (venous gangrene, absent arterial signals, compartment syndrome, PE)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Vascular surgery and critical care for a threatened limb and life",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Venous duplex; CT or MR venography; limb perfusion and compartment pressures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does venous imaging confirm extensive proximal thrombosis threatening the limb?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acute arterial ischaemia, necrotising infection or uncomplicated iliofemoral DVT",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Emergency intravenous unfractionated heparin as the immediate priority",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aggressive fluid resuscitation and limb elevation to reduce venous congestion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Catheter-directed thrombolysis or venous thrombectomy to restore venous outflow",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Fasciotomy for compartment syndrome; debride or amputate established gangrene",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Investigate and treat prothrombotic causes, particularly occult malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Limb- and life-threatening; prompt treatment can save the limb; gangrene is poor",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

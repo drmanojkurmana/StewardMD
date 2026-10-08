@@ -150,5 +150,323 @@
       "caption": "Overview comparison matrix for drowning / submersion injury."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Auerbach's Wilderness Medicine / Tintinalli's Emergency Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "near_drowning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulse oximetry and arterial blood gas",
+          "cells": [
+            {
+              "text": "Oxygenation and acid-base status; hypoxia is the primary insult"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Aspiration and evolving pulmonary oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core temperature measurement",
+          "cells": [
+            {
+              "text": "Identifies and grades hypothermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and cardiac monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose, electrolytes and toxicology screen",
+          "cells": [
+            {
+              "text": "Where relevant to the precipitant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of cervical spine and head",
+          "cells": [
+            {
+              "text": "When trauma is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "near_drowning-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary cardiac arrest or arrhythmia precipitating submersion",
+          "cells": [
+            {
+              "text": "A precipitant to exclude; ECG and monitoring identify it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizure disorder causing the submersion",
+          "cells": [
+            {
+              "text": "A precipitant to consider from the history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Traumatic injury, including cervical spine injury from diving",
+          "cells": [
+            {
+              "text": "Cervical spine precautions are needed when diving or trauma is possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "near_drowning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early rescue breathing and supplemental oxygen",
+          "cells": [
+            {
+              "text": "Correcting hypoxia is the overriding priority"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway and ventilation",
+          "cells": [
+            {
+              "text": "Intubation and ventilation with PEEP for respiratory failure or non-cardiogenic pulmonary oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiopulmonary resuscitation",
+          "cells": [
+            {
+              "text": "For arrest; prolonged efforts continue in cold or hypothermic patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Active rewarming",
+          "cells": [
+            {
+              "text": "Management of hypothermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "In-hospital observation",
+          "cells": [
+            {
+              "text": "Symptomatic patients are observed for delayed pulmonary oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive care",
+          "cells": [
+            {
+              "text": "Targeted temperature management and neuroprotection for hypoxic-ischaemic encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine immobilisation",
+          "cells": [
+            {
+              "text": "Where diving or traumatic injury is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "near_drowning-dx-mgmt",
+      "title": "Diagnosis and management of Drowning / submersion injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Submersion with respiratory impairment; now hypoxic, drowsy or in arrest",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (apnoea, arrest, persistent hypoxaemia, altered consciousness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate oxygenation, rescue breathing, CPR if arrest, ventilation with PEEP",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pulse oximetry, ABG, chest X-ray, core temperature, ECG, glucose, toxicology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Hypoxaemia or aspiration evident on blood gas or chest radiograph?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Observe for delayed pulmonary oedema before any discharge",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early rescue breathing and supplemental oxygen, correcting hypoxia first",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intubation and ventilation with PEEP for respiratory failure or pulmonary oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Active rewarming and CPR, continued longer in cold or hypothermic patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cervical spine immobilisation where diving or trauma is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Brief submersion with prompt rescue often recovers well; prolonged coma carries high risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

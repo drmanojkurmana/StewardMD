@@ -150,5 +150,323 @@
       "caption": "Overview comparison matrix for congenital nasolacrimal duct obstruction."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nasolacrimal_duct_obstruction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fluorescein dye disappearance test",
+          "cells": [
+            {
+              "text": "Assessment of tear drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for lacrimal sac regurgitation on digital pressure",
+          "cells": [
+            {
+              "text": "Mucoid regurgitation supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal diameter and intraocular pressure",
+          "cells": [
+            {
+              "text": "Excludes congenital glaucoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal endoscopy",
+          "cells": [
+            {
+              "text": "Complex or revision cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dacryocystography or dacryoscintigraphy",
+          "cells": [
+            {
+              "text": "Level of obstruction in atypical or older children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microbiological swab of discharge",
+          "cells": [
+            {
+              "text": "When acute dacryocystitis is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nasolacrimal_duct_obstruction-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital or infantile glaucoma",
+          "cells": [
+            {
+              "text": "Corneal enlargement, cloudiness or photophobia suggests glaucoma rather than duct obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dacryocele or lacrimal sac mucocele",
+          "cells": [
+            {
+              "text": "A tense bluish swelling at the medial canthus in a neonate suggests a dacryocele"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nasolacrimal_duct_obstruction-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lacrimal sac massage and lid hygiene",
+          "cells": [
+            {
+              "text": "First-line conservative care (Crigler technique)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Most cases resolve spontaneously within the first year"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical antibiotics",
+          "cells": [
+            {
+              "text": "Reserved for secondary conjunctivitis or mucopurulent discharge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic antibiotics",
+          "cells": [
+            {
+              "text": "For acute dacryocystitis or periorbital cellulitis, with prompt ophthalmological review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasolacrimal duct probing",
+          "cells": [
+            {
+              "text": "When symptoms persist beyond about the first year of life"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syringing, intubation or balloon dacryoplasty",
+          "cells": [
+            {
+              "text": "For probing failure or recurrent obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dacryocystorhinostomy",
+          "cells": [
+            {
+              "text": "For refractory obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric ophthalmology referral",
+          "cells": [
+            {
+              "text": "Exclude congenital glaucoma when watering is atypical"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nasolacrimal_duct_obstruction-dx-mgmt",
+      "title": "Diagnosis and management of Congenital nasolacrimal duct obstruction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent watering and mucopurulent discharge in an infant from birth or early weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (corneal enlargement, photophobia, red tender medial canthus)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology; exclude glaucoma; systemic antibiotics for acute dacryocystitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dye disappearance test, sac regurgitation, corneal diameter and IOP",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Mucoid regurgitation on sac pressure, with glaucoma excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Examine for congenital glaucoma or another cause of watering; refer",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lacrimal sac massage (Crigler technique) and lid hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassure: most resolve spontaneously within the first year",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Probing when symptoms persist beyond about the first year",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dacryocystorhinostomy for refractory obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent outlook; most resolve in the first year and probing is highly successful",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

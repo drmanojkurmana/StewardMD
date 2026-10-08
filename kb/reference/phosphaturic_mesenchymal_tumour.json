@@ -165,5 +165,361 @@
       "caption": "Overview comparison matrix for phosphaturic mesenchymal tumour."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Endocrine and metabolic bone references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "phosphaturic_mesenchymal_tumour-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting serum phosphate with renal phosphate handling (TmP/GFR)",
+          "cells": [
+            {
+              "text": "Renal phosphate wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium, alkaline phosphatase, PTH and vitamin D metabolites",
+          "cells": [
+            {
+              "text": "Biochemical profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intact FGF23",
+          "cells": [
+            {
+              "text": "Inappropriately elevated for the degree of hypophosphataemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatostatin-receptor PET/CT (e.g. gallium-68 DOTATATE)",
+          "cells": [
+            {
+              "text": "Tumour localisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or CT of the suspected site",
+          "cells": [
+            {
+              "text": "Surgical anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective venous sampling for FGF23",
+          "cells": [
+            {
+              "text": "When non-invasive imaging is equivocal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology with immunohistochemistry",
+          "cells": [
+            {
+              "text": "Mixed connective tissue variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phosphaturic_mesenchymal_tumour-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "X-linked hypophosphataemic rickets",
+          "cells": [
+            {
+              "text": "PHEX variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autosomal recessive hypophosphataemic rickets",
+          "cells": [
+            {
+              "text": "DMP1 or ENPP1 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrous dysplasia or McCune-Albright syndrome",
+          "cells": [
+            {
+              "text": "Also FGF23-mediated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional osteomalacia",
+          "cells": [
+            {
+              "text": "Vitamin D deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phosphaturic_mesenchymal_tumour-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Definitive tumour removal",
+          "cells": [
+            {
+              "text": "Removal of the FGF23-secreting tumour, rather than cytotoxic therapy, as PMT is usually benign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "First line with negative margins; potentially curative once localised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Minimally invasive surgery",
+          "cells": [
+            {
+              "text": "Image-guided or ablative therapy for anatomically difficult sites such as skull base or sinonasal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bridging medical therapy",
+          "cells": [
+            {
+              "text": "Oral phosphate salts plus an active vitamin D agent such as calcitriol while localisation proceeds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inoperable or occult disease",
+          "cells": [
+            {
+              "text": "Anti-FGF23 monoclonal antibody such as burosumab for inoperable, multifocal or occult disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant variant or metastasis",
+          "cells": [
+            {
+              "text": "Surgery first, with multidisciplinary sarcoma input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy and chemotherapy",
+          "cells": [
+            {
+              "text": "No established primary role; not standard for typical benign PMT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biochemical follow-up",
+          "cells": [
+            {
+              "text": "Serum phosphate, calcium, alkaline phosphatase and PTH to confirm cure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "phosphaturic_mesenchymal_tumour-dx-mgmt",
+      "title": "Diagnosis and management of Phosphaturic Mesenchymal Tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adult with fragility fractures, bone pain and persistent hypophosphataemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (fractures, proximal myopathy, persistent hypophosphataemia, treatment failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Endocrinology referral and functional imaging for suspected tumour-induced osteomalacia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fasting phosphate and TmP/GFR; intact FGF23; PTH and vitamin D; somatostatin PET",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is FGF23 inappropriately high for the degree of hypophosphataemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other hypophosphataemic rickets, Fanconi syndrome or nutritional osteomalacia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Localise the tumour with functional imaging and remove the FGF23-secreting tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Complete surgical excision with negative margins, which is potentially curative",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bridge with oral phosphate salts and calcitriol while localisation proceeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Burosumab, an anti-FGF23 antibody, for inoperable or occult disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Confirm cure by serial phosphate, calcium, alkaline phosphatase and PTH",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Almost always benign; complete excision is curative and phosphate normalises rapidly",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

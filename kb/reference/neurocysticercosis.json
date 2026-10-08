@@ -152,5 +152,305 @@
       "caption": "Overview comparison matrix for neurocysticercosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neurocysticercosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Cyst stage, scolex and perilesional oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Calcified lesions, indicating dead cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serological antibody testing",
+          "cells": [
+            {
+              "text": "Supportive evidence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Excludes ocular cysts before therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF studies and hydrocephalus assessment",
+          "cells": [
+            {
+              "text": "Extraparenchymal disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neurocysticercosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tuberculoma",
+          "cells": [
+            {
+              "text": "A ring-enhancing mimic; a cyst with a visible scolex is characteristic of cysticercosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral toxoplasmosis",
+          "cells": [
+            {
+              "text": "Infection mimic in immunocompromised patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary or metastatic brain tumour",
+          "cells": [
+            {
+              "text": "Mimics ring-enhancing lesions; imaging and biopsy decide"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neurocysticercosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Albendazole, with or without praziquantel",
+          "cells": [
+            {
+              "text": "Hastens resolution of viable parenchymal cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids with antiparasitic therapy",
+          "cells": [
+            {
+              "text": "Blunt the inflammatory reaction to dying cysts and perilesional oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Mainstay for those presenting with epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude ocular cysts",
+          "cells": [
+            {
+              "text": "Ophthalmological examination before antiparasitic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosurgical management",
+          "cells": [
+            {
+              "text": "For extraparenchymal disease and hydrocephalus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withhold antiparasitics",
+          "cells": [
+            {
+              "text": "In calcified-only lesions and cysticercal encephalitis; treat supportively"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neurocysticercosis-dx-mgmt",
+      "title": "Diagnosis and management of Neurocysticercosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "New seizures with ring-enhancing or calcified brain lesions after endemic exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (status epilepticus, raised intracranial pressure, focal deficits)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical review for hydrocephalus; antiseizure control",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain for stage and scolex, CT for calcification, serology, eye examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Viable parenchymal cyst with a scolex on MRI, ocular cysts excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tuberculoma, toxoplasmosis or tumour; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Albendazole with or without praziquantel for viable parenchymal cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids alongside antiparasitic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiseizure medication for seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurosurgical treatment for extraparenchymal disease and hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Solitary cysts often resolve; extraparenchymal disease has a worse prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

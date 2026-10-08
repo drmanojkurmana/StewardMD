@@ -344,6 +344,16 @@
       "id": "c3",
       "label": "Tables PDF, Table 304-5",
       "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, DNA Viruses (p60)",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 306-1",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -781,6 +791,195 @@
         }
       ],
       "footnote": "Liver transplant referral for fulminant hepatitis is not covered in the sources opened (needs-source for transplant criteria). Immunoprophylaxis doses are not given in the sources opened."
+    },
+    {
+      "id": "VIRAL_HEPATITIS-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "DNA viruses by family",
+      "rowHeader": "Family",
+      "columns": [
+        "Viruses",
+        "Genome"
+      ],
+      "rows": [
+        {
+          "parameter": "Hepadnaviridae",
+          "cells": [
+            {
+              "text": "Hepatitis B virus"
+            },
+            {
+              "text": "Double-stranded DNA with single-stranded portions"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Parvoviridae",
+          "cells": [
+            {
+              "text": "Parvovirus B19"
+            },
+            {
+              "text": "Single-stranded DNA"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Papovaviridae",
+          "cells": [
+            {
+              "text": "Human papillomaviruses; JC virus; BK virus"
+            },
+            {
+              "text": "Double-stranded DNA"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Adenoviridae",
+          "cells": [
+            {
+              "text": "Human adenoviruses"
+            },
+            {
+              "text": "Double-stranded DNA"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Herpesviridae",
+          "cells": [
+            {
+              "text": "Herpes simplex virus types 1 and 2; varicella-zoster virus; Epstein-Barr virus; cytomegalovirus; human herpesvirus 6; human herpesvirus 7; Kaposi's sarcoma-associated herpesvirus"
+            },
+            {
+              "text": "Double-stranded DNA"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Poxviridae",
+          "cells": [
+            {
+              "text": "Variola (smallpox) virus; Orf virus; Molluscum contagiosum virus"
+            },
+            {
+              "text": "Double-stranded DNA"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "The source marks some viruses with superscript letters whose footnote text is not on the page."
+    },
+    {
+      "id": "VIRAL_HEPATITIS-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Clinical and laboratory features of chronic hepatitis",
+      "rowHeader": "Type of hepatitis",
+      "columns": [
+        "Diagnostic tests",
+        "Autoantibodies",
+        "Therapy"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic hepatitis B",
+          "cells": [
+            {
+              "text": "HBsAg, IgG anti-HBc, HBeAg, HBV DNA"
+            },
+            {
+              "text": "Uncommon"
+            },
+            {
+              "text": "IFN-alpha, PEG IFN-alpha, lamivudine, adefovir, entecavir, telbivudine, tenofovir"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Chronic hepatitis C",
+          "cells": [
+            {
+              "text": "Anti-HCV, HCV RNA"
+            },
+            {
+              "text": "Anti-LKM1"
+            },
+            {
+              "text": "PEG IFN-alpha, ribavirin, telaprevir, boceprevir (the last two marked as awaiting expected approval in 2011)"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Chronic hepatitis D",
+          "cells": [
+            {
+              "text": "Anti-HDV, HDV RNA, HBsAg, IgG anti-HBc"
+            },
+            {
+              "text": "Anti-LKM3"
+            },
+            {
+              "text": "IFN-alpha, PEG IFN-alpha (clinical trials suggest benefit of IFN-alpha; PEG IFN-alpha is as effective, if not more so)"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Autoimmune hepatitis",
+          "cells": [
+            {
+              "text": "ANA (homogeneous; autoimmune hepatitis type I), anti-LKM1 (variable), hyperglobulinemia"
+            },
+            {
+              "text": "ANA, anti-LKM1, anti-SLA (anti-SLA marks type III)"
+            },
+            {
+              "text": "Prednisone, azathioprine"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Drug-associated",
+          "cells": [
+            {
+              "text": "None listed"
+            },
+            {
+              "text": "Uncommon"
+            },
+            {
+              "text": "Withdraw the drug"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Cryptogenic",
+          "cells": [
+            {
+              "text": "All negative"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "Prednisone (question mark in source), azathioprine (question mark in source)"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "Anti-LKM1 is antibody to liver-kidney microsomes type 1 (autoimmune hepatitis type II and some cases of hepatitis C). Abbreviations: HBc, hepatitis B core; HBeAg, hepatitis B e antigen; HBsAg, hepatitis B surface antigen; LKM, liver-kidney microsome; PEG, pegylated; SLA, soluble liver antigen."
     }
   ],
   "flowcharts": [

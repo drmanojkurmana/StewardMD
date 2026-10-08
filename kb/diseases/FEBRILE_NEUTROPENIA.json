@@ -261,6 +261,11 @@
       "label": "Merck Manual Professional, Neutropenia",
       "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/leukopenias/neutropenia",
       "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 132-3",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -587,6 +592,124 @@
         }
       ],
       "footnote": "Antifungal timing differs: IDSA 2011 says after 4 to 7 days of antibiotics, Merck says after 3 to 4 days. Doses of empiric beta-lactams were not stated in the sources opened."
+    },
+    {
+      "id": "FEBRILE_NEUTROPENIA-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Common sources of infection after hematopoietic stem cell transplantation",
+      "rowHeader": "Infection site",
+      "columns": [
+        "Early (<1 month)",
+        "Middle (1 to 4 months)",
+        "Late (>6 months)"
+      ],
+      "rows": [
+        {
+          "parameter": "Disseminated",
+          "cells": [
+            {
+              "text": "Aerobic bacteria (gram-negative, gram-positive)"
+            },
+            {
+              "text": "Nocardia, Candida, Aspergillus, EBV"
+            },
+            {
+              "text": "Encapsulated bacteria (Streptococcus pneumoniae, Haemophilus influenzae, Neisseria meningitidis)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Skin and mucous membranes",
+          "cells": [
+            {
+              "text": "HSV"
+            },
+            {
+              "text": "HHV-6"
+            },
+            {
+              "text": "VZV"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Lungs",
+          "cells": [
+            {
+              "text": "Aerobic bacteria (gram-negative, gram-positive), Candida, Aspergillus, other molds, HSV"
+            },
+            {
+              "text": "CMV, seasonal respiratory viruses, Pneumocystis, Toxoplasma"
+            },
+            {
+              "text": "Pneumocystis, S. pneumoniae"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Gastrointestinal tract",
+          "cells": [
+            {
+              "text": "Clostridium difficile"
+            },
+            {
+              "text": "CMV, adenovirus"
+            },
+            {
+              "text": "EBV, CMV"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Kidney",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "BK virus, adenovirus"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Brain",
+          "cells": [
+            {
+              "text": "HHV-6"
+            },
+            {
+              "text": "HHV-6, Toxoplasma"
+            },
+            {
+              "text": "Toxoplasma, JC virus (rare)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Bone marrow",
+          "cells": [
+            {
+              "text": "HHV-6"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
     }
   ],
   "flowcharts": [

@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for lymphoedema-distichiasis syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lymphedema_distichiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "FOXC2 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the loss-of-function variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Distichiasis and corneal effects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoscintigraphy",
+          "cells": [
+            {
+              "text": "Lymphatic drainage and reflux"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Congenital heart disease screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous duplex",
+          "cells": [
+            {
+              "text": "Varicose veins and reflux"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphedema_distichiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Milroy disease",
+          "cells": [
+            {
+              "text": "VEGFR3-related lymphoedema without distichiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meige or late-onset lymphoedema",
+          "cells": [
+            {
+              "text": "Other primary lymphoedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary lymphoedema",
+          "cells": [
+            {
+              "text": "Post-surgical, infective or malignant cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic venous insufficiency",
+          "cells": [
+            {
+              "text": "Venous oedema without lymphatic defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphedema_distichiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphoedema care",
+          "cells": [
+            {
+              "text": "Complex decongestive therapy, compression and skin care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distichiasis",
+          "cells": [
+            {
+              "text": "Lubrication and follicle ablation by electrolysis, cryotherapy or laser"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital heart disease and varicose veins",
+          "cells": [
+            {
+              "text": "Screen and manage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology referral",
+          "cells": [
+            {
+              "text": "Corneal protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening",
+          "cells": [
+            {
+              "text": "Autosomal dominant FOXC2 variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lymphedema_distichiasis-dx-mgmt",
+      "title": "Diagnosis and management of Lymphoedema-distichiasis syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lower-limb lymphoedema from puberty with eyelash-like lashes from the meibomian glands",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (corneal damage, recurrent cellulitis or undiagnosed heart disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ophthalmology review for corneal compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FOXC2 testing, slit-lamp examination, lymphoscintigraphy, echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a FOXC2 loss-of-function variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Milroy disease, secondary lymphoedema or venous oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complex decongestive therapy and compression for the limb",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Electrolysis, cryotherapy or laser for distichiasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen and manage congenital heart disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prompt antibiotics for cellulitis and prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cascade genetic screening of the family",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic but generally compatible with a normal lifespan; manageable with care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

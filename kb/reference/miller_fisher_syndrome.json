@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for miller fisher syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "miller_fisher_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum anti-GQ1b ganglioside antibody testing",
+          "cells": [
+            {
+              "text": "Anti-GQ1b antibody"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid analysis",
+          "cells": [
+            {
+              "text": "Albuminocytological dissociation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Reduced sensory responses or subtle changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain, when the picture is atypical",
+          "cells": [
+            {
+              "text": "Brainstem lesions excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for preceding Campylobacter or other infection",
+          "cells": [
+            {
+              "text": "Preceding infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory function monitoring, where overlap weakness is suspected",
+          "cells": [
+            {
+              "text": "Overlap weakness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "miller_fisher_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bickerstaff brainstem encephalitis",
+          "cells": [
+            {
+              "text": "Declining consciousness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Guillain-Barre syndrome (classic form)",
+          "cells": [
+            {
+              "text": "Evolving limb weakness indicates overlap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brainstem stroke",
+          "cells": [
+            {
+              "text": "Atypical picture; MRI excludes brainstem lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "miller_fisher_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunotherapy",
+          "cells": [
+            {
+              "text": "IV immunoglobulin or plasma exchange, particularly with significant disability or Guillain-Barre overlap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory and bulbar monitoring",
+          "cells": [
+            {
+              "text": "For overlapping Guillain-Barre weakness; ventilatory support if required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "VTE prophylaxis and physiotherapy during recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmoplegia",
+          "cells": [
+            {
+              "text": "Monocular occlusion for diplopia; ocular lubrication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic instability",
+          "cells": [
+            {
+              "text": "Watch for and treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology and neuroimmunology",
+          "cells": [
+            {
+              "text": "Reassurance that recovery is usually complete over weeks to months"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "miller_fisher_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Miller Fisher syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ophthalmoplegia after a preceding infection; suspected Miller Fisher syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Evolving limb weakness, bulbar dysfunction or declining consciousness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Monitor airway and respiratory function; escalate to ventilatory support if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anti-GQ1b antibody; CSF albuminocytological dissociation; NCS; brain MRI if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is anti-GQ1b antibody positive with supportive CSF or NCS findings?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Bickerstaff encephalitis, classic GBS or myasthenia gravis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "IV immunoglobulin or plasma exchange, particularly with significant disability",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Close respiratory and bulbar monitoring for Guillain-Barre overlap",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "VTE prophylaxis and physiotherapy during recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monocular occlusion for diplopia and lubrication; treat autonomic instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recovery usually complete over weeks to months under neurology and neuroimmunology",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

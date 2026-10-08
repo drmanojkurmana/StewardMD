@@ -145,5 +145,325 @@
       "caption": "Overview comparison matrix for tay-sachs disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / standard metabolic references",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tay_sachs_disease-dx-mgmt",
+      "title": "Diagnosis and management of Tay-Sachs disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Tay-Sachs disease: infant regression, startle and cherry-red spot",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: rapid regression, new seizures or vision loss, or swallowing difficulty?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent palliative, feeding and seizure support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hexosaminidase A assay; HEXA genetic testing; macular examination; neuroimaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does enzyme assay show deficient hexosaminidase A with HEXA variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Sandhoff disease, GM1 gangliosidosis, Niemann-Pick or leukodystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive and palliative care, centred on comfort",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticonvulsant therapy for seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Feeding support, with gastrostomy where aspiration risk is high",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Management of spasticity, secretions and chest infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling with carrier screening and prenatal options",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Infantile form is progressive and usually fatal in early childhood; later forms vary",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tay_sachs_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hexosaminidase A activity in serum or leukocytes",
+          "cells": [
+            {
+              "text": "Deficient enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HEXA molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and enables carrier detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Macular cherry-red spot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Neurodegeneration and exclusion of alternatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carrier screening and prenatal or preimplantation testing",
+          "cells": [
+            {
+              "text": "At-risk families"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tay_sachs_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sandhoff disease",
+          "cells": [
+            {
+              "text": "Visceral storage with organomegaly; Tay-Sachs has no hepatosplenomegaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GM1 gangliosidosis",
+          "cells": [
+            {
+              "text": "Shares the cherry-red spot and neurodegeneration; enzyme and gene testing separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Niemann-Pick disease",
+          "cells": [
+            {
+              "text": "Shares the cherry-red spot; enzyme and gene testing separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tay_sachs_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive and palliative care",
+          "cells": [
+            {
+              "text": "No curative therapy; focus on comfort and quality of life"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticonvulsant therapy",
+          "cells": [
+            {
+              "text": "Seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support",
+          "cells": [
+            {
+              "text": "Gastrostomy where aspiration risk is high"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of spasticity and secretions",
+          "cells": [
+            {
+              "text": "Recurrent chest infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric palliative care",
+          "cells": [
+            {
+              "text": "Early involvement for symptom control and family support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Metabolic medicine, neurology and allied health"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Carrier screening, especially in Ashkenazi Jewish families; prenatal or preimplantation diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

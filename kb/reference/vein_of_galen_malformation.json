@@ -149,5 +149,285 @@
       "caption": "Overview comparison matrix for vein of galen malformation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vein_of_galen_malformation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transfontanelle cranial ultrasound with Doppler",
+          "cells": [
+            {
+              "text": "Feeding arteries and shunt flow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI and MR angiography or venography",
+          "cells": [
+            {
+              "text": "Intracranial malformation and drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter cerebral angiography",
+          "cells": [
+            {
+              "text": "Feeding arteries and drainage routes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Shunt burden and pulmonary pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BNP and cardiac biomarkers",
+          "cells": [
+            {
+              "text": "Cardiac strain from high-output failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and hepatic function panels",
+          "cells": [
+            {
+              "text": "Multi-organ effects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vein_of_galen_malformation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Structural congenital heart disease",
+          "cells": [
+            {
+              "text": "Neonatal failure disproportionate to any cardiac lesion points to the malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent pulmonary hypertension of the newborn",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal sepsis with cardiovascular collapse",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dural sinus malformation",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vein_of_galen_malformation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Staged transarterial endovascular embolisation",
+          "cells": [
+            {
+              "text": "Definitive closure of the arteriovenous shunt, timed for growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure support",
+          "cells": [
+            {
+              "text": "Diuretics, inotropic support and mechanical ventilation as required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary hypertension and organ support",
+          "cells": [
+            {
+              "text": "Manage pulmonary hypertension; optimise systemic and coronary perfusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vein_of_galen_malformation-dx-mgmt",
+      "title": "Diagnosis and management of vein of galen malformation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vein of Galen malformation: neonatal high-output heart failure with bruit",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (refractory failure, bruit with head growth or raised pressure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent stabilisation of high-output cardiac failure and neuro-imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cranial ultrasound with Doppler, MRI and MR venography, angiography, echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show a choroidal or quadrigeminal arteriovenous shunt?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider structural heart disease, pulmonary hypertension or sepsis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stabilise high-output cardiac failure with diuretics and inotropes as required",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Manage pulmonary hypertension and optimise systemic and coronary perfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Staged endovascular embolisation of the arteriovenous shunt",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Outcome depends on brain injury; embolisation is avoided if injury is irreversible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

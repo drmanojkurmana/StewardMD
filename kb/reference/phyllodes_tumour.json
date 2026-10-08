@@ -152,5 +152,343 @@
       "caption": "Overview comparison matrix for phyllodes tumour."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Breast Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "phyllodes_tumour-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Triple assessment with clinical examination, ultrasound and mammography",
+          "cells": [
+            {
+              "text": "Combined clinical and imaging assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound-guided core needle biopsy",
+          "cells": [
+            {
+              "text": "Tissue architecture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast MRI",
+          "cells": [
+            {
+              "text": "Delineates large lesions and plans margins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excisional histology with margin assessment and grading",
+          "cells": [
+            {
+              "text": "Margins and grade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry (CD34, beta-catenin, p53, Ki-67)",
+          "cells": [
+            {
+              "text": "Supports classification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging chest imaging",
+          "cells": [
+            {
+              "text": "Confirmed malignant phyllodes tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary review",
+          "cells": [
+            {
+              "text": "Borderline and malignant cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phyllodes_tumour-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fibroadenoma",
+          "cells": [
+            {
+              "text": "Cellular or juvenile variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Juvenile fibroadenoma",
+          "cells": [
+            {
+              "text": "Rapid growth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phyllodes_tumour-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Wide local excision",
+          "cells": [
+            {
+              "text": "Aiming for a clear margin as definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mastectomy",
+          "cells": [
+            {
+              "text": "For lesions large relative to the breast"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid enucleation",
+          "cells": [
+            {
+              "text": "Leaves positive margins and predisposes to recurrence; re-excise when margins are inadequate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Axilla",
+          "cells": [
+            {
+              "text": "No axillary dissection; malignant tumours metastasise haematogenously to lung and bone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy",
+          "cells": [
+            {
+              "text": "For malignant and selected borderline tumours, or after re-excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic chemotherapy",
+          "cells": [
+            {
+              "text": "Sarcoma-type chemotherapy reserved for large malignant or metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Clinical examination and breast imaging for local recurrence; chest staging if malignant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Breast multidisciplinary team with specialist histological grading"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "phyllodes_tumour-dx-mgmt",
+      "title": "Diagnosis and management of Phyllodes tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Breast mass, possibly a phyllodes tumour, suspected on core biopsy or imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid enlargement, skin ulceration, high-grade stroma, lung or bone symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent multidisciplinary review for high-grade or metastatic phyllodes tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Triple assessment; ultrasound-guided core biopsy; MRI for large lesions; excision grading",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does excisional histology confirm a phyllodes tumour with its grade and margins?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider fibroadenoma (cellular or juvenile) or metaplastic carcinoma; review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Wide local excision aiming for a clear margin as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid enucleation; re-excise when margins are inadequate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "No axillary dissection, as malignant tumours spread haematogenously",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Adjuvant radiotherapy for malignant and selected borderline tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Follow up with clinical examination and imaging for local recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign tumours have an excellent outlook after complete excision; malignant lesions recur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

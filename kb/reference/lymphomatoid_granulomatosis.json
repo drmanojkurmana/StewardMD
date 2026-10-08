@@ -156,5 +156,316 @@
       "caption": "Overview comparison matrix for lymphomatoid granulomatosis (ebv)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Haematolymphoid Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lymphomatoid_granulomatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lung or tissue biopsy with EBV-encoded RNA in situ hybridisation",
+          "cells": [
+            {
+              "text": "EBV-positive atypical large B-cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Grading by EBV-positive cell density and necrosis",
+          "cells": [
+            {
+              "text": "Grade 1 to 3 determines treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the chest",
+          "cells": [
+            {
+              "text": "Nodular, often cavitating disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Central nervous system involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune status with HIV testing and immunoglobulins",
+          "cells": [
+            {
+              "text": "Underlying immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphomatoid_granulomatosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Granulomatosis with polyangiitis",
+          "cells": [
+            {
+              "text": "Vasculitis serology and biopsy pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary mycobacterial or fungal infection",
+          "cells": [
+            {
+              "text": "Microbiology identifies the organism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diffuse large B-cell lymphoma of the lung",
+          "cells": [
+            {
+              "text": "EBV-positive grade structure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic malignancy",
+          "cells": [
+            {
+              "text": "Multiple nodules; biopsy separates"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphomatoid_granulomatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Correct immunosuppression",
+          "cells": [
+            {
+              "text": "Reduce iatrogenic immunosuppression or treat HIV in all grades"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-grade disease",
+          "cells": [
+            {
+              "text": "Interferon-alfa to restore T-cell surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CD20-positive lower-grade disease",
+          "cells": [
+            {
+              "text": "Single-agent rituximab"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-grade disease",
+          "cells": [
+            {
+              "text": "Treated as aggressive B-cell lymphoma with rituximab and CHOP-like chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery and radiotherapy",
+          "cells": [
+            {
+              "text": "Not established primary treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lymphomatoid_granulomatosis-dx-mgmt",
+      "title": "Diagnosis and management of Lymphomatoid granulomatosis (EBV)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multiple lung nodules with cough and fever in an immunocompromised adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (respiratory failure, CNS involvement or high-grade histology)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: haemato-oncology review for high-grade lymphoma or CNS disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lung biopsy with EBV in situ hybridisation, CT chest, brain MRI if CNS signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is EBV-positive large B-cell angiocentric disease confirmed on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider granulomatosis with polyangiitis or mycobacterial infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct or reduce underlying immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Interferon-alfa for low-grade disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rituximab for CD20-positive lower-grade disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Rituximab with CHOP-like chemotherapy for high-grade disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Haemato-oncology management with repeat biopsy on change",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Grade-dependent; low-grade may regress, high-grade behaves as aggressive lymphoma",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

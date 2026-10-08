@@ -189,6 +189,16 @@
       "label": "US Pharmacist, ADA Standards of Care 2025 treatment updates",
       "url": "https://www.uspharmacist.com/article/diabetestreatment-updates",
       "kind": "web"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 241-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 315-1",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -595,6 +605,635 @@
         }
       ],
       "footnote": "Drug choice is individualised by cardiorenal disease, weight, hypoglycaemia risk, cost and preference (ADA 2025). No doses are listed because the opened sources gave none."
+    },
+    {
+      "id": "diabetes_mellitus-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Metabolic syndrome: any three risk factors",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Defining level"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal obesity, men (waist circumference)",
+          "cells": [
+            {
+              "text": ">102 cm (>40 in.)"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Abdominal obesity, women (waist circumference)",
+          "cells": [
+            {
+              "text": ">88 cm (>35 in.)"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Triglycerides",
+          "cells": [
+            {
+              "text": ">1.7 mmol/L (>150 mg/dL)"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "HDL cholesterol, men",
+          "cells": [
+            {
+              "text": "<1 mmol/L (<40 mg/dL)"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "HDL cholesterol, women",
+          "cells": [
+            {
+              "text": "<1.3 mmol/L (<50 mg/dL)"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Blood pressure",
+          "cells": [
+            {
+              "text": ">=130 / >=85 mmHg"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Fasting glucose",
+          "cells": [
+            {
+              "text": ">6.1 mmol/L (>110 mg/dL)"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "Footnotes a and b are not shown on the source page."
+    },
+    {
+      "id": "diabetes_mellitus-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "HLA markers associated with disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Marker",
+        "Gene",
+        "Strength of association"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankylosing spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "B*2702, B*2704, B*2705"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Reiter's syndrome",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Acute anterior uveitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Reactive arthritis (Yersinia, Salmonella, Shigella, Chlamydia)",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Psoriatic spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular",
+          "cells": [
+            {
+              "text": "DR8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular (second marker)",
+          "cells": [
+            {
+              "text": "DR5"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404, DRB1*0405"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Sjogren's syndrome",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, White patients",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, Japanese patients",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease)",
+          "cells": [
+            {
+              "text": "DQ2"
+            },
+            {
+              "text": "DQA1*0501"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease), second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DQB1*0201"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Chronic active hepatitis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Dermatitis herpetiformis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Psoriasis vulgaris",
+          "cells": [
+            {
+              "text": "Cw6"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Pemphigus vulgaris",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0402"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Pemphigus vulgaris, second marker",
+          "cells": [
+            {
+              "text": "DQ1"
+            },
+            {
+              "text": "DQB1*0503"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Bullous pemphigoid variant",
+          "cells": [
+            {
+              "text": "DQ7"
+            },
+            {
+              "text": "DQB1*0301"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "DQ8"
+            },
+            {
+              "text": "DQB1*0302"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, second marker",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, third marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, fourth marker",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "Negative association (protective), footnote a"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves')",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves'), second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Hyperthyroidism (Japanese patients)",
+          "cells": [
+            {
+              "text": "B35"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Adrenal insufficiency",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Myasthenia gravis, second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Multiple sclerosis",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DRB1*1501"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Multiple sclerosis, second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DRB5*0101"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Behcet's disease",
+          "cells": [
+            {
+              "text": "B51"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "B47"
+            },
+            {
+              "text": "21-OH (Cyp21B)"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Narcolepsy",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Goodpasture's syndrome (anti-GBM)",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Abacavir hypersensitivity",
+          "cells": [
+            {
+              "text": "B57"
+            },
+            {
+              "text": "B*5701"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c6"
+        }
+      ],
+      "footnote": "Table continues on the next page (adrenal insufficiency row onward). The printed footnote a for the negative association and the key for the number of plus signs are not shown on the pages."
     }
   ],
   "flowcharts": [

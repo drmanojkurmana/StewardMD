@@ -150,5 +150,323 @@
       "caption": "Overview comparison matrix for short qt syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ESC/AHA guidelines on ventricular arrhythmias and sudden cardiac death; Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "short_qt_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "Corrected QT interval and T-wave morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial ECGs",
+          "cells": [
+            {
+              "text": "Confirms a persistently short QT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory monitoring",
+          "cells": [
+            {
+              "text": "Atrial and ventricular arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte and drug review",
+          "cells": [
+            {
+              "text": "Excludes causes of QT shortening, then reassess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Structurally normal heart"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "Potassium and calcium channel variants; cascade screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "short_qt_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypercalcaemia",
+          "cells": [
+            {
+              "text": "Shortens the QT; reassess after correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digoxin effect",
+          "cells": [
+            {
+              "text": "Affects ST segment and QT; reassess after withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brugada syndrome",
+          "cells": [
+            {
+              "text": "Overlapping calcium channel variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "short_qt_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Implantable cardioverter defibrillator",
+          "cells": [
+            {
+              "text": "Mainstay after aborted arrest or high arrhythmic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quinidine or class Ia agent",
+          "cells": [
+            {
+              "text": "Prolongs repolarisation and QT, reducing ventricular arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte correction",
+          "cells": [
+            {
+              "text": "Avoid influences that shorten repolarisation further"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atrial fibrillation care",
+          "cells": [
+            {
+              "text": "Rhythm or rate control and anticoagulation; caution with conduction suppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG surveillance and device interrogation",
+          "cells": [
+            {
+              "text": "Guides therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Cascade ECG and genetic screening of first-degree relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist review",
+          "cells": [
+            {
+              "text": "Inherited-arrhythmia team after syncope or palpitations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "short_qt_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Short QT syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Short corrected QT interval on ECG with syncope, palpitations or family sudden death",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (aborted arrest, VF, unexplained syncope, young-onset AF)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency arrhythmia care; ICD assessment after aborted cardiac arrest",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeat ECGs, ambulatory monitor, echo, electrolytes, drug review, genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the short QT persistent after excluding electrolyte and drug causes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the cause (hypercalcaemia, digoxin) and repeat the ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "ICD for aborted arrest survivors or high-risk patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Quinidine to lengthen the QT where an ICD is not suitable or arrhythmia recurs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Manage atrial fibrillation with rate or rhythm control and anticoagulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cascade ECG and genetic screening; inherited-arrhythmia follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Risk of sudden arrhythmic death at any age; defibrillator protects high-risk patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

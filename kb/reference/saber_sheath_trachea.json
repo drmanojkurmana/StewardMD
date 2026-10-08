@@ -150,5 +150,229 @@
       "caption": "Overview comparison matrix for saber sheath trachea."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fishman's Pulmonary Diseases and Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "saber_sheath_trachea-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest CT with coronal and sagittal tracheal diameters",
+          "cells": [
+            {
+              "text": "Coronal narrowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function testing",
+          "cells": [
+            {
+              "text": "Associated obstructive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph, frontal view",
+          "cells": [
+            {
+              "text": "Coronal narrowing of the trachea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopy",
+          "cells": [
+            {
+              "text": "Where an intrinsic lesion is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "saber_sheath_trachea-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Optimise COPD with inhaled bronchodilators",
+          "cells": [
+            {
+              "text": "Long-acting muscarinic antagonists and beta-agonists; inhaled corticosteroids where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "Key modifiable factor in airflow obstruction and tracheal remodelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary rehabilitation and vaccination",
+          "cells": [
+            {
+              "text": "Influenza and pneumococcus, to reduce exacerbation-related decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt treatment of infective exacerbations",
+          "cells": [
+            {
+              "text": "Bronchodilators and antibiotics as indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "saber_sheath_trachea-dx-mgmt",
+      "title": "Diagnosis and management of saber sheath trachea",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic airflow obstruction with a narrowed trachea on imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new stridor, haemoptysis, rapidly progressive dyspnoea)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway assessment for stridor or a fixed stenosing lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest CT tracheal diameters, PFTs, chest radiograph, bronchoscopy if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CT show a reduced coronal tracheal diameter?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider post-intubation stenosis, tracheomalacia or relapsing polychondritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Optimise COPD with long-acting inhaled bronchodilators and inhaled steroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Smoking cessation support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pulmonary rehabilitation and influenza and pneumococcal vaccination",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Smoking cessation is the key modifiable factor",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

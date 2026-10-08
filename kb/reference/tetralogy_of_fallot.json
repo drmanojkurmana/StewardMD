@@ -150,5 +150,296 @@
       "caption": "Overview comparison matrix for tetralogy of fallot."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tetralogy_of_fallot-dx-mgmt",
+      "title": "Diagnosis and management of Tetralogy of Fallot",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tetralogy of Fallot: cyanosis, systolic murmur and tet spells",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: hypercyanotic spell with collapse, seizures, or acidosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency spell care: knee-to-chest, oxygen, sedation and a vasopressor",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography; chest radiograph; ECG; pulse oximetry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does echocardiography show the four features of tetralogy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider transposition, tricuspid atresia or pulmonary atresia with VSD",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical repair: VSD closure and relief of outflow obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prostaglandin infusion to keep the duct open in duct-dependent cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prophylactic beta-blockade to reduce spells while awaiting repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lifelong cardiology follow-up for pulmonary regurgitation and arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Pulmonary valve replacement for significant regurgitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Timely repair gives a generally good outlook; untreated disease carries high morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tetralogy_of_fallot-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Outflow tract, septal defect, aortic override and pulmonary artery anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Boot-shaped heart with reduced pulmonary vascularity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Right axis deviation and right ventricular hypertrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse oximetry",
+          "cells": [
+            {
+              "text": "Degree of cyanosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac catheterisation or CT or MR angiography",
+          "cells": [
+            {
+              "text": "Coronary or pulmonary artery anatomy when unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "22q11.2 deletion when associated features are present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tetralogy_of_fallot-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical repair",
+          "cells": [
+            {
+              "text": "Closure of the septal defect and relief of outflow obstruction; definitive, usually in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative shunt",
+          "cells": [
+            {
+              "text": "Systemic-to-pulmonary (Blalock-Taussig) shunt where repair is not yet possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prostaglandin infusion",
+          "cells": [
+            {
+              "text": "Duct-dependent presentation, until intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spell management",
+          "cells": [
+            {
+              "text": "Knee-to-chest position, oxygen, sedation, fluids, and phenylephrine or a beta-blocker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylactic beta-blockade",
+          "cells": [
+            {
+              "text": "Reduces infundibular spasm while awaiting repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong cardiology surveillance",
+          "cells": [
+            {
+              "text": "Pulmonary regurgitation, residual obstruction and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary valve replacement",
+          "cells": [
+            {
+              "text": "Significant pulmonary regurgitation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for hereditary nephrogenic diabetes insipidus (avpr2/aqp2)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Oxford Textbook of Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nephrogenic_diabetes_insipidus_hereditary-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Paired serum and urine osmolality with serum sodium",
+          "cells": [
+            {
+              "text": "Concentrating defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Water-deprivation test with vasopressin analogue",
+          "cells": [
+            {
+              "text": "Localises the defect to the collecting duct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Copeptin or vasopressin measurement",
+          "cells": [
+            {
+              "text": "Supports classification where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of hypercalcaemia, hypokalaemia and lithium",
+          "cells": [
+            {
+              "text": "Acquired causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Hydronephrosis or distended bladder from high urine output"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AVPR2 or AQP2 genetic testing",
+          "cells": [
+            {
+              "text": "X-linked or autosomal forms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nephrogenic_diabetes_insipidus_hereditary-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Central (neurogenic) diabetes insipidus",
+          "cells": [
+            {
+              "text": "Vasopressin replacement works here, not in the nephrogenic form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary polydipsia",
+          "cells": [
+            {
+              "text": "Osmolality and water deprivation testing separate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired nephrogenic diabetes insipidus",
+          "cells": [
+            {
+              "text": "From lithium or hypercalcaemia; reversible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-obstructive or tubulointerstitial disease",
+          "cells": [
+            {
+              "text": "Concentrating defect from structural renal disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nephrogenic_diabetes_insipidus_hereditary-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Unrestricted water access",
+          "cells": [
+            {
+              "text": "Frequent feeds in infants who cannot signal thirst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-solute diet with a thiazide diuretic",
+          "cells": [
+            {
+              "text": "Reduces urine volume"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amiloride or indometacin",
+          "cells": [
+            {
+              "text": "Augments the reduction in polyuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and neurodevelopment monitoring",
+          "cells": [
+            {
+              "text": "Serum sodium and osmolality followed closely"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nephrogenic_diabetes_insipidus_hereditary-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary nephrogenic diabetes insipidus (AVPR2/AQP2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant or child with polyuria and failure to thrive despite high vasopressin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe dehydration, lethargy or seizures, obstructive uropathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent rehydration; correct chronic hypernatraemia slowly",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Osmolality, sodium, water deprivation with vasopressin analogue, renal ultrasound, AVPR2",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Concentrating defect with an AVPR2 or AQP2 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude acquired causes first; consider central diabetes insipidus",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Guarantee unrestricted access to water with frequent feeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Low-solute diet with a thiazide diuretic",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Amiloride or indometacin to augment polyuria reduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor sodium, osmolality, growth and development",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early diagnosis preserves growth; repeated severe hypernatraemia can injure the brain",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

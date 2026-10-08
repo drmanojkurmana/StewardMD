@@ -150,5 +150,296 @@
       "caption": "Overview comparison matrix for ureaplasma urealyticum infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell / BASHH-CDC STI guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ureaplasma_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "NAAT or specialised culture of genital or urine specimens",
+          "cells": [
+            {
+              "text": "Species differentiation of Ureaplasma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NAAT for chlamydia and gonorrhoea",
+          "cells": [
+            {
+              "text": "Excludes established pathogens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microscopy of genital smears",
+          "cells": [
+            {
+              "text": "Urethritis or cervicitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycoplasma genitalium and Trichomonas testing",
+          "cells": [
+            {
+              "text": "Tested for in persistent urethritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ureaplasma_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chlamydia trachomatis",
+          "cells": [
+            {
+              "text": "Excluded by NAAT before attributing urethritis to Ureaplasma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycoplasma genitalium",
+          "cells": [
+            {
+              "text": "Tested for in persistent urethritis; not treated with beta-lactams"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichomonas vaginalis",
+          "cells": [
+            {
+              "text": "Tested for in persistent urethritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ureaplasma_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No testing or treatment of asymptomatic carriage",
+          "cells": [
+            {
+              "text": "Usually commensal colonisation rather than disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macrolide or tetracycline",
+          "cells": [
+            {
+              "text": "Azithromycin or doxycycline for genuine symptomatic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid beta-lactams",
+          "cells": [
+            {
+              "text": "Ineffective because the organism lacks a cell wall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat co-existing pathogens",
+          "cells": [
+            {
+              "text": "Chlamydia, gonorrhoea and Mycoplasma genitalium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Partner management",
+          "cells": [
+            {
+              "text": "Partner notification, contact treatment and full STI screen when sexually acquired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy and neonates",
+          "cells": [
+            {
+              "text": "Chorioamnionitis and preterm-labour risk; treat colonised preterm or very-low-birth-weight neonates"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ureaplasma_infection-dx-mgmt",
+      "title": "Diagnosis and management of Ureaplasma urealyticum infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Ureaplasma infection: symptomatic urethritis or cervicitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (preterm labour, chorioamnionitis or neonatal respiratory decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent obstetric or neonatal management of chorioamnionitis or pneumonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Species-level NAAT or culture, chlamydia and gonorrhoea NAAT, microscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are chlamydia, gonorrhoea and Mycoplasma genitalium excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the established pathogen found; do not treat asymptomatic carriage",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Azithromycin or doxycycline for symptomatic infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid beta-lactams, which are ineffective without a cell wall",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Partner notification, contact treatment and full STI screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manage chorioamnionitis or treat colonised preterm neonates as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Colonisation is common; treat genuine symptomatic infection and co-pathogens only",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

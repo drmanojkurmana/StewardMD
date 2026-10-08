@@ -167,5 +167,451 @@
       "caption": "Overview comparison matrix for nontyphoidal salmonellosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Nontyphoidal Salmonella Infections",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/gram-negative-bacilli/nontyphoidal-salmonella-infections"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 128-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "salmonellosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing nontyphoidal Salmonella infection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Incubation",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "6 to 48 h after contaminated food or water",
+              "range": [
+                6,
+                48
+              ]
+            },
+            {
+              "text": "Beef, poultry, eggs, dairy; inflammatory diarrhea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Course",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Diarrhea settles in 3 to 7 days, fever within 72 h",
+              "range": [
+                3,
+                7
+              ]
+            },
+            {
+              "text": "Stool may stay culture positive 4 to 5 weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool culture",
+          "cells": [
+            {
+              "text": "Confirms diagnosis and gives susceptibility"
+            },
+            {
+              "text": "Culture even after a positive PCR panel"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Prolonged or recurrent fever, high-risk host"
+            },
+            {
+              "text": "Positive in bacteremic and focal disease even if stool negative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-grade bacteremia",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Over 50% of 3 or more blood culture sets positive",
+              "op": ">",
+              "value": 50
+            },
+            {
+              "text": "{{hy:Suspect endovascular infection}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal infection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "5 to 10% of bacteremic patients",
+              "range": [
+                5,
+                10
+              ]
+            },
+            {
+              "text": "Bone, joint, meninges, aneurysm, urinary tract"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chronic carriage",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Under 1% of cases",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "Usually self-limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Echocardiography, CT or white-cell scan"
+            },
+            {
+              "text": "For persistent bacteremia or focal pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "salmonellosis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic NTS infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Campylobacter enteritis",
+          "cells": [
+            {
+              "text": "Poultry and raw milk; inflammatory diarrhea"
+            },
+            {
+              "text": "Stool culture or PCR"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Shigellosis",
+          "cells": [
+            {
+              "text": "Dysentery, low infective dose"
+            },
+            {
+              "text": "Stool culture"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Enterohemorrhagic E. coli",
+          "cells": [
+            {
+              "text": "Bloody diarrhea, little fever, HUS risk"
+            },
+            {
+              "text": "Shiga toxin testing"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Viral gastroenteritis (norovirus)",
+          "cells": [
+            {
+              "text": "Vomiting prominent, outbreaks"
+            },
+            {
+              "text": "Stool PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enteric fever (S. Typhi or Paratyphi)",
+          "cells": [
+            {
+              "text": "Prolonged fever, little diarrhea"
+            },
+            {
+              "text": "Blood culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute appendicitis",
+          "cells": [
+            {
+              "text": "NTS can cause pseudoappendicitis"
+            },
+            {
+              "text": "CT abdomen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Chronic course"
+            },
+            {
+              "text": "Colonoscopy and biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "salmonellosis-treatment",
+      "kind": "treatment",
+      "title": "Treating nontyphoidal salmonellosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral rehydration and fluids",
+          "cells": [
+            {
+              "text": "All gastroenteritis"
+            },
+            {
+              "text": "Avoid antimotility drugs in invasive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No antibiotics",
+          "cells": [
+            {
+              "text": "Uncomplicated gastroenteritis in healthy hosts"
+            },
+            {
+              "text": "{{hy:Antibiotics prolong carriage and raise relapse}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ciprofloxacin, azithromycin or ceftriaxone (TMP-SMX in children)",
+          "cells": [
+            {
+              "text": "Infants, elderly nursing home residents, hemoglobinopathy, HIV or immunosuppression"
+            },
+            {
+              "text": "3 to 5 days if not immunocompromised; check ciprofloxacin susceptibility"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prolonged therapy",
+          "cells": [
+            {
+              "text": "Sustained bacteremia"
+            },
+            {
+              "text": "Generally 4 to 6 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drainage plus 4 weeks or more of antibiotics",
+          "cells": [
+            {
+              "text": "Abscess"
+            },
+            {
+              "text": "Count from surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgery plus prolonged antibiotics",
+          "cells": [
+            {
+              "text": "Mycotic aneurysm, endocarditis, bone or joint infection"
+            },
+            {
+              "text": "Repair or resect infected aneurysm"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ciprofloxacin for 1 month",
+          "cells": [
+            {
+              "text": "Carrier who is a food handler or health worker"
+            },
+            {
+              "text": "Confirm clearance with stool cultures"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "salmonellosis-dx-mgmt",
+      "title": "Diagnosis and management of nontyphoidal salmonellosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever and diarrhea 6 to 48 h after suspect food",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Stool culture; oral rehydration",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "High-risk host or systemic toxicity?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Supportive care only; no antibiotics",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Blood cultures; start ciprofloxacin, azithromycin or ceftriaxone",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Persistent or high-grade bacteremia, or focal pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Echo, CT or white-cell scan for endovascular or focal infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Drain or repair focus; 4 to 6 weeks of antibiotics",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Complete 3 to 5 days (longer if immunocompromised)",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

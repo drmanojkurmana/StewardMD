@@ -154,5 +154,296 @@
       "caption": "Overview comparison matrix for salivary gland tumor."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / DeVita's Cancer: Principles & Practice of Oncology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "salivary_gland_tumor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ultrasound with guided FNA cytology",
+          "cells": [
+            {
+              "text": "First-line imaging of the lump, with cytology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or CT",
+          "cells": [
+            {
+              "text": "Tumour extent, deep lobe involvement, perineural or nodal spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Facial nerve assessment",
+          "cells": [
+            {
+              "text": "Nerve function in parotid lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology of excised specimen",
+          "cells": [
+            {
+              "text": "Tumour type, grade and margins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging imaging",
+          "cells": [
+            {
+              "text": "For high-grade or clinically malignant tumours"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "salivary_gland_tumor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Primary treatment; parotidectomy preserving the facial nerve unless directly invaded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neck dissection",
+          "cells": [
+            {
+              "text": "Therapeutic if node positive; elective considered for high-grade or locally advanced tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adenoid cystic carcinoma",
+          "cells": [
+            {
+              "text": "Surgery plus radiotherapy regardless of grade because of perineural spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy",
+          "cells": [
+            {
+              "text": "High grade, positive margins, perineural invasion or nodal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Definitive radiotherapy",
+          "cells": [
+            {
+              "text": "When surgery is not feasible; concurrent platinum chemotherapy considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted therapy",
+          "cells": [
+            {
+              "text": "HER2 antibody therapy with a taxane; NTRK inhibitor for NTRK fusion positive secretory carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent or metastatic disease",
+          "cells": [
+            {
+              "text": "No standard therapy; prioritise trials and molecular testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Follows head and neck squamous cell schedules; multidisciplinary team care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "salivary_gland_tumor-dx-mgmt",
+      "title": "Diagnosis and management of Salivary gland tumor",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Salivary gland lump, most often parotid",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Facial nerve weakness, fixed or painful rapid growth, skin infiltration or nodes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent head and neck multidisciplinary referral for suspected malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound with FNA; MRI or CT for extent; assess facial nerve function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do cytology and imaging show a malignant tumour?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Benign lesion such as pleomorphic adenoma: complete excision, never enucleation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgery: parotidectomy preserving facial nerve unless invaded",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Neck dissection if node positive; elective for high grade",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adjuvant radiotherapy for high grade, positive margins or perineural invasion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Adenoid cystic carcinoma: add radiotherapy regardless of grade",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Recurrent or metastatic: trial enrolment, test NTRK and HER2",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Outcome depends on grade, stage and histology; benign tumours do well after excision",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,296 @@
       "caption": "Overview comparison matrix for monofixation syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Von Noorden's Binocular Vision and Ocular Motility",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "monofixation_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cover/uncover and alternate prism cover test",
+          "cells": [
+            {
+              "text": "Detects and quantifies the small deviation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "4-prism-dioptre base-out test",
+          "cells": [
+            {
+              "text": "Shows the central suppression scotoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Worth four-dot test",
+          "cells": [
+            {
+              "text": "Distinguishes peripheral fusion from central suppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stereoacuity (Titmus or TNO)",
+          "cells": [
+            {
+              "text": "Gross but subnormal stereopsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual acuity in each eye",
+          "cells": [
+            {
+              "text": "Detects amblyopia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "monofixation_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Orthotropia with normal binocular single vision",
+          "cells": [
+            {
+              "text": "No central suppression scotoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intermittent exotropia or esotropia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia without a manifest deviation",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "monofixation_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Optical correction",
+          "cells": [
+            {
+              "text": "Spectacles or contact lenses for underlying anisometropia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia treatment",
+          "cells": [
+            {
+              "text": "Occlusion or penalisation with acuity monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Stable, often favourable sensory state; many need no further treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prism or strabismus surgery",
+          "cells": [
+            {
+              "text": "Only if the deviation decompensates into larger-angle strabismus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoptic monitoring",
+          "cells": [
+            {
+              "text": "Deviation and stereoacuity, to detect decompensation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "monofixation_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Monofixation syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Patient with microtropia, gross stereopsis and possible anisometropia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "New or increasing deviation, new diplopia, dense amblyopia or macular lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent orthoptic and ophthalmic review for decompensation or macular pathology",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Prism cover test, 4-dioptre base-out test, Worth four-dot, stereoacuity, refraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Small deviation with central suppression and peripheral fusion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider orthotropia, intermittent exotropia, amblyopia without tropia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct anisometropia with spectacles or contact lenses",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat amblyopia with occlusion or penalisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reassure; periodic orthoptic monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prism or surgery only if decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Stable and often favourable; most remain comfortable without surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

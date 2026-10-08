@@ -151,5 +151,321 @@
       "caption": "Overview comparison matrix for pulmonary artery sling."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pulmonary_artery_sling-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT angiography of the thorax",
+          "cells": [
+            {
+              "text": "Anomalous left pulmonary artery origin and airway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR angiography",
+          "cells": [
+            {
+              "text": "Vascular anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Anomalous origin and associated cardiac anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexible and rigid bronchoscopy",
+          "cells": [
+            {
+              "text": "Complete rings and stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast oesophagogram",
+          "cells": [
+            {
+              "text": "Anterior oesophageal indentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Asymmetric aeration, low right hilum and air trapping"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_artery_sling-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete vascular ring (double aortic arch)",
+          "cells": [
+            {
+              "text": "Complete vascular ring"
+            },
+            {
+              "text": "CT angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital tracheal stenosis without a sling",
+          "cells": [
+            {
+              "text": "Tracheal stenosis without sling"
+            },
+            {
+              "text": "Bronchoscopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_artery_sling-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical division",
+          "cells": [
+            {
+              "text": "Division and re-implantation of the anomalous left pulmonary artery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tracheal reconstruction",
+          "cells": [
+            {
+              "text": "Concurrent slide tracheoplasty for associated long-segment stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway stabilisation",
+          "cells": [
+            {
+              "text": "Respiratory support for the compromised infant before definitive repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopic assessment",
+          "cells": [
+            {
+              "text": "Trachea for complete rings and the level and length of stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anatomic definition",
+          "cells": [
+            {
+              "text": "Echocardiography and cross-sectional angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative surveillance",
+          "cells": [
+            {
+              "text": "Airway review for residual stenosis, granulation or restenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Cardiothoracic, airway and paediatric intensive care management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pulmonary_artery_sling-dx-mgmt",
+      "title": "Diagnosis and management of pulmonary artery sling",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pulmonary artery sling: infant with stridor and air trapping",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe stridor, apnoeic or cyanotic spells, or recurrent lobar pneumonia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent airway and respiratory support for apnoea or cyanosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CTA thorax; MRA; echo; bronchoscopy for rings; oesophagogram; chest X-ray",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the anomalous left pulmonary artery confirmed on CTA or echo?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider vascular ring, innominate compression or tracheomalacia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Airway stabilisation and respiratory support before definitive repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical division and re-implantation of the left pulmonary artery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Concurrent slide tracheoplasty for long-segment stenosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Postoperative airway surveillance for residual stenosis or restenosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary cardiothoracic, airway and paediatric intensive care follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

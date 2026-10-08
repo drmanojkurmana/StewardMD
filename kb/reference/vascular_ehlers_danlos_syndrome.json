@@ -151,5 +151,258 @@
       "caption": "Overview comparison matrix for vascular ehlers-danlos syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Connective tissue disorder references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vascular_ehlers_danlos_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "COL3A1 sequencing with deletion and duplication analysis",
+          "cells": [
+            {
+              "text": "Confirms the type III collagen variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermal fibroblast culture with type III collagen analysis",
+          "cells": [
+            {
+              "text": "Biochemical defect in type III collagen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler ultrasound and CT or MR angiography",
+          "cells": [
+            {
+              "text": "Non-invasive vascular imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline and surveillance echocardiography",
+          "cells": [
+            {
+              "text": "Aortic and cardiac involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vascular_ehlers_danlos_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Loeys-Dietz syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marfan syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Classical Ehlers-Danlos syndrome",
+          "cells": [
+            {
+              "text": "Mild skin and joint findings; vascular rupture is not its leading risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vascular_ehlers_danlos_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Celiprolol",
+          "cells": [
+            {
+              "text": "Reduces haemodynamic wall stress and the risk of arterial rupture and dissection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure control",
+          "cells": [
+            {
+              "text": "Strict control; avoid heavy lifting, straining and contact sports"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-invasive vascular surveillance",
+          "cells": [
+            {
+              "text": "Doppler ultrasound and CT or MR angiography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vascular_ehlers_danlos_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Vascular Ehlers-Danlos syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vascular Ehlers-Danlos: thin skin, bruising and arterial or organ events",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute chest, abdominal or flank pain, or unexplained shock)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent imaging for arterial or organ rupture; avoid invasive arteriography",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "COL3A1 testing, fibroblast collagen analysis, Doppler, CT or MR angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does COL3A1 testing confirm a pathogenic variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Loeys-Dietz, Marfan or classical Ehlers-Danlos syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Celiprolol to reduce haemodynamic wall stress and rupture risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Strict blood pressure control; avoid heavy lifting and straining",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Non-invasive vascular surveillance with Doppler and CT or MR angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Arterial rupture or dissection is the leading cause of premature death",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

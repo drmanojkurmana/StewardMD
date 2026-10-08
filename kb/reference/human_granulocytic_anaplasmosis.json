@@ -148,5 +148,276 @@
       "caption": "Overview comparison matrix for human granulocytic anaplasmosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "human_granulocytic_anaplasmosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Peripheral blood film",
+          "cells": [
+            {
+              "text": "Intraleukocyte morulae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR of whole blood for Anaplasma phagocytophilum",
+          "cells": [
+            {
+              "text": "Anaplasma DNA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indirect immunofluorescence serology on paired samples",
+          "cells": [
+            {
+              "text": "Antibody rise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Leucopenia and thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver enzymes",
+          "cells": [
+            {
+              "text": "Hepatic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Co-infection testing for Borrelia and Babesia",
+          "cells": [
+            {
+              "text": "Co-infection, where relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "human_granulocytic_anaplasmosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empirical doxycycline",
+          "cells": [
+            {
+              "text": "Started promptly on clinical suspicion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doxycycline in children and pregnancy",
+          "cells": [
+            {
+              "text": "Used despite age, given the severity of the infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Antipyretics, fluids and monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Co-infection",
+          "cells": [
+            {
+              "text": "Evaluated and treated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe, older or immunosuppressed patients",
+          "cells": [
+            {
+              "text": "Closer monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tick-bite prevention",
+          "cells": [
+            {
+              "text": "Prompt tick removal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "human_granulocytic_anaplasmosis-dx-mgmt",
+      "title": "Diagnosis and management of Human granulocytic anaplasmosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tick-exposed febrile illness with leucopenia and thrombocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Respiratory distress, shock, neurological decline, or no response to doxycycline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: ICU care for respiratory failure or shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood film for morulae; Anaplasma PCR; paired serology; FBC; liver enzymes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is Anaplasma phagocytophilum confirmed by PCR or rising serology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider human monocytic ehrlichiosis, rickettsiosis, babesiosis or leptospirosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Empirical doxycycline on clinical suspicion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Doxycycline in children and pregnancy, given the severity of infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care with antipyretics and fluids",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treatment of co-infection with other tick-borne agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Defervescence on doxycycline; tick prevention advised",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

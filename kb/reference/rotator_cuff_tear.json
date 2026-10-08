@@ -147,5 +147,231 @@
       "caption": "Overview comparison matrix for rotator cuff tear."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon's System of Orthopaedics and Fractures",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rotator_cuff_tear-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ultrasound of the shoulder",
+          "cells": [
+            {
+              "text": "Cuff integrity assessed dynamically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Tear size, retraction and muscle quality (fatty atrophy)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Acromial morphology, humeral head position and arthropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rotator_cuff_tear-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Structured physiotherapy",
+          "cells": [
+            {
+              "text": "Cuff and scapular strengthening for small or degenerative tears"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and NSAIDs",
+          "cells": [
+            {
+              "text": "Activity modification; consider subacromial corticosteroid injection for pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early surgical repair",
+          "cells": [
+            {
+              "text": "Acute traumatic and large symptomatic tears, before retraction and fatty degeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tendon transfer or superior capsular reconstruction",
+          "cells": [
+            {
+              "text": "Irreparable tears; reverse total shoulder arthroplasty is an option"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rotator_cuff_tear-dx-mgmt",
+      "title": "Diagnosis and management of Rotator cuff tear",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Shoulder pain and weakness with suspected rotator cuff tear",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute loss of active movement after trauma, signs of infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent assessment for acute repairable tear or septic joint",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound and MRI of the cuff, radiographs of the acromion and humeral head",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a full or partial cuff tear confirmed on ultrasound or MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider subacromial impingement, frozen shoulder or cervical radiculopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy with cuff and scapular strengthening for small tears",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Analgesia, NSAIDs and possible subacromial corticosteroid injection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early surgical repair for acute or large symptomatic tears",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Tendon transfer, capsular reconstruction or reverse arthroplasty if irreparable",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surgery favoured before retraction and fatty muscle degeneration develop",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

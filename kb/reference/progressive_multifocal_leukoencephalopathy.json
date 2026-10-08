@@ -148,5 +148,285 @@
       "caption": "Overview comparison matrix for progressive multifocal leukoencephalopathy (jc virus)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "progressive_multifocal_leukoencephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain with and without gadolinium",
+          "cells": [
+            {
+              "text": "White-matter lesions and enhancement suggesting IRIS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF JC virus DNA PCR",
+          "cells": [
+            {
+              "text": "JC virus DNA, ideally quantitative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing with CD4 count and viral load",
+          "cells": [
+            {
+              "text": "HIV and immune status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of immunosuppressive and biological therapy",
+          "cells": [
+            {
+              "text": "Cumulative natalizumab exposure and anti-JCV antibody index"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain biopsy with JC virus immunohistochemistry",
+          "cells": [
+            {
+              "text": "JC virus when CSF is negative but suspicion remains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematological or transplant immune status",
+          "cells": [
+            {
+              "text": "Underlying immune deficit"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_multifocal_leukoencephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Restore cell-mediated immunity",
+          "cells": [
+            {
+              "text": "Start antiretroviral therapy in HIV, or withdraw the offending immunosuppressant such as natalizumab"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No specific anti-JC-virus drug",
+          "cells": [
+            {
+              "text": "Avoid unnecessary additional immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PML-IRIS",
+          "cells": [
+            {
+              "text": "Corticosteroids for symptomatic inflammatory deterioration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational and speech therapy; antiseizure treatment if seizures occur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Clinical and MRI review for progression and IRIS; CSF JC virus DNA to follow the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying condition",
+          "cells": [
+            {
+              "text": "HIV, haematological malignancy or transplant immunosuppression, with relevant specialists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neurology, infectious diseases and palliative care given the guarded prognosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "progressive_multifocal_leukoencephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of Progressive multifocal leukoencephalopathy (JC virus)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PML: rapidly progressive focal deficit in an immunocompromised patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Brainstem signs, seizures, cognitive collapse, or enhancement after immune recovery?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology and infectious diseases review; consider PML-IRIS",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI with gadolinium; CSF JC virus DNA PCR; HIV, CD4 and viral load; drug history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is JC virus DNA detected in CSF, or is brain biopsy diagnostic?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cerebral toxoplasmosis, CNS lymphoma or viral encephalitis; biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Restore immunity: start antiretroviral therapy or withdraw the immunosuppressant",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "No proven anti-JC-virus drug; avoid unnecessary immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids for symptomatic PML-IRIS",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial clinical and MRI monitoring with CSF JC virus DNA",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary neurology, infectious diseases and palliative care involvement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

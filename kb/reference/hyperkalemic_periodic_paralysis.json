@@ -153,5 +153,341 @@
       "caption": "Overview comparison matrix for hyperkalaemic periodic paralysis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyperkalemic_periodic_paralysis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum potassium and ECG during a spontaneous attack",
+          "cells": [
+            {
+              "text": "Raised or high-normal potassium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography between or during attacks",
+          "cells": [
+            {
+              "text": "Myotonic discharges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short and prolonged exercise electromyography",
+          "cells": [
+            {
+              "text": "Characteristic compound muscle action potential changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and adrenal assessment",
+          "cells": [
+            {
+              "text": "Excludes secondary hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SCN4A genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy",
+          "cells": [
+            {
+              "text": "Fixed myopathy or diagnostic uncertainty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperkalemic_periodic_paralysis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypokalaemic periodic paralysis",
+          "cells": [
+            {
+              "text": "Low potassium during attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paramyotonia congenita",
+          "cells": [
+            {
+              "text": "Cold-induced stiffness and potassium-aggravated myotonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Andersen-Tawil syndrome",
+          "cells": [
+            {
+              "text": "Cardiac arrhythmia and dysmorphic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary hyperkalaemia",
+          "cells": [
+            {
+              "text": "Renal failure, adrenal insufficiency or medication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Guillain-Barre syndrome",
+          "cells": [
+            {
+              "text": "Reflex loss and rising CSF protein"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperkalemic_periodic_paralysis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Carbohydrate ingestion or mild activity",
+          "cells": [
+            {
+              "text": "Terminates early attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhaled beta-agonist",
+          "cells": [
+            {
+              "text": "Shifts potassium intracellularly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acetazolamide or a thiazide diuretic",
+          "cells": [
+            {
+              "text": "Prevents recurrent attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid provoking factors",
+          "cells": [
+            {
+              "text": "Fasting, cold, potassium-rich food and rest after exertion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium-sparing, carbohydrate-rich diet",
+          "cells": [
+            {
+              "text": "Regular meals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sodium-channel-blocking agent",
+          "cells": [
+            {
+              "text": "Symptomatic myotonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium and ECG monitoring",
+          "cells": [
+            {
+              "text": "Watch for progressive fixed proximal myopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyperkalemic_periodic_paralysis-dx-mgmt",
+      "title": "Diagnosis and management of Hyperkalaemic periodic paralysis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent flaccid weakness with raised or high-normal potassium during attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Respiratory compromise, prolonged severe weakness, arrhythmia, or fixed myopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for respiratory compromise or arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Potassium and ECG in attack; EMG; exercise EMG; renal and adrenal tests; SCN4A",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are SCN4A variants found with secondary causes of hyperkalaemia excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hypokalaemic PP, paramyotonia, Andersen-Tawil or secondary hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Carbohydrate or mild activity to end early attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Inhaled beta-agonist to shift potassium into cells",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Acetazolamide or thiazide diuretic to prevent attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dietary and trigger avoidance with neuromuscular follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Attacks reduced; potassium and myopathy monitored",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

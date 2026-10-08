@@ -149,5 +149,344 @@
       "caption": "Overview comparison matrix for page kidney."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "page_kidney-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT or MRI of the kidneys",
+          "cells": [
+            {
+              "text": "Compressing collection and compressed parenchyma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound with Doppler",
+          "cells": [
+            {
+              "text": "Renal perfusion and the collection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma renin activity and aldosterone",
+          "cells": [
+            {
+              "text": "Renin-angiotensin activation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and electrolytes",
+          "cells": [
+            {
+              "text": "Renal impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure profiling",
+          "cells": [
+            {
+              "text": "Ambulatory monitoring of hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen",
+          "cells": [
+            {
+              "text": "Anticoagulation or spontaneous haematoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "page_kidney-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Renovascular hypertension",
+          "cells": [
+            {
+              "text": "Arterial stenosis rather than external compression of the parenchyma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other secondary hypertension (phaeochromocytoma, primary aldosteronism)",
+          "cells": [
+            {
+              "text": "Endocrine causes; cross-sectional imaging shows compression here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal malignancy",
+          "cells": [
+            {
+              "text": "A malignant compressing lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "page_kidney-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pharmacological control",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "ACE inhibitor or angiotensin-receptor blocker to target the activated pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative care of acute haematoma",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Reabsorption with blood pressure control and analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Reverse or withhold where a haematoma is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drainage or decompression",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Evacuation, drainage or capsulectomy when hypertension is severe or persistent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrectomy",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Only for a non-functioning kidney with refractory hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Blood pressure, renal function and serial cross-sectional imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "page_kidney-dx-mgmt",
+      "title": "Diagnosis and management of Page kidney",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Resistant hypertension after trauma, biopsy or lithotripsy with a renal collection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (accelerated hypertension, expanding haematoma or falling renal function)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent drainage or decompression for an expanding haematoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT or MRI of kidneys, renal Doppler, renin and aldosterone, renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the parenchyma compressed by a collection on cross-sectional imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider renovascular hypertension, endocrine hypertension or renal malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "ACE inhibitor or angiotensin-receptor blocker to target the renin-angiotensin pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Conservative care of acute subcapsular haematoma, with blood pressure control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reverse or withhold anticoagulation where a haematoma is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Drainage, evacuation or decapsulation when hypertension is severe or persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Nephrectomy only for a non-functioning kidney with refractory hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Often good; hypertension resolves as haematoma reabsorbs or is drained",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

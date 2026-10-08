@@ -150,5 +150,323 @@
       "caption": "Overview comparison matrix for spinal muscular atrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinal_muscular_atrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "SMN1 genetic testing with SMN2 copy number",
+          "cells": [
+            {
+              "text": "Biallelic SMN1 loss; SMN2 copies inform prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Newborn screening result",
+          "cells": [
+            {
+              "text": "Presymptomatic diagnosis, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory and swallowing assessment",
+          "cells": [
+            {
+              "text": "Respiratory and bulbar risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase",
+          "cells": [
+            {
+              "text": "Usually normal or mildly raised, helping separate it from dystrophies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EMG and nerve conduction studies",
+          "cells": [
+            {
+              "text": "If genetic testing is inconclusive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional and growth assessment",
+          "cells": [
+            {
+              "text": "Feeding and growth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_muscular_atrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital myopathies",
+          "cells": [
+            {
+              "text": "Hypotonia from muscle disease; creatine kinase helps separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prader-Willi syndrome and other central causes of hypotonia",
+          "cells": [
+            {
+              "text": "Central hypotonia; the lower motor neuron pattern is missed if assumed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_muscular_atrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "SMN-directed therapy",
+          "cells": [
+            {
+              "text": "Nusinersen, started as early as possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Presymptomatic treatment",
+          "cells": [
+            {
+              "text": "Start before irreversible anterior horn motor neuron loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory care",
+          "cells": [
+            {
+              "text": "Non-invasive ventilation, airway clearance and cough assist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and swallowing",
+          "cells": [
+            {
+              "text": "Gastrostomy where bulbar weakness threatens aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Musculoskeletal care",
+          "cells": [
+            {
+              "text": "Physiotherapy, orthoses, and monitoring of scoliosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neurology, respiratory, orthopaedics and dietetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standardised motor scales",
+          "cells": [
+            {
+              "text": "Track response to disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "SMN2 copy-number prognosis; carrier and family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinal_muscular_atrophy-dx-mgmt",
+      "title": "Diagnosis and management of Spinal Muscular Atrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with hypotonia, poor head control and weak cry: suspected SMA",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (respiratory failure, unsafe swallowing, rapid weakness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ventilatory support and airway clearance for respiratory failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SMN1 testing with SMN2 copy number; respiratory and swallowing assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is biallelic SMN1 loss confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital myopathy or central hypotonia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Start nusinersen as early as possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Non-invasive ventilation, airway clearance and cough assist",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Gastrostomy where bulbar weakness threatens aspiration",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, orthoses and scoliosis monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Disease-modifying therapy has changed the outlook; respiratory risk remains",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

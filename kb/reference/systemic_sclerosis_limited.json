@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for limited cutaneous systemic sclerosis (crest)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kelley & Firestein's Textbook of Rheumatology / EULAR systemic sclerosis guidance",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "systemic_sclerosis_limited-dx-mgmt",
+      "title": "Diagnosis and management of Limited cutaneous systemic sclerosis (CREST)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected limited systemic sclerosis (CREST): distal skin thickening with Raynaud",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive breathlessness, critical digital ischaemia, or aspiration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiopulmonary review; right heart catheterisation if PAH is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ANA with anticentromere; capillaroscopy; echocardiography; lung function with DLCO",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does echocardiography or right heart catheterisation show pulmonary hypertension?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary Raynaud, diffuse disease or mixed connective tissue disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Vasodilators for Raynaud phenomenon and digital ulcers",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Targeted pulmonary vasodilators for pulmonary arterial hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Proton pump inhibitors and prokinetics for dysmotility",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Regular echocardiography and lung function surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Wound care and management of calcinosis and digital ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Indolent course; PAH worsens outcome, so early detection improves prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "systemic_sclerosis_limited-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ANA with anticentromere and ENA profiling",
+          "cells": [
+            {
+              "text": "Anticentromere antibodies, the characteristic serological marker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nailfold capillaroscopy",
+          "cells": [
+            {
+              "text": "Scleroderma-pattern microvascular change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Pulmonary arterial hypertension screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests with diffusing capacity",
+          "cells": [
+            {
+              "text": "Vascular or interstitial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right heart catheterisation",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension, when non-invasive screening suggests it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "systemic_sclerosis_limited-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffuse cutaneous systemic sclerosis",
+          "cells": [
+            {
+              "text": "Skin thickening is confined distal to the elbows and knees in the limited form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary Raynaud phenomenon",
+          "cells": [
+            {
+              "text": "Longstanding Raynaud should prompt a search for evolving systemic sclerosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "systemic_sclerosis_limited-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Vasodilators for Raynaud phenomenon and digital ulcers",
+          "cells": [
+            {
+              "text": "Calcium channel blockers, phosphodiesterase-5 inhibitors, endothelin receptor antagonists or prostacyclin analogues"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted pulmonary vasodilators",
+          "cells": [
+            {
+              "text": "Pulmonary arterial hypertension, the leading disease-specific cause of late death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proton pump inhibitors and prokinetics",
+          "cells": [
+            {
+              "text": "Oesophageal dysmotility and reflux"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiographic and lung function surveillance",
+          "cells": [
+            {
+              "text": "Detects pulmonary arterial hypertension before it becomes symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care and calcinosis management",
+          "cells": [
+            {
+              "text": "Ischaemic ulcers, calcinosis and telangiectasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACE inhibitor if renal crisis occurs",
+          "cells": [
+            {
+              "text": "Uncommon in the limited subset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Rheumatology, respiratory and cardiology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

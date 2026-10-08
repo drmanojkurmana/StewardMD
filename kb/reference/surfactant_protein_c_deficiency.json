@@ -145,5 +145,336 @@
       "caption": "Overview comparison matrix for surfactant protein c deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Respiratory and genetic references",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "surfactant_protein_c_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Surfactant protein C deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected SFTPC disease: interstitial lung disease at any age",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapidly progressive respiratory failure or severe neonatal disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent specialist care for severe neonatal or rapidly progressive respiratory failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SFTPC genetic testing; high-resolution CT; lung biopsy if unclear",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does SFTPC testing identify a pathogenic variant matching the imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other childhood or adult interstitial lung diseases; re-evaluate",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Trial corticosteroids, sometimes with hydroxychloroquine; evidence is limited",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oxygen and supportive care for chronic interstitial lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunisation and prompt treatment of respiratory infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial pulmonary function tests and high-resolution CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lung transplantation for progressive end-stage fibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Family screening for dominant inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Course is variable: some stabilise, others progress to fibrosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "surfactant_protein_c_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Genetic testing for SFTPC mutations",
+          "cells": [
+            {
+              "text": "Pathogenic SFTPC variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT of the chest",
+          "cells": [
+            {
+              "text": "Diffuse interstitial change and ground-glass opacity; later cysts or fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung biopsy",
+          "cells": [
+            {
+              "text": "Diagnosis, when unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function testing",
+          "cells": [
+            {
+              "text": "Lung function in older children and adults"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening",
+          "cells": [
+            {
+              "text": "Relatives, given dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "surfactant_protein_c_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Surfactant protein B deficiency",
+          "cells": [
+            {
+              "text": "Recessive; SFTPC disease is dominant-negative, so one abnormal allele can cause it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adult idiopathic pulmonary fibrosis",
+          "cells": [
+            {
+              "text": "Adult interstitial lung disease can be a genetic surfactant disorder; do not assume it is not"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family labelled as having idiopathic fibrosis",
+          "cells": [
+            {
+              "text": "Familial pattern may reflect an SFTPC mutation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "surfactant_protein_c_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empirical anti-inflammatory therapy",
+          "cells": [
+            {
+              "text": "Systemic corticosteroids, sometimes with hydroxychloroquine; evidence is limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Supplemental oxygen for chronic interstitial lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prevention",
+          "cells": [
+            {
+              "text": "Routine, influenza and pneumococcal immunisation; prompt treatment of respiratory infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial pulmonary function testing and high-resolution CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung transplantation",
+          "cells": [
+            {
+              "text": "Progressive end-stage fibrotic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Paediatric or adult interstitial lung disease service"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family assessment",
+          "cells": [
+            {
+              "text": "Autosomal dominant with de novo cases and variable expression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

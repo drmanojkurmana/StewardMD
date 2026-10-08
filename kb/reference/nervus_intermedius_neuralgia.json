@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for nervus intermedius neuralgia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nervus_intermedius_neuralgia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Otoscopy and microscopy",
+          "cells": [
+            {
+              "text": "Excludes external and middle ear disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the internal auditory meatus and cerebellopontine angle",
+          "cells": [
+            {
+              "text": "Facial nerve and posterior fossa lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR angiography",
+          "cells": [
+            {
+              "text": "Compressive vascular loop"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testing the external auditory canal for a trigger zone",
+          "cells": [
+            {
+              "text": "Characteristic trigger in the posterior canal wall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of the pharynx and larynx",
+          "cells": [
+            {
+              "text": "Referred otalgia from a head and neck malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nervus_intermedius_neuralgia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Geniculate neuralgia",
+          "cells": [
+            {
+              "text": "Similar facial nerve pain pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glossopharyngeal neuralgia",
+          "cells": [
+            {
+              "text": "Pain from the throat and tonsil region"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigeminal neuralgia",
+          "cells": [
+            {
+              "text": "Facial pain in the trigeminal territory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ramsay Hunt syndrome",
+          "cells": [
+            {
+              "text": "Auricular vesicles and facial weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebellopontine angle tumour",
+          "cells": [
+            {
+              "text": "Mass on imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nervus_intermedius_neuralgia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Carbamazepine or oxcarbazepine",
+          "cells": [
+            {
+              "text": "First-line anticonvulsant to suppress paroxysms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gabapentin, pregabalin or baclofen",
+          "cells": [
+            {
+              "text": "Added or substituted if response is inadequate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiviral therapy for herpetic origin",
+          "cells": [
+            {
+              "text": "Where varicella-zoster or Ramsay Hunt is identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical decompression or sectioning",
+          "cells": [
+            {
+              "text": "Selected refractory cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nervus_intermedius_neuralgia-dx-mgmt",
+      "title": "Diagnosis and management of Nervus intermedius neuralgia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Brief severe deep ear canal pain with a trigger zone in a patient with a normal ear",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (vesicles, facial weakness, posterior fossa mass, cranial neuropathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Antiviral treatment if herpes zoster; urgent imaging if a mass is seen",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Otoscopy, MRI of internal auditory meatus, MR angiography, trigger zone and pharynx",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Paroxysmal deep ear pain with trigger zone and no ear or posterior fossa lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider geniculate or glossopharyngeal neuralgia, or referred pain; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Carbamazepine or oxcarbazepine as first-line treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add gabapentin, pregabalin or baclofen if response is inadequate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiviral therapy when herpetic origin is identified",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical decompression or sectioning for refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign but distressing; many respond to anticonvulsants, and surgery helps selected cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

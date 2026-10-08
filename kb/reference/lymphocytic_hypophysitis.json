@@ -151,5 +151,325 @@
       "caption": "Overview comparison matrix for lymphocytic hypophysitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lymphocytic_hypophysitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the pituitary and stalk",
+          "cells": [
+            {
+              "text": "Symmetrical enlargement with stalk thickening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full anterior pituitary hormone profile with cortisol",
+          "cells": [
+            {
+              "text": "Hormone loss, often corticotroph and thyrotroph"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paired plasma and urine osmolality",
+          "cells": [
+            {
+              "text": "Diabetes insipidus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolactin",
+          "cells": [
+            {
+              "text": "Mildly elevated or reduced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of immunotherapy exposure",
+          "cells": [
+            {
+              "text": "Checkpoint-inhibitor trigger"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphocytic_hypophysitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-functioning pituitary adenoma",
+          "cells": [
+            {
+              "text": "Diabetes insipidus is unusual in adenomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniopharyngioma",
+          "cells": [
+            {
+              "text": "Sellar mass with a different course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Granulomatous hypophysitis (sarcoidosis)",
+          "cells": [
+            {
+              "text": "Systemic granulomatous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgG4-related hypophysitis",
+          "cells": [
+            {
+              "text": "Immune profile and systemic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphocytic_hypophysitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Glucocorticoids first",
+          "cells": [
+            {
+              "text": "Give before thyroid hormone to avoid adrenal crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other hormone replacement",
+          "cells": [
+            {
+              "text": "Thyroid hormone, sex steroids and growth hormone as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desmopressin",
+          "cells": [
+            {
+              "text": "Cranial diabetes insipidus from posterior or stalk involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-dose glucocorticoids",
+          "cells": [
+            {
+              "text": "Headache or visual compromise from gland enlargement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger withdrawal",
+          "cells": [
+            {
+              "text": "Hold checkpoint inhibitor; manage jointly with oncology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Reserved for significant mass effect or diagnostic uncertainty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lymphocytic_hypophysitis-dx-mgmt",
+      "title": "Diagnosis and management of Lymphocytic hypophysitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Headache, visual change and pituitary deficit, postpartum or on checkpoint inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute adrenal insufficiency, visual loss or new diabetes insipidus)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent glucocorticoid cover and endocrine review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pituitary MRI, full hormone profile including cortisol, osmolality studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show an inflamed gland with the hormone deficit pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider non-functioning adenoma, craniopharyngioma or granulomatous disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Start glucocorticoids before any thyroid hormone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Desmopressin for cranial diabetes insipidus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "High-dose steroids for headache or visual compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Withhold checkpoint inhibitor and involve oncology",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lifelong replacement and sick-day steroid counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Some recover; corticotroph loss is often permanent and needs lifelong replacement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

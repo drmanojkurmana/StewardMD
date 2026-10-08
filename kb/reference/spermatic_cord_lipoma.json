@@ -145,5 +145,296 @@
       "caption": "Overview comparison matrix for spermatic cord lipoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spermatic_cord_lipoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Scrotal and inguinal ultrasound",
+          "cells": [
+            {
+              "text": "Fat-density extratesticular mass with a normal testis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "Fat content; excludes liposarcoma in larger lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical assessment",
+          "cells": [
+            {
+              "text": "Coexisting inguinal hernia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision with histology",
+          "cells": [
+            {
+              "text": "Confirms a benign lipoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum tumour markers",
+          "cells": [
+            {
+              "text": "Only if an intratesticular tumour cannot be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spermatic_cord_lipoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Inguinal hernia containing omentum or bowel",
+          "cells": [
+            {
+              "text": "Fatty inguinoscrotal swelling is often assumed to be only a hernia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Well-differentiated liposarcoma of the cord",
+          "cells": [
+            {
+              "text": "Can look similar; typically larger, with non-fatty components on imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spermatic_cord_lipoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "Symptomatic, enlarging or diagnostically uncertain lesions, with histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excision at hernia repair",
+          "cells": [
+            {
+              "text": "When found incidentally"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological exclusion of liposarcoma",
+          "cells": [
+            {
+              "text": "The main differential of concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI before surgery",
+          "cells": [
+            {
+              "text": "Larger or heterogeneous lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small, asymptomatic, clearly benign lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Urology, and a sarcoma service if liposarcoma is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spermatic_cord_lipoma-dx-mgmt",
+      "title": "Diagnosis and management of Spermatic cord lipoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fatty swelling along the spermatic cord: suspected cord lipoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (large or fast-growing mass, heterogeneous imaging, recurrence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent sarcoma referral for suspected liposarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Scrotal and inguinal ultrasound; CT or MRI for larger lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a fat-density extratesticular mass seen with a normal testis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider inguinal hernia or other paratesticular masses; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Excise symptomatic, enlarging or uncertain lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Excise or reduce at hernia repair if found incidentally",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Histology to exclude well-differentiated liposarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Observe small, clearly benign, asymptomatic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign lipoma has a good outlook after excision; liposarcoma needs sarcoma care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

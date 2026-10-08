@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for spinal muscular atrophy, lower-extremity predominant (dync1h1/bicd2)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley and Daroff Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinal_muscular_atrophy_lower_extremity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "EMG and nerve conduction studies",
+          "cells": [
+            {
+              "text": "Chronic motor neuronopathy with preserved sensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DYNC1H1 and BICD2 sequencing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SMN1 testing",
+          "cells": [
+            {
+              "text": "Excludes 5q spinal muscular atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase and muscle imaging",
+          "cells": [
+            {
+              "text": "Neurogenic versus myopathic weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cortical malformation or learning difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history",
+          "cells": [
+            {
+              "text": "Dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_muscular_atrophy_lower_extremity-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "SMN1-related spinal muscular atrophy type 3",
+          "cells": [
+            {
+              "text": "Excluded by SMN1 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary spastic paraplegia",
+          "cells": [
+            {
+              "text": "Upper motor neurone signs argue against a motor neuronopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic inflammatory demyelinating polyradiculoneuropathy",
+          "cells": [
+            {
+              "text": "Sensation is preserved here; electrophysiology separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_muscular_atrophy_lower_extremity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Lower-limb strength, range of motion and gait"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-foot orthoses and mobility aids",
+          "cells": [
+            {
+              "text": "Proximal lower-limb weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic care",
+          "cells": [
+            {
+              "text": "Foot deformity and contractures, with corrective surgery if indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI and neurodevelopmental review",
+          "cells": [
+            {
+              "text": "DYNC1H1 patients with cortical malformation or learning difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic assessment",
+          "cells": [
+            {
+              "text": "Functional and respiratory review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; cascade testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinal_muscular_atrophy_lower_extremity-dx-mgmt",
+      "title": "Diagnosis and management of Spinal muscular atrophy, lower-extremity predominant (DYNC1H1/BICD2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lower-limb weakness with waddling gait in childhood: suspected lower-limb SMA",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (upper motor neurone signs, seizures, rapid decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review for an alternative diagnosis or brain malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EMG and nerve conduction; DYNC1H1 and BICD2 sequencing; SMN1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are DYNC1H1 or BICD2 variants found with a lower-limb-predominant neuronopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SMN1 type 3 SMA, HSP or CIDP; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy to maintain strength, range of motion and gait",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ankle-foot orthoses and mobility aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic care for foot deformity and contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Brain MRI and neurodevelopmental review for DYNC1H1 patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Course is largely static to slowly progressive; genetic confirmation is needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

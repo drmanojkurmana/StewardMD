@@ -172,5 +172,506 @@
       "caption": "Overview comparison matrix for vitamin and trace mineral deficiency and excess."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Thiamin Deficiency",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/nutritional-disorders/vitamin-deficiency-dependency-and-toxicity/thiamin-deficiency"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Vitamin B12 Deficiency",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/nutritional-disorders/vitamin-deficiency-dependency-and-toxicity/vitamin-b12-deficiency"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vitamin_and_trace_mineral_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Laboratory thresholds for common micronutrient deficiencies",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Deficient if",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Thiamine: transketolase stimulation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Over 25% (activity coefficient over 1.25)",
+              "op": ">",
+              "value": 25
+            },
+            {
+              "text": "{{hy:Diagnosis often by response to thiamine}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B6: plasma PLP",
+          "unit": "nmol/L",
+          "cells": [
+            {
+              "text": "Under 20 nmol/L",
+              "op": "<",
+              "value": 20
+            },
+            {
+              "text": "Isoniazid, high dose causes neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12: serum level",
+          "unit": "pg/mL",
+          "cells": [
+            {
+              "text": "Under 200 pg/mL (145 pmol/L)",
+              "op": "<",
+              "value": 200
+            },
+            {
+              "text": "200 to 350 borderline: check methylmalonic acid"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Vitamin A: serum retinol",
+          "unit": "micromol/L",
+          "cells": [
+            {
+              "text": "Under 0.70 micromol/L (20 microg/dL)",
+              "op": "<",
+              "value": 0.7
+            },
+            {
+              "text": "Normal 1.05 to 3.50; read with CRP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin D: 25-hydroxyvitamin D",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "Adequate for bone if over 20 ng/mL",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "Lower suggests deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin E: alpha-tocopherol",
+          "unit": "microg/mL",
+          "cells": [
+            {
+              "text": "Under 5 microg/mL",
+              "op": "<",
+              "value": 5
+            },
+            {
+              "text": "Neuropathy, ataxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin K: phylloquinone",
+          "unit": "microg/L",
+          "cells": [
+            {
+              "text": "Under 0.15 microg/L, raised PT and PIVKA-II",
+              "op": "<",
+              "value": 0.15
+            },
+            {
+              "text": "PT corrects with vitamin K"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Zinc",
+          "unit": "micromol/L",
+          "cells": [
+            {
+              "text": "Under 12 micromol/L (70 microg/dL)",
+              "op": "<",
+              "value": 12
+            },
+            {
+              "text": "Falls with inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Copper",
+          "unit": "microg/dL",
+          "cells": [
+            {
+              "text": "Under 65 microg/dL",
+              "op": "<",
+              "value": 65
+            },
+            {
+              "text": "Rises with ceruloplasmin in inflammation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Acute illness redistributes copper, zinc and retinol; interpret levels with CRP and albumin (Harrison)."
+    },
+    {
+      "id": "vitamin_and_trace_mineral_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic micronutrient deficiency",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Diabetic or toxic neuropathy",
+          "cells": [
+            {
+              "text": "Mimics B1, B6, B12, E deficiency"
+            },
+            {
+              "text": "Glucose, HbA1c, heavy metals, vitamin levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug or marrow-related megaloblastosis",
+          "cells": [
+            {
+              "text": "Mimics B12 or folate deficiency"
+            },
+            {
+              "text": "Methylmalonic acid normal in folate deficiency"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Liver disease coagulopathy",
+          "cells": [
+            {
+              "text": "Mimics vitamin K deficiency"
+            },
+            {
+              "text": "PT fails to correct with vitamin K"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seborrhoeic or other dermatitis",
+          "cells": [
+            {
+              "text": "Mimics niacin, riboflavin, biotin, zinc deficiency"
+            },
+            {
+              "text": "Nutrient levels, response to repletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudotumor cerebri or hypercalcaemia of other cause",
+          "cells": [
+            {
+              "text": "Mimics vitamin A or D toxicity"
+            },
+            {
+              "text": "Retinol and 25-hydroxyvitamin D levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biotin assay interference",
+          "cells": [
+            {
+              "text": "Spurious thyroid, troponin, hCG results"
+            },
+            {
+              "text": "Stop biotin and retest"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vitamin_and_trace_mineral_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Treating micronutrient deficiencies",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "IV thiamine before glucose",
+          "unit": "mg",
+          "cells": [
+            {
+              "text": "Alcohol use or malnutrition"
+            },
+            {
+              "text": "100 mg IV before any IV glucose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-dose IV thiamine",
+          "cells": [
+            {
+              "text": "Wernicke-Korsakoff"
+            },
+            {
+              "text": "500 mg IV three times daily for 2 days, then 250 mg daily for 5 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV thiamine",
+          "cells": [
+            {
+              "text": "Wet beriberi"
+            },
+            {
+              "text": "100 mg IV daily for several days plus heart failure care"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral thiamine",
+          "cells": [
+            {
+              "text": "Mild neuropathy"
+            },
+            {
+              "text": "10 to 20 mg daily for 2 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral vitamin B12",
+          "cells": [
+            {
+              "text": "B12 deficiency without severe or neurological disease"
+            },
+            {
+              "text": "1000 to 2000 mcg daily"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "IM vitamin B12",
+          "cells": [
+            {
+              "text": "Severe or neurological B12 deficiency"
+            },
+            {
+              "text": "1 mg 1 to 4 times weekly, then monthly; lifelong if cause persists"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Do not give folate alone",
+          "cells": [
+            {
+              "text": "Suspected B12 deficiency"
+            },
+            {
+              "text": "Masks anaemia while neuropathy progresses"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pyridoxine with isoniazid",
+          "cells": [
+            {
+              "text": "TB treatment"
+            },
+            {
+              "text": "Prevents neuropathy; avoid chronic high dose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat cause and avoid excess",
+          "cells": [
+            {
+              "text": "Malabsorption, alcohol, bariatric surgery; vitamins A and D"
+            },
+            {
+              "text": "Monitor for refeeding shifts and toxicity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vitamin_and_trace_mineral_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of micronutrient deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neuropathy, dermatitis, anaemia, night blindness, bleeding or malnutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Confusion, ataxia or ophthalmoplegia in at-risk patient?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Wernicke: IV thiamine at once, before glucose",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Targeted levels with CRP and albumin",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "B12 under 200 pg/mL or raised MMA?",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Neurological signs or severe deficiency?",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "IM B12 1 mg, then monthly",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Oral B12 1000 to 2000 mcg daily",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Prolonged PT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Give vitamin K; if PT fails to correct, liver disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Replete specific nutrient; treat cause; watch toxicity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

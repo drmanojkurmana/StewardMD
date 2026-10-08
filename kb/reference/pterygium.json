@@ -144,5 +144,303 @@
       "caption": "Overview comparison matrix for pterygium."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pterygium-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Size, vascularity and corneal encroachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refraction and corneal topography",
+          "cells": [
+            {
+              "text": "Induced astigmatism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial photography",
+          "cells": [
+            {
+              "text": "Progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excision biopsy with histology, when neoplasia is suspected",
+          "cells": [
+            {
+              "text": "Ocular surface neoplasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pterygium-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pseudopterygium",
+          "cells": [
+            {
+              "text": "Prior injury or inflammation"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular surface squamous neoplasia",
+          "cells": [
+            {
+              "text": "Rapid growth, thickening or leukoplakic change"
+            },
+            {
+              "text": "Excision biopsy with histology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pterygium-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lubricants and steroids",
+          "cells": [
+            {
+              "text": "Ocular lubricants; short topical corticosteroid courses for inflamed lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "UV protection",
+          "cells": [
+            {
+              "text": "Sunglasses and brimmed hats; avoidance of wind and dust"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "For lesions threatening the visual axis or inducing marked astigmatism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conjunctival autograft",
+          "cells": [
+            {
+              "text": "Rather than bare sclera, or adjunctive mitomycin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Astigmatism",
+          "cells": [
+            {
+              "text": "Refraction and corneal topography to quantify induced astigmatism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Excised tissue examined to exclude ocular surface squamous neoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Ophthalmology for symptomatic or progressive lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pterygium-dx-mgmt",
+      "title": "Diagnosis and management of Pterygium",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pterygium: fleshy conjunctival growth encroaching onto the cornea",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid growth, thickening or leukoplakia, visual axis encroachment, or marked astigmatism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ophthalmology review for suspected ocular surface neoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp; refraction and topography; serial photography; excision biopsy if suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lesion a pterygium on slit-lamp, without neoplasia features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Excise and send for histology to exclude neoplasia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ocular lubricants and short courses of topical steroids for inflamed lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "UV protection with sunglasses and brimmed hats",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical excision with conjunctival autograft for visual-axis or astigmatism threat",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Histological examination of excised tissue",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Ophthalmology follow-up for symptomatic or progressive lesions",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

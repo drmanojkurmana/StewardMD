@@ -146,5 +146,316 @@
       "caption": "Overview comparison matrix for malan syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "malan_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Exome or genome sequencing with NFIX testing",
+          "cells": [
+            {
+              "text": "Confirms the variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Copy number causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Neurological signs or macrocephaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Strabismus and optic atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal and cardiovascular review",
+          "cells": [
+            {
+              "text": "Marfanoid habitus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "malan_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sotos syndrome (NSD1)",
+          "cells": [
+            {
+              "text": "Shared overgrowth; NSD1 testing separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weaver syndrome (EZH2)",
+          "cells": [
+            {
+              "text": "Overgrowth with different gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marfan syndrome",
+          "cells": [
+            {
+              "text": "Connective tissue disorder without intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fragile X syndrome",
+          "cells": [
+            {
+              "text": "Gene testing separates"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "malan_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Speech and language, occupational and physiotherapy from early life"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural support",
+          "cells": [
+            {
+              "text": "For anxiety and autistic traits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vision",
+          "cells": [
+            {
+              "text": "Ophthalmological review for strabismus; surveillance for optic atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular and skeletal",
+          "cells": [
+            {
+              "text": "Surveillance given marfanoid habitus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant; most cases arise de novo"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "malan_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Malan syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tall child with macrocephaly, marfanoid habitus and developmental delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (head growth change, aortic dilatation or visual loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiology or neurology review for aortic or neurological signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Exome or genome sequencing with NFIX testing, microarray, brain MRI if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a heterozygous NFIX variant found with overgrowth and intellectual disability?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Sotos, Weaver, Tatton-Brown-Rahman or Marfan syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early developmental intervention for speech and motor skills",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Behavioural support for anxiety and autistic traits",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ophthalmology review for strabismus and optic atrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cardiovascular and skeletal surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and confirmatory NFIX testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Prognosis tracks intellectual disability; lifespan is not clearly reduced",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -143,5 +143,316 @@
       "caption": "Overview comparison matrix for lymphocytic gastritis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lymphocytic_gastritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Gastric biopsies with lymphocyte quantification",
+          "cells": [
+            {
+              "text": "Raised intraepithelial CD8 T lymphocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Helicobacter pylori testing",
+          "cells": [
+            {
+              "text": "Infection present or eradicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology and duodenal biopsies",
+          "cells": [
+            {
+              "text": "Associated coeliac disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and iron studies",
+          "cells": [
+            {
+              "text": "Anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum albumin",
+          "cells": [
+            {
+              "text": "Protein-losing Menetrier-like picture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphocytic_gastritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Coeliac disease with gastric involvement",
+          "cells": [
+            {
+              "text": "Duodenal findings and serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Helicobacter pylori chronic active gastritis",
+          "cells": [
+            {
+              "text": "Infection on biopsy or testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Menetrier disease",
+          "cells": [
+            {
+              "text": "Protein loss and hypertrophic folds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric lymphoma",
+          "cells": [
+            {
+              "text": "Persistent nodularity or mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphocytic_gastritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Helicobacter pylori eradication",
+          "cells": [
+            {
+              "text": "Combination antibiotics with a proton-pump inhibitor where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gluten-free diet",
+          "cells": [
+            {
+              "text": "When associated coeliac disease is identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acid suppression",
+          "cells": [
+            {
+              "text": "Proton-pump inhibitors for dyspepsia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron deficiency",
+          "cells": [
+            {
+              "text": "Correct and replace iron where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat biopsy",
+          "cells": [
+            {
+              "text": "Confirms resolution after treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lymphocytic_gastritis-dx-mgmt",
+      "title": "Diagnosis and management of Lymphocytic gastritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dyspepsia or incidental gastric biopsy showing intraepithelial lymphocytosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (low albumin, persistent nodularity or refractory symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: gastroenterology review for protein loss or suspected lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gastric biopsies, Helicobacter pylori testing, coeliac serology and duodenal biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lymphocytosis confirmed with H. pylori or coeliac disease found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Menetrier disease, collagenous gastritis or gastric lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Eradicate Helicobacter pylori with combination therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gluten-free diet if coeliac disease is identified",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Proton-pump inhibitors for dyspeptic symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct iron deficiency anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Repeat endoscopic biopsy after treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally good; infiltrate and symptoms often improve after the cause is treated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,296 @@
       "caption": "Overview comparison matrix for uveitic glaucoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "uveitic_glaucoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Grades inflammation, keratic precipitates and synechiae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonioscopy",
+          "cells": [
+            {
+              "text": "Open-angle, synechial or pupillary-block mechanism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Applanation tonometry",
+          "cells": [
+            {
+              "text": "Pressure during and after inflammatory episodes and steroid treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT of optic nerve and macula",
+          "cells": [
+            {
+              "text": "Glaucomatous damage and cystoid oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Automated perimetry",
+          "cells": [
+            {
+              "text": "Field loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "uveitic_glaucoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary open-angle glaucoma with coincidental uveitis",
+          "cells": [
+            {
+              "text": "Distinguished by gonioscopy and the course of the inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-induced glaucoma",
+          "cells": [
+            {
+              "text": "Pressure rise in steroid responders during treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posner-Schlossman syndrome",
+          "cells": [
+            {
+              "text": "Glaucomatocyclitic crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neovascular glaucoma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "uveitic_glaucoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids for inflammation",
+          "cells": [
+            {
+              "text": "Topical, periocular or systemic, with steroid-sparing agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat any infective or systemic cause",
+          "cells": [
+            {
+              "text": "Specific therapy for the identified cause of uveitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic and mydriatic agents",
+          "cells": [
+            {
+              "text": "Prevent and break posterior synechiae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aqueous suppressants",
+          "cells": [
+            {
+              "text": "Topical beta-blockers and carbonic anhydrase inhibitors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "uveitic_glaucoma-dx-mgmt",
+      "title": "Diagnosis and management of Uveitic glaucoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected uveitic glaucoma: raised pressure with intraocular inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (iris bombe, marked steroid pressure rise or corneal oedema)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent iridotomy for iris bombe; urgent pressure lowering for very high pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp, gonioscopy, applanation tonometry, OCT, perimetry and infection workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does gonioscopy show a synechial, pupillary-block or trabecular mechanism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary open-angle glaucoma or steroid-induced rise; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Vigorous control of intraocular inflammation with corticosteroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Specific treatment of any infective or systemic cause of the uveitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cycloplegic and mydriatic agents to prevent posterior synechiae",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Aqueous suppressants such as topical beta-blockers and carbonic anhydrase inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Pressure and inflammation both need control; pupillary block may need iridotomy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

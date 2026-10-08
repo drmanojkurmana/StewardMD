@@ -154,5 +154,323 @@
       "caption": "Overview comparison matrix for ophthalmia neonatorum."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell / BASHH-CDC STI guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neonatal_ophthalmia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Gram stain of conjunctival exudate",
+          "cells": [
+            {
+              "text": "Gram-negative intracellular diplococci suggest gonococcus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture of conjunctival swabs on chocolate agar, with susceptibility",
+          "cells": [
+            {
+              "text": "Gonococcal culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nucleic acid amplification testing for chlamydia and gonorrhoea",
+          "cells": [
+            {
+              "text": "Both pathogens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chlamydial specimen from conjunctival cells",
+          "cells": [
+            {
+              "text": "Detects the intracellular organism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpes simplex testing",
+          "cells": [
+            {
+              "text": "When vesicles, keratitis or systemic features are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal and partner STI screen",
+          "cells": [
+            {
+              "text": "Identifies the source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_ophthalmia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chemical conjunctivitis from topical prophylaxis",
+          "cells": [
+            {
+              "text": "Appears within the first day or two; transient and self-limiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital nasolacrimal duct obstruction with infection",
+          "cells": [
+            {
+              "text": "Blocked-duct causes are a pitfall when purulence is gonococcal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpes simplex conjunctivitis or keratitis",
+          "cells": [
+            {
+              "text": "Needs antiviral rather than antibacterial treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_ophthalmia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic third-generation cephalosporin",
+          "cells": [
+            {
+              "text": "Ceftriaxone or cefotaxime urgently for gonococcal ophthalmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic macrolide",
+          "cells": [
+            {
+              "text": "Oral erythromycin or azithromycin for chlamydial disease, also covering pneumonitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic aciclovir",
+          "cells": [
+            {
+              "text": "When herpes simplex is implicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Saline irrigation",
+          "cells": [
+            {
+              "text": "Clears copious purulent discharge in gonococcal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal assessment",
+          "cells": [
+            {
+              "text": "Prevent ulceration and perforation, with ophthalmology input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mother and partners",
+          "cells": [
+            {
+              "text": "Treat and screen for the identified infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Reinforce neonatal ocular prophylaxis at birth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neonatal_ophthalmia-dx-mgmt",
+      "title": "Diagnosis and management of Ophthalmia neonatorum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Purulent or mucopurulent conjunctivitis in a neonate within the first month",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (copious purulent discharge, corneal haze, systemic or vesicular signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent systemic third-generation cephalosporin; ophthalmology for corneal risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gram stain, culture on chocolate agar, NAAT for chlamydia and gonorrhoea, HSV test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Gonococcal or chlamydial infection confirmed by culture or NAAT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider chemical, herpes or duct-related causes; test and treat accordingly",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic ceftriaxone or cefotaxime urgently for gonococcal ophthalmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Systemic macrolide for chlamydial ophthalmia, also covering pneumonitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Systemic aciclovir when herpes simplex is implicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Saline irrigation and treatment of the mother and partners",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent with prompt systemic treatment; delayed gonococcal disease risks blindness",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -142,5 +142,323 @@
       "caption": "Overview comparison matrix for neonatal hypocalcaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neonatology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neonatal_hypocalcaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum total and ionised calcium",
+          "cells": [
+            {
+              "text": "Low calcium; ionised calcium reflects the active fraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Magnesium, phosphate and alkaline phosphatase",
+          "cells": [
+            {
+              "text": "Hypomagnesaemia or a high phosphate load"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parathyroid hormone and vitamin D, if persistent",
+          "cells": [
+            {
+              "text": "Hypoparathyroidism or a vitamin D disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for DiGeorge syndrome, if features suggest it",
+          "cells": [
+            {
+              "text": "Cardiac, dysmorphic or immune features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose and sepsis evaluation",
+          "cells": [
+            {
+              "text": "In symptomatic infants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_hypocalcaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypomagnesaemia",
+          "cells": [
+            {
+              "text": "Impairs parathyroid hormone secretion and action; refractory hypocalcaemia points to it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoparathyroidism such as DiGeorge syndrome",
+          "cells": [
+            {
+              "text": "Persistent hypocalcaemia with cardiac, dysmorphic or immune features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia",
+          "cells": [
+            {
+              "text": "Also causes jitteriness and seizures; a glucose check separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin D deficiency",
+          "cells": [
+            {
+              "text": "A cause of late-onset hypocalcaemia; replaced in deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_hypocalcaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intravenous calcium gluconate",
+          "cells": [
+            {
+              "text": "For symptomatic or severe hypocalcaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral calcium",
+          "cells": [
+            {
+              "text": "For milder cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Magnesium",
+          "cells": [
+            {
+              "text": "Corrects coexisting hypomagnesaemia, which impairs parathyroid hormone secretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Reduce a high phosphate load; replace vitamin D; manage hypoparathyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac monitoring during intravenous calcium",
+          "cells": [
+            {
+              "text": "For seizures or apnoea; watch for bradycardia and extravasation injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Total and ionised calcium, phosphate and magnesium during correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigation of persistent or late cases",
+          "cells": [
+            {
+              "text": "DiGeorge syndrome and vitamin D disorders; genetics referral if a 22q11 deletion is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neonatal_hypocalcaemia-dx-mgmt",
+      "title": "Diagnosis and management of Neonatal hypocalcaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Jitteriness, irritability, feeding difficulty or seizures in a newborn with low calcium",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures, refractory hypocalcaemia, prolonged QT or arrhythmia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "IV calcium gluconate under cardiac monitoring; treat seizures or apnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Total and ionised calcium, magnesium, phosphate, ALP, glucose, sepsis screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low ionised calcium confirmed, with magnesium checked?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat hypoglycaemia or sepsis as the cause of symptoms; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "IV calcium gluconate for symptomatic or severe hypocalcaemia; oral calcium if milder",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct coexisting hypomagnesaemia with magnesium",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reduce high phosphate load; replace vitamin D in deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Investigate DiGeorge syndrome and vitamin D disorders if persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early cases usually resolve within days; late or persistent cases depend on cause",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

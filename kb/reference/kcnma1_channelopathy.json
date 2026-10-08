@@ -148,5 +148,343 @@
       "caption": "Overview comparison matrix for kcnma1 channelopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / ILAE",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kcnma1_channelopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "KCNMA1 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Absence or other seizure types"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar or structural change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video of paroxysmal episodes",
+          "cells": [
+            {
+              "text": "Triggers and dyskinetic phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional characterisation where available",
+          "cells": [
+            {
+              "text": "Gain or loss of function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and cerebellar assessment",
+          "cells": [
+            {
+              "text": "Ataxia and developmental impact"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kcnma1_channelopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "PRRT2-related paroxysmal kinesigenic dyskinesia",
+          "cells": [
+            {
+              "text": "Kinesigenic trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PNKD (MR-1) paroxysmal non-kinesigenic dyskinesia",
+          "cells": [
+            {
+              "text": "Non-kinesigenic attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ADCY5-related dyskinesia",
+          "cells": [
+            {
+              "text": "Chronic and paroxysmal dyskinesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GLUT1 deficiency",
+          "cells": [
+            {
+              "text": "Paroxysmal movement and epilepsy with low CSF glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic generalised epilepsy with absence seizures",
+          "cells": [
+            {
+              "text": "Absence seizures without dyskinesia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kcnma1_channelopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Variant type",
+          "cells": [
+            {
+              "text": "Gain or loss of function steers therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Absence seizures",
+          "cells": [
+            {
+              "text": "Ethosuximide or valproate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paroxysmal dyskinesia",
+          "cells": [
+            {
+              "text": "Clonazepam with avoidance of stress, fatigue, caffeine, alcohol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental",
+          "cells": [
+            {
+              "text": "Physiotherapy and cerebellar rehabilitation for loss of function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassessment",
+          "cells": [
+            {
+              "text": "Video-EEG and clinical review of response and episode type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetics",
+          "cells": [
+            {
+              "text": "Counselling and assessment of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kcnma1_channelopathy-dx-mgmt",
+      "title": "Diagnosis and management of KCNMA1 channelopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Paroxysmal dyskinesia, epilepsy or both in a child or family member",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Frequent or prolonged dyskinetic attacks, status epilepticus, or progressive ataxia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review; manage status and protect from injury during attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gene panel or exome, EEG, MRI, video of episodes, functional studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "KCNMA1 variant confirmed with matching paroxysmal phenotype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PRRT2, PNKD, ADCY5 or GLUT1 deficiency; reclassify episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Determine gain or loss of function to guide therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ethosuximide or valproate for absence and generalised seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Clonazepam and trigger avoidance for paroxysmal dyskinesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and cerebellar rehabilitation where ataxia present",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Video-EEG reassessment and clinical genetics counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Attacks may respond to clonazepam; function depends on variant effect",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

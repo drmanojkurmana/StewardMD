@@ -151,5 +151,285 @@
       "caption": "Overview comparison matrix for properdin deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Middleton's Allergy: Principles and Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "properdin_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "AH50 alternative-pathway assay",
+          "cells": [
+            {
+              "text": "Alternative-pathway activity, abnormal in properdin deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CH50 classical-pathway assay",
+          "cells": [
+            {
+              "text": "Classical pathway, usually preserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specific properdin (factor P) level",
+          "cells": [
+            {
+              "text": "Properdin level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CFP gene testing",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cultures and PCR during acute infection",
+          "cells": [
+            {
+              "text": "Serogroup of the infecting organism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meningococcal and other vaccination status",
+          "cells": [
+            {
+              "text": "Vaccine coverage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "X-linked family screening and carrier assessment",
+          "cells": [
+            {
+              "text": "Carrier status in relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "properdin_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Meningococcal vaccination",
+          "cells": [
+            {
+              "text": "Quadrivalent conjugate (ACWY) and serogroup B vaccines, with boosters as advised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Education and stand-by antibiotics",
+          "cells": [
+            {
+              "text": "Seek immediate care for any febrile illness; stand-by antibiotics where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency treatment",
+          "cells": [
+            {
+              "text": "Immediate parenteral third-generation cephalosporin such as ceftriaxone, with fluid resuscitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term prophylaxis",
+          "cells": [
+            {
+              "text": "Prophylactic penicillin in selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family",
+          "cells": [
+            {
+              "text": "Screen at-risk male relatives; genetic counselling for X-linked inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Routine care",
+          "cells": [
+            {
+              "text": "Keep routine immunisations current; refer to clinical immunology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "properdin_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Properdin deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected properdin deficiency: febrile illness with meningococcal risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Headache with neck stiffness, non-blanching rash, septic shock, or purpura fulminans?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: IV ceftriaxone for suspected invasive meningococcal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "AH50 and CH50; properdin level; CFP gene testing; cultures and PCR during infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is AH50 abnormal with CH50 preserved on testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider terminal complement deficiency, factor D defect or asplenia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Full meningococcal vaccination (ACWY and serogroup B)",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stand-by antibiotics and immediate care for any febrile illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Long-term prophylactic penicillin in selected patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen at-risk male relatives; genetic counselling for X-linked inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Clinical immunology follow-up with routine immunisations kept current",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

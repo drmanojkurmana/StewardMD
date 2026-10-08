@@ -149,5 +149,367 @@
       "caption": "Overview comparison matrix for ornithine transcarbamylase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ornithine_transcarbamylase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma ammonia and arterial blood gas",
+          "cells": [
+            {
+              "text": "Hyperammonaemia with respiratory alkalosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids and urine orotic acid",
+          "cells": [
+            {
+              "text": "Low citrulline and arginine; elevated urine orotic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allopurinol loading or protein challenge",
+          "cells": [
+            {
+              "text": "Unmasks carriers; used cautiously in specialist settings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OTC gene testing and liver enzyme assay",
+          "cells": [
+            {
+              "text": "Causative variant or enzyme deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Encephalopathy in severe or prolonged hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening",
+          "cells": [
+            {
+              "text": "Carrier status in relatives, given X-linked inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ornithine_transcarbamylase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Carbamoyl phosphate synthetase 1 or N-acetylglutamate synthase deficiency",
+          "cells": [
+            {
+              "text": "Orotic acid is not raised in these disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperammonaemia in carrier females",
+          "cells": [
+            {
+              "text": "Valproate, postpartum or surgery can precipitate a crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal sepsis",
+          "cells": [
+            {
+              "text": "A well neonatal boy collapsing after the first feeds is easily mistaken for sepsis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ornithine_transcarbamylase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute crisis: stop protein, give energy",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Glucose and lipid to suppress catabolism; IV sodium benzoate, sodium phenylacetate and arginine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dialysis for severe hyperammonaemia",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Haemodialysis or haemofiltration to clear ammonia rapidly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein-restricted diet",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Essential amino acids, with citrulline or arginine to support the urea cycle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term nitrogen scavengers",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Oral sodium phenylbutyrate or glycerol phenylbutyrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid precipitants",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Fasting, catabolic stress, high protein loads and sodium valproate; written sick-day regimen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Definitive treatment for severe or poorly controlled disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and counselling",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Ammonia, amino acids and neurodevelopment; genetic counselling and family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ornithine_transcarbamylase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Ornithine transcarbamylase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Well neonatal boy with lethargy, vomiting and encephalopathy after first feeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (falling consciousness, seizures, cerebral oedema or carrier crisis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: immediate ammonia lowering, with dialysis for severe hyperammonaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma ammonia, blood gas, plasma amino acids, urine orotic acid, OTC gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is orotic acid raised with low citrulline and arginine, confirming OTC deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CPS1 or NAGS deficiency, organic acidaemia, sepsis or Reye-like illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop protein; glucose and lipid; IV sodium benzoate, sodium phenylacetate, arginine",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Haemodialysis or haemofiltration to clear ammonia rapidly in severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Protein-restricted diet with essential amino acids; citrulline or arginine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Oral sodium phenylbutyrate or glycerol phenylbutyrate as nitrogen scavengers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Avoid fasting, high protein and valproate; written sick-day regimen",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Liver transplantation for severe or poorly controlled disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Severe neonatal disease carries high risk of death or impairment without rapid control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

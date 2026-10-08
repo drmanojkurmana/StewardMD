@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for unverricht-lundborg disease (epm1, cystatin b)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "unverricht_lundborg_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CSTB genetic testing with dodecamer repeat expansion analysis",
+          "cells": [
+            {
+              "text": "Confirms EPM1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Photosensitivity and generalised epileptiform discharges with relatively preserved background"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Structural causes and atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic and mitochondrial screening",
+          "cells": [
+            {
+              "text": "Excludes other progressive myoclonic epilepsies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Comparatively mild cognitive trajectory"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "unverricht_lundborg_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lafora disease",
+          "cells": [
+            {
+              "text": "Rapid cognitive decline out of keeping with EPM1 points to it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Juvenile myoclonic epilepsy",
+          "cells": [
+            {
+              "text": "Confused with EPM1, which has a progressive component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial disease, including MERRF",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "unverricht_lundborg_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sodium valproate",
+          "cells": [
+            {
+              "text": "First-line anti-myoclonic and antiseizure therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levetiracetam and piracetam",
+          "cells": [
+            {
+              "text": "Added for disabling action myoclonus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clonazepam, zonisamide or topiramate",
+          "cells": [
+            {
+              "text": "Adjuncts for refractory myoclonus and generalised tonic-clonic seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid sodium-channel-blocking drugs",
+          "cells": [
+            {
+              "text": "Phenytoin, carbamazepine, oxcarbazepine and lamotrigine markedly worsen myoclonus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "N-acetylcysteine",
+          "cells": [
+            {
+              "text": "Antioxidant adjunct given the oxidative-stress mechanism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and mobility aids",
+          "cells": [
+            {
+              "text": "Progressive action myoclonus and cerebellar ataxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic review",
+          "cells": [
+            {
+              "text": "Neurological, EEG and neuropsychological review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "unverricht_lundborg_disease-dx-mgmt",
+      "title": "Diagnosis and management of Unverricht-Lundborg disease (EPM1, cystatin B)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Unverricht-Lundborg disease: late childhood myoclonus with generalised seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid cognitive decline or myoclonus worse on a sodium-channel drug)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review; stop any sodium-channel drug and consider Lafora disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CSTB testing with dodecamer expansion analysis, EEG, brain MRI and metabolic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CSTB testing confirm an EPM1 expansion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Lafora disease, mitochondrial disease or other progressive myoclonic epilepsies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sodium valproate as first-line therapy; avoid sodium-channel drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add levetiracetam or piracetam for disabling action myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Clonazepam, zonisamide or topiramate as adjuncts for refractory myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, mobility aids and periodic neurological and cognitive review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive but comparatively benign; myoclonus can become disabling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

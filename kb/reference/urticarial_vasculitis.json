@@ -146,5 +146,305 @@
       "caption": "Overview comparison matrix for urticarial vasculitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kelley & Firestein's Textbook of Rheumatology / vasculitis guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "urticarial_vasculitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with histology and direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Leucocytoclastic vasculitis of small dermal vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complement levels (C3, C4, CH50) and C1q",
+          "cells": [
+            {
+              "text": "Low complement indicates the hypocomplementaemic systemic subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antinuclear antibody and connective tissue serology",
+          "cells": [
+            {
+              "text": "Underlying connective tissue disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, inflammatory markers and renal function with urinalysis",
+          "cells": [
+            {
+              "text": "Systemic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum and urine electrophoresis",
+          "cells": [
+            {
+              "text": "Paraproteinaemic association, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urticarial_vasculitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic spontaneous urticaria",
+          "cells": [
+            {
+              "text": "Ordinary urticaria resolves within hours; these wheals persist beyond 24 hours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus",
+          "cells": [
+            {
+              "text": "Connective tissue disease to exclude as the underlying cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum sickness or drug reaction",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Schnitzler syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urticarial_vasculitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Connective tissue disease, infection, culprit drug, paraproteinaemia or malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antihistamines",
+          "cells": [
+            {
+              "text": "Symptomatic relief, often insufficient alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mild, skin-limited, normocomplementaemic disease",
+          "cells": [
+            {
+              "text": "NSAIDs, colchicine, dapsone or hydroxychloroquine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic or hypocomplementaemic disease",
+          "cells": [
+            {
+              "text": "Corticosteroids with a steroid-sparing agent such as azathioprine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complement monitoring",
+          "cells": [
+            {
+              "text": "Serial complement levels"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "urticarial_vasculitis-dx-mgmt",
+      "title": "Diagnosis and management of Urticarial vasculitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected urticarial vasculitis: wheals lasting over 24 hours that burn or bruise",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (low complement, renal or pulmonary involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent systemic vasculitis review for renal or pulmonary involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with immunofluorescence, complement, ANA, renal function, electrophoresis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show leucocytoclastic vasculitis of small dermal vessels?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider chronic spontaneous urticaria or other small-vessel vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Identify and treat any underlying cause, such as connective tissue disease or drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antihistamines for symptomatic relief, recognising they are often insufficient",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "NSAIDs, colchicine, dapsone or hydroxychloroquine for mild skin-limited disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Corticosteroids with azathioprine or similar for systemic or low-complement disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most cases are skin-limited with normal complement; low complement needs systemic care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -145,5 +145,298 @@
       "caption": "Overview comparison matrix for terson syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "terson_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Terson syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Terson syndrome: intraocular haemorrhage with subarachnoid haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: reduced consciousness, bilateral dense haemorrhage, or raised pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical care for the intracranial haemorrhage and raised pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dilated fundus examination; CT or MRI brain; OCT; B-scan if media opaque",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging confirm an intracranial haemorrhage or raised pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Valsalva retinopathy, vein occlusion or non-accidental injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying intracranial haemorrhage with neurosurgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observe most haemorrhage for spontaneous clearance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pars plana vitrectomy for non-clearing or dense bilateral haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Early vitrectomy in children to prevent deprivation amblyopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor for retinal detachment and raised intraocular pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Visual prognosis often good once clear; neurological injury dominates the outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "terson_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundus examination",
+          "cells": [
+            {
+              "text": "Characterises the intraocular haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI of the brain",
+          "cells": [
+            {
+              "text": "Underlying intracranial haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Pre-retinal or sub-internal limiting membrane blood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasound",
+          "cells": [
+            {
+              "text": "Fundus view when the media are opaque"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "terson_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Valsalva retinopathy",
+          "cells": [
+            {
+              "text": "Haemorrhage follows a Valsalva effort rather than an intracranial bleed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-accidental injury in an infant",
+          "cells": [
+            {
+              "text": "Intraocular haemorrhage in an infant requires exclusion of abuse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinal vein occlusion",
+          "cells": [
+            {
+              "text": "Venous occlusion without an acute intracranial haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "terson_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the intracranial haemorrhage",
+          "cells": [
+            {
+              "text": "Neurosurgery and neurology; control of raised intracranial pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Most intraocular haemorrhage clears spontaneously over weeks to months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pars plana vitrectomy",
+          "cells": [
+            {
+              "text": "Non-clearing vitreous haemorrhage, dense bilateral involvement, or early visual rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early vitrectomy in children",
+          "cells": [
+            {
+              "text": "Prevents deprivation amblyopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication surveillance",
+          "cells": [
+            {
+              "text": "Retinal detachment, epiretinal membrane and raised intraocular pressure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

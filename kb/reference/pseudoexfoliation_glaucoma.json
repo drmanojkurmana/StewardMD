@@ -150,5 +150,285 @@
       "caption": "Overview comparison matrix for pseudoexfoliation glaucoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pseudoexfoliation_glaucoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated slit-lamp examination",
+          "cells": [
+            {
+              "text": "Target-like lens deposits and pupillary ruff changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonioscopy",
+          "cells": [
+            {
+              "text": "Trabecular pigmentation; angle closure excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Applanation tonometry",
+          "cells": [
+            {
+              "text": "Pressure fluctuation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT of the retinal nerve fibre layer",
+          "cells": [
+            {
+              "text": "Glaucomatous damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Automated perimetry",
+          "cells": [
+            {
+              "text": "Field loss over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of zonular integrity",
+          "cells": [
+            {
+              "text": "Zonular integrity before cataract surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pseudoexfoliation_glaucoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical therapy",
+          "cells": [
+            {
+              "text": "Prostaglandin analogue first to lower intraocular pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laser trabeculoplasty",
+          "cells": [
+            {
+              "text": "Often effective given the heavily pigmented trabecular meshwork"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incisional surgery",
+          "cells": [
+            {
+              "text": "Trabeculectomy or drainage device for uncontrolled disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cataract surgery",
+          "cells": [
+            {
+              "text": "Anticipate zonular weakness; capsular tension ring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pressure monitoring",
+          "cells": [
+            {
+              "text": "Frequent monitoring given large diurnal fluctuations, with OCT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Target pressure",
+          "cells": [
+            {
+              "text": "Lower target than primary open-angle glaucoma, given the more aggressive course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Ophthalmology follow-up, given the systemic elastic-tissue nature of the disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pseudoexfoliation_glaucoma-dx-mgmt",
+      "title": "Diagnosis and management of Pseudoexfoliation glaucoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pseudoexfoliation glaucoma: lens deposits with raised or fluctuating IOP",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Very high or fluctuating IOP, phacodonesis, advanced field loss, or angle closure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent pressure lowering and surgical planning for zonular weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp for lens deposits; gonioscopy; tonometry; RNFL OCT; perimetry; zonules",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are lens deposits confirmed on slit-lamp examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary open-angle or pigmentary glaucoma; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prostaglandin analogue first to lower intraocular pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Laser trabeculoplasty, often effective given pigmented trabecular meshwork",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Trabeculectomy or drainage device for uncontrolled disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Capsular tension ring and caution for zonular weakness at cataract surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lower target IOP and frequent monitoring given aggressive course and fluctuation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,343 @@
       "caption": "Overview comparison matrix for lobomycosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lobomycosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with fungal stains",
+          "cells": [
+            {
+              "text": "Chains of yeast cells joined by tubular bridges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct microscopy of tissue scrapings",
+          "cells": [
+            {
+              "text": "Characteristic yeast cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exposure history",
+          "cells": [
+            {
+              "text": "Forest or riverine work; dolphin contact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lesion extent and margins",
+          "cells": [
+            {
+              "text": "Planning of excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of other subcutaneous mycoses and leprosy",
+          "cells": [
+            {
+              "text": "Differential diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular identification",
+          "cells": [
+            {
+              "text": "Where the organism cannot be cultured"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lobomycosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Keloid or hypertrophic scar",
+          "cells": [
+            {
+              "text": "Clinical mimic; biopsy avoids delay in diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromoblastomycosis",
+          "cells": [
+            {
+              "text": "Other subcutaneous mycosis; histology separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lepromatous leprosy",
+          "cells": [
+            {
+              "text": "Excluded by testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatofibrosarcoma protuberans",
+          "cells": [
+            {
+              "text": "Cutaneous tumour mimic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lobomycosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Mainstay; clear margins for localised lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryotherapy or Mohs surgery",
+          "cells": [
+            {
+              "text": "Selected accessible lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Itraconazole or posaconazole",
+          "cells": [
+            {
+              "text": "Prolonged antifungal therapy; medical treatment alone often disappointing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery with antifungals",
+          "cells": [
+            {
+              "text": "Extensive disease, to reduce recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term follow-up",
+          "cells": [
+            {
+              "text": "Local recurrence and rare malignant change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Avoid scratching to prevent autoinoculation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Dermatology or infectious diseases, with histological confirmation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lobomycosis-dx-mgmt",
+      "title": "Diagnosis and management of Lobomycosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slowly growing firm, shiny keloid-like nodules on ears, limbs or face in forest workers",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid change, ulceration, induration, recurrence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent biopsy to exclude malignant transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with fungal stains, scrapings, exposure history, lesion mapping",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are chains of yeast cells with tubular bridges seen on histology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider keloid, chromoblastomycosis, leishmaniasis or leprosy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision with clear margins, the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cryotherapy or Mohs surgery for selected accessible lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prolonged itraconazole or posaconazole for extensive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term follow-up for recurrence and rare malignant change",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Dermatology or infectious diseases referral with histology",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Indolent; localised lesions cure with excision; extensive disease recurs",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

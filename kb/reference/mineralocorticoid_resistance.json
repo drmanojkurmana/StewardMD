@@ -149,5 +149,341 @@
       "caption": "Overview comparison matrix for mineralocorticoid resistance (pseudohypoaldosteronism spectrum overview)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mineralocorticoid_resistance-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum electrolytes, urea, creatinine and venous blood gas",
+          "cells": [
+            {
+              "text": "Hyponatraemia, hyperkalaemia and metabolic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma renin activity and aldosterone",
+          "cells": [
+            {
+              "text": "Both high in type 1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary sodium and potassium",
+          "cells": [
+            {
+              "text": "Renal salt wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sweat chloride testing",
+          "cells": [
+            {
+              "text": "Systemic form versus cystic fibrosis; both can raise sweat chloride"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tract imaging",
+          "cells": [
+            {
+              "text": "Secondary or transient pseudohypoaldosteronism excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing of NR3C2, ENaC subunit genes and WNK pathway genes",
+          "cells": [
+            {
+              "text": "Disease subtype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mineralocorticoid_resistance-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary adrenal insufficiency or salt-wasting congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "Aldosterone is low in these, whereas it is high in type 1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystic fibrosis, for the systemic form",
+          "cells": [
+            {
+              "text": "Salty sweat and respiratory features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary pseudohypoaldosteronism from urinary tract infection or obstructive uropathy",
+          "cells": [
+            {
+              "text": "Infants with urinary tract infection or obstructive uropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gordon syndrome (pseudohypoaldosteronism type 2)",
+          "cells": [
+            {
+              "text": "Hyperkalaemic hypertensive phenotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mineralocorticoid_resistance-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral sodium chloride",
+          "cells": [
+            {
+              "text": "Generous supplementation; the mainstay for salt-wasting pseudohypoaldosteronism type 1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperkalaemia control",
+          "cells": [
+            {
+              "text": "Dietary potassium restriction and potassium-binding cation-exchange resins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic acidosis",
+          "cells": [
+            {
+              "text": "Sodium bicarbonate or citrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute salt-wasting crises",
+          "cells": [
+            {
+              "text": "Intravenous saline and emergency measures for severe hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic recessive form",
+          "cells": [
+            {
+              "text": "Skin care, airway and respiratory management for cystic-fibrosis-like features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudohypoaldosteronism type 2 (Gordon syndrome)",
+          "cells": [
+            {
+              "text": "Dietary sodium restriction and a thiazide diuretic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Growth, electrolytes and acid-base status; the renal form is expected to ease with age"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and counselling",
+          "cells": [
+            {
+              "text": "Defines the subtype and guides family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mineralocorticoid_resistance-dx-mgmt",
+      "title": "Diagnosis and management of Mineralocorticoid resistance (pseudohypoaldosteronism spectrum overview)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with salt wasting, hyponatraemia and hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Salt-wasting crisis with severe hyperkalaemia or arrhythmia, or failure to thrive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent IV saline and treatment of severe hyperkalaemia; cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Electrolytes and blood gas; renin and aldosterone; urinary sodium; sweat chloride; NR3C2",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are renin and aldosterone both high, indicating type 1?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider adrenal insufficiency, CAH, cystic fibrosis or Gordon syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Generous oral sodium chloride, the mainstay for salt-wasting type 1",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dietary potassium restriction and cation-exchange resins for hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sodium bicarbonate or citrate for metabolic acidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intravenous saline for salt-wasting crises; emergency measures for severe hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Growth and electrolyte monitoring; renal form expected to ease; genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

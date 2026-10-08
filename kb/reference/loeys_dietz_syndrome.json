@@ -152,5 +152,352 @@
       "caption": "Overview comparison matrix for loeys-dietz syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "loeys_dietz_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography with aortic root measurement",
+          "cells": [
+            {
+              "text": "Root dimensions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Head-to-pelvis CT or MR angiography",
+          "cells": [
+            {
+              "text": "Arterial tortuosity and aneurysms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TGF-beta pathway aortopathy gene panel",
+          "cells": [
+            {
+              "text": "Confirms the gene variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Absence of ectopia lentis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine imaging",
+          "cells": [
+            {
+              "text": "Instability before intervention or anaesthesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal review",
+          "cells": [
+            {
+              "text": "Scoliosis, pectus deformity and club foot"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "loeys_dietz_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Marfan syndrome",
+          "cells": [
+            {
+              "text": "Ectopia lentis is absent here; surgical thresholds differ"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular Ehlers-Danlos syndrome",
+          "cells": [
+            {
+              "text": "Overlapping vascular features; genetic testing classifies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial tortuosity syndrome",
+          "cells": [
+            {
+              "text": "Arterial tortuosity; genetic testing separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial thoracic aortic aneurysm and dissection",
+          "cells": [
+            {
+              "text": "Aortic disease without the syndromic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "loeys_dietz_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-blockade and angiotensin-receptor blockade",
+          "cells": [
+            {
+              "text": "Reduce aortic wall stress and slow aneurysm growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylactic vascular surgery",
+          "cells": [
+            {
+              "text": "At smaller diameters and younger ages than in Marfan, given dissection at small calibre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-arterial imaging surveillance",
+          "cells": [
+            {
+              "text": "Head to pelvis at regular intervals, not only the aortic root"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity modification",
+          "cells": [
+            {
+              "text": "Avoid heavy isometric exertion and contact or competitive sport"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure and pregnancy",
+          "cells": [
+            {
+              "text": "Blood pressure control; counselling on high maternal vascular risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Genetics, cardiology and vascular surgery; skeletal and craniofacial features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; cascade family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine",
+          "cells": [
+            {
+              "text": "Assessed for instability before anaesthesia or intervention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "loeys_dietz_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Loeys-Dietz syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Arterial tortuosity, hypertelorism and bifid uvula with aneurysms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute chest, back or abdominal pain, threshold size, neck instability)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent vascular surgical review for dissection or rupture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Aortic root echo, head-to-pelvis CT or MR angiography, TGF-beta gene panel, slit-lamp",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a pathogenic TGF-beta pathway variant identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Marfan syndrome, vascular EDS or arterial tortuosity syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Beta-blocker and or ARB to reduce aortic wall stress",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prophylactic surgery at smaller diameters than in Marfan",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Whole-arterial surveillance from head to pelvis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid heavy isometric exertion and contact sports",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cascade genetic testing and cervical spine assessment before anaesthesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Improved by surveillance and earlier surgery; widespread arterial disease still at risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

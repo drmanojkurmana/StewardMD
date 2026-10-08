@@ -150,5 +150,332 @@
       "caption": "Overview comparison matrix for milroy disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "milroy_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "FLT4 (VEGFR3) molecular genetic testing",
+          "cells": [
+            {
+              "text": "FLT4 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoscintigraphy",
+          "cells": [
+            {
+              "text": "Reduced or absent lymphatic uptake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical examination for toenail changes, toe creases and hydrocele",
+          "cells": [
+            {
+              "text": "Toenail changes, toe creases and hydrocele"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex ultrasound",
+          "cells": [
+            {
+              "text": "Venous cause of swelling excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for and monitoring of recurrent cellulitis",
+          "cells": [
+            {
+              "text": "Recurrent cellulitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history review and cascade genetic screening",
+          "cells": [
+            {
+              "text": "Family history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "milroy_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphoedema-distichiasis syndrome (FOXC2)",
+          "cells": [
+            {
+              "text": "Later onset, with distichiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other primary lymphoedemas (late-onset type)",
+          "cells": [
+            {
+              "text": "Late-onset primary lymphoedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary lymphoedema (infective, filarial or post-surgical)",
+          "cells": [
+            {
+              "text": "Infective, filarial or post-surgical cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital venous malformation with limb swelling",
+          "cells": [
+            {
+              "text": "Venous cause excluded on duplex ultrasound"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "milroy_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Compression and complex decongestive therapy",
+          "cells": [
+            {
+              "text": "Graduated compression garments, bandaging, manual lymphatic drainage and exercise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin care and elevation",
+          "cells": [
+            {
+              "text": "Limits progression and protects the skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellulitis treatment",
+          "cells": [
+            {
+              "text": "Prompt antibiotics; prophylaxis for recurrent attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microsurgery",
+          "cells": [
+            {
+              "text": "Lymphovenous anastomosis in carefully selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated hydrocele",
+          "cells": [
+            {
+              "text": "Surgery where symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant FLT4 (VEGFR3) disorder; cascade family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist follow-up",
+          "cells": [
+            {
+              "text": "Long-term lymphoedema service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "milroy_disease-dx-mgmt",
+      "title": "Diagnosis and management of Milroy disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Limb lymphoedema with toenail changes, toe creases or hydrocele",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Recurrent severe cellulitis, rapidly asymmetric swelling, or skin breakdown?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat cellulitis promptly; assess for a secondary cause of swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lymphoscintigraphy; FLT4 testing; duplex ultrasound; clinical examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an FLT4 variant confirmed with reduced lymphatic uptake?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider FOXC2 lymphoedema-distichiasis, late-onset lymphoedema or a secondary cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Graduated compression, bandaging and complex decongestive therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Meticulous skin care and limb elevation to protect the skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prompt antibiotics for cellulitis; prophylaxis for recurrent attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Microsurgery such as lymphovenous anastomosis in selected patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Cascade genetic screening for autosomal dominant FLT4; long-term lymphoedema service",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -366,6 +366,16 @@
       "id": "c5",
       "label": "Tables PDF, Table 257-2",
       "kind": "user-supplied"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 257-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c7",
+      "label": "Tables PDF, Table 147-1",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -773,6 +783,155 @@
         }
       ],
       "footnote": "Tables PDF Table 257-4 (older guidance) lists a macrolide or doxycycline first for healthy outpatients; ATS/IDSA 2019 prefers amoxicillin and allows a macrolide only where pneumococcal macrolide resistance is <25%. The PDF defines high-level resistance as MIC >16 ug/mL in 25% of isolates. Vancomycin dose also differs between sources. Follow-up chest imaging: ATS/IDSA recommend against routine imaging, Harrison suggests a film about 4 to 6 weeks after hospitalisation."
+    },
+    {
+      "id": "CAP-treatment-2",
+      "kind": "treatment",
+      "title": "Empirical antibiotics for community-acquired pneumonia by setting",
+      "rowHeader": "Option",
+      "columns": [
+        "Regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "Outpatient, previously healthy, no antibiotics in past 3 months",
+          "cells": [
+            {
+              "text": "A macrolide (clarithromycin 500 mg PO bid, or azithromycin 500 mg PO once then 250 mg qd), or doxycycline 100 mg PO bid"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Outpatient, comorbidities or antibiotics in past 3 months (choose a different class)",
+          "cells": [
+            {
+              "text": "A respiratory fluoroquinolone (moxifloxacin 400 mg PO qd, gemifloxacin 320 mg PO qd, levofloxacin 750 mg PO qd), or a beta-lactam plus a macrolide (a). Beta-lactam preferred: high-dose amoxicillin 1 g tid or amoxicillin/clavulanate 2 g bid. Beta-lactam alternatives: ceftriaxone 1 to 2 g IV qd, cefpodoxime 200 mg PO bid, cefuroxime 500 mg PO bid"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Region with high rate of high-level pneumococcal macrolide resistance (b)",
+          "cells": [
+            {
+              "text": "Consider the alternatives listed for patients with comorbidities"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Inpatient, non-ICU",
+          "cells": [
+            {
+              "text": "A respiratory fluoroquinolone (moxifloxacin 400 mg PO or IV qd, gemifloxacin 320 mg PO qd, levofloxacin 750 mg PO or IV qd), or a beta-lactam (c) (cefotaxime 1 to 2 g IV q8h, ceftriaxone 1 to 2 g IV qd, ampicillin 1 to 2 g IV q4 to 6h, ertapenem 1 g IV qd in selected patients) plus a macrolide (d) (oral clarithromycin or azithromycin as above, or IV azithromycin 1 g once then 500 mg qd)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Inpatient, ICU",
+          "cells": [
+            {
+              "text": "A beta-lactam (e) (cefotaxime 1 to 2 g IV q8h, ceftriaxone 2 g IV qd, ampicillin-sulbactam 2 g IV q8h) plus azithromycin or a fluoroquinolone (as for non-ICU inpatients)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Special concern: Pseudomonas",
+          "cells": [
+            {
+              "text": "An antipneumococcal, antipseudomonal beta-lactam (piperacillin/tazobactam 4.5 g IV q6h, cefepime 1 to 2 g IV q12h, imipenem 500 mg IV q6h, meropenem 1 g IV q8h) plus ciprofloxacin 400 mg IV q12h or levofloxacin 750 mg IV qd; or the same beta-lactams plus an aminoglycoside (amikacin 15 mg/kg qd or tobramycin 1.7 mg/kg qd) and azithromycin; or the same beta-lactams (f) plus an aminoglycoside plus an antipneumococcal fluoroquinolone"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Special concern: CA-MRSA",
+          "cells": [
+            {
+              "text": "Add linezolid 600 mg IV q12h or vancomycin 1 g IV q12h"
+            }
+          ],
+          "cite": "c6"
+        }
+      ],
+      "footnote": "(a) Doxycycline 100 mg PO bid is an alternative to the macrolide. (b) MIC above 16 ug/mL in 25% of isolates. (c) Use a respiratory fluoroquinolone for penicillin-allergic patients. (d) Doxycycline 100 mg IV q12h is an alternative to the macrolide. (e) For penicillin allergy use a respiratory fluoroquinolone and aztreonam 2 g IV q8h. (f) Text not shown on the printed page."
+    },
+    {
+      "id": "CAP-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Clinical clues suggestive of Legionnaires' disease",
+      "rowHeader": "Clue",
+      "columns": [
+        "Detail"
+      ],
+      "rows": [
+        {
+          "parameter": "Diarrhea",
+          "cells": [
+            {
+              "text": "Clinical clue"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "High fever",
+          "cells": [
+            {
+              "text": "Above 40 deg C (104 deg F)"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Sputum Gram stain",
+          "cells": [
+            {
+              "text": "Numerous neutrophils but no organisms seen on Gram's stain of respiratory secretions"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Hyponatremia",
+          "cells": [
+            {
+              "text": "Serum sodium <131 (unit printed in the source as mg/dL)"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Treatment failure",
+          "cells": [
+            {
+              "text": "No response to beta-lactam drugs (penicillins or cephalosporins) and aminoglycosides"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Environmental exposure",
+          "cells": [
+            {
+              "text": "Illness in an environment where the potable water supply is known to be contaminated with Legionella"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Recent hospitalization",
+          "cells": [
+            {
+              "text": "Symptom onset within 10 days after hospital discharge"
+            }
+          ],
+          "cite": "c7"
+        }
+      ]
     }
   ],
   "flowcharts": [

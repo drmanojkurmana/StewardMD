@@ -151,5 +151,321 @@
       "caption": "Overview comparison matrix for pseudoangiomatous stromal hyperplasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Breast Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pseudoangiomatous_stromal_hyperplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Breast ultrasound",
+          "cells": [
+            {
+              "text": "Circumscribed solid mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mammography, as part of triple assessment",
+          "cells": [
+            {
+              "text": "Triple assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core needle biopsy",
+          "cells": [
+            {
+              "text": "Histological diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CD34, factor VIII and hormone receptor immunohistochemistry",
+          "cells": [
+            {
+              "text": "Stromal marker profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI for large or rapidly enlarging lesions",
+          "cells": [
+            {
+              "text": "Size and growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excisional biopsy where imaging and pathology are discordant",
+          "cells": [
+            {
+              "text": "Discordance resolved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval imaging of conservatively managed lesions",
+          "cells": [
+            {
+              "text": "Stability over time"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pseudoangiomatous_stromal_hyperplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-grade angiosarcoma",
+          "cells": [
+            {
+              "text": "Histological atypia, mitoses or true vascular channels"
+            },
+            {
+              "text": "Core needle biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibroadenoma",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pseudoangiomatous_stromal_hyperplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign lesion with no malignant or metastatic potential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core biopsy and immunohistochemistry",
+          "cells": [
+            {
+              "text": "Triple assessment with CD34 and factor VIII staining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Clinical and imaging surveillance for small, asymptomatic lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "Large, symptomatic, rapidly enlarging or cosmetically troubling masses, or discordance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone review",
+          "cells": [
+            {
+              "text": "Review and modify exogenous hormone exposure that may drive proliferation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence counselling",
+          "cells": [
+            {
+              "text": "Local recurrence after incomplete excision does not indicate malignant behaviour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pseudoangiomatous_stromal_hyperplasia-dx-mgmt",
+      "title": "Diagnosis and management of Pseudoangiomatous stromal hyperplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PASH: circumscribed solid breast mass on ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid growth, atypia or vascular channels, or biopsy-imaging discordance?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent excision and pathology review for suspected angiosarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Breast ultrasound; mammography; core biopsy with CD34 and factor VIII; MRI if large",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the core biopsy consistent with PASH, without atypia or vascular channels?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Excise the lesion for pathology and consider an alternative diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance: benign lesion with no malignant potential",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Clinical and imaging surveillance for small asymptomatic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Excision for large, symptomatic or rapidly enlarging masses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Review and modify exogenous hormone exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Local recurrence after incomplete excision does not indicate malignant behaviour",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

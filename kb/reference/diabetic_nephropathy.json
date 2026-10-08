@@ -152,6 +152,11 @@
       "id": "c1",
       "label": "Harrison's Principles of Internal Medicine",
       "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 280-1",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -313,6 +318,72 @@
           "cite": "c1"
         }
       ]
+    },
+    {
+      "id": "diabetic_nephropathy-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Classification of chronic kidney disease by GFR",
+      "rowHeader": "Stage",
+      "columns": [
+        "GFR, mL/min per 1.73 m2"
+      ],
+      "rows": [
+        {
+          "parameter": "0",
+          "cells": [
+            {
+              "text": ">90"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "1",
+          "cells": [
+            {
+              "text": ">=90"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "2",
+          "cells": [
+            {
+              "text": "60-89"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "3",
+          "cells": [
+            {
+              "text": "30-59"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "4",
+          "cells": [
+            {
+              "text": "15-29"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "5",
+          "cells": [
+            {
+              "text": "<15"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "The source marks stages 0 and 1 with footnotes a and b, but the footnote text is not legible on the page."
     }
   ],
   "flowcharts": [

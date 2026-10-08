@@ -153,5 +153,343 @@
       "caption": "Overview comparison matrix for long qt syndrome type 1."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Inherited arrhythmia and cardiac electrophysiology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "long_qt_syndrome_type_1-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG with QT and T-wave morphology",
+          "cells": [
+            {
+              "text": "Broad-based, smooth, prolonged T wave"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise stress testing",
+          "cells": [
+            {
+              "text": "Failure to shorten QT or paradoxical prolongation in recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory Holter monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmic events"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KCNQ1 genetic testing with cascade screening",
+          "cells": [
+            {
+              "text": "Confirms the variant; relatives screened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum electrolytes (potassium, magnesium, calcium)",
+          "cells": [
+            {
+              "text": "Precipitants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological assessment",
+          "cells": [
+            {
+              "text": "Where biallelic disease or deafness is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "long_qt_syndrome_type_1-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Catecholaminergic polymorphic VT",
+          "cells": [
+            {
+              "text": "Exertional events with a normal resting QT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Jervell and Lange-Nielsen syndrome",
+          "cells": [
+            {
+              "text": "Biallelic disease with congenital deafness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LQT2 and LQT3",
+          "cells": [
+            {
+              "text": "Other congenital subtypes; triggers and ECG pattern differ"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurocardiogenic or vasovagal syncope",
+          "cells": [
+            {
+              "text": "Non-arrhythmic cause of collapse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "long_qt_syndrome_type_1-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-blockade",
+          "cells": [
+            {
+              "text": "Non-selective agent such as nadolol or propranolol; most protective in this subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise and swimming advice",
+          "cells": [
+            {
+              "text": "Avoid unsupervised swimming and diving; modify strenuous or competitive exertion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes and drugs",
+          "cells": [
+            {
+              "text": "Correct and maintain potassium, magnesium and calcium; avoid QT-prolonging drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute arrhythmia",
+          "cells": [
+            {
+              "text": "Intravenous magnesium for torsades; defibrillation for sustained polymorphic VT or arrest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breakthrough events",
+          "cells": [
+            {
+              "text": "Left cardiac sympathetic denervation or an ICD despite beta-blockade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic and family screening",
+          "cells": [
+            {
+              "text": "KCNQ1 testing; biallelic disease assessed with audiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist service",
+          "cells": [
+            {
+              "text": "Inherited cardiac conditions service for syncope or poor response"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "long_qt_syndrome_type_1-dx-mgmt",
+      "title": "Diagnosis and management of Long QT syndrome type 1",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Exertional syncope in a young person, especially while swimming, with a long QT",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (syncope in exercise, torsades, family sudden death, very long QT)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent arrhythmia review; magnesium and defibrillation if torsades",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "12-lead ECG, exercise test, Holter, KCNQ1 testing, electrolytes, audiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a pathogenic KCNQ1 variant or exercise-related QT failure confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CPVT, LQT2 or LQT3, drug-induced QT or vasovagal syncope",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Beta-blockade with nadolol or propranolol as first line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Advise against unsupervised swimming and strenuous exertion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct electrolytes and avoid QT-prolonging drugs lifelong",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Defibrillation for arrest; intravenous magnesium for torsades",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cascade genetic screening of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Favourable with beta-blockers and trigger avoidance; lethality is lower than LQT3",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for ovotesticular disorder of sex development."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ovotesticular_dsd-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Karyotype with SRY and SOX9 copy-number analysis",
+          "cells": [
+            {
+              "text": "Genetic basis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Gonads and Mullerian structures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testosterone, AMH and gonadotropins with hCG stimulation",
+          "cells": [
+            {
+              "text": "Testicular function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonadal biopsy and histopathology",
+          "cells": [
+            {
+              "text": "Both ovarian and testicular tissue confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal steroid profiling with 17-hydroxyprogesterone",
+          "cells": [
+            {
+              "text": "Congenital adrenal hyperplasia excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ovotesticular_dsd-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "Virilises a 46,XX infant; salt-wasting is the urgent exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mixed gonadal dysgenesis (45,X/46,XY)",
+          "cells": [
+            {
+              "text": "Dysgenetic gonads; histology shows both tissue types in this condition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ovotesticular_dsd-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Specialist team",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Disorders-of-sex-development team; decisions on sex of rearing, gonadal function and malignancy risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonadal surgery",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Matched to the assigned sex, keeping functional tissue where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sex-steroid replacement",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Oestrogen or testosterone to induce and maintain puberty for the assigned sex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genital reconstruction",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Where indicated, timed with the family and young person"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy management",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Germ cell tumour surveillance of retained tissue, or gonadectomy where risk is high"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ovotesticular_dsd-dx-mgmt",
+      "title": "Diagnosis and management of Ovotesticular disorder of sex development",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ambiguous genitalia in a newborn; both ovarian and testicular tissue suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (salt-wasting crisis, enlarging gonadal mass or absent puberty)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent adrenal assessment for salt-wasting congenital adrenal hyperplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype, SRY and SOX9 testing, pelvic imaging, hormones, adrenal steroid profile",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does gonadal histology show both ovarian and testicular tissue?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CAH, mixed gonadal dysgenesis or androgen insensitivity; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Specialist disorders-of-sex-development team decides sex of rearing and gonadal care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gonadal surgery matched to the assigned sex, keeping functional tissue where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sex-steroid replacement to induce and maintain puberty for the assigned sex",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genital reconstruction where indicated, timed with the family and young person",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Germ cell tumour surveillance of retained tissue, or gonadectomy where risk is high",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on gonadal function, assigned sex and support; lifelong cancer awareness",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

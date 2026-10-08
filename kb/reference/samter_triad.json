@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for samter triad (aspirin-exacerbated respiratory disease)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology - Head and Neck Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "samter_triad-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nasal endoscopy",
+          "cells": [
+            {
+              "text": "Polyp burden and distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT paranasal sinuses",
+          "cells": [
+            {
+              "text": "Disease extent before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function testing",
+          "cells": [
+            {
+              "text": "Characterises and monitors asthma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supervised aspirin challenge",
+          "cells": [
+            {
+              "text": "Used where the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood and tissue eosinophils",
+          "cells": [
+            {
+              "text": "Gauges type 2 inflammation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "samter_triad-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic rhinosinusitis with polyps, no aspirin sensitivity",
+          "cells": [
+            {
+              "text": "No aspirin-triggered reaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eosinophilic granulomatosis with polyangiitis",
+          "cells": [
+            {
+              "text": "Vasculitis features such as neuropathy, purpura or systemic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgE-mediated NSAID allergy",
+          "cells": [
+            {
+              "text": "AERD is pseudo-allergic, so conventional allergy tests do not detect it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "samter_triad-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid aspirin and COX-1 NSAIDs",
+          "cells": [
+            {
+              "text": "Central trigger; educate on hidden sources"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leukotriene-modifying therapy",
+          "cells": [
+            {
+              "text": "Receptor antagonist or 5-lipoxygenase inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical and inhaled steroids",
+          "cells": [
+            {
+              "text": "Intranasal steroid and saline irrigation; inhaled steroid and bronchodilators"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspirin desensitisation",
+          "cells": [
+            {
+              "text": "Then maintenance aspirin in suitable patients to reduce polyp recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biologic therapy",
+          "cells": [
+            {
+              "text": "Anti-IL-5, anti-IL-4/13 or anti-IgE for refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic sinus surgery",
+          "cells": [
+            {
+              "text": "Debulks extensive polyps; recurrence is common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint monitoring",
+          "cells": [
+            {
+              "text": "Pulmonary function and nasal endoscopy across ENT, allergy and respiratory services"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "samter_triad-dx-mgmt",
+      "title": "Diagnosis and management of Samter triad (aspirin-exacerbated respiratory disease)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Asthma, nasal polyps and reaction to aspirin or NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe bronchospasm after NSAID, airway-threatening polyps or vasculitic features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency asthma care; stop NSAIDs; look for vasculitis if systemic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nasal endoscopy, sinus CT, spirometry, eosinophils; aspirin challenge if unclear",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is aspirin-exacerbated respiratory disease confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CRS with polyps, fungal sinusitis, EGPA or IgE-mediated NSAID allergy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict avoidance of aspirin and COX-1 NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Leukotriene modifier, intranasal and inhaled steroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aspirin desensitisation then maintenance aspirin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Biologics for refractory disease; sinus surgery to debulk polyps",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic relapsing course; polyps often recur after surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

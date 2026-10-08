@@ -148,5 +148,296 @@
       "caption": "Overview comparison matrix for naevus sebaceus of jadassohn."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nevus_sebaceus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical and dermoscopic assessment of the plaque",
+          "cells": [
+            {
+              "text": "Hairless yellow-orange plaque"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Diagnosis uncertain or secondary tumour suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology of any excised lesion",
+          "cells": [
+            {
+              "text": "Identifies secondary neoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Extensive lesions with seizures or developmental delay"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nevus_sebaceus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Aplasia cutis congenita",
+          "cells": [
+            {
+              "text": "Congenital scalp defect without yellow plaque"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Juvenile xanthogranuloma",
+          "cells": [
+            {
+              "text": "Yellow papules or nodules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Solitary mastocytoma",
+          "cells": [
+            {
+              "text": "Brown lesion that urticates on rubbing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichoblastoma or basal cell carcinoma",
+          "cells": [
+            {
+              "text": "Secondary tumours arising within the plaque"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syringocystadenoma papilliferum",
+          "cells": [
+            {
+              "text": "Benign adnexal tumour within the plaque"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nevus_sebaceus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Periodic surveillance",
+          "cells": [
+            {
+              "text": "Clinical and dermoscopic review of isolated, asymptomatic lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Elective full-thickness excision",
+          "cells": [
+            {
+              "text": "Offered for cosmetic reasons or to remove a secondary tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic screening",
+          "cells": [
+            {
+              "text": "Extensive lesions with neurological or ocular involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "Mosaic RAS-pathway lesion; modest lifelong tumour risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nevus_sebaceus-dx-mgmt",
+      "title": "Diagnosis and management of Naevus sebaceus of Jadassohn",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hairless yellow-orange plaque on the scalp or face present since birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new nodule, ulceration, bleeding, rapid change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent biopsy of any suspicious nodule or ulcerated area",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dermoscopy, biopsy where uncertain, histopathology of excised lesions, MRI if extensive",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Organoid epidermal and adnexal hamartoma on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider aplasia cutis or juvenile xanthogranuloma; biopsy to confirm",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Periodic clinical and dermoscopic surveillance for isolated lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Elective full-thickness excision for cosmetic reasons or secondary tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Systemic screening for extensive or neurocutaneous disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Counselling about the modest lifelong tumour risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Isolated lesion has excellent prognosis; secondary tumours are mostly benign",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

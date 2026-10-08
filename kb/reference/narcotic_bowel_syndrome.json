@@ -141,5 +141,314 @@
       "caption": "Overview comparison matrix for narcotic bowel syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rome IV criteria / gastroenterology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "narcotic_bowel_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Opioid and pain history",
+          "cells": [
+            {
+              "text": "Documents the dose-pain relationship; pain worsens as the opioid dose rises"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted investigation for structural disease",
+          "cells": [
+            {
+              "text": "Excludes structural disease rather than repeated testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological comorbidity and functional assessment",
+          "cells": [
+            {
+              "text": "Impact on function and mood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Planned opioid withdrawal programme",
+          "cells": [
+            {
+              "text": "A transient pain flare is expected during withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of previous investigations",
+          "cells": [
+            {
+              "text": "Avoids duplication"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "narcotic_bowel_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Opioid-induced constipation with pain",
+          "cells": [
+            {
+              "text": "Constipation is a separate opioid effect; the defining feature here is pain that worsens with dose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structural intra-abdominal disease",
+          "cells": [
+            {
+              "text": "New alarm features suggest organic disease and need investigation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Opioid withdrawal during treatment",
+          "cells": [
+            {
+              "text": "The transient pain flare during withdrawal must be anticipated and explained"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "narcotic_bowel_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Planned, supported opioid withdrawal",
+          "cells": [
+            {
+              "text": "Structured taper or detoxification as the definitive treatment; explain the expected transient flare"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-opioid bridging",
+          "cells": [
+            {
+              "text": "Tricyclic antidepressants, SNRIs or gabapentinoids for visceral pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdrawal symptom support",
+          "cells": [
+            {
+              "text": "Clonidine and antiemetics; treat associated constipation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Cognitive behavioural therapy and treatment of anxiety and depression, as part of the programme"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Therapeutic alliance",
+          "cells": [
+            {
+              "text": "Clear explanation; avoid repeated invasive investigations once structural disease is excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Gastroenterology, pain medicine and psychology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse prevention",
+          "cells": [
+            {
+              "text": "Resuming opioids reproduces the syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "narcotic_bowel_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Narcotic bowel syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic abdominal pain that worsens as opioid doses rise",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (alarm features, surgical abdomen, escalating opioid need)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Investigate for organic or surgical cause before attributing pain to opioids",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Opioid and pain history, targeted structural investigation, psychological assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pain worsens with dose, with structural disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the organic cause; reassess for alarm features",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Planned, supported opioid withdrawal as the definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bridge with tricyclic antidepressants, SNRIs or gabapentinoids for visceral pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Clonidine and antiemetics for withdrawal symptoms; treat constipation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Psychological support, including CBT, as part of the programme",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Pain usually improves after supported withdrawal; relapse is common if opioids resume",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -153,5 +153,315 @@
       "caption": "Overview comparison matrix for osteofibrous dysplasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Soft Tissue and Bone / Enzinger and Weiss's Soft Tissue Tumors",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "osteofibrous_dysplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiography",
+          "cells": [
+            {
+              "text": "Intracortical lytic lesion and tibial bowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Extent; features concerning for adamantinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology for osteoblastic rimming",
+          "cells": [
+            {
+              "text": "Rimmed trabeculae; absent in fibrous dysplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytokeratin immunohistochemistry",
+          "cells": [
+            {
+              "text": "Scattered or clustered epithelial cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term radiographic surveillance",
+          "cells": [
+            {
+              "text": "Progression or adamantinomatous change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteofibrous_dysplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Adamantinoma of long bones",
+          "cells": [
+            {
+              "text": "Sits on a spectrum with osteofibrous dysplasia; an epithelial component is the key difference"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrous dysplasia",
+          "cells": [
+            {
+              "text": "Lacks the osteoblastic rimming seen here"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteofibrous_dysplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Watchful observation",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "The default posture in growing children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial radiographs",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "For asymptomatic lesions; many stabilise or regress near skeletal maturity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bracing and activity modification",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "For anterior bowing without progressive deformity, fracture or significant pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corrective surgery",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Curettage or resection with bone grafting or osteotomy for progressive deformity, fracture or failure to stabilise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epithelial component",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Shifts management to wide resection, as for a low- to intermediate-grade bone malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Timing of surgery",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Reserved in young children, given the high recurrence rate after resection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "osteofibrous_dysplasia-dx-mgmt",
+      "title": "Diagnosis and management of Osteofibrous dysplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless anterior tibial bowing or incidental lytic cortical lesion in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (increasing size or pain, epithelial component, deformity or recurrence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: wide resection as for a low-grade bone malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs, MRI for extent, histology with rimming, cytokeratin staining",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lesion pure osteofibrous dysplasia, with no epithelial component?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Epithelial component found: manage as adamantinoma with wide resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Watchful observation as the default in growing children",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial radiographs for asymptomatic lesions; many stabilise near maturity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bracing, activity modification and observation for bowing without progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Curettage or resection with graft or osteotomy for progressive deformity or fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and often regresses by maturity, but recurs after excision in young children",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,333 @@
       "caption": "Overview comparison matrix for progressive cardiac conduction defect."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard cardiology and inherited cardiac conditions references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "progressive_cardiac_conduction_defect-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial 12-lead ECGs",
+          "cells": [
+            {
+              "text": "Progression of conduction block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory ECG monitoring",
+          "cells": [
+            {
+              "text": "Intermittent high-grade block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Structural or infiltrative heart disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Infiltrative or inflammatory disease, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SCN5A and related gene testing, with cascade family screening",
+          "cells": [
+            {
+              "text": "Genetic basis of the conduction disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrophysiological study",
+          "cells": [
+            {
+              "text": "Level of block, in selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_cardiac_conduction_defect-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Infiltrative cardiomyopathy (amyloidosis, sarcoidosis)",
+          "cells": [
+            {
+              "text": "Infiltrative or inflammatory disease"
+            },
+            {
+              "text": "Cardiac MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LMNA cardiomyopathy with conduction disease",
+          "cells": [
+            {
+              "text": "Coexisting features of lamin-related cardiomyopathy"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brugada syndrome and other sodium-channelopathies",
+          "cells": [
+            {
+              "text": "Overlapping sodium-channel phenotype"
+            },
+            {
+              "text": "SCN5A and related gene testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_cardiac_conduction_defect-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Permanent pacemaker",
+          "cells": [
+            {
+              "text": "Mainstay for symptomatic or high-grade AV and His-Purkinje block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid conduction-slowing drugs",
+          "cells": [
+            {
+              "text": "No drug corrects the defect; avoid sodium-channel blockers and AV-nodal blocking agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Defibrillator",
+          "cells": [
+            {
+              "text": "Where a Brugada-type phenotype or other sudden-death risk is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Serial 12-lead ECGs and ambulatory monitoring to track progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated arrhythmias",
+          "cells": [
+            {
+              "text": "Assess and manage associated arrhythmias and overlapping sodium-channel phenotypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "SCN5A and related genes, with cascade family screening and counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syncope safety",
+          "cells": [
+            {
+              "text": "Advise on syncope safety; escalate urgently for pacing when block advances"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "progressive_cardiac_conduction_defect-dx-mgmt",
+      "title": "Diagnosis and management of Progressive cardiac conduction defect",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected progressive conduction defect: block progressing on serial ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Syncope, high-grade AV block, very wide QRS, or family history of pacing or sudden death?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent pacing for syncope or complete heart block",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial 12-lead ECGs; ambulatory ECG; echo; cardiac MRI if suspected; SCN5A testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is progression confirmed with structural and infiltrative disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ischaemic or drug-induced block; repeat monitoring and reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Permanent pacemaker for symptomatic or high-grade conduction block",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid drugs that impair conduction, such as sodium-channel blockers",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Defibrillator where a Brugada-type phenotype or sudden-death risk coexists",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "SCN5A testing with cascade family screening and counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serial ECG and ambulatory monitoring; urgent pacing if block advances",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

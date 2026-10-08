@@ -150,5 +150,334 @@
       "caption": "Overview comparison matrix for syne1-related ataxia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "syne1_ataxia-dx-mgmt",
+      "title": "Diagnosis and management of SYNE1-Related Ataxia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected SYNE1 ataxia: slowly progressive cerebellar ataxia with dysarthria",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (prominent motor neuron or bulbar signs, or swallowing compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for respiratory or swallowing compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI for cerebellar atrophy; SYNE1 sequencing or recessive ataxia panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do biallelic SYNE1 variants explain the cerebellar ataxia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Friedreich ataxia, motor neuron disease or an acquired ataxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy for gait, balance and function",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Speech and language therapy for dysarthria and swallowing safety",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Symptomatic treatment of spasticity and lower motor neuron features",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor swallowing, respiratory and motor-neuron complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family testing for autosomal recessive inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually slowly progressive with preserved lifespan; multisystem forms are more disabling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "syne1_ataxia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar atrophy; other structures relatively preserved in the pure form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SYNE1 sequencing or recessive ataxia panel",
+          "cells": [
+            {
+              "text": "Biallelic SYNE1 variants; the gene is very large"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Neuropathy and motor neuron involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase",
+          "cells": [
+            {
+              "text": "Muscle or neuromuscular junction involvement, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for acquired causes",
+          "cells": [
+            {
+              "text": "Acquired ataxias excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive assessment",
+          "cells": [
+            {
+              "text": "Cognitive change in a complex multisystem phenotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "syne1_ataxia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Motor neuron disease",
+          "cells": [
+            {
+              "text": "Complex SYNE1 phenotypes can include motor neuron signs and should not be mistaken for it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired ataxias (alcohol-related, gluten, paraneoplastic)",
+          "cells": [
+            {
+              "text": "Excluded by screening for acquired causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sporadic adult-onset cerebellar ataxia",
+          "cells": [
+            {
+              "text": "Pure, adult-onset, slowly progressive cerebellar ataxia; biallelic SYNE1 variants identify SYNE1 ataxia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "syne1_ataxia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Gait, balance and function; mobility aids and falls prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and language therapy",
+          "cells": [
+            {
+              "text": "Dysarthria and assessment of swallowing safety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic management of the expanded phenotype",
+          "cells": [
+            {
+              "text": "Spasticity and lower motor neuron involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for complications",
+          "cells": [
+            {
+              "text": "Swallowing, respiratory and motor-neuron complications over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology-led ataxia service",
+          "cells": [
+            {
+              "text": "Long-term coordination of multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

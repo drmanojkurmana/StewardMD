@@ -149,5 +149,334 @@
       "caption": "Overview comparison matrix for karyomegalic interstitial nephritis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Renal pathology and nephrology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "karyomegalic_interstitial_nephritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal biopsy with light microscopy",
+          "cells": [
+            {
+              "text": "Karyomegaly, interstitial fibrosis and tubular atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry or in-situ viral studies",
+          "cells": [
+            {
+              "text": "Viral inclusions excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatinine and estimated GFR",
+          "cells": [
+            {
+              "text": "Renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and proteinuria quantification",
+          "cells": [
+            {
+              "text": "Proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Structural change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug and toxin exposure history",
+          "cells": [
+            {
+              "text": "Toxic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FAN1 genetic testing with relatives",
+          "cells": [
+            {
+              "text": "Causal variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "karyomegalic_interstitial_nephritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cytomegalovirus or BK polyomavirus nephritis",
+          "cells": [
+            {
+              "text": "Viral cytopathic change mimics karyomegaly; immunostaining excludes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesic or aristolochic acid nephropathy",
+          "cells": [
+            {
+              "text": "Drug or toxin exposure history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autosomal dominant tubulointerstitial kidney disease",
+          "cells": [
+            {
+              "text": "Dominant inheritance (UMOD, MUC1, REN, HNF1B)"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "karyomegalic_interstitial_nephritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood pressure",
+          "cells": [
+            {
+              "text": "Control with renin-angiotensin system blockade; no disease-specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrotoxins",
+          "cells": [
+            {
+              "text": "Avoid; adjust drug doses to renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CKD complications",
+          "cells": [
+            {
+              "text": "Anaemia, metabolic acidosis and mineral-bone disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection",
+          "cells": [
+            {
+              "text": "Treat recurrent respiratory tract infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement",
+          "cells": [
+            {
+              "text": "Planned dialysis; transplant feasible as the defect does not recur in the graft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family",
+          "cells": [
+            {
+              "text": "Genetic counselling and family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "karyomegalic_interstitial_nephritis-dx-mgmt",
+      "title": "Diagnosis and management of Karyomegalic interstitial nephritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Insidious progressive chronic kidney disease in early or mid adulthood",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid decline, advanced CKD, recurrent infection or features suggesting malignancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nephrology review; plan dialysis or transplant; infection management",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal biopsy for karyomegaly, viral immunostaining, creatinine, proteinuria, FAN1",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Karyomegaly on biopsy with biallelic FAN1 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tubulointerstitial dominant disease, viral or toxic nephritis; repeat tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Blood pressure control with renin-angiotensin blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid nephrotoxic drugs and adjust doses to renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Manage anaemia, acidosis and mineral-bone disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat recurrent respiratory infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Plan renal replacement or transplant; family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Progressive chronic kidney disease; transplant feasible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

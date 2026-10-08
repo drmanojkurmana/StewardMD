@@ -152,5 +152,323 @@
       "caption": "Overview comparison matrix for specific granule deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immune Deficiencies / Nathan and Oski's Hematology of Infancy and Childhood",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "specific_granule_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Peripheral blood film",
+          "cells": [
+            {
+              "text": "Bilobed, hypogranular neutrophils with a pseudo-Pelger-Huet appearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neutrophil granule protein assays",
+          "cells": [
+            {
+              "text": "Reduced lactoferrin and defensins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CEBPE and SMARCD2 sequencing",
+          "cells": [
+            {
+              "text": "Biallelic variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neutrophil functional studies",
+          "cells": [
+            {
+              "text": "Chemotaxis and bactericidal activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow aspirate and trephine",
+          "cells": [
+            {
+              "text": "Granulopoiesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of suspected deep abscesses",
+          "cells": [
+            {
+              "text": "Extent of deep infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "specific_granule_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic granulomatous disease",
+          "cells": [
+            {
+              "text": "Separated from it by functional testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myeloperoxidase deficiency",
+          "cells": [
+            {
+              "text": "Separated from it by functional testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital or cyclic neutropenia",
+          "cells": [
+            {
+              "text": "Neutrophil counts are typically normal in this disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myelodysplasia with acquired Pelger-Huet anomaly",
+          "cells": [
+            {
+              "text": "Acquired, not a congenital defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "specific_granule_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aggressive antibiotic treatment",
+          "cells": [
+            {
+              "text": "Guided by culture; covering Staphylococcus aureus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term co-trimoxazole prophylaxis",
+          "cells": [
+            {
+              "text": "Reduces recurrent pyogenic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical drainage",
+          "cells": [
+            {
+              "text": "Deep abscesses when they develop"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Potentially curative in severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Low threshold for imaging and early intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic confirmation and counselling",
+          "cells": [
+            {
+              "text": "CEBPE and SMARCD2 testing; autosomal recessive family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "specific_granule_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of specific granule deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent deep pyogenic infection, bilobed neutrophils: suspected SGD",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (deep abscess, sepsis, faltering growth, bronchiectasis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent sepsis management and drainage of deep abscesses",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood film; granule protein assays; CEBPE and SMARCD2 sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are granule proteins reduced, with CEBPE or SMARCD2 variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CGD, LAD, MPO deficiency or MDS; repeat functional testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Aggressive antibiotics guided by culture, covering S aureus",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Long-term co-trimoxazole prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical drainage of deep abscesses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Allogeneic transplant as the potentially curative option for severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recurrent infection is the main burden; transplant is potentially curative",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

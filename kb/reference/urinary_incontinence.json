@@ -150,5 +150,296 @@
       "caption": "Overview comparison matrix for urinary incontinence."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "urinary_incontinence-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Excludes infection and haematuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder frequency-volume diary",
+          "cells": [
+            {
+              "text": "Pattern of leakage and voiding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-void residual volume",
+          "cells": [
+            {
+              "text": "Retention, which must be measured before treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cough stress test and pelvic examination",
+          "cells": [
+            {
+              "text": "Stress leakage, prolapse and pelvic floor strength"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urodynamic studies",
+          "cells": [
+            {
+              "text": "Complex, mixed or pre-surgical cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystoscopy or imaging",
+          "cells": [
+            {
+              "text": "Fistula, malignancy or structural abnormality, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urinary_incontinence-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Overflow incontinence from obstruction or detrusor underactivity",
+          "cells": [
+            {
+              "text": "Dribbling from retention; antimuscarinics can worsen retention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurogenic bladder",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vesicovaginal or other urinary fistula",
+          "cells": [
+            {
+              "text": "Continuous leakage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urinary_incontinence-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Correct reversible contributors",
+          "cells": [
+            {
+              "text": "Weight loss, caffeine and fluid moderation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic floor muscle training",
+          "cells": [
+            {
+              "text": "Supervised; first-line for stress incontinence, with duloxetine as an adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder retraining with antimuscarinic or beta-3 agonist",
+          "cells": [
+            {
+              "text": "For urgency incontinence and overactive bladder, such as mirabegron"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravesical botulinum toxin or tibial nerve stimulation",
+          "cells": [
+            {
+              "text": "Refractory urgency incontinence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "urinary_incontinence-dx-mgmt",
+      "title": "Diagnosis and management of Urinary incontinence",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected urinary incontinence: involuntary leakage with stress, urgency or retention",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (haematuria, neurological signs or chronic retention)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for cord compression or cauda equina, or for renal impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinalysis, frequency-volume diary, post-void residual, cough test, pelvic exam",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the incontinence type classified, with post-void residual measured?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Urodynamics or cystoscopy for mixed, complex or structural cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct reversible contributors such as weight, caffeine and fluid intake",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Supervised pelvic floor training first for stress incontinence",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bladder retraining with antimuscarinic or beta-3 agonist for urgency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intravesical botulinum toxin for refractory urgency incontinence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Type-specific treatment improves symptoms; mislabelled overflow can worsen retention",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

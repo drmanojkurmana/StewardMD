@@ -147,5 +147,326 @@
       "caption": "Overview comparison matrix for osteosarcoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon's System of Orthopaedics and Fractures",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "osteosarcoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs of the affected region",
+          "cells": [
+            {
+              "text": "Bone destruction, new bone formation, sunburst pattern and Codman's triangle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the whole involved bone",
+          "cells": [
+            {
+              "text": "Extent, soft-tissue mass and skip lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the chest",
+          "cells": [
+            {
+              "text": "Pulmonary metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy planned at the treating centre",
+          "cells": [
+            {
+              "text": "Histological diagnosis; tract planned for later limb salvage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone scan or PET with ALP and LDH",
+          "cells": [
+            {
+              "text": "Distant disease and baseline biochemistry"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteosarcoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteomyelitis",
+          "cells": [
+            {
+              "text": "Can mimic tumour clinically and radiologically; histology separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign but aggressive lesions (giant cell tumour, osteoblastoma)",
+          "cells": [
+            {
+              "text": "Histology is needed; these can look aggressive but are benign"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteosarcoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neoadjuvant chemotherapy",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Typically high-dose methotrexate, doxorubicin and cisplatin before definitive surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wide resection with limb salvage",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Where feasible; amputation when adequate margins cannot otherwise be achieved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant chemotherapy",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Guided by histological necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary metastasectomy",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Lungs are the dominant site of spread; resection can still be curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist team",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Bone-sarcoma multidisciplinary team with orthopaedic oncology, medical oncology and radiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance and genetics",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Chest and primary-site imaging; genetic assessment where hereditary retinoblastoma or Li-Fraumeni is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "osteosarcoma-dx-mgmt",
+      "title": "Diagnosis and management of Osteosarcoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent night bone pain and swelling near the knee in an adolescent",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (pathological fracture, rapidly enlarging soft-tissue mass or swelling)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent specialist bone sarcoma referral before any biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs, MRI of whole bone, CT chest, bone scan or PET, ALP and LDH",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the planned biopsy show a malignant osteoid-producing tumour?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider osteomyelitis, Ewing sarcoma or a benign aggressive lesion; re-biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Neoadjuvant chemotherapy, typically high-dose methotrexate, doxorubicin and cisplatin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Wide resection with limb salvage where feasible, or amputation if margins require",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adjuvant chemotherapy guided by histological necrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Resect pulmonary metastases, as metastasectomy can still be curative",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surveillance with chest and primary-site imaging; genetic assessment if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on metastases at diagnosis and chemo response; localised disease often survives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

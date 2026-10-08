@@ -142,5 +142,296 @@
       "caption": "Overview comparison matrix for skew deviation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "skew_deviation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "HINTS examination in acute vestibular syndrome",
+          "cells": [
+            {
+              "text": "Skew deviation as a central sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upright-supine test",
+          "cells": [
+            {
+              "text": "The deviation reduces when supine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain with brainstem and cerebellum",
+          "cells": [
+            {
+              "text": "Posterior fossa lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoptic assessment with ocular torsion",
+          "cells": [
+            {
+              "text": "Vertical misalignment and torsion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular risk-factor evaluation",
+          "cells": [
+            {
+              "text": "Stroke risk, when stroke is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "skew_deviation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fourth nerve (superior oblique) palsy",
+          "cells": [
+            {
+              "text": "Skew is a vestibular misalignment, not a single muscle palsy; the upright-supine test helps separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orbital restrictive disease",
+          "cells": [
+            {
+              "text": "Vertical diplopia attributed to orbital disease without considering a central cause is a pitfall"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "skew_deviation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent stroke pathway",
+          "cells": [
+            {
+              "text": "When acute skew occurs with other central signs on HINTS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the posterior fossa lesion",
+          "cells": [
+            {
+              "text": "Ischaemia, demyelination, tumour or haemorrhage, with the relevant specialist team"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic diplopia relief",
+          "cells": [
+            {
+              "text": "Prisms or temporary monocular occlusion while awaiting resolution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular risk-factor control",
+          "cells": [
+            {
+              "text": "Antiplatelet or anticoagulant therapy, blood pressure and lipid control when ischaemic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoptic follow-up",
+          "cells": [
+            {
+              "text": "Monitor the deviation and torsion; strabismus surgery only for stable, persistent misalignment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology and neuro-ophthalmology referral",
+          "cells": [
+            {
+              "text": "Multidisciplinary assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "skew_deviation-dx-mgmt",
+      "title": "Diagnosis and management of Skew deviation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute vertical diplopia or misalignment with vertigo: suspected skew deviation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute vertigo, ataxia, direction-changing nystagmus)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent stroke pathway: posterior circulation stroke suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "HINTS examination; upright-supine test; MRI of brain with brainstem and cerebellum",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the deviation reduce when supine, with no ocular muscle palsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider fourth nerve palsy or orbital disease; re-examine",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urgent stroke pathway when acute skew occurs with central HINTS signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Specialist management of the causative posterior fossa lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prisms or temporary monocular occlusion for vertical diplopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiplatelet or anticoagulant and risk-factor control if ischaemic",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prognosis follows the cause; a brainstem stroke carries that event's outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

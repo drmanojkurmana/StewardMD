@@ -151,5 +151,332 @@
       "caption": "Overview comparison matrix for type 1 diabetes mellitus (child)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "type1_diabetes_child-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood glucose and HbA1c",
+          "cells": [
+            {
+              "text": "Hyperglycaemia; HbA1c guides dose titration and glycaemic target"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood or urine ketones",
+          "cells": [
+            {
+              "text": "Ketosis; ketoacidosis when severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous blood gas and electrolytes",
+          "cells": [
+            {
+              "text": "Acid-base status in ketoacidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic autoantibodies (GAD, IA-2, ZnT8)",
+          "cells": [
+            {
+              "text": "Autoimmune beta-cell destruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function and coeliac screening",
+          "cells": [
+            {
+              "text": "Associated autoimmune conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C-peptide",
+          "cells": [
+            {
+              "text": "Used where the diabetes type is uncertain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "type1_diabetes_child-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Type 2 diabetes mellitus",
+          "cells": [
+            {
+              "text": "Type 1 needs lifelong insulin; lifestyle or oral agents alone are not enough"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes insipidus",
+          "cells": [
+            {
+              "text": "Shares polyuria and polydipsia; glucose testing separates the two"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary tract infection or behavioural enuresis",
+          "cells": [
+            {
+              "text": "New secondary enuresis in a previously dry child is a clue to diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monogenic diabetes (MODY) and neonatal diabetes",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "type1_diabetes_child-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong insulin",
+          "cells": [
+            {
+              "text": "Basal-bolus injections or insulin pump; lifestyle and oral agents alone are insufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carbohydrate awareness",
+          "cells": [
+            {
+              "text": "Match prandial insulin to carbohydrate intake and adjust for exercise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose monitoring",
+          "cells": [
+            {
+              "text": "Capillary testing or continuous glucose monitoring; HbA1c to titrate doses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia treatment",
+          "cells": [
+            {
+              "text": "Fast-acting oral carbohydrate; parenteral glucagon for severe episodes; sick-day rules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetic ketoacidosis",
+          "cells": [
+            {
+              "text": "Careful rehydration, insulin infusion and potassium replacement; avoid rapid correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune and complication screening",
+          "cells": [
+            {
+              "text": "Thyroid and coeliac screening; later retinopathy, nephropathy and neuropathy screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Paediatric diabetes team with specialist nurse, dietitian and psychological support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "type1_diabetes_child-dx-mgmt",
+      "title": "Diagnosis and management of Type 1 Diabetes Mellitus (Child)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected type 1 diabetes in a child: polyuria, polydipsia, weight loss or enuresis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ketoacidosis, reduced consciousness, severe hypoglycaemia or shock)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency DKA management: careful rehydration, insulin infusion and potassium",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood glucose, HbA1c, ketones, venous gas, electrolytes and pancreatic autoantibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do autoantibodies and clinical features support type 1 diabetes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider type 2, monogenic or secondary diabetes; check C-peptide",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong insulin by injections or pump; lifestyle and oral agents are insufficient",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Carbohydrate matching and glucose monitoring with HbA1c-guided titration",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hypoglycaemia treatment with oral carbohydrate, glucagon and sick-day rules",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Multidisciplinary paediatric care with autoimmune and complication screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most live full lives with good control; ketoacidosis and hypoglycaemia are acute risks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

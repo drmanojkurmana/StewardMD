@@ -152,6 +152,21 @@
       "id": "c1",
       "label": "Williams Hematology / AABB technical manual",
       "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 103-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 103-6",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 280-5",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -322,6 +337,349 @@
             }
           ],
           "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anemia_of_chronic_disease-ddx-2",
+      "kind": "ddx",
+      "title": "Microcytic anemia: iron deficiency, inflammation, thalassemia, sideroblastic anemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Smear",
+        "Serum iron (SI)",
+        "TIBC",
+        "Percent saturation",
+        "Ferritin (ug/L)",
+        "Hemoglobin pattern on electrophoresis"
+      ],
+      "rows": [
+        {
+          "parameter": "Iron deficiency",
+          "cells": [
+            {
+              "text": "Micro/hypochromic"
+            },
+            {
+              "text": "<30"
+            },
+            {
+              "text": "Over 360"
+            },
+            {
+              "text": "<10"
+            },
+            {
+              "text": "<15"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Inflammation",
+          "cells": [
+            {
+              "text": "Normal to micro/hypochromic"
+            },
+            {
+              "text": "<50"
+            },
+            {
+              "text": "<300"
+            },
+            {
+              "text": "10 to 20"
+            },
+            {
+              "text": "30 to 200"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thalassemia",
+          "cells": [
+            {
+              "text": "Micro/hypochromic with targeting"
+            },
+            {
+              "text": "Normal to high"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "30 to 80"
+            },
+            {
+              "text": "50 to 300"
+            },
+            {
+              "text": "Abnormal with beta thalassemia; can be normal with alpha thalassemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sideroblastic anemia",
+          "cells": [
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "Normal to high"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "30 to 80"
+            },
+            {
+              "text": "50 to 300"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "anemia_of_chronic_disease-ddx-3",
+      "kind": "ddx",
+      "title": "Hypoproliferative anemias compared",
+      "rowHeader": "Condition",
+      "columns": [
+        "Anemia",
+        "MCV (fL)",
+        "Morphology",
+        "Serum iron (SI)",
+        "TIBC",
+        "Saturation (%)",
+        "Serum ferritin (ug/L)",
+        "Iron stores"
+      ],
+      "rows": [
+        {
+          "parameter": "Iron deficiency",
+          "cells": [
+            {
+              "text": "Mild to severe"
+            },
+            {
+              "text": "60 to 90"
+            },
+            {
+              "text": "Normo-microcytic"
+            },
+            {
+              "text": "<30"
+            },
+            {
+              "text": "Over 360"
+            },
+            {
+              "text": "<10"
+            },
+            {
+              "text": "<15"
+            },
+            {
+              "text": "0"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Inflammation",
+          "cells": [
+            {
+              "text": "Mild"
+            },
+            {
+              "text": "80 to 90"
+            },
+            {
+              "text": "Normocytic"
+            },
+            {
+              "text": "<50"
+            },
+            {
+              "text": "<300"
+            },
+            {
+              "text": "10 to 20"
+            },
+            {
+              "text": "30 to 200"
+            },
+            {
+              "text": "2 to 4+"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Renal disease",
+          "cells": [
+            {
+              "text": "Mild to severe"
+            },
+            {
+              "text": "90"
+            },
+            {
+              "text": "Normocytic"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "115 to 150"
+            },
+            {
+              "text": "1 to 4+"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hypometabolic states",
+          "cells": [
+            {
+              "text": "Mild"
+            },
+            {
+              "text": "90"
+            },
+            {
+              "text": "Normocytic"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "MCV, mean corpuscular volume; SI, serum iron; TIBC, total iron-binding capacity. The ferritin unit prints as ?g/L in the source and is read as ug/L."
+    },
+    {
+      "id": "anemia_of_chronic_disease-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of anemia in chronic kidney disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Role"
+      ],
+      "rows": [
+        {
+          "parameter": "Relative deficiency of erythropoietin",
+          "cells": [
+            {
+              "text": "Cause"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Diminished red blood cell survival",
+          "cells": [
+            {
+              "text": "Cause"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Bleeding diathesis",
+          "cells": [
+            {
+              "text": "Cause"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Iron deficiency",
+          "cells": [
+            {
+              "text": "Cause"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Hyperparathyroidism and bone marrow fibrosis",
+          "cells": [
+            {
+              "text": "Cause"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Chronic inflammation",
+          "cells": [
+            {
+              "text": "Cause"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Folate or vitamin B12 deficiency",
+          "cells": [
+            {
+              "text": "Cause"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Hemoglobinopathy",
+          "cells": [
+            {
+              "text": "Cause"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Comorbid conditions",
+          "cells": [
+            {
+              "text": "Hypothyroidism or hyperthyroidism, pregnancy, HIV-associated disease, autoimmune disease, immunosuppressive drugs"
+            }
+          ],
+          "cite": "c4"
         }
       ]
     }

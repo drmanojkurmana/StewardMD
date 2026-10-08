@@ -153,5 +153,298 @@
       "caption": "Overview comparison matrix for pleural plaques."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Murray & Nadel's Textbook of Respiratory Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pleural_plaques-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Pleural plaques"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT of the thorax",
+          "cells": [
+            {
+              "text": "Characterisation; other disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational and exposure history",
+          "cells": [
+            {
+              "text": "Asbestos exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests",
+          "cells": [
+            {
+              "text": "Usually normal; detects coexistent asbestosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comparison with previous imaging",
+          "cells": [
+            {
+              "text": "Stability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pleural_plaques-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Malignant pleural mesothelioma",
+          "cells": [
+            {
+              "text": "Nodular or circumferential thickening, or an associated mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural metastases",
+          "cells": [
+            {
+              "text": "Chest pain or unexplained weight loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pleural_plaques-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, rarely symptomatic, not themselves premalignant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exposure",
+          "cells": [
+            {
+              "text": "Confirm cessation of asbestos exposure; detailed occupational history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "Reduces the compounded lifetime risk of lung cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vigilance",
+          "cells": [
+            {
+              "text": "Investigate new breathlessness for other asbestos-related disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Compare with previous imaging; PET or biopsy only if malignancy is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pleural_plaques-dx-mgmt",
+      "title": "Diagnosis and management of pleural plaques",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Incidental pleural thickening on imaging after asbestos exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (nodular or circumferential thickening, new effusion, weight loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent thoracic review for suspected mesothelioma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT thorax; occupational history; spirometry; comparison with prior imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are the plaques stable and benign-looking on CT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider diffuse pleural thickening, mesothelioma, metastases or fibrothorax",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure that pleural plaques are benign and rarely symptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Confirm cessation of asbestos exposure and document occupational history",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Advise smoking cessation to reduce lung cancer risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor lung function to detect coexistent asbestosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer for biopsy only where features suggest malignant transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign with an excellent prognosis; rarely causes symptoms or impairment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,296 @@
       "caption": "Overview comparison matrix for spinal epidural lipomatosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rothman-Simeone and Herkowitz's The Spine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinal_epidural_lipomatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the spine",
+          "cells": [
+            {
+              "text": "High-T1-signal epidural fat compressing the thecal sac"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Low-attenuation epidural fat when MRI is unavailable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroid exposure review",
+          "cells": [
+            {
+              "text": "Exogenous steroid excess and Cushing syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine work-up",
+          "cells": [
+            {
+              "text": "Hypercortisolism, where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Body-mass index assessment",
+          "cells": [
+            {
+              "text": "Obesity and related comorbidity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_epidural_lipomatosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lumbar spinal stenosis",
+          "cells": [
+            {
+              "text": "Canal compromise from disc, facet and ligament change, without excess epidural fat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidural haematoma or abscess",
+          "cells": [
+            {
+              "text": "A collection rather than fat; MRI distinguishes them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_epidural_lipomatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Taper exogenous corticosteroids",
+          "cells": [
+            {
+              "text": "Where possible, with treatment of any endocrine cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured weight loss",
+          "cells": [
+            {
+              "text": "Cornerstone in obese patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and physiotherapy",
+          "cells": [
+            {
+              "text": "Back pain, radiculopathy and neurogenic claudication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Laminectomy with debulking of epidural fat for severe or progressive compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Neurological status and repeat MRI to track fat burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Endocrinology for hypercortisolism; spinal surgery for myelopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinal_epidural_lipomatosis-dx-mgmt",
+      "title": "Diagnosis and management of Spinal epidural lipomatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Back pain or claudication with steroid excess: suspected epidural lipomatosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (myelopathy, saddle anaesthesia, rapid deficit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent spinal surgery review for myelopathy or cauda equina features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI of the spine; review corticosteroid exposure; assess for Cushing syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show excess epidural fat compressing the sac?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lumbar stenosis, haematoma or abscess; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Taper exogenous corticosteroids and treat any endocrine cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Structured weight loss for obesity-related disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Analgesia and physiotherapy for symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Laminectomy with fat debulking for severe or progressive compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Cause-directed treatment is central; surgery is reserved for severe compromise",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

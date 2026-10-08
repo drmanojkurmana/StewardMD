@@ -151,5 +151,350 @@
       "caption": "Overview comparison matrix for segmental arterial mediolysis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Vascular medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "segmental_arterial_mediolysis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT angiography",
+          "cells": [
+            {
+              "text": "Aneurysms, dissection and active haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter digital subtraction angiography",
+          "cells": [
+            {
+              "text": "Detailed vascular mapping; allows intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and vasculitis screen",
+          "cells": [
+            {
+              "text": "Characteristically normal, which argues against an arteritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Excludes a mycotic aneurysm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic and connective tissue evaluation",
+          "cells": [
+            {
+              "text": "Done where clinically suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology of resected or biopsied vessel",
+          "cells": [
+            {
+              "text": "Medial lysis without inflammation is definitive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval MR or CT angiography",
+          "cells": [
+            {
+              "text": "Surveillance for new or evolving lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "segmental_arterial_mediolysis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Polyarteritis nodosa and other vasculitides",
+          "cells": [
+            {
+              "text": "Inflammatory markers and serology are raised; they are normal in SAM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibromuscular dysplasia",
+          "cells": [
+            {
+              "text": "Angiographic appearances can overlap; SAM may be its acute phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular Ehlers-Danlos, Marfan, Loeys-Dietz",
+          "cells": [
+            {
+              "text": "Genetic and connective tissue evaluation where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycotic (infective) aneurysm",
+          "cells": [
+            {
+              "text": "Excluded by blood cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atherosclerotic aneurysm",
+          "cells": [
+            {
+              "text": "SAM is non-atherosclerotic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Traumatic arterial injury",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "segmental_arterial_mediolysis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute rupture or active haemorrhage",
+          "cells": [
+            {
+              "text": "Coil embolisation, covered stent or surgical repair, with haemodynamic resuscitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure control",
+          "cells": [
+            {
+              "text": "Reduces wall stress on affected arteries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stable unruptured lesions",
+          "cells": [
+            {
+              "text": "Conservative with close observation, as spontaneous healing is possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude mimics before settling on diagnosis",
+          "cells": [
+            {
+              "text": "Vasculitis, fibromuscular dysplasia, connective tissue disease, infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Vascular medicine and interventional radiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging surveillance",
+          "cells": [
+            {
+              "text": "New aneurysms, dissection or further arterial territories"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "segmental_arterial_mediolysis-dx-mgmt",
+      "title": "Diagnosis and management of Segmental Arterial Mediolysis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected SAM: spontaneous intra-abdominal haemorrhage or visceral artery aneurysm",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Shock, severe abdominal pain or bowel ischaemia from a ruptured aneurysm?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Resuscitate; coil embolisation, covered stent or surgical repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT angiography; vasculitis screen, blood cultures, connective tissue evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Vasculitis, FMD, connective tissue disease and infection excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the alternative diagnosis; avoid immunosuppression for presumed vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Control blood pressure to lower arterial wall stress",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observe stable unruptured lesions, as medial lesions may heal",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Vascular medicine and interventional radiology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Interval MR or CT angiography for new lesions or territories",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Variable course; may stabilise after acute event, so surveillance continues",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

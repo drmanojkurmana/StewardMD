@@ -230,6 +230,16 @@
       "id": "c3",
       "label": "Tables PDF, Table 115-1",
       "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 143-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 113-2",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -631,6 +641,151 @@
         }
       ],
       "footnote": "Children are usually managed supportively; most recover spontaneously. Doses are as stated by Merck 2026; verify against local formulary."
+    },
+    {
+      "id": "itp-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Common causes of petechial or purpuric rashes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral infections",
+          "cells": [
+            {
+              "text": "Enteroviruses; influenza and other respiratory viruses; measles virus; Epstein-Barr virus; cytomegalovirus; parvovirus"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Coagulation",
+          "cells": [
+            {
+              "text": "Deficiency of protein C or S (including postvaricella protein S deficiency)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Platelet disorders",
+          "cells": [
+            {
+              "text": "Idiopathic thrombocytopenic purpura, drug effects, bone marrow infiltration"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Other noninfective",
+          "cells": [
+            {
+              "text": "Henoch-Schonlein purpura; connective tissue disorders; trauma (including nonaccidental injury in children)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Bacterial sepsis",
+          "cells": [
+            {
+              "text": "Pneumococcal, streptococcal, staphylococcal, or gram-negative bacterial sepsis"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    },
+    {
+      "id": "itp-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Characteristics of selected blood components",
+      "rowHeader": "Component",
+      "columns": [
+        "Volume, mL",
+        "Content",
+        "Clinical response"
+      ],
+      "rows": [
+        {
+          "parameter": "PRBC",
+          "cells": [
+            {
+              "text": "180-200"
+            },
+            {
+              "text": "Red cells with variable leukocyte content and a small amount of plasma"
+            },
+            {
+              "text": "Raises hemoglobin by 10 g/L and hematocrit by 3%"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Platelets (random donor unit)",
+          "cells": [
+            {
+              "text": "50-70"
+            },
+            {
+              "text": "5.5 x 10^10 per random-donor unit"
+            },
+            {
+              "text": "Raises platelet count by 5000-10,000/uL"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Platelets (single-donor apheresis product)",
+          "cells": [
+            {
+              "text": "200-400"
+            },
+            {
+              "text": ">=3 x 10^11 per single-donor apheresis product"
+            },
+            {
+              "text": "Corrected count increment >=10 x 10^9/L within 1 h and >=7.5 x 10^9/L within 24 h after transfusion"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "FFP",
+          "cells": [
+            {
+              "text": "200-250"
+            },
+            {
+              "text": "Plasma proteins: coagulation factors, proteins C and S, antithrombin"
+            },
+            {
+              "text": "Raises coagulation factors by about 2%"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Cryoprecipitate",
+          "cells": [
+            {
+              "text": "10-15"
+            },
+            {
+              "text": "Cold-insoluble plasma proteins: fibrinogen, factor VIII, vWF"
+            },
+            {
+              "text": "Used as topical fibrin glue; also supplies 80 IU of factor VIII"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "The PDF prints the platelet component as two rows; the second row has no component label and is read here as the apheresis product (CCI = corrected count increment)."
     }
   ],
   "flowcharts": [

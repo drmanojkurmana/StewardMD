@@ -151,5 +151,324 @@
       "caption": "Overview comparison matrix for progressive encephalomyelitis with rigidity and myoclonus (perm)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "progressive_encephalomyelitis_with_rigidity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF glycine receptor, anti-GAD and amphiphysin antibodies",
+          "cells": [
+            {
+              "text": "Autoantibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Continuous motor unit activity and agonist-antagonist co-contraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Pleocytosis, oligoclonal bands and inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body cross-sectional imaging and tumour markers",
+          "cells": [
+            {
+              "text": "Underlying malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain and spinal cord MRI",
+          "cells": [
+            {
+              "text": "Inflammatory change and structural mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Startle reflex studies",
+          "cells": [
+            {
+              "text": "Exaggerated acoustic startle"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_encephalomyelitis_with_rigidity-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Hereditary and acquired hyperekplexia",
+          "cells": [
+            {
+              "text": "Exaggerated acoustic startle"
+            },
+            {
+              "text": "Startle reflex studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brainstem encephalitis of other autoimmune or infective cause",
+          "cells": [
+            {
+              "text": "Reduced consciousness or seizures from widespread encephalitis"
+            },
+            {
+              "text": "Brain and spinal cord MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Classic stiff-person syndrome and focal variants",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Antibody testing (anti-GAD)"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_encephalomyelitis_with_rigidity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "First-line immunotherapy",
+          "cells": [
+            {
+              "text": "Corticosteroids with IVIG or plasma exchange to remove pathogenic glycine-receptor and related antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line immunosuppression",
+          "cells": [
+            {
+              "text": "Rituximab or cyclophosphamide for refractory or relapsing disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic control",
+          "cells": [
+            {
+              "text": "GABAergic agents such as benzodiazepines and baclofen for rigidity, spasms and myoclonus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysautonomia",
+          "cells": [
+            {
+              "text": "High-dependency or critical care with cardiac rhythm, blood pressure and temperature monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying malignancy",
+          "cells": [
+            {
+              "text": "Screen for and treat, particularly breast carcinoma, thymoma, lymphoma and small cell lung cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Multidisciplinary neurology and immunology care with rehabilitation and relapse surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "progressive_encephalomyelitis_with_rigidity-dx-mgmt",
+      "title": "Diagnosis and management of Progressive Encephalomyelitis with Rigidity and Myoclonus (PERM)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PERM: progressive rigidity with myoclonus and encephalomyelitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Autonomic instability, laryngospasm, hyperthermia, or reduced consciousness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: high-dependency care for dysautonomia or airway threat",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Glycine receptor, GAD and amphiphysin antibodies; EMG; CSF; MRI; whole-body imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do antibodies and EMG co-contraction fit PERM with mimics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider stiff-person syndrome, serotonin syndrome or other mimics; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids with IVIG or plasma exchange as first-line immunotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rituximab or cyclophosphamide for refractory or relapsing disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Benzodiazepines and baclofen for rigidity, spasms and myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for malignancy, particularly breast carcinoma, thymoma or lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Neurology and immunology care with rehabilitation and relapse surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

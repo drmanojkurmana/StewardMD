@@ -154,5 +154,352 @@
       "caption": "Overview comparison matrix for systemic juvenile idiopathic arthritis (still disease)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Textbook of Pediatric Rheumatology / ILAR & PRINTO criteria",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "systemic_juvenile_idiopathic_arthritis-dx-mgmt",
+      "title": "Diagnosis and management of Systemic juvenile idiopathic arthritis (Still disease)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected systemic JIA: quotidian fever, evanescent salmon-pink rash, arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (falling counts with rising ferritin, bleeding, or tamponade)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent MAS treatment: high-dose corticosteroids, anakinra and ciclosporin",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC; ESR and CRP; ferritin, fibrinogen, triglycerides; ANA and rheumatoid factor",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are infection and malignancy excluded, with ANA and rheumatoid factor negative?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Kawasaki disease, leukaemia or periodic fever syndromes; re-evaluate",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early interleukin-1 blockade with anakinra or canakinumab as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Interleukin-6 blockade with tocilizumab",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Systemic corticosteroids for severe presentations and as a bridge",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "NSAIDs for fever and arthralgia in milder disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Methotrexate or continued biologic for potentially erosive arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early cytokine-targeted therapy has improved outcomes; MAS carries high mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "systemic_juvenile_idiopathic_arthritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count with differential",
+          "cells": [
+            {
+              "text": "Neutrophilia, thrombocytosis and anaemia; cytopenias suggest MAS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR and CRP",
+          "cells": [
+            {
+              "text": "Inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ferritin, fibrinogen, triglycerides and liver function tests",
+          "cells": [
+            {
+              "text": "Macrophage activation syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANA and rheumatoid factor",
+          "cells": [
+            {
+              "text": "Usually negative; helps exclude other subtypes and connective tissue disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures, infection screen and bone marrow",
+          "cells": [
+            {
+              "text": "Infection, malignancy or HLH, when a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and chest imaging",
+          "cells": [
+            {
+              "text": "Serositis, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp ophthalmology assessment",
+          "cells": [
+            {
+              "text": "Uveitis, as part of JIA surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "systemic_juvenile_idiopathic_arthritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic infection or occult sepsis",
+          "cells": [
+            {
+              "text": "Persistent fever and raised markers are often attributed to infection; rheumatology review should not be delayed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leukaemia or lymphoma",
+          "cells": [
+            {
+              "text": "Excluded before corticosteroids in a febrile child with cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus",
+          "cells": [
+            {
+              "text": "Antinuclear antibody is typically negative in systemic JIA"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "systemic_juvenile_idiopathic_arthritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early interleukin-1 blockade",
+          "cells": [
+            {
+              "text": "Anakinra or canakinumab as the disease-modifying mainstay, used early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interleukin-6 blockade",
+          "cells": [
+            {
+              "text": "Tocilizumab"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Severe systemic presentations, and to bridge to biologic control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "Symptomatic relief of fever and arthralgia in milder disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methotrexate or continued biologic therapy",
+          "cells": [
+            {
+              "text": "Persistent, potentially erosive arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macrophage activation syndrome treatment",
+          "cells": [
+            {
+              "text": "High-dose corticosteroids, anakinra and ciclosporin, given urgently"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth, bone and drug toxicity monitoring",
+          "cells": [
+            {
+              "text": "Physiotherapy to preserve joint function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric rheumatology team",
+          "cells": [
+            {
+              "text": "Multidisciplinary management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -146,5 +146,305 @@
       "caption": "Overview comparison matrix for slc6a1-related disorder (gat1)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "slc6a1_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Generalised spike-and-wave and other epileptiform activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Usually normal or non-specific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological and autism assessment",
+          "cells": [
+            {
+              "text": "Intellectual disability and autistic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene panel or exome sequencing including SLC6A1",
+          "cells": [
+            {
+              "text": "Heterozygous loss-of-function variants, usually de novo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Deletions involving the SLC6A1 locus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "slc6a1_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Myoclonic-atonic epilepsy (Doose syndrome) of other cause",
+          "cells": [
+            {
+              "text": "Generic Doose syndrome should not be diagnosed without testing SLC6A1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Childhood absence epilepsy",
+          "cells": [
+            {
+              "text": "Absences occur here alongside intellectual disability and autistic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autism spectrum disorder with epilepsy",
+          "cells": [
+            {
+              "text": "Autism features and behavioural difficulties are frequent here"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "slc6a1_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Broad-spectrum antiseizure medication",
+          "cells": [
+            {
+              "text": "Valproate, ethosuximide or lamotrigine; avoid agents that aggravate generalised seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental support",
+          "cells": [
+            {
+              "text": "Special education, behavioural therapy and speech and language therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "For hypotonia and motor difficulties"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ketogenic dietary therapy",
+          "cells": [
+            {
+              "text": "For drug-resistant seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular EEG monitoring",
+          "cells": [
+            {
+              "text": "Review of seizure control over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Usually de novo autosomal dominant variant; parental testing and recurrence-risk advice"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "slc6a1_disorder-dx-mgmt",
+      "title": "Diagnosis and management of SLC6A1-related disorder (GAT1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Myoclonic-atonic or absence epilepsy with intellectual disability and autistic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (drop attacks, regression with seizures, status epilepticus)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of status epilepticus or drop attacks causing falls",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EEG; gene panel or exome including SLC6A1; microarray; brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does SLC6A1 sequencing show a heterozygous loss-of-function variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other genetic generalised epilepsies or SYNGAP1-related disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Broad-spectrum antiseizure medication such as valproate, ethosuximide or lamotrigine",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Neurodevelopmental support: special education, behavioural and speech therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ketogenic diet for drug-resistant seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling and parental testing for the de novo variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild to moderate intellectual disability; seizures may improve over time in some",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,296 @@
       "caption": "Overview comparison matrix for neonatal respiratory distress syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neonatal_rds-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Diffuse reticulogranular (ground-glass) pattern with air bronchograms and low lung volumes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas",
+          "cells": [
+            {
+              "text": "Hypoxaemia, hypercapnia and acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse oximetry and cardiorespiratory monitoring",
+          "cells": [
+            {
+              "text": "Oxygenation and respiratory trend"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood culture and inflammatory markers",
+          "cells": [
+            {
+              "text": "When sepsis cannot be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "If congenital heart disease or pulmonary hypertension is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_rds-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal pneumonia or early-onset sepsis",
+          "cells": [
+            {
+              "text": "Presentations overlap; blood culture and inflammatory markers help"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transient tachypnoea of the newborn",
+          "cells": [
+            {
+              "text": "Respiratory signs overlap; the course and radiograph help separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumothorax or other air leak",
+          "cells": [
+            {
+              "text": "Sudden deterioration suggests an air leak"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_rds-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Exogenous surfactant",
+          "cells": [
+            {
+              "text": "Cornerstone of treatment; delivered into the airway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal CPAP, escalating to ventilation",
+          "cells": [
+            {
+              "text": "Maintains functional residual capacity; reduces the need for intubation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antenatal corticosteroids",
+          "cells": [
+            {
+              "text": "Given before anticipated preterm delivery to accelerate lung maturation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care and empirical antibiotics",
+          "cells": [
+            {
+              "text": "Thermoregulation, caffeine, and antibiotics when sepsis cannot be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Blood gases, saturations and radiographs for air leak, patent ductus and bronchopulmonary dysplasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neonatal_rds-dx-mgmt",
+      "title": "Diagnosis and management of Neonatal Respiratory Distress Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Preterm infant with tachypnoea, grunting, recession and cyanosis soon after birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rising oxygen need, sudden deterioration, apnoea)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Surfactant and CPAP; escalate to ventilation if failing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph, blood gas, pulse oximetry, blood culture if sepsis possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Ground-glass pattern with air bronchograms on chest radiograph?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider transient tachypnoea, pneumonia or pneumothorax; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exogenous surfactant as the cornerstone of treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early nasal CPAP, escalating to ventilation if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Caffeine and supportive care; empirical antibiotics when sepsis is not excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for air leak, patent ductus and bronchopulmonary dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "High survival with antenatal steroids and surfactant; outcome worsens at lower gestation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

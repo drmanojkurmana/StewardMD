@@ -144,5 +144,316 @@
       "caption": "Overview comparison matrix for madarosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ophthalmology and dermatology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "madarosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lid margin and skin examination",
+          "cells": [
+            {
+              "text": "Pattern of loss; local cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scarring versus non-scarring assessment",
+          "cells": [
+            {
+              "text": "Prognosis and treatment route"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Hypothyroidism with lateral eyebrow loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of a suspicious lid margin lesion",
+          "cells": [
+            {
+              "text": "Eyelid malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatological or systemic work-up",
+          "cells": [
+            {
+              "text": "Cause guided by history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "madarosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic blepharitis",
+          "cells": [
+            {
+              "text": "Lid margin inflammation; common local cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alopecia areata",
+          "cells": [
+            {
+              "text": "Patchy non-scarring follicle loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothyroidism",
+          "cells": [
+            {
+              "text": "Lateral eyebrow loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eyelid malignancy",
+          "cells": [
+            {
+              "text": "Localised lash loss with a lid margin lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "madarosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Madarosis is a sign rather than a disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lid disease",
+          "cells": [
+            {
+              "text": "Lid hygiene, warm compresses, antibiotics as indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatological causes",
+          "cells": [
+            {
+              "text": "Corticosteroids or immunotherapy for alopecia areata"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic causes",
+          "cells": [
+            {
+              "text": "Thyroid hormone for hypothyroidism; review of causative drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Suspicious lesion",
+          "cells": [
+            {
+              "text": "Biopsy and referral for eyelid malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "madarosis-dx-mgmt",
+      "title": "Diagnosis and management of Madarosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Loss of eyelashes or lateral eyebrows in an adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (localised lid margin lesion or scarring loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: biopsy and referral for suspected eyelid malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lid margin examination, scarring assessment, thyroid tests, biopsy if suspicious",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the pattern of loss explained by a local or systemic cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider trichotillomania or alopecia areata",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat chronic blepharitis with lid hygiene and warm compresses",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Thyroid hormone replacement for hypothyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids or immunotherapy for alopecia areata",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Biopsy and refer any suspicious lid margin lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Behavioural and psychiatric support for trichotillomania",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Non-scarring loss often recovers when the cause is treated; scarring loss is permanent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

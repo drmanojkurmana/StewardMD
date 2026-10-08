@@ -156,5 +156,438 @@
       "caption": "Overview comparison matrix for wilson's disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Wilson Disease",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/nutritional-disorders/mineral-deficiency-and-toxicity/wilson-disease"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "wilsons_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing Wilson's disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum ceruloplasmin",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Under 5 mg/dL highly suggestive (normal 20 to 35)",
+              "op": "<",
+              "value": 5
+            },
+            {
+              "text": "Usually low; can be normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Low ceruloplasmin plus Kayser-Fleischer ring",
+          "cells": [
+            {
+              "text": "Both present"
+            },
+            {
+              "text": "{{hy:Diagnostic}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "24-h urine copper",
+          "unit": "mcg/day",
+          "cells": [
+            {
+              "text": "Usually over 100 mcg/day (normal 30 or less)",
+              "op": ">",
+              "value": 100
+            },
+            {
+              "text": "Use copper-free containers"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hepatic copper on biopsy",
+          "unit": "mcg/g",
+          "cells": [
+            {
+              "text": "Over 200 mcg/g dry weight",
+              "op": ">",
+              "value": 200
+            },
+            {
+              "text": "Gold standard for unclear cases; sampling error possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kayser-Fleischer rings",
+          "cells": [
+            {
+              "text": "Slit-lamp or OCT"
+            },
+            {
+              "text": "Absent in about one third of hepatic presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penicillamine challenge",
+          "cells": [
+            {
+              "text": "Urine copper after penicillamine"
+            },
+            {
+              "text": "Cut-offs poorly defined in adults"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Leipzig score",
+          "cells": [
+            {
+              "text": "Combines clinical, biochemical, genetic features"
+            },
+            {
+              "text": "EASL-endorsed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coombs-negative haemolysis with liver failure",
+          "cells": [
+            {
+              "text": "Sudden copper release"
+            },
+            {
+              "text": "Fulminant Wilson disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Normal copper, ceruloplasmin or urine copper do not exclude Wilson disease (Harrison)."
+    },
+    {
+      "id": "wilsons_disease-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic Wilson's disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral or autoimmune hepatitis",
+          "cells": [
+            {
+              "text": "Common first misdiagnosis in young patients"
+            },
+            {
+              "text": "Ceruloplasmin, urine copper, serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary biliary cholangitis or biliary atresia",
+          "cells": [
+            {
+              "text": "Can show KF rings"
+            },
+            {
+              "text": "Ceruloplasmin normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Heterozygous ATP7B carrier",
+          "cells": [
+            {
+              "text": "Mildly low ceruloplasmin"
+            },
+            {
+              "text": "Urine copper, genetic testing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Parkinson disease or other movement disorder",
+          "cells": [
+            {
+              "text": "Older onset"
+            },
+            {
+              "text": "Test all young patients with movement disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary psychiatric illness or substance use",
+          "cells": [
+            {
+              "text": "Teen or young adult"
+            },
+            {
+              "text": "Exclude Wilson in new psychiatric illness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "wilsons_disease-treatment",
+      "kind": "treatment",
+      "title": "Treating Wilson's disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Penicillamine plus pyridoxine",
+          "cells": [
+            {
+              "text": "Symptomatic disease"
+            },
+            {
+              "text": "Toxic: rash, cytopenias, proteinuria; early neurological worsening possible"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Trientine",
+          "cells": [
+            {
+              "text": "Alternative chelator"
+            },
+            {
+              "text": "When penicillamine not tolerated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Zinc acetate",
+          "cells": [
+            {
+              "text": "Maintenance, presymptomatic or chelator-intolerant"
+            },
+            {
+              "text": "Not taken at the same time as chelators"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Low-copper diet",
+          "cells": [
+            {
+              "text": "All"
+            },
+            {
+              "text": "Avoid liver, shellfish, nuts, mushrooms, cocoa; check water copper"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Fulminant failure or refractory cirrhosis"
+            },
+            {
+              "text": "Corrects the metabolic defect"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lifelong treatment",
+          "cells": [
+            {
+              "text": "All, with or without symptoms"
+            },
+            {
+              "text": "{{hy:Stopping therapy is dangerous}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Screen siblings",
+          "cells": [
+            {
+              "text": "Family members"
+            },
+            {
+              "text": "Not before age 1"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "wilsons_disease-dx-mgmt",
+      "title": "Diagnosis and management of Wilson's disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Young patient with liver disease, movement disorder or psychiatric change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Ceruloplasmin, 24-h urine copper, slit-lamp exam",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Low ceruloplasmin with KF rings?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Results equivocal?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Liver biopsy for copper, ATP7B genetics, Leipzig score",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Wilson disease unlikely; pursue other cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Acute liver failure or Coombs-negative haemolysis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Urgent transplant assessment",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Symptomatic?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Penicillamine with pyridoxine, or trientine; low-copper diet",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Zinc acetate maintenance; lifelong follow-up",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

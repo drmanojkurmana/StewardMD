@@ -147,5 +147,325 @@
       "caption": "Overview comparison matrix for photoallergic contact dermatitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "photoallergic_dermatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Photopatch testing with irradiated and non-irradiated series",
+          "cells": [
+            {
+              "text": "Photoallergen, by comparing the two series"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard patch testing",
+          "cells": [
+            {
+              "text": "Coexisting ordinary contact allergy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed history of topical products, medicaments and light exposure",
+          "cells": [
+            {
+              "text": "Culprit agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototesting (action spectrum, minimal erythema dose)",
+          "cells": [
+            {
+              "text": "When chronic actinic dermatitis is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy in atypical cases",
+          "cells": [
+            {
+              "text": "Spongiotic dermatitis; mimics excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune serology (ANA, ENA)",
+          "cells": [
+            {
+              "text": "Photosensitive lupus excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "photoallergic_dermatitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Phototoxic dermatitis",
+          "cells": [
+            {
+              "text": "Occurs on first exposure and is dose-dependent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airborne allergic contact dermatitis",
+          "cells": [
+            {
+              "text": "Shaded folds such as the eyelids and submental area"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic actinic dermatitis",
+          "cells": [
+            {
+              "text": "Persistent, disabling photosensitivity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "photoallergic_dermatitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Culprit avoidance",
+          "cells": [
+            {
+              "text": "Permanent avoidance of the culprit photoallergen, commonly organic sunscreen filters"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Broad-spectrum inorganic UVA-blocking sunscreen, protective clothing and sun avoidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eczema treatment",
+          "cells": [
+            {
+              "text": "Topical corticosteroids; a short oral course for severe widespread disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm agent",
+          "cells": [
+            {
+              "text": "Photopatch testing to identify the responsible agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom relief",
+          "cells": [
+            {
+              "text": "Emollients and antihistamines for pruritus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Evolution to persistent light reactivity or chronic actinic dermatitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "photoallergic_dermatitis-dx-mgmt",
+      "title": "Diagnosis and management of Photoallergic contact dermatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Eczematous eruption on sun-exposed skin after topical or medicament use",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (disabling photosensitivity, erythroderma, lupus features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for erythroderma or a suspected severe drug reaction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Photopatch testing with irradiated and non-irradiated series; exposure history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does photopatch testing identify a photoallergen?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider phototoxic dermatitis, airborne contact dermatitis or a photodermatosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Identify and avoid the culprit photoallergen, such as organic sunscreen filters",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Strict photoprotection with broad-spectrum UVA-blocking sunscreen and clothing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical corticosteroids for the eczema; short oral course for severe widespread disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Emollients and antihistamines to relieve pruritus",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor for persistent light reactivity or chronic actinic dermatitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Good outlook once the agent is avoided; a minority develop persistent light reactivity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

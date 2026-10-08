@@ -142,5 +142,294 @@
       "caption": "Overview comparison matrix for primary stabbing headache."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "International Classification of Headache Disorders (ICHD-3)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_stabbing_headache-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Characteristic brief stabs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological examination",
+          "cells": [
+            {
+              "text": "Focal signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging, if pains are strictly fixed or examination is abnormal",
+          "cells": [
+            {
+              "text": "Structural cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review for coexisting migraine or other primary headache",
+          "cells": [
+            {
+              "text": "Coexisting primary headache"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_stabbing_headache-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Secondary stabbing pain from a structural lesion",
+          "cells": [
+            {
+              "text": "Stabs strictly fixed in one location; abnormal neurological examination"
+            },
+            {
+              "text": "Neuroimaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short-lasting unilateral neuralgiform headache attacks (SUNCT/SUNA)",
+          "cells": [
+            {
+              "text": "Short-lasting unilateral attacks"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_stabbing_headache-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "No pharmacological treatment for most patients; attacks are usually too brief to treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preventive indometacin",
+          "cells": [
+            {
+              "text": "For frequent or troublesome stabs; a subset responds well"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric protection",
+          "cells": [
+            {
+              "text": "Proton pump inhibitor when indometacin is used"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alternative preventives",
+          "cells": [
+            {
+              "text": "Gabapentin, melatonin or a COX-2 inhibitor if indometacin is ineffective or not tolerated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting primary headache",
+          "cells": [
+            {
+              "text": "Identify and treat coexisting migraine or other primary headache"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging and referral",
+          "cells": [
+            {
+              "text": "Neuroimaging and specialist referral if stabs are fixed or examination is abnormal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_stabbing_headache-dx-mgmt",
+      "title": "Diagnosis and management of Primary stabbing headache",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary stabbing headache: brief stabs of pain in the head",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Stabs fixed in one location, abnormal examination, or new onset in an older patient?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neuroimaging and neurology referral for fixed or abnormal presentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; neurological examination; neuroimaging if fixed or abnormal",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is this a typical primary stabbing headache with a normal examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider trigeminal neuralgia, SUNCT or structural lesion; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance; most patients need no drug treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Preventive indometacin for frequent or troublesome stabs, with PPI cover",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Gabapentin, melatonin or a COX-2 inhibitor if indometacin fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat coexisting migraine or other primary headache",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Neurology referral and neuroimaging if stabs are fixed or examination is abnormal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

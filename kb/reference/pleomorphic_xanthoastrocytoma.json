@@ -156,5 +156,323 @@
       "caption": "Overview comparison matrix for pleomorphic xanthoastrocytoma (braf v600e)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours of the CNS",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pleomorphic_xanthoastrocytoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced brain MRI",
+          "cells": [
+            {
+              "text": "Superficial nodule, cyst and meningeal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video-EEG, when seizures are the presenting feature",
+          "cells": [
+            {
+              "text": "Seizure characterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Pleomorphic and xanthomatous astrocytes with eosinophilic granular bodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRAF V600E immunohistochemistry or molecular testing",
+          "cells": [
+            {
+              "text": "BRAF V600E status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CDKN2A/B deletion analysis",
+          "cells": [
+            {
+              "text": "Deletion status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ki-67/MIB-1 index and mitotic count",
+          "cells": [
+            {
+              "text": "Anaplastic (grade 3) features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pleomorphic_xanthoastrocytoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Curative intent",
+          "cells": [
+            {
+              "text": "For newly diagnosed, resectable, lower-grade (CNS WHO grade 2) disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maximal safe resection",
+          "cells": [
+            {
+              "text": "Primary and preferred treatment for newly diagnosed disease; complete resection favoured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Grade 2 after gross total resection",
+          "cells": [
+            {
+              "text": "Close imaging surveillance without upfront radiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subtotal resection",
+          "cells": [
+            {
+              "text": "Adjuvant radiotherapy considered, particularly in eloquent locations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy technique",
+          "cells": [
+            {
+              "text": "Highly conformal techniques favoured to limit CNS toxicity in younger patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemotherapy",
+          "cells": [
+            {
+              "text": "No defined regimen; generally reserved for young children after subtotal resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRAF V600E",
+          "cells": [
+            {
+              "text": "Characteristic but not universal; a wild-type result does not exclude the tumour type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRAF and MEK inhibitors",
+          "cells": [
+            {
+              "text": "Reasonable option for BRAF V600E disease that is recurrent or unresectable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Supportive care, given the cortical location and seizure risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Serial contrast-enhanced brain MRI after resection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pleomorphic_xanthoastrocytoma-dx-mgmt",
+      "title": "Diagnosis and management of Pleomorphic xanthoastrocytoma (BRAF V600E)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Superficial cortical nodule with a cyst, often presenting with seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (high mitoses or necrosis, rapid progression, new deficit, leptomeningeal)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neuro-oncology and neurosurgical review for anaplastic or progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast brain MRI; histology with BRAF V600E and CDKN2A/B; Ki-67 and mitoses",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology show pleomorphic xanthomatous astrocytes with granular bodies?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ganglioglioma, pilocytic astrocytoma, glioblastoma or dysembryoplastic tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Maximal safe surgical resection as the primary treatment for newly diagnosed disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Close imaging surveillance after gross total resection of grade 2 disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adjuvant radiotherapy considered after subtotal resection, especially in eloquent sites",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "BRAF plus MEK inhibitor therapy for BRAF V600E disease that is recurrent or unresectable",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Antiseizure medication as supportive care for seizure risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Good after gross total resection of grade 2 disease; the anaplastic variant does worse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

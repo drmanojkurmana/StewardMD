@@ -324,6 +324,16 @@
       "id": "c5",
       "label": "Tables PDF, Table 128-4",
       "kind": "user-supplied"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 47-5",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c7",
+      "label": "Tables PDF, Table 149-2",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -705,6 +715,168 @@
         }
       ],
       "footnote": "Metronidazole dose for amoebiasis differs: ICMR lists 500 mg three times daily for 5 days; Tables PDF 209-1 lists 750 mg three times daily for 5 to 10 days. Antibiotics are generally avoided in suspected EHEC, but that statement was not in the sources opened."
+    },
+    {
+      "id": "DYSENTERY-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of non-anion gap acidosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "I. Gastrointestinal bicarbonate loss",
+          "cells": [
+            {
+              "text": "Diarrhea; external pancreatic or small-bowel drainage; ureterosigmoidostomy, jejunal loop, ileal loop; drugs: calcium chloride (acidifying agent), magnesium sulfate (diarrhea), cholestyramine (bile acid diarrhea)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "II.A Renal acidosis with hypokalemia",
+          "cells": [
+            {
+              "text": "Proximal RTA (type 2), drug-induced: acetazolamide, topiramate; distal (classic) RTA (type 1), drug-induced: amphotericin B, ifosfamide"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "II.B Renal acidosis with hyperkalemia",
+          "cells": [
+            {
+              "text": "Generalized distal nephron dysfunction (type 4 RTA): mineralocorticoid deficiency; mineralocorticoid resistance (autosomal dominant PHA I); voltage defect (autosomal dominant PHA I and PHA II); tubulointerstitial disease"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "III. Drug-induced hyperkalemia (with renal insufficiency)",
+          "cells": [
+            {
+              "text": "Potassium-sparing diuretics (amiloride, triamterene, spironolactone); trimethoprim; pentamidine; ACE inhibitors and ARBs; nonsteroidal anti-inflammatory drugs; cyclosporine and tacrolimus"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "IV. Other",
+          "cells": [
+            {
+              "text": "Acid loads (ammonium chloride, hyperalimentation); loss of potential bicarbonate (ketosis with ketone excretion); expansion acidosis (rapid saline administration); hippurate; cation exchange resins"
+            }
+          ],
+          "cite": "c6"
+        }
+      ],
+      "footnote": "The last row is partly cut off at the bottom of the printed page; any further rows are unreadable."
+    },
+    {
+      "id": "DYSENTERY-ddx-2",
+      "kind": "ddx",
+      "title": "Intestinal pathogenic E. coli pathotypes",
+      "rowHeader": "Pathotype",
+      "columns": [
+        "Epidemiology",
+        "Clinical syndrome",
+        "Defining molecular trait",
+        "Responsible genetic element"
+      ],
+      "rows": [
+        {
+          "parameter": "STEC/EHEC",
+          "cells": [
+            {
+              "text": "Food, water, person-to-person; all ages, industrialized countries"
+            },
+            {
+              "text": "Hemorrhagic colitis, hemolytic-uremic syndrome"
+            },
+            {
+              "text": "Shiga toxin"
+            },
+            {
+              "text": "Lambda-like Stx1- or Stx2-encoding bacteriophage"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "ETEC",
+          "cells": [
+            {
+              "text": "Food, water; young children in and travelers to developing countries"
+            },
+            {
+              "text": "Traveler's diarrhea"
+            },
+            {
+              "text": "Heat-stable and heat-labile enterotoxins, colonization factors"
+            },
+            {
+              "text": "Virulence plasmid(s)"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "EPEC",
+          "cells": [
+            {
+              "text": "Person-to-person; young children and neonates in developing countries"
+            },
+            {
+              "text": "Watery diarrhea, persistent diarrhea"
+            },
+            {
+              "text": "Localized adherence, attaching and effacing lesion on intestinal epithelium"
+            },
+            {
+              "text": "EPEC adherence factor plasmid and pathogenicity island [locus for enterocyte effacement (LEE)]"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "EIEC",
+          "cells": [
+            {
+              "text": "Food, water; children in and travelers to developing countries"
+            },
+            {
+              "text": "Dysentery"
+            },
+            {
+              "text": "Invasion of colonic epithelial cells, intracellular multiplication, cell-to-cell spread"
+            },
+            {
+              "text": "Multiple genes contained primarily in a large virulence plasmid"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "EAEC",
+          "cells": [
+            {
+              "text": "Possibly food, water; children in and travelers to developing countries; all ages in industrialized countries"
+            },
+            {
+              "text": "Traveler's diarrhea, acute diarrhea, persistent diarrhea"
+            },
+            {
+              "text": "Aggregative/diffuse adherence, virulence factors regulated by AggR"
+            },
+            {
+              "text": "Chromosomal or plasmid-associated adherence and toxin genes"
+            }
+          ],
+          "cite": "c7"
+        }
+      ],
+      "footnote": "Source footnotes (a) to (c) are not shown on the page; the question mark before food and water for EAEC is rendered here as possibly."
     }
   ],
   "flowcharts": [

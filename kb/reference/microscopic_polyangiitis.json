@@ -150,5 +150,294 @@
       "caption": "Overview comparison matrix for microscopic polyangiitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology / ACR-EULAR classification criteria",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "microscopic_polyangiitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ANCA testing with anti-MPO and anti-PR3 specificities",
+          "cells": [
+            {
+              "text": "Anti-myeloperoxidase and anti-proteinase-3 specificities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and microscopy",
+          "cells": [
+            {
+              "text": "Dysmorphic haematuria and red cell casts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urine protein quantification",
+          "cells": [
+            {
+              "text": "Renal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging and, where indicated, bronchoscopy",
+          "cells": [
+            {
+              "text": "Alveolar haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal or other tissue biopsy",
+          "cells": [
+            {
+              "text": "Pauci-immune necrotising vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-GBM antibody testing",
+          "cells": [
+            {
+              "text": "Overlapping disease excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "microscopic_polyangiitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remission induction",
+          "cells": [
+            {
+              "text": "High-dose glucocorticoids with rituximab or cyclophosphamide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avacopan",
+          "cells": [
+            {
+              "text": "C5a-receptor antagonist to reduce cumulative glucocorticoid exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "Severe presentations: diffuse alveolar haemorrhage or severe, advancing renal failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance",
+          "cells": [
+            {
+              "text": "Rituximab or azathioprine to prevent relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ support",
+          "cells": [
+            {
+              "text": "Renal replacement therapy for severe kidney injury; respiratory support for alveolar haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylaxis and bone protection",
+          "cells": [
+            {
+              "text": "Pneumocystis prophylaxis, bone protection and vaccination while immunosuppressed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Renal function, urinalysis, ANCA titre and drug toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint management",
+          "cells": [
+            {
+              "text": "Rheumatology, nephrology and respiratory teams"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "microscopic_polyangiitis-dx-mgmt",
+      "title": "Diagnosis and management of Microscopic polyangiitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapidly rising creatinine with active urinary sediment and ANCA positivity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Haemoptysis with hypoxaemia, mononeuritis multiplex, oliguria or dialysis-requiring AKI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent plasma exchange for alveolar haemorrhage or severe renal failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ANCA (MPO and PR3); urinalysis and microscopy; chest imaging; renal biopsy; anti-GBM",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is pauci-immune necrotising vasculitis confirmed on biopsy, with anti-GBM excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider anti-GBM disease, GPA, EGPA or cryoglobulinaemic vasculitis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Induce remission with high-dose glucocorticoids plus rituximab or cyclophosphamide",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add avacopan to reduce cumulative glucocorticoid exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Maintain remission with rituximab or azathioprine to prevent relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal replacement therapy and respiratory support for failing organs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Joint rheumatology, nephrology and respiratory care; monitor ANCA titre for relapse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

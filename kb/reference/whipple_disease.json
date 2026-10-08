@@ -160,5 +160,450 @@
       "caption": "Overview comparison matrix for whipple disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Whipple Disease",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/malabsorption-syndromes/whipple-disease"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "whipple_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing Whipple disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardinal features",
+          "cells": [
+            {
+              "text": "Arthralgia, diarrhoea, abdominal pain, weight loss"
+            },
+            {
+              "text": "Arthralgia often precedes gut symptoms by years"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duodenal biopsy PAS stain",
+          "cells": [
+            {
+              "text": "PAS-positive, diastase-resistant macrophages in lamina propria"
+            },
+            {
+              "text": "{{hy:Take distal postbulbar biopsies}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acid-fast stain",
+          "cells": [
+            {
+              "text": "Negative in T. whipplei"
+            },
+            {
+              "text": "Positive in MAC, which looks similar"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duodenal PCR",
+          "unit": "Ct",
+          "cells": [
+            {
+              "text": "Cycle threshold 30 or less",
+              "op": "<=",
+              "value": 30
+            },
+            {
+              "text": "Supports diagnosis even if PAS negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry",
+          "cells": [
+            {
+              "text": "More sensitive and specific than PAS"
+            },
+            {
+              "text": "Works on archived tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF PCR",
+          "cells": [
+            {
+              "text": "Do even without neurological symptoms"
+            },
+            {
+              "text": "CNS disease common and often silent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Saliva or stool PCR",
+          "cells": [
+            {
+              "text": "Low positive predictive value"
+            },
+            {
+              "text": "Colonisation; not diagnostic alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture-negative endocarditis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "T. whipplei causes 2.6 to 6.3%",
+              "range": [
+                2.6,
+                6.3
+              ]
+            },
+            {
+              "text": "Valve PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology",
+          "cells": [
+            {
+              "text": "Of little value"
+            },
+            {
+              "text": "Positive mainly reflects past exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "whipple_disease-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic Whipple disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Seronegative inflammatory arthritis",
+          "cells": [
+            {
+              "text": "Arthralgic phase; RF and ANA negative"
+            },
+            {
+              "text": "Duodenal biopsy and PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycobacterium avium complex",
+          "cells": [
+            {
+              "text": "Similar PAS-positive macrophages"
+            },
+            {
+              "text": "Acid-fast stain"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lymphoma",
+          "cells": [
+            {
+              "text": "Mesenteric or retroperitoneal nodes on CT"
+            },
+            {
+              "text": "Node or duodenal biopsy with PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "Non-caseating granulomas, uveitis"
+            },
+            {
+              "text": "T. whipplei PCR of tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crohn or coeliac disease",
+          "cells": [
+            {
+              "text": "Malabsorption and diarrhoea"
+            },
+            {
+              "text": "Small-bowel histology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "whipple_disease-treatment",
+      "kind": "treatment",
+      "title": "Treating Whipple disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "IV ceftriaxone or penicillin G",
+          "cells": [
+            {
+              "text": "Induction"
+            },
+            {
+              "text": "2 to 4 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral TMP-SMX",
+          "cells": [
+            {
+              "text": "Long-term maintenance"
+            },
+            {
+              "text": "Crosses blood-brain barrier"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Doxycycline plus hydroxychloroquine",
+          "cells": [
+            {
+              "text": "Maintenance alternative"
+            },
+            {
+              "text": "Long term"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral penicillin VK or ampicillin",
+          "cells": [
+            {
+              "text": "Sulfa allergy"
+            },
+            {
+              "text": "Maintenance alternative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Severe immune reconstitution inflammatory syndrome"
+            },
+            {
+              "text": "Recurrent fever, arthritis, uveitis after starting antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional repletion",
+          "cells": [
+            {
+              "text": "Malabsorption"
+            },
+            {
+              "text": "Vitamins, minerals, trace elements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid immunosuppressants",
+          "cells": [
+            {
+              "text": "All"
+            },
+            {
+              "text": "{{hy:Anti-TNF can unmask or worsen disease}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR and biopsy follow-up",
+          "cells": [
+            {
+              "text": "Monitoring and suspected relapse"
+            },
+            {
+              "text": "Relapse common, even years later"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Untreated Whipple disease is progressive and fatal. Fever and joint pain usually settle within days; gut symptoms within 1 to 4 weeks."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "whipple_disease-dx-mgmt",
+      "title": "Diagnosis and management of Whipple disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Arthralgia, diarrhoea, weight loss, or unexplained endocarditis",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Endoscopy with distal duodenal biopsies: PAS, IHC, PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "PAS-positive macrophages?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Acid-fast positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Mycobacterium avium complex: treat accordingly",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "PCR positive with Ct 30 or less?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Whipple unlikely; reconsider if suspicion persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "CSF PCR for all confirmed cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "IV ceftriaxone or penicillin 2 to 4 weeks",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Long-term TMP-SMX; watch for IRIS and relapse",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

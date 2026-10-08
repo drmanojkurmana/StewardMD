@@ -150,5 +150,267 @@
       "caption": "Overview comparison matrix for vesicoureteric reflux."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vesicoureteric_reflux-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Voiding cystourethrography",
+          "cells": [
+            {
+              "text": "Confirms and grades reflux"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DMSA renal scintigraphy",
+          "cells": [
+            {
+              "text": "Scarring and acute pyelonephritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and bladder ultrasound",
+          "cells": [
+            {
+              "text": "Dilatation and anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and culture during febrile illness",
+          "cells": [
+            {
+              "text": "Infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vesicoureteric_reflux-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Recurrent urinary tract infection without reflux",
+          "cells": [
+            {
+              "text": "Infection without reflux on cystourethrography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior urethral valves or PUJ obstruction",
+          "cells": [
+            {
+              "text": "Obstructive uropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurogenic or dysfunctional bladder",
+          "cells": [
+            {
+              "text": "Bladder-bowel dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex collecting system with ectopic ureter",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vesicoureteric_reflux-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Optimise bladder and bowel function",
+          "cells": [
+            {
+              "text": "Constipation and dysfunctional voiding treated with timed voiding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous antibiotic prophylaxis",
+          "cells": [
+            {
+              "text": "High-grade reflux or recurrent febrile UTI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Most reflux managed without surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vesicoureteric_reflux-dx-mgmt",
+      "title": "Diagnosis and management of Vesicoureteric reflux",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vesicoureteric reflux: febrile UTI with retrograde urine flow",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (obstructed or refluxing system with fever, or progressive scarring)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent urology review for urosepsis in an obstructed or refluxing system",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Voiding cystourethrography, DMSA scintigraphy, renal and bladder ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does voiding cystourethrography confirm reflux?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Investigate recurrent UTI for other causes, such as obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Optimise bladder and bowel function with timed voiding and bowel regimen",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Continuous antibiotic prophylaxis for high-grade reflux",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Conservative management with surveillance of renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Scarring and reduced differential function determine long-term outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

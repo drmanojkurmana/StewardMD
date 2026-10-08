@@ -147,5 +147,316 @@
       "caption": "Overview comparison matrix for mal de meleda."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mal_de_meleda-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "SLURP1 molecular testing",
+          "cells": [
+            {
+              "text": "Biallelic variants confirm the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Orthohyperkeratosis with acanthosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycological and bacterial swabs",
+          "cells": [
+            {
+              "text": "Secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for pseudo-ainhum",
+          "cells": [
+            {
+              "text": "Digital constriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family pedigree",
+          "cells": [
+            {
+              "text": "Autosomal recessive pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mal_de_meleda-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vorner or Unna-Thost keratoderma",
+          "cells": [
+            {
+              "text": "Diffuse palmoplantar without dorsal spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Loricrin keratoderma",
+          "cells": [
+            {
+              "text": "Ichthyosis with LOR variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Olmsted syndrome",
+          "cells": [
+            {
+              "text": "Periorificial keratoderma and mutilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Papillon-Lefevre syndrome",
+          "cells": [
+            {
+              "text": "Periodontitis and palmoplantar change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mal_de_meleda-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Keratolytic emollients",
+          "cells": [
+            {
+              "text": "Urea, salicylic or lactic acid preparations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic retinoids",
+          "cells": [
+            {
+              "text": "Acitretin for severe disease, with side-effect monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mechanical care",
+          "cells": [
+            {
+              "text": "Paring and debridement with podiatry input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperhidrosis",
+          "cells": [
+            {
+              "text": "Antiperspirants and topical botulinum toxin where troublesome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudo-ainhum",
+          "cells": [
+            {
+              "text": "Early surgical release to prevent autoamputation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mal_de_meleda-dx-mgmt",
+      "title": "Diagnosis and management of Mal de Meleda",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Thick palmoplantar keratoderma spreading onto the backs of the hands and feet",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (constricting digital bands, deep infection or rapid change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical review for constricting bands or deep infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SLURP1 testing, skin biopsy, mycological and bacterial swabs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic SLURP1 variants found with transgredient keratoderma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other palmoplantar keratodermas such as loricrin or Olmsted",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Keratolytic emollients for transgredient keratoderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Acitretin for severe hyperkeratosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Podiatry and mechanical debridement",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat secondary bacterial and fungal infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Early release of pseudo-ainhum bands and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifelong and progressive in childhood; function is maintained with diligent care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

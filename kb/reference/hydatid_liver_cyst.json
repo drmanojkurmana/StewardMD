@@ -150,5 +150,294 @@
       "caption": "Overview comparison matrix for hydatid liver cyst."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hydatid_liver_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Characterises and stages the cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "Anatomical detail and biliary communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echinococcal serology",
+          "cells": [
+            {
+              "text": "Supportive; false negatives possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRCP or ERCP",
+          "cells": [
+            {
+              "text": "Biliary communication or obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Concurrent pulmonary hydatid disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hydatid_liver_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Benzimidazole antihelminthic therapy",
+          "cells": [
+            {
+              "text": "Such as albendazole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Percutaneous PAIR",
+          "cells": [
+            {
+              "text": "Puncture, aspiration, injection and re-aspiration for suitable cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical cystectomy or pericystectomy",
+          "cells": [
+            {
+              "text": "Large or complicated cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Watch-and-wait",
+          "cells": [
+            {
+              "text": "Inactive, calcified cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic management",
+          "cells": [
+            {
+              "text": "Cystobiliary communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaphylaxis preparedness",
+          "cells": [
+            {
+              "text": "Spillage-induced anaphylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term follow-up",
+          "cells": [
+            {
+              "text": "Serial imaging and serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatobiliary and infectious disease team",
+          "cells": [
+            {
+              "text": "Multidisciplinary management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hydatid_liver_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Hydatid liver cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Liver cyst on imaging, with possible echinococcal exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rupture with anaphylaxis, biliary leak, sepsis, or spillage into peritoneum or chest?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent management for anaphylaxis, sepsis or biliary communication",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound; CT or MRI; serology; FBC; MRCP or ERCP; chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a hydatid cyst confirmed on imaging, with serology supportive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider simple cyst, pyogenic or amoebic abscess, cystadenoma or Caroli disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Benzimidazole antihelminthic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Percutaneous PAIR for suitable cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical cystectomy or pericystectomy for large or complicated cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Watch-and-wait for inactive calcified cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Cyst controlled; long-term imaging and serology follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

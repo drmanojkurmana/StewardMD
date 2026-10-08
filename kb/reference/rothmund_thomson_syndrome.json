@@ -148,5 +148,240 @@
       "caption": "Overview comparison matrix for rothmund-thomson syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rothmund_thomson_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular genetic testing of RECQL4",
+          "cells": [
+            {
+              "text": "Biallelic variants confirm the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal radiographs",
+          "cells": [
+            {
+              "text": "Bone anomalies and baseline for osteosarcoma surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Juvenile cataract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatological examination",
+          "cells": [
+            {
+              "text": "Poikiloderma and suspicious skin lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rothmund_thomson_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong photoprotection",
+          "cells": [
+            {
+              "text": "Sun avoidance, protective clothing and broad-spectrum sunscreen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteosarcoma surveillance",
+          "cells": [
+            {
+              "text": "Low threshold to image persistent bone pain or swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatological surveillance",
+          "cells": [
+            {
+              "text": "Prompt biopsy or excision of suspicious lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological care",
+          "cells": [
+            {
+              "text": "Monitoring and surgical treatment of juvenile cataract"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rothmund_thomson_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Rothmund-Thomson syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with poikiloderma, skin changes and bony or ocular anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new bone pain or mass, changing skin lesion, rapid visual loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent imaging and biopsy for suspected osteosarcoma or skin malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "RECQL4 genetic testing, skeletal radiographs, ophthalmology and skin review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic RECQL4 variants found on molecular testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Bloom, Werner, Fanconi or Cockayne syndrome and other poikiloderma disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong photoprotection and sun avoidance",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Osteosarcoma surveillance with low threshold for bone imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dermatological surveillance with prompt biopsy of suspicious lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ophthalmological monitoring and surgery for juvenile cataract",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong surveillance for skin cancer, osteosarcoma and cataract",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

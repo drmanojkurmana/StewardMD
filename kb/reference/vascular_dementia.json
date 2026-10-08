@@ -154,5 +154,463 @@
       "caption": "Overview comparison matrix for vascular dementia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Vascular Dementia",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/delirium-and-dementia/vascular-dementia"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 371-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vascular_dementia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing vascular cognitive impairment and dementia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Dementia criteria",
+          "cells": [
+            {
+              "text": "Decline that impairs daily function, not delirium or psychiatric"
+            },
+            {
+              "text": "Required"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vascular evidence",
+          "cells": [
+            {
+              "text": "Stroke history or imaging evidence of vascular cause"
+            },
+            {
+              "text": "{{hy:Needed to confirm VCID}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Post-stroke dementia",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "Decline begins within 6 months of stroke",
+              "op": "<=",
+              "value": 6
+            },
+            {
+              "text": "Irreversible"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cognitive profile",
+          "cells": [
+            {
+              "text": "Early executive dysfunction, mild or no memory loss"
+            },
+            {
+              "text": "Many show gradual AD-like memory decline"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Course",
+          "cells": [
+            {
+              "text": "Stepwise (multi-infarct) or gradual (small vessel)"
+            },
+            {
+              "text": "Stepwise decline is not universal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI (FLAIR, DWI, T2*)",
+          "cells": [
+            {
+              "text": "Infarcts, lacunes, microbleeds, white matter hyperintensities"
+            },
+            {
+              "text": "WMH are common with ageing; do not over-read"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Modified Hachinski score",
+          "cells": [
+            {
+              "text": "High score"
+            },
+            {
+              "text": "Supports vascular cause when imaging unavailable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Young onset or family history",
+          "cells": [
+            {
+              "text": "Consider CADASIL or hereditary amyloid angiopathy"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vascular_dementia-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic vascular dementia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Alzheimer disease",
+          "cells": [
+            {
+              "text": "Slow memory-led decline; hippocampal and temporoparietal atrophy"
+            },
+            {
+              "text": "Amyloid or tau biomarkers, FDG-PET"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mixed dementia",
+          "cells": [
+            {
+              "text": "Vascular plus Alzheimer or Lewy pathology"
+            },
+            {
+              "text": "Imaging plus biomarkers; mixed is the rule"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Delirium",
+          "cells": [
+            {
+              "text": "Acute onset, attention mainly affected, often reversible"
+            },
+            {
+              "text": "Clinical; search for precipitant"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Normal pressure hydrocephalus",
+          "cells": [
+            {
+              "text": "Shares gait disturbance"
+            },
+            {
+              "text": "Brain imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dementia with Lewy bodies, FTD",
+          "cells": [
+            {
+              "text": "Different first symptom, neuropsychiatry and imaging"
+            },
+            {
+              "text": "Clinical comparison per Table 371-4"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "CJD",
+          "cells": [
+            {
+              "text": "Rapid progression with myoclonus and rigidity"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vascular_dementia-treatment",
+      "kind": "treatment",
+      "title": "Managing vascular dementia",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood pressure lowering",
+          "cells": [
+            {
+              "text": "All"
+            },
+            {
+              "text": "Slows progression"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Statin, glucose control, stop smoking",
+          "cells": [
+            {
+              "text": "All with risk factors"
+            },
+            {
+              "text": "Vascular risk reduction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antiplatelet, or anticoagulant for AF",
+          "cells": [
+            {
+              "text": "Secondary stroke prevention"
+            },
+            {
+              "text": "Screen for AF if silent infarcts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholinesterase inhibitor or memantine",
+          "cells": [
+            {
+              "text": "Coexisting Alzheimer disease; trial reasonable in VCID"
+            },
+            {
+              "text": "Benefit uncertain in pure VCID"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psychological support, antidepressants",
+          "cells": [
+            {
+              "text": "Depression, anxiety, apathy"
+            },
+            {
+              "text": "Minimise antipsychotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation and safe environment",
+          "cells": [
+            {
+              "text": "Gait and function"
+            },
+            {
+              "text": "Orientation, safety monitoring"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Advance care planning",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Early"
+            },
+            {
+              "text": "5-year mortality about 60%",
+              "op": "=",
+              "value": 60
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Harrison reserves cholinesterase inhibitors for coexisting Alzheimer pathology; Merck calls a trial reasonable in VCID. Both kept."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vascular_dementia-dx-mgmt",
+      "title": "Diagnosis and management of vascular dementia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cognitive decline, often with stroke history or vascular risk",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute onset with fluctuating attention?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Delirium: find and treat precipitant",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cognitive testing and MRI with FLAIR, DWI, T2*",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Vascular lesions explain deficits?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Consider Alzheimer, Lewy body, FTD, NPH; biomarkers",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Young onset or family history?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Test for CADASIL or hereditary amyloid angiopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Control BP, lipids, glucose; antiplatelet or anticoagulant",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Features of coexisting Alzheimer disease?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Add cholinesterase inhibitor or memantine; support care",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Risk control, rehabilitation, advance care planning",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

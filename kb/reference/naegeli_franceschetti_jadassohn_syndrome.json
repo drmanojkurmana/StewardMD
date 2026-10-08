@@ -148,5 +148,323 @@
       "caption": "Overview comparison matrix for naegeli-franceschetti-jadassohn syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "naegeli_franceschetti_jadassohn_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular genetic testing of KRT14",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for absent dermatoglyphics",
+          "cells": [
+            {
+              "text": "Loss of fingerprints, a distinctive sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Pigment incontinence without significant inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sweating and heat tolerance assessment",
+          "cells": [
+            {
+              "text": "Hypohidrosis and heat intolerance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental and nail evaluation",
+          "cells": [
+            {
+              "text": "Dental anomalies and nail dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and pedigree analysis",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "naegeli_franceschetti_jadassohn_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dermatopathia pigmentosa reticularis",
+          "cells": [
+            {
+              "text": "Allelic KRT14 disorder; variants that abolish the protein cause it instead"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incontinentia pigmenti",
+          "cells": [
+            {
+              "text": "Has vesicular and verrucous stages before pigmentation; this syndrome does not"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dyskeratosis congenita",
+          "cells": [
+            {
+              "text": "Carries systemic risk; suspected when features point away from this syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "naegeli_franceschetti_jadassohn_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid overheating",
+          "cells": [
+            {
+              "text": "Cooling measures and hydration in hot conditions for hypohidrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients and keratolytics",
+          "cells": [
+            {
+              "text": "Urea- or salicylic-acid-based preparations for palmoplantar keratoderma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental care",
+          "cells": [
+            {
+              "text": "Restorative and prosthetic management of enamel defects and early tooth loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail care",
+          "cells": [
+            {
+              "text": "Supportive dermatological care and treatment of secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Pigmentation is benign and tends to fade with age; cosmetic camouflage if desired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant KRT14 disease; family assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Dermatology, dentistry and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "naegeli_franceschetti_jadassohn_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Naegeli-Franceschetti-Jadassohn syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Net-like pigmentation without a preceding inflammatory stage, with absent fingerprints",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (heat intolerance, severe dental disease, disabling keratoderma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cooling advice for heat intolerance; dental and dermatology input",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "KRT14 sequencing, dermatoglyphics, skin biopsy, sweating and dental assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "KRT14 variant confirmed with absent dermatoglyphics?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dyskeratosis congenita or incontinentia pigmenti; repeat genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid overheating; cooling measures and hydration for hypohidrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients and keratolytics for palmoplantar keratoderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Comprehensive dental care for enamel defects and early tooth loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassure: reticulate pigmentation is benign and tends to fade with age",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Normal lifespan; heat intolerance, keratoderma and dental problems are manageable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,323 @@
       "caption": "Overview comparison matrix for sparganosis (spirometra)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sparganosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI or CT",
+          "cells": [
+            {
+              "text": "Migrating tracks, granulomas or intracranial lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sparganum serology",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of the excised larva",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Ocular involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cestode serology",
+          "cells": [
+            {
+              "text": "Excludes other cystic cestode infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sparganosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cutaneous larva migrans and other migratory helminths",
+          "cells": [
+            {
+              "text": "A migrating track in the skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurocysticercosis and other cerebral cystic disease",
+          "cells": [
+            {
+              "text": "Excluded by serology for other cestodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Soft-tissue lipoma, cyst or abscess",
+          "cells": [
+            {
+              "text": "Mistaken for a benign nodule; migration distinguishes the larva"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sparganosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision of the whole larva",
+          "cells": [
+            {
+              "text": "Definitive and curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anthelmintic drugs",
+          "cells": [
+            {
+              "text": "Generally ineffective against the tissue-dwelling larva"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Reduce peri-lesional oedema, particularly in cerebral disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure drugs",
+          "cells": [
+            {
+              "text": "For seizures from cerebral sparganosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosurgical or ophthalmological referral",
+          "cells": [
+            {
+              "text": "Central nervous system or ocular larvae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preventive advice",
+          "cells": [
+            {
+              "text": "Safe water; avoid raw frog or snake and raw amphibian poultices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Confirms complete removal; incomplete excision may recur"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sparganosis-dx-mgmt",
+      "title": "Diagnosis and management of Sparganosis (Spirometra)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Migrating nodule with eosinophilia, after raw-food or untreated-water exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures, progressive ocular swelling, enlarging lesion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical or ophthalmology referral for CNS or eye involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI or CT for tracks and lesions; FBC for eosinophilia; sparganum serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do imaging and eosinophilia support sparganosis with that exposure history?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cutaneous larva migrans, cysticercosis or lipoma; repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision of the whole larva, which is curative",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anthelmintics rarely work against tissue-dwelling larvae",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids for peri-lesional oedema, especially cerebral",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiseizure drugs for seizures from cerebral disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Curative when the whole larva is removed; incomplete excision may recur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

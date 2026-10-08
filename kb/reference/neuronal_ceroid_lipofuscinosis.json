@@ -148,5 +148,341 @@
       "caption": "Overview comparison matrix for neuronal ceroid lipofuscinoses (batten disease group)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neuronal_ceroid_lipofuscinosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular genetic panel across CLN genes",
+          "cells": [
+            {
+              "text": "Principal basis of diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lysosomal enzyme assays for PPT1 and TPP1",
+          "cells": [
+            {
+              "text": "CLN1 and CLN2 activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Epileptiform and photic changes in some subtypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebral and cerebellar atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology and electroretinography",
+          "cells": [
+            {
+              "text": "Retinal degeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue electron microscopy",
+          "cells": [
+            {
+              "text": "Where genetics are inconclusive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neuronal_ceroid_lipofuscinosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lafora disease or Unverricht-Lundborg disease",
+          "cells": [
+            {
+              "text": "Other progressive myoclonic epilepsies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sialidosis or gangliosidoses",
+          "cells": [
+            {
+              "text": "Other lysosomal storage disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial encephalomyopathies",
+          "cells": [
+            {
+              "text": "Regression with epilepsy and myopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rett syndrome or other regression syndromes",
+          "cells": [
+            {
+              "text": "Early childhood regression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subacute sclerosing panencephalitis",
+          "cells": [
+            {
+              "text": "Progressive encephalitis with myoclonus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neuronal_ceroid_lipofuscinosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intracerebroventricular cerliponase alfa",
+          "cells": [
+            {
+              "text": "Enzyme replacement for CLN2 (TPP1) deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "For seizures and myoclonus, avoiding agents that aggravate myoclonus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spasticity and movement disorder management",
+          "cells": [
+            {
+              "text": "Pharmacological and supportive measures; sleep and behaviour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision aids",
+          "cells": [
+            {
+              "text": "For progressive visual decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition support",
+          "cells": [
+            {
+              "text": "Dietetic input; gastrostomy feeding as swallowing declines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary and palliative care",
+          "cells": [
+            {
+              "text": "Neurology, ophthalmology, physiotherapy and family support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Mostly autosomal recessive; carrier and prenatal testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neuronal_ceroid_lipofuscinosis-dx-mgmt",
+      "title": "Diagnosis and management of Neuronal ceroid lipofuscinoses (Batten disease group)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Developmental regression with seizures, myoclonus or visual failure in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new seizures with visual failure, rapid dementia, bulbar signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review; measure TPP1 to exclude treatable CLN2",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CLN gene panel, PPT1 and TPP1 enzyme assays, EEG, MRI, ERG, EM if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biallelic CLN variant with enzyme or electron microscopy support?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Lafora disease, sialidosis or mitochondrial disease; broaden testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intracerebroventricular cerliponase alfa for CLN2 disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure treatment, avoiding agents that worsen myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Multidisciplinary supportive and palliative care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most childhood forms are progressive and life-limiting; ERT can slow CLN2 progression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -153,5 +153,352 @@
       "caption": "Overview comparison matrix for sydenham chorea."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sydenham_chorea-dx-mgmt",
+      "title": "Diagnosis and management of sydenham chorea",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Sydenham chorea: subacute chorea after a streptococcal infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (active carditis, severe chorea, fever or encephalopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology assessment for active carditis or severe chorea",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Throat culture, anti-streptolysin O and anti-DNase B titres; echocardiography; ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do titres and echocardiography support rheumatic disease, with lupus and Wilson excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lupus-related, drug-induced chorea or Wilson disease; re-evaluate",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Penicillin course and long-term secondary antibiotic prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dopamine blockers or antiepileptics only for disabling chorea",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids, immunoglobulin or plasma exchange if severe or refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Echocardiography and management of associated rheumatic carditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor for relapse, including with pregnancy or oestrogen exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most resolve over weeks to months; rheumatic heart disease is the main long-term risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sydenham_chorea-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Throat swab culture and anti-streptolysin O or anti-DNase B titres",
+          "cells": [
+            {
+              "text": "Recent group A streptococcal infection; titres may already be falling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Subclinical rheumatic valvulitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR, CRP and full blood count",
+          "cells": [
+            {
+              "text": "Systemic inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antinuclear and antiphospholipid antibodies",
+          "cells": [
+            {
+              "text": "Lupus-related chorea excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum caeruloplasmin and copper studies",
+          "cells": [
+            {
+              "text": "Wilson disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Often normal, or reversible striatal signal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Evidence of rheumatic carditis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sydenham_chorea-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic lupus erythematosus or antiphospholipid syndrome chorea",
+          "cells": [
+            {
+              "text": "Distinguished by antinuclear and antiphospholipid antibody screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chorea gravidarum or oral contraceptive-related chorea",
+          "cells": [
+            {
+              "text": "Triggered by pregnancy or oestrogen exposure; a post-streptococcal history points to Sydenham"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced chorea",
+          "cells": [
+            {
+              "text": "Exposure history to neuroleptics, stimulants or anticonvulsants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wilson disease",
+          "cells": [
+            {
+              "text": "Excluded by serum caeruloplasmin and copper studies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sydenham_chorea-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Penicillin course",
+          "cells": [
+            {
+              "text": "Eradicates group A streptococcus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term secondary antibiotic prophylaxis",
+          "cells": [
+            {
+              "text": "Prevents recurrence and rheumatic heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dopamine blockers or antiepileptics",
+          "cells": [
+            {
+              "text": "Only for disabling chorea, such as haloperidol, risperidone, sodium valproate or carbamazepine; avoid over-sedation when mild"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunomodulation for severe chorea",
+          "cells": [
+            {
+              "text": "Corticosteroids, intravenous immunoglobulin or plasma exchange for severe or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Screens for and manages associated rheumatic carditis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural and supportive care",
+          "cells": [
+            {
+              "text": "Obsessive-compulsive symptoms, emotional lability, attention difficulties; low-stimulation setting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse monitoring",
+          "cells": [
+            {
+              "text": "Pregnancy or oestrogen exposure; paediatric neurology and cardiology follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

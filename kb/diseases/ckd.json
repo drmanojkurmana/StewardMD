@@ -258,6 +258,36 @@
       "id": "c3",
       "label": "Tables PDF, Table 280-1 and Table 280-5",
       "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 36-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 103-6",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 352-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c7",
+      "label": "Tables PDF, Table 47-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c8",
+      "label": "Tables PDF, Table 285-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c9",
+      "label": "Tables PDF, Table 282-5",
+      "kind": "user-supplied"
     }
   ],
   "valueTables": [
@@ -688,6 +718,380 @@
         }
       ],
       "footnote": "Causes of anaemia in CKD in the Tables PDF include EPO deficiency, iron, B12 or folate deficiency, bleeding, hyperparathyroidism and inflammation; check these before ESA."
+    },
+    {
+      "id": "ckd-ddx-2",
+      "kind": "ddx",
+      "title": "Drugs that cause edema",
+      "rowHeader": "Condition",
+      "columns": [
+        "Drugs or agents listed"
+      ],
+      "rows": [
+        {
+          "parameter": "Nonsteroidal anti-inflammatory drugs",
+          "cells": [
+            {
+              "text": "nonsteroidal anti-inflammatory drugs"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Antihypertensive agents",
+          "cells": [
+            {
+              "text": "direct vasodilators (hydralazine, clonidine, methyldopa, guanethidine, minoxidil); calcium channel antagonists; alpha-adrenergic antagonists; thiazolidinediones"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Steroid hormones",
+          "cells": [
+            {
+              "text": "glucocorticoids, anabolic steroids, estrogens, progestins"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Cyclosporine",
+          "cells": [
+            {
+              "text": "cyclosporine"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Growth hormone",
+          "cells": [
+            {
+              "text": "growth hormone"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Immunotherapies",
+          "cells": [
+            {
+              "text": "interleukin 2, OKT3 monoclonal antibody"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    },
+    {
+      "id": "ckd-ddx-3",
+      "kind": "ddx",
+      "title": "Hypoproliferative anemias compared",
+      "rowHeader": "Condition",
+      "columns": [
+        "Anemia",
+        "MCV (fL)",
+        "Morphology",
+        "Serum iron (SI)",
+        "TIBC",
+        "Saturation (%)",
+        "Serum ferritin (ug/L)",
+        "Iron stores"
+      ],
+      "rows": [
+        {
+          "parameter": "Iron deficiency",
+          "cells": [
+            {
+              "text": "Mild to severe"
+            },
+            {
+              "text": "60 to 90"
+            },
+            {
+              "text": "Normo-microcytic"
+            },
+            {
+              "text": "<30"
+            },
+            {
+              "text": "Over 360"
+            },
+            {
+              "text": "<10"
+            },
+            {
+              "text": "<15"
+            },
+            {
+              "text": "0"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Inflammation",
+          "cells": [
+            {
+              "text": "Mild"
+            },
+            {
+              "text": "80 to 90"
+            },
+            {
+              "text": "Normocytic"
+            },
+            {
+              "text": "<50"
+            },
+            {
+              "text": "<300"
+            },
+            {
+              "text": "10 to 20"
+            },
+            {
+              "text": "30 to 200"
+            },
+            {
+              "text": "2 to 4+"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Renal disease",
+          "cells": [
+            {
+              "text": "Mild to severe"
+            },
+            {
+              "text": "90"
+            },
+            {
+              "text": "Normocytic"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "115 to 150"
+            },
+            {
+              "text": "1 to 4+"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Hypometabolic states",
+          "cells": [
+            {
+              "text": "Mild"
+            },
+            {
+              "text": "90"
+            },
+            {
+              "text": "Normocytic"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "MCV, mean corpuscular volume; SI, serum iron; TIBC, total iron-binding capacity. The ferritin unit prints as ?g/L in the source and is read as ug/L."
+    },
+    {
+      "id": "ckd-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of hyperphosphatemia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "I. Impaired renal phosphate excretion: renal insufficiency",
+          "cells": [
+            {
+              "text": "Renal insufficiency"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "I. Hypoparathyroidism",
+          "cells": [
+            {
+              "text": "Developmental; autoimmune; after neck surgery or radiation; activating mutations of the calcium-sensing receptor"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "I. Parathyroid suppression",
+          "cells": [
+            {
+              "text": "Parathyroid-independent hypercalcemia (vitamin D or vitamin A intoxication; sarcoidosis and other granulomatous diseases; immobilization, osteolytic metastases; milk-alkali syndrome); severe hypermagnesemia or hypomagnesemia"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "I. Other impaired excretion",
+          "cells": [
+            {
+              "text": "Pseudohypoparathyroidism; acromegaly; tumoral calcinosis; heparin therapy"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "II. Massive extracellular fluid phosphate load: exogenous",
+          "cells": [
+            {
+              "text": "Rapid administration of exogenous phosphate (intravenous, oral, rectal)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "II. Extensive cellular injury or necrosis",
+          "cells": [
+            {
+              "text": "Crush injuries; rhabdomyolysis; hyperthermia; fulminant hepatitis; cytotoxic therapy; severe hemolytic anemia"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "II. Transcellular phosphate shifts",
+          "cells": [
+            {
+              "text": "Metabolic acidosis; respiratory acidosis"
+            }
+          ],
+          "cite": "c6"
+        }
+      ]
+    },
+    {
+      "id": "ckd-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Causes of high anion-gap metabolic acidosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acids and metabolic causes",
+          "cells": [
+            {
+              "text": "Lactic acidosis; ketoacidosis (diabetic, alcoholic, starvation)"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Toxins",
+          "cells": [
+            {
+              "text": "Ethylene glycol; methanol; salicylates; propylene glycol; pyroglutamic acid"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Renal failure",
+          "cells": [
+            {
+              "text": "Acute and chronic"
+            }
+          ],
+          "cite": "c7"
+        }
+      ]
+    },
+    {
+      "id": "ckd-diagnostic-4",
+      "kind": "diagnostic",
+      "title": "Major causes of papillary necrosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Causes",
+          "cells": [
+            {
+              "text": "Analgesic nephropathy; sickle cell nephropathy; diabetes with urinary tract infection; prolonged NSAID use (rare)"
+            }
+          ],
+          "cite": "c8"
+        }
+      ]
+    },
+    {
+      "id": "ckd-diagnostic-5",
+      "kind": "diagnostic",
+      "title": "Most common opportunistic infections in renal transplant recipients",
+      "rowHeader": "Period after transplant",
+      "columns": [
+        "Infections"
+      ],
+      "rows": [
+        {
+          "parameter": "Peritransplant (<1 month)",
+          "cells": [
+            {
+              "text": "Wound infections; herpesvirus; oral candidiasis; urinary tract infection"
+            }
+          ],
+          "cite": "c9"
+        },
+        {
+          "parameter": "Early (1 to 6 months)",
+          "cells": [
+            {
+              "text": "Pneumocystis carinii; cytomegalovirus; Legionella; Listeria; hepatitis B; hepatitis C"
+            }
+          ],
+          "cite": "c9"
+        },
+        {
+          "parameter": "Late (>6 months)",
+          "cells": [
+            {
+              "text": "Aspergillus; Nocardia; BK virus (polyoma); herpes zoster; hepatitis B; hepatitis C"
+            }
+          ],
+          "cite": "c9"
+        }
+      ]
     }
   ],
   "flowcharts": [

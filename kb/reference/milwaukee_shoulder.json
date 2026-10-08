@@ -146,5 +146,305 @@
       "caption": "Overview comparison matrix for milwaukee shoulder syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "milwaukee_shoulder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Joint aspiration with cell count and culture",
+          "cells": [
+            {
+              "text": "Blood-tinged, low-cell-count effusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alizarin red staining or electron microscopy",
+          "cells": [
+            {
+              "text": "BCP crystals, which are non-birefringent on polarised light"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs",
+          "cells": [
+            {
+              "text": "Glenohumeral destruction and superior humeral head migration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or ultrasound",
+          "cells": [
+            {
+              "text": "Rotator cuff tear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional CT",
+          "cells": [
+            {
+              "text": "Bony destruction and surgical planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Synovial fluid cell count and Gram stain",
+          "cells": [
+            {
+              "text": "Sepsis excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "milwaukee_shoulder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Septic arthritis",
+          "cells": [
+            {
+              "text": "Superimposed on a destroyed joint; Gram stain and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gout or CPP crystal arthritis",
+          "cells": [
+            {
+              "text": "Crystal analysis; BCP crystals are non-birefringent"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "milwaukee_shoulder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Simple analgesia and cautious NSAIDs, given the typically elderly patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Therapeutic aspiration",
+          "cells": [
+            {
+              "text": "Large effusions, always with culture to exclude infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intra-articular corticosteroid",
+          "cells": [
+            {
+              "text": "To reduce pain and effusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Maintain range of movement and function; activity modification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Selected patients; reverse total shoulder arthroplasty as rotator cuff deficiency precludes conventional repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Remain alert to superimposed septic arthritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "milwaukee_shoulder-dx-mgmt",
+      "title": "Diagnosis and management of Milwaukee shoulder syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful shoulder with rotator cuff tear, typically in an older patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid joint destruction, signs of septic arthritis, or large haemorrhagic effusions?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Aspirate with culture; exclude septic arthritis urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Joint aspiration with cell count, Gram stain and culture; BCP crystal study; imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are BCP crystals found with sepsis excluded on culture and Gram stain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider septic arthritis, gout or CPP crystal arthritis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Simple analgesia and cautious NSAIDs for typically elderly patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Therapeutic aspiration of large effusions, always with culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intra-articular corticosteroid injection to reduce pain and effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and activity modification to maintain range and function",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Reverse total shoulder arthroplasty for selected surgical cases; monitor for infection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

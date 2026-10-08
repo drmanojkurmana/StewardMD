@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for nelson syndrome corticotroph tumour."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nelson_tumor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial plasma ACTH measurement",
+          "cells": [
+            {
+              "text": "Marked and progressive elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial pituitary MRI",
+          "cells": [
+            {
+              "text": "Corticotroph tumour growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Formal visual field perimetry",
+          "cells": [
+            {
+              "text": "Chiasmal compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of remaining anterior pituitary function",
+          "cells": [
+            {
+              "text": "Hypopituitarism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Replacement adequacy after adrenalectomy",
+          "cells": [
+            {
+              "text": "Glucocorticoid and mineralocorticoid cover"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nelson_tumor-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary adrenal insufficiency",
+          "cells": [
+            {
+              "text": "Also causes hyperpigmentation and high ACTH; pituitary imaging shows whether the tumour is growing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent or recurrent Cushing disease before adrenalectomy",
+          "cells": [
+            {
+              "text": "Occurs before adrenalectomy; this tumour follows it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other sellar masses, such as non-functioning adenoma, craniopharyngioma or meningioma",
+          "cells": [
+            {
+              "text": "These cause mass effect; a very high ACTH points to a corticotroph tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nelson_tumor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Transsphenoidal resection",
+          "cells": [
+            {
+              "text": "The mainstay of treatment for the ACTH-secreting tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylactic or adjuvant radiotherapy",
+          "cells": [
+            {
+              "text": "At adrenalectomy in high-risk cases, or for residual tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical therapy",
+          "cells": [
+            {
+              "text": "Pasireotide, cabergoline and temozolomide for aggressive or malignant behaviour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong replacement",
+          "cells": [
+            {
+              "text": "Glucocorticoid and mineralocorticoid replacement after bilateral adrenalectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypopituitarism and visual care",
+          "cells": [
+            {
+              "text": "Targeted hormone replacement; monitor for bitemporal hemianopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Serial plasma ACTH and pituitary MRI after adrenalectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preferred strategy",
+          "cells": [
+            {
+              "text": "Direct pituitary-directed treatment of Cushing disease avoids this syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nelson_tumor-dx-mgmt",
+      "title": "Diagnosis and management of Nelson syndrome corticotroph tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hyperpigmentation with very high ACTH after bilateral adrenalectomy for Cushing disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, visual field loss, adrenal crisis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent visual field and pituitary assessment; cover for adrenal crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial plasma ACTH, pituitary MRI, perimetry, pituitary hormone assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Progressive ACTH elevation with a growing corticotroph tumour on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary adrenal insufficiency or recurrent Cushing disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Transsphenoidal resection of the ACTH-secreting tumour as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Radiotherapy, given prophylactically or for residual or aggressive tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pasireotide, cabergoline or temozolomide for aggressive or malignant behaviour",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial plasma ACTH and pituitary MRI surveillance after adrenalectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many are controlled with surgery and radiotherapy; an aggressive subset can recur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

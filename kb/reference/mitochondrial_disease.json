@@ -150,5 +150,276 @@
       "caption": "Overview comparison matrix for mitochondrial disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mitochondrial_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood and CSF lactate and pyruvate with lactate-to-pyruvate ratio",
+          "cells": [
+            {
+              "text": "Lactate-to-pyruvate ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI and MR spectroscopy",
+          "cells": [
+            {
+              "text": "Lactate peak; symmetrical basal ganglia or brainstem lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with histochemistry and respiratory chain enzyme assays",
+          "cells": [
+            {
+              "text": "Ragged-red and COX-deficient fibres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing of mitochondrial DNA and nuclear gene panels",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ-specific assessment (echocardiography, audiometry, endocrine, ophthalmology)",
+          "cells": [
+            {
+              "text": "Organ involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mitochondrial_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cofactor regimen",
+          "cells": [
+            {
+              "text": "Coenzyme Q10, riboflavin and antioxidants, with nutrition and energy optimisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid toxins and fasting",
+          "cells": [
+            {
+              "text": "Sodium valproate (especially in POLG disease), aminoglycosides and prolonged fasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ-specific therapy",
+          "cells": [
+            {
+              "text": "Anticonvulsants avoiding valproate; heart-failure and pacing therapy; hormone replacement for diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MELAS stroke-like episodes",
+          "cells": [
+            {
+              "text": "L-arginine considered; intravenous dextrose and fluids for lactic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography, ECG, audiometry, ophthalmology and endocrine review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist care",
+          "cells": [
+            {
+              "text": "Mitochondrial disease centre, with physiotherapy, dietetics and hearing and visual rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Maternal, autosomal or X-linked inheritance; preimplantation testing; mitochondrial donation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mitochondrial_disease-dx-mgmt",
+      "title": "Diagnosis and management of Mitochondrial disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multisystem disease with lactic acidosis, stroke-like episodes or encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Stroke-like episodes, severe lactic acidosis, brainstem failure or conduction block?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent IV dextrose and fluids for lactic acidosis; cardiac and respiratory support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lactate ratio; MRI and spectroscopy; muscle biopsy; mtDNA and nuclear panels",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a mitochondrial DNA or nuclear gene defect confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PDH deficiency, organic acidaemia or acquired lactic acidosis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Mitochondrial cofactor regimen: coenzyme Q10, riboflavin and antioxidants",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid valproate, aminoglycosides and prolonged fasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticonvulsants avoiding valproate; pacing and heart-failure therapy for cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider L-arginine for MELAS stroke-like episodes; IV dextrose for decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary mitochondrial centre care; genetic counselling for inheritance pattern",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

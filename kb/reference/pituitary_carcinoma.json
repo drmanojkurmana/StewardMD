@@ -150,5 +150,334 @@
       "caption": "Overview comparison matrix for pituitary carcinoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pituitary_carcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Whole-neuraxis MRI of brain and spine",
+          "cells": [
+            {
+              "text": "Craniospinal metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT and somatostatin-receptor PET",
+          "cells": [
+            {
+              "text": "Distant spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology with Ki-67, mitoses and p53",
+          "cells": [
+            {
+              "text": "High proliferation indices, supporting aggressiveness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of a metastatic deposit",
+          "cells": [
+            {
+              "text": "Metastasis, which is the defining criterion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial hormone measurement (ACTH, cortisol or prolactin)",
+          "cells": [
+            {
+              "text": "Functioning tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior and posterior pituitary function assessment",
+          "cells": [
+            {
+              "text": "Pituitary function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pituitary_carcinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Aggressive invasive pituitary adenoma",
+          "cells": [
+            {
+              "text": "Non-metastatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary metastasis from another primary",
+          "cells": [
+            {
+              "text": "Secondary tumour, such as from breast or lung"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pituitary_carcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic chemotherapy",
+          "cells": [
+            {
+              "text": "Temozolomide as first-line therapy for aggressive metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical debulking",
+          "cells": [
+            {
+              "text": "Maximal safe debulking of the primary tumour and accessible metastatic deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Fractionated or stereotactic radiotherapy for local control and symptomatic metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone excess",
+          "cells": [
+            {
+              "text": "Dopamine agonists for lactotroph tumours; steroidogenesis inhibitors for ACTH excess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypopituitarism",
+          "cells": [
+            {
+              "text": "Replacement with glucocorticoid, thyroid hormone and sex-steroid therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Serial whole-neuraxis MRI and tumour hormone markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory disease",
+          "cells": [
+            {
+              "text": "Immune checkpoint inhibitors or peptide-receptor radionuclide therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Neuro-endocrine multidisciplinary team, with early palliative care involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pituitary_carcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Pituitary carcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Aggressive sellar tumour progressing despite prior treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (progression despite treatment, discontinuous lesions, leptomeningeal signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent multidisciplinary neuro-endocrine review for discontinuous or metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Whole-neuraxis MRI; systemic staging; Ki-67 and p53 histology; biopsy of metastasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is metastasis confirmed by biopsy of a deposit outside the sella?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider invasive non-metastatic adenoma, pituitary metastasis or other sellar malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Temozolomide as first-line systemic chemotherapy for aggressive metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Maximal safe surgical debulking of the primary tumour and accessible metastases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fractionated or stereotactic radiotherapy for local control and symptomatic metastases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Replace hypopituitarism with glucocorticoid, thyroid and sex-steroid therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial whole-neuraxis MRI and hormone marker surveillance for progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Poor overall once metastasis is documented; some respond to temozolomide",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

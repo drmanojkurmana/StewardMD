@@ -147,5 +147,335 @@
       "caption": "Overview comparison matrix for otoferlin-related deafness (dfnb9)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "otoferlin_deafness-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Otoacoustic emissions and cochlear microphonic",
+          "cells": [
+            {
+              "text": "Preserved outer hair cell activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Auditory brainstem response",
+          "cells": [
+            {
+              "text": "Absence or gross dyssynchrony of the response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural and speech perception audiometry",
+          "cells": [
+            {
+              "text": "Functional hearing, as age allows"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted OTOF sequencing with deletion and duplication analysis",
+          "cells": [
+            {
+              "text": "Biallelic OTOF variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging of the cochlear nerve",
+          "cells": [
+            {
+              "text": "An intact nerve before implantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temperature-dependent threshold assessment",
+          "cells": [
+            {
+              "text": "Febrile fluctuation in the temperature-sensitive form"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "otoferlin_deafness-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neural auditory neuropathy from spiral ganglion or nerve pathology",
+          "cells": [
+            {
+              "text": "An auditory nerve lesion; the presynaptic defect here leaves the nerve intact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cochlear nerve deficiency on imaging",
+          "cells": [
+            {
+              "text": "Excluded before implantation; the nerve is intact in this condition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "otoferlin_deafness-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cochlear implantation",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "The mainstay; the presynaptic lesion with an intact nerve responds well to direct stimulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cochlear nerve imaging",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Confirms an intact nerve before implantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing aids",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Conventional aids give limited benefit as the defect is synaptic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Language support",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Early speech-perception and language support; gene-directed therapies are emerging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Autosomal recessive inheritance from biallelic OTOF variants; family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temperature-sensitive variant",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Protect hearing during febrile illness with antipyresis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "otoferlin_deafness-dx-mgmt",
+      "title": "Diagnosis and management of Otoferlin-related deafness (DFNB9)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Congenital severe deafness with present emissions and absent ABR",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (language delay, hearing drop during fever or emissions lost over time)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent auditory and implant team review for language delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Emissions, ABR, speech audiometry, OTOF sequencing and cochlear nerve imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic OTOF variants found, with the cochlear nerve intact?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider GJB2 deafness, cochlear nerve deficiency or other auditory neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cochlear implantation as the mainstay; excellent response in this presynaptic defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Confirm an intact cochlear nerve on imaging before implantation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early speech-perception and language support; consider emerging gene-directed therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for autosomal recessive inheritance and family testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Protect hearing during febrile illness with antipyresis in the temperature-sensitive form",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Cochlear implantation usually restores excellent speech perception",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }
