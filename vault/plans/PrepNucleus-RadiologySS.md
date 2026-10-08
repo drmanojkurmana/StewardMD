@@ -224,7 +224,17 @@ licensed figures (pilot targets list) or open grounding (StatPearls bank).
 - Owner: confirm whether the RDN11 figures may be shown publicly (only with the publisher's or author's written permission).
 - Owner/radiologist: clinical sample review; 19 items were dropped because a checker judged the key wrong (list in
   `~/prep-data/radnotes/ss/out/report.json` keyReview; none shipped, no key changed).
-- Pilot bug carried over and fixed here: `tools/prep-rad.mjs finalize` writes index topics without group/file, so
-  `prep.js` lists no module; `bankIndex()` in prep-radss writes the full prep-build-bank shape.
-- Lessons index: `v1/lessons/index.json` is live and shared; the 15 radiology entries are staged as
-  `~/prep-data/radnotes/ss/out/lessons-index-add.json` and merged into the live index only at ship time.
+- Pilot index shape: `tools/prep-rad.mjs finalize` on main already writes topics with group and file; `bankIndex()` in
+  prep-radss writes the same prep-build-bank shape.
+
+### 10.6 Shipped (2026-10-09, owner approved: all items and lessons)
+- `finalize --merge` folded the live v6 pilot (29 items, own `v6/` figure and stack paths, served from v6) into v7: 189
+  items in 24 modules (d1 41, d2 112, d3 36). The 160 v7 items and the 29 pilot items are byte-identical to the verified
+  copies; the 5 held pilot items and the 19 key-review drops are not in the bank. No answer key changed.
+- `prep/bank/v7/ss-radiology/index.json` ships in the app (prep.js reads the subject index from `/prep/bank/<bv>/`).
+- R2 `prep-bank/v7/ss-radiology/` 73 files re-uploaded and SHA-256 verified (73 of 73).
+- Lessons: 12 entries (not 15: nuclear, MSK joint and paediatrics were withdrawn and have no file) merged into the live
+  `v1/lessons/index.json` after the deploy.
+- Cache: module files cached in IndexedDB are stamped with the subject's bytes and items from
+  `prep/bank/<ver>/manifest.json` (`bankStamps`, `cacheFresh` in prep.js), so a file republished in place (v5
+  explanations) is fetched again; offline the cached copy is kept. build-www ships the manifest.

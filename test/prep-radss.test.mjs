@@ -198,3 +198,16 @@ test("bankIndex writes the prep-build-bank subject index shape with a row per ta
   assert.deepEqual([ix.counts.total, ix.counts.d1, ix.counts.d3], [2, 1, 1]);
   assert.ok(!/stewardmd|ai-generated|licen/i.test(JSON.stringify(ix)), "no source or AI field");
 });
+
+test("shipped v7 subject index: taxonomy bv v7, every taxonomy module listed with group and file, counts add up", () => {
+  const tax = JSON.parse(fs.readFileSync(new URL("../prep/taxonomy.json", import.meta.url), "utf8"));
+  let sub = null; for (const b of tax.branches) for (const s of b.subjects) if (s.id === "ss-radiology") sub = s;
+  assert.equal(sub && sub.bv, "v7");
+  const ix = JSON.parse(fs.readFileSync(new URL("../prep/bank/v7/ss-radiology/index.json", import.meta.url), "utf8"));
+  const mods = sub.sections.flatMap((x) => x.modules.map((m) => m.id));
+  assert.deepEqual(ix.topics.map((t) => t.id).sort(), mods.slice().sort());
+  for (const t of ix.topics) { assert.ok(t.group && ix.groups.some((g) => g.id === t.group), t.id); assert.equal(t.file, "mcq/" + t.id + ".json"); }
+  const n = ix.topics.reduce((a, t) => a + t.count, 0);
+  assert.equal(ix.counts.total, n); assert.equal(ix.counts.d1 + ix.counts.d2 + ix.counts.d3, n);
+  assert.ok(n >= 189, "v7 holds the 160 best items and the 29 pilot items");
+});

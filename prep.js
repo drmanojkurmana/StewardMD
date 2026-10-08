@@ -243,11 +243,21 @@
     if (!r && x && x.others) r = it.o.map(function (o, k) { return k === it.a ? x.key : String(x.others[L4[k]] || ""); });
     return { x: x, r: r };
   }
+  /* Module files of a bank version can be republished in place (explanations added to v5 items), but a module once
+     opened is kept in IndexedDB. bankStamps(manifest) -> { subject: stamp } from prep/bank/<ver>/manifest.json (each
+     subject's bytes and items, which change when its files do); cacheFresh(hit, stamp) says whether a cached copy can be
+     used as is. No stamp (manifest not loaded, offline, a subject outside the manifest) keeps the cached copy. */
+  function bankStamps(m) {
+    var o = {};
+    ((m && m.subjects) || []).forEach(function (s) { if (s && s.id && s.bytes) o[s.id] = s.bytes + "." + (s.items || 0); });
+    return o;
+  }
+  function cacheFresh(hit, stamp) { return !!hit && (!stamp || hit.s === stamp); }
   var PURE = { EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, poolFor: poolFor, progressByModule: progressByModule,
     statusOf: statusOf, stars: stars, countFor: countFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, shuffle: shuffle, fmtTime: fmtTime,
     targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
     MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
-    mdLite: mdLite, inlineMd: inlineMd, legacyExp: legacyExp, explainOf: explainOf, mergeOverlay: mergeOverlay };
+    mdLite: mdLite, inlineMd: inlineMd, legacyExp: legacyExp, explainOf: explainOf, mergeOverlay: mergeOverlay, bankStamps: bankStamps, cacheFresh: cacheFresh };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -319,17 +329,23 @@
   function cacheKeys() { return idbDo("readonly", function (os) { return os.getAllKeys ? os.getAllKeys() : null; }); }
   function cacheDel(path) { return idbDo("readwrite", function (os) { return os.delete(path); }); }
   function modulePath(sid, mid) { return bvOf(sid) + "/" + sid + "/mcq/" + mid + ".json"; }
+  // Stamps of the main bank version (bankStamps), loaded once a session; a failed load (offline) gives none.
+  function loadStamps() {
+    if (!st.stampsP) st.stampsP = getJSON(STATIC + "bank/" + VER + "/manifest.json").then(bankStamps, function () { return {}; });
+    return st.stampsP;
+  }
   function loadBank(sid, mid) {
     var p = modulePath(sid, mid);
     if (st.mem[p]) return Promise.resolve(st.mem[p]);
-    return cacheGet(p).then(function (hit) {
-      if (hit && hit.items) return (st.mem[p] = hit.items);
+    return Promise.all([cacheGet(p), bvOf(sid) === VER ? loadStamps() : {}]).then(function (r) {
+      var hit = r[0] && r[0].items ? r[0] : null, stamp = r[1][sid] || "";
+      if (cacheFresh(hit, stamp)) return (st.mem[p] = hit.items);
       return getJSON(API + p).then(function (f) {
         var items = (f.items || []).map(function (it) { it._s = sid; it._m = mid; return it; });
         st.mem[p] = items;
-        cachePut(p, { items: items, ts: Date.now() });
+        cachePut(p, { items: items, ts: Date.now(), s: stamp });
         return items;
-      });
+      }, function (e) { if (hit) return (st.mem[p] = hit.items); throw e; });
     });
   }
   /* Overlay sets: extra MCQs for a module from outside the bank (the owner's radiology notes, set "radnotes"), at
