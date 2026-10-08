@@ -5,23 +5,23 @@
   "minutes": 5,
   "review": "ai_drafted",
   "title": {
-    "en": "Biometry and implant power",
-    "hi": "बायोमेट्री और कृत्रिम लेंस की पावर"
+    "en": "Biometry and intraocular lens (IOL) power",
+    "hi": "बायोमेट्री (biometry) और कृत्रिम लेंस (intraocular lens, IOL) की पावर"
   },
   "idea": {
-    "en": "Implant power depends on corneal power, [[axial-length]] and the predicted lens position. A small error in length gives a large error in the result.",
-    "hi": "कृत्रिम लेंस की पावर कॉर्निया की पावर, [[axial-length]] और लेंस की अनुमानित जगह पर निर्भर है। लंबाई में छोटी ग़लती से नतीजे में बड़ा फ़र्क़ आता है।"
+    "en": "IOL power depends on corneal power, [[axial-length]] (front-to-back length of the eye) and the predicted lens position. A small error in length gives a large error in the result.",
+    "hi": "IOL की पावर कॉर्निया (cornea) की पावर, [[axial-length]] (आँख की आगे से पीछे तक की लंबाई) और लेंस की अनुमानित जगह पर निर्भर है। लंबाई में छोटी ग़लती से नतीजे में बड़ा फ़र्क़ आता है।"
   },
   "see": {
     "diagram": "diagrams/lens-iol-power.svg",
     "w": 480,
     "h": 290,
     "alt": {
-      "en": "Side view of an eye. Four yellow light rays enter from the left. They bend at the cornea and at a small blue implant, and meet at one point on the retina. A teal arc marks the front curve of the cornea. A yellow double arrow spans from the cornea to the implant. A long teal double arrow below spans the whole length of the eye.",
+      "en": "Side view of an eye. Four yellow light rays enter from the left. They bend at the cornea and at a small blue IOL, and meet at one point on the retina. A teal arc marks the front curve of the cornea. A yellow double arrow spans from the cornea to the IOL. A long teal double arrow below spans the whole length of the eye.",
       "hi": "आँख का बगल से चित्र। चार पीली किरणें बाईं ओर से आकर कॉर्निया और एक छोटे नीले कृत्रिम लेंस पर मुड़ती हैं, और पीछे रेटिना पर एक बिंदु पर मिलती हैं। एक फ़िरोज़ी चाप कॉर्निया के आगे के घुमाव को दिखाती है। एक पीला दोहरा तीर कॉर्निया से लेंस तक है। नीचे एक लंबा फ़िरोज़ी दोहरा तीर आँख की पूरी लंबाई दिखाता है।"
     },
     "caption": {
-      "en": "What biometry measures: corneal curve, lens position and axial length. Together they set the implant power that focuses light on the retina.",
+      "en": "What biometry measures: corneal curve, lens position and axial length. Together they set the IOL power that focuses light on the retina.",
       "hi": "बायोमेट्री क्या नापती है: कॉर्निया का घुमाव, लेंस की जगह और आँख की लंबाई। तीनों मिलकर वह पावर तय करते हैं जो रोशनी को रेटिना पर फ़ोकस करे।"
     },
     "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
@@ -34,16 +34,16 @@
           "hi": "कॉर्निया की पावर"
         },
         "note": {
-          "en": "[[keratometry]] measures the front curve. Contact lenses and dry eye can distort it.",
-          "hi": "[[keratometry]] आगे का घुमाव नापती है। कॉन्टैक्ट लेंस और सूखी आँख इसे बिगाड़ सकते हैं।"
+          "en": "[[keratometry]] measures the front curvature of the cornea. Contact lenses and dry eye can distort it.",
+          "hi": "[[keratometry]] आगे का घुमाव नापती है। कॉन्टैक्ट लेंस और सूखी आँख (dry eye) इसे बिगाड़ सकते हैं।"
         }
       },
       {
         "x": 0.3125,
         "y": 0.414,
         "label": {
-          "en": "Implant",
-          "hi": "कृत्रिम लेंस"
+          "en": "IOL",
+          "hi": "कृत्रिम लेंस (IOL)"
         },
         "note": {
           "en": "Its power is the unknown the formula solves for.",
@@ -58,7 +58,7 @@
           "hi": "लेंस की जगह"
         },
         "note": {
-          "en": "Formulas predict where the implant will settle. This is the main source of error.",
+          "en": "Formulas predict where the IOL will settle. This is the main source of error.",
           "hi": "फ़ॉर्मूले अनुमान लगाते हैं कि कृत्रिम लेंस कहाँ टिकेगा। ग़लती का मुख्य स्रोत यही है।"
         }
       },
@@ -70,8 +70,8 @@
           "hi": "आँख की लंबाई"
         },
         "note": {
-          "en": "[[axial-length]]: about 23 to 24 mm in most adults. Check readings that are unusual or differ between eyes.",
-          "hi": "[[axial-length]]: ज़्यादातर वयस्कों में लगभग 23 से 24 mm। असामान्य या दोनों आँखों में अलग नाप दोबारा जाँचें।"
+          "en": "[[axial-length]]: about 23 to 24 millimetres (mm) in most adults. Check readings that are unusual or differ between eyes.",
+          "hi": "[[axial-length]]: ज़्यादातर वयस्कों में लगभग 23 से 24 मिलीमीटर (millimetres, mm)। असामान्य या दोनों आँखों में अलग नाप दोबारा जाँचें।"
         }
       },
       {
@@ -92,19 +92,19 @@
     "steps": [
       {
         "en": "Optical biometry is the standard. Use immersion ultrasound when a dense cataract blocks the optical reading.",
-        "hi": "ऑप्टिकल बायोमेट्री मानक है। घना मोतियाबिंद ऑप्टिकल रीडिंग रोके तो इमर्शन अल्ट्रासाउंड करें।"
+        "hi": "ऑप्टिकल बायोमेट्री (optical biometry) मानक है। घना मोतियाबिंद (cataract) ऑप्टिकल रीडिंग रोके तो इमर्शन अल्ट्रासाउंड (immersion ultrasound) करें।"
       },
       {
-        "en": "An error of 1 mm in [[axial-length]] changes the implant power by about 2.5 to 3 dioptres.",
-        "hi": "[[axial-length]] में 1 mm की ग़लती से कृत्रिम लेंस की पावर लगभग 2.5 से 3 डायॉप्टर बदल जाती है।"
+        "en": "An error of 1 mm in [[axial-length]] changes the IOL power by about 2.5 to 3 dioptres (D).",
+        "hi": "[[axial-length]] में 1 mm की ग़लती से कृत्रिम लेंस की पावर लगभग 2.5 से 3 डायॉप्टर (dioptres, D) बदल जाती है।"
       },
       {
         "en": "Measure both eyes. Recheck values that are unusual or differ a lot between the eyes.",
         "hi": "दोनों आँखें नापें। असामान्य या दोनों आँखों में बहुत अलग नाप दोबारा जाँचें।"
       },
       {
-        "en": "Use a modern formula. Barrett Universal II was the most accurate in a large study.",
-        "hi": "आधुनिक फ़ॉर्मूला इस्तेमाल करें। एक बड़े अध्ययन में बैरेट यूनिवर्सल II सबसे सटीक रहा।"
+        "en": "Use a modern formula. Barrett Universal II was the most accurate in the large 2018 study by Melles, Holladay and Chang.",
+        "hi": "आधुनिक फ़ॉर्मूला इस्तेमाल करें। मेल्स, हॉलिडे और चैंग (Melles, Holladay and Chang) के 2018 के बड़े अध्ययन में बैरेट यूनिवर्सल II (Barrett Universal II) सबसे सटीक रहा।"
       },
       {
         "en": "Agree the target with the patient. Keep the fellow eye in mind to avoid a large difference between eyes.",
@@ -112,22 +112,22 @@
       },
       {
         "en": "After laser refractive surgery, standard [[keratometry]] misleads. Use methods made for these eyes.",
-        "hi": "लेज़र से चश्मा हटाने के ऑपरेशन के बाद सामान्य [[keratometry]] ग़लत दिशा देती है। ऐसी आँखों के लिए बने तरीक़े अपनाएँ।"
+        "hi": "लेज़र रिफ़्रैक्टिव सर्जरी (laser refractive surgery, चश्मा हटाने का लेज़र ऑपरेशन) के बाद सामान्य [[keratometry]] ग़लत दिशा देती है। ऐसी आँखों के लिए बने तरीक़े अपनाएँ।"
       }
     ],
     "analogy": {
-      "en": "Choosing implant power is like focusing a projector. Move the screen a little, and the picture blurs a lot.",
-      "hi": "कृत्रिम लेंस की पावर चुनना प्रोजेक्टर फ़ोकस करने जैसा है। पर्दा थोड़ा खिसके, तो तस्वीर बहुत धुंधली हो जाती है।"
+      "en": "Choosing IOL power is like focusing a projector. Move the screen (the retina) a little, and the picture (the image) blurs a lot.",
+      "hi": "कृत्रिम लेंस की पावर चुनना प्रोजेक्टर फ़ोकस करने जैसा है। पर्दा (रेटिना) थोड़ा खिसके, तो तस्वीर (image) बहुत धुंधली हो जाती है।"
     }
   },
   "spot": [
     {
-      "en": "Very short or very long eyes: formula choice matters most.",
-      "hi": "बहुत छोटी या बहुत लंबी आँख: फ़ॉर्मूले का चुनाव सबसे अहम।"
+      "en": "Very short or very long eyes (axial length): formula choice matters most.",
+      "hi": "बहुत छोटी या बहुत लंबी आँख (axial length): फ़ॉर्मूले का चुनाव सबसे अहम।"
     },
     {
-      "en": "Previous refractive surgery: standard K readings mislead.",
-      "hi": "पहले चश्मा हटाने का ऑपरेशन: सामान्य K रीडिंग ग़लत।"
+      "en": "Previous refractive surgery: standard keratometry (K) readings mislead.",
+      "hi": "पहले चश्मा हटाने का ऑपरेशन (refractive surgery): सामान्य केराटोमेट्री (keratometry, K) रीडिंग ग़लत।"
     },
     {
       "en": "Big difference between eyes: measure again.",
@@ -160,12 +160,12 @@
       },
       "o": [
         {
-          "en": "Too strong an implant: the eye ends up short-sighted",
-          "hi": "ज़्यादा ताक़तवर लेंस: आँख निकट-दृष्टि वाली हो जाती है"
+          "en": "Too strong an IOL: the eye ends up myopic (short sight)",
+          "hi": "ज़्यादा ताक़तवर लेंस: आँख में निकट-दृष्टि (myopia) आ जाती है"
         },
         {
-          "en": "Too weak an implant: the eye ends up long-sighted",
-          "hi": "कम ताक़तवर लेंस: आँख दूर-दृष्टि वाली हो जाती है"
+          "en": "Too weak an IOL: the eye ends up hyperopic (long sight)",
+          "hi": "कम ताक़तवर लेंस: आँख में दूर-दृष्टि (hyperopia) आ जाती है"
         },
         {
           "en": "No change",
@@ -174,7 +174,7 @@
       ],
       "a": 0,
       "why": {
-        "en": "A shorter eye seems to need more power. The implant is too strong by about 2.5 to 3 D.",
+        "en": "A shorter eye seems to need more power. The IOL is too strong by about 2.5 to 3 D.",
         "hi": "छोटी आँख को ज़्यादा पावर चाहिए लगती है। कृत्रिम लेंस लगभग 2.5 से 3 D ज़्यादा ताक़तवर हो जाता है।"
       }
     },
@@ -199,14 +199,14 @@
       ],
       "a": 0,
       "why": {
-        "en": "Optical biometry is precise; predicting where the implant will sit is harder.",
+        "en": "Optical biometry is precise; predicting where the IOL will sit is harder.",
         "hi": "ऑप्टिकल बायोमेट्री सटीक है; लेंस कहाँ टिकेगा, यह अनुमान मुश्किल है।"
       }
     },
     {
       "q": {
-        "en": "A patient had LASIK years ago. Why take care with biometry?",
-        "hi": "मरीज़ का सालों पहले LASIK हुआ था। बायोमेट्री में सावधानी क्यों?"
+        "en": "A patient had laser-assisted in situ keratomileusis (LASIK) years ago. Why take care with biometry?",
+        "hi": "मरीज़ का सालों पहले लेसिक (laser-assisted in situ keratomileusis, LASIK) हुआ था। बायोमेट्री में सावधानी क्यों?"
       },
       "o": [
         {
@@ -224,8 +224,8 @@
       ],
       "a": 0,
       "why": {
-        "en": "The corneal shape change fools standard readings, often leaving a hyperopic surprise.",
-        "hi": "कॉर्निया के आकार का बदलाव सामान्य रीडिंग को धोखा देता है, जिससे अक्सर हाइपरोपिक फ़र्क़ रह जाता है।"
+        "en": "The corneal shape change fools standard readings, often leaving a hyperopic surprise (unplanned long sight).",
+        "hi": "कॉर्निया के आकार का बदलाव सामान्य रीडिंग को धोखा देता है, जिससे अक्सर अनचाही दूर-दृष्टि (hyperopic surprise) रह जाती है।"
       }
     }
   ],
