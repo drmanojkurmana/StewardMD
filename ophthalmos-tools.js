@@ -85,7 +85,7 @@
     return Math.round(85 - 50 * L);
   }
   var VA = {
-    id: "va", title: "Visual acuity", sub: "Snellen, logMAR and letters", icon: "eye",
+    id: "va", title: "Visual acuity", sub: "Snellen, logMAR (log of the minimum angle of resolution) and letters", icon: "eye",
     src: "Gregori, Feuer, Rosenfeld 2010",
     cite: "Sources: Gregori, Feuer, Rosenfeld 2010 (letters from Snellen); chart lines from Ferris, Kassoff, Bresnick, Bailey 1982 (ETDRS).",
     rule: "logMAR = log10(denominator ÷ numerator). ETDRS letters = 85 − 50 × logMAR, to the nearest letter.",
@@ -111,7 +111,7 @@
     },
     det: function (v, r) {
       var on = r && r.onLine ? r.nearest[0] : null;
-      return '<h3 class="oph-h3" id="tlLinesH">ETDRS chart lines</h3><div class="tl-lines" role="group" aria-labelledby="tlLinesH">' +
+      return '<h3 class="oph-h3" id="tlLinesH">Early Treatment Diabetic Retinopathy Study (ETDRS) chart lines</h3><div class="tl-lines" role="group" aria-labelledby="tlLinesH">' +
         '<div class="tl-lrow tl-lhead" aria-hidden="true"><span>Metric</span><span>Imperial</span><span>Decimal</span><span>logMAR</span><span>Letters</span></div>' +
         M.LINES.map(function (x) {
           var L = x[0], dec = x[3], lt = Math.round(85 - 50 * L);
@@ -124,15 +124,15 @@
   };
 
   var IOL = {
-    id: "iol", title: "IOL power", sub: "SRK/T for a target", icon: "calc",
+    id: "iol", title: "Intraocular lens (IOL) power", sub: "Sanders-Retzlaff-Kraff theoretical (SRK/T) formula for a target", icon: "calc",
     src: "Retzlaff, Sanders, Kraff 1990",
     cite: "Source: Retzlaff, Sanders, Kraff 1990, J Cataract Refract Surg 16:333, with the 1990 erratum (16:528) to the axial length correction.",
-    rule: "SRK/T predicts where the lens will sit (ELP) from the corneal height and the A-constant, then solves thin-lens vergence for the target at a 12 mm vertex.",
+    rule: "The Sanders-Retzlaff-Kraff theoretical (SRK/T) formula predicts where the lens will sit (effective lens position, ELP) from the corneal height and the A-constant, then solves thin-lens vergence for the target at a 12 mm vertex.",
     init: { al: 23.5, k1: 43.25, k2: 44, a: 118.7, tg: -0.5 },
     fields: [
       { k: "al", label: "Axial length", name: "the axial length", unit: "mm", step: 0.1, dp: 2, min: 15, max: 40 },
-      { k: "k1", label: "K1", name: "K1", unit: "D", step: 0.25, dp: 2, min: 30, max: 60, hint: "Flat meridian" },
-      { k: "k2", label: "K2", name: "K2", unit: "D", step: 0.25, dp: 2, min: 30, max: 60, hint: "Steep meridian" },
+      { k: "k1", label: "K1 (flat keratometry)", name: "K1", unit: "D", step: 0.25, dp: 2, min: 30, max: 60, hint: "Flat meridian" },
+      { k: "k2", label: "K2 (steep keratometry)", name: "K2", unit: "D", step: 0.25, dp: 2, min: 30, max: 60, hint: "Steep meridian" },
       { k: "a", label: "A-constant", name: "the A-constant", step: 0.1, dp: 1, min: 110, max: 125, hint: "The lens’s optimised SRK/T constant" },
       { k: "tg", label: "Target refraction", name: "the target", unit: "D", step: 0.25, dp: 2, min: -10, max: 10, signed: true, neg: true }
     ],
@@ -151,8 +151,8 @@
         }).join("") + "</tbody></table>" +
         '<h3 class="oph-h3">Inside the formula</h3><div class="tl-kvs">' +
         kv("Average K", nm(e.K, 2) + NB + "D") + kv("Corneal radius", nm(e.r, 2) + NB + "mm") +
-        kv("Axial length used", nm(e.lcor, 2) + NB + "mm", v.al > 24.2 ? "Corrected for a long eye (LCOR)" : "") +
-        kv("Corneal height", nm(e.h, 2) + NB + "mm") + kv("Predicted lens position (ELP)", nm(e.elp, 2) + NB + "mm") +
+        kv("Axial length used", nm(e.lcor, 2) + NB + "mm", v.al > 24.2 ? "Corrected for a long eye (corrected axial length, LCOR)" : "") +
+        kv("Corneal height", nm(e.h, 2) + NB + "mm") + kv("Effective lens position (ELP)", nm(e.elp, 2) + NB + "mm") +
         kv("Optical axial length", nm(e.lopt, 2) + NB + "mm", "Axial length plus retinal thickness") + "</div>";
     },
     say: function (v, r) { return "IOL for target " + nm(r.power, 2) + " dioptres; for emmetropia " + nm(r.emmetropia, 2) + "."; }
@@ -167,7 +167,7 @@
     arop: { head: "A-ROP", tone: "bad", act: "Outside the ETROP types. Severe plus with rapid progression needs prompt review by the treating ROP specialist." }
   };
   var ROP = {
-    id: "rop", title: "ROP treatment", sub: "ETROP type 1 or 2", icon: "baby",
+    id: "rop", title: "Retinopathy of prematurity (ROP) treatment", sub: "Early Treatment for ROP (ETROP) type 1 or 2", icon: "baby",
     src: "ETROP 2003 · ICROP3 2021",
     cite: "Sources: Early Treatment for ROP Cooperative Group 2003, Arch Ophthalmol 121:1684; ICROP3, Chiang et al. 2021, Ophthalmology 128:e51.",
     rule: function (v, r) { return r && r.rule ? "ETROP: " + r.rule : "ETROP type 1: zone I any stage with plus; zone I stage 3; zone II stage 2 or 3 with plus. Type 2: zone I stage 1 or 2; zone II stage 3; both without plus."; },
@@ -196,17 +196,17 @@
         }).join("") + "</tbody></table>" +
         '<ul class="tl-notes">' +
         (v.plus === "pre" ? "<li>Pre-plus is not plus: it does not change the ETROP type.</li>" : "") +
-        "<li>Plus disease: ETROP compared vessels with a standard photograph. ICROP3 judges plus from the vessels within zone I, not by counting quadrants, and treats normal, pre-plus and plus as a continuum.</li>" +
-        "<li>ICROP3 replaced AP-ROP with A-ROP: it is not confined to zone I and is seen in larger preterm infants too.</li></ul>";
+        "<li>Plus disease: ETROP compared vessels with a standard photograph. The International Classification of ROP, 3rd edition (ICROP3) judges plus from the vessels within zone I, not by counting quadrants, and treats normal, pre-plus and plus as a continuum.</li>" +
+        "<li>ICROP3 replaced aggressive posterior ROP (AP-ROP) with aggressive ROP (A-ROP): it is not confined to zone I and is seen in larger preterm infants too.</li></ul>";
     },
     say: function (v, r) { var x = ROP_V[r.type]; return x.head + ". " + x.act + (r.rule ? " " + r.rule : ""); }
   };
 
   var DR = {
-    id: "dr", title: "DR severity", sub: "ICDR level and review interval", icon: "droplet",
+    id: "dr", title: "Diabetic retinopathy (DR) severity", sub: "International Clinical Diabetic Retinopathy (ICDR) level and review interval", icon: "droplet",
     src: "ICDR 2003 · AAO PPP 2024",
     cite: "Sources: Wilkinson et al. 2003, Ophthalmology 110:1677 (international scale); AAO Diabetic Retinopathy PPP, 2024 edition (Lim et al., Ophthalmology 2025;132:P75), Table 5 for follow-up.",
-    rule: "4-2-1 rule: severe NPDR when any one is present: more than 20 intraretinal haemorrhages in each of 4 quadrants, definite venous beading in 2 or more, prominent IRMA in 1 or more.",
+    rule: "4-2-1 rule: severe non-proliferative diabetic retinopathy (NPDR) when any one is present: more than 20 intraretinal haemorrhages in each of 4 quadrants, definite venous beading in 2 or more, prominent intraretinal microvascular abnormality (IRMA) in 1 or more.",
     init: { ma: false, hem: false, ex: false, hemQ: 0, vbQ: 0, irmaQ: 0, nvd: false, nve: false, nvMod: false, vh: false, dme: "none" },
     fields: [
       { t: "h", label: "Non-proliferative signs" },
@@ -219,11 +219,11 @@
         { k: "nve", label: "New vessels elsewhere (NVE)" },
         { k: "nvMod", label: "At least moderate new vessels", hint: "NVD larger than 1/4 to 1/3 disc area, or NVE at least 1/2 disc area" },
         { k: "vh", label: "Vitreous or preretinal haemorrhage" }] },
-      { k: "dme", t: "seg", label: "Diabetic macular oedema", stack: true, opts: [["none", "None"], ["nci", "Present, not involving the centre"], ["ci", "Centre-involved"]] }
+      { k: "dme", t: "seg", label: "Diabetic macular oedema (DME)", stack: true, opts: [["none", "None"], ["nci", "Present, not involving the centre"], ["ci", "Centre-involved"]] }
     ],
     calc: function (v) { return M.icdr(v); },
     sum: function (v, r) {
-      var sub = r.level === 4 ? (r.highRisk ? "High-risk PDR" : "Non-high-risk PDR") : r.verySevere ? "Very severe NPDR: two or more 4-2-1 features" : "";
+      var sub = r.level === 4 ? (r.highRisk ? "High-risk proliferative diabetic retinopathy (PDR)" : "Non-high-risk proliferative diabetic retinopathy (PDR)") : r.verySevere ? "Very severe NPDR: two or more 4-2-1 features" : "";
       var dme = { none: "", nci: "Non-centre-involved DME", ci: "Centre-involved DME" }[r.dme];
       var fu = r.followUp
         ? kv("Follow-up", months(r.followUp), r.key === "moderate" && r.dme === "none" ? "Sooner if signs approach severe NPDR" : "")
@@ -241,7 +241,7 @@
         row(r.rule421[2], "IRMA, 1 or more quadrants", v.irmaQ + " of 1") + "</ul>" +
         '<p class="oph-small">Any one makes severe NPDR. Two or more is very severe NPDR, which the international scale groups with severe.</p>';
       if (r.level === 4) {
-        h += '<h3 class="oph-h3">High-risk PDR: any 3 of 4 (DRS)</h3><ul class="tl-rule421">' +
+        h += '<h3 class="oph-h3">High-risk PDR: any 3 of 4 (Diabetic Retinopathy Study, DRS)</h3><ul class="tl-rule421">' +
           row(r.drs[0], "New vessels anywhere", "") + row(r.drs[1], "New vessels at or near the disc", "") +
           row(r.drs[2], "At least moderate new vessels", "") + row(r.drs[3], "Vitreous or preretinal haemorrhage", "") + "</ul>" +
           '<p class="oph-small">' + r.nDrs + " of 4 present.</p>";
@@ -257,7 +257,7 @@
   var UM_SUB = { a: "without ciliary body involvement or extraocular extension", b: "with ciliary body involvement",
     c: "with extraocular extension of 5 mm or less, no ciliary body involvement", d: "with ciliary body involvement and extraocular extension of 5 mm or less" };
   var UM = {
-    id: "um", title: "Uveal melanoma", sub: "AJCC 8th T category", icon: "ribbon",
+    id: "um", title: "Uveal melanoma", sub: "American Joint Committee on Cancer (AJCC) 8th edition T category", icon: "ribbon",
     src: "AJCC 8th edition",
     cite: "Source: AJCC Cancer Staging Manual, 8th edition, uveal melanoma (Kivelä et al.); grid as reproduced by Baron, Di Nicola, Shields 2018. Choroid and ciliary body only: iris melanoma has its own T categories.",
     rule: "Find the size category in the grid from the largest basal diameter and the thickness, then add a to e: b ciliary body, c extraocular extension up to 5 mm, d both, e extension over 5 mm.",

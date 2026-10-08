@@ -11,7 +11,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const BASE = (process.env.BASE || "http://localhost:8996/").replace(/\/?$/, "/");
-const PORT = 9397, userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/ophthalmos-10x-chrome";
+const PORT = +(process.env.CHROME_PORT || 9397), userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/ophthalmos-10x-chrome";
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
 let serveProc = null;

@@ -179,6 +179,34 @@
   touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 .ln-mfig .oph-credit a:focus-visible, .ln-fig .oph-credit a:focus-visible { outline: 2px solid var(--op-acc); outline-offset: 2px; border-radius: 2px; }
 
+/* What the patient sees (fields block): pattern chips, left eye | right eye, both eyes open, the lesion site.
+   Scenes are photos, so their frames are black in both themes; everything else uses the theme tokens. */
+.ln-fintro { margin: -6px 0 14px; }
+.ln-fchips { display: flex; flex-wrap: wrap; gap: 6px 8px; margin: 0 0 16px; }
+.ln-fchip { min-height: 44px; min-width: 44px; max-width: 100%; padding: 8px 14px; border: 1px solid var(--op-line); border-radius: 22px; background: var(--op-s1);
+  color: var(--op-text); font-size: 14px; font-weight: 600; line-height: 1.3; text-align: left; touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent; transition: transform 140ms var(--op-ease), background-color 160ms ease, border-color 160ms ease; }
+.ln-fchip:active { transform: scale(0.97); }
+.ln-fchip[aria-pressed="true"] { background: var(--op-pri-fill); border-color: var(--op-pri-fill); color: #fff; }
+.ln-fsim { margin: 0; }
+.ln-fpair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
+.ln-fpane { margin: 0; min-width: 0; }
+.ln-fboth { margin-top: 16px; }
+.ln-fframe { position: relative; aspect-ratio: 3 / 2; background: #000; border-radius: 10px; overflow: hidden; }
+.ln-fcv { display: block; width: 100%; height: 100%; }
+.ln-fpane figcaption { margin-top: 6px; font-size: 13px; line-height: 1.4; color: var(--op-mut); text-wrap: pretty; }
+.ln-fpane figcaption b { display: block; font-size: 14px; font-weight: 650; color: var(--op-text); }
+.ln-fsim.err .ln-fframe { background: var(--op-s1); }
+.ln-fwhere { margin: 16px 0 0; padding: 12px 14px; border-radius: 14px; background: var(--op-s1); font-size: 16px; line-height: 1.5; }
+.ln-fwhere b { display: block; font-size: 13px; font-weight: 650; color: var(--op-mut); margin-bottom: 2px; }
+.ln-fhow { margin: 14px 0 0; line-height: 1.5; }
+.ln-fstyle { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 16px 0 6px; }
+.ln-fstyle .oph-seg button { min-height: 44px; min-width: 44px; }
+.ln-fcredit { margin: 10px 0 0; overflow-wrap: anywhere; }
+.ln-fcredit a { color: var(--op-link); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: var(--op-link-line); }
+.oph-overlay .ln-fgo { display: flex; width: fit-content; align-items: center; min-height: 44px; margin: 2px 0 0; font-size: 15px; font-weight: 600; color: var(--op-link); text-decoration-color: var(--op-link-line); }
+[lang="hi"] .ln-fpane figcaption, [lang="hi"] .ln-fwhere { line-height: 1.65; }
+
 /* glossary: inline term, bottom sheet, list */
 .oph-overlay .ln-term { display: inline; padding: 10px 0; margin: -10px 0; color: var(--op-link); cursor: pointer; -webkit-tap-highlight-color: transparent;
   touch-action: manipulation; text-decoration: underline dotted; text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-color: var(--op-link-line); }
@@ -214,6 +242,7 @@
   .ln-choice:hover, .ln-row:hover, .ln-grow:hover, .ln-unit-sum:hover { background: var(--op-s2); }
   .ln-lang:hover { background: var(--op-s3); }
   .ln-play:hover { background: var(--op-s3); }
+  .ln-fchip:not([aria-pressed="true"]):hover { background: var(--op-s2); }
   .ln-mfig .oph-credit a:hover { text-decoration-color: currentColor; }
   .ln-term:hover { text-decoration-style: solid; }
 }
@@ -221,7 +250,8 @@
 [lang="hi"] .ln-title, [lang="hi"] .ln-h1, [lang="hi"] .ln-start-t { line-height: 1.35; }
 [lang="hi"] .ln-q, [lang="hi"] .ln-start-idea, [lang="hi"] .ln-choice-b span, [lang="hi"] .ln-grow span { line-height: 1.65; }
 @media (prefers-reduced-motion: reduce) {
-  .ln-lang:active, .ln-choice:active, .ln-row:active, .ln-grow:active, .ln-hot:active .ln-dot, .ln-mpic:active, .ln-play:active { transform: none; }
+  .ln-lang:active, .ln-choice:active, .ln-row:active, .ln-grow:active, .ln-hot:active .ln-dot, .ln-mpic:active, .ln-play:active, .ln-fchip:active { transform: none; }
+  .ln-fchip { transition: none; }
   .ln-unit-sum .oph-chev { transition: none; }
   .ln-play { display: none; } /* each animation's own reduced-motion rule shows its still frame: nothing to pause */
   .ln-sheetwrap.pre .ln-sheet { transform: none; opacity: 0; }
