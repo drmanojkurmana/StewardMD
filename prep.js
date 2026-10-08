@@ -176,10 +176,70 @@
     return best;
   }
   function fmtTime(sec) { sec = Math.max(0, Math.round(sec)); var m = Math.floor(sec / 60), s = sec % 60; return m + ":" + (s < 10 ? "0" : "") + s; }
+
+  /* Explanations (2026-10-08, tools/prep-explain.mjs). An item may carry x = { key, notes, others: { letter: reason },
+     pearl }; notes use a tiny Markdown subset and nothing else is ever turned into HTML: every character is escaped
+     first, then "## " headings, **bold**, "- " / "* " bullets, "1. " steps and pipe tables (header row, "| --- |" row)
+     become tags. Old MedMCQA explanations use "*" as an inline bullet ("*Corkscrew ... *Represents ..."): legacyExp
+     turns two or more of those into list lines and drops a lone leading one. */
+  function escH(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function inlineMd(s) { return escH(s).replace(/\*\*(?=\S)([^*]*?\S)\*\*/g, "<b>$1</b>").replace(/\*/g, ""); }
+  function cellsOf(l) { return l.trim().replace(/^\|/, "").replace(/\|\s*$/, "").split("|").map(function (c) { return c.trim(); }); }
+  var TBL_SEP = /^\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$/;
+  function mdLite(src) {
+    var lines = String(src == null ? "" : src).replace(/\r\n?/g, "\n").split("\n"), out = [], para = [], list = null, i = 0, m;
+    function flushP() { if (para.length) { out.push("<p>" + inlineMd(para.join(" ")) + "</p>"); para = []; } }
+    function flushL() {
+      if (!list) return;
+      out.push("<" + list.t + (list.start > 1 ? ' start="' + list.start + '"' : "") + ">" + list.items.map(function (x) { return "<li>" + inlineMd(x) + "</li>"; }).join("") + "</" + list.t + ">");
+      list = null;
+    }
+    while (i < lines.length) {
+      var t = lines[i].trim();
+      if (!t) { flushP(); flushL(); i++; continue; }
+      if ((m = /^#{1,6}\s+(.+?)\s*#*$/.exec(t))) { flushP(); flushL(); out.push('<h4 class="pn-xh">' + inlineMd(m[1]) + "</h4>"); i++; continue; }
+      if (t.charAt(0) === "|" && i + 1 < lines.length && TBL_SEP.test(lines[i + 1].trim())) {
+        flushP(); flushL();
+        var head = cellsOf(t), rows = [];
+        i += 2;
+        while (i < lines.length && lines[i].trim().charAt(0) === "|") rows.push(cellsOf(lines[i++]));
+        var w = head.length;
+        out.push('<div class="pn-xt" role="region" tabindex="0" aria-label="Table: ' + escH(head.join(", ").replace(/\*/g, "")) + '"><table><thead><tr>' + head.map(function (c) { return '<th scope="col">' + inlineMd(c) + "</th>"; }).join("") + "</tr></thead><tbody>" +
+          rows.map(function (r) { var cs = []; for (var k = 0; k < w; k++) cs.push(k ? "<td>" + inlineMd(r[k] || "") + "</td>" : '<th scope="row">' + inlineMd(r[k] || "") + "</th>"); return "<tr>" + cs.join("") + "</tr>"; }).join("") + "</tbody></table></div>");
+        continue;
+      }
+      var b = /^[-*\u2022]\s+(.*)$/.exec(t), n = /^(\d{1,2})[.)]\s+(.*)$/.exec(t);
+      if (b || n) {
+        flushP();
+        var ty = b ? "ul" : "ol";
+        if (!list || list.t !== ty) { flushL(); list = { t: ty, items: [], start: n ? +n[1] : 1 }; }
+        list.items.push(b ? b[1] : n[2]);
+        i++; continue;
+      }
+      flushL(); para.push(t); i++;
+    }
+    flushP(); flushL();
+    return out.join("");
+  }
+  function legacyExp(s) {
+    var t = String(s == null ? "" : s).replace(/\r\n?/g, "\n").trim(), re = /(^|\s)\*(?!\*)(?=[^\s*])/g;
+    var hits = t.match(re);
+    if (hits && hits.length >= 2) return t.replace(re, "\n- ").trim();
+    return t.replace(/^\*(?!\*)\s*/, "");
+  }
+  /* explainOf(item) -> { x, r } the parts the feedback draws: x when it is whole, r one reason per option (the item's own,
+     else built from x). */
+  function explainOf(it) {
+    var L4 = ["A", "B", "C", "D"], x = it && it.x && typeof it.x === "object" && typeof it.x.key === "string" && it.x.key.trim() ? it.x : null;
+    var r = it && it.r && it.r.length === it.o.length ? it.r : null;
+    if (!r && x && x.others) r = it.o.map(function (o, k) { return k === it.a ? x.key : String(x.others[L4[k]] || ""); });
+    return { x: x, r: r };
+  }
   var PURE = { EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, poolFor: poolFor, progressByModule: progressByModule,
     statusOf: statusOf, stars: stars, countFor: countFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, shuffle: shuffle, fmtTime: fmtTime,
     targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
-    MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule };
+    MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
+    mdLite: mdLite, inlineMd: inlineMd, legacyExp: legacyExp, explainOf: explainOf };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -655,6 +715,17 @@
       '<circle class="rv" cx="20" cy="20" r="17" pathLength="100" style="animation-duration:' + Math.max(1, per).toFixed(1) + "s;animation-delay:-" + Math.max(0, spent).toFixed(1) + 's"/></svg>' +
       '<span class="pn-clock" id="pnClock" role="timer" aria-live="off">' + fmtTime(r.limit - (Date.now() - r.t0) / 1000) + "</span></span>";
   }
+  /* The explanation under the answer: the key line and topic notes when the item has x, else its stored text (old "*"
+     bullets made into a list), else a plain "not written yet" line. */
+  function whyHtml(it, xo, why, L) {
+    if (xo.x) return "<h3>Why " + L[it.a] + ' is right</h3><p class="pn-xkey">' + inlineMd(xo.x.key) + "</p>" + (xo.x.notes ? '<div class="pn-xnotes">' + mdLite(xo.x.notes) + "</div>" : "");
+    if (why) return "<h3>" + (xo.r ? "Why " + L[it.a] + " is right" : "Explanation") + '</h3><div class="pn-exp">' + mdLite(legacyExp(why)) + "</div>";
+    return '<p class="pn-mut">' + (it._py ? "Explanation coming soon." : "No explanation is stored for this question yet.") + "</p>";
+  }
+  function pearlHtml(it, xo) {
+    var p = xo.x && xo.x.pearl ? xo.x.pearl : it.kp;
+    return p ? '<aside class="pn-kp" aria-label="Remember"><b>Remember</b><span>' + inlineMd(p) + "</span></aside>" : "";
+  }
   function renderRun() {
     var r = st.run; if (!r) return;
     if (r.done) return r.custom ? r.custom.render(r) : renderResult();
@@ -681,17 +752,17 @@
       r.fresh = -1;   // the reveal plays once, on the paint right after the answer (a bookmark or tag repaint keeps still)
       // Round 7: verdict, then the answer on its own line, then why it is right and, when the item carries a reason
       // per option (r: PYQ and deck items), why each other option is wrong, the student's pick first.
-      var rs = it.r && it.r.length === it.o.length ? it.r : null, why = it.exp || (rs && rs[it.a]) || "";
+      var xo = explainOf(it), rs = xo.r, why = it.exp || (rs && rs[it.a]) || "";
       var others = rs ? it.o.map(function (o, k) { return k; }).filter(function (k) { return k !== it.a && rs[k] && String(rs[k]).trim(); }) : [];
       others.sort(function (x, y) { return (y === chosen) - (x === chosen) || x - y; });
       fb = '<section class="pn-fb ' + (ok ? "ok" : "no") + (fresh ? " pn-new" : "") + '" role="status" tabindex="-1">';
       fb += '<p class="pn-verdict"><span class="pn-vb" aria-hidden="true">' + ico(ok ? "check" : "x") + "</span><span><b>" + (ok ? "Correct" : "Incorrect") + "</b>" + (ok ? "" : "<small>You chose " + L[chosen] + "</small>") + "</span></p>" +
         '<p class="pn-ans"><span class="pn-l">' + L[it.a] + '</span><span><small>Right answer</small>' + esc(it.o[it.a]) + "</span></p>" +
-        (why ? "<h3>" + (rs ? "Why " + L[it.a] + " is right" : "Explanation") + '</h3><p class="pn-exp">' + esc(why) + "</p>" : '<p class="pn-mut">' + (it._py ? "Explanation coming soon." : "No explanation is stored for this question yet.") + "</p>") +
+        whyHtml(it, xo, why, L) +
         (others.length ? "<h3>Why the others are wrong</h3><ul class=\"pn-why\">" + others.map(function (k) {
-          return "<li" + (k === chosen ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === chosen ? "Your pick: " : "") + esc(it.o[k]) + "</small>" + esc(rs[k]) + "</p></li>";
+          return "<li" + (k === chosen ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === chosen ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(rs[k]) + "</span></p></li>";
         }).join("") + "</ul>" : "") +
-        (it.kp ? '<p class="pn-kp"><b>Exam pearl:</b> ' + esc(it.kp) + "</p>" : "") +
+        pearlHtml(it, xo) +
         (it.rv && it.rv.old ? '<p class="pn-old">This may be outdated: check current guidance.</p>' : "") +
         // Offline teacher (prep-teacher.js, Phase 6): only when MaiK runs on this phone; never a server call.
         (!ok && G.PREP_TEACHER && G.PREP_TEACHER.ready && G.PREP_TEACHER.ready() ? '<button type="button" class="pn-btn" data-act="teach">Why is ' + L[chosen] + " wrong? Ask MaiK offline</button>" : "") +
@@ -908,7 +979,12 @@
       var L = ["A", "B", "C", "D"];
       paint(bar("Review", esc(r.title), "back") + '<div class="pn-body pn-run">' + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
         return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></div></li>";
-      }).join("") + '</ol><section class="pn-fb"><h3>Explanation</h3><p class="pn-exp">' + esc(it.exp || "No explanation is stored for this question yet.") + '</p>' + provHtml(it) + "</section></div>");
+      }).join("") + '</ol><section class="pn-fb">' + (function () {
+        var xo = explainOf(it), others = xo.r ? it.o.map(function (o, k) { return k; }).filter(function (k) { return k !== it.a && String(xo.r[k] || "").trim(); }) : [];
+        return whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
+          return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(xo.r[k]) + "</span></p></li>";
+        }).join("") + "</ul>" : "") + pearlHtml(it, xo);
+      })() + provHtml(it) + "</section></div>");
     });
     rerender();
   }

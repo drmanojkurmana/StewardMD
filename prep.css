@@ -1179,3 +1179,36 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
 .pn-root .pn-recap i.no { background: #ff8794; }
 .pn-root .pn-recap i.skip { background: rgba(255, 255, 255, .22); }
 @media (prefers-reduced-motion: reduce) { .pn-root .pn-opt { transition: none; } }
+
+/* ==== Explanations (prep21) ==== the key line, then short topic notes (headings, bullets, steps, a comparison table),
+   then why each other option is wrong, then the "Remember" line. Notes keep the reading measure of the stem; a table
+   wider than the card scrolls inside its own frame (the page never scrolls sideways), its first column stays in view. */
+.pn-root .pn-exp { white-space: normal; }
+.pn-root .pn-exp, .pn-root .pn-xnotes { display: flex; flex-direction: column; gap: 10px; max-width: none; font-size: 16px; line-height: 1.6; text-wrap: pretty; overflow-wrap: anywhere; }
+.pn-root .pn-exp > :not(.pn-xt), .pn-root .pn-xnotes > :not(.pn-xt) { max-width: 38em; }
+.pn-root .pn-xkey { max-width: 38em; font-size: 17px; font-weight: 650; line-height: 1.5; letter-spacing: -.005em; text-wrap: pretty; }
+.pn-root .pn-xkey b { font-weight: 800; }
+.pn-root .pn-xnotes b, .pn-root .pn-exp b, .pn-root .pn-why b { font-weight: 700; color: var(--pn-text); }
+.pn-root .pn-xh { margin: 6px 0 -2px; font-size: 16.5px; font-weight: 750; letter-spacing: -.01em; line-height: 1.35; color: var(--pn-pri-ink); text-wrap: balance; }
+.pn-root .pn-xh:first-child { margin-top: 0; }
+.pn-root .pn-xnotes ul, .pn-root .pn-xnotes ol, .pn-root .pn-exp ul, .pn-root .pn-exp ol { margin: 0; padding-left: 1.25em; display: flex; flex-direction: column; gap: 5px; }
+.pn-root .pn-xnotes ul, .pn-root .pn-exp ul { list-style: none; padding-left: 0; }
+.pn-root .pn-xnotes ul > li, .pn-root .pn-exp ul > li { position: relative; padding-left: 18px; }
+.pn-root .pn-xnotes ul > li::before, .pn-root .pn-exp ul > li::before { content: ""; position: absolute; left: 4px; top: .68em; width: 6px; height: 6px; border-radius: 50%; background: var(--pn-pri); }
+.pn-root .pn-xnotes ol, .pn-root .pn-exp ol { list-style: decimal; }
+.pn-root .pn-xnotes ol > li { padding-left: 2px; }
+.pn-root .pn-xnotes ol > li::marker, .pn-root .pn-exp ol > li::marker { color: var(--pn-pri-ink); font-weight: 750; font-variant-numeric: tabular-nums; }
+.pn-root .pn-xt { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; border: 1px solid var(--pn-line); border-radius: var(--pn-r-sm); }
+.pn-root .pn-xt:focus-visible { outline: 2px solid var(--pn-pri); outline-offset: 2px; }
+.pn-root .pn-xt table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 14.5px; line-height: 1.45; }
+.pn-root .pn-xt th, .pn-root .pn-xt td { padding: 9px 12px; text-align: left; vertical-align: top; border-top: 1px solid var(--pn-line); min-width: 7.5em; }
+.pn-root .pn-xt thead th { border-top: 0; background: var(--pn-pri-soft); color: var(--pn-pri-ink); font-size: 13px; font-weight: 750; letter-spacing: .01em; white-space: nowrap; }
+.pn-root .pn-xt tbody th { position: sticky; left: 0; background: var(--pn-card); font-weight: 700; box-shadow: 1px 0 0 var(--pn-line); }
+.pn-root .pn-xt tbody tr:nth-child(even) td, .pn-root .pn-xt tbody tr:nth-child(even) th { background: color-mix(in srgb, var(--pn-s1) 55%, var(--pn-card)); }
+.pn-root .pn-kp { display: flex; flex-direction: column; gap: 3px; max-width: 40em; padding: 12px 14px 13px 16px; border-left: 3px solid var(--pn-pri); border-radius: var(--pn-r-xs) var(--pn-r-md) var(--pn-r-md) var(--pn-r-xs); background: var(--pn-pri-soft); font-size: 15.5px; line-height: 1.55; }
+.pn-root .pn-kp > b { font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--pn-pri-ink); }
+@media (min-width: 600px) {
+  .pn-root .pn-xkey { font-size: 18px; }
+  .pn-root .pn-exp, .pn-root .pn-xnotes { font-size: 16.5px; }
+  .pn-root .pn-xt table { font-size: 15px; }
+}
