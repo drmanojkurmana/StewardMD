@@ -414,6 +414,8 @@ function vbatches() {
   for (let i = 0; i < out.length; i += size) w(path.join(wd, "vb", `${opt("tag", "v")}${i / size}.json`), out.slice(i, i + size));
   console.log("verifier batches", Math.ceil(out.length / size), "items", out.length);
 }
+// Owner 2026-10-09: the pilot ships without these five; their keys wait for the owner's review (plan RadiologySS 8).
+const HELD = new Set(["perthes", "intussusception", "emph-pyelo", "pneumothorax-tension", "dermoid"]);
 function finalize() {
   // --runs a,b: a target's newest run wins (a later run regenerates a target with a new figure or prompt).
   const runs = String(opt("runs", opt("run", "rad-pilot-1"))).split(",");
@@ -436,6 +438,7 @@ function finalize() {
   const out = path.join(DIR, "out", BANK_VER, SUBJECT);
   for (const t of ts) {
     const why = (r) => { report.rejected[t.id] = r; };
+    if (HELD.has(t.id)) { why("held for the owner's key review (not in the bank)"); continue; }
     const g0 = st.gen[t.id];
     if (!g0) { why("not generated (no licensed candidate)"); continue; }
     if (g0.fail) { why("generation: " + g0.fail); continue; }
