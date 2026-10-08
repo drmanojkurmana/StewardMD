@@ -123,6 +123,7 @@ function withCors(request, resp) {
  * =================================================================== */
 import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, meterEmail, deviceCheck } from "../../_usage.js";
 import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, MODEL_HARD_DEFAULT, ACCURATE_MODEL, MODEL_RETIRES, envModel, overrideModel, allowedModels, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime, scribeChargeSec, isScribeKind, poolKeyFor, capsEnforced, resolveModel, modelRate, rateConfirmed, estCostInr as aiEstCostInr } from "../../_ai_usage.js";
+import { listRecentSignups, userDetail } from "../../_admin_users.js";
 import { getCredits, dailyCostCap, costCapOn, inrToMt, MT_PER_INR, tokenPackList } from "../../_credits.js";
 import { warmBillingCfg } from "../../_billingcfg.js";
 import { istDay } from "../../_counters.js";
@@ -1479,6 +1480,24 @@ export async function onRequest(context) {
     let actorId = "admin"; try { actorId = (await identify(request, env)).id; } catch (e) {}
     try { await auditRecord(store, "user-limit", email + ":" + module + "=" + (limit == null ? "default" : limit), actorId, Date.now()); } catch (e) {}
     return json({ ok: true, email: email, limits: map || {} });
+  }
+
+  // User control (owner, 2026-10-08): newest sign-ups, and everything about one account. Read only;
+  // every change goes through an existing owner-gated endpoint (functions/_admin_users.js header).
+  if (seg === "admin/users-recent") {
+    const url = new URL(request.url);
+    if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
+    return json(await listRecentSignups(env, { days: url.searchParams.get("days"), limit: url.searchParams.get("limit"), q: url.searchParams.get("q"), filter: url.searchParams.get("filter") }));
+  }
+  if (seg === "admin/user-detail") {
+    const url = new URL(request.url);
+    if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
+    let uid = String(url.searchParams.get("uid") || "").trim();
+    const em = String(url.searchParams.get("email") || "").trim().toLowerCase();
+    if (!uid && em) { const f = await lookupUidByEmail(env, em); uid = (f && f.uid) || ""; }
+    if (!uid) return json({ ok: false, error: "not_found" }, 404);
+    const d = await userDetail(env, uid);
+    return json(d, d.ok ? 200 : 404);
   }
 
   // User-management: look up a doctor by email -> status (verified / pro / disabled / last sign-in).
